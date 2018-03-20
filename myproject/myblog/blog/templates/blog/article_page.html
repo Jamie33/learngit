@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Article Page</title>
+</head>
+<br>
+<h1>Hello, It's great to see you! You are now at Article page.</h1>
+<br/>
+<h1>{{article.title}}</h1>
+<br/>
+<p>{{article.content}}</p>
+<br/>
+<a href="{% url 'blog:edit_page' article.id %}">edit the blog</a>
+</body>
+</html>
