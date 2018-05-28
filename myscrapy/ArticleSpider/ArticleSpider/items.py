@@ -20,3 +20,4 @@ class ArticlespiderItem(scrapy.Item):
     comments = scrapy.Field()
     content = scrapy.Field()
     tags = scrapy.Field()
+

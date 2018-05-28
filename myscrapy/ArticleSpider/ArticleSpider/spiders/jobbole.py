@@ -3,7 +3,10 @@ import scrapy
 import re
 from scrapy.http import Request
 from urllib import parse
+
 from ArticleSpider.items import ArticlespiderItem
+
+from ArticleSpider.utils.common import get_md5
 
 
 class JobboleSpider(scrapy.Spider):
@@ -50,7 +53,7 @@ class JobboleSpider(scrapy.Spider):
             fav = int(fav_num.group(1))
         else:
             fav = 0
-        comments = response.xpath("//a[@href='#article-comment']/text()").extract()[0]
+        comments = response.xpath("//a[@href='#article-comment']/text()").extract_first("")
         comment_num = re.search(r'(\d+)',comments)
         if comment_num:
             comments = int(comment_num.group(1))
@@ -76,10 +79,10 @@ class JobboleSpider(scrapy.Spider):
         #tag_list2= response.css("p.entry-meta-hide-on-mobile a::text").extract()
         #tags2 = ",".join([element for element in tag_list2 if not element.strip().endswith('评论')])
 
-
+        article_item['url_object_id'] = get_md5(response.url)
         article_item['title'] = title
         article_item['url'] = response.url
-        article_item['cover_url'] = cover_url
+        article_item['cover_url'] = [cover_url]
         article_item['date'] = date
         article_item['vote_num'] = vote_num
         article_item['fav_num'] = fav_num
