@@ -1,0 +1,41 @@
+1533717896524	geckodriver	INFO	geckodriver 0.21.0
+1533717896535	geckodriver	INFO	Listening on 127.0.0.1:60754
+1533717899544	mozrunner::runner	INFO	Running command: "C:\\soft\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\win7\\AppData\\Local\\Temp\\rust_mozprofile.pDOMN4hYvtAD"
+Unable to read VR Path Registry from C:\Users\win7\AppData\Local\openvr\openvrpaths.vrpath
+Unable to read VR Path Registry from C:\Users\win7\AppData\Local\openvr\openvrpaths.vrpath
+Unable to read VR Path Registry from C:\Users\win7\AppData\Local\openvr\openvrpaths.vrpath
+Unable to read VR Path Registry from C:\Users\win7\AppData\Local\openvr\openvrpaths.vrpath
+Unable to read VR Path Registry from C:\Users\win7\AppData\Local\openvr\openvrpaths.vrpath
+1533717902081	Marionette	INFO	Listening on port 60765
+1533717902371	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://qrlogin.taobao.com/qrcodelogin/qrcodeLoginCheck.do?lgToken=d82fc33935e577596e0ae9f20cbfbedf&defaulturl=&_ksTS=1533718072912_2430&callback=jsonp2431, line 1: ReferenceError: jsonp2431 is not defined
+[Child 18320, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 18320, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+[Parent 19112, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 17608, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 17608, Chrome_ChildThread] WARNING: pipe error: 109: file z:/buil[Parent 19112, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 10480, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 10480, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 3420, Chrome_ChildThread] WARNING: pip
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
