@@ -1,0 +1,416 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>Python_与_Excel_不得不说的事</h1><div class="RichText ztext Post-RichText">
+ <p>
+  数据处理是 Python 的一大应用场景，而 Excel 则是最流行的数据处理软件。因此用 Python 进行数据相关的工作时，难免要和 Excel 打交道。
+ </p>
+ <p>
+  如果仅仅是要以表单形式保存数据，可以借助 CSV 格式（一种以逗号分隔的表格数据格式）进行处理，Excel 也支持此格式。但标准的 Excel 文件（xls/xlsx）具有较复杂的格式，并不方便像普通文本文件一样直接进行读写，需要借助第三方库来实现。
+ </p>
+ <p>
+  常用的库是 python-excel 系列：
+ </p>
+ <p>
+  <b>
+   xlrd、xlwt、xlutils
+  </b>
+ </p>
+ <ul>
+  <li>
+   xlrd － 读取 Excel 文件
+  </li>
+  <li>
+   xlwt － 写入 Excel 文件
+  </li>
+  <li>
+   xlutils － 操作 Excel 文件的实用工具，如复制、分割、筛选等
+  </li>
+ </ul>
+ <p>
+  尽管这是目前被用得最多的 Excel 库，我还是很想吐槽为什么这三个包不能放在一个模块里……另外它们有个缺陷，就是只能处理 xls 文件。如果你想用新版本的 xlsx，可以考虑 openpyxl 和 xlsxwriter。
+ </p>
+ <p>
+  不过今天只说说这三个。
+ </p>
+ <p>
+  <i>
+   （更新：有人提到另外几个 Python 处理 Excel 的库，有些的确会比 python-excel 系列好用。之后会再做一篇对比，敬请期待。
+  </i>
+ </p>
+ <p>
+  <i>
+   另外，关于为什么不用 VBA、Java、C#……处理 Excel。其实本文的出发点是对于 Python 使用者来说，操作 Excel 的一种基本方式，并非否定其他语言和方法。）
+  </i>
+ </p>
+ <h2>
+  <b>
+   安装
+  </b>
+ </h2>
+ <p>
+  安装的方法没啥特别的，只是得装三遍。可以下载安装包、下载代码压缩包、或者通过 pip 等。可参考
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20760860">
+   如何安装 Python 的第三方模块 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  如果安装过之前推荐的 anaconda，那么就已经有了 xlrd 和 xlwt，但 xlutils 没有附带在安装包中，使用时仍需另行安装。
+ </p>
+ <h2>
+  <b>
+   读取
+  </b>
+ </h2>
+ <p>
+  结合一段简单的代码来看：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">xlrd</span>
+<span class="c1"># 打开 xls 文件</span>
+<span class="n">book</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="s2">"test.xls"</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">"表单数量:"</span><span class="p">,</span> <span class="n">book</span><span class="o">.</span><span class="n">nsheets</span>
+<span class="k">print</span> <span class="s2">"表单名称:"</span><span class="p">,</span> <span class="n">book</span><span class="o">.</span><span class="n">sheet_names</span><span class="p">()</span>
+<span class="c1"># 获取第1个表单</span>
+<span class="n">sh</span> <span class="o">=</span> <span class="n">book</span><span class="o">.</span><span class="n">sheet_by_index</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">u"表单 </span><span class="si">%s</span><span class="s2"> 共 </span><span class="si">%d</span><span class="s2"> 行 </span><span class="si">%d</span><span class="s2"> 列"</span> <span class="o">%</span> <span class="p">(</span><span class="n">sh</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sh</span><span class="o">.</span><span class="n">nrows</span><span class="p">,</span> <span class="n">sh</span><span class="o">.</span><span class="n">ncols</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">"第二行第三列:"</span><span class="p">,</span> <span class="n">sh</span><span class="o">.</span><span class="n">cell_value</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1"># 遍历所有表单</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">book</span><span class="o">.</span><span class="n">sheets</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">nrows</span><span class="p">):</span>
+        <span class="c1"># 输出指定行</span>
+        <span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">row</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  测试文件：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/6ea25b0c57032e2e6a5b3fce140da277_r.jpg" data-rawheight="402" data-rawwidth="521" data-size="normal" src="https://pic1.zhimg.com/6ea25b0c57032e2e6a5b3fce140da277_b.jpg" width="521"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/6ea25b0c57032e2e6a5b3fce140da277_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/6ea25b0c57032e2e6a5b3fce140da277_r.jpg" data-rawheight="402" data-rawwidth="521" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='521'%20height='402'&gt;&lt;/svg&gt;" width="521"/>
+ </figure>
+ <p>
+  输出结果：
+ </p>
+ <blockquote>
+  表单数量: 2
+  <br/>
+  表单名称: [u'Group.A', u'Group.B']
+  <br/>
+  表单 Group.A 共 7 行 3 列
+  <br/>
+  第二行第三列: 15.0
+  <br/>
+  [text:u'Rank', text:u'Team', text:u'Points']
+  <br/>
+  [number:1.0, text:u'Brazil', number:15.0]
+  <br/>
+  [number:2.0, text:u'Russia', number:12.0]
+  <br/>
+  ...
+ </blockquote>
+ <p>
+  常用的方法：
+ </p>
+ <ul>
+  <li>
+   open_workbook 打开文件
+  </li>
+  <li>
+   sheet_by_index 获取某一个表单
+  </li>
+  <li>
+   sheets 获取所有表单
+  </li>
+  <li>
+   cell_value 获取指定单元格的数据
+  </li>
+ </ul>
+ <h2>
+  <b>
+   写入
+  </b>
+ </h2>
+ <p>
+  还是看代码：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">xlwt</span>
+<span class="c1"># 创建 xls 文件对象</span>
+<span class="n">wb</span> <span class="o">=</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">Workbook</span><span class="p">()</span>
+<span class="c1"># 新增一个表单</span>
+<span class="n">sh</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">add_sheet</span><span class="p">(</span><span class="s1">'A Test Sheet'</span><span class="p">)</span>
+<span class="c1"># 按位置添加数据</span>
+<span class="n">sh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1234.56</span><span class="p">)</span>
+<span class="n">sh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8888</span><span class="p">)</span>
+<span class="n">sh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">)</span>
+<span class="n">sh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'world'</span><span class="p">)</span>
+<span class="c1"># 保存文件</span>
+<span class="n">wb</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">'example.xls'</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  生成文件：
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="287" data-rawwidth="407" data-size="normal" src="https://pic3.zhimg.com/9ab96134d8216b0762b5e34dbab742d4_b.jpg" width="407"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic3.zhimg.com/9ab96134d8216b0762b5e34dbab742d4_b.jpg" data-caption="" data-rawheight="287" data-rawwidth="407" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='407'%20height='287'&gt;&lt;/svg&gt;" width="407"/>
+ </figure>
+ <p>
+  常用的方法：
+ </p>
+ <ul>
+  <li>
+   Workbook 创建文件对象
+  </li>
+  <li>
+   add_sheet 新增一个表单
+  </li>
+  <li>
+   write 在指定单元格写入数据
+  </li>
+ </ul>
+ <h2>
+  <b>
+   修改
+  </b>
+ </h2>
+ <p>
+  很遗憾，并没有直接修改 xls 文件的方法。通常的做法是，读取出文件，复制一份数据，对其进行修改，再保存。
+ </p>
+ <p>
+  在复制时，需要用到 xlutils 中的方法。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">from</span> <span class="nn">xlrd</span> <span class="kn">import</span> <span class="n">open_workbook</span>
+<span class="kn">from</span> <span class="nn">xlutils.copy</span> <span class="kn">import</span> <span class="n">copy</span>
+<span class="c1"># 打开文件</span>
+<span class="n">rb</span> <span class="o">=</span> <span class="n">open_workbook</span><span class="p">(</span><span class="s2">"example.xls"</span><span class="p">)</span>
+<span class="c1"># 复制</span>
+<span class="n">wb</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">rb</span><span class="p">)</span>
+<span class="c1"># 选取表单</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">get_sheet</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># 写入数据</span>
+<span class="n">s</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'new data'</span><span class="p">)</span>
+<span class="c1"># 保存</span>
+<span class="n">wb</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">'example.xls'</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  修改后文件：
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="271" data-rawwidth="378" data-size="normal" src="https://pic1.zhimg.com/bb123fe2b57efc737ca484ca75282f7a_b.jpg" width="378"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic1.zhimg.com/bb123fe2b57efc737ca484ca75282f7a_b.jpg" data-caption="" data-rawheight="271" data-rawwidth="378" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='378'%20height='271'&gt;&lt;/svg&gt;" width="378"/>
+ </figure>
+ <p>
+  特别要注意的是，选取读取表单时，要使用 sheet_by_index，而在选取写入表单时，则要用 get_sheet。不要问我为什么，我也很想知道这么设定的用意何在……
+ </p>
+ <h2>
+  <b>
+   时间转换
+  </b>
+ </h2>
+ <p>
+  如果表单中有时间格式的数据，通过处理之后，你会发现时间数据出了差错。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/5eed298cd30335762e6ccacebd5b9599_r.jpg" data-rawheight="302" data-rawwidth="518" data-size="normal" src="https://pic2.zhimg.com/5eed298cd30335762e6ccacebd5b9599_b.jpg" width="518"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/5eed298cd30335762e6ccacebd5b9599_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/5eed298cd30335762e6ccacebd5b9599_r.jpg" data-rawheight="302" data-rawwidth="518" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='518'%20height='302'&gt;&lt;/svg&gt;" width="518"/>
+ </figure>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/83fea940da78d839ca38c0ac12c75867_r.jpg" data-rawheight="269" data-rawwidth="426" data-size="normal" src="https://pic1.zhimg.com/83fea940da78d839ca38c0ac12c75867_b.jpg" width="426"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/83fea940da78d839ca38c0ac12c75867_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/83fea940da78d839ca38c0ac12c75867_r.jpg" data-rawheight="269" data-rawwidth="426" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='426'%20height='269'&gt;&lt;/svg&gt;" width="426"/>
+ </figure>
+ <p>
+  输出单元格内容：
+ </p>
+ <blockquote>
+  [number:8888.0, xldate:42613.0]
+ </blockquote>
+ <p>
+  因为这里 xldate 有自己的格式定义。如果要使用正确的格式，必须转换：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="n">new_date</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">xldate</span><span class="o">.</span><span class="n">xldate_as_datetime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">book</span><span class="o">.</span><span class="n">datemode</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  date 是对应单元格的数据，book 是打开的文件对象。
+  <br/>
+ </p>
+ <p>
+  另外，在打开文件时，加上参数 formatting_info=True，可以保证在时间数据在 copy 时保持原样。
+  <br/>
+ </p>
+ <p>
+  写入时间数据，则可通过此方法创建 excel 的时间对象：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="n">xlrd</span><span class="o">.</span><span class="n">xldate</span><span class="o">.</span><span class="n">xldate_from_datetime_tuple</span>
+</code></pre>
+ </div>
+ <p>
+  或者通过 xlwt.easyxf 指定时间格式：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="n">style</span> <span class="o">=</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">easyxf</span><span class="p">(</span><span class="n">num_format_str</span><span class="o">=</span><span class="s1">'D-MMM-YY'</span><span class="p">)</span>
+<span class="n">ws</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="n">style</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  具体细节及更多功能这里不展开说明。
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  以上便是 Python 操作 Excel 文件的一些基本方法。实际使用过程中遇到问题或者需要了解更多功能，永远记住两个词：
+ </p>
+ <p>
+  <b>
+   RTFM
+  </b>
+  、
+  <b>
+   STFW
+  </b>
+ </p>
+ <p>
+  <b>
+   ：）
+  </b>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  参考资料：
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//www.python-excel.org/" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://www.
+   </span>
+   <span class="visible">
+    python-excel.org/
+   </span>
+   <span class="invisible">
+   </span>
+  </a>
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//github.com/python-excel" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    github.com/python-excel
+   </span>
+   <span class="invisible">
+   </span>
+  </a>
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//github.com/python-excel/tutorial/raw/master/python-excel.pdf" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    github.com/python-excel
+   </span>
+   <span class="invisible">
+    /tutorial/raw/master/python-excel.pdf
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <u>
+   其他文章及回答：
+  </u>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21886694">
+   想用 Python 做数据分析？先玩玩这个再说 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21624000">
+   用 Python 实现你的量化交易策略 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20683456?refer=crossin">
+   编程初学者如何使用搜索引擎 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20721034?refer=crossin">
+   如何直观地理解程序的运行过程？- Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21304838">
+   如何在 Python 中使用断点调试 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21057822">
+   Python 抓取网页乱码原因分析 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21438729">
+   极简 Github 上手教程 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  微信ID：crossincode
+ </p>
+ <p>
+  论坛：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com/" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室
+  </a>
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>

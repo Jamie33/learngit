@@ -1,0 +1,290 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>直播答题？Python助你自动搜题之新手篇！</h1><div class="RichText ztext Post-RichText">
+ <p>
+  承接前文关于Python自动搜题的介绍
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/32828411">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    zhuanlan.zhihu.com/p/32
+   </span>
+   <span class="invisible">
+    828411
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+  ,此篇面向新手小白进行解析，助你成功运行自动搜题的python程序。
+ </p>
+ <p>
+  A部分是介绍思路，可以先跳到B部分去下载包，装中文包时耗时蛮长，可以再来细看A部分~
+ </p>
+ <p>
+  A 思路：如前文所述，代码大致分三步。
+ </p>
+ <p>
+  1. 获取手机直播答题界面截图
+ </p>
+ <p>
+  注意：我们这里只关注题目，不管选项，通过搜索题目内容获取辅助线索，所以截图我们只定位在显示题目的位置就足够了，这样图片中读取文字的速度快精度也高一些，例如中午1点直播答题测试时截图第六题：
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="150" data-rawwidth="380" data-size="normal" src="https://pic3.zhimg.com/v2-b7c16b51d1b5b807c7192cfde3d8ad17_b.jpg" width="380"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic3.zhimg.com/v2-b7c16b51d1b5b807c7192cfde3d8ad17_b.jpg" data-caption="" data-rawheight="150" data-rawwidth="380" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='380'%20height='150'&gt;&lt;/svg&gt;" width="380"/>
+ </figure>
+ <p>
+  2. 读取截图中的题目文字内容
+ </p>
+ <p>
+  这里我们在shell处将读取到的题目内容输出展示，同时也显示代码耗时：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-c89f8173be71060a0efa6a9c28fe21e3_r.jpg" data-rawheight="332" data-rawwidth="622" data-size="normal" src="https://pic1.zhimg.com/v2-c89f8173be71060a0efa6a9c28fe21e3_b.jpg" width="622"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-c89f8173be71060a0efa6a9c28fe21e3_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-c89f8173be71060a0efa6a9c28fe21e3_r.jpg" data-rawheight="332" data-rawwidth="622" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='622'%20height='332'&gt;&lt;/svg&gt;" width="622"/>
+ </figure>
+ <p>
+  3. 打开浏览器执行对题目搜索
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-2c949038ee80c8f73e243fb42c3c194e_r.jpg" data-rawheight="798" data-rawwidth="890" data-size="normal" src="https://pic4.zhimg.com/v2-2c949038ee80c8f73e243fb42c3c194e_b.jpg" width="890"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-2c949038ee80c8f73e243fb42c3c194e_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-2c949038ee80c8f73e243fb42c3c194e_r.jpg" data-rawheight="798" data-rawwidth="890" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='890'%20height='798'&gt;&lt;/svg&gt;" width="890"/>
+ </figure>
+ <p>
+  单论每一步，实现方法有很多，但考虑到时间，我们只选取耗时尽量少的方法来实现各部分功能。经过1月11日中午1点百万英雄直播答题时的测试，网络良好时，搜完结果剩余答题时间仍有5秒，完全达到预期效果（但由于中午醉心于搜索、录影，忘了答题了，一心不可二用啊T.T）
+ </p>
+ <p>
+  B 下载相关功能包：由于我也算是刚入门的新手，基本各种功能模块都是按着搜来的网上教程来的，所以大家只要能保证各个模块都配好，最终程序跑通还是不难的。
+ </p>
+ <p>
+  执行代码时，我用的是Windows10系统电脑，Python3.6，安卓手机数据线连电脑。
+ </p>
+ <p>
+  1. 无论什么手机、电脑系统，要做的是实现把手机屏幕内容实时显示在电脑屏幕上，我是用的360手机助手的'演示'功能完成了对安卓和windows的连接，其余型号手机电脑可以自己搜一下来解决。
+ </p>
+ <p>
+  2. 接下来我们通过电脑截屏来实现截取屏幕上手机直播内容，由于Windows API获取截图的耗时极少，我们选择了它。由于Python没有自带访问windows系统API的库，需要下载pywin32库来实现，pip 安装的命令是： pip install pypiwin32(注意安装时是pypiwin32,不是pywin32)。这里关于windows通过python截屏函数，参考
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.cnblogs.com/weidiao/p/8051280.html" rel="nofollow noreferrer" target="_blank">
+   Python实现屏幕截图的两种方式 - weiyinfu - 博客园
+  </a>
+ </p>
+ <p>
+  3. 拿到题目的截图后，要完成对题目中文字的读取，就需要安装PIL和pytesseract，同时还需要简体中文识别的引擎包tesseract-ocr，相关安装检测参考链接：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//blog.csdn.net/qiushi_1990/article/details/78041375" rel="nofollow noreferrer" target="_blank">
+   Python人工智能之图片识别，Python3一行代码实现图片文字识别 - 邱石的专栏 - CSDN博客
+  </a>
+  注意：安装引擎包时最好按照链接中保存到C盘相似的路径，我和朋友安到E盘都有报错，也没搞清具体原因，把文件剪切到C盘就解决了。另外，请官方下载最新版或者通过我这网盘分享的4.0.0版本的，链接中的版本有点低，准确率也较差
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//pan.baidu.com/s/1bpVvjUB" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    pan.baidu.com/s/1bpVvjU
+   </span>
+   <span class="invisible">
+    B
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  4. 打开浏览器的时webbrowser模块，自带不用下载。
+ </p>
+ <p>
+  C 接下来是校准工作，调整代码中w,h值来改变截图大小，(20,140)处的两个值改变截图初始位置坐标，对应着你个人手机屏幕在电脑屏幕中的显示位置，调整以上的值使截图恰好落在手机屏上直播时显示题目的位置。
+ </p>
+ <p>
+  D 代码解析
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">def</span> <span class="nf">window_capture</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="n">hwnd</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">hwndDC</span> <span class="o">=</span> <span class="n">win32gui</span><span class="o">.</span><span class="n">GetWindowDC</span><span class="p">(</span><span class="n">hwnd</span><span class="p">)</span>
+    <span class="n">mfcDC</span> <span class="o">=</span> <span class="n">win32ui</span><span class="o">.</span><span class="n">CreateDCFromHandle</span><span class="p">(</span><span class="n">hwndDC</span><span class="p">)</span>
+    <span class="n">saveDC</span> <span class="o">=</span> <span class="n">mfcDC</span><span class="o">.</span><span class="n">CreateCompatibleDC</span><span class="p">()</span>
+    <span class="n">saveBitMap</span> <span class="o">=</span> <span class="n">win32ui</span><span class="o">.</span><span class="n">CreateBitmap</span><span class="p">()</span>
+    <span class="n">MoniterDev</span> <span class="o">=</span> <span class="n">win32api</span><span class="o">.</span><span class="n">EnumDisplayMonitors</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+    <span class="c1">#下面的#w=...和#h=...都是链接中源代码对其赋值，获取的是电脑截屏的宽和高</span>
+    <span class="c1">#w = MoniterDev[0][2][2]</span>
+    <span class="c1">#h = MoniterDev[0][2][3]</span>
+    <span class="c1">#我针对自己手机的屏幕大小以及显示题目的位置重新对其设置</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="mi">380</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mi">150</span>
+    <span class="n">saveBitMap</span><span class="o">.</span><span class="n">CreateCompatibleBitmap</span><span class="p">(</span><span class="n">mfcDC</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">saveDC</span><span class="o">.</span><span class="n">SelectObject</span><span class="p">(</span><span class="n">saveBitMap</span><span class="p">)</span>
+    <span class="c1">#here的正下方（20，140）是截图的起点坐标来定位截图位置，这些根据个人情况调整</span>
+    <span class="c1">#--------------------------------here--------------------</span>
+    <span class="n">saveDC</span><span class="o">.</span><span class="n">BitBlt</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="n">w</span><span class="p">,</span><span class="n">h</span><span class="p">),</span><span class="n">mfcDC</span><span class="p">,(</span><span class="mi">20</span><span class="p">,</span><span class="mi">140</span><span class="p">),</span><span class="n">win32con</span><span class="o">.</span><span class="n">SRCCOPY</span><span class="p">)</span>
+    <span class="n">saveBitMap</span><span class="o">.</span><span class="n">SaveBitmapFile</span><span class="p">(</span><span class="n">saveDC</span><span class="p">,</span><span class="n">filename</span><span class="p">)</span>
+<span class="c1">#获取开始执行代码的时间</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="c1">#获取截图为'haha.jpg'</span>
+<span class="n">window_capture</span><span class="p">(</span><span class="s1">'haha.jpg'</span><span class="p">)</span>
+<span class="c1">#识别截图中的简体中文</span>
+<span class="n">text</span><span class="o">=</span><span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'haha.jpg'</span><span class="p">),</span><span class="n">lang</span><span class="o">=</span><span class="s1">'chi_sim'</span><span class="p">)</span>
+<span class="c1">#识别的字符串是'你 好 吗'带空格的格式，这里去除这些空格生成新的字符串list即题目内容</span>
+<span class="n">new_text</span> <span class="o">=</span><span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span>
+<span class="c1">#将题目内容作为搜索关键词加到百度搜索的网址</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">'http://www.baidu.com/s?wd=</span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="n">new_text</span>
+<span class="c1">#打开浏览器获取搜索结果</span>
+<span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="c1">#获取代码结束时的时间</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="c1">#计算代码执行时间，搜索结果出现的时间还要取决于网络状况。。。</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  E 直播答题实测：
+ </p>
+ <p>
+  文中提到的第六题：
+ </p>
+ <a class="video-box" data-lens-id="934868742274408448" data-name="" data-poster="https://pic2.zhimg.com/80/v2-1287641d43929f70c5b2cc923b530cfd_b.jpg" data-video-id="" data-video-playable="true" href="https://link.zhihu.com/?target=https%3A//www.zhihu.com/video/934868742274408448" target="_blank">
+  <img class="thumbnail" src="https://pic2.zhimg.com/80/v2-1287641d43929f70c5b2cc923b530cfd_b.jpg"/>
+  <span class="content">
+   <span class="title">
+    <span class="z-ico-extern-gray">
+    </span>
+    <span class="z-ico-extern-blue">
+    </span>
+   </span>
+   <span class="url">
+    <span class="z-ico-video">
+    </span>
+    https://www.zhihu.com/video/934868742274408448
+   </span>
+  </span>
+ </a>
+ <p>
+  代码功能介绍：
+ </p>
+ <a class="video-box" data-lens-id="935150865682132992" data-name="" data-poster="https://pic4.zhimg.com/80/v2-341830d7b45de3777650590a34614f8f_b.jpg" data-video-id="" data-video-playable="true" href="https://link.zhihu.com/?target=https%3A//www.zhihu.com/video/935150865682132992" target="_blank">
+  <img class="thumbnail" src="https://pic4.zhimg.com/80/v2-341830d7b45de3777650590a34614f8f_b.jpg"/>
+  <span class="content">
+   <span class="title">
+    <span class="z-ico-extern-gray">
+    </span>
+    <span class="z-ico-extern-blue">
+    </span>
+   </span>
+   <span class="url">
+    <span class="z-ico-video">
+    </span>
+    https://www.zhihu.com/video/935150865682132992
+   </span>
+  </span>
+ </a>
+ <p>
+  成功的第一题：
+ </p>
+ <a class="video-box" data-lens-id="935149969132904448" data-name="" data-poster="https://pic2.zhimg.com/80/v2-dd91c3a8eb98f33185a244a9c3639029_b.jpg" data-video-id="" data-video-playable="true" href="https://link.zhihu.com/?target=https%3A//www.zhihu.com/video/935149969132904448" target="_blank">
+  <img class="thumbnail" src="https://pic2.zhimg.com/80/v2-dd91c3a8eb98f33185a244a9c3639029_b.jpg"/>
+  <span class="content">
+   <span class="title">
+    <span class="z-ico-extern-gray">
+    </span>
+    <span class="z-ico-extern-blue">
+    </span>
+   </span>
+   <span class="url">
+    <span class="z-ico-video">
+    </span>
+    https://www.zhihu.com/video/935149969132904448
+   </span>
+  </span>
+ </a>
+ <p>
+  忘记答题的第二题：
+ </p>
+ <a class="video-box" data-lens-id="935150275946283008" data-name="" data-poster="https://pic2.zhimg.com/80/v2-bdec5c33ca6875158be3dd823eca6e1d_b.jpg" data-video-id="" data-video-playable="true" href="https://link.zhihu.com/?target=https%3A//www.zhihu.com/video/935150275946283008" target="_blank">
+  <img class="thumbnail" src="https://pic2.zhimg.com/80/v2-bdec5c33ca6875158be3dd823eca6e1d_b.jpg"/>
+  <span class="content">
+   <span class="title">
+    <span class="z-ico-extern-gray">
+    </span>
+    <span class="z-ico-extern-blue">
+    </span>
+   </span>
+   <span class="url">
+    <span class="z-ico-video">
+    </span>
+    https://www.zhihu.com/video/935150275946283008
+   </span>
+  </span>
+ </a>
+ <p>
+  彻底GG的第三题：
+ </p>
+ <a class="video-box" data-lens-id="935151057739374592" data-name="" data-poster="https://pic2.zhimg.com/80/v2-3c2920c0eb939f60f790fd78c10e7f79_b.jpg" data-video-id="" data-video-playable="true" href="https://link.zhihu.com/?target=https%3A//www.zhihu.com/video/935151057739374592" target="_blank">
+  <img class="thumbnail" src="https://pic2.zhimg.com/80/v2-3c2920c0eb939f60f790fd78c10e7f79_b.jpg"/>
+  <span class="content">
+   <span class="title">
+    <span class="z-ico-extern-gray">
+    </span>
+    <span class="z-ico-extern-blue">
+    </span>
+   </span>
+   <span class="url">
+    <span class="z-ico-video">
+    </span>
+    https://www.zhihu.com/video/935151057739374592
+   </span>
+  </span>
+ </a>
+ <p>
+  <br/>
+ </p>
+ <p>
+  希望当你看到这里时，能够成功运行代码咯~ 有问题可以留言，或者关注公众号TEDxPY留言，希望能认识更多喜欢Python的朋友~！
+ </p>
+ <p>
+  补充：
+ </p>
+ <p>
+  1.本代码只是简化百度搜索题目的过程，美其名自动搜题，只作答题参考，有优化的想法欢迎来建议。
+ </p>
+ <p>
+  2.代码运行后，文件夹中会生成截图图片，可以根据图片内容去调整代码中关于截图位置、大小的设置，百万英雄的题目是白底黑字，只要截图准确，一般精确度都很高的。
+ </p>
+ <p>
+  3.为了方便答题时运行代码，可以用python自带的IDLE打开py文件置于屏幕下方，出题目时在py文件上按F5运行即可跳出浏览器界面；同时提前打开好浏览器，调整好位置，避免答题时跳出的窗口挡住手机屏幕位置影响截图。
+ </p>
+ <p>
+  4.关于win32模块，谢谢评论提醒，并不是因为win10系统自带，而是我之前运行其它程序时预装过pypiwin32,所以如果找不到win32的模块，可以pip install pypiwin32
+ </p>
+ <p>
+  5.关于OCR版本，版本低的话可能准确度比较差，这里提供4.0.0版本的安装文件，别用链接里的版本了
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//pan.baidu.com/s/1bpVvjUB" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    pan.baidu.com/s/1bpVvjU
+   </span>
+   <span class="invisible">
+    B
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+  抱歉哈
+ </p>
+ <p>
+  原创代码
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/pengfexue2/TEDxPY" rel="nofollow noreferrer" target="_blank">
+   pengfexue2/TEDxPY
+  </a>
+ </p>
+ <p>
+ </p>
+ <p>
+ </p>
+</div></body></html>

@@ -1,0 +1,955 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>在知乎上学_Python_-_入门篇</h1><div class="RichText ztext Post-RichText">
+ <p>
+  <b>
+   写在前面
+  </b>
+ </p>
+ <p>
+  本文对知乎上关于Python入门方面的问答、文章、专栏做了一定的收集和整理，希望对各位Python学习者能有帮助，至少可以节省大家一点时间。
+ </p>
+ <p>
+  这一篇主要针对的是零基础或初学Python，包括学习的路线、方法建议，推荐的教程、资源等。而像爬虫、数据分析、机器学习等进阶内容将会在后续的文章给出。
+ </p>
+ <p>
+  本文仅为知乎内资源的索引，不包含外部资源。但在这些回答和文章中，你会找到足够丰富的学习资源。
+ </p>
+ <p>
+  内容的筛选有一定主观性，也难免会有遗漏。如果有其他值得推荐的内容，欢迎各位在评论中给出，我也将持续更新本文。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  首先是值得Python初学者关注的一些问题，花点时间翻一翻里面的回答，会有不少收获：
+ </p>
+ <p>
+  <b>
+   学习建议
+  </b>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg" href="https://www.zhihu.com/question/20039623" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     编程零基础应当如何开始学习 Python ？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg"/>
+   </span>
+  </span>
+ </a>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg" href="https://www.zhihu.com/question/29138020" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     如何系统地自学 Python？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg"/>
+   </span>
+  </span>
+ </a>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg" href="https://www.zhihu.com/question/28530832" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     怎么用最短时间高效而踏实地学习 Python？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  <b>
+   经验分享
+  </b>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg" href="https://www.zhihu.com/question/20702054" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     你是如何自学 Python 的？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg"/>
+   </span>
+  </span>
+ </a>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg" href="https://www.zhihu.com/question/55493026" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     你们都是怎么学Python 的？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  <b>
+   教程书籍
+  </b>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg" href="https://www.zhihu.com/question/19593179" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     关于 Python 的经典入门书籍有哪些？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg"/>
+   </span>
+  </span>
+ </a>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg" href="https://www.zhihu.com/question/27522719" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     最好的Python入门教材是哪本？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg"/>
+   </span>
+  </span>
+ </a>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg" href="https://www.zhihu.com/question/34907211" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     Python 有哪些好的学习资料或者博客？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  <b>
+   练手项目
+  </b>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://pic4.zhimg.com/80/6868a17911abfed6f2b1a4f064d37d8f_180x120.jpg" data-image-height="322" data-image-width="600" href="https://www.zhihu.com/question/29372574" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://pic4.zhimg.com/80/6868a17911abfed6f2b1a4f064d37d8f_180x120.jpg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     Python 的练手项目有哪些值得推荐？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--horizontal" src="https://pic4.zhimg.com/80/6868a17911abfed6f2b1a4f064d37d8f_180x120.jpg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  关于Python，一直有个令人纠结的问题：学2还是学3？如今的答案其实已经明了：
+  <b>
+   直接学3就行了
+  </b>
+  。但如果你还在纠结，那就看下这里：
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg" href="https://www.zhihu.com/question/24549965" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     应该学习最新版本的 Python 3 还是旧版本的 Python 2？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  发现有同学问，学了Python可以干嘛，那么再看下这两个问题吧：
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg" href="https://www.zhihu.com/question/20799742" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     你都用 Python 来做什么？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg"/>
+   </span>
+  </span>
+ </a>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg" href="https://www.zhihu.com/question/21395276" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     可以用 Python 编程语言做哪些神奇好玩的事情？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  <br/>
+ </p>
+ <p>
+  几个以python学习为主题的专栏：
+ </p>
+ <p>
+  Python之禅 -
+  <a class="member_mention" data-hash="ba286d02fd9701a446d68ba85d0755c0" data-hovercard="p$b$ba286d02fd9701a446d68ba85d0755c0" href="https://www.zhihu.com/people/ba286d02fd9701a446d68ba85d0755c0">
+   @刘志军
+  </a>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://pic2.zhimg.com/v2-47afa3c33337dcdc0089ba1a53e62069_ipico.jpg" data-image-height="200" data-image-width="200" href="https://zhuanlan.zhihu.com/pythoneer" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://pic2.zhimg.com/v2-47afa3c33337dcdc0089ba1a53e62069_ipico.jpg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     Python之禅
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     zhuanlan.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://pic2.zhimg.com/v2-47afa3c33337dcdc0089ba1a53e62069_ipico.jpg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  Python中文社区 -
+  <a class="member_mention" data-hash="9826f79b7d26d8d015245dd394e83f3e" data-hovercard="p$b$9826f79b7d26d8d015245dd394e83f3e" href="https://www.zhihu.com/people/9826f79b7d26d8d015245dd394e83f3e">
+   @阿橙FM
+  </a>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://pic2.zhimg.com/v2-29d994e518953cade86704e66aef3701_ipico.jpg" data-image-height="200" data-image-width="200" href="https://zhuanlan.zhihu.com/zimei" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://pic2.zhimg.com/v2-29d994e518953cade86704e66aef3701_ipico.jpg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     Python中文社区
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     zhuanlan.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://pic2.zhimg.com/v2-29d994e518953cade86704e66aef3701_ipico.jpg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  学习编程 -
+  <a class="member_mention" data-hash="eaf435b228ce0b038a4afe8203f59b49" data-hovercard="p$b$eaf435b228ce0b038a4afe8203f59b49" href="https://www.zhihu.com/people/eaf435b228ce0b038a4afe8203f59b49">
+   @路人甲
+  </a>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://pic3.zhimg.com/a778f2637fd0cd3bfce5ddb4ff441662_ipico.jpg" data-image-height="200" data-image-width="200" href="https://zhuanlan.zhihu.com/passer" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://pic3.zhimg.com/a778f2637fd0cd3bfce5ddb4ff441662_ipico.jpg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     学习编程
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     zhuanlan.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://pic3.zhimg.com/a778f2637fd0cd3bfce5ddb4ff441662_ipico.jpg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  Python之美 -
+  <a class="member_mention" data-hash="6d23d8e16eb481e548032719bb5898a4" data-hovercard="p$b$6d23d8e16eb481e548032719bb5898a4" href="https://www.zhihu.com/people/6d23d8e16eb481e548032719bb5898a4">
+   @董伟明
+  </a>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://pic3.zhimg.com/v2-16fe083e82f044cc74013ccab68ee282_ipico.jpg" data-image-height="200" data-image-width="200" href="https://zhuanlan.zhihu.com/python-cn" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://pic3.zhimg.com/v2-16fe083e82f044cc74013ccab68ee282_ipico.jpg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     Python之美
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     zhuanlan.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://pic3.zhimg.com/v2-16fe083e82f044cc74013ccab68ee282_ipico.jpg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  Python程序员 -
+  <a class="member_mention" data-hash="9a7d6515fb875c3876293f1e0df21d38" data-hovercard="p$b$9a7d6515fb875c3876293f1e0df21d38" href="https://www.zhihu.com/people/9a7d6515fb875c3876293f1e0df21d38">
+   @Python程序员
+  </a>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://pic4.zhimg.com/v2-128d545af8ddfb8759a8ce278a24d887_ipico.jpg" data-image-height="200" data-image-width="200" href="https://zhuanlan.zhihu.com/pythoncxy" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://pic4.zhimg.com/v2-128d545af8ddfb8759a8ce278a24d887_ipico.jpg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     Python程序员
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     zhuanlan.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://pic4.zhimg.com/v2-128d545af8ddfb8759a8ce278a24d887_ipico.jpg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  Crossin的编程教室 -
+  <a class="member_mention" data-hash="3049d74682543a3f8f73b57964bf5db3" data-hovercard="p$b$3049d74682543a3f8f73b57964bf5db3" href="https://www.zhihu.com/people/3049d74682543a3f8f73b57964bf5db3">
+   @Crossin
+  </a>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://pic3.zhimg.com/3461ca55befe0944de323b5d6be10512_ipico.jpg" data-image-height="200" data-image-width="200" href="https://zhuanlan.zhihu.com/crossin" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://pic3.zhimg.com/3461ca55befe0944de323b5d6be10512_ipico.jpg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     Crossin的编程教室
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     zhuanlan.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://pic3.zhimg.com/3461ca55befe0944de323b5d6be10512_ipico.jpg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  <br/>
+ </p>
+ <p>
+  再推荐几篇我觉得对Python新手很有帮助的回答或文章：
+ </p>
+ <p>
+  编程入门指南 v1.5 -
+  <a class="member_mention" data-hash="fd7c571a0ada1a72e42e8d7992c4a780" data-hovercard="p$b$fd7c571a0ada1a72e42e8d7992c4a780" href="https://www.zhihu.com/people/fd7c571a0ada1a72e42e8d7992c4a780">
+   @萧井陌
+  </a>
+  ,
+  <a class="member_mention" data-hash="d2facf05b7138a6eb4631a161915f7d4" data-hovercard="p$b$d2facf05b7138a6eb4631a161915f7d4" href="https://www.zhihu.com/people/d2facf05b7138a6eb4631a161915f7d4">
+   @Badger4us
+  </a>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg" href="https://zhuanlan.zhihu.com/p/19959253" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     Badger4us：编程入门指南 v1.5
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     zhuanlan.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  有哪些适合新手练手的Python项目？-
+  <a class="member_mention" data-hash="eaf435b228ce0b038a4afe8203f59b49" data-hovercard="p$b$eaf435b228ce0b038a4afe8203f59b49" href="https://www.zhihu.com/people/eaf435b228ce0b038a4afe8203f59b49">
+   @路人甲
+  </a>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://pic1.zhimg.com/a77f5b371b6ecbb24f823edaa1913750_180x120.jpg" data-image-height="800" data-image-width="1200" href="https://zhuanlan.zhihu.com/p/22164270" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://pic1.zhimg.com/a77f5b371b6ecbb24f823edaa1913750_180x120.jpg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     路人甲：有哪些适合新手练手的Python项目？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     zhuanlan.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--horizontal" src="https://pic1.zhimg.com/a77f5b371b6ecbb24f823edaa1913750_180x120.jpg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  应该怎样系统的学习Python标准库？-
+  <a class="member_mention" data-hash="fbfd391076f7c6d7a335b79642bc3156" data-hovercard="p$b$fbfd391076f7c6d7a335b79642bc3156" href="https://www.zhihu.com/people/fbfd391076f7c6d7a335b79642bc3156">
+   @追梦人物
+  </a>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg" href="https://www.zhihu.com/question/22100190/answer/133327399" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     应该怎样系统的学习Python标准库？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  一个0经验人的自学编程之路 -
+  <a class="member_mention" data-hash="788f207a6bf8f66c5bad79bd0f011065" data-hovercard="p$b$788f207a6bf8f66c5bad79bd0f011065" href="https://www.zhihu.com/people/788f207a6bf8f66c5bad79bd0f011065">
+   @赛门喵Simon
+  </a>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://pic2.zhimg.com/v2-b823bbdec3c826bf40b4feb944b1e3f1_180x120.jpg" data-image-height="600" data-image-width="800" href="https://zhuanlan.zhihu.com/p/24360023" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://pic2.zhimg.com/v2-b823bbdec3c826bf40b4feb944b1e3f1_180x120.jpg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     赛门喵Simon：一个0经验人的自学编程之路
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     zhuanlan.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--horizontal" src="https://pic2.zhimg.com/v2-b823bbdec3c826bf40b4feb944b1e3f1_180x120.jpg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  对于编程零基础，第一个语言是 Python 的人有什么建议？-
+  <a class="member_mention" data-hash="5f80afc51a69c1cffa0c2ee7895b751c" data-hovercard="p$b$5f80afc51a69c1cffa0c2ee7895b751c" href="https://www.zhihu.com/people/5f80afc51a69c1cffa0c2ee7895b751c">
+   @杜志鹏
+  </a>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg" href="https://www.zhihu.com/question/22785587/answer/51643418" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     对于编程零基础，第一个语言是 Python 的人有什么建议？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  怎么样才算是精通 Python？-
+  <a class="member_mention" data-hash="9dc46aa6570ad50f998d93e5e63049de" data-hovercard="p$b$9dc46aa6570ad50f998d93e5e63049de" href="https://www.zhihu.com/people/9dc46aa6570ad50f998d93e5e63049de">
+   @xlzd
+  </a>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg" href="https://www.zhihu.com/question/19794855/answer/111320427" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     怎么样才算是精通 Python？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  70个Python练手项目列表 -
+  <a class="member_mention" data-hash="8073bc40eef9c7f61a00e307791048df" data-hovercard="p$b$8073bc40eef9c7f61a00e307791048df" href="https://www.zhihu.com/people/8073bc40eef9c7f61a00e307791048df">
+   @林梓
+  </a>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://pic2.zhimg.com/v2-1529898fb851a9c65dcfe935fcfa0a95_180x120.jpg" data-image-height="500" data-image-width="900" href="https://zhuanlan.zhihu.com/p/27931879" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://pic2.zhimg.com/v2-1529898fb851a9c65dcfe935fcfa0a95_180x120.jpg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     林梓：70个Python练手项目列表
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     zhuanlan.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--horizontal" src="https://pic2.zhimg.com/v2-1529898fb851a9c65dcfe935fcfa0a95_180x120.jpg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  作为初学者哪种编程语言比较适合学习？-
+  <a class="member_mention" data-hash="960e5e06bd066473de06f7a00b6c80cc" data-hovercard="p$b$960e5e06bd066473de06f7a00b6c80cc" href="https://www.zhihu.com/people/960e5e06bd066473de06f7a00b6c80cc">
+   @林茜茜
+  </a>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://pic4.zhimg.com/80/59f47c31ddf7f33f8fe92126deed9fdb_120x160.jpg" data-image-height="2097" data-image-width="800" href="https://www.zhihu.com/question/34747293/answer/100520134" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://pic4.zhimg.com/80/59f47c31ddf7f33f8fe92126deed9fdb_120x160.jpg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     作为初学者哪种编程语言比较适合学习？
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--vertical" src="https://pic4.zhimg.com/80/59f47c31ddf7f33f8fe92126deed9fdb_120x160.jpg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  给伸手党的福利：Python 新手入门引导 -
+  <a class="member_mention" data-hash="3049d74682543a3f8f73b57964bf5db3" data-hovercard="p$b$3049d74682543a3f8f73b57964bf5db3" href="https://www.zhihu.com/people/3049d74682543a3f8f73b57964bf5db3">
+   @Crossin
+  </a>
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://pic1.zhimg.com/v2-1e2699da4dddbc8d07a2d8f223ab2904_180x120.jpg" data-image-height="800" data-image-width="1920" href="https://zhuanlan.zhihu.com/p/25824007" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://pic1.zhimg.com/v2-1e2699da4dddbc8d07a2d8f223ab2904_180x120.jpg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     Crossin：给伸手党的福利：Python 新手入门引导
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     zhuanlan.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--horizontal" src="https://pic1.zhimg.com/v2-1e2699da4dddbc8d07a2d8f223ab2904_180x120.jpg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  <br/>
+ </p>
+ <p>
+  此外，知乎官方也出过一期 Python 学习的周刊：
+ </p>
+ <p>
+  【知乎周刊】编程小白学 Python
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://pic4.zhimg.com/v2-7918cc4e478d7de83e17641ea9641ddb_120x160.jpg" data-image-height="267" data-image-width="200" href="https://www.zhihu.com/pub/book/19550511" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://pic4.zhimg.com/v2-7918cc4e478d7de83e17641ea9641ddb_120x160.jpg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     编程小白学 Python
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--vertical" src="https://pic4.zhimg.com/v2-7918cc4e478d7de83e17641ea9641ddb_120x160.jpg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  <br/>
+ </p>
+ <p>
+  部分回答和文章，我都收录在了收藏夹里，欢迎关注和补充：
+ </p>
+ <p>
+  【收藏夹】在知乎上学 Python（入门）
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg" href="https://www.zhihu.com/collection/227959517" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     在知乎上学Python（入门）
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     www.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--square" src="https://zhstatic.zhihu.com/assets/zhihu/editor/zhihu-card-default.svg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <b>
+   写在后面
+  </b>
+ </p>
+ <p>
+  好的资源有很多，肯定远不止我这里列出的这些。但过犹不及，我们不必做过冬的松鼠，把收集本身当做了目的。电脑里存上大量的资源，不如把其中一本教材学完。
+ </p>
+ <p>
+  还有一些优质回答，初学者恐怕还不能理解，因此未收录，可能会在后续的文章中推荐。本来还想推荐几位用户，但发现Python大牛往往很少发入门向的内容，而整天发的多半是培训机构或营销号，于是作罢。大家在阅读上述推荐内容的时候自行选择关注吧。
+ </p>
+ <p>
+  最后我想说两点：
+ </p>
+ <ol>
+  <li>
+   每个人的情况都不一样，适合的学习方式自然也会不同。所以方法论的东西只是个参考，并不存在万金油的套路。点赞最多的，未必是适合你的。
+  </li>
+  <li>
+   编程是件理论结合实践的事，并且实践是更重要的部分。
+  </li>
+ </ol>
+ <p>
+  <br/>
+ </p>
+ <p>
+  祝大家都能在编程这条道路上顺利走下去。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+ </p>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学编程的弯路
+  </a>
+  |
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <blockquote>
+  微信公众号：
+  <b>
+   Crossin的编程教室
+  </b>
+  （crossincode）
+  <br/>
+  关注后回复
+  <b>
+   资料
+  </b>
+  ，可获取Python电子书及视频资源
+ </blockquote>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-a546a1dd634b7bdffa0b14948057744f_r.jpg" data-rawheight="576" data-rawwidth="2066" data-size="small" src="https://pic4.zhimg.com/v2-a546a1dd634b7bdffa0b14948057744f_b.jpg" width="2066"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-a546a1dd634b7bdffa0b14948057744f_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-a546a1dd634b7bdffa0b14948057744f_r.jpg" data-rawheight="576" data-rawwidth="2066" data-size="small" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='2066'%20height='576'&gt;&lt;/svg&gt;" width="2066"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>

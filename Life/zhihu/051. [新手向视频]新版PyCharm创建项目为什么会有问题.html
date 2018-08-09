@@ -1,0 +1,200 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>[新手向视频]新版PyCharm创建项目为什么会有问题</h1><div class="RichText ztext Post-RichText">
+ <p>
+ </p>
+ <a class="video-box" data-lens-id="936250782660042752" data-name="" data-poster="https://pic3.zhimg.com/80/v2-2d7de26cadde5b5145f5c9bb77211a7a_b.jpg" data-video-id="" data-video-playable="true" href="https://link.zhihu.com/?target=https%3A//www.zhihu.com/video/936250782660042752" target="_blank">
+  <img class="thumbnail" src="https://pic3.zhimg.com/80/v2-2d7de26cadde5b5145f5c9bb77211a7a_b.jpg"/>
+  <span class="content">
+   <span class="title">
+    <span class="z-ico-extern-gray">
+    </span>
+    <span class="z-ico-extern-blue">
+    </span>
+   </span>
+   <span class="url">
+    <span class="z-ico-video">
+    </span>
+    https://www.zhihu.com/video/936250782660042752
+   </span>
+  </span>
+ </a>
+ <p>
+  之前我们发过一篇关于 PyCharm 的文章：
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/26066151">
+   喏，你们要的 PyCharm 快速上手指南
+  </a>
+ </p>
+ <p>
+  文章帮好多新手解决了问题，在微博上还被知乎官方账号推荐了。
+ </p>
+ <p>
+  而 PyCharm 在2017年的新版本中，对
+  <b>
+   新建项目
+  </b>
+  的配置增加了一点小功能。这些功能很有帮助，但却会让刚刚接触开发的新手困惑。最近已经连续有好几个同学问到这个问题，所以今天专门来演示一下。
+  <br/>
+ </p>
+ <p>
+  首先要注意的是：PyCharm 只是开发工具，并不自带 python 环境，所以在安装 PyCharm 之前，应当先
+  <b>
+   安装 python
+  </b>
+  并设置好
+  <b>
+   环境变量
+  </b>
+  。（关于安装和环境变量的详细说明，请在公众号里回复
+  <b>
+   安装
+  </b>
+  ）
+ </p>
+ <p>
+  安装好 PyCharm 并打开后，会看到这样一个界面。点击
+  <b>
+   Create New Project
+  </b>
+  就是新建一个项目。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-f2d3cdb32673ab08e57f1c24b5a01cb3_r.jpg" data-rawheight="482" data-rawwidth="777" data-size="normal" src="https://pic4.zhimg.com/v2-f2d3cdb32673ab08e57f1c24b5a01cb3_b.jpg" width="777"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-f2d3cdb32673ab08e57f1c24b5a01cb3_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-f2d3cdb32673ab08e57f1c24b5a01cb3_r.jpg" data-rawheight="482" data-rawwidth="777" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='777'%20height='482'&gt;&lt;/svg&gt;" width="777"/>
+ </figure>
+ <p>
+  这里第一行是设定新项目的所在目录。可以设定你的项目名称。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-acb3f779077af392790d0cc9fc54d5bd_r.jpg" data-rawheight="482" data-rawwidth="777" data-size="normal" src="https://pic3.zhimg.com/v2-acb3f779077af392790d0cc9fc54d5bd_b.jpg" width="777"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-acb3f779077af392790d0cc9fc54d5bd_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-acb3f779077af392790d0cc9fc54d5bd_r.jpg" data-rawheight="482" data-rawwidth="777" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='777'%20height='482'&gt;&lt;/svg&gt;" width="777"/>
+ </figure>
+ <p>
+  在创建同时，还需要指定项目所使用的 python 环境。之前的版本，是直接在项目目录下面有一行 python 环境的选择。而新版本，这里改成了更复杂的选项。
+ </p>
+ <p>
+  默认情况下，新版 PyCharm 预设的是第一种选择：
+  <b>
+   New environment
+  </b>
+  。这种方式会创建一个新的
+  <b>
+   虚拟 python 环境
+  </b>
+  。
+ </p>
+ <p>
+  这样的效果是，将你选择的 python 环境复制一份，生成一个副本，这个新项目之后安装的所有第三方库仅限于这个副本的环境，而不会影响你原本的 python 和其他项目。
+ </p>
+ <p>
+  创建成功之后，会在项目里看到一个额外的目录，就是虚拟的 python 环境所在。
+ </p>
+ <p>
+  这对于开发多个 python 项目来说非常方便，也是通常所采用的解决方案。但对于新手来说，就会发生，在命令行里通过 pip install 安装的库，无法在自己创建的 PyCharm 项目中使用。原因就是项目使用了全新的虚拟环境。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  所以，对于刚刚接触 python 学习的新手来说，建议使用下面第二种创建方式：
+ </p>
+ <p>
+  <b>
+   Existing interpreter
+  </b>
+  。就是使用已有的 python 解释器。
+ </p>
+ <p>
+  通常来说，在成功安装好 python 的情况下，这里会自动显示你电脑上的 python 环境，选择你要使用的版本，点 create 确认创建即可。
+ </p>
+ <p>
+  而如果你已经安装了 python 但这里没有显示，则需要点击后面的齿轮按钮进行设置，手动指定你的python路径。注意这里和设置环境变量路径不同，是需要指定到具体的 python 可执行文件的地址，windows 的话就是要选择到 python 安装目录下的 python.exe。
+ </p>
+ <p>
+  创建成功之后，就可以新建 py 文件，开始编写 python 代码了
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  当在项目中需要新增库时，可以通过 PyCharm 设置里的 project interpreter 页面进行安装，确保路径不会出错。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-4dbdf606b3723c3d13836114fe553d97_r.jpg" data-rawheight="1342" data-rawwidth="2052" data-size="normal" src="https://pic1.zhimg.com/v2-4dbdf606b3723c3d13836114fe553d97_b.jpg" width="2052"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-4dbdf606b3723c3d13836114fe553d97_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-4dbdf606b3723c3d13836114fe553d97_r.jpg" data-rawheight="1342" data-rawwidth="2052" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='2052'%20height='1342'&gt;&lt;/svg&gt;" width="2052"/>
+ </figure>
+ <p>
+  以上就是通过新版 PyCharm 创建项目的简要过程。
+ </p>
+ <p>
+  .
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+ </p>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/30932804">
+   双11
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/29043669">
+   押韵工具
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学编程的弯路
+  </a>
+  |
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   自学Python
+  </a>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  Crossin的编程教室
+ </p>
+ <blockquote>
+  微信公众号ID：crossincode
+  <br/>
+  网站：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/" rel="nofollow noreferrer" target="_blank">
+   crossincode.com
+  </a>
+  <br/>
+  论坛：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com" rel="nofollow noreferrer" target="_blank">
+   bbs.crossincode.com
+  </a>
+ </blockquote>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+ <p>
+ </p>
+</div></body></html>

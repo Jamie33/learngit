@@ -1,0 +1,174 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>如何安装_Python_的第三方模块</h1><div class="RichText ztext Post-RichText">
+ <p>
+  正所谓“人生苦短，我用 Python”。Python 的一大优势就是有丰富且易用的第三方模块，省去了大量重复造轮子的时间，节约了众多开发者的生命。对于已经熟悉 Python 开发的人来说，安装第三方模块是家常便饭的事情。但如果是刚入门的新手，很可能会被折腾一番。所以我来简单地科普一下，如何安装 Python 的第三方模块。
+ </p>
+ <p>
+  （本文基于 Python 2.7 版本）
+ </p>
+ <p>
+  安装通常有两种方式：通过
+  <strong>
+   包管理器
+  </strong>
+  、直接
+  <strong>
+   下载源码安装
+  </strong>
+  。
+ </p>
+ <h2>
+  1. 包管理器
+ </h2>
+ <p>
+  很多系统和语言都提供了包管理器。你可以把“包管理器”想象成一个类似应用商店的工具。Python 的包管理器里就是各种第三方模块。有了它，不用998，也不用98，只需要一条命令，就可以自动帮你下载并安装。
+ </p>
+ <p>
+  Python 常用的包管理器是
+  <strong>
+   pip
+  </strong>
+  和
+  <strong>
+   easy_install
+  </strong>
+  。他们会从一个叫做 PyPI 的源里搜索你要的模块，找到后自动下载安装。PyPI 是 Python 官方的第三方模块仓库，供所有开发者下载或上传代码。
+ </p>
+ <p>
+  如果你用的是 Mac 或者 Linux，那么同 Python 一样，你的系统里应该自带了 pip。而如果你是 Windows，那么在安装 Python 的时候，勾选
+  <i>
+   pip
+  </i>
+  和
+  <i>
+   Add python.exe to Path
+  </i>
+  ，就会帮你同时安装好 pip 并设置好环境变量中的路径。如果无法使用 pip，确认 Python 安装目录下的 Scripts 子目录中有 pip，并且这个子目录的路径被加在了环境变量 Path 中。如果没有 pip，则要通过下载 setuptools 安装，或建议直接重新安装一遍 Python。
+ </p>
+ <p>
+  以 IPython 为例，通过 pip 命令进行安装，只需要在命令行输入：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>pip install ipython
+</code></pre>
+ </div>
+ <p>
+  如果一切正常，网络不抽风，只要稍微等待，就可以看到下载进度，自动安装完就可使用。如果 Mac/Linux 下提示 Permission denied 之类的权限问题，在命令前加上 sudo。
+ </p>
+ <p>
+  IPython 是一个增强版的 Python shell，在命令行输入 ipython 就可以打开使用。比默认运行 python 进入的那个更好使，在里面调试代码会很方便。不过 windows 的话，还要再用 pip 装一个 pyreadline 的模块，才能使用 IPython 的 tab 键自动补全功能。（用 Windows 开发就是事多）
+ </p>
+ <p>
+  如果你不是很明确要下载的模块名，也可以进行搜索，比如：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>pip search ipython
+</code></pre>
+ </div>
+ <p>
+  再来看 easy_install。安装 easy_install 的一种简单方法是去网上下载一个的脚本文件：
+ </p>
+ <br/>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//res.crossincode.com/jump.html%3Fto%3Dhttp%3A//peak.telecommunity.com/dist/ez_setup.py" rel="nofollow noreferrer" target="_blank">
+   ez_setup.py
+  </a>
+  ( peak.telecommunity.com/dist/ez_setup.py )
+ </p>
+ <p>
+  下载之后运行它：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>python ez_setup.py
+</code></pre>
+ </div>
+ <p>
+  然后 easy_install 就被安装好了。同样，需确认 Scripts 在环境变量 PATH 里。
+ </p>
+ <p>
+  使用方法和 pip 一样简单：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>easy_install ipython
+</code></pre>
+ </div>
+ <p>
+  一般来说，pip 和 easy_install 就可以搞定绝大多数的模块安装了。万一不行，还可以尝试下面的另一种方式。
+ </p>
+ <h2>
+  2. 源码安装
+ </h2>
+ <p>
+  几乎所有第三方模块都可以在 PyPI 或 github 上找到源码，都会提供 zip、tar 等格式的压缩包。把代码压缩包下载到本地并解压，应该会看到一个 setup.py 的文件。在命令行进入其所在目录，执行：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>python setup.py install
+</code></pre>
+ </div>
+ <p>
+  就会安装这个第三方模块。最终效果和用包管理器是一样的。
+ </p>
+ <p>
+  无论哪种方法，都会将第三方模块代码安装至 Python 的路径下，根据系统不同，位置有所区别，大致都是叫做 site-packages 或 dist-packages。所以对于一些没有其他依赖，不需要编译其他语言的纯 Python 代码包，也可以直接手动将源码复制到 site-packages 或 dist-packages 目录下。只要路径正确，就可以在你的代码里引入这些模块。
+ </p>
+ <br/>
+ <p>
+  <em>
+   友情提醒一些坑：
+  </em>
+ </p>
+ <ul>
+  <li>
+   <p>
+    安装第三方模块前，请确认它所支持的版本，是不是包含你所使用的 Python 版本。有些模块对应 Python 2 和 3 需要下载不同的版本。
+   </p>
+  </li>
+  <li>
+   <p>
+    少数复杂的包可能无法直接一条命令安装成功，特殊情况特殊对待，搜索引擎会给你指引。
+   </p>
+  </li>
+  <li>
+   <p>
+    如果你的电脑上装有多个版本的 Python，使用 pip 很可能会造成混乱。对于这个问题，virtualenv 是一个很好的解决方案，下次会专门来讲一讲。
+   </p>
+  </li>
+ </ul>
+ <br/>
+ <p>
+  有一个叫做
+  <strong>
+   Awesome Python
+  </strong>
+  的项目，列出了各类优秀的、实用的、有意思的 Python 库：
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//res.crossincode.com/jump.html%3Fto%3Dhttp%3A//awesome-python.com/" rel="nofollow noreferrer" target="_blank">
+   awesome-python.com
+  </a>
+ </p>
+ <br/>
+ <p>
+  <strong>
+   Crossin的编程教室
+  </strong>
+ </p>
+ <p>
+  微信ID：crossincode
+ </p>
+ <p>
+  论坛：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室
+  </a>
+ </p>
+ <p>
+  QQ群：498545096
+ </p>
+ <br/>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="258" data-rawwidth="258" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+</div></body></html>

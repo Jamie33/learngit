@@ -1,0 +1,474 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>关于函数参数传递，80%人都错了</h1><div class="RichText ztext Post-RichText">
+ <p>
+  还记得上一次关于变量作用域文章 ：
+ </p>
+ <a class="LinkCard LinkCard--hasImage" data-draft-node="block" data-draft-type="link-card" data-image="https://pic3.zhimg.com/v2-8ee50acb641d34f5090800a97592535a_180x120.jpg" data-image-height="425" data-image-width="1024" href="https://zhuanlan.zhihu.com/p/37585716" target="_blank">
+  <span class="LinkCard-backdrop" style="background-image:url(https://pic3.zhimg.com/v2-8ee50acb641d34f5090800a97592535a_180x120.jpg)">
+  </span>
+  <span class="LinkCard-content">
+   <span>
+    <span class="LinkCard-title" data-text="true">
+     Crossin：全菊变量和菊部变量
+    </span>
+    <span class="LinkCard-meta">
+     <span style="display:inline-flex;align-items:center">
+      ​
+      <svg class="Zi Zi--InsertLink" fill="currentColor" height="17" viewbox="0 0 24 24" width="17">
+       <path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd">
+       </path>
+      </svg>
+     </span>
+     zhuanlan.zhihu.com
+    </span>
+   </span>
+   <span class="LinkCard-imageCell">
+    <img alt="图标" class="LinkCard-image LinkCard-image--horizontal" src="https://pic3.zhimg.com/v2-8ee50acb641d34f5090800a97592535a_180x120.jpg"/>
+   </span>
+  </span>
+ </a>
+ <p>
+  我们在公众号（Crossin的编程教室）里做了个问题投票：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">m</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">func</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'l ='</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  实际的输出我想大家都尝试过了吧，应该是选项二：
+  <br/>
+  <b>
+   [20, 2, 3]
+  </b>
+ </p>
+ <p>
+  和80%人想象中的结果不一样。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-53d201484e20407aa8be25ac04db4b88_r.jpg" data-rawheight="500" data-rawwidth="1080" data-size="normal" src="https://pic4.zhimg.com/v2-53d201484e20407aa8be25ac04db4b88_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-53d201484e20407aa8be25ac04db4b88_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-53d201484e20407aa8be25ac04db4b88_r.jpg" data-rawheight="500" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='500'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  这是为什么呢？
+ </p>
+ <p>
+  在 Python 的官方文档 FAQ 里有这样一句话
+ </p>
+ <blockquote>
+  Remember that arguments are passed by assignment in Python.
+  <br/>
+  要记住，Python 里的参数是通过赋值传递的。
+ </blockquote>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3/faq/programming.html%23how-do-i-write-a-function-with-output-parameters-call-by-reference" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    docs.python.org/3/faq/p
+   </span>
+   <span class="invisible">
+    rogramming.html#how-do-i-write-a-function-with-output-parameters-call-by-reference
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  所以要弄清楚参数传递，先得弄清 Python 的赋值。
+ </p>
+ <p>
+  或许在很多人的直观印象中，变量是一个容器；给变量赋值，就像是往一个存储的容器中填入一个数据；再次赋值就是把容器中的数据换掉。
+ </p>
+ <p>
+  然而，
+ </p>
+ <p>
+  <b>
+   在 Python 中，这种理解是不准确的！
+  </b>
+  <br/>
+  <b>
+   在 Python 中，这种理解是不准确的！
+  </b>
+  <br/>
+  <b>
+   在 Python 中，这种理解是不准确的！
+  </b>
+ </p>
+ <p>
+  若是想要个形象的类比，
+  <b>
+   Python 中的变量更像是是个标签；给变量赋值，就是把标签贴在一个物体上；再次赋值就是把标签贴在另一个物体上
+  </b>
+  。
+ </p>
+ <p>
+  体会下这两种设计的差异：
+ </p>
+ <p>
+  · 前者，变量是一个固定的存在，赋值只会改变其中的数值，而变量本身没有改动。
+  <br/>
+  · 后者，变量不存在实体，它仅仅是一个标签，一旦赋值就被设置到另一个物体上，不变的是那些物体。
+ </p>
+ <p>
+  这些“物体”就是
+  <b>
+   对象
+  </b>
+  。
+  <b>
+   Python 中所有东西都是对象
+  </b>
+  ，包括函数、类、模块，甚至是字符串’hello’，数字1、2、3，都是对象。
+ </p>
+ <p>
+  用个例子来说明：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1"># 再次赋值</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">b</span>
+</code></pre>
+ </div>
+ <p>
+  在这个代码里，a 和 c 其实指向的是同一个对象—整数 1。给 a 赋值为 b 之后，a 就变成了指向 2 的标签，但 1 和 c 都不会受影响。
+ </p>
+ <p>
+  示意图：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-ec4afe014f1f8cca2464dcb533be7aed_r.jpg" data-rawheight="782" data-rawwidth="740" data-size="small" src="https://pic4.zhimg.com/v2-ec4afe014f1f8cca2464dcb533be7aed_b.jpg" width="740"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-ec4afe014f1f8cca2464dcb533be7aed_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-ec4afe014f1f8cca2464dcb533be7aed_r.jpg" data-rawheight="782" data-rawwidth="740" data-size="small" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='740'%20height='782'&gt;&lt;/svg&gt;" width="740"/>
+ </figure>
+ <p>
+  更有说服力一点的验证：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'b'</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'c'</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+<span class="c1"># 再次赋值</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">b</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</code></pre>
+ </div>
+ <p>
+  输出：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>a 1 4301490544
+b 2 4301490576
+c 1 4301490544
+a 2 4301490576
+</code></pre>
+ </div>
+ <p>
+  <b>
+   id()
+  </b>
+  可以认为是获取一个对象的地址。可以看出，a 和 c 开始其实是同一个地址，而后来赋值之后，a 又和 b 是同一个地址。
+ </p>
+ <p>
+  每次给变量重新赋值，它就指向了新的地址，与原来的地址无关了。
+ </p>
+ <p>
+  回到函数的调用上：
+  <br/>
+  <b>
+   Python 里的参数是通过赋值传递的
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">fn</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  输出结果为
+  <code>
+   1
+  </code>
+  ，a 没有变化。
+ </p>
+ <p>
+  调用 fn(a) 的时候，就相当于做了一次
+  <code>
+   x = a
+  </code>
+  ，把 a 赋值给了 x，也就是把 x 这个标签贴在了 a 的对象上。只不过 x 的作用域仅限于函数 fn 内部。
+ </p>
+ <p>
+  当 x 在函数内部又被赋值为 3 时，就是把 x 又贴在了 3 这个对象上，与之前的 a 不在有关系。所以外部的 a 不会有任何变化。
+ </p>
+ <p>
+  把其中的数值换成其他对象，效果也是一样的：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">fn</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  输出结果为
+  <code>
+   [1,2,3]
+  </code>
+  ，a 没有变化。（记住这个例子，最后我们还会提到）
+ </p>
+ <p>
+  那上次的题目又是怎么回事？
+ </p>
+ <p>
+  我们再来看一个赋值：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'b'</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'b'</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+</code></pre>
+ </div>
+ <p>
+  输出：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>a [1, 2, 3] 4490723464
+b [1, 2, 3] 4490723464
+a [1, 5, 3] 4490723464
+b [1, 5, 3] 4490723464
+</code></pre>
+ </div>
+ <p>
+  这个是不是好理解一点？b 赋值为 a 后，和 a 指向同一个列表对象。[1] 这个基于 index 的赋值是 list 对象本身的一种操作，并没有给 b 重新贴标签，改变的是对象本身。所以 b 指向的还是原来的对象，此对象的改动自然也会体现在 a 身上。同理，
+  <code>
+   b.append(7)
+  </code>
+  这样的操作也会是类似的效果。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-c58453d3c5fdd0a69256ee3145bccf1a_r.jpg" data-rawheight="786" data-rawwidth="858" data-size="small" src="https://pic1.zhimg.com/v2-c58453d3c5fdd0a69256ee3145bccf1a_b.jpg" width="858"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-c58453d3c5fdd0a69256ee3145bccf1a_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-c58453d3c5fdd0a69256ee3145bccf1a_r.jpg" data-rawheight="786" data-rawwidth="858" data-size="small" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='858'%20height='786'&gt;&lt;/svg&gt;" width="858"/>
+ </figure>
+ <p>
+  再来回顾下原问题呢：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="c1"># m = [4, 5, 6]</span>
+    <span class="k">return</span> <span class="n">m</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">func</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'l ='</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  去掉那句
+  <code>
+   m=[4,5,6]
+  </code>
+  的干扰，函数的调用就相当于：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">l</span>
+<span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span>
+</code></pre>
+ </div>
+ <p>
+  l 的值变成
+  <code>
+   [20,2,3]
+  </code>
+  没毛病吧。而对 m 重新赋值之后，m 与 l 无关，但不影响已经做出的修改。
+ </p>
+ <p>
+  这就是这道题的解答。上次留言里有些同学已经解释的很准确了。
+ </p>
+ <p>
+  另外说下，
+  <b>
+   函数的返回值 return，也相当于是一次赋值
+  </b>
+  。只不过，这时候是把函数内部返回值所指向的对象，赋值给外面函数的调用者：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'x'</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</code></pre>
+ </div>
+ <p>
+  输出：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>x 3 4556777904
+a 3 4556777904
+</code></pre>
+ </div>
+ <p>
+  函数结束后，x 这个标签虽然不存在了，但 x 所指向的对象依然存在，就是 a 指向的新对象。
+ </p>
+ <p>
+  所以，如果你想要通过一个函数来修改外部变量的值，有几种方法：
+ </p>
+ <ol>
+  <li>
+   通过返回值赋值
+  </li>
+  <li>
+   使用全局变量
+  </li>
+  <li>
+   修改 list 或 dict 对象的内部元素
+  </li>
+  <li>
+   修改类的成员变量
+  </li>
+ </ol>
+ <p>
+  有相当多的教程把 Python 的函数参数传递分为可变对象和不可变对象（这个概念下次来说）来说明，然后类比到 C++ 的值传递和引用传递。我很反对这样去理解：
+ </p>
+ <ol>
+  <li>
+   对于没有学过 C++ 的人来说，这个解释属于循环论证，还是没说清问题。
+  </li>
+  <li>
+   Python 本来就不存在值传递/引用传递的概念，这个比较没有意义。
+  </li>
+  <li>
+   这个类比实际上是错误的。就算类比，也应该是相当于 C++ 里的指针值传递。
+  </li>
+  <li>
+   用可变对象/不可变对象来划分很容易产生误解，比如我们前面例子中的
+   <code>
+    x=[4,5,6]
+   </code>
+   ，它是可变对象，但一样不影响外部参数的值。
+  </li>
+ </ol>
+ <p>
+  这点前面贴出的官方文档里也直说了：
+ </p>
+ <blockquote>
+  Since assignment just creates references to objects, there’s no alias between an argument name in the caller and callee, and so no call-by-reference per se.
+  <br/>
+  赋值是创建了一份对象的引用（也就是地址），形参和实参之间不存在别名的关系，本质上不存在引用传递。
+ </blockquote>
+ <p>
+  网上很容易搜到“参数是可变对象就相当于引用传递”这种错误的理解。也不知道他们是对 Python 的参数传递有什么误解，还是对C++的引用传递有什么误解。结果就是，让很多初学者从网上看了几篇教程之后，更糊涂了。
+ </p>
+ <p>
+  所以呢，找到一个靠谱的教程是非常重要滴😏
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   精选
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   Python
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   问答
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/36064871">
+   Python单词表
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36538511">
+   区块链
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36581953">
+   人工智能
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/30932804">
+   双11
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/29043669">
+   嘻哈
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/28726244">
+   爬虫
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37430943">
+   排序算法
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37664927">
+   我用Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37814595">
+   高考
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37981169">
+   世界杯
+  </a>
+ </p>
+ <p>
+  欢迎搜索及关注：
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+</div></body></html>

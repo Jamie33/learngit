@@ -1,0 +1,374 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>3分钟破译朋友圈测试小游戏</h1><div class="RichText ztext Post-RichText">
+ <p>
+  最近，朋友圈时不时会流行起某个测试类小游戏，比如你的性格图谱啦，你是三体中的哪个角色啦，你有什么超能力啦……昨天晚上在某个群里，又被一个测测你是什么书的小游戏刷屏了。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-7d7873780fe8c318883dcce54949f76c_r.jpg" data-rawheight="1032" data-rawwidth="710" data-size="normal" src="https://pic3.zhimg.com/v2-7d7873780fe8c318883dcce54949f76c_b.jpg" width="710"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-7d7873780fe8c318883dcce54949f76c_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-7d7873780fe8c318883dcce54949f76c_r.jpg" data-rawheight="1032" data-rawwidth="710" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='710'%20height='1032'&gt;&lt;/svg&gt;" width="710"/>
+ </figure>
+ <p>
+  讲真，这个游戏还真不赖，制作得很精良，立意也不错：在即将到来的世界读书日，邀请你多读点书（当然是用他们的产品读啦）。
+ </p>
+ <p>
+  通过回答6道二选一的题目，会给你一个结论：你是一本什么书。于是在咱们这个爱读书爱学习的群里，自然都跃跃欲试。还有人不断尝试，想测出所有结果。
+ </p>
+ <p>
+  然而作为一只程序猿，看到大家这么热情地讨论，自然忍不住要手贱一把，一探究竟。😏
+ </p>
+ <p>
+  <b>
+   1. 潜入
+  </b>
+ </p>
+ <p>
+  因为这种推广类小游戏的开发周期短，又要考虑被封禁的可能，所以通常都直接使用 HTML5 的网页开发，且没有微信登录验证，计算逻辑完全通过前端实现。而前端代码是很难加密的，这就给我们留下了探索的空间。
+ </p>
+ <p>
+  扫描结果中的二维码，选择“
+  <b>
+   复制链接
+  </b>
+  ”，得到游戏的
+  <b>
+   URL 地址
+  </b>
+  。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-427d553a3e881fa5a4b83542152b9dbe_r.jpg" data-rawheight="1334" data-rawwidth="750" data-size="normal" src="https://pic1.zhimg.com/v2-427d553a3e881fa5a4b83542152b9dbe_b.jpg" width="750"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-427d553a3e881fa5a4b83542152b9dbe_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-427d553a3e881fa5a4b83542152b9dbe_r.jpg" data-rawheight="1334" data-rawwidth="750" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='750'%20height='1334'&gt;&lt;/svg&gt;" width="750"/>
+ </figure>
+ <p>
+  在
+  <b>
+   Chrome 浏览器
+  </b>
+  中打开链接，提示要将手机竖屏。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-e2eb3a6d9786f42b6e00df39d5c4f40f_r.jpg" data-rawheight="621" data-rawwidth="1080" data-size="normal" src="https://pic1.zhimg.com/v2-e2eb3a6d9786f42b6e00df39d5c4f40f_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-e2eb3a6d9786f42b6e00df39d5c4f40f_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-e2eb3a6d9786f42b6e00df39d5c4f40f_r.jpg" data-rawheight="621" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='621'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  没关系，我们右键点击页面，选择“
+  <b>
+   审查元素
+  </b>
+  ”，或从菜单栏里找到“
+  <b>
+   开发者工具
+  </b>
+  ”，打开
+  <b>
+   Chrome 开发者工具
+  </b>
+  ，点击手机样的图标，就可以进入
+  <b>
+   手机模拟模式
+  </b>
+  。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-d16a5b353fbc38984393c8764b40b08c_r.jpg" data-rawheight="1125" data-rawwidth="1080" data-size="normal" src="https://pic4.zhimg.com/v2-d16a5b353fbc38984393c8764b40b08c_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-d16a5b353fbc38984393c8764b40b08c_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-d16a5b353fbc38984393c8764b40b08c_r.jpg" data-rawheight="1125" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='1125'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  现在就可以在电脑上来做这个测试了。
+ </p>
+ <p>
+  <b>
+   2. 探索与发现
+  </b>
+ </p>
+ <p>
+  首先选择开发者工具
+  <b>
+   Console（控制台）
+  </b>
+  标签页，看看在游戏中会有什么信息。
+ </p>
+ <p>
+  的确会有些输出，但除了知道这是用 Cocos2d-JS v3.14 开发的之外，也并不什么更有价值的。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-1ab42e66d727c9299fd2a4fc0adea832_r.jpg" data-rawheight="118" data-rawwidth="468" data-size="normal" src="https://pic3.zhimg.com/v2-1ab42e66d727c9299fd2a4fc0adea832_b.jpg" width="468"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-1ab42e66d727c9299fd2a4fc0adea832_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-1ab42e66d727c9299fd2a4fc0adea832_r.jpg" data-rawheight="118" data-rawwidth="468" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='468'%20height='118'&gt;&lt;/svg&gt;" width="468"/>
+ </figure>
+ <p>
+  那就再看看
+  <b>
+   Network（网络）
+  </b>
+  标签页。
+ </p>
+ <p>
+  当游戏结束，显示最终结果之后，一个图片请求成功引起了我的注意：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-5f30a6e53ce904b8a71f15a759d2b7f1_r.jpg" data-rawheight="1021" data-rawwidth="1080" data-size="normal" src="https://pic1.zhimg.com/v2-5f30a6e53ce904b8a71f15a759d2b7f1_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-5f30a6e53ce904b8a71f15a759d2b7f1_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-5f30a6e53ce904b8a71f15a759d2b7f1_r.jpg" data-rawheight="1021" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='1021'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  点击预览一下，正是游戏给我们的结果图片，只是上面没有我们的名字。
+ </p>
+ <p>
+  哈哈，还记得我上一次“
+  <b>
+   每周一坑
+  </b>
+  ”栏目推送了什么来着？
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D2650166899%26idx%3D1%26sn%3D1b0b1068cbeca1f45902c7fa41a36140%26chksm%3Dbe4b5b0b893cd21d765203089252acc4b022ae4c034ff820e6b82ece878cb1a43a7dfada0a2d%26scene%3D21%23wechat_redirect" rel="nofollow noreferrer" target="_blank">
+   【每周一坑】用代码给图片配上文字
+  </a>
+ </p>
+ <p>
+  当时还有同学留言说这功能有什么用。喏，这就是应用场景，我们输入的名字就是通过与这张图片合成后，显示出的结果。
+  <br/>
+  这张图片的名字叫做
+  <b>
+   estp.jpg
+  </b>
+  ，可以拿到它的
+  <b>
+   URL 地址
+  </b>
+  。我们就从它入手，寻找更多的线索。
+ </p>
+ <p>
+  <b>
+   3. 顺藤摸瓜
+  </b>
+ </p>
+ <p>
+  这里，就可以用到我在
+  <b>
+   爬虫课程
+  </b>
+  里经常提到的一个方法：如何从网页上的众多请求中搜索关键字。
+ </p>
+ <p>
+  在 Network 标签页的请求列表上右键单击，选择“
+  <b>
+   Save as HAR with content
+  </b>
+  ”。这样就得到一个包含所有请求和返回值详细信息的 .har 文本文件。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-da4ee11a2400703ab4de429fb4a724f7_r.jpg" data-rawheight="852" data-rawwidth="1080" data-size="normal" src="https://pic4.zhimg.com/v2-da4ee11a2400703ab4de429fb4a724f7_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-da4ee11a2400703ab4de429fb4a724f7_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-da4ee11a2400703ab4de429fb4a724f7_r.jpg" data-rawheight="852" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='852'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  找一个功能强大的编辑器打开这个文件。（比如 SublimeText、Notepad++，默认的记事本就算了……）
+ </p>
+ <p>
+  搜索上一步得到的关键字：
+  <b>
+   estp
+  </b>
+ </p>
+ <p>
+  很幸运，游戏的开发者没有给我们设置很大的障碍，比较轻松地就找到了一些有意思的信息：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-8656e78812d81b9a48791eda7fea88a3_r.jpg" data-rawheight="647" data-rawwidth="1080" data-size="normal" src="https://pic2.zhimg.com/v2-8656e78812d81b9a48791eda7fea88a3_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-8656e78812d81b9a48791eda7fea88a3_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-8656e78812d81b9a48791eda7fea88a3_r.jpg" data-rawheight="647" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='647'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  从这个信息往上翻一翻，就可以找到对应的请求来源：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-b4c0cc4867c3f0a2ed6bad3bd3be772f_r.jpg" data-rawheight="317" data-rawwidth="1080" data-size="normal" src="https://pic1.zhimg.com/v2-b4c0cc4867c3f0a2ed6bad3bd3be772f_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-b4c0cc4867c3f0a2ed6bad3bd3be772f_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-b4c0cc4867c3f0a2ed6bad3bd3be772f_r.jpg" data-rawheight="317" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='317'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  这个 loader.js 看来就是揭开答案的关键。打开地址，再搜一下
+  <b>
+   estp
+  </b>
+  ：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-d72751ea290406cc11ec94fc2cb4fa80_r.jpg" data-rawheight="835" data-rawwidth="1080" data-size="normal" src="https://pic3.zhimg.com/v2-d72751ea290406cc11ec94fc2cb4fa80_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-d72751ea290406cc11ec94fc2cb4fa80_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-d72751ea290406cc11ec94fc2cb4fa80_r.jpg" data-rawheight="835" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='835'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-93c192efc125b3bcb936a224380ddd6a_r.jpg" data-rawheight="653" data-rawwidth="1080" data-size="normal" src="https://pic1.zhimg.com/v2-93c192efc125b3bcb936a224380ddd6a_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-93c192efc125b3bcb936a224380ddd6a_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-93c192efc125b3bcb936a224380ddd6a_r.jpg" data-rawheight="653" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='653'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  即使你不懂 JS 代码，也能从这里猜出个大概了吧。
+ </p>
+ <p>
+  <b>
+   4. 剧透，慎入
+  </b>
+ </p>
+ <p>
+  e和i、n和s、f和t、j和p，分别对应了4组不同的选择。而下半部分代码，就是把你的名字绘制到图片上。
+ </p>
+ <p>
+  于是，把它这里的另外15组字符替换到我们前面的拿到的结果图片地址中，你就会看到其他15个答案。
+ </p>
+ <p>
+  等等！6组二选一，不是应该有2的6次方，64组结果吗？怎么只有16个！难道说……
+ </p>
+ <p>
+  没错，稍微验证下就会发现，最后两题的答案根本不影响结果！
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-e12365dc95c86bf645ca8cbb0560b023_r.jpg" data-rawheight="682" data-rawwidth="686" data-size="small" src="https://pic4.zhimg.com/v2-e12365dc95c86bf645ca8cbb0560b023_b.jpg" width="686"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-e12365dc95c86bf645ca8cbb0560b023_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-e12365dc95c86bf645ca8cbb0560b023_r.jpg" data-rawheight="682" data-rawwidth="686" data-size="small" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='686'%20height='682'&gt;&lt;/svg&gt;" width="686"/>
+ </figure>
+ <p>
+  到这里，我的工作就算完成了。不过呢，我这么懒，显然不会去一张张下载图片啊。借用对方代码里的 ys 字典，随手写个批量下载的 python 脚本：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">ys</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'enfj'</span><span class="p">:</span> <span class="mi">360</span><span class="p">,</span>
+    <span class="s1">'enfp'</span><span class="p">:</span> <span class="mi">428</span><span class="p">,</span>
+    <span class="s1">'entj'</span><span class="p">:</span> <span class="mi">428</span><span class="p">,</span>
+    <span class="s1">'entp'</span><span class="p">:</span> <span class="mi">428</span><span class="p">,</span>
+    <span class="s1">'esfj'</span><span class="p">:</span> <span class="mi">428</span><span class="p">,</span>
+    <span class="s1">'esfp'</span><span class="p">:</span> <span class="mi">428</span><span class="p">,</span>
+    <span class="s1">'estj'</span><span class="p">:</span> <span class="mi">428</span><span class="p">,</span>
+    <span class="s1">'estp'</span><span class="p">:</span> <span class="mi">428</span><span class="p">,</span>
+    <span class="s1">'infj'</span><span class="p">:</span> <span class="mi">428</span><span class="p">,</span>
+    <span class="s1">'infp'</span><span class="p">:</span> <span class="mi">360</span><span class="p">,</span>
+    <span class="s1">'intj'</span><span class="p">:</span> <span class="mi">428</span><span class="p">,</span>
+    <span class="s1">'intp'</span><span class="p">:</span> <span class="mi">428</span><span class="p">,</span>
+    <span class="s1">'isfj'</span><span class="p">:</span> <span class="mi">428</span><span class="p">,</span>
+    <span class="s1">'isfp'</span><span class="p">:</span> <span class="mi">360</span><span class="p">,</span>
+    <span class="s1">'istj'</span><span class="p">:</span> <span class="mi">428</span><span class="p">,</span>
+    <span class="s1">'istp'</span><span class="p">:</span> <span class="mi">360</span>
+<span class="p">}</span>
+<span class="kn">import</span> <span class="nn">requests</span> <span class="k">as</span> <span class="nn">r</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ys</span><span class="p">:</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="s1">'https://cdn.tiaotiaotang.net/library/f_test_5/res/result/</span><span class="si">%s</span><span class="s1">.jpg'</span> <span class="o">%</span> <span class="n">k</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="s1">'.jpg'</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  瞬间搞定：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-db3e93558a312b00dfead7345cda8db7_r.jpg" data-rawheight="844" data-rawwidth="1062" data-size="normal" src="https://pic3.zhimg.com/v2-db3e93558a312b00dfead7345cda8db7_b.jpg" width="1062"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-db3e93558a312b00dfead7345cda8db7_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-db3e93558a312b00dfead7345cda8db7_r.jpg" data-rawheight="844" data-rawwidth="1062" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1062'%20height='844'&gt;&lt;/svg&gt;" width="1062"/>
+ </figure>
+ <p>
+  最后的结果，16本书：
+ </p>
+ <p>
+  <i>
+   1.《罗生门》
+   <br/>
+   2.《降临》
+   <br/>
+   3.《门口的野蛮人》
+   <br/>
+   4.《十一字杀人》
+   <br/>
+   5.《爱的教育》
+   <br/>
+   6.《向上汇报》
+   <br/>
+   7.《自控力》
+   <br/>
+   8.《且以优雅过一生 杨绛传》
+   <br/>
+   9.《悟空传》
+   <br/>
+   10.《查令十字街84号》
+   <br/>
+   11.《中国通史》
+   <br/>
+   12.《批判性思维工具》
+   <br/>
+   13.《小王子》
+   <br/>
+   14.《我们都是孤独的行路人》
+   <br/>
+   15.《无声告白》
+   <br/>
+   16.《天生变态狂》
+  </i>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-cc4e2b69c32807816b67b90b404af50b_r.jpg" data-rawheight="1601" data-rawwidth="1080" data-size="normal" src="https://pic4.zhimg.com/v2-cc4e2b69c32807816b67b90b404af50b_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-cc4e2b69c32807816b67b90b404af50b_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-cc4e2b69c32807816b67b90b404af50b_r.jpg" data-rawheight="1601" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='1601'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  想到群里的有朋友花了1个小时去试所有的选项，我默默心疼1秒……
+ </p>
+ <p>
+  不过最后给个友情提醒：作为一个无趣的程序猿，还是低调一点好，不然会没朋友的。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-718b4c1a69f8099e46e0d50a45776b43_r.jpg" data-rawheight="396" data-rawwidth="826" data-size="normal" src="https://pic3.zhimg.com/v2-718b4c1a69f8099e46e0d50a45776b43_b.jpg" width="826"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-718b4c1a69f8099e46e0d50a45776b43_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-718b4c1a69f8099e46e0d50a45776b43_r.jpg" data-rawheight="396" data-rawwidth="826" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='826'%20height='396'&gt;&lt;/svg&gt;" width="826"/>
+ </figure>
+ <p>
+  ┑(￣Д ￣)┍
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   精选
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   Python
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   问答
+  </a>
+ </p>
+</div></body></html>

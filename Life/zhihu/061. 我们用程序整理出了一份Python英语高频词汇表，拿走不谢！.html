@@ -1,0 +1,273 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>我们用程序整理出了一份Python英语高频词汇表，拿走不谢！</h1><div class="RichText ztext Post-RichText">
+ <p>
+  有不少编程初学者会问这样一个问题：
+  <b>
+   我英语不好，还能不能学编程？会不会有影响？
+  </b>
+ </p>
+ <p>
+  我的回答是：
+  <b>
+   能，会。
+  </b>
+ </p>
+ <p>
+  能学，是因为虽然编程用的都是英语，但翻来覆去就那么一些关键字，写一阵子就都记住了。中文的学习资料也不少，足够学会。
+ </p>
+ <p>
+  但肯定会有影响，主要有几点：
+ </p>
+ <ol>
+  <li>
+   看不懂
+   <b>
+    报错信息
+   </b>
+  </li>
+  <li>
+   看不懂
+   <b>
+    官方文档
+   </b>
+   ，只能看别人翻译的二手货。翻译版本不能准确传达意思不说，很多前沿技术的版本更新速度也比翻译的速度快多了。你看 Django 就从来没有一个中文版本能跟上的。
+  </li>
+  <li>
+   看不懂
+   <b>
+    StackOverflow
+   </b>
+   上的问答
+  </li>
+  <li>
+   无法使用参与
+   <b>
+    Github
+   </b>
+   上的项目
+  </li>
+  <li>
+   没法好好用
+   <b>
+    Google
+   </b>
+   （当然这不仅是英语问题）
+  </li>
+ </ol>
+ <p>
+  总结下来就是：
+  <b>
+   可以学，但会吃力，尤其在更进一步提升时会有限制。而如果英语好，则事半功倍。
+  </b>
+ </p>
+ <p>
+  而英语本身的作用也不仅仅是对编程帮助。多花点时间学英语，哪怕仅仅多背一些单词也是有用的。
+ </p>
+ <p>
+  于是，为了让编程小白+英语苦手在开始时能有些方向，我们尝试用程序整理了一份
+  <b>
+   Python 高频词汇表
+  </b>
+  ，供参考。
+ </p>
+ <blockquote>
+  网页演示地址：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//lab.crossincode.com/recite/" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室-Python必背单词整理
+  </a>
+  <br/>
+  <b>
+   扇贝单词本
+  </b>
+  （可导入你的扇贝单词使用）和项目完整
+  <b>
+   代码
+  </b>
+  及说明
+  <b>
+   文档、单词列表
+  </b>
+  ，请在公众号（
+  <u>
+   Crossin的编程教室
+  </u>
+  ）回复
+  <b>
+   背单词
+  </b>
+  ，获取地址。
+ </blockquote>
+ <p>
+  <b>
+   【关于这份词汇表的说明】
+  </b>
+ </p>
+ <p>
+  内容来源包括
+ </p>
+ <ul>
+  <li>
+   《Head First Python》、《Learn Python The Hard Way》、《Python for Data Analysis》等20多本Python书籍；
+  </li>
+  <li>
+   Python 官方文档、pandas、requests、django 等10份文档；
+  </li>
+  <li>
+   Github awesome-python 项目下近400个项目的 readme 说明；
+  </li>
+  <li>
+   stackoverflow 下 Python 及常用库的问答 topics 400+ 回答等资源。
+  </li>
+ </ul>
+ <p>
+  通过程序从中采集了词频最高的单词，再加上人工筛选，最终整理出近 2000 个单词。
+ </p>
+ <p>
+  需要指出的是，单词的中文释义我们使用了金山的翻译接口。但某些词汇在计算机和编程领域有特殊的含义，翻译接口未必能够给出，所以会存在一定的问题。对此，我们在自建的网页版工具上提供了“
+  <b>
+   用户自定义解释
+  </b>
+  ”的接口，供大家修正和补充解释。如果遇到解释不到位的单词，欢迎各位提交补充。（但扇贝上已提交的单词本暂无法修改释义）
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-f65311d19740f54e25172ed1db0a053b_r.jpg" data-rawheight="1010" data-rawwidth="574" data-size="normal" src="https://pic2.zhimg.com/v2-f65311d19740f54e25172ed1db0a053b_b.jpg" width="574"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-f65311d19740f54e25172ed1db0a053b_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-f65311d19740f54e25172ed1db0a053b_r.jpg" data-rawheight="1010" data-rawwidth="574" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='574'%20height='1010'&gt;&lt;/svg&gt;" width="574"/>
+ </figure>
+ <p>
+  <b>
+   【程序的实现方法
+  </b>
+  】
+ </p>
+ <p>
+  <b>
+   1. 文档抓取
+  </b>
+ </p>
+ <p>
+  4 个不同渠道来源，通过
+  <b>
+   requests + BeautifulSoup
+  </b>
+  实现。
+ </p>
+ <p>
+  <b>
+   2. 词频统计
+  </b>
+ </p>
+ <p>
+  用到了之前提过的
+  <b>
+   Counter
+  </b>
+  类。可参考
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D2650166343%26idx%3D2%26sn%3Dca8bbc637c61fe5f2c327572e604d0af%26chksm%3Dbe4b593f893cd029c88b002bc53e8d83849aaa21b8f5593bca1d660eff8a74d17479ef3d47b9%26scene%3D21%23wechat_redirect" rel="nofollow noreferrer" target="_blank">
+   【编程课堂】计数器 Counter
+  </a>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">Counter</span>
+<span class="c1"># 打开文件，读取数据</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">raw_words</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1"># 正则匹配所有单词</span>
+<span class="n">words</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">'[a-z]+'</span><span class="p">,</span> <span class="n">raw_words</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+<span class="c1"># 统计单词</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="c1"># 提取出前词频前 100 的单词</span>
+<span class="n">c</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  <b>
+   3. 翻译接口
+  </b>
+ </p>
+ <p>
+  使用了
+  <b>
+   金山的API
+  </b>
+  。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>import requests
+# 请求API
+url = 'http://www.iciba.com/index.php?a=getWordMean&amp;c=search&amp;word=' + word
+req = requests.get(url)
+# 处理返回的JSON数据
+info = req.json()
+data = info['baesInfo']['symbols'][0]
+means = data['parts'][0]['means']
+</code></pre>
+ </div>
+ <p>
+  <b>
+   4. 网站展示
+  </b>
+ </p>
+ <p>
+  网站基于
+  <b>
+   django
+  </b>
+  搭建。数据的导入使用了
+  <b>
+   peewee
+  </b>
+  库，直接与 django 的 ORM 对接。
+ </p>
+ <p>
+  网页演示地址：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//lab.crossincode.com/recite/" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室-Python必背单词整理
+  </a>
+ </p>
+ <blockquote>
+  完整的代码和更详细说明可在 Github 的项目中查看。
+  <br/>
+  在公众号回复
+  <b>
+   背单词
+  </b>
+  ，可获取扇贝单词本地址和项目完整代码、单词表及说明文档。
+ </blockquote>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   精选
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   Python
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   问答
+  </a>
+ </p>
+ <p>
+  欢迎关注：
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+</div></body></html>

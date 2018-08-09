@@ -1,0 +1,380 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>全菊变量和菊部变量</h1><div class="RichText ztext Post-RichText">
+ <p>
+  <b>
+   王菊
+  </b>
+  这波热点来得莫名其妙啊，让我们这些“
+  <b>
+   菊外人
+  </b>
+  ”一脸懵逼。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-130ebb9dadc62acd2b23a920d72a8fac_r.jpg" data-rawheight="1294" data-rawwidth="750" data-size="normal" src="https://pic4.zhimg.com/v2-130ebb9dadc62acd2b23a920d72a8fac_b.jpg" width="750"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-130ebb9dadc62acd2b23a920d72a8fac_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-130ebb9dadc62acd2b23a920d72a8fac_r.jpg" data-rawheight="1294" data-rawwidth="750" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='750'%20height='1294'&gt;&lt;/svg&gt;" width="750"/>
+ </figure>
+ <p>
+  前阵子还自我吐槽了下文章的选题，
+  <b>
+   热点没营养，干货没人看
+  </b>
+  。这下好了，找到了热点与干货的完美结合😏
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic3.zhimg.com/v2-113c1e52e8879af3dd059407ad5f3fc1_r.jpg" data-rawheight="338" data-rawwidth="640" data-size="normal" data-thumbnail="https://pic3.zhimg.com/v2-113c1e52e8879af3dd059407ad5f3fc1_b.jpg" src="https://pic3.zhimg.com/v2-113c1e52e8879af3dd059407ad5f3fc1_b.gif" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-113c1e52e8879af3dd059407ad5f3fc1_b.gif" data-original="https://pic3.zhimg.com/v2-113c1e52e8879af3dd059407ad5f3fc1_r.jpg" data-rawheight="338" data-rawwidth="640" data-size="normal" data-thumbnail="https://pic3.zhimg.com/v2-113c1e52e8879af3dd059407ad5f3fc1_b.jpg" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='338'&gt;&lt;/svg&gt;" width="640"/>
+  <figcaption>
+   是谁的小眼睛，还没看Crossin老师？
+  </figcaption>
+ </figure>
+ <p>
+  明确地说，我今天就是来
+  <b>
+   蹭热点话题流量
+  </b>
+  的。（虽然我觉得事件本身也挺有意思的，已成路人粉）
+ </p>
+ <p>
+  如果你对此感到不适，或对于
+  <b>
+   变量作用域
+  </b>
+  的相关概念已了然于心，那后面的内容就不必看了，谢谢！
+ </p>
+ <p>
+  但根据我的经验，几乎所有的编程学习者在开始用函数不久之后，都踩过
+  <b>
+   局部变量
+  </b>
+  的坑。几乎每个星期，都会有人在答疑群、知识星球、论坛、微博上问到关于作用域使用不当而导致的问题。（昨天我在微博上刚回答了一个）
+ </p>
+ <p>
+  所以，如果通过这个略有点恶趣味的热点事件能让你记住
+  <b>
+   “全局变量”、“局部变量”、“形参”、“实参”、“变量作用域”
+  </b>
+  这几个概念，我觉得也挺好啊。
+ </p>
+ <p>
+  这些内容，在我们的教程里都有，包含在了：
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D200368047%26idx%3D1%26sn%3D4b183c93cf00160950df5c9d879ba196%26scene%3D21%23wechat_redirect" rel="nofollow noreferrer" target="_blank">
+   【Python 第67课】函数的参数传递
+  </a>
+  |
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D200569916%26idx%3D1%26sn%3Dc5b08dd43592676aba00efab50566cf3%26scene%3D21%23wechat_redirect" rel="nofollow noreferrer" target="_blank">
+   【Python 第71课】变量的作用域
+  </a>
+ </p>
+ <p>
+  这里再帮大家理一下。
+ </p>
+ <p>
+  首先来看这样一段代码：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'x ='</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">x</span> <span class="o">+=</span> <span class="n">y</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'x ='</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'a ='</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'b ='</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  输出：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>x = 5
+x = 15
+a = 5
+b = 15
+</code></pre>
+ </div>
+ <p>
+  这里，函数 func 的
+  <b>
+   形参是 x
+  </b>
+  ，它只在函数内部有效，也就是
+  <b>
+   作用域仅在函数中
+  </b>
+  ，如果在外部调用它，就会报错。
+  <br/>
+  变量
+  <b>
+   a 作为实参
+  </b>
+  传递给函数 func，所以函数里 x 的值就是 a 的值，但
+  <b>
+   x 不是 a
+  </b>
+  ，只是现在它俩一样。
+  <br/>
+  变量 y 是函数中定义的
+  <b>
+   局部变量
+  </b>
+  ，它的作用域同样也仅在函数中。
+  <br/>
+  对 x 进行赋值之后，x 的值发生了变化，但
+  <b>
+   不会影响
+  </b>
+  实参 a 的值。
+  <br/>
+  函数的
+  <b>
+   返回值是 x
+  </b>
+  的值，并赋值给了外部的变量 b，所以 b 的值就是 x 的值，但 b 不是 x，此时 x 已不存在。
+  <br/>
+ </p>
+ <p>
+  理解了上面几条之后，我们再修改一下函数：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'x ='</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">x</span> <span class="o">+=</span> <span class="n">x</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'x ='</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'x ='</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  输出：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>x = 5
+x = 20
+x = 5
+</code></pre>
+ </div>
+ <p>
+  解读一下：
+  <br/>
+  函数 func 的
+  <b>
+   形参是 x
+  </b>
+  。
+  <br/>
+  <b>
+   外部变量 x
+  </b>
+  作为
+  <b>
+   实参
+  </b>
+  传递给函数 func，所以函数里 x 的值就是外部 x 的值，但这
+  <b>
+   两个 x 是两个不同的变量
+  </b>
+  ，只是现在值一样。
+  <br/>
+  变量 x 在函数中被重新赋值 10，但
+  <b>
+   不会影响
+  </b>
+  外部变量 x 的值。
+  <br/>
+  对 x 自身做了累加，此时 x 变成 20。
+  <br/>
+  函数的
+  <b>
+   返回值是 x
+  </b>
+  的值，但没有赋值给任何变量，所以此返回值没任何作用，函数结束。
+  <br/>
+  外部的变量 x 仍然是一开始的值 5。
+  <br/>
+  但在初学阶段，不建议你这么给变量命名，可能会把自己绕进去。把代码写清楚，多定义几个变量，多分几行代码，反正也不要钱。（除非你是做区块链程序开发）
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  那如果要在函数内部修改外部的变量可不可以呢？
+ </p>
+ <p>
+  可以，用全局变量。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">def</span> <span class="nf">func</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">x</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">func</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'x ='</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  输出：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>x = 10
+</code></pre>
+ </div>
+ <p>
+  在函数中声明
+  <b>
+   global x
+  </b>
+  ，程序就会知道这个
+  <b>
+   x 是一个全局变量
+  </b>
+  。此时的 x 就是外部的 x，给它赋值的结果自然在函数结束后依然有效。
+  <br/>
+  但这种情况下，你不能再同时将 x 设定为函数的形参。
+  <br/>
+ </p>
+ <p>
+  如果你仅仅需要在函数内部读取外部的参数值而不用修改它的值，那么 global 的声明就不再需要。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">def</span> <span class="nf">func</span><span class="p">():</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'y ='</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">func</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'x ='</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  输出：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>y = 5
+x = 5
+</code></pre>
+ </div>
+ <p>
+  写入时 global 的必要在于区分全局变量和局部变量，而读取不存在这样的问题。
+ </p>
+ <p>
+  以上就是关于
+  <b>
+   全局变量、局部变量、形参、实参、变量作用域
+  </b>
+  的一些小知识点，更多内容可以查看我们的入门教程。
+  <u>
+   公众号“
+   <b>
+    Crossin的编程教室
+   </b>
+   ”里回复关键字
+   <b>
+    python
+   </b>
+  </u>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  最后留一个思考题：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">m</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">func</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'l ='</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  思考一下输出会是什么？
+ </p>
+ <p>
+  然后自己在电脑上或者我们的在线编辑器
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/oj/wechat/" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室 - 在线Python编辑器
+  </a>
+  里输入代码运行下看看结果，再想想为什么。
+ </p>
+ <p>
+  欢迎留言给出你的解释。
+ </p>
+ <p>
+  <br/>
+  ════
+  <br/>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   精选
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   Python
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   问答
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/36064871">
+   Python单词表
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36538511">
+   区块链
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36581953">
+   人工智能
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/30932804">
+   双11
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/29043669">
+   嘻哈
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/28726244">
+   爬虫
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37430943">
+   排序算法
+  </a>
+ </p>
+ <p>
+  欢迎搜索及关注：
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+</div></body></html>

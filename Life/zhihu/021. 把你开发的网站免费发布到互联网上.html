@@ -1,0 +1,636 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>把你开发的网站免费发布到互联网上</h1><div class="RichText ztext Post-RichText">
+ <h2>
+  <b>
+   0. 前言
+  </b>
+ </h2>
+ <p>
+  之前我们写过很多代码，但几乎都是在自己的电脑上运行的。如果别人要看，也只能在电脑上演示，或者把代码发给他运行。
+ </p>
+ <p>
+  而在学习 web 开发，比如 Django、Flask、webpy 等框架的过程中，我们会有将网站上线的需求，用来测试或展示。
+ </p>
+ <p>
+  如何可以让我们写的网站通过互联网来访问呢？
+ </p>
+ <p>
+  本篇文章就将介绍如何免费且快速的在
+  <b>
+   PythonAnywhere
+  </b>
+  上部署自己的 Django 网站。与 PythonAnywhere 类似的免费平台还有
+  <b>
+   Heroku
+  </b>
+  ，
+  <b>
+   Openshift
+  </b>
+  等，收费平台有
+  <b>
+   阿里云
+  </b>
+  、
+  <b>
+   亚马逊 AWS
+  </b>
+  、
+  <b>
+   微软 Azure
+  </b>
+  等。
+ </p>
+ <p>
+  本文包括两部分：
+ </p>
+ <ol>
+  <li>
+   直接在 PythonAnywhere 新建项目
+  </li>
+  <li>
+   在 PythonAnywhere 上部署已有项目
+  </li>
+ </ol>
+ <h2>
+  <b>
+   1. 部署前须知
+  </b>
+ </h2>
+ <p>
+  <b>
+   1.1 部署环境
+  </b>
+ </p>
+ <p>
+  针对本次部署的一些说明：
+ </p>
+ <ul>
+  <li>
+   Python 版本：3.5
+  </li>
+  <li>
+   Django 版本：1.10
+  </li>
+  <li>
+   数据库采用 Django 自带的 sqlite3
+  </li>
+ </ul>
+ <p>
+  <b>
+   1.2 遇到问题怎么办
+  </b>
+ </p>
+ <p>
+  由于每个人的部署环境，代码量不一样，所以部署的过程中很可能会出现问题，所以在此贴出两个英语版本教程，可以结合本教程来看：
+ </p>
+ <p>
+  <i>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//tutorial.djangogirls.org/en/deploy/" rel="nofollow noreferrer" target="_blank">
+    Deploy! · Django Girls Tutorial
+   </a>
+  </i>
+ </p>
+ <p>
+  <i>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//help.pythonanywhere.com/pages/DeployExistingDjangoProject" rel="nofollow noreferrer" target="_blank">
+    Deploying an existing Django project on PythonAnywhere
+   </a>
+  </i>
+ </p>
+ <p>
+  同时，PythonAnywhere 也提供了论坛，遇到错误时不妨在论坛上搜索一下错误信息，论坛地址如下：
+ </p>
+ <p>
+  <i>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.pythonanywhere.com/forums/" rel="nofollow noreferrer" target="_blank">
+    Forums : PythonAnywhere
+   </a>
+  </i>
+ </p>
+ <p>
+  PythonAnywhere 支持常用的 Python web 框架：Django、web2py、Flask、Bottle，也可以手动配置，还提供 MySQL 支持。免费账户可以创建一个项目，虽然在性能和流量上有限制，但作为学习用足够了。
+ </p>
+ <h2>
+  <b>
+   2. 新建 PythonAnywhere 项目
+  </b>
+ </h2>
+ <p>
+  在 PythonAnywhere 上新建项目并运行的过程十分简单，在此贴出流程图，查看教程或自己动手部署时做到心中有数。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-93a50090d0a654f210c692694535536b_r.jpg" data-rawheight="585" data-rawwidth="640" data-size="normal" src="https://pic2.zhimg.com/v2-93a50090d0a654f210c692694535536b_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-93a50090d0a654f210c692694535536b_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-93a50090d0a654f210c692694535536b_r.jpg" data-rawheight="585" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='585'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  <b>
+   2.1 注册登录
+  </b>
+ </p>
+ <p>
+  这个没啥特别的地方，不赘述。PythonAnywhere 网站：
+ </p>
+ <p>
+  <i>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//www.pythonanywhere.com/" rel="nofollow noreferrer" target="_blank">
+    Host, run, and code Python in the cloud: PythonAnywhere
+   </a>
+  </i>
+ </p>
+ <p>
+  <b>
+   2.2 新建 web-app
+  </b>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-83d083fd432dc163d3335800ebe75f5d_r.jpg" data-rawheight="315" data-rawwidth="640" data-size="normal" src="https://pic2.zhimg.com/v2-83d083fd432dc163d3335800ebe75f5d_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-83d083fd432dc163d3335800ebe75f5d_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-83d083fd432dc163d3335800ebe75f5d_r.jpg" data-rawheight="315" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='315'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  然后按照提示依次选择框架和版本，完成配置：
+ </p>
+ <p>
+  <b>
+   next
+  </b>
+  -&gt;
+  <b>
+   django
+  </b>
+  -&gt;
+  <b>
+   Python3.5
+  </b>
+  -&gt;
+  <b>
+   next
+  </b>
+ </p>
+ <p>
+  <b>
+   2.3 修改 urls 和 views 文件
+  </b>
+ </p>
+ <p>
+  这是新建项目最关键的一步。这里我们新增一条对网站根目录路径的响应处理，返回一个包含字符“hello,world”的网页。
+ </p>
+ <p>
+  进入 Files 分页：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-379786d9b1af1bdec8ff7827feafe2d2_r.jpg" data-rawheight="477" data-rawwidth="640" data-size="normal" src="https://pic3.zhimg.com/v2-379786d9b1af1bdec8ff7827feafe2d2_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-379786d9b1af1bdec8ff7827feafe2d2_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-379786d9b1af1bdec8ff7827feafe2d2_r.jpg" data-rawheight="477" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='477'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  如下图所示修改urls文件：
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-95cfc9cc82173779a53a13080006eabb_r.jpg" data-rawheight="277" data-rawwidth="467" data-size="normal" src="https://pic4.zhimg.com/v2-95cfc9cc82173779a53a13080006eabb_b.jpg" width="467"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-95cfc9cc82173779a53a13080006eabb_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-95cfc9cc82173779a53a13080006eabb_r.jpg" data-rawheight="277" data-rawwidth="467" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='467'%20height='277'&gt;&lt;/svg&gt;" width="467"/>
+ </figure>
+ <p>
+  新建 views.py 文件后，添加如下代码：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-a15c1afb79a9c2cdcaaf26ae0a2f07c2_r.jpg" data-rawheight="212" data-rawwidth="495" data-size="normal" src="https://pic1.zhimg.com/v2-a15c1afb79a9c2cdcaaf26ae0a2f07c2_b.jpg" width="495"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-a15c1afb79a9c2cdcaaf26ae0a2f07c2_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-a15c1afb79a9c2cdcaaf26ae0a2f07c2_r.jpg" data-rawheight="212" data-rawwidth="495" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='495'%20height='212'&gt;&lt;/svg&gt;" width="495"/>
+ </figure>
+ <p>
+  <b>
+   2.4 运行
+  </b>
+ </p>
+ <p>
+  完成修改之后，需要点击一下 Reload 重新载入修改后的网站。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-9b4707c0827dc9329bfe4905c4452a40_r.jpg" data-rawheight="227" data-rawwidth="438" data-size="normal" src="https://pic1.zhimg.com/v2-9b4707c0827dc9329bfe4905c4452a40_b.jpg" width="438"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-9b4707c0827dc9329bfe4905c4452a40_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-9b4707c0827dc9329bfe4905c4452a40_r.jpg" data-rawheight="227" data-rawwidth="438" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='438'%20height='227'&gt;&lt;/svg&gt;" width="438"/>
+ </figure>
+ <p>
+  下面是见证奇迹的时刻！
+ </p>
+ <p>
+  打开你注册时设定的网址，将会看到如下图所示的页面：
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="196" data-rawwidth="377" data-size="normal" src="https://pic1.zhimg.com/v2-4672f087292ad2ccb2ce711ac0c5745b_b.jpg" width="377"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic1.zhimg.com/v2-4672f087292ad2ccb2ce711ac0c5745b_b.jpg" data-caption="" data-rawheight="196" data-rawwidth="377" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='377'%20height='196'&gt;&lt;/svg&gt;" width="377"/>
+ </figure>
+ <p>
+  以上，就是新建项目的整个过程。如果在此基础上增加页面，只需要对 urls.py、views.py 进行修改，必要时增加 models.py。基本上就是将本地开发搬到网页上操作。了解过 Django MTV 模式的同学是不是觉得很简单呢？
+ </p>
+ <h2>
+  <b>
+   3. 部署已有项目到PythonAnywhere
+  </b>
+ </h2>
+ <p>
+  接下来再讲一讲如何将已有的 Django 项目部署到 PythonAnywhere 上。这个要稍微麻烦一些，依然先上流程图：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-dc60b3cbb86288e7df14323d943ed5ab_r.jpg" data-rawheight="593" data-rawwidth="640" data-size="normal" src="https://pic2.zhimg.com/v2-dc60b3cbb86288e7df14323d943ed5ab_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-dc60b3cbb86288e7df14323d943ed5ab_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-dc60b3cbb86288e7df14323d943ed5ab_r.jpg" data-rawheight="593" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='593'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  <b>
+   3.1 注册登录
+  </b>
+ </p>
+ <p>
+  同 2.1
+ </p>
+ <p>
+  <b>
+   3.2 新建 bash 控制台
+  </b>
+ </p>
+ <p>
+  我们需要将 GitHub 上的代码克隆过来，所以在 Consoles（控制台）下我们新建一个 bash 控制台。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-7b8e2e2dadb248faf5fbbb1564acfd37_r.jpg" data-rawheight="575" data-rawwidth="640" data-size="normal" src="https://pic4.zhimg.com/v2-7b8e2e2dadb248faf5fbbb1564acfd37_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-7b8e2e2dadb248faf5fbbb1564acfd37_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-7b8e2e2dadb248faf5fbbb1564acfd37_r.jpg" data-rawheight="575" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='575'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  点击 bash 进入一个类似 cmd 的操作界面。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <b>
+   3.3 从 GitHub 上传代码
+  </b>
+ </p>
+ <p>
+  PythonAnywhere 上已经预装好了 git，所以只需在 bash 控制台下，使用 git clone 命令将 GitHub 的代码上传到服务器。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>git clone https://your.github.site
+</code></pre>
+ </div>
+ <p>
+  对 git 操作有疑问的可以看看这份《git - 简明指南》：
+  <i>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//rogerdudler.github.io/git-guide/index.zh.html" rel="nofollow noreferrer" target="_blank">
+    git - the simple guide - no deep shit!
+   </a>
+  </i>
+ </p>
+ <p>
+  <b>
+   3.4 建立虚拟环境
+  </b>
+ </p>
+ <p>
+  继续在 bash 控制台下操作。代码示例如下：
+ </p>
+ <p>
+  进入项目文件夹
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>cd mysite
+virtualenv --python=python3.5 myvenv
+source myvenv/bin/activate
+</code></pre>
+ </div>
+ <p>
+  其中 mysite 是你的项目名，myvenv 是你的虚拟环境目录名。
+ </p>
+ <p>
+  <b>
+   3.5 下载所需安装包
+  </b>
+ </p>
+ <p>
+  接下来，使用 pip 下载项目中使用到的库，最基本的就是 django。
+ </p>
+ <p>
+  注意：每个人的项目中安装的库可能不一样，所以一定记得将所有项目中用到的库都下载。比如处理图片（如添加头像）用到的 Pillow，操作 MySQL 使用到的 pymysql 等。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>pip install django
+pip install pillow
+...
+</code></pre>
+ </div>
+ <p>
+  <b>
+   3.6 迁移数据库并创建管理员账户
+  </b>
+ </p>
+ <p>
+  创建数据表。当然需要预先配置好 MySQL 并建好库。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>python manage.py migrate
+</code></pre>
+ </div>
+ <p>
+  创建管理员，按要求输入账户及密码。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>python manage.py createsuperuser
+</code></pre>
+ </div>
+ <p>
+  到此，关于 bash 控制台的操作告一段落。
+ </p>
+ <p>
+  <b>
+   3.7 修改 setting文件
+  </b>
+ </p>
+ <p>
+  进入到 Files 栏目中，编辑 settings.py 文件，修改其中的 ALLOWED_HOST 值，把你项目的域名添加进去。
+ </p>
+ <p>
+  修改示例：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>ALLOWED_HOSTS = ['username.pythonanywhere.com']
+</code></pre>
+ </div>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-bb60abd5d800d48b13dc8ad2e9c73392_r.jpg" data-rawheight="253" data-rawwidth="640" data-size="normal" src="https://pic3.zhimg.com/v2-bb60abd5d800d48b13dc8ad2e9c73392_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-bb60abd5d800d48b13dc8ad2e9c73392_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-bb60abd5d800d48b13dc8ad2e9c73392_r.jpg" data-rawheight="253" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='253'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  注意：使用 MySQL 的同学还需要修改 settings.py 中 DATABASE 的设置。
+ </p>
+ <p>
+  <b>
+   3.8 新建 Web-app
+  </b>
+ </p>
+ <p>
+  进入 Web 栏目，选择
+ </p>
+ <p>
+  <b>
+   Add a new webapp
+  </b>
+  -&gt;
+  <b>
+   next
+  </b>
+  -&gt;
+  <b>
+   Manual Configuration
+  </b>
+  -&gt;
+  <b>
+   Python3.5
+  </b>
+  -&gt;
+  <b>
+   next
+  </b>
+ </p>
+ <p>
+  比较重要的两步截图如下：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-e10d45fa3c46cff03cb9118b062fe5c7_r.jpg" data-rawheight="536" data-rawwidth="640" data-size="normal" src="https://pic3.zhimg.com/v2-e10d45fa3c46cff03cb9118b062fe5c7_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-e10d45fa3c46cff03cb9118b062fe5c7_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-e10d45fa3c46cff03cb9118b062fe5c7_r.jpg" data-rawheight="536" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='536'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  <b>
+   3.9 配置 WSGI
+  </b>
+ </p>
+ <ol>
+  <li>
+   按照要求填写正确的项目文件夹
+  </li>
+  <li>
+   修改 WSGI 文件
+  </li>
+ </ol>
+ <p>
+  修改 WSGI 配置文件，注意填写正确的 path 路径。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-883158f91be72fe72eec46490cb00e19_r.jpg" data-rawheight="164" data-rawwidth="640" data-size="normal" src="https://pic4.zhimg.com/v2-883158f91be72fe72eec46490cb00e19_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-883158f91be72fe72eec46490cb00e19_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-883158f91be72fe72eec46490cb00e19_r.jpg" data-rawheight="164" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='164'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  以下图中的信息为例，settings文件的完整路径为：
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>/home/zx576/zxsite_v0.3/mysite/settings.py
+</code></pre>
+ </div>
+ <p>
+  那么在文件中应该如下图所示填写
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-9a278b64c514144795209c7963d50f4d_r.jpg" data-rawheight="313" data-rawwidth="598" data-size="normal" src="https://pic1.zhimg.com/v2-9a278b64c514144795209c7963d50f4d_b.jpg" width="598"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-9a278b64c514144795209c7963d50f4d_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-9a278b64c514144795209c7963d50f4d_r.jpg" data-rawheight="313" data-rawwidth="598" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='598'%20height='313'&gt;&lt;/svg&gt;" width="598"/>
+ </figure>
+ <p>
+  <b>
+   3.10 其他的 web 设置
+  </b>
+ </p>
+ <p>
+  最后我们再设置一下虚拟环境路径，以及静态文件路径，本地项目中有 media 文件的小伙伴仍需要设置 media 路径。
+ </p>
+ <p>
+  结果如下图所示：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-71cd587231a996a306917dd6303b0e0b_r.jpg" data-rawheight="536" data-rawwidth="589" data-size="normal" src="https://pic3.zhimg.com/v2-71cd587231a996a306917dd6303b0e0b_b.jpg" width="589"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-71cd587231a996a306917dd6303b0e0b_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-71cd587231a996a306917dd6303b0e0b_r.jpg" data-rawheight="536" data-rawwidth="589" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='589'%20height='536'&gt;&lt;/svg&gt;" width="589"/>
+ </figure>
+ <p>
+  <b>
+   3.11 展示
+  </b>
+ </p>
+ <p>
+  最后“
+  <b>
+   Reload
+  </b>
+  ”一下，就开开心心去查看自己的网站吧！
+ </p>
+ <p>
+  下面是小编的半成品（捂脸逃：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-f958c6e471d10bc954f3c9757f0da3ba_r.jpg" data-rawheight="638" data-rawwidth="640" data-size="normal" src="https://pic2.zhimg.com/v2-f958c6e471d10bc954f3c9757f0da3ba_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-f958c6e471d10bc954f3c9757f0da3ba_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-f958c6e471d10bc954f3c9757f0da3ba_r.jpg" data-rawheight="638" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='638'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  <b>
+   3.12 总结
+  </b>
+ </p>
+ <p>
+  以上就是将已有项目部署到 PythonAnywhere 的整个流程，回顾整个流程，拢共分三步：
+ </p>
+ <ol>
+  <li>
+   上传代码
+  </li>
+  <li>
+   配置代码
+  </li>
+  <li>
+   配置环境
+  </li>
+ </ol>
+ <p>
+  都是不难的知识，但每一步都有一些细节需要我们去认真对待，最后才能搭出自己的网站。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  魔鬼在细节，编程之事大抵如此。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  在公众号『Crossin的编程教室』（crossincode）里回复
+  <b>
+   部署
+  </b>
+  ，可查看演示博客网站（仿 WordPress）及参考 Django 项目代码。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  2016 即将过去。祝大家新年有新的收获！
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <u>
+   其他文章及回答：
+  </u>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/24606846">
+   今天，你抢到票了吗 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22261597">
+   Python 与 Excel 不得不说的事 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/23998083">
+   Python-Excel 模块哪家强？- Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22339492">
+   爆款游戏《贪吃蛇大作战》的 Python 实现 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22917775">
+   NBA 举办编程马拉松 - 数据分析时代的到来 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21886694">
+   想用 Python 做数据分析？先玩玩这个再说 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21624000">
+   用 Python 实现你的量化交易策略 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21057822">
+   Python 抓取网页乱码原因分析 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  微信ID：crossincode
+ </p>
+ <p>
+  论坛：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室
+  </a>
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>

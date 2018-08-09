@@ -1,0 +1,296 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>工欲善其事必先利其器：用什么写Python？</h1><div class="RichText ztext Post-RichText">
+ <p>
+  通常来说，每个程序员都有自己趁手的兵器：
+  <b>
+   代码编辑器
+  </b>
+  。你要是让他换个开发环境，恐怕开发效率至少下降三成。然而，每个人对编辑器的喜好各不相同，甚至引发出诸如“神的编辑器”与“编辑器之神”这种信仰之争。但也正由此可见，个性化的编辑器对于一个程序员的重要性。
+ </p>
+ <p>
+  对编程新手来说，开发环境的选择常常成为入门后的第一道坎。因为捣鼓了半天没能成功运行代码而被迫从入门到放弃的情景并不少见。初上手时选择的编辑器是否易用也会直接影响你的学习热情。
+ </p>
+ <p>
+  今天就来讲讲
+  <b>
+   我对 Python 编辑器的经验
+  </b>
+  。
+ </p>
+ <p>
+  我们用来写 Python 的工具有两类：
+ </p>
+ <p>
+  一种是被称为
+  <b>
+   IDE
+  </b>
+  的
+  <b>
+   集成开发环境
+  </b>
+  ，它们为开发而生。如 IDLE、PyCharm、Spyder 等。
+ </p>
+ <p>
+  另一种更像是
+  <b>
+   文本编辑器
+  </b>
+  ，只不过比较强大，可以支持编写和运行代码。如 SublimeText、Emacs、Vim 等。在此我主要介绍下我个人平常用的几款。
+ </p>
+ <p>
+  <b>
+   1. IDLE
+  </b>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-026c98f06d58ce4289424b586d1e4acf_r.jpg" data-rawheight="627" data-rawwidth="1080" data-size="normal" src="https://pic1.zhimg.com/v2-026c98f06d58ce4289424b586d1e4acf_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-026c98f06d58ce4289424b586d1e4acf_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-026c98f06d58ce4289424b586d1e4acf_r.jpg" data-rawheight="627" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='627'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  讲真，再怎么降低标准，IDLE 恐怕也算不上一个“好”的编辑器。不论是自动补全、语法提示，还是项目文件管理，甚至是高亮提示，它要么不支持，要么支持得很勉强。“用户体验”基本没有，更要命的是，经常在某些系统或某些版本下无法运行或无法输入。
+ </p>
+ <p>
+  但没办法，人是亲儿子啊！安装完 Python 什么配置都不用做（甚至不用理会环境变量），就可以用它来编写和运行代码了。对一个没什么计算机基础的新人来说，还要啥自行车要啥手表呢？直接写就完啦！
+ </p>
+ <p>
+  所以在我的零基础教程，以及其他不少入门级教程里，都把 IDLE 当做了一开始的演示开发环境。但我不得不强调下，
+  <b>
+   IDLE 仅仅是编程世界的敲门砖
+  </b>
+  ，它让你快速上手，但不可能陪你走下去。尽早去寻找属于你的工具吧。
+ </p>
+ <p>
+  <b>
+   2. SublimeText
+  </b>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-f42dbc80a8fb3d219e7ef50ce727244a_r.jpg" data-rawheight="685" data-rawwidth="1080" data-size="normal" src="https://pic2.zhimg.com/v2-f42dbc80a8fb3d219e7ef50ce727244a_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-f42dbc80a8fb3d219e7ef50ce727244a_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-f42dbc80a8fb3d219e7ef50ce727244a_r.jpg" data-rawheight="685" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='685'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  Sublime 是一个功能丰富的文本编辑器。除了写 Python 外，我也会拿它写一写其他代码如 JS、HTML、CSS，并且它也是我日常使用的记事本和文本编辑器。你们看到的大多数微信推送文章，最初的草稿都是是用 Sublime 写成的。
+ </p>
+ <p>
+  默认安装后，如果你的电脑上已装好 Python，Sublime 就可以运行 .py 文件，并且具有语法提示、补全的功能。不支持更复杂的语法检查，也不支持控制台输入（input），但可以通过安装额外插件来补充功能。如果你电脑上有多个版本的 Python，选择起来也稍复杂。因此
+  <b>
+   我常年打开着 Sublime，写一些代码片段
+  </b>
+  ，或者审核学员提交的作业时使用。
+ </p>
+ <p>
+  Sublime 是收费软件，但可以免费使用。
+ </p>
+ <p>
+  <b>
+   3. PyCharm
+  </b>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-df1f4a875c878287958e5e4d18e3a4b3_r.jpg" data-rawheight="760" data-rawwidth="1080" data-size="normal" src="https://pic2.zhimg.com/v2-df1f4a875c878287958e5e4d18e3a4b3_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-df1f4a875c878287958e5e4d18e3a4b3_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-df1f4a875c878287958e5e4d18e3a4b3_r.jpg" data-rawheight="760" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='760'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  这是我在课程中和答疑群里主要推荐的开发工具。除了一开始配置可能会遇到点麻烦，以及启动时间略慢以外，真的是很好用。PyCharm 在项目内部提供了对编码、第三方库的管理，形成一个小的沙盒，避免系统中其他的配置对开发环境造成的干扰，让新手少踩点坑。不过有点不幸的是：如果你没有按照它设想的那样配置好，有可能因此踩到新的坑。
+ </p>
+ <p>
+  <b>
+   我个人用 PyCharm 做的开发主要是课程和演示项目
+  </b>
+  。如果你在使用其他编辑器时遇到问题，不妨同我的例子保持一致试试，减少不必要的折腾。
+ </p>
+ <p>
+  PyCharm 也是收费软件，但有免费的社区版和教育版（需申请）。我用的就是社区版，功能足够学习了。如果你一定需要汉化版或者专业版，可自行网上搜索。
+ </p>
+ <p>
+  <b>
+   4. IPython
+  </b>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-2f5804d2852ea2451d6b5ae03982a113_r.jpg" data-rawheight="316" data-rawwidth="976" data-size="normal" src="https://pic3.zhimg.com/v2-2f5804d2852ea2451d6b5ae03982a113_b.jpg" width="976"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-2f5804d2852ea2451d6b5ae03982a113_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-2f5804d2852ea2451d6b5ae03982a113_r.jpg" data-rawheight="316" data-rawwidth="976" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='976'%20height='316'&gt;&lt;/svg&gt;" width="976"/>
+ </figure>
+ <p>
+  IPython 是一个交互式的开发环境，也就是我们课程一开始用过的 Python Shell 的加强版。通过 pip install ipython 即可安装。主要是增加了自动补全和历史命令记录，语法高亮也看着舒服点。但新手可能不太会用到。如果你到了上服务器运行代码的阶段，那一定得装一个。
+ </p>
+ <p>
+  同 Sublime 一样，IPython 我也一直开着。因为
+  <b>
+   交互式的环境很适合调试几句代码，测试一下某个语法的特性，看看某个模块里方法的调用，甚至用 help() 命令去看文档
+  </b>
+  。看过我答疑的同学也知道，我经常是针对问题在 IPython 里运行一段代码贴过去。我强烈建议大家养成运行代码的习惯，尤其是在你看书看教程的时候，不要光顾着看，一定把编辑器开着随时敲一敲代码跑一跑。很多问题通过几次尝试自然就领会了。
+ </p>
+ <p>
+  <b>
+   5. Jupyter
+  </b>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-32bee4f6d05cf9437d78e9721b53386d_r.jpg" data-rawheight="372" data-rawwidth="1080" data-size="normal" src="https://pic3.zhimg.com/v2-32bee4f6d05cf9437d78e9721b53386d_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-32bee4f6d05cf9437d78e9721b53386d_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-32bee4f6d05cf9437d78e9721b53386d_r.jpg" data-rawheight="372" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='372'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  也就是 IPython Notebook。它相当于是把上面提到的 IPython 做成了网页版，但又不仅仅是网页版。
+ </p>
+ <p>
+  我之前很少用，但最近有点爱上它：因为
+  <b>
+   用它来写爬虫或数据分析实在太舒服了！
+  </b>
+  写爬虫的时候免不了反复尝试，有了交互式的 Jupyter，你可以步步为营，逐步修正你的代码，而不用每次都从头抓。数据分析则是因为它和 matplotlib 以及 echarts 都结合得很好，无需弹窗，页面上直接显示绘图结果。
+ </p>
+ <p>
+  对于想深入数据分析的同学，拿一本《利用 Python 进行数据分析》，再就着一个开着的 Jupyter 页面，一个个例子去玩吧。
+ </p>
+ <p>
+  另外，因为是网页版的，所以如果你有服务器的话，甚至可以用它做一个随时随地写代码的在线版 Python 工具。不过自己用用就好，千万不要直接对外公布，它会把你的服务器环境暴露在外。
+ </p>
+ <p>
+  <b>
+   5.Emacs
+  </b>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-9d6f63f2a24f14ce98a787e0054ce1c0_r.jpg" data-rawheight="587" data-rawwidth="1080" data-size="normal" src="https://pic4.zhimg.com/v2-9d6f63f2a24f14ce98a787e0054ce1c0_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-9d6f63f2a24f14ce98a787e0054ce1c0_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-9d6f63f2a24f14ce98a787e0054ce1c0_r.jpg" data-rawheight="587" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='587'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  终于来了，神的编辑器。
+  <br/>
+  这是多年开发的老习惯。你们看到的编程教室网站就是在 Emacs 上写成的。但这个门槛较高，也不存在推荐了，大家看看就好。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-270cb520ea0406cdcfb9c439102f30af_r.jpg" data-rawheight="400" data-rawwidth="600" data-size="normal" src="https://pic4.zhimg.com/v2-270cb520ea0406cdcfb9c439102f30af_b.jpg" width="600"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-270cb520ea0406cdcfb9c439102f30af_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-270cb520ea0406cdcfb9c439102f30af_r.jpg" data-rawheight="400" data-rawwidth="600" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='400'&gt;&lt;/svg&gt;" width="600"/>
+ </figure>
+ <p>
+  为了用 Emacs 我都改了自己的键位。最近手指有点疼，考虑是不是再加个脚踏板。🤦‍
+ </p>
+ <p>
+  以上是我常用的编辑器。算是有点分裂，不过确实各有各的优势。所以没必要争论哪个更好，按自己的需要选择用着顺手的就好。
+ </p>
+ <p>
+  <b>
+   对于初学，我还是建议用 PyCharm
+  </b>
+  ，功能比较完善，各方面相对均衡。之前写过两篇关于 PyCharm 的介绍文章，
+ </p>
+ <p>
+  公众号（Crossin的编程教室）里回复
+  <b>
+   PyCharm
+  </b>
+  可以看到。
+ </p>
+ <p>
+  不过似乎最近的版本又做了一些改动，可能我又得再写一篇新的了。
+ </p>
+ <p>
+  而其他还有不少优秀的编辑器，如评价很好的
+  <b>
+   VSCode、Atom、Vim、Spyder
+  </b>
+  等（不推荐 PyScripter），因我自己并无长期使用经验，就不搬运网上的介绍了。如果你在使用或者有兴趣，搜索下会有很多教程。有推荐的欢迎留言。但仅我上述提及的几个其实也足够用了。
+ </p>
+ <p>
+  正如标题所说：工欲善其事，必先利其器。选个好的编辑器，学习效率大增，起码像少半个括号少半个引号这种错误就不太会出现了。
+ </p>
+ <p>
+  不过最终嘛，工具还是看谁来用。只要你写得够多，记事本也能成就大牛。（但认真地说：如果你还不是大牛，任何开发相关的事情都不要用 Windows 自带的记事本！）
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+  ════
+  <br/>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   精选
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   Python
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   问答
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/36064871">
+   Python单词表
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36538511">
+   区块链
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36581953">
+   人工智能
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/30932804">
+   双11
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/29043669">
+   嘻哈
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/28726244">
+   爬虫
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37430943">
+   排序算法
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37664927">
+   我用Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37814595">
+   高考
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37981169">
+   世界杯
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/38466193">
+   requests
+  </a>
+ </p>
+ <p>
+  欢迎搜索及关注：
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+</div></body></html>

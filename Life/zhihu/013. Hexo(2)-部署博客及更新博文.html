@@ -1,0 +1,407 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>Hexo(2)-部署博客及更新博文</h1><div class="RichText ztext Post-RichText">
+ 本系列文章：
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22191919?refer=crossin">
+   用 GitHub + Hexo 建立你的第一个博客 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  Hexo(2)-部署博客及更新博文
+  <br/>
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D2650166056%26idx%3D1%26sn%3D5693b76cd7528d76305f420deb2f2598%26scene%3D1%26srcid%3D0919BiBAnqYyqbJsCc0dzyTM%23rd" rel="nofollow noreferrer" target="_blank">
+   Hexo(3)-安装自己喜欢的主题
+  </a>
+  <br/>
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D502682429%26idx%3D1%26sn%3Db02318724303e8632bcb08bf340ddd29%26chksm%3D3e4b5e45093cd753607031d131e35a69cd4d97cb6e60048ebb606b935a1307aa9a4a57c2f971%26scene%3D1%26srcid%3D0919oLK4LqP9Cj8r0LXp31hD%23rd" rel="nofollow noreferrer" target="_blank">
+   Hexo(4)-安装多说评论框
+  </a>
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D502682429%26idx%3D2%26sn%3D69cc7685dbd7a395c0254366c9b2d30b%26chksm%3D3e4b5e45093cd7538b6bc2e5ba5ab1e5f090117a8e9e44260cb11f76d8814786825b129bb591%26scene%3D1%26srcid%3D0919B9JktkjwIQwnvnije6ZD%23rd" rel="nofollow noreferrer" target="_blank">
+   Hexo(5)-购买并绑定域名
+  </a>
+ </p>
+ <br/>
+ <h2>
+  <strong>
+   将本地文件部署到 GitHub
+  </strong>
+ </h2>
+ <p>
+  <strong>
+   修改 Hexo 中的 _config.yml 文件
+  </strong>
+  <br/>
+ </p>
+ <p>
+  在 Hexo 文件夹下找到 _config.yml 文件,如下图所示：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic4.zhimg.com/v2-06ca2da15b746844063f6a8f631ccbed_r.jpg" data-rawheight="400" data-rawwidth="622" src="https://pic4.zhimg.com/v2-06ca2da15b746844063f6a8f631ccbed_b.jpg" width="622"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-06ca2da15b746844063f6a8f631ccbed_b.jpg" data-original="https://pic4.zhimg.com/v2-06ca2da15b746844063f6a8f631ccbed_r.jpg" data-rawheight="400" data-rawwidth="622" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='622'%20height='400'&gt;&lt;/svg&gt;" width="622"/>
+ </figure>
+ <p>
+  找到其中的 deploy 标签，改成下图所示形式，并保存。注意：冒号后面要加上一个空格，否则会报错。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic3.zhimg.com/v2-b1dcddd8d657b66ce91daa628caec6c5_r.jpg" data-rawheight="167" data-rawwidth="719" src="https://pic3.zhimg.com/v2-b1dcddd8d657b66ce91daa628caec6c5_b.jpg" width="719"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-b1dcddd8d657b66ce91daa628caec6c5_b.jpg" data-original="https://pic3.zhimg.com/v2-b1dcddd8d657b66ce91daa628caec6c5_r.jpg" data-rawheight="167" data-rawwidth="719" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='719'%20height='167'&gt;&lt;/svg&gt;" width="719"/>
+ </figure>
+ <p>
+  <strong>
+   将其 deploy 到仓库中
+  </strong>
+  <br/>
+ </p>
+ <p>
+  打开 Git Shell 进入创建的文件夹，依次输入以下命令：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>hexo clean
+hexo generate
+hexo deploy
+</code></pre>
+ </div>
+ <p>
+  如果出现下图错误，不要着急：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/v2-b62a620a0f6e44ad842e3e91d6485977_r.jpg" data-rawheight="53" data-rawwidth="563" src="https://pic1.zhimg.com/v2-b62a620a0f6e44ad842e3e91d6485977_b.jpg" width="563"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-b62a620a0f6e44ad842e3e91d6485977_b.jpg" data-original="https://pic1.zhimg.com/v2-b62a620a0f6e44ad842e3e91d6485977_r.jpg" data-rawheight="53" data-rawwidth="563" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='563'%20height='53'&gt;&lt;/svg&gt;" width="563"/>
+ </figure>
+ <p>
+  将deploy 的 type 改成 git，然后再在 Git Shell 中运行以下命令:
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>npm install hexo-deployer-git --save
+</code></pre>
+ </div>
+ <p>
+  再重新来一遍：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>hexo clean
+hexo generate
+hexo deploy
+</code></pre>
+ </div>
+ <p>
+  出现以下提示则表示正确：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic4.zhimg.com/v2-afc855fbbb24c435dde04ae2bce57711_r.jpg" data-rawheight="442" data-rawwidth="677" src="https://pic4.zhimg.com/v2-afc855fbbb24c435dde04ae2bce57711_b.jpg" width="677"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-afc855fbbb24c435dde04ae2bce57711_b.jpg" data-original="https://pic4.zhimg.com/v2-afc855fbbb24c435dde04ae2bce57711_r.jpg" data-rawheight="442" data-rawwidth="677" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='677'%20height='442'&gt;&lt;/svg&gt;" width="677"/>
+ </figure>
+ <p>
+  恭喜，到这一步，个人博客就已经部署到 GitHub 上了，你可以到你的GitHub仓库查看是否已经更新。此时，通过
+  <br/>
+ </p>
+ <p>
+  <strong>
+   <a class=" external" href="https://link.zhihu.com/?target=http%3A//your_user_name.github.io" rel="nofollow noreferrer" target="_blank">
+    <span class="invisible">
+     http://
+    </span>
+    <span class="visible">
+     your_user_name.github.io
+    </span>
+    <span class="invisible">
+    </span>
+   </a>
+  </strong>
+ </p>
+ <p>
+  （即你那个仓库的名称，形如："你的 GitHub 用户名".
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//github.io" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    github.io
+   </span>
+   <span class="invisible">
+   </span>
+  </a>
+  ）
+ </p>
+ <p>
+  就可以看到你的个人博客了。
+ </p>
+ <p>
+  注意：这里可能会出现这种需要输入账号密码的情况
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic3.zhimg.com/v2-c5c9d3eaa1374d6599be94e39a64ae03_r.jpg" data-rawheight="567" data-rawwidth="912" src="https://pic3.zhimg.com/v2-c5c9d3eaa1374d6599be94e39a64ae03_b.jpg" width="912"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-c5c9d3eaa1374d6599be94e39a64ae03_b.jpg" data-original="https://pic3.zhimg.com/v2-c5c9d3eaa1374d6599be94e39a64ae03_r.jpg" data-rawheight="567" data-rawwidth="912" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='912'%20height='567'&gt;&lt;/svg&gt;" width="912"/>
+ </figure>
+ <p>
+  输入github的账号密码就可以了，记住那里输入密码的时候光标是不会移动的，只要你输入了就好，不要以为没输入上：）
+ </p>
+ <h2>
+  <strong>
+   发表博文
+  </strong>
+ </h2>
+ <p>
+  辛苦了这么久，终于回到我们搭建博客最初的目标–写作，现在来看看怎么写博文并发表吧(^__^)。
+ </p>
+ <p>
+  <strong>
+   新建博文
+  </strong>
+ </p>
+ <p>
+  我们可以使用命令新建一篇博文,使用 Git Shell 进入 Hexo 文件夹，输入以下命令：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>hexo new "文章题目"
+</code></pre>
+ </div>
+ <p>
+  命令执行完后，就会发现在
+ </p>
+ <p>
+  Hexo\source_posts
+ </p>
+ <p>
+  目录中多了一个文件博文名.md，这就是我们刚才新建的博文。
+ </p>
+ <p>
+  此外，我们也可以直接进入
+ </p>
+ <p>
+  Hexo\source_posts
+ </p>
+ <p>
+  目录中，右键新建一个文本文档，将名字改为博文名.md，这样也新建了一篇博文。
+ </p>
+ <p>
+  <strong>
+   新建页面
+  </strong>
+ </p>
+ <p>
+  上面新建的博文是显示在单个文章界面，这里新建的页面是作为单个页面显示的，比如下图的分类、标签、归档和关于我，你点击后都是显示为单个页面。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic3.zhimg.com/v2-ae290f307b05f52e9436a568973f78d8_r.jpg" data-rawheight="209" data-rawwidth="537" src="https://pic3.zhimg.com/v2-ae290f307b05f52e9436a568973f78d8_b.jpg" width="537"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-ae290f307b05f52e9436a568973f78d8_b.jpg" data-original="https://pic3.zhimg.com/v2-ae290f307b05f52e9436a568973f78d8_r.jpg" data-rawheight="209" data-rawwidth="537" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='537'%20height='209'&gt;&lt;/svg&gt;" width="537"/>
+ </figure>
+ <p>
+  你只需要记住新建博文是用上面的方法，新建页面是用这里的方法就行了，这里也采用命令新建页面：
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>hexo new page "页面名称"
+</code></pre>
+ </div>
+ <p>
+  命令执行完后，就会发现在在
+ </p>
+ <p>
+  Hexo\source
+ </p>
+ <p>
+  目录中多了一个文件夹，里面还有一个index.md，这就代表我们新建了一个页面。
+ </p>
+ <p>
+  <strong>
+   写博文
+  </strong>
+ </p>
+ <p>
+  用文本编辑器打开上面新建的博文，如下图所示：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/v2-b9adb8bd41d18783c47ea118ea817c40_r.jpg" data-rawheight="240" data-rawwidth="880" src="https://pic2.zhimg.com/v2-b9adb8bd41d18783c47ea118ea817c40_b.jpg" width="880"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-b9adb8bd41d18783c47ea118ea817c40_b.jpg" data-original="https://pic2.zhimg.com/v2-b9adb8bd41d18783c47ea118ea817c40_r.jpg" data-rawheight="240" data-rawwidth="880" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='880'%20height='240'&gt;&lt;/svg&gt;" width="880"/>
+ </figure>
+ <p>
+  新建的页面略有不同，没有tags和categories标签。
+  <br/>
+ </p>
+ <p>
+  三个”-“后面就是博文的正文内容，接下来就是正儿八经地撰写博文了。
+ </p>
+ <p>
+  <b>
+   Markdown
+  </b>
+ </p>
+ <p>
+  因为我们的博文都是用Markdown语言写的，所以首先，你需要一个好用的Markdown编辑器。其实好用的Markdown编辑器一大堆，这里就给大家推荐两个，如果你用的不习惯也可以换其它的。
+ </p>
+ <ul>
+  <li>
+   <p>
+    本地编辑器：Haroopad，非常小众的一款Markdown编辑器，左边编辑右边实时预览效果，非常轻便；
+   </p>
+  </li>
+  <li>
+   <p>
+    在线编辑器：MaHua，也是比较小众的一款Markdown编辑器，但效果确实很棒，我的这篇博文就是用MaHua写的。
+   </p>
+  </li>
+ </ul>
+ <p>
+  现在你可以打开新建的博文了，然而还不造怎么下手对吧。其实很简单，除了特殊格式，其它的你就当做在word里面写文章就行了，具体请看这里的Markdown教程：
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//www.jianshu.com/p/1e402922ee32/" rel="nofollow noreferrer" target="_blank">
+   Markdown——入门指南
+  </a>
+ </p>
+ <p>
+  <strong>
+   发博文
+  </strong>
+ </p>
+ <p>
+  呼啦啦，博文写好了，你得发表出去别人才看得到呀。依然在 Git Shell 中进入 Hexo 文件夹，执行下面几条命令，将博客部署到 GitHub 上：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>hexo clean
+hexo generate
+(若要本地预览就先执行 hexo server)
+hexo deploy
+</code></pre>
+ </div>
+ <p>
+  快捷命令：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>hexo g == hexo generate
+hexo d == hexo deploy
+hexo s == hexo server
+hexo n == hexo new
+</code></pre>
+ </div>
+ <p>
+  还能组合使用，如：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>hexo d -g
+</code></pre>
+ </div>
+ <p>
+  刷新你的个人博客，就可以看到新鲜出炉的博文了，赶紧邀请小伙伴们来欣赏吧。
+ </p>
+ <p>
+  <strong>
+   两个可能出现的错误
+  </strong>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>spawn git ENOENT
+</code></pre>
+ </div>
+ <p>
+  解决方法在这里：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//liangwenhao.cn/2016/08/24/article03/" rel="nofollow noreferrer" target="_blank">
+   spawn git ENOENT解决方法
+  </a>
+ </p>
+ <p>
+  头像图片无法显示：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//liangwenhao.cn/2016/08/29/article28/" rel="nofollow noreferrer" target="_blank">
+   hexo头像无法显示【解决办法】
+  </a>
+  <br/>
+ </p>
+ <br/>
+ <br/>
+ <p>
+  本系列其余几篇文章，已在文章开头的链接中给出。欢迎进入公众号阅读。
+ </p>
+ <p>
+  如果有其他疑问，也欢迎在本教室论坛的主题贴中讨论：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com/forum.php%3Fmod%3Dviewthread%26tid%3D5650%26extra%3Dpage%253D1" rel="nofollow noreferrer" target="_blank">
+   用 GitHub + Hexo 建立你的第一个博客
+  </a>
+ </p>
+ <br/>
+ <br/>
+ <br/>
+ <p>
+  <u>
+   其他文章及回答：
+  </u>
+ </p>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/21886694">
+  想用 Python 做数据分析？先玩玩这个再说 - Crossin的文章 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/21624000">
+  用 Python 实现你的量化交易策略 - Crossin的文章 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+  学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？ - Crossin 的回答
+ </a>
+ <br/>
+ <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+  你是如何自学 Python 的？ - Crossin 的回答
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/20683456?refer=crossin">
+  编程初学者如何使用搜索引擎 - Crossin的文章 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/20721034?refer=crossin">
+  如何直观地理解程序的运行过程？- Crossin的文章 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/21304838">
+  如何在 Python 中使用断点调试 - Crossin的文章 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/21057822">
+  Python 抓取网页乱码原因分析 - Crossin的编程教室 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/21438729">
+  极简 Github 上手教程 - Crossin的编程教室 - 知乎专栏
+ </a>
+ <br/>
+ <p>
+  <b>
+   Crossin的编程教室
+  </b>
+  <br/>
+ </p>
+ <br/>
+ 微信ID：crossincode
+ <br/>
+ 论坛：
+ <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com" rel="nofollow noreferrer" target="_blank">
+  Crossin的编程教室
+ </a>
+ <br/>
+ QQ群：521603553
+ <br/>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="258" data-rawwidth="258" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+</div></body></html>

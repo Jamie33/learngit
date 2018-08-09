@@ -1,0 +1,226 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>如何在一台电脑上同时使用_Python_2_和_Python_3</h1><div class="RichText ztext Post-RichText">
+ <p>
+  Python 的版本是这几年被开发者诟病的一大槽点，也让众多新手头疼不已。逐渐退居二线的老版本 2 存在不少缺陷但应用广泛，而新版本 3 为了彻底解决历史遗留问题决定另起炉灶不向后兼容。
+ </p>
+ <p>
+  对于开发者来说，如果要更新版本，将有大量的代码移植工作，同时还得考虑外部依赖库的兼容性。而对于学习者来说，最大的问题莫过于：我要学 2 还是学 3？
+ </p>
+ <p>
+  不过今天要说的不是 2 与 3 的选择，而是另一个事情。如果你想兼容并包地看下两个版本的教程，或是已经基本掌握一个版本，打算 get 另一个版本时，就必须要面对如何在你的电脑上同时使用 Python 2 和 Python 3 的问题。
+ </p>
+ <p>
+  <strong>
+   Linux
+  </strong>
+ </p>
+ <p>
+  如果你是 Linux 系统，通常都默认安装了 Python 2.x 版本，在命令行下查看版本：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>python -V
+</code></pre>
+ </div>
+ <p>
+  而通过包管理或者编译安装的 Python 3 版本，会是另一个名字：
+  <u>
+   python3
+  </u>
+  （也有的是带小版本号如 python3.4）。再查看版本：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>python3 -V
+</code></pre>
+ </div>
+ <p>
+  因此只要用不同的命令，就可以区分版本了。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>python test_v2.py
+python3 test_v3.py
+</code></pre>
+ </div>
+ <p>
+  如果想要用 python3 替换默认的 python，常见的做法是修改系统 PATH 路径中的 python，让它成为一个指向 python3 的软链接，或者用 alias，将 python 指定为 python3 的别名。
+ </p>
+ <p>
+  <strong>
+   Mac
+  </strong>
+ </p>
+ <p>
+  Mac 系统也默认装有 Python 2.x 版本。安装3版本一种较方便的方法是使用
+  <u>
+   homebrew
+  </u>
+  （需自行安装）：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>brew install python3
+</code></pre>
+ </div>
+ <p>
+  同样，它叫做
+  <u>
+   python3
+  </u>
+  ，与原有的 python 区别开。
+ </p>
+ <p>
+  <strong>
+   Windows
+  </strong>
+ </p>
+ <p>
+  而在 Windows 上，默认没有 Python，需要下载安装。官网上提供有不同版本，安装后路径不同，但执行程序名称均为
+  <u>
+   python.exe
+  </u>
+  。
+ </p>
+ <p>
+  看上去好像要复杂一些。但其实官方已经很贴心地提供了一个解决方案：当你安装 Python 3 版本之后，就会同时安装一个名为
+  <u>
+   py.exe
+  </u>
+  的 Python 启动器。可以用它替代 python 命令：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>py test.py
+</code></pre>
+ </div>
+ <p>
+  并且可以指定版本（前提是安装了对应版本）：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>py -2 test_v2.py
+py -3 test_v3.py
+</code></pre>
+ </div>
+ <br/>
+ <p>
+  上一次说到可以通过
+  <u>
+   pip
+  </u>
+  来安装第三方模块（参见
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20760860">
+   如何安装 Python 的第三方模块
+  </a>
+  ）。如果系统里有了两个版本的 Python，用 pip 时需注意，究竟是安装在了哪个版本上。
+ </p>
+ <p>
+  通过命令可查看 pip 默认的对应版本：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>pip -V
+</code></pre>
+ </div>
+ <p>
+  为了防止出现版本对应混乱的情况，除了默认的 pip 之外，每个版本都有对应的副本，如
+  <u>
+   pip2
+  </u>
+  、
+  <u>
+   pip2.7
+  </u>
+  、
+  <u>
+   pip3
+  </u>
+  、
+  <u>
+   pip3.5
+  </u>
+  。所以当需要明确安装版本时，可使用对应的命令：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>pip2 install ...
+pip3 install ...
+</code></pre>
+ </div>
+ <p>
+  除此之外，Windows 上也可以这样做：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>py -2 -m pip install ...
+py -3 -m pip install ...
+</code></pre>
+ </div>
+ <p>
+  当然，这些的前提是将对应目录加到了系统变量 PATH 路径里，包括 Python 安装目录及其 Scripts 子目录。如果没有在安装时勾选全部可选项，让安装程序自动帮你设置好，则需要手动添加。
+ </p>
+ <br/>
+ <p>
+  还有种优雅的方法控制不同 Python 版本的共存，就是通过
+  <u>
+   pyenv
+  </u>
+  或者
+  <u>
+   virtualenv
+  </u>
+  创建虚拟开发环境。之后也会来说一说。
+ </p>
+ <br/>
+ <br/>
+ <p>
+  其他文章及回答：
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20683456?refer=crossin">
+   编程初学者如何使用搜索引擎 - Crossin的文章 - 知乎专栏
+  </a>
+  <br/>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20721034?refer=crossin">
+   如何直观地理解程序的运行过程？ - Crossin的文章 - 知乎专栏
+  </a>
+  <br/>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20760860?refer=crossin">
+   如何安装 Python 的第三方模块 - Crossin的编程教室 - 知乎专栏
+  </a>
+  <br/>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？ - Crossin 的回答
+  </a>
+  <br/>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？ - Crossin 的回答
+  </a>
+  <br/>
+ </p>
+ <br/>
+ <br/>
+ <p>
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+ <p>
+  微信ID：crossincode
+ </p>
+ <p>
+  论坛：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室
+  </a>
+ </p>
+ <p>
+  QQ群：498545096
+ </p>
+ <br/>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="258" data-rawwidth="258" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+</div></body></html>

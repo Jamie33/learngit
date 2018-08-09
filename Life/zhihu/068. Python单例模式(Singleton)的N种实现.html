@@ -1,0 +1,438 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>Python单例模式(Singleton)的N种实现</h1><div class="RichText ztext Post-RichText">
+ <p>
+  很多初学者喜欢用
+  <b>
+   全局变量
+  </b>
+  ，因为这比函数的参数传来传去更容易让人理解。确实在很多场景下用全局变量很方便。不过如果代码规模增大，并且有多个文件的时候，全局变量就会变得比较混乱。你可能不知道在哪个文件中定义了相同类型甚至重名的全局变量，也不知道这个变量在程序的某个地方被做了怎样的操作。
+ </p>
+ <p>
+  因此对于这种情况，有种更好的实现方式：
+  <br/>
+  <b>
+   单例（Singleton）
+  </b>
+ </p>
+ <p>
+  单例是一种
+  <b>
+   设计模式
+  </b>
+  ，应用该模式的类只会生成一个实例。
+ </p>
+ <p>
+  单例模式保证了在程序的不同位置都
+  <b>
+   可以且仅可以取到同一个对象实例
+  </b>
+  ：如果实例不存在，会创建一个实例；如果已存在就会返回这个实例。因为单例是一个类，所以你也可以为其提供相应的操作方法，以便于对这个实例进行管理。
+ </p>
+ <p>
+  举个例子来说，比如你开发一款游戏软件，游戏中需要有“场景管理器”这样一种东西，用来管理游戏场景的切换、资源载入、网络连接等等任务。这个管理器需要有多种方法和属性，在代码中很多地方会被调用，且被调用的必须是同一个管理器，否则既容易产生冲突，也会浪费资源。这种情况下，单例模式就是一个很好的实现方法。
+ </p>
+ <p>
+  单例模式广泛应用于各种开发场景，对于开发者而言是必须掌握的知识点，同时在很多面试中，也是常见问题。本篇文章总结了目前主流的实现单例模式的方法供读者参考。
+ </p>
+ <p>
+  希望看过此文的同学，在以后被面到此问题时，能直接皮一下面试官，“我会 4 种单例模式实现，你想听哪一种？”
+ </p>
+ <p>
+  以下是实现方法索引：
+ </p>
+ <ul>
+  <li>
+   使用函数装饰器实现单例
+  </li>
+  <li>
+   使用类装饰器实现单例
+  </li>
+  <li>
+   使用 __new__ 关键字实现单例
+  </li>
+  <li>
+   使用 metaclass 实现单例
+  </li>
+ </ul>
+ <h2>
+  <b>
+   使用函数装饰器实现单例
+  </b>
+ </h2>
+ <p>
+  以下是实现代码：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">def</span> <span class="nf">singleton</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+    <span class="n">_instance</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">cls</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_instance</span><span class="p">:</span>
+            <span class="n">_instance</span><span class="p">[</span><span class="n">cls</span><span class="p">]</span> <span class="o">=</span> <span class="n">cls</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">_instance</span><span class="p">[</span><span class="n">cls</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">inner</span>
+    
+<span class="nd">@singleton</span>
+<span class="k">class</span> <span class="nc">Cls</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="n">cls1</span> <span class="o">=</span> <span class="n">Cls</span><span class="p">()</span>
+<span class="n">cls2</span> <span class="o">=</span> <span class="n">Cls</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">cls1</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">cls2</span><span class="p">))</span>
+</code></pre>
+ </div>
+ <p>
+  输出结果：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="kc">True</span>
+</code></pre>
+ </div>
+ <p>
+  在 Python 中，id 关键字可用来查看对象在内存中的存放位置，这里 cls1 和 cls2 的 id 值相同，说明他们指向了同一个对象。
+ </p>
+ <p>
+  关于装饰器的知识，有不明白的同学可以查看之前的文章
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D2650166480%26idx%3D2%26sn%3Dbe7349921b91730a8c717f6ab28dad97%26chksm%3Dbe4b59a8893cd0bee407e3d8a1b7bec44d7571623c355a37f352d5cf9e104d986af6f5b5e1fe%26scene%3D21%23wechat_redirect" rel="nofollow noreferrer" target="_blank">
+   【编程课堂】装饰器浅析
+  </a>
+  或者使用搜索引擎再学习一遍。代码中比较巧妙的一点是:
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">_instance</span> <span class="o">=</span> <span class="p">{}</span>
+</code></pre>
+ </div>
+ <p>
+  使用不可变的
+  <b>
+   类地址
+  </b>
+  作为键，其实例作为值，每次创造实例时，首先查看该类是否存在实例，存在的话直接返回该实例即可，否则新建一个实例并存放在字典中。
+ </p>
+ <h2>
+  <b>
+   使用类装饰器实现单例
+  </b>
+ </h2>
+ <p>
+  代码：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">class</span> <span class="nc">Singleton</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cls</span> <span class="o">=</span> <span class="n">cls</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_instance</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cls</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cls</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cls</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instance</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cls</span><span class="p">]</span>
+
+<span class="nd">@Singleton</span>
+<span class="k">class</span> <span class="nc">Cls2</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="n">cls1</span> <span class="o">=</span> <span class="n">Cls2</span><span class="p">()</span>
+<span class="n">cls2</span> <span class="o">=</span> <span class="n">Cls2</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">cls1</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">cls2</span><span class="p">))</span>
+</code></pre>
+ </div>
+ <p>
+  同时，由于是面对对象的，这里还可以这么用
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">class</span> <span class="nc">Cls3</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="n">Cls3</span> <span class="o">=</span> <span class="n">Singleton</span><span class="p">(</span><span class="n">Cls3</span><span class="p">)</span>
+<span class="n">cls3</span> <span class="o">=</span> <span class="n">Cls3</span><span class="p">()</span>
+<span class="n">cls4</span> <span class="o">=</span> <span class="n">Cls3</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">cls3</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">cls4</span><span class="p">))</span>
+</code></pre>
+ </div>
+ <p>
+  使用 类装饰器实现单例的原理和 函数装饰器 实现的原理相似，理解了上文，再理解这里应该不难。
+ </p>
+ <h2>
+  <b>
+   New、Metaclass 关键字
+  </b>
+ </h2>
+ <p>
+  在接着说另外两种方法之前，需要了解在 Python 中一个类和一个实例是通过哪些方法以怎样的顺序被创造的。
+ </p>
+ <p>
+  简单来说，
+  <b>
+   元类
+  </b>
+  (
+  <b>
+   metaclass
+  </b>
+  ) 可以通过方法
+  <b>
+   __metaclass__
+  </b>
+  创造了
+  <b>
+   类(class)
+  </b>
+  ，而
+  <b>
+   类(class)
+  </b>
+  通过方法
+  <b>
+   __new__
+  </b>
+  创造了
+  <b>
+   实例(instance)
+  </b>
+  。
+ </p>
+ <p>
+  在单例模式应用中，在创造类的过程中或者创造实例的过程中稍加控制达到最后产生的实例都是一个对象的目的。
+ </p>
+ <p>
+  本文主讲单例模式，所以对这个 topic 只会点到为止，有感兴趣的同学可以在网上搜索相关内容，几篇参考文章：
+ </p>
+ <ul>
+  <li>
+   What are metaclasses in Python?
+   <br/>
+   <a class=" external" href="https://link.zhihu.com/?target=https%3A//stackoverflow.com/questions/100003/what-are-metaclasses-in-python" rel="nofollow noreferrer" target="_blank">
+    <span class="invisible">
+     https://
+    </span>
+    <span class="visible">
+     stackoverflow.com/quest
+    </span>
+    <span class="invisible">
+     ions/100003/what-are-metaclasses-in-python
+    </span>
+    <span class="ellipsis">
+    </span>
+   </a>
+  </li>
+  <li>
+   python-__new__-magic-method-explained
+   <br/>
+   <a class=" external" href="https://link.zhihu.com/?target=http%3A//howto.lintel.in/python-__new__-magic-method-explained/" rel="nofollow noreferrer" target="_blank">
+    <span class="invisible">
+     http://
+    </span>
+    <span class="visible">
+     howto.lintel.in/python-
+    </span>
+    <span class="invisible">
+     __new__-magic-method-explained/
+    </span>
+    <span class="ellipsis">
+    </span>
+   </a>
+  </li>
+  <li>
+   Why is __init__() always called after __new__()?
+   <br/>
+   <a class=" external" href="https://link.zhihu.com/?target=https%3A//stackoverflow.com/questions/674304/why-is-init-always-called-after-new" rel="nofollow noreferrer" target="_blank">
+    <span class="invisible">
+     https://
+    </span>
+    <span class="visible">
+     stackoverflow.com/quest
+    </span>
+    <span class="invisible">
+     ions/674304/why-is-init-always-called-after-new
+    </span>
+    <span class="ellipsis">
+    </span>
+   </a>
+  </li>
+ </ul>
+ <h2>
+  <b>
+   使用
+  </b>
+  <b>
+   new
+  </b>
+  <b>
+   关键字实现单例模式
+  </b>
+ </h2>
+ <p>
+  使用 __new__ 方法在创造实例时进行干预，达到实现单例模式的目的。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">class</span> <span class="nc">Single</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">_instance</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">_instance</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="n">single1</span> <span class="o">=</span> <span class="n">Single</span><span class="p">()</span>
+<span class="n">single2</span> <span class="o">=</span> <span class="n">Single</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">single1</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">single2</span><span class="p">))</span>
+</code></pre>
+ </div>
+ <p>
+  在理解到 __new__ 的应用后，理解单例就不难了，这里使用了
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">_instance</span> <span class="o">=</span> <span class="kc">None</span>
+</code></pre>
+ </div>
+ <p>
+  来存放实例，如果 _instance 为 None，则新建实例，否则直接返回 _instance 存放的实例。
+ </p>
+ <h2>
+  <b>
+   使用
+  </b>
+  <b>
+   metaclass
+  </b>
+  <b>
+   实现单例模式
+  </b>
+ </h2>
+ <p>
+  同样，我们在类的创建时进行干预，从而达到实现单例的目的。
+ </p>
+ <p>
+  在实现单例之前，需要了解使用 type 创造类的方法，代码如下：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"do sth"</span><span class="p">)</span>
+
+<span class="n">Klass</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s2">"Klass"</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{</span><span class="s2">"func"</span><span class="p">:</span> <span class="n">func</span><span class="p">})</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Klass</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">func</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  以上，我们使用 type 创造了一个类出来。这里的知识是 mataclass 实现单例的基础。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">class</span> <span class="nc">Singleton</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+    <span class="n">_instances</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cls</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">_instances</span><span class="p">:</span>
+            <span class="n">cls</span><span class="o">.</span><span class="n">_instances</span><span class="p">[</span><span class="n">cls</span><span class="p">]</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">__call__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">_instances</span><span class="p">[</span><span class="n">cls</span><span class="p">]</span>
+
+<span class="k">class</span> <span class="nc">Cls4</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">Singleton</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">cls1</span> <span class="o">=</span> <span class="n">Cls4</span><span class="p">()</span>
+<span class="n">cls2</span> <span class="o">=</span> <span class="n">Cls4</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">cls1</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">cls2</span><span class="p">))</span>
+</code></pre>
+ </div>
+ <p>
+  这里，我们将 metaclass 指向 Singleton 类，让 Singleton 中的 type 来创造新的 Cls4 实例。
+ </p>
+ <h2>
+  <b>
+   小结
+  </b>
+ </h2>
+ <p>
+  本文虽然是讲单例模式，但在实现单例模式的过程中，涉及到了蛮多高级 Python 语法，包括装饰器、元类、new、type 甚至 super 等等。对于新手同学可能难以理解，其实在工程项目中并不需要你掌握的面面俱到，掌握其中一种，剩下的作为了解即可。
+ </p>
+ <p>
+  <i>
+   by 周鑫鑫
+  </i>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  关于更多的设计模式，给初学者推荐《
+  <b>
+   Head First 设计模式
+  </b>
+  》（Head First Design Patterns），此书浅显易懂，在 Head First 系列书籍里面也算是很好的一本。
+ </p>
+ <p>
+  我们的资源网盘里有电子版，获取地址请在公众号（
+  <b>
+   Crossin的编程教室
+  </b>
+  ）里回复关键字：
+  <b>
+   资源
+  </b>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   精选
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   Python
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   问答
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/36064871">
+   Python单词表
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36538511">
+   区块链
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36581953">
+   人工智能
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/30932804">
+   双11
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/29043669">
+   嘻哈
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/28726244">
+   爬虫
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37430943">
+   排序算法
+  </a>
+ </p>
+ <p>
+  欢迎搜索及关注：
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+</div></body></html>

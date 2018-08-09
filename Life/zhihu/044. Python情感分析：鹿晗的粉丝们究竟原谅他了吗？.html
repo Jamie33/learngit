@@ -1,0 +1,351 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>Python情感分析：鹿晗的粉丝们究竟原谅他了吗？</h1><div class="RichText ztext Post-RichText">
+ <p>
+  国庆长假的最后一天，鹿晗在微博上公开宣布和关晓彤的恋情。消息来得太突然，不仅粉丝圈里炸了，顺带连微博服务器也给炸了。在此心疼新浪运维工程师一秒，放个假都不能省心。
+ </p>
+ <p>
+  这条微博让粉丝们心情复杂，却让各路媒体们集体高潮，从各种刁钻的角度进行了全方位的报道和评论，蹭热点的姿势令人眼花缭乱。（在这点上不得不承认，我们是个不称职的公众号，到今天才有了这么一篇分析。）
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="555" data-rawwidth="335" src="https://pic3.zhimg.com/v2-3a45fdcd215b466279efe33243832747_b.jpg" width="335"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic3.zhimg.com/v2-3a45fdcd215b466279efe33243832747_b.jpg" data-caption="" data-rawheight="555" data-rawwidth="335" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='335'%20height='555'&gt;&lt;/svg&gt;" width="335"/>
+ </figure>
+ <p>
+  到目前，这条微博已经有了280多万条评论。有点赞祝福的，有质疑的，当然也少不了悲痛欲绝，甚至表示取关粉转路人的。那么究竟粉丝们对此事的态度如何，真的“原谅”鹿晗了吗？于是，我们编程教室的小伙伴用 python 对评论里的情绪做了个简单的统计分析。
+ </p>
+ <p>
+  先说我们的结论：
+  <b>
+   原谅？不存在！
+  </b>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-e27dc3e3c3d5873f350fe2b8651df57e_r.jpg" data-rawheight="645" data-rawwidth="640" src="https://pic3.zhimg.com/v2-e27dc3e3c3d5873f350fe2b8651df57e_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-e27dc3e3c3d5873f350fe2b8651df57e_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-e27dc3e3c3d5873f350fe2b8651df57e_r.jpg" data-rawheight="645" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='645'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  此微博的评论中负面情绪较多，说明还是被扎心的粉丝们占了多数，不是一时半会儿就能“原谅”的。这也是符合主观感受的。引用一个热评来说就是“3909万粉丝，一起失恋了”。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-2fc33d5ba609b8d1bd55d701f9738f6c_r.jpg" data-rawheight="480" data-rawwidth="640" src="https://pic4.zhimg.com/v2-2fc33d5ba609b8d1bd55d701f9738f6c_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-2fc33d5ba609b8d1bd55d701f9738f6c_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-2fc33d5ba609b8d1bd55d701f9738f6c_r.jpg" data-rawheight="480" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='480'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  这是我们通过一些数据分析得出的结论，到底是不是可信，可以一起来看下我们的分析过程。
+ </p>
+ <h2>
+  <b>
+   1. 抓取微博评论
+  </b>
+ </h2>
+ <p>
+  抓取微博使用了爬虫框架 scrapy，并结合 mongodb 作为数据存储。通常来说，手机版网页会比 PC 版网页更容易抓取数据，所以我们通过
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//m.weibo.cn" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    m.weibo.cn
+   </span>
+   <span class="invisible">
+   </span>
+  </a>
+  找到了此条微博的评论数据接口：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>https://m.weibo.cn/api/comments/show?id=4160547165300149&amp;page=1
+</code></pre>
+ </div>
+ <p>
+  通过修改 page 参数，可以获取各页评论。
+ </p>
+ <p>
+  得到数据之后，通过正则或 bs4 对信息进行提取（我们的代码里用了正则），将评论内容文本存入数据库。
+ </p>
+ <h2>
+  <b>
+   2. 情感分析
+  </b>
+ </h2>
+ <h2>
+  <b>
+   2.1 snownlp
+  </b>
+ </h2>
+ <p>
+  首先我们使用了 python 的一个情感分析库 snownlp。在开发过程中，我们看到知乎上也有人做了同样的工作：
+ </p>
+ <ul>
+  <li>
+   <a class="internal" href="https://zhuanlan.zhihu.com/p/29968019">
+    用python对鹿晗、关晓彤微博进行情感分析 - 宅米RICE
+   </a>
+  </li>
+  <li>
+   <a class="internal" href="https://zhuanlan.zhihu.com/p/30061051">
+    利用500W条微博语料对评论进行情感分析 - 布道
+   </a>
+  </li>
+ </ul>
+ <p>
+  snownlp（
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//github.com/isnowfy/snownlp" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    github.com/isnowfy/snow
+   </span>
+   <span class="invisible">
+    nlp
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+  ）是一个可以方便处理中文文本的 python 库，提供了分词、词性标注、情感分析、文本分类、转拼音、繁转简、提取关键词、摘要等功能，功能十分强大。
+ </p>
+ <p>
+  分析结果：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-755ee37dc0fb29dbe783e76253a4169f_r.jpg" data-rawheight="480" data-rawwidth="640" src="https://pic1.zhimg.com/v2-755ee37dc0fb29dbe783e76253a4169f_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-755ee37dc0fb29dbe783e76253a4169f_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-755ee37dc0fb29dbe783e76253a4169f_r.jpg" data-rawheight="480" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='480'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  图中情感值越接近 0 表示越消极，越接近 1 表示越积极。从结果来看，0、1 两端和中间 0.5 的数量最多，整体上较为平衡，稍稍偏积极一些。
+ </p>
+ <p>
+  可真的是这样吗？
+ </p>
+ <p>
+  我们来挑几热门评论尝试下：
+ </p>
+ <ol>
+  <li>
+   大家觉得是假的点赞
+   <u>
+    0.99
+   </u>
+  </li>
+  <li>
+   大家觉的鹿晗与关晓彤不配的请点赞。
+   <u>
+    0.48
+   </u>
+  </li>
+  <li>
+   一定是电视剧的宣传。一定是。
+   <u>
+    0.39
+   </u>
+  </li>
+  <li>
+   不喜欢关晓彤的赞我
+   <u>
+    0.80
+   </u>
+  </li>
+  <li>
+   哥哥 我们心脏不好
+   <u>
+    0.98
+   </u>
+  </li>
+  <li>
+   同意恋爱，关晓彤就算了吧。
+   <u>
+    0.55
+   </u>
+  </li>
+  <li>
+   如果不是关晓彤。。我觉得我还没那么心痛！人生的悲哀就是最喜欢的和最讨厌的在一起了
+   <u>
+    0.81
+   </u>
+  </li>
+ </ol>
+ <p>
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-cc1efee9c9aa491fbd700aa0304fff57_r.jpg" data-rawheight="534" data-rawwidth="521" src="https://pic3.zhimg.com/v2-cc1efee9c9aa491fbd700aa0304fff57_b.jpg" width="521"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-cc1efee9c9aa491fbd700aa0304fff57_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-cc1efee9c9aa491fbd700aa0304fff57_r.jpg" data-rawheight="534" data-rawwidth="521" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='521'%20height='534'&gt;&lt;/svg&gt;" width="521"/>
+ </figure>
+ <p>
+  这好像不大对吧。
+ </p>
+ <p>
+  后来进一步了解发现，snownlp 的默认训练语料库是针对网上商品的购买评价，将其得出的模型用在此微博评论的分析上并不是很准确。于是我们又从网上找了一份针对腾讯微博上新闻事件评价的语料库，来修正训练数据。但可惜因为样本量较少，并且也不是很符合此场景，因此结果和上述差别不大。
+ </p>
+ <p>
+  我们上面提到的两篇文章，结论也与此类似。如果要进一步提升 snownlp 准确性，则需要一定数量的手动标记样本。
+ </p>
+ <h2>
+  <b>
+   2.2 腾讯文智
+  </b>
+ </h2>
+ <p>
+  那如果一时没有那么多的标记样本，有没有其他方法？我们找到了“腾讯文智” — 腾讯出品的中文语义平台，支持 NLP、转码、抽取、全网数据抓取等中文语义分析需求。这个平台是收费的，不过有一些免费配额，足够我们做一些小的实验分析。
+ </p>
+ <p>
+  在使用之前，我们也将前文的几条热评测试了一下：
+ </p>
+ <p>
+  我们来挑几热门评论尝试下：
+ </p>
+ <ol>
+  <li>
+   大家觉得是假的点赞
+   <u>
+    0.52
+   </u>
+  </li>
+  <li>
+   大家觉的鹿晗与关晓彤不配的请点赞。
+   <u>
+    0.53
+   </u>
+  </li>
+  <li>
+   一定是电视剧的宣传。一定是。
+   <u>
+    0.50
+   </u>
+  </li>
+  <li>
+   不喜欢关晓彤的赞我
+   <u>
+    0.62
+   </u>
+  </li>
+  <li>
+   哥哥 我们心脏不好
+   <u>
+    0.02
+   </u>
+  </li>
+  <li>
+   同意恋爱，关晓彤就算了吧。
+   <u>
+    0.48
+   </u>
+  </li>
+  <li>
+   如果不是关晓彤。。我觉得我还没那么心痛！人生的悲哀就是最喜欢的和最讨厌的在一起了
+   <u>
+    0.35
+   </u>
+  </li>
+ </ol>
+ <p>
+  从这几个例子来看，文智相对要准确一点，虽然有些评论依然没有被划归到负面，但至少没有给到很夸张的积极情感值。
+ </p>
+ <p>
+  由于文智的数量限制，我们对数据中进行了随机抽样，用一小部分数据进行分析，并且过滤掉了情感值为 0.5 的部分（其中有不少是纯表情回复），得到如下结果：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-2fc33d5ba609b8d1bd55d701f9738f6c_r.jpg" data-rawheight="480" data-rawwidth="640" src="https://pic4.zhimg.com/v2-2fc33d5ba609b8d1bd55d701f9738f6c_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-2fc33d5ba609b8d1bd55d701f9738f6c_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-2fc33d5ba609b8d1bd55d701f9738f6c_r.jpg" data-rawheight="480" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='480'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  尽管在手动测试时发现文智的预测会略偏积极，但即便如此，最终的结果依然偏向消极。由此推断，实际的情感可能比这个分布更加负面。这也就是我们文章开始时给出的结论。
+ </p>
+ <p>
+  这个结论其实并没有多大意义（
+  <i>
+   反正我也不粉鹿晗
+  </i>
+  ），但通过程序来做情感分析，也许你会用得到。
+ </p>
+ <p>
+  获取源码和详细文档，请在公众号（Crossin的编程教室）中回复
+  <b>
+   鹿晗
+  </b>
+  。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+ </p>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <blockquote>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/30270181">
+   用 Python 解读十九工作报告
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/29043669">
+   Python有嘻哈：Crossin教你用代码写出押韵的verse
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/28726244">
+   听说你好不容易写了个爬虫，结果没抓几个就被封了？
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/26066151">
+   喏，你们要的 PyCharm 快速上手指南
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/28206656">
+   编程新手：看懂很多示例，却依然写不好一个程序
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   给伸手党的福利：Python 新手入门引导
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25499306">
+   如何用100行Python代码做出魔性声控游戏“八分音符酱”
+  </a>
+  <br/>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？
+  </a>
+  <br/>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？
+  </a>
+ </blockquote>
+ <p>
+  Crossin的编程教室
+ </p>
+ <blockquote>
+  微信公众号ID：crossincode
+  <br/>
+  网站：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/" rel="nofollow noreferrer" target="_blank">
+   crossincode.com
+  </a>
+  <br/>
+  QQ群：657099683
+  <br/>
+  微信加群：crossin123(新手/进阶/爬虫)
+ </blockquote>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="258" data-rawwidth="258" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-caption="" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>听说你好不容易写了个爬虫，结果没抓几个就被封了？</h1><div class="RichText ztext Post-RichText">
+ <p>
+  近来知乎上如雨后春笋般冒出了大把大把的爬虫教程。这是好事，学了 Python 基础的同学们可以很轻松地搜出许多练手的例子。不过我不是针对谁，我是说网上绝大多数的爬虫教程，其实都缺乏可操作性。
+ </p>
+ <p>
+  是的，也包括我自己写过的。
+ </p>
+ <p>
+  主要原因有两点：
+ </p>
+ <ol>
+  <li>
+   教程是死的，网站是活的。页面会改版，接口会更新。一个爬虫教程的案例三个月之后还能有效已经是万幸了。比如我自己教程里的查天气案例，接口改动过很多次，数据也早就不更新。但发出去的文章被转发几次后就很难再维护更新了。我也只能在自己的论坛上发布更新消息和问题答疑：
+   <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com/forum.php%3Fmod%3Dviewthread%26tid%3D8" rel="nofollow noreferrer" target="_blank">
+    【Python 第43课】 查天气（1）
+   </a>
+   。
+  </li>
+  <li>
+   但凡数据比较有价值的网站，一定都会有反爬措施，既是对数据的保护，也是避免机器流量干扰到正常用户的体验。所以光是写个网络请求，几乎不可能成功拿到数据。反爬措施千千万，应对反爬的手段万万千，这就是个不停斗智斗勇的过程，不存在一个教程就教会的万金油方法。
+  </li>
+ </ol>
+ <p>
+  反爬里面最常见的一种手段就是，判断你的请求频率。如果你短时间内发送了大量的请求，甭管你是不是人，先封你账号或 IP 一段时间再说。所以，这就成了一个矛盾的地方：爬得太快会被封，爬得太慢又很耗时间。一般教程也许会说句：想要提升抓取效率并且降低被封的风险，可以使用代理 IP。然而这话说着倒轻松，网上免费的代理 IP 也不少，但每次找来能用的却没几个。总不至于每次为了写点小练习还去花钱买很多付费代理吧。况且现如今你真要买，也还未必能顺利买到可用的。
+  <br/>
+ </p>
+ <p>
+  于是我们决定自己动手，一劳永逸地解决这个老大难问题：
+  <b>
+   实现一个自动获取可用代理 IP 的接口
+  </b>
+  。
+ </p>
+ <p>
+  基本思路还是从网上的几大免费平台获取 IP 地址，不同的是我们定期去检测 IP 的可用性。在调用接口时，提供可用性最高的 IP 地址列表。
+ </p>
+ <p>
+  网页上列出了几十个最新的推荐 IP，只是临时找几个做测试，可直接访问查看。
+ </p>
+ <p>
+  网页地址：
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//lab.crossincode.com/proxy/" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    lab.crossincode.com/pro
+   </span>
+   <span class="invisible">
+    xy/
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  API 接口地址：
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//lab.crossincode.com/proxy/get/" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    lab.crossincode.com/pro
+   </span>
+   <span class="invisible">
+    xy/get/
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  请求方法：GET
+ </p>
+ <p>
+  频率限制：不高于3秒1次
+ </p>
+ <p>
+  请求示例：
+ </p>
+ <p>
+  <i>
+   获取 5 个 IP
+  </i>
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//lab.crossincode.com/proxy/get/%3Fnum%3D5" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    lab.crossincode.com/pro
+   </span>
+   <span class="invisible">
+    xy/get/?num=5
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  <i>
+   获取 5 个 HTTPS 的 IP
+  </i>
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//lab.crossincode.com/proxy/get/%3Fnum%3D5%26head%3Dhttps" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    lab.crossincode.com/pro
+   </span>
+   <span class="invisible">
+    xy/get/?num=5&amp;head=https
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  返回结果示例：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-json"><span></span><span class="p">{</span>
+  <span class="nt">"proxies"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">"http"</span><span class="p">:</span> <span class="s2">"117.90.0.225:9000"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">"http"</span><span class="p">:</span> <span class="s2">"186.154.146.26:8080"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">"http"</span><span class="p">:</span> <span class="s2">"175.155.25.27:808"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">"http"</span><span class="p">:</span> <span class="s2">"124.88.67.52:843"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">"http"</span><span class="p">:</span> <span class="s2">"119.5.0.7:808"</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nt">"code"</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</code></pre>
+ </div>
+ <p>
+  于是，在你做爬虫练习时，只要通过接口获取几个 IP，作为你请求的 proxy，即可大大提高抓取的效率。目前我们自己的爬虫项目都在使用此接口。
+ </p>
+ <p>
+  不过仍然要说明，即使经过多次验证，也无法保证一个 IP 的绝对可用性。不同时间不同地域不同网络都有可能导致请求超时或失效。所以你的代码中也还是需要自己做好相应的异常处理。这是个概率问题，工具的作用只是尽可能提高概率。
+ </p>
+ <p>
+  我们不生产 IP，我们只是互联网的搬运工。
+ </p>
+ <p>
+  完整的接口参数说明，以及项目的源代码，可在公众号（Crossin的编程教室）后台回复
+  <b>
+   IP
+  </b>
+  获取。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+ </p>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <blockquote>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/26066151">
+   喏，你们要的 PyCharm 快速上手指南
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/28206656">
+   编程新手：看懂很多示例，却依然写不好一个程序
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   给伸手党的福利：Python 新手入门引导
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25499306">
+   如何用100行Python代码做出魔性声控游戏“八分音符酱”
+  </a>
+  <br/>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？
+  </a>
+  <br/>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？
+  </a>
+ </blockquote>
+ <p>
+  Crossin的编程教室
+ </p>
+ <blockquote>
+  微信公众号ID：crossincode
+  <br/>
+  网站：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/" rel="nofollow noreferrer" target="_blank">
+   crossincode.com
+  </a>
+ </blockquote>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>

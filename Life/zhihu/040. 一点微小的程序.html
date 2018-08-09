@@ -1,0 +1,149 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>一点微小的程序</h1><div class="RichText ztext Post-RichText">
+ <p>
+  今年年初的时候，说好要颠覆 App 的小程序上线了。不过几个月来一直不温不火。最近估计实在挂不住了，小程序又开放了一些功能权限。
+ </p>
+ <p>
+  正好前阵子有不止一个同学跟我提到，想做一个类似库存管理的系统，最好还要能和扫码枪对接，通过扫描条形码实现入库出库操作。然后我看了下，微信小程序里就有提供扫码的接口，那就很方便了。于是我们的助教就开发了一个简单的小程序，叫做“
+  <strong>
+   扫码入库
+  </strong>
+  ”。
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="258" data-rawwidth="258" src="https://pic2.zhimg.com/v2-681076afaf464bb0a3760bb4d6651798_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic2.zhimg.com/v2-681076afaf464bb0a3760bb4d6651798_b.jpg" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+  长按识别小程序码可以进入体验
+  <br/>
+ </p>
+ <p>
+  算是个 demo 版的产品吧，实现了基本的扫码入库、出库操作，可以查询库存列表，还可以自己创建新库。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic3.zhimg.com/v2-d7415b43e28dbed9a5eeedf4539be144_r.jpg" data-rawheight="549" data-rawwidth="640" src="https://pic3.zhimg.com/v2-d7415b43e28dbed9a5eeedf4539be144_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-d7415b43e28dbed9a5eeedf4539be144_b.jpg" data-original="https://pic3.zhimg.com/v2-d7415b43e28dbed9a5eeedf4539be144_r.jpg" data-rawheight="549" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='549'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  对于做电商、零售的人来说，应该是很有实用价值的。当然要完全适用于具体场景，可能还需要进一步的改进。比如：权限管理，可以多账号管理同一仓库；库存报表、操作日志；网页版管理后台等……
+ </p>
+ <p>
+  <strong>
+   ════
+  </strong>
+ </p>
+ <p>
+  简单说下实现思路：
+ </p>
+ <h4>
+  1. 小程序端
+ </h4>
+ <p>
+  小程序端作为系统的前台，主要负责登录、扫码和用户界面。微信提供了一套类似网页前端的开发接口。这里主要使用了
+  <strong>
+   用户认证
+  </strong>
+  和
+  <strong>
+   扫码
+  </strong>
+  接口，剩下的就是页面的布局显示，以及和后台的数据交互。
+ </p>
+ <h4>
+  2. 服务器端
+ </h4>
+ <p>
+  由于要保存库存数据，所以得有一个后台的服务器端，作为操作的响应以及数据存储。我们这里用的是 Django，一个很常用的 python web 框架。数据库使用了 MySQL。服务器部署在阿里云上。
+ </p>
+ <p>
+  与普通网站不同，我们不能直接使用 Django 的页面渲染功能，而是通过 JSON 作为数据的传输格式完成与小程序端的数据交互。
+ </p>
+ <p>
+  在公众号（Crossin的编程教室）里回复
+  <strong>
+   扫码
+  </strong>
+  获取代码。
+ </p>
+ <p>
+  另外，公众号里回复
+  <strong>
+   小程序
+  </strong>
+  ，有一些我们之前整理的小程序文档和学习资源。
+ </p>
+ <p>
+  <strong>
+   ════
+  </strong>
+ </p>
+ <p>
+  你可以在我们的代码基础上修改，增加你需要的功能。只是自己用的话，并不需要提交微信审核，也不用备案网站。不然得稍微折腾下。
+ </p>
+ <p>
+  当然，有付费定制开发的需求（不仅限于这个小程序），也可以和我们联系。
+ </p>
+ <p>
+  对于目前这个小程序 demo，如果觉得需要我们写点更详细的教程，请点个赞。如果需求不大就算咯。
+ </p>
+ <p>
+  另外，我们之后打算继续做一些更偏实例的开发和教程。最好这些实例是来自于真实的需求。所以如果各位有具体的需求和想法，请在本文下面留言，以及为其他留言点赞。我们将视大家的意见，决定接下来开发的教学实例。
+ </p>
+ <p>
+  还有个小预告：我们做了一个获取免费代理 IP 的接口。写过爬虫的同学一定知道这个有什么用。现已开发好，这几天就会放出，敬请期待。
+ </p>
+ <p>
+  ════
+  <br/>
+ </p>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/26066151">
+  喏，你们要的 PyCharm 快速上手指南
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+  给伸手党的福利：Python 新手入门引导
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/25499306">
+  如何用100行Python代码做出魔性声控游戏“八分音符酱”
+ </a>
+ <br/>
+ <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+  学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？
+ </a>
+ <br/>
+ <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+  你是如何自学 Python 的？
+ </a>
+ <br/>
+ <h2>
+  Crossin的编程教室
+ </h2>
+ <p>
+  微信公众号ID：crossincode
+  <br/>
+  网站：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/" rel="nofollow noreferrer" target="_blank">
+   crossincode.com
+  </a>
+  <br/>
+  QQ群：149164011
+  <br/>
+  微信加群：crossin11
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="258" data-rawwidth="258" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+</div></body></html>

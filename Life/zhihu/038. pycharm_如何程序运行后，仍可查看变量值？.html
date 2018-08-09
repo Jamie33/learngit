@@ -1,0 +1,117 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>pycharm_如何程序运行后，仍可查看变量值？</h1><div class="RichText ztext Post-RichText">
+ 原问题出自：
+ <a class="internal" href="https://www.zhihu.com/question/38234248/answer/165200660">
+  pycharm 如何程序运行后，仍可查看变量值？（非Debug mode, 因为debug运行太慢）
+ </a>
+ <p>
+  因为觉得这个问题挺实用，且确实有很多人不了解，故将自己的回答搬运到专栏里。
+ </p>
+ <p>
+  我自己开发时候也经常遇到这样的需求：程序运行后，结果不正确，想要调试一下。但这时程序已经关闭，如果要调试，只能在代码里添加输出，重新跑。或者用 debug 模式加断点。虽说这也没毛病，但如果程序比较长，尤其像爬虫类的程序，总是反复重新跑也是蛮蛋疼的。
+ </p>
+ <p>
+  那有没有别的方法，比如像 python shell 那样，运行之后的变量仍然保持在内存中，可以继续操作？
+ </p>
+ <p>
+  答案是肯定的。PyCharm 就有这个功能。但不幸的是，这个功能的开启并不在 PyCharm 的 Preference 设置里，自然也就搜索不到，于是很多人并不知道。当时我看了问题下面的所有答案，没有一个提到。包括我自己，在之前某次偶然发现这个功能之后，后来又再次想找，也是在各项菜单、配置栏目里翻了半天才找到。
+  <br/>
+ </p>
+ <p>
+  正确的打开方式如下：
+ </p>
+ <p>
+  在菜单栏里，选择项目的下拉菜单里选择
+  <b>
+   Edit Configuration
+  </b>
+ </p>
+ <br/>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/v2-ee9b74091cbff19421dbbfed42d84081_r.jpg" data-rawheight="280" data-rawwidth="490" src="https://pic1.zhimg.com/v2-ee9b74091cbff19421dbbfed42d84081_b.jpg" width="490"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-ee9b74091cbff19421dbbfed42d84081_b.jpg" data-original="https://pic1.zhimg.com/v2-ee9b74091cbff19421dbbfed42d84081_r.jpg" data-rawheight="280" data-rawwidth="490" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='490'%20height='280'&gt;&lt;/svg&gt;" width="490"/>
+ </figure>
+ <p>
+  在对应项目的设置里勾选上 Show command line afterwards
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic3.zhimg.com/v2-fb9de67b301db068ab3c9b2ef9a56801_r.jpg" data-rawheight="304" data-rawwidth="664" src="https://pic3.zhimg.com/v2-fb9de67b301db068ab3c9b2ef9a56801_b.jpg" width="664"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-fb9de67b301db068ab3c9b2ef9a56801_b.jpg" data-original="https://pic3.zhimg.com/v2-fb9de67b301db068ab3c9b2ef9a56801_r.jpg" data-rawheight="304" data-rawwidth="664" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='664'%20height='304'&gt;&lt;/svg&gt;" width="664"/>
+ </figure>
+ <p>
+  就OK了。
+ </p>
+ <p>
+  程序执行后会保持在 python shell 的状态，可以对程序中的数据进行调试。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/v2-974953567afa2c7f6dfb65c13898d41d_r.jpg" data-rawheight="584" data-rawwidth="1608" src="https://pic1.zhimg.com/v2-974953567afa2c7f6dfb65c13898d41d_b.jpg" width="1608"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-974953567afa2c7f6dfb65c13898d41d_b.jpg" data-original="https://pic1.zhimg.com/v2-974953567afa2c7f6dfb65c13898d41d_r.jpg" data-rawheight="584" data-rawwidth="1608" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1608'%20height='584'&gt;&lt;/svg&gt;" width="1608"/>
+ </figure>
+ <br/>
+ <p>
+  关于 PyCharm，之前还写过一篇：
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/26066151">
+   喏，你们要的 PyCharm 快速上手指南 - 知乎专栏
+  </a>
+  ，转需。
+ </p>
+ <p>
+  其中，两个重要的配置：编码和 python 路径，开发前最好确认下。一个实用的功能：断点调试，用好了可以节省很多时间。
+ </p>
+ <br/>
+ <p>
+  .
+ </p>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/26066151">
+  喏，你们要的 PyCharm 快速上手指南
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+  给伸手党的福利：Python 新手入门引导
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/25499306">
+  如何用100行Python代码做出魔性声控游戏“八分音符酱”
+ </a>
+ <br/>
+ <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+  学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？
+ </a>
+ <br/>
+ <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+  你是如何自学 Python 的？
+ </a>
+ <br/>
+ <h2>
+  Crossin的编程教室
+ </h2>
+ <p>
+  微信公众号ID：crossincode
+  <br/>
+  网站：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/" rel="nofollow noreferrer" target="_blank">
+   crossincode.com
+  </a>
+  <br/>
+  QQ群：205177265
+  <br/>
+  微信加群：crossin11
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="258" data-rawwidth="258" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+</div></body></html>

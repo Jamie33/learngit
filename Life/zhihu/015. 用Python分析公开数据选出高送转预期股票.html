@@ -1,0 +1,254 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>用Python分析公开数据选出高送转预期股票</h1><div class="RichText ztext Post-RichText">
+ <blockquote>
+  <em>
+   本文授权转载自公众号：挖
+  </em>
+  <i>
+   地兔（waditu）-  Jimmy米哥
+  </i>
+ </blockquote>
+ <p>
+  上周五，永和智控公布了高送转预案，开盘涨停并直至收盘，打响了2016年报高送转的第一枪，一些具备高送转预期的个股也纷纷上涨，再次启动了高送转行情。
+ </p>
+ <p>
+  根据以往的经验，每年年底都会有一波高送转预期行情。今天，米哥就带大家实践一下如何利用tushare实现高送转预期选股。
+ </p>
+ <p>
+  本文主要是讲述选股的思路方法，选股条件和参数大家可以根据米哥提供的代码自行修改。
+ </p>
+ <br/>
+ <b>
+  1. 选股原理
+ </b>
+ <p>
+  一般来说，具备高送转预期的个股，都具有总市值低、每股公积金高、每股收益大，流通股本少的特点。当然，也还有其它的因素，比如当前股价、经营收益变动情况、以及以往分红送股习惯等等。
+ </p>
+ <p>
+  这里我们暂时只考虑每股公积金、每股收益、流通股本和总市值四个因素，将公积金大于等于5元，每股收益大于等于5毛，流通股本在3亿以下，总市值在100亿以内作为高送转预期目标（这些参数大家可根据自己的经验随意调整）。
+ </p>
+ <br/>
+ <p>
+  <b>
+   2. 数据准备
+  </b>
+ </p>
+ <p>
+  首先要导入tushare：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>import tushare as ts
+</code></pre>
+ </div>
+ <p>
+  调取股票基本面数据和行情数据
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="c1"># 基本面数据</span>
+<span class="n">basic</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">get_stock_basics</span><span class="p">()</span>
+
+<span class="c1"># 行情和市值数据</span>
+<span class="n">hq</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">get_today_all</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  <b>
+   3. 数据清洗整理
+  </b>
+ </p>
+ <p>
+  对获取到的数据进行清洗和整理，只保留需要的字段。（其它字段及含义，请参考
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//tushare.org" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    tushare.org
+   </span>
+   <span class="invisible">
+   </span>
+  </a>
+  文档）
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="c1">#当前股价,如果停牌则设置当前价格为上一个交易日股价</span>
+<span class="n">hq</span><span class="p">[</span><span class="s1">'trade'</span><span class="p">]</span> <span class="o">=</span> <span class="n">hq</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">.</span><span class="n">settlement</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">trade</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="n">x</span><span class="o">.</span><span class="n">trade</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#分别选取流通股本,总股本,每股公积金,每股收益</span>
+<span class="n">basedata</span> <span class="o">=</span> <span class="n">basic</span><span class="p">[[</span><span class="s1">'outstanding'</span><span class="p">,</span> <span class="s1">'totals'</span><span class="p">,</span> <span class="s1">'reservedPerShare'</span><span class="p">,</span> <span class="s1">'esp'</span><span class="p">]]</span>
+
+<span class="c1">#选取股票代码,名称,当前价格,总市值,流通市值</span>
+<span class="n">hqdata</span> <span class="o">=</span> <span class="n">hq</span><span class="p">[[</span><span class="s1">'code'</span><span class="p">,</span> <span class="s1">'name'</span><span class="p">,</span> <span class="s1">'trade'</span><span class="p">,</span> <span class="s1">'mktcap'</span><span class="p">,</span> <span class="s1">'nmc'</span><span class="p">]]</span>
+
+<span class="c1">#设置行情数据code为index列</span>
+<span class="n">hqdata</span> <span class="o">=</span> <span class="n">hqdata</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'code'</span><span class="p">)</span>
+
+<span class="c1">#合并两个数据表</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">basedata</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">hqdata</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic4.zhimg.com/v2-a7631fd536b9d70cabd31f89b3c06acb_r.jpg" data-rawheight="347" data-rawwidth="640" src="https://pic4.zhimg.com/v2-a7631fd536b9d70cabd31f89b3c06acb_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-a7631fd536b9d70cabd31f89b3c06acb_b.jpg" data-original="https://pic4.zhimg.com/v2-a7631fd536b9d70cabd31f89b3c06acb_r.jpg" data-rawheight="347" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='347'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  <b>
+   4. 选股条件
+  </b>
+ </p>
+ <p>
+  根据上文提到的选股参数和条件，我们对数据进一步处理。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>将总市值和流通市值换成亿元单位
+data['mktcap'] = data['mktcap'] / 10000
+data['nmc'] = data['nmc'] / 10000
+</code></pre>
+ </div>
+ <p>
+  设置参数和过滤值（此次各自调整）
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="c1">#每股公积金&gt;=5</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">reservedPerShare</span> <span class="o">&gt;=</span> <span class="mi">5</span>
+<span class="c1">#流通股本&lt;=3亿</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">outstanding</span> <span class="o">&lt;=</span> <span class="mi">30000</span>
+<span class="c1">#每股收益&gt;=5毛</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">esp</span> <span class="o">&gt;=</span> <span class="mf">0.5</span>
+<span class="c1">#总市值&lt;100亿</span>
+<span class="n">mktcap</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mktcap</span> <span class="o">&lt;=</span> <span class="mi">100</span>
+</code></pre>
+ </div>
+ <p>
+  取并集结果：
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="n">allcrit</span> <span class="o">=</span> <span class="n">res</span> <span class="o">&amp;</span> <span class="n">out</span> <span class="o">&amp;</span> <span class="n">eps</span> <span class="o">&amp;</span> <span class="n">mktcap</span>
+<span class="n">selected</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">allcrit</span><span class="p">]</span>
+</code></pre>
+ </div>
+ <p>
+  具有高送转预期股票的结果呈现：
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic3.zhimg.com/v2-0909b4c6671cad0a2dbb6c0b0cde90f9_r.jpg" data-rawheight="433" data-rawwidth="640" src="https://pic3.zhimg.com/v2-0909b4c6671cad0a2dbb6c0b0cde90f9_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-0909b4c6671cad0a2dbb6c0b0cde90f9_b.jpg" data-original="https://pic3.zhimg.com/v2-0909b4c6671cad0a2dbb6c0b0cde90f9_r.jpg" data-rawheight="433" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='433'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  以上字段的含义分别为：股票名称、收盘价格、每股公积金、流通股本、每股收益（应该为eps，之前发布笔误）、总市值和流通市值。
+  <br/>
+ </p>
+ <p>
+  <b>
+   （本文仅作为编写选股策略的实例练习，不构成任何投资参考建议。投资有风险，入市需谨慎。）
+  </b>
+ </p>
+ <br/>
+ <br/>
+ <p>
+  <b>
+   <u>
+    在公众号（crossincode）中回复『高送转』，可以查看完整示例代码。
+   </u>
+  </b>
+ </p>
+ <br/>
+ <br/>
+ <p>
+  对数据分析和量化感兴趣的朋友，可关注公众号
+  <strong>
+   “挖地
+  </strong>
+  <strong>
+   兔
+  </strong>
+  <strong>
+   ”（waditu）
+  </strong>
+  ，阅读更多相关文章。
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//weixin.qq.com/r/gki8pLzEc_EMrfjH9x2Q" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    weixin.qq.com/r/gki8pLz
+   </span>
+   <span class="invisible">
+    Ec_EMrfjH9x2Q
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+  (二维码自动识别)
+ </p>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <p>
+  <u>
+   其他文章及回答：
+  </u>
+ </p>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/22339492">
+  爆款游戏《贪吃蛇大作战》的 Python 实现 - Crossin的编程教室 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/22261597">
+  Python 与 Excel 不得不说的事 - Crossin的编程教室 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/21886694">
+  想用 Python 做数据分析？先玩玩这个再说 - Crossin的文章 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/21624000">
+  用 Python 实现你的量化交易策略 - Crossin的文章 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+  学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？ - Crossin 的回答
+ </a>
+ <br/>
+ <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+  你是如何自学 Python 的？ - Crossin 的回答
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/21057822">
+  Python 抓取网页乱码原因分析 - Crossin的编程教室 - 知乎专栏
+ </a>
+ <br/>
+ <p>
+  <b>
+   Crossin的编程教室
+  </b>
+  <br/>
+ </p>
+ <br/>
+ 微信ID：crossincode
+ <br/>
+ 论坛：
+ <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com" rel="nofollow noreferrer" target="_blank">
+  Crossin的编程教室
+ </a>
+ <br/>
+ QQ群：167478032
+ <br/>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="258" data-rawwidth="258" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+</div></body></html>

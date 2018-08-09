@@ -1,0 +1,335 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>想用_Python_做数据分析？先玩玩这个再说</h1><div class="RichText ztext Post-RichText">
+ <p>
+  数据分析是 Python 的一大应用领域。据我所知，本教室的读者中有不少学习 Python 就是为了在工作中能用它分析数据。这其中，又有相当一部分人是涉及金融相关行业，有从业人员，有学生，还有对此具有兴趣的爱好者。
+ </p>
+ <p>
+  那么，想要学习用 Python 做数据分析该从何入手？
+ </p>
+ <p>
+  既然是数据分析，首先，你得有数据。
+ </p>
+ <p>
+  今天就来介绍一个很好用的财经数据包：
+  <b>
+   TuShare
+  </b>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/956ff4449de2422ad1d46b02df331652_r.jpg" data-rawheight="451" data-rawwidth="820" data-size="normal" src="https://pic4.zhimg.com/956ff4449de2422ad1d46b02df331652_b.jpg" width="820"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/956ff4449de2422ad1d46b02df331652_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/956ff4449de2422ad1d46b02df331652_r.jpg" data-rawheight="451" data-rawwidth="820" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='820'%20height='451'&gt;&lt;/svg&gt;" width="820"/>
+ </figure>
+ <p>
+  直接摘录
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//res.crossincode.com/jump.html%3Fto%3Dhttp%3A//tushare.org" rel="nofollow noreferrer" target="_blank">
+   TuShare 官网
+  </a>
+  上的介绍：
+ </p>
+ <blockquote>
+  TuShare是一个免费、开源的python财经数据接口包。主要实现对股票等金融数据从数据采集、清洗加工到数据存储的过程，能够为金融分析人员提供快速、整洁、和多样的便于分析的数据，为他们在数据获取方面极大地减轻工作量，使他们更加专注于策略和模型的研究与实现上。
+ </blockquote>
+ <p>
+  TuShare 数据格式使用 pandas DataFrame 类型，也可保存至 Excel 和 数据库。兼容 Python 2 和 3。
+ </p>
+ <p>
+  看起来很好很强大，关键还是免费且开源的。再来试下好不好用。
+ </p>
+ <h2>
+  <b>
+   安装
+  </b>
+ </h2>
+ <p>
+  TuShare 基于 Python，有两个主要依赖：
+  <b>
+   pandas
+  </b>
+  和
+  <b>
+   lxml
+  </b>
+  。可以先分别安装这两个库，但我更推荐的是直接安装
+  <b>
+   Anaconda
+  </b>
+  。对于要做数据分析和科学计算相关的同学来说，Anaconda 帮你一次性解决了几乎所有你可能用到的依赖库的安装，避免了某些库在不同平台上编译的问题。真的是谁用谁知道。
+ </p>
+ <p>
+  Anaconda 的下载安装这里就不多说了，本身不复杂，网上搜一下就出来了。
+ </p>
+ <p>
+  装好之后就可以直接通过 pip 安装 TuShare：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>pip install tushare
+</code></pre>
+ </div>
+ <p>
+  还有其它安装方法可参考
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20760860">
+   如何安装 Python 的第三方模块
+  </a>
+ </p>
+ <p>
+  安装成功后，验证可以被 import。
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="152" data-rawwidth="416" data-size="normal" src="https://pic2.zhimg.com/599a85fb5f80331202f17d1cf4d94e7b_b.jpg" width="416"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic2.zhimg.com/599a85fb5f80331202f17d1cf4d94e7b_b.jpg" data-caption="" data-rawheight="152" data-rawwidth="416" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='416'%20height='152'&gt;&lt;/svg&gt;" width="416"/>
+ </figure>
+ <h2>
+  <b>
+   功能
+  </b>
+ </h2>
+ <p>
+  简单尝试几个基础功能：
+ </p>
+ <p>
+  1. 获取股票历史数据
+ </p>
+ <p>
+  get_hist_data
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">tushare</span> <span class="kn">as</span> <span class="nn">ts</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">get_hist_data</span><span class="p">(</span><span class="s1">'601688'</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/dacccd4fd8c04047a04f0ba462542337_r.jpg" data-rawheight="239" data-rawwidth="640" data-size="normal" src="https://pic3.zhimg.com/dacccd4fd8c04047a04f0ba462542337_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/dacccd4fd8c04047a04f0ba462542337_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/dacccd4fd8c04047a04f0ba462542337_r.jpg" data-rawheight="239" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='239'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  2. 获取股票实时行情
+  <br/>
+ </p>
+ <p>
+  get_realtime_quotes
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">tushare</span> <span class="kn">as</span> <span class="nn">ts</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">get_realtime_quotes</span><span class="p">(</span><span class="s1">'000002'</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/9d17dc2a32ef6e13904351ca04563512_r.jpg" data-rawheight="194" data-rawwidth="640" data-size="normal" src="https://pic4.zhimg.com/9d17dc2a32ef6e13904351ca04563512_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/9d17dc2a32ef6e13904351ca04563512_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/9d17dc2a32ef6e13904351ca04563512_r.jpg" data-rawheight="194" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='194'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  除了股票，TuShare 还提供了多种数据，比如宏观经济数据：
+ </p>
+ <p>
+  3. 存款利率
+ </p>
+ <p>
+  get_deposit_rate
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">tushare</span> <span class="kn">as</span> <span class="nn">ts</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">get_deposit_rate</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/3cdb8be0b0ced7f9a792819c8398fd0b_r.jpg" data-rawheight="340" data-rawwidth="640" data-size="normal" src="https://pic4.zhimg.com/3cdb8be0b0ced7f9a792819c8398fd0b_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/3cdb8be0b0ced7f9a792819c8398fd0b_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/3cdb8be0b0ced7f9a792819c8398fd0b_r.jpg" data-rawheight="340" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='340'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  甚至还有：
+ </p>
+ <p>
+  4. 电影票房
+ </p>
+ <p>
+  realtime_boxoffice
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">tushare</span> <span class="kn">as</span> <span class="nn">ts</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">realtime_boxoffice</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/ca695be0855a317d15374e15d6d5561a_r.jpg" data-rawheight="275" data-rawwidth="640" data-size="normal" src="https://pic2.zhimg.com/ca695be0855a317d15374e15d6d5561a_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/ca695be0855a317d15374e15d6d5561a_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/ca695be0855a317d15374e15d6d5561a_r.jpg" data-rawheight="275" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='275'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  （暑期档的电影还真是让人无力吐槽……）
+ </p>
+ <p>
+  以上仅挑选了几个接口演示，具体调用参数和返回值字段说明，我就不做详细解释了，官网上都写的很清楚。
+ </p>
+ <p>
+  TuShare 的数据主要来源于网络，等于是提供了一个集中的接口，目前支持的数据包括：
+ </p>
+ <ul>
+  <li>
+   交易数据
+  </li>
+  <li>
+   投资参考数据
+  </li>
+  <li>
+   股票分类数据
+  </li>
+  <li>
+   基本面数据
+  </li>
+  <li>
+   宏观经济数据
+  </li>
+  <li>
+   新闻事件数据
+  </li>
+  <li>
+   龙虎榜数据
+  </li>
+  <li>
+   银行间同业拆放利率
+  </li>
+  <li>
+   电影票房
+  </li>
+ </ul>
+ <p>
+  另外还引入了通联数据的开放平台数据接口，基本上满足全品类金融数据的需求。对于学习数据分析来说，更是非常好的数据来源。
+ </p>
+ <h2>
+  <b>
+   示例
+  </b>
+ </h2>
+ <p>
+  再用一小段简单的代码来演示下 TuShare 的使用。这里我将获取今年上证指数的日K信息，然后保存成 excel 文件，再画出每日的收盘指数的折线图。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">tushare</span> <span class="kn">as</span> <span class="nn">ts</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">df</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">get_hist_data</span><span class="p">(</span><span class="s1">'sh'</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s1">'2016-01-01'</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">'stock_sh.xlsx'</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">close</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/f507abd7c665a21514d1ff583701d8de_r.jpg" data-rawheight="354" data-rawwidth="640" data-size="normal" src="https://pic1.zhimg.com/f507abd7c665a21514d1ff583701d8de_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/f507abd7c665a21514d1ff583701d8de_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/f507abd7c665a21514d1ff583701d8de_r.jpg" data-rawheight="354" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='354'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/1c844e4d9c03446065e2955e6b3a98de_r.jpg" data-rawheight="537" data-rawwidth="640" data-size="normal" src="https://pic2.zhimg.com/1c844e4d9c03446065e2955e6b3a98de_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/1c844e4d9c03446065e2955e6b3a98de_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/1c844e4d9c03446065e2955e6b3a98de_r.jpg" data-rawheight="537" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='537'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  这里发现取到的数据和文档上显示的顺序是相反的，所以画图的时候多加了两行代码将x轴反向。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  以上仅仅对 TuShare 做了一个极为简单的介绍，更详细的文档请自行去
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//res.crossincode.com/jump.html%3Fto%3Dhttp%3A//tushare.org" rel="nofollow noreferrer" target="_blank">
+   TuShare 官网
+  </a>
+  上阅读，写得还是很清楚的。
+ </p>
+ <p>
+  当然最重要，是要亲手写一写代码。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <u>
+   其他文章及回答：
+  </u>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21624000">
+   用 Python 实现你的量化交易策略 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20683456?refer=crossin">
+   编程初学者如何使用搜索引擎 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20721034?refer=crossin">
+   如何直观地理解程序的运行过程？- Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21304838">
+   如何在 Python 中使用断点调试 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21057822">
+   Python 抓取网页乱码原因分析 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21438729">
+   极简 Github 上手教程 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  微信ID：crossincode
+ </p>
+ <p>
+  论坛：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com/" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室
+  </a>
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>

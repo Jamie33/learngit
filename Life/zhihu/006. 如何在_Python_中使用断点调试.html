@@ -1,0 +1,287 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>如何在_Python_中使用断点调试</h1><div class="RichText ztext Post-RichText">
+ <blockquote>
+  <p>
+   <em>
+    实际上没人能一次就写出完美的代码，除了我。但是世界上只有一个我。
+   </em>
+  </p>
+  <p>
+   <em>
+    -- 林纳斯·托瓦兹（Linux 之父）
+   </em>
+  </p>
+ </blockquote>
+ <br/>
+ <p>
+  既然不是神，写代码自然免不了要修改。测试并修正代码中各种错误的过程被称作调试，又叫 debug。
+ </p>
+ <p>
+  刚接触编程的人，往往对调试代码没有很深的认识，觉得把功能做出来就完事了。一旦程序运行出现问题，便无从下手。而实际开发中，调试代码通常要花费比新编写代码更多的时间。所谓“行百里者半于九十”，这句话放在软件开发上一点不为过。你以为完成了 90% 开发工作的时候，剩下的工作可能还要花费差不多的时间。
+ </p>
+ <p>
+  因此，选择合理的调试方法和工具，对于开发来说意义重大。
+ </p>
+ <p>
+  在写 Python 代码的时候，我习惯的调试方法很简单，就是
+  <b>
+   <u>
+    在程序里增加输出
+   </u>
+  </b>
+  ，以便了解程序的运行路径和变量的值。
+ </p>
+ <p>
+  以下面这段代码为例：
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>def twice(n):
+    n *= 2
+    return n
+
+a = input("a:")
+b = input("b:")
+if a &gt; 3:
+    b += 4
+    if b &gt; 5:
+        c = a + twice(b)
+    else:
+        c = twice(a) + b
+else:
+    b -= 2
+    if b &lt; 1:
+        c = a - twice(b)
+    else:
+        c = twice(a) - b
+print c
+</code></pre>
+ </div>
+ <p>
+  即使这样不长的一段代码，如果对于某些输入，最后输出的值和你的预期不一致，想要用肉眼从中看出到底哪里出了问题也并不是一目了然的事情。
+ </p>
+ <p>
+  于是我会添加一些辅助的代码：
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>def twice(n):
+    n *= 2
+    return n
+
+a = input("a:")
+b = input("b:")
+print "====a,b:", a, b 
+if a &gt; 3:
+    b += 4
+    print "====1 b:", b
+    if b &gt; 5:
+        c = a + twice(b)
+        print "====1 c:", c
+    else:
+        c = twice(a) + b
+        print "====2 c:", c
+else:
+    b -= 2
+    print "====2 b:", b
+    if b &lt; 1:
+        c = a - twice(b)
+        print "====3 c:", c
+    else:
+        c = twice(a) - b
+        print "====4 c:", c
+print c
+</code></pre>
+ </div>
+ <p>
+  运行后的效果：
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>a:2
+b:4
+====a,b: 2 4
+====2 b: 2
+====4 c: 2
+2
+</code></pre>
+ </div>
+ <p>
+  通过添加类似的输出内容，就能比较清晰地了解程序的运行状态。
+  <br/>
+ </p>
+ <br/>
+ <br/>
+ <p>
+  不过，直接通过输出来调试，有时候会需要一点经验判断，决定在哪里输出什么数据。尤其当程序复杂之后，需要参考的数值会很多，全部都输出会很繁琐。
+ </p>
+ <p>
+  一种更便捷更直观的方式就是
+  <b>
+   <u>
+    使用断点调试
+   </u>
+  </b>
+  。
+ </p>
+ <p>
+  断点（break point）是指在代码中指定位置，当程序运行到此位置时变中断下来，并让开发者可查看此时各变量的值。因断点中断的程序并没有结束，可以选择继续执行。
+ </p>
+ <p>
+  实现断点调试需要 IDE 的支持。下面以 PyCharm 来演示一下，仍然是前面的代码：
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="382" data-rawwidth="291" src="https://pic4.zhimg.com/a1286418fc41c4dd36ac35b4df2ebfc8_b.jpg" width="291"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/a1286418fc41c4dd36ac35b4df2ebfc8_b.jpg" data-rawheight="382" data-rawwidth="291" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='291'%20height='382'&gt;&lt;/svg&gt;" width="291"/>
+ </figure>
+ <p>
+  在某一行代码的左侧栏点击，就可以在这行增加断点。现在在 3 个 if 判断的地方都加上断点。
+ </p>
+ <p>
+  选择 debug，程序开始运行。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/32e5c75469ef199331f2e7efe11295e1_r.jpg" data-rawheight="178" data-rawwidth="430" src="https://pic1.zhimg.com/32e5c75469ef199331f2e7efe11295e1_b.jpg" width="430"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/32e5c75469ef199331f2e7efe11295e1_b.jpg" data-original="https://pic1.zhimg.com/32e5c75469ef199331f2e7efe11295e1_r.jpg" data-rawheight="178" data-rawwidth="430" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='430'%20height='178'&gt;&lt;/svg&gt;" width="430"/>
+ </figure>
+ <p>
+  输入 a、b 两个值之后，程序就在第一个 if 处中断，并且在工具栏中显示出当前程序中的各种数值。
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="633" data-rawwidth="420" src="https://pic1.zhimg.com/8964d07da8934b56ad8fa38088008ed7_b.jpg" width="420"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic1.zhimg.com/8964d07da8934b56ad8fa38088008ed7_b.jpg" data-rawheight="633" data-rawwidth="420" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='420'%20height='633'&gt;&lt;/svg&gt;" width="420"/>
+ </figure>
+ <p>
+  选择“resume program”，程序就会继续执行，直到遇到下一个断点。
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="462" data-rawwidth="376" src="https://pic2.zhimg.com/af6554b985a63e93a92aeef8e01632c5_b.jpg" width="376"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic2.zhimg.com/af6554b985a63e93a92aeef8e01632c5_b.jpg" data-rawheight="462" data-rawwidth="376" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='376'%20height='462'&gt;&lt;/svg&gt;" width="376"/>
+ </figure>
+ <p>
+  有了断点功能的帮助，调试的时候就方便许多，很容易观察程序运行时的状态。
+ </p>
+ <br/>
+ <br/>
+ <p>
+  在断点调试时，还有个经常一起使用的功能就是
+  <b>
+   <u>
+    单步调试
+   </u>
+  </b>
+  。
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="463" data-rawwidth="372" src="https://pic1.zhimg.com/de30a3c19091264f7a0afb82062550a9_b.jpg" width="372"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic1.zhimg.com/de30a3c19091264f7a0afb82062550a9_b.jpg" data-rawheight="463" data-rawwidth="372" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='372'%20height='463'&gt;&lt;/svg&gt;" width="372"/>
+ </figure>
+ <p>
+  在程序中断时，选择“Step Over”，会向下执行一行代码后继续中断。
+ </p>
+ <p>
+  当所处代码行中有函数时，“Step Into”会中断在函数内部，之后将在其中单步执行。对应的，“Step Out”将中断在执行完当前所在函数后的位置。
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="139" data-rawwidth="232" src="https://pic4.zhimg.com/d6ee40ee37394ffe2131d77d37e963d9_b.jpg" width="232"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/d6ee40ee37394ffe2131d77d37e963d9_b.jpg" data-rawheight="139" data-rawwidth="232" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='232'%20height='139'&gt;&lt;/svg&gt;" width="232"/>
+ </figure>
+ <p>
+  这些操作在工具栏有快捷按钮，也可通过快捷键操作。
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="191" data-rawwidth="411" src="https://pic4.zhimg.com/c75f87faf40d6093dbd984e91d4199e0_b.jpg" width="411"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/c75f87faf40d6093dbd984e91d4199e0_b.jpg" data-rawheight="191" data-rawwidth="411" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='411'%20height='191'&gt;&lt;/svg&gt;" width="411"/>
+ </figure>
+ <br/>
+ <br/>
+ <p>
+  “工欲善其事，必先利其器”。把上述调试工具熟悉之后，对你的开发效率将会有很大提升。
+ </p>
+ <p>
+  当然，比调试工具更重要的，还是调试的思路。遇到错误时，读懂报错信息，分析出错原因，并逐步定位问题所在，而不是盲目地修改代码、无意义地重复运行，才是解决问题的关键。
+ </p>
+ <p>
+  之后会继续跟大家分享调试代码的经验，这些经验都是一行行代码积累出来的。不过我的经验终究是我的经验，要把它变成你的经验，仍然需要经过一行行代码的磨练。
+ </p>
+ <p>
+  没有捷径。
+ </p>
+ <br/>
+ <br/>
+ <p>
+  其他文章及回答：
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20683456?refer=crossin">
+   编程初学者如何使用搜索引擎 - Crossin的文章 - 知乎专栏
+  </a>
+  <br/>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20721034?refer=crossin">
+   如何直观地理解程序的运行过程？ - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20832723">
+   如何在一台电脑上同时使用 Python 2 和 Python 3 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21057822">
+   Python 抓取网页乱码原因分析 - Crossin的编程教室 - 知乎专栏
+  </a>
+  <br/>
+ </p>
+ <br/>
+ <br/>
+ <p>
+  <b>
+   Crossin的编程教室
+  </b>
+  <br/>
+ </p>
+ <p>
+  微信ID：crossincode
+ </p>
+ <p>
+  论坛：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室
+  </a>
+ </p>
+ <p>
+  QQ群：498545096
+ </p>
+ <br/>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="258" data-rawwidth="258" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+</div></body></html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>数据分析：当赵雷唱民谣时他唱些什么？</h1><div class="RichText ztext Post-RichText">
+ <p>
+  赵雷的一曲《成都》，成为了湖南卫视知名飙高音节目《歌手》里的一股清流。
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//www.iqiyi.com/v_19rrajt06k.html" rel="nofollow noreferrer" target="_blank">
+   《歌手》纯享：赵雷《成都》
+  </a>
+ </p>
+ <p>
+  这个几年前在 live house 里被粉丝喊着“赵雷不红，天理不容”的民谣歌手，终于大众市场上火了一把。
+  <br/>
+ </p>
+ <p>
+  作为一个名老粉丝，我也倍感欣慰。（虽然以后的现场票价估计要更贵了）
+  <br/>
+ </p>
+ <p>
+  所以今天，决定不按常理地来一发安利：
+  <br/>
+ </p>
+ <p>
+  <u>
+   利用 Python 分词，分析下赵雷的歌里到底写了什么？
+  </u>
+ </p>
+ <h2>
+  <b>
+   1. 样本
+  </b>
+ </h2>
+ <p>
+  赵雷公开发行的三张专辑《无法长大》、《吉姆餐厅》、《赵小雷》和单曲《再也不会去丽江》，共 32 首。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-7ed07a1f037dc173eaa04efff5212189_r.jpg" data-rawheight="280" data-rawwidth="640" data-size="normal" src="https://pic2.zhimg.com/v2-7ed07a1f037dc173eaa04efff5212189_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-7ed07a1f037dc173eaa04efff5212189_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-7ed07a1f037dc173eaa04efff5212189_r.jpg" data-rawheight="280" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='280'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  这些歌词可以通过爬虫脚本从音乐网站上抓取，不过因为只有 32 首，不算太多，我就偷懒直接手动复制到了本地文件中。
+  <br/>
+ </p>
+ <p>
+  虽然还有些很不错的未收录歌曲，比如我个人非常喜欢的《飞来飞去》，但这次不纳入统计。
+ </p>
+ <h2>
+  <b>
+   2. 统计方法
+  </b>
+ </h2>
+ <p>
+  我的目的是要看一看赵雷的歌曲里，哪些词出现的次数最多，以此对赵雷的歌曲风格管中窥豹。当然，同一首歌中出现多次的词，只能算作一次，不然像“北京”这种在副歌中反复出现的词就不得了了。
+ </p>
+ <p>
+  所以大体的思路是：
+ </p>
+ <ol>
+  <li>
+   把一首歌的歌词按词划分。这里要用到分词库，下面会具体介绍下。
+  </li>
+  <li>
+   去除重复的词，得到这首歌的用词表。通过集合 set() 可以轻松做到。
+  </li>
+  <li>
+   把所有歌曲的用词合并到一起，统计出现次数。可以借助 collections.Counter 实现。
+  </li>
+  <li>
+   按照次数排序。由于 Python 的字典本身是无序的，所以使用 sorted 方法排序时还需要一点小技巧，详情可参见代码。
+  </li>
+ </ol>
+ <p>
+  在公众号（Crossin的编程教室）中回复“
+  <b>
+   赵雷
+  </b>
+  ”可获取代码及统计样本。
+ </p>
+ <h2>
+  <b>
+   3. 分词库
+  </b>
+ </h2>
+ <p>
+  使用“
+  <b>
+   结巴中文分词
+  </b>
+  ”。这是个效果不错、使用方便的 python 中文分词库，强烈推荐。
+ </p>
+ <p>
+  项目地址：
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/fxsjy/jieba" rel="nofollow noreferrer" target="_blank">
+   fxsjy/jieba
+  </a>
+ </p>
+ <p>
+  安装方法：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>pip install jieba
+</code></pre>
+ </div>
+ <p>
+  分词示例：
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="n">seg_list</span> <span class="o">=</span> <span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="s2">"我来到北京清华大学"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"/ "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">seg_list</span><span class="p">))</span>
+</code></pre>
+ </div>
+ <p>
+  输出：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>我/ 来到/ 北京/ 清华大学
+</code></pre>
+ </div>
+ <h2>
+  <b>
+   4. 结果
+  </b>
+ </h2>
+ <p>
+  经过分词、去重、计数、排序后，得到了频率最高的一些词。去掉没有太多特殊意义的助词、代词、介词、连词等虚词，以及“走”、“想”这种十分普遍的动词，剩下值得关注的热词有（后面的数字为该词出现的歌曲数）：
+ </p>
+ <blockquote>
+  生活 10
+  <br/>
+  衣裳 10
+  <br/>
+  笑 8
+  <br/>
+  阳光 8
+  <br/>
+  青春 8
+  <br/>
+  月亮 8
+  <br/>
+  寂寞 7
+  <br/>
+  无法 7
+  <br/>
+  车 7
+  <br/>
+  离开 7
+  <br/>
+  时光 7
+  <br/>
+  时间 7
+  <br/>
+  永远 6
+  <br/>
+  沉默 6
+  <br/>
+  世界 6
+  <br/>
+  她 6
+  <br/>
+  谁 6
+  <br/>
+  自己 6
+  <br/>
+  孩子 6
+  <br/>
+  看到 6
+ </blockquote>
+ <p>
+  果真是歌如其人。从这些词，仿佛就拼出一个：外表“
+  <b>
+   沉默
+  </b>
+  ”，内心热爱“
+  <b>
+   生活
+  </b>
+  ”，白天晒“
+  <b>
+   阳光
+  </b>
+  ”，晚上晒“
+  <b>
+   月亮
+  </b>
+  ”，“
+  <b>
+   寂寞
+  </b>
+  ”时候常常回味起往日“
+  <b>
+   青春
+  </b>
+  ”“
+  <b>
+   时光
+  </b>
+  ”的大“
+  <b>
+   孩子
+  </b>
+  ”。
+  <br/>
+ </p>
+ <p>
+  不过我没料到，赵雷是有多喜欢“
+  <b>
+   衣裳
+  </b>
+  ”……
+ </p>
+ <blockquote>
+  over：穿着你送的衣裳
+  <br/>
+  再也不会去丽江：别给性穿上爱情的衣裳
+  <br/>
+  北京的冬天：北京的冬天太冷我没有足够的衣裳过冬
+  <br/>
+  南方姑娘：阳光里她在院子中央晾晒着衣裳
+  <br/>
+  吉姆餐厅：穿上那件未见过太阳的新衣裳
+  <br/>
+  孤独：却只有你洗净叠好的衣裳 放在我枕旁
+  <br/>
+  家乡：就像一件俗气的衣裳
+  <br/>
+  朵：若她只是件衣裳 那我就没有必要隐藏欲望
+  <br/>
+  窑上路：那时树影下的母亲在为我缝补衣裳
+  <br/>
+  赵小雷：他捋捋头发换上新的衣裳要出门去
+ </blockquote>
+ <p>
+  “
+  <b>
+   生活
+  </b>
+  ”也是赵雷歌曲中一个重要的主题：
+ </p>
+ <blockquote>
+  over：我要创造新的生活，和你重新来过，
+  <br/>
+  三十岁的女人：是不是一个人的生活 比两个人更快活
+  <br/>
+  人家：生活简单的就像是一块石子
+  <br/>
+  八十年代的歌：我想过平常人的生活
+  <br/>
+  无法长大：爱情是否能解除生活的狼狈
+  <br/>
+  未给姐姐递出的信：生活一下子变得冷清
+  <br/>
+  梦中的哈德森：我每天面对着同样的生活没有变化
+  <br/>
+  民谣：歌是生活 歌是纯真
+  <br/>
+  理想：又让我沉入失望的生活里
+  <br/>
+  赵小雷：生活要自己为自己创造惊喜
+ </blockquote>
+ <p>
+  反倒通常流行歌曲中常常出现的“爱”、“喜欢”等词，在赵雷的歌曲中有着更含蓄的表达。
+ </p>
+ <p>
+  或许这也是为什么如今越来越多人喜欢赵雷的原因：真实、接地气，好像是邻居家的朋友，对你把他的故事娓娓道来。因为正如他歌里所唱，他坐着火车走南闯北，然后回到一间十四五平米的北京小院里，写下了这些歌曲，掺杂着浓浓的生活气息。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-3b60cfd48d0312337663af6053d1a1f8_r.jpg" data-rawheight="1200" data-rawwidth="1908" data-size="normal" src="https://pic1.zhimg.com/v2-3b60cfd48d0312337663af6053d1a1f8_b.jpg" width="1908"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-3b60cfd48d0312337663af6053d1a1f8_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-3b60cfd48d0312337663af6053d1a1f8_r.jpg" data-rawheight="1200" data-rawwidth="1908" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1908'%20height='1200'&gt;&lt;/svg&gt;" width="1908"/>
+ </figure>
+ <p>
+  <br/>
+ </p>
+ <p>
+  公众号（Crossin的编程教室）中回复“
+  <b>
+   赵雷
+  </b>
+  ”，可下载本篇源代码。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <u>
+   其他文章及回答：
+  </u>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22339492">
+   爆款游戏《贪吃蛇大作战》的 Python 实现 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21886694">
+   想用 Python 做数据分析？先玩玩这个再说 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+ <p>
+  微信ID：crossincode
+  <br/>
+  论坛：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室
+  </a>
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>

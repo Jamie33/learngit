@@ -1,0 +1,401 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>折腾了几个月，终于调教出一架可以抢车位的无人机。然而…</h1><div class="RichText ztext Post-RichText">
+ <p>
+  作为一名技术宅，自然对飞行器有着无法抗拒的喜爱，之前还曾专程和朋友到西北戈壁的无人区域飞了个过瘾，航拍了不少镜头。
+  <i>
+   （正片敬请期待）
+  </i>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-e62c0f158ac571030836c76d30df8aa4_r.jpg" data-rawheight="450" data-rawwidth="800" data-size="normal" src="https://pic1.zhimg.com/v2-e62c0f158ac571030836c76d30df8aa4_b.jpg" width="800"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-e62c0f158ac571030836c76d30df8aa4_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-e62c0f158ac571030836c76d30df8aa4_r.jpg" data-rawheight="450" data-rawwidth="800" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='450'&gt;&lt;/svg&gt;" width="800"/>
+ </figure>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-87279303cbc4a9ab07e90f79b8a34bd6_r.jpg" data-rawheight="450" data-rawwidth="800" data-size="normal" src="https://pic3.zhimg.com/v2-87279303cbc4a9ab07e90f79b8a34bd6_b.jpg" width="800"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-87279303cbc4a9ab07e90f79b8a34bd6_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-87279303cbc4a9ab07e90f79b8a34bd6_r.jpg" data-rawheight="450" data-rawwidth="800" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='450'&gt;&lt;/svg&gt;" width="800"/>
+ </figure>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="180" data-rawwidth="320" data-size="normal" data-thumbnail="https://pic3.zhimg.com/v2-76bde9f7513004c73013b19106113b43_b.jpg" src="https://pic3.zhimg.com/v2-76bde9f7513004c73013b19106113b43_b.gif" width="320"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic3.zhimg.com/v2-76bde9f7513004c73013b19106113b43_b.gif" data-caption="" data-rawheight="180" data-rawwidth="320" data-size="normal" data-thumbnail="https://pic3.zhimg.com/v2-76bde9f7513004c73013b19106113b43_b.jpg" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='320'%20height='180'&gt;&lt;/svg&gt;" width="320"/>
+ </figure>
+ <p>
+  然而在我们今天要说的这位朋友面前，我可以说是非常小白了。
+ </p>
+ <p>
+  本文转自公众号“
+  <b>
+   明说了呗
+  </b>
+  ”（wang-daoming），作者是一名极为有趣的程序员，想关注他的朋友可在微信里搜索关注。
+ </p>
+ <hr/>
+ <p>
+  跟我一样的中产阶级，摆脱了穿格子衬衫-牛仔裤-球鞋-双肩包，挤公交/地铁/骑共享单车一身臭汗的上班方式，终于攒够了钱，于是可以穿格子衬衫-牛仔裤-球鞋-双肩包，香喷喷的开车上班了。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-dc6aed2960854f7246caa496cfee7781_r.jpg" data-rawheight="367" data-rawwidth="550" data-size="normal" src="https://pic1.zhimg.com/v2-dc6aed2960854f7246caa496cfee7781_b.jpg" width="550"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-dc6aed2960854f7246caa496cfee7781_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-dc6aed2960854f7246caa496cfee7781_r.jpg" data-rawheight="367" data-rawwidth="550" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='550'%20height='367'&gt;&lt;/svg&gt;" width="550"/>
+ </figure>
+ <p>
+  可是下班到家，却有另一个比加班更恐怖的噩梦在等着，那就是“抢车位”！
+ </p>
+ <p>
+  <u>
+   <b>
+    现状
+   </b>
+  </u>
+ </p>
+ <p>
+  我居住小区的地面停车情况是这样滴
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-6f4ab7f25ad738666bfd94c7f70956b4_r.jpg" data-rawheight="744" data-rawwidth="1268" data-size="normal" src="https://pic4.zhimg.com/v2-6f4ab7f25ad738666bfd94c7f70956b4_b.jpg" width="1268"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-6f4ab7f25ad738666bfd94c7f70956b4_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-6f4ab7f25ad738666bfd94c7f70956b4_r.jpg" data-rawheight="744" data-rawwidth="1268" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1268'%20height='744'&gt;&lt;/svg&gt;" width="1268"/>
+ </figure>
+ <p>
+  怎么才能抢到一个车位呢？
+ </p>
+ <p>
+  做梦吧！
+ </p>
+ <p>
+  可是码农的内心深处，却不甘屈服于眼前的现实。
+ </p>
+ <p>
+  <u>
+   <b>
+    解局
+   </b>
+  </u>
+ </p>
+ <p>
+  寻觅了很久，我买了一个大新疆无人机，可以在手机上监看到飞机的视角。
+ </p>
+ <p>
+  有了玉帝（or上帝？）视角，抢车位这事儿，就靠谱多了。
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="126" data-rawwidth="224" data-size="normal" data-thumbnail="https://pic2.zhimg.com/v2-6a31ff3d9651033d1b8a5e7fde124911_b.jpg" src="https://pic2.zhimg.com/v2-6a31ff3d9651033d1b8a5e7fde124911_b.gif" width="224"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic2.zhimg.com/v2-6a31ff3d9651033d1b8a5e7fde124911_b.gif" data-caption="" data-rawheight="126" data-rawwidth="224" data-size="normal" data-thumbnail="https://pic2.zhimg.com/v2-6a31ff3d9651033d1b8a5e7fde124911_b.jpg" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='224'%20height='126'&gt;&lt;/svg&gt;" width="224"/>
+ </figure>
+ <p>
+  只要我第一时间发现空闲车位，并迅速占领，不就成了？
+ </p>
+ <p>
+  没那么简单？
+ </p>
+ <p>
+  你说对了。
+ </p>
+ <p>
+  当然，码农也不是吃醋的。
+ </p>
+ <p>
+  <u>
+   <b>
+    分析
+   </b>
+  </u>
+ </p>
+ <p>
+  首先，要有一个飞机场，这个嘛，刚刚好我有：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-ac7eded959d0d90407c60c02285aa3ed_r.jpg" data-rawheight="960" data-rawwidth="720" data-size="normal" src="https://pic1.zhimg.com/v2-ac7eded959d0d90407c60c02285aa3ed_b.jpg" width="720"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-ac7eded959d0d90407c60c02285aa3ed_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-ac7eded959d0d90407c60c02285aa3ed_r.jpg" data-rawheight="960" data-rawwidth="720" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='720'%20height='960'&gt;&lt;/svg&gt;" width="720"/>
+ </figure>
+ <p>
+  其次，要看看遥控的最远距离，说明书写了直线距离2km，就是2048米。
+ </p>
+ <p>
+  再来用脚测量一下小区的距离：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-135665e65531f9223b5ecd331b4fef83_r.jpg" data-rawheight="662" data-rawwidth="640" data-size="normal" src="https://pic2.zhimg.com/v2-135665e65531f9223b5ecd331b4fef83_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-135665e65531f9223b5ecd331b4fef83_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-135665e65531f9223b5ecd331b4fef83_r.jpg" data-rawheight="662" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='662'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  6条边一共9.08km，平均每条边1.51km，就是1546.24米，远远小于遥控器的2048米。
+ </p>
+ <p>
+  然后，因为小区内的道路比较固定，所以飞行路线可以提前规划好，自动巡航。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-38682c696896d7ee69f8bbba4958eee1_r.jpg" data-rawheight="534" data-rawwidth="640" data-size="normal" src="https://pic1.zhimg.com/v2-38682c696896d7ee69f8bbba4958eee1_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-38682c696896d7ee69f8bbba4958eee1_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-38682c696896d7ee69f8bbba4958eee1_r.jpg" data-rawheight="534" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='534'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  <u>
+   <b>
+    划重点
+   </b>
+  </u>
+ </p>
+ <p>
+  最关键的是咱码农的一手好活儿，通过开发接口，接入云端AI人工智能，具备了以下功能：
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="158" data-rawwidth="280" data-size="normal" data-thumbnail="https://pic4.zhimg.com/v2-6b1b089c7e49f26ca5d06233662415e7_b.jpg" src="https://pic4.zhimg.com/v2-6b1b089c7e49f26ca5d06233662415e7_b.gif" width="280"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/v2-6b1b089c7e49f26ca5d06233662415e7_b.gif" data-rawheight="158" data-rawwidth="280" data-size="normal" data-thumbnail="https://pic4.zhimg.com/v2-6b1b089c7e49f26ca5d06233662415e7_b.jpg" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='280'%20height='158'&gt;&lt;/svg&gt;" width="280"/>
+  <figcaption>
+   空闲车位识别
+  </figcaption>
+ </figure>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="158" data-rawwidth="280" data-size="normal" data-thumbnail="https://pic2.zhimg.com/v2-dd69a50fe6e97573726c58c41fef8714_b.jpg" src="https://pic2.zhimg.com/v2-dd69a50fe6e97573726c58c41fef8714_b.gif" width="280"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic2.zhimg.com/v2-dd69a50fe6e97573726c58c41fef8714_b.gif" data-rawheight="158" data-rawwidth="280" data-size="normal" data-thumbnail="https://pic2.zhimg.com/v2-dd69a50fe6e97573726c58c41fef8714_b.jpg" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='280'%20height='158'&gt;&lt;/svg&gt;" width="280"/>
+  <figcaption>
+   自主泊车
+  </figcaption>
+ </figure>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/v2-59c527ee8385f72e0156b22c60afe3b6_r.jpg" data-rawheight="431" data-rawwidth="720" data-size="normal" src="https://pic2.zhimg.com/v2-59c527ee8385f72e0156b22c60afe3b6_b.jpg" width="720"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-59c527ee8385f72e0156b22c60afe3b6_b.jpg" data-original="https://pic2.zhimg.com/v2-59c527ee8385f72e0156b22c60afe3b6_r.jpg" data-rawheight="431" data-rawwidth="720" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='720'%20height='431'&gt;&lt;/svg&gt;" width="720"/>
+  <figcaption>
+   悬浮占车位
+  </figcaption>
+ </figure>
+ <p>
+  <u>
+   <b>
+    实战
+   </b>
+  </u>
+ </p>
+ <p>
+  好了，一切准备妥当，早上出门之前，把大新疆停放到机场。
+ </p>
+ <p>
+  我想象的画面应该是这样的
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-df7975078adca884b07784a70b0a9b97_r.jpg" data-rawheight="960" data-rawwidth="720" data-size="normal" src="https://pic4.zhimg.com/v2-df7975078adca884b07784a70b0a9b97_b.jpg" width="720"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-df7975078adca884b07784a70b0a9b97_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-df7975078adca884b07784a70b0a9b97_r.jpg" data-rawheight="960" data-rawwidth="720" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='720'%20height='960'&gt;&lt;/svg&gt;" width="720"/>
+ </figure>
+ <p>
+  可惜那天机场被我妈征用了，经过紧急磋商，终于圆满的解决了，只是……画风有些诡异……
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-865307e8ed4431c4400267a08ab7b2a4_r.jpg" data-rawheight="540" data-rawwidth="720" data-size="normal" src="https://pic2.zhimg.com/v2-865307e8ed4431c4400267a08ab7b2a4_b.jpg" width="720"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-865307e8ed4431c4400267a08ab7b2a4_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-865307e8ed4431c4400267a08ab7b2a4_r.jpg" data-rawheight="540" data-rawwidth="720" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='720'%20height='540'&gt;&lt;/svg&gt;" width="720"/>
+ </figure>
+ <p>
+  但是，丝毫不影响螺旋桨的旋转
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-6b38b83e21338fa308b7bb944dcb808b_r.jpg" data-rawheight="540" data-rawwidth="720" data-size="normal" src="https://pic4.zhimg.com/v2-6b38b83e21338fa308b7bb944dcb808b_b.jpg" width="720"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-6b38b83e21338fa308b7bb944dcb808b_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-6b38b83e21338fa308b7bb944dcb808b_r.jpg" data-rawheight="540" data-rawwidth="720" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='720'%20height='540'&gt;&lt;/svg&gt;" width="720"/>
+ </figure>
+ <p>
+  只是从飞机的角度看起来就……
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/v2-f60e68c63de7b8b2ecbc3077bc9f5044_r.jpg" data-rawheight="540" data-rawwidth="720" data-size="normal" src="https://pic2.zhimg.com/v2-f60e68c63de7b8b2ecbc3077bc9f5044_b.jpg" width="720"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-f60e68c63de7b8b2ecbc3077bc9f5044_b.jpg" data-original="https://pic2.zhimg.com/v2-f60e68c63de7b8b2ecbc3077bc9f5044_r.jpg" data-rawheight="540" data-rawwidth="720" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='720'%20height='540'&gt;&lt;/svg&gt;" width="720"/>
+  <figcaption>
+   飞机和AI的对话
+  </figcaption>
+ </figure>
+ <p>
+  晚上6点下班，不紧不慢的开车回到小区，暂时停在小区外面的路边，坐在车里，打开遥控器，“大新疆、大新疆，我是塔台，我是塔台，允许起飞，允许起飞”，4个螺旋桨徐徐转动，飞机升空，画面传来：
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="158" data-rawwidth="280" data-size="normal" data-thumbnail="https://pic3.zhimg.com/v2-be152099538a7a4a7a9bebcbc8224417_b.jpg" src="https://pic3.zhimg.com/v2-be152099538a7a4a7a9bebcbc8224417_b.gif" width="280"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic3.zhimg.com/v2-be152099538a7a4a7a9bebcbc8224417_b.gif" data-caption="" data-rawheight="158" data-rawwidth="280" data-size="normal" data-thumbnail="https://pic3.zhimg.com/v2-be152099538a7a4a7a9bebcbc8224417_b.jpg" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='280'%20height='158'&gt;&lt;/svg&gt;" width="280"/>
+ </figure>
+ <p>
+  什么鬼这是？？？
+ </p>
+ <p>
+  难道“炸鸡”了？？？（无人机坠毁俗称“炸鸡”）
+ </p>
+ <p>
+  赶紧锁车飞奔回家，画面太醉，不忍直视啊……
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="330" data-rawwidth="331" data-size="normal" src="https://pic3.zhimg.com/v2-f272369331a17849111d0579fe7ab789_b.jpg" width="331"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic3.zhimg.com/v2-f272369331a17849111d0579fe7ab789_b.jpg" data-caption="" data-rawheight="330" data-rawwidth="331" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='331'%20height='330'&gt;&lt;/svg&gt;" width="331"/>
+ </figure>
+ <p>
+  怎么会这样？
+ </p>
+ <p>
+  赶紧问问
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-a0187492efe956687ae7d48c7e2287e2_r.jpg" data-rawheight="1129" data-rawwidth="640" data-size="normal" src="https://pic3.zhimg.com/v2-a0187492efe956687ae7d48c7e2287e2_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-a0187492efe956687ae7d48c7e2287e2_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-a0187492efe956687ae7d48c7e2287e2_r.jpg" data-rawheight="1129" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='1129'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  心疼啊，我攒了好几个月的钱啊，我辛辛苦苦设计的程序啊，我的大新疆啊。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-4beb5e349cf00d0e16b37f9ccd21cd0c_r.jpg" data-rawheight="540" data-rawwidth="720" data-size="normal" src="https://pic2.zhimg.com/v2-4beb5e349cf00d0e16b37f9ccd21cd0c_b.jpg" width="720"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-4beb5e349cf00d0e16b37f9ccd21cd0c_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-4beb5e349cf00d0e16b37f9ccd21cd0c_r.jpg" data-rawheight="540" data-rawwidth="720" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='720'%20height='540'&gt;&lt;/svg&gt;" width="720"/>
+ </figure>
+ <p>
+  美丽的夜景，让我的内心终于平静了下来，抬头看看表，已经晚上10点了。
+ </p>
+ <p>
+  不就一架飞机么，算了，明天中午开始少吃点吧，重新攒钱就是了。
+ </p>
+ <p>
+  洗洗睡了，明天还得开车上班呢。
+ </p>
+ <p>
+  车？车……车还在路边！！！
+ </p>
+ <p>
+  赶紧换上衣服飞奔到路边
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic3.zhimg.com/v2-df508bb93fc958e1a215adcecdb7ce09_r.jpg" data-rawheight="540" data-rawwidth="720" data-size="normal" src="https://pic3.zhimg.com/v2-df508bb93fc958e1a215adcecdb7ce09_b.jpg" width="720"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-df508bb93fc958e1a215adcecdb7ce09_b.jpg" data-original="https://pic3.zhimg.com/v2-df508bb93fc958e1a215adcecdb7ce09_r.jpg" data-rawheight="540" data-rawwidth="720" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='720'%20height='540'&gt;&lt;/svg&gt;" width="720"/>
+  <figcaption>
+   损失金额+200
+  </figcaption>
+ </figure>
+ <p>
+  <u>
+   <b>
+    后记
+   </b>
+  </u>
+ </p>
+ <p>
+  过了几天，终于决定敞开心扉，跟一位好基友分享了我的悲惨遭遇，想听一些安慰的话。
+ </p>
+ <p>
+  他想了想说：“你为啥不把飞机带在车里，从车里起飞呢？”
+ </p>
+ <p>
+  我：“………………”
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//weixin.qq.com/r/_UhVTU-ECBJ3rQsu9x3r" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    weixin.qq.com/r/_UhVTU-
+   </span>
+   <span class="invisible">
+    ECBJ3rQsu9x3r
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+  (二维码自动识别)
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  附上大疆 SDK 地址：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//developer.dji.com/" rel="nofollow noreferrer" target="_blank">
+   DJI Developer
+  </a>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+ </p>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <blockquote>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/30932804">
+   一名python学习者打开双11的正确姿势
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/29043669">
+   Python有嘻哈：Crossin教你用代码写出押韵的verse
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/26066151">
+   喏，你们要的 PyCharm 快速上手指南
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   给伸手党的福利：Python 新手入门引导
+  </a>
+  <br/>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？
+  </a>
+  <br/>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？
+  </a>
+ </blockquote>
+ <p>
+  Crossin的编程教室
+ </p>
+ <blockquote>
+  微信公众号ID：crossincode
+  <br/>
+  网站：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/" rel="nofollow noreferrer" target="_blank">
+   crossincode.com
+  </a>
+  <br/>
+  QQ群：657099683
+  <br/>
+  微信加群：crossin123(新手/进阶/爬虫)
+ </blockquote>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>

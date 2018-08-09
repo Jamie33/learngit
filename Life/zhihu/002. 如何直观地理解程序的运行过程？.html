@@ -1,0 +1,190 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>如何直观地理解程序的运行过程？</h1><div class="RichText ztext Post-RichText">
+ <p>
+  了解代码的执行过程是编程的基本要求。一个熟练的编程老手只需要用肉眼看着代码，就能对其运行的过程有所了解。然而对于刚接触编程不久的新手来说，这种事情就没那么显而易见了。于是在编写代码和调试代码时，一旦程序的逻辑有些复杂，就像掉进代码的迷宫，完全不知道东南西北。
+ </p>
+ <p>
+  所以，每当有人对自己的代码没有给出预想结果而百思不得其解，无奈寻求帮助时，我都会建议在程序中增加输出，一方面是根据不同输出的先后顺序来判断程序的运行路径，另一方面则是观察各变量在运行过程中的实际数值，确认是在哪里发生了错误。
+  <br/>
+ </p>
+ <p>
+  还有种方法就是使用 IDE 提供的调试功能，通过添加断点和单步运行，了解程序的运行状态。Visual Studio、Eclipse、xCode 等常见的 IDE 几乎都提供了调试工具。对于 Python，也可以使用 pdb 库来实现断点调试。
+  <br/>
+ </p>
+ <p>
+  上述两种途径应该是大部分程序员 debug 时候的基本套路。但同样的，对于新手来说，即使这样的工具，用起来仍然有些费力。
+  <br/>
+ </p>
+ <p>
+  有时我会选择在纸上画出一些流程和图形来向人解释程序，虽然效果会好些，但显然不是一种可以广泛推广的方式。后来意外发现有一款工具满足了此类需求，非常适合新手，可以让你直观地“看”出程序是怎么运行的。对于初学编程，难以理解程序运行过程的苦手来说，绝对可称之为“神器”。
+  <br/>
+ </p>
+ <p>
+  这就是
+  <b>
+   Online Python Tutor
+  </b>
+  。一款免费的在线代码运行及演示工具。
+  <br/>
+ </p>
+ <p>
+  项目地址：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//res.crossincode.com/jump.html%3Fto%3Dhttp%3A//pythontutor.com" rel="nofollow noreferrer" target="_blank">
+   pythontutor.com
+  </a>
+  <br/>
+ </p>
+ <br/>
+ <br/>
+ <p>
+  关于此项目的介绍（摘自网络，出处未知）：
+ </p>
+ <br/>
+ <blockquote>
+  <p>
+   Online Python Tutor 是由 Philip Guo 开发的一个免费教育工具，可帮助学生攻克编程学习中的基础障碍，理解每一行源代码在程序执行时在计算机中的过程。通过这个工具，教师或学生可以直接在 Web 浏览器中编写 Python 代码，并一步一步可视化地执行程序。
+  </p>
+  <p>
+   截至 2013 年 12 月，来自 165 个国家和地区共 50 万多人使用了这个在线工具，通常是用作教材、讲义或在线编程指南的补充。每天共执行和演示超过 6,000 段 Python 程序。除了自学的初学者，Online Python Tutor 的用户还包括了那些参加 Coursera、edX 和 Udacity 等在线课程的学生，还有诸如 MIT、UC 伯克利等高校的教师。
+  </p>
+ </blockquote>
+ <ul>
+  <li>
+   Python Tutor 支持 2.7 和 3.3 两个版本的 Python。
+   <br/>
+  </li>
+  <li>
+   除了 Python 外，还可运行 Java、JavaScript、TypeScript、Ruby，另外也有支持 C、C++ 的版本。
+   <br/>
+  </li>
+  <li>
+   可以通过一行 JS 代码，把此工具嵌入到你自己的页面中。
+   <br/>
+  </li>
+  <li>
+   也可以生成链接，把你的代码直接分享给别人。
+   <br/>
+  </li>
+  <li>
+   附带单元测试功能。
+   <br/>
+  </li>
+  <li>
+   网站上还提供了很多的实例，其中包括一些比较经典的算法。
+   <br/>
+  </li>
+ </ul>
+ <br/>
+ <br/>
+ <br/>
+ <p>
+  再来体验一下其使用过程：
+ </p>
+ <br/>
+ <p>
+  在编辑器里输入代码，点击 “Visualize Execution” 即可运行并演示。
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">t</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">result</span>
+</code></pre>
+ </div>
+ <p>
+  我用了段包含循环、列表、函数、模块的代码片段。看看效果如何：
+ </p>
+ <br/>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic3.zhimg.com/73bacb2a70186cf1eb9ac1a002f67949_r.jpg" data-rawheight="532" data-rawwidth="858" src="https://pic3.zhimg.com/73bacb2a70186cf1eb9ac1a002f67949_b.jpg" width="858"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/73bacb2a70186cf1eb9ac1a002f67949_b.jpg" data-original="https://pic3.zhimg.com/73bacb2a70186cf1eb9ac1a002f67949_r.jpg" data-rawheight="532" data-rawwidth="858" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='858'%20height='532'&gt;&lt;/svg&gt;" width="858"/>
+ </figure>
+ <br/>
+ <p>
+  左上是代码，箭头表示当前运行到的位置。
+ </p>
+ <p>
+  通过下面的按钮和进度条可以直接控制程序的进行。
+ </p>
+ <p>
+  左下是输出。
+ </p>
+ <p>
+  右边就是程序的可视化模拟。在这个例子里，可以清楚地看到过程中变量的变化，何时调用了函数等信息。
+ </p>
+ <br/>
+ <br/>
+ <p>
+  不过同很多在线运行环境一样，Python Tutor 不支持运行过程中的输入功能。所以没法把我们的猜数字或是罚点球的小游戏直接放上去运行。希望以后能够增加此功能。
+ </p>
+ <br/>
+ <p>
+  借助 Python Tutor，可以更轻松地理解一些算法。最后放一个冒泡排序的实现，
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//res.crossincode.com/jump.html%3Fto%3Dhttp%3A//pythontutor.com/visualize.html%23code%3Dlst%2B%253D%2B%255B4%2C12%2C7%2C16%2C3%2C12%2C45%2C12%2C57%2C32%255D%250Afor%2Bj%2Bin%2Brange%28len%28lst%2529%2B-%2B1%2529%253A%250A%2B%2B%2B%2Bfor%2Bi%2Bin%2Brange%28len%28lst%2529%2B-%2B1%2B-%2Bj%2529%253A%250A%2B%2B%2B%2B%2B%2B%2B%2Bif%2Blst%255Bi%255D%2B%253C%2Blst%255Bi%252B1%255D%253A%250A%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2B%2Blst%255Bi%255D%2C%2Blst%255Bi%252B1%255D%2B%253D%2Blst%255Bi%252B1%255D%2C%2Blst%255Bi%255D%250Aprint%2Blst%26mode%3Dedit%26origin%3Dopt-frontend.js%26cumulative%3Dfalse%26heapPrimitives%3Dfalse%26textReferences%3Dfalse%26py%3D2%26rawInputLstJSON%3D%255B%255D" rel="nofollow noreferrer" target="_blank">
+   点此查看
+  </a>
+  。
+ </p>
+ <br/>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic3.zhimg.com/40b4f50621d7f0d7ff2d58de5555b930_r.jpg" data-rawheight="331" data-rawwidth="541" src="https://pic3.zhimg.com/40b4f50621d7f0d7ff2d58de5555b930_b.jpg" width="541"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/40b4f50621d7f0d7ff2d58de5555b930_b.jpg" data-original="https://pic3.zhimg.com/40b4f50621d7f0d7ff2d58de5555b930_r.jpg" data-rawheight="331" data-rawwidth="541" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='541'%20height='331'&gt;&lt;/svg&gt;" width="541"/>
+ </figure>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/ebcda652bde9bf47826e63919f614702_r.jpg" data-rawheight="203" data-rawwidth="564" src="https://pic1.zhimg.com/ebcda652bde9bf47826e63919f614702_b.jpg" width="564"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/ebcda652bde9bf47826e63919f614702_b.jpg" data-original="https://pic1.zhimg.com/ebcda652bde9bf47826e63919f614702_r.jpg" data-rawheight="203" data-rawwidth="564" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='564'%20height='203'&gt;&lt;/svg&gt;" width="564"/>
+ </figure>
+ <p>
+  -------------------------------------------------
+ </p>
+ <br/>
+ 其他文章及回答：
+ <br/>
+ <a class="internal" href="http://zhuanlan.zhihu.com/p/20683456">
+  编程初学者如何使用搜索引擎
+ </a>
+ <br/>
+ <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+  你是如何自学 Python 的？
+ </a>
+ <br/>
+ <br/>
+ <p>
+  <strong>
+   Crossin的编程教室
+  </strong>
+ </p>
+ <p>
+  微信ID：crossincode
+ </p>
+ <p>
+  论坛：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室
+  </a>
+ </p>
+ <p>
+  QQ群：498545096
+ </p>
+ <br/>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="258" data-rawwidth="258" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+</div></body></html>

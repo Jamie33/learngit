@@ -1,0 +1,330 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>ECharts+Python_给你的数据做“美颜”</h1><div class="RichText ztext Post-RichText">
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/v2-f87e13e5da143235d65773fb010e81b3_r.jpg" data-rawheight="206" data-rawwidth="622" src="https://pic1.zhimg.com/v2-f87e13e5da143235d65773fb010e81b3_b.jpg" width="622"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-f87e13e5da143235d65773fb010e81b3_b.jpg" data-original="https://pic1.zhimg.com/v2-f87e13e5da143235d65773fb010e81b3_r.jpg" data-rawheight="206" data-rawwidth="622" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='622'%20height='206'&gt;&lt;/svg&gt;" width="622"/>
+ </figure>
+ <p>
+  <em>
+   本文授权转载自公众号：挖地兔（waditu）
+  </em>
+ </p>
+ <h2>
+  <strong>
+   前言
+  </strong>
+ </h2>
+ <p>
+  最近无意中看到一篇文章，介绍的是在IPython Notebook里实现ECharts的可视化效果。我个人对ECharts一直是推崇有加，是baidu发布的开源项目中我比较喜欢的一个，绝对是良心之作了。所以，看到这篇文章着实小激动了一把。
+ </p>
+ <p>
+  今天借花献佛，利用金融证券数据，举几个小例子，给大家分享一下实现过程。顺便告诉大家，怎么在tushare里调用前十大股东及流通股东数据的接口。
+ </p>
+ <h2>
+  <b>
+   1. ECharts介绍
+  </b>
+ </h2>
+ <p>
+  以下摘自ECharts官网的介绍：
+ </p>
+ <blockquote>
+  ECharts，一个纯 Javascript 的图表库，可以流畅的运行在 PC 和移动设备上，兼容当前绝大部分浏览器，底层依赖轻量级的 Canvas 类库 ZRender，提供直观，生动，可交互，可高度个性化定制的数据可视化图表。
+ </blockquote>
+ <p>
+  ECharts 3 中更是加入了更多丰富的交互功能以及更多的可视化效果，并且对移动端做了深度的优化。
+  <br/>
+ </p>
+ <p>
+  ECharts的成名，得益于几年前百度人口迁徙大数据效果的展示，当年看到那个基于地图连线忽闪忽闪的效果，简直了，太高大上了。最近一年在北京偶尔拜访一些所谓的大数据公司，进门显眼位置看见的那些大屏幕数据展示，估计很多都是基于ECharts开发的。
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="366" data-rawwidth="411" src="https://pic3.zhimg.com/v2-966a399797dc9430a79f56932e927c2e_b.jpg" width="411"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic3.zhimg.com/v2-966a399797dc9430a79f56932e927c2e_b.jpg" data-rawheight="366" data-rawwidth="411" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='411'%20height='366'&gt;&lt;/svg&gt;" width="411"/>
+ </figure>
+ <p>
+  更多效果实例可上官网看：
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//echarts.baidu.com/examples.html" rel="nofollow noreferrer" target="_blank">
+   ECharts Examples
+  </a>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic3.zhimg.com/v2-3868b54a469d22bb77a5cf823c56fc7b_r.jpg" data-rawheight="283" data-rawwidth="640" src="https://pic3.zhimg.com/v2-3868b54a469d22bb77a5cf823c56fc7b_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-3868b54a469d22bb77a5cf823c56fc7b_b.jpg" data-original="https://pic3.zhimg.com/v2-3868b54a469d22bb77a5cf823c56fc7b_r.jpg" data-rawheight="283" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='283'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <h2>
+  <b>
+   2. 与Python的结合
+  </b>
+ </h2>
+ <p>
+  ECharts主要是应用在web和app领域，跟Python应用的结合，目前在Django，Flask等web框架里更为常见。今天要介绍的，也是在IPython Notebook里基于web的效果展示，而在IPython qtconsole等环境下似乎无能为力。
+ </p>
+ <p>
+  实际上，在IPython Notebook里使用ECharts相比纯web开发环境，要复杂麻烦一些。但是在IPython Notebook里作为除matplotlib以外的数据可视化方案，ECharts或许可以成为一个强有力候补。尤其是在基于国内地图、关系图、桑基图等方面的数据展示上，ECharts完全可以担当大任，游刃有余。
+ </p>
+ <h2>
+  <b>
+   3. 实现原理
+  </b>
+ </h2>
+ <p>
+  在IPython Notebook里，有一个display的模块，可以实现HTML效果的展示。而最核心的条件是notebook自带一个JS模块，可以通过RequireJS动态导入js脚本并执行。
+ </p>
+ <p>
+  我们先来看看HTML代码在IPython notebook里简单的实现效果：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/v2-a9cc486154fdc75b5ebd53da6e9bf793_r.jpg" data-rawheight="163" data-rawwidth="640" src="https://pic1.zhimg.com/v2-a9cc486154fdc75b5ebd53da6e9bf793_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-a9cc486154fdc75b5ebd53da6e9bf793_b.jpg" data-original="https://pic1.zhimg.com/v2-a9cc486154fdc75b5ebd53da6e9bf793_r.jpg" data-rawheight="163" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='163'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  通过RequireJS，引入ECharts包
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/v2-6bb8622aa1848d3124dd8c71350304e0_r.jpg" data-rawheight="136" data-rawwidth="640" src="https://pic2.zhimg.com/v2-6bb8622aa1848d3124dd8c71350304e0_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-6bb8622aa1848d3124dd8c71350304e0_b.jpg" data-original="https://pic2.zhimg.com/v2-6bb8622aa1848d3124dd8c71350304e0_r.jpg" data-rawheight="136" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='136'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  然后配置echarts熟悉和数据
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/v2-0ed9e2cd083cae4e04c79752e57613f4_r.jpg" data-rawheight="207" data-rawwidth="503" src="https://pic2.zhimg.com/v2-0ed9e2cd083cae4e04c79752e57613f4_b.jpg" width="503"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-0ed9e2cd083cae4e04c79752e57613f4_b.jpg" data-original="https://pic2.zhimg.com/v2-0ed9e2cd083cae4e04c79752e57613f4_r.jpg" data-rawheight="207" data-rawwidth="503" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='503'%20height='207'&gt;&lt;/svg&gt;" width="503"/>
+ </figure>
+ <h2>
+  <b>
+   4. 图表效果实例
+  </b>
+ </h2>
+ <p>
+  这里只给大家展示K线图、折线图和饼图的效果，只揭示实现原理和过程，具体的代码优化和图表功能的完善，可以自行研究ECharts的相关资料来改进。
+ </p>
+ <p>
+  要实现这三类图表，这里借用股票日线行情数据、前十大股东持股占比数据和前十大流通股东持股比例来举例。（请将tushare升级到最新版。）
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/v2-fb41a5a58449e2187daf3abd83c38b42_r.jpg" data-rawheight="124" data-rawwidth="426" src="https://pic2.zhimg.com/v2-fb41a5a58449e2187daf3abd83c38b42_b.jpg" width="426"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-fb41a5a58449e2187daf3abd83c38b42_b.jpg" data-original="https://pic2.zhimg.com/v2-fb41a5a58449e2187daf3abd83c38b42_r.jpg" data-rawheight="124" data-rawwidth="426" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='426'%20height='124'&gt;&lt;/svg&gt;" width="426"/>
+ </figure>
+ <p>
+  <strong>
+   1、K线图效果
+  </strong>
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/v2-1f1f5f39840c6cda023429c2a4939118_r.jpg" data-rawheight="411" data-rawwidth="640" src="https://pic2.zhimg.com/v2-1f1f5f39840c6cda023429c2a4939118_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-1f1f5f39840c6cda023429c2a4939118_b.jpg" data-original="https://pic2.zhimg.com/v2-1f1f5f39840c6cda023429c2a4939118_r.jpg" data-rawheight="411" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='411'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ 通过tushare的get_k_data获取日线前复权数据，这里通过中国联通来演示。根据上文的实现原理，我们运行代码后可以看到如下效果。
+ <br/>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic4.zhimg.com/v2-4661ce7c82a741018cea43699b81a47a_r.jpg" data-rawheight="472" data-rawwidth="640" src="https://pic4.zhimg.com/v2-4661ce7c82a741018cea43699b81a47a_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-4661ce7c82a741018cea43699b81a47a_b.jpg" data-original="https://pic4.zhimg.com/v2-4661ce7c82a741018cea43699b81a47a_r.jpg" data-rawheight="472" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='472'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  <strong>
+   2、折线图效果
+  </strong>
+ </p>
+ <p>
+  演示的折线图效果实际是我选用了关系图进行了改造，常规的折线图大家可以参考ECharts官网的代码。
+ </p>
+ <p>
+  这里我用到了tusahre的新数据接口“十大流通股东”数据来做演示，数据包括了前十大股东和十大流通股东历年各季度的持股数量和占比。折线图我用前十大股东历年持股占比情况来演示。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic4.zhimg.com/v2-083882ee3831756daec23d0b5a458b4f_r.jpg" data-rawheight="141" data-rawwidth="640" src="https://pic4.zhimg.com/v2-083882ee3831756daec23d0b5a458b4f_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-083882ee3831756daec23d0b5a458b4f_b.jpg" data-original="https://pic4.zhimg.com/v2-083882ee3831756daec23d0b5a458b4f_r.jpg" data-rawheight="141" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='141'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="391" data-rawwidth="379" src="https://pic3.zhimg.com/v2-4584a978a836603b260aeb4e031b8f57_b.jpg" width="379"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic3.zhimg.com/v2-4584a978a836603b260aeb4e031b8f57_b.jpg" data-rawheight="391" data-rawwidth="379" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='379'%20height='391'&gt;&lt;/svg&gt;" width="379"/>
+ </figure>
+ <p>
+  根据线图实现的代码，运行后，效果如下：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic4.zhimg.com/v2-3bba3df159590f9103b959608853e9ef_r.jpg" data-rawheight="498" data-rawwidth="640" src="https://pic4.zhimg.com/v2-3bba3df159590f9103b959608853e9ef_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-3bba3df159590f9103b959608853e9ef_b.jpg" data-original="https://pic4.zhimg.com/v2-3bba3df159590f9103b959608853e9ef_r.jpg" data-rawheight="498" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='498'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  <strong>
+   3、饼图效果
+  </strong>
+ </p>
+ <p>
+  饼图用到了前十大流通股数据，选用浦发银行2016年第三季度的数据作为示例。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/v2-4265ddf970d1db4bdf21c4cc426bc245_r.jpg" data-rawheight="331" data-rawwidth="640" src="https://pic2.zhimg.com/v2-4265ddf970d1db4bdf21c4cc426bc245_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-4265ddf970d1db4bdf21c4cc426bc245_b.jpg" data-original="https://pic2.zhimg.com/v2-4265ddf970d1db4bdf21c4cc426bc245_r.jpg" data-rawheight="331" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='331'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  对前十大流通股东数据安装ECharts数据格式进行处理，代码大致如下：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/v2-eabed1a993b1e6adb249e18b6dab782f_r.jpg" data-rawheight="402" data-rawwidth="640" src="https://pic2.zhimg.com/v2-eabed1a993b1e6adb249e18b6dab782f_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-eabed1a993b1e6adb249e18b6dab782f_b.jpg" data-original="https://pic2.zhimg.com/v2-eabed1a993b1e6adb249e18b6dab782f_r.jpg" data-rawheight="402" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='402'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  完整执行后，可以看到最终效果图。
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic3.zhimg.com/v2-24d75b75757f58a71ff391471611fdbd_r.jpg" data-rawheight="516" data-rawwidth="640" src="https://pic3.zhimg.com/v2-24d75b75757f58a71ff391471611fdbd_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-24d75b75757f58a71ff391471611fdbd_b.jpg" data-original="https://pic3.zhimg.com/v2-24d75b75757f58a71ff391471611fdbd_r.jpg" data-rawheight="516" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='516'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <h2>
+  <b>
+   5. 总结
+  </b>
+ </h2>
+ <p>
+  ECharts实际可以大大丰富Python的图表和展示效果。但是要想用好，需要对ECharts的用法有所了解，特别是要实现自定义的图表的时候，更要对底层代码进行研究。
+ </p>
+ <p>
+  这里有三个应用方面的小技巧分享一下：
+ </p>
+ <ol>
+  <li>
+   选定图表后，在ECharts的官网里进行代码修改和效果调试，直到满意。（如果有条件，这一步可以交给前端工程师）
+   <br/>
+  </li>
+  <li>
+   根据已经完成的代码模板，将数据部分在IPythong notebook里用经过了pandas和Python数据清洗处理后的数据进行替换。
+   <br/>
+  </li>
+  <li>
+   如果在IPython notebook里无法出现图表效果，检查数据结构是否正确。可以将代码和数据重新拷贝到ECharts的调试器里进行检查。
+  </li>
+ </ol>
+ <h2>
+  <b>
+   6. 演示代码获取
+  </b>
+ </h2>
+ <p>
+  已经将以上效果的所有代码完整保存到了IPython Notebook格式的文件里，有兴趣的朋友可以直接在本公众号私信回复
+  <b>
+   图表
+  </b>
+  ，自动获取代码文件下载地址。
+ </p>
+ <p>
+  欢迎有使用经验的朋友提出宝贵意见，分享应用心得。
+  <br/>
+ </p>
+ <p>
+  本文授权转自tushare官方公众号挖地兔(waditu)
+  <br/>
+ </p>
+ <br/>
+ <br/>
+ <p>
+  <u>
+   其他文章及回答：
+  </u>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？ - Crossin 的回答
+  </a>
+  <br/>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？ - Crossin 的回答
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/24865235">
+   在这个看脸的时代，如何用 GUI 提高 python 程序的颜值？ - Crossin的编程教室 - 知乎专栏
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/24606846">
+   今天，你抢到票了吗 - Crossin的编程教室 - 知乎专栏
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22261597">
+   Python 与 Excel 不得不说的事 - Crossin的编程教室 - 知乎专栏
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/23998083">
+   Python-Excel 模块哪家强？- Crossin的编程教室 - 知乎专栏
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22339492">
+   爆款游戏《贪吃蛇大作战》的 Python 实现 - Crossin的编程教室 - 知乎专栏
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22917775">
+   NBA 举办编程马拉松 - 数据分析时代的到来 - Crossin的文章 - 知乎专栏
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21886694">
+   想用 Python 做数据分析？先玩玩这个再说 - Crossin的文章 - 知乎专栏
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21624000">
+   用 Python 实现你的量化交易策略 - Crossin的文章 - 知乎专栏
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21057822">
+   Python 抓取网页乱码原因分析 - Crossin的编程教室 - 知乎专栏
+  </a>
+  <br/>
+ </p>
+ <p>
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+ <p>
+  微信ID：crossincode
+  <br/>
+  论坛：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室
+  </a>
+  <br/>
+  QQ群：453300655
+  <br/>
+  <figure>
+   <noscript>
+    <img class="content_image" data-rawheight="258" data-rawwidth="258" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+   </noscript>
+   <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+  </figure>
+ </p>
+</div></body></html>

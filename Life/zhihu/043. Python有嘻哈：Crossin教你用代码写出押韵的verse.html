@@ -1,0 +1,272 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>Python有嘻哈：Crossin教你用代码写出押韵的verse</h1><div class="RichText ztext Post-RichText">
+ <p>
+  托某奇艺选秀节目的福，“嘻哈”无疑是这个夏天最热的音乐标签。年初的时候，我们教室实习生小D还是网易云上一只忧郁的民谣狗（参见
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25109074">
+   数据分析：当赵雷唱民谣时他唱些什么？
+  </a>
+  ）。没想到一夜之间，他的歌单已被HipHop占据，俨然一只黑怕老炮儿。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-8eba2e40fd2339cbe7eb35cd66793182_r.jpg" data-rawheight="525" data-rawwidth="640" data-size="normal" src="https://pic2.zhimg.com/v2-8eba2e40fd2339cbe7eb35cd66793182_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-8eba2e40fd2339cbe7eb35cd66793182_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-8eba2e40fd2339cbe7eb35cd66793182_r.jpg" data-rawheight="525" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='525'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  这对小D来说可谓一大利好：本来报个吉他班，学了仨月才把1645摸熟，如今去淘宝了一把嘻哈四件套，找段beat，药药切克闹，就嗨起来啦！
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-67b43393b4d1ac07ff84beddae5be905_r.jpg" data-rawheight="640" data-rawwidth="640" data-size="normal" src="https://pic2.zhimg.com/v2-67b43393b4d1ac07ff84beddae5be905_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-67b43393b4d1ac07ff84beddae5be905_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-67b43393b4d1ac07ff84beddae5be905_r.jpg" data-rawheight="640" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='640'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  小D underground听多了就想找人battle。隔壁老王他早就不爽了，这次一定要写段词来diss他！但像小D这么real的rapper是绝对不屑套别人的词的，这可难为坏他小学及格的作文水平了。
+ </p>
+ <p>
+  小D一连几天闷头在纸上写写画画，也没憋出来几句。我实在看不下去了，不就是写点押韵的词嘛，交给哥来帮你搞定。小D一脸鄙夷：你还会写歌词？我微微一笑：词我是写不了，但我们会什么？编程啊！都什么时代了，还要靠人力嘛。
+ </p>
+ <p>
+  我的想法很简单：就是找些嘻哈歌手的歌词，把里面的词语都拿出来。当想要写一段歌词时，只要给一个参考词，就帮你找出押韵的备选词。当然太简单的单字押韵我都懒得列出来了，咱们要做就做双押和三押！
+ </p>
+ <p>
+  说干就干！
+ </p>
+ <p>
+  1.
+  <b>
+   拿网易云的接口，抓了十几位中文嘻哈歌手的歌单
+  </b>
+  ，包括：
+ </p>
+ <p>
+  红花会、PGone、VaVa、艾福杰尼、BooM黄旭、Bridge、GAI爷、TizzyT、JonyJ、小青龙、辉子、孙八一、谢帝、马思维、满舒克、Mc光光
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">'http://music.163.com/api/playlist/detail?id=402614161'</span>
+<span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  <b>
+   2.把他们的歌词全抓下来
+  </b>
+  ，共 459 首歌曲
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">'http://music.163.com/api/song/lyric?os=pc&amp;id=411988938&amp;lv=-1&amp;kv=-1&amp;tv=-1'</span>
+<span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  <b>
+   3.用我们之前介绍过的结巴分词（参见
+   <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D2650166445%26idx%3D2%26sn%3D4af384e6ad4ca33d76a3e4f93cba736b%26chksm%3Dbe4b59d5893cd0c3b2454a644e4d2b43d2c5ff95a463b260201c01206a5b58bcc662dda48f0d%26scene%3D21%23wechat_redirect" rel="nofollow noreferrer" target="_blank">
+    【编程课堂】jieba-中文分词利器
+   </a>
+   ），把歌词处理下，分成一个个的词语
+  </b>
+  ，得到 21206 个词
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">jieba</span>
+<span class="n">seg_list</span> <span class="o">=</span> <span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="s2">"我做的说唱从来不是为了混这圈子"</span><span class="p">,</span> <span class="n">cut_all</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"Full Mode: "</span> <span class="o">+</span> <span class="s2">"/ "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">seg_list</span><span class="p">))</span>
+<span class="sd">'''</span>
+<span class="sd">结果</span>
+<span class="sd">Full Mode: 我/ 做/ 的/ 说唱/ 从来/ 从来不/ 不是/ 为了/ 混/ 这/ 圈子</span>
+<span class="sd">'''</span>
+</code></pre>
+ </div>
+ <p>
+  <b>
+   4.用 xpinyin 将处理出来的词语转成拼音
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">from</span> <span class="nn">xpinyin</span> <span class="kn">import</span> <span class="n">Pinyin</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Pinyin</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_pinyin</span><span class="p">(</span><span class="s2">u"嘻哈"</span><span class="p">))</span>
+<span class="sd">'''</span>
+<span class="sd">xi-ha</span>
+<span class="sd">'''</span>
+</code></pre>
+ </div>
+ <p>
+  <b>
+   5.有了拼音就好办了。从网上找个押韵表，把这些嘻哈词语分门别类
+  </b>
+  ，就大告功成啦。最后得到 2845 个双押及三押的备选词汇
+ </p>
+ <blockquote>
+  一、佳麻　 a ia ua　　　第十部　麻、佳半，部分入声
+  <br/>
+  二、开来　 ai uai　　　　第五部　佳半、灰半
+  <br/>
+  三、先寒　 an ian uan üan 第七部　寒删先元半十四部覃盐咸
+  <br/>
+  四、江阳　 ang iang uang　第二部　江阳
+  <br/>
+  五、逍遥　 ao iao　　　　　第八部　萧肴豪
+  <br/>
+  六、国歌　 e o uo　　　　第九部　歌，部分入声
+  <br/>
+  七、灰微　 ei ui　　　第三部　支微齐，部分入声
+  <br/>
+  八、森林　 en in un ün　 第六部　真文元半，十三部　侵
+  <br/>
+  九、冬青　 eng ing ong iong 第一部　东冬，十一部　庚青蒸
+  <br/>
+  十、希奇（儿）i（er并入）　第三部　支微齐，部分入声
+  <br/>
+  十一、诗词　i（整体认读）第三部　支微齐，部分入声
+  <br/>
+  十二、别叠　ie (y)e 　　　　 部分入声，佳麻二韵部分字
+  <br/>
+  十三、忧愁　ou iu　　　　 十二部　尤
+  <br/>
+  十四、读书　u　　　　　　第四部　鱼虞，部分入声
+  <br/>
+  十五、须臾　ü　　　　　　 第四部　鱼虞，部分入声
+  <br/>
+  十六、绝学　üe　　　　　 部分入声
+ </blockquote>
+ <p>
+  <b>
+   6.最后，用django搭个网站
+  </b>
+  ，把这功能做成可在线访问的
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-f11dd41bb2e28790602b2b9aeee8dbde_r.jpg" data-rawheight="302" data-rawwidth="640" data-size="normal" src="https://pic2.zhimg.com/v2-f11dd41bb2e28790602b2b9aeee8dbde_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-f11dd41bb2e28790602b2b9aeee8dbde_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-f11dd41bb2e28790602b2b9aeee8dbde_r.jpg" data-rawheight="302" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='302'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  接下来，小D要做的事就只剩下：想一个词，然后去搜一下有什么其他词跟它配。比如要diss老王，搜一下“老王”：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-e5dd042757bd7c4f25742cce0f1f5b4b_r.jpg" data-rawheight="281" data-rawwidth="640" data-size="normal" src="https://pic1.zhimg.com/v2-e5dd042757bd7c4f25742cce0f1f5b4b_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-e5dd042757bd7c4f25742cce0f1f5b4b_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-e5dd042757bd7c4f25742cce0f1f5b4b_r.jpg" data-rawheight="281" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='281'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  于是小D就写下了：
+  <br/>
+  <b>
+   隔壁
+   <u>
+    老王
+   </u>
+   ，你不要
+   <u>
+    嚣张
+   </u>
+   ，放学之后给我等在
+   <u>
+    操场
+   </u>
+   ！
+  </b>
+ </p>
+ <p>
+  实在太方便啦！
+ </p>
+ <p>
+  如果你也想来首自己的嘻哈，
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//lab.crossincode.com/rhyme/" rel="nofollow noreferrer" target="_blank">
+   点击这里
+  </a>
+  ，进入网站自个儿玩儿去吧！
+ </p>
+ <p>
+  想要完整代码及详细讲解的，请在公众号（Crossin的编程教室）里回复
+  <b>
+   嘻哈
+  </b>
+  。
+ </p>
+ <p>
+  最后，本人亲自演示，如何用搜出来的双押词汇加上一段简单beat做出一段嘻哈歌曲。
+ </p>
+ <a class="video-box" data-lens-id="888055148159602688" data-name="" data-poster="https://pic1.zhimg.com/v2-4d821289d92c233fbd98ec046f72d2d0.jpg" data-video-id="" data-video-playable="true" href="https://link.zhihu.com/?target=https%3A//www.zhihu.com/video/888055148159602688" target="_blank">
+  <img class="thumbnail" src="https://pic1.zhimg.com/v2-4d821289d92c233fbd98ec046f72d2d0.jpg"/>
+  <span class="content">
+   <span class="title">
+    <span class="z-ico-extern-gray">
+    </span>
+    <span class="z-ico-extern-blue">
+    </span>
+   </span>
+   <span class="url">
+    <span class="z-ico-video">
+    </span>
+    https://www.zhihu.com/video/888055148159602688
+   </span>
+  </span>
+ </a>
+ <p>
+  多谢各位homie支持，别忘了转发文章以及给我的知乎专栏点赞！
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+ </p>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <blockquote>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/28726244">
+   听说你好不容易写了个爬虫，结果没抓几个就被封了？
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/26066151">
+   喏，你们要的 PyCharm 快速上手指南
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/28206656">
+   编程新手：看懂很多示例，却依然写不好一个程序
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   给伸手党的福利：Python 新手入门引导
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25499306">
+   如何用100行Python代码做出魔性声控游戏“八分音符酱”
+  </a>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？
+  </a>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？
+  </a>
+ </blockquote>
+ <p>
+  Crossin的编程教室
+ </p>
+ <blockquote>
+  微信公众号ID：crossincode
+  <br/>
+  网站：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/" rel="nofollow noreferrer" target="_blank">
+   crossincode.com
+  </a>
+ </blockquote>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>

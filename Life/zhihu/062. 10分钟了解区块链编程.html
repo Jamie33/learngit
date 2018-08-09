@@ -1,0 +1,307 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>10分钟了解区块链编程</h1><div class="RichText ztext Post-RichText">
+ <p>
+  谈起这几年最热的技术，一定少不了区块链。按说新技术的出现本是稀松平常的事情，但区块链的出现和发展，却有那么一点让人不淡定：
+ </p>
+ <p>
+  其一，区块链的代表应用比特币，其
+  <b>
+   价格在这七八年间翻了上百万
+  </b>
+  倍。2010年有人花10000个比特币买了两块披萨，在比特币最高价位时，这两块披萨相当于近两亿美元。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-40a1fcacbe3277eaf8ca0b4745a2d6df_r.jpg" data-rawheight="418" data-rawwidth="1080" data-size="normal" src="https://pic3.zhimg.com/v2-40a1fcacbe3277eaf8ca0b4745a2d6df_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-40a1fcacbe3277eaf8ca0b4745a2d6df_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-40a1fcacbe3277eaf8ca0b4745a2d6df_r.jpg" data-rawheight="418" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='418'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  其二，因为区块链项目的大热，相关从业人员的需求激增，
+  <b>
+   岗位薪资也水涨船高
+  </b>
+  ，让一众程序员们蠢蠢欲动。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-e82fa6826928bc78945f765cbe34d66b_r.jpg" data-rawheight="868" data-rawwidth="794" data-size="normal" src="https://pic1.zhimg.com/v2-e82fa6826928bc78945f765cbe34d66b_b.jpg" width="794"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-e82fa6826928bc78945f765cbe34d66b_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-e82fa6826928bc78945f765cbe34d66b_r.jpg" data-rawheight="868" data-rawwidth="794" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='794'%20height='868'&gt;&lt;/svg&gt;" width="794"/>
+ </figure>
+ <p>
+  正所谓人红是非多，关于区块链以及数字货币的争论一直不断。支持者认为区块链将会是有一项
+  <b>
+   改变世界
+  </b>
+  的新技术，而反对者则认为它不过是又一个更高级的
+  <b>
+   庞氏骗局
+  </b>
+  罢了。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-01db2d780c2302eb309bc88edd40c68a_r.jpg" data-rawheight="406" data-rawwidth="720" data-size="normal" src="https://pic2.zhimg.com/v2-01db2d780c2302eb309bc88edd40c68a_b.jpg" width="720"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-01db2d780c2302eb309bc88edd40c68a_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-01db2d780c2302eb309bc88edd40c68a_r.jpg" data-rawheight="406" data-rawwidth="720" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='720'%20height='406'&gt;&lt;/svg&gt;" width="720"/>
+ </figure>
+ <p>
+  我觉得，对于一个新兴事物，没必要过早地下结论。尤其在还不了解它的情况下，就凭自己的固有观念来站队打标签，这是很不明智的。
+ </p>
+ <p>
+  于是，和你们学习Python一样，我也在不断学习新的技术，而区块链就是我最近关注较多的一项。在这里分享下我对区块链的一些认识和理解。
+ </p>
+ <p>
+  说区块链就不能不说比特币。它们好像鸡和蛋的关系：
+  <b>
+   区块链是比特币的技术基础，但区块链的相关研究却是由比特币开始
+  </b>
+  。
+ </p>
+ <p>
+  比特币的特殊之处在于，它通过区块链实现了一种新的
+  <b>
+   记账方式
+  </b>
+  ：除了创世区块外，每个账本（区块）都记录了上一个账本的
+  <b>
+   特征信息
+  </b>
+  （哈希值），一个个账本构成了一整个链条。同时这个链条存在于整个网络的每个人手上。这样一来，如果要修改已有的数据，就会导致后续账本上的信息都不对了。如果你想对以前的一笔交易动手脚，则必须把后续账本上的记录都修改掉，并得到其他人的认可。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-1f4a344b91f49006edde013a51752fa3_r.jpg" data-rawheight="441" data-rawwidth="1080" data-size="normal" src="https://pic1.zhimg.com/v2-1f4a344b91f49006edde013a51752fa3_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-1f4a344b91f49006edde013a51752fa3_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-1f4a344b91f49006edde013a51752fa3_r.jpg" data-rawheight="441" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='441'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  而比特币的另一项设计，就是每个账本上必须附带一个特殊的数字，这个数字的特点是难以计算但很容易验证。计算这个数字的过程就是我们常听到的“挖矿”。所以挖矿并不是指挖比特币，而是为了记账。只不过对于成功算出数字的人，会给予一定比特币的奖励。这个精妙的设计，使得前面说的篡改记录变得不可能—你无法拥有足够的计算能力去修改这些账本，这保证了整个链条的可信。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-f46358a9fcfbfd3b8d47077b744a9cca_r.jpg" data-rawheight="447" data-rawwidth="660" data-size="normal" src="https://pic3.zhimg.com/v2-f46358a9fcfbfd3b8d47077b744a9cca_b.jpg" width="660"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-f46358a9fcfbfd3b8d47077b744a9cca_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-f46358a9fcfbfd3b8d47077b744a9cca_r.jpg" data-rawheight="447" data-rawwidth="660" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='660'%20height='447'&gt;&lt;/svg&gt;" width="660"/>
+ </figure>
+ <p>
+  上图是
+  <b>
+   哈希算法
+  </b>
+  的示意图。假设我们想找到一个数字，使它加上账本上的信息，能满足算出的哈希值以4个0开头，是非常耗时的（挖矿）；但如果给定了数据，验证它的哈希值是否以4个0开头，则非常容易（验证）。
+ </p>
+ <p>
+  比特币没有我们通常意义的账户，它的账本上的内容是一条条
+  <b>
+   转账记录
+  </b>
+  ，收款人是一个个
+  <b>
+   数字地址
+  </b>
+  。除了持有地址对应口令的人之外，无法知道这些地址的主人是谁。因此比特币交易从技术上是
+  <b>
+   匿名的
+  </b>
+  。只要你有口令，你就能转走里面的比特币。丢了口令，你的币就再也找不回来了。
+ </p>
+ <p>
+  综上，
+  <b>
+   比特币提供了一种去中心化的、不可篡改的、匿名的记账方式
+  </b>
+  （而并非一种以实体存在的“币”，即便在网络上，也没有“一个比特币”）。而逐渐人们又发现，比特币背后的区块链蕴含着更大的想象空间。
+ </p>
+ <p>
+  <b>
+   以太坊
+  </b>
+  就是
+  <b>
+   区块链
+  </b>
+  的另一个热门应用。它最大的优势是提供了“
+  <b>
+   智能合约
+  </b>
+  ”。如果说，比特币解决了交易记录的可靠性问题，那么智能合约就更进一步，避免了赖账的问题。
+ </p>
+ <p>
+  智能合约相当于一段代码，它可以像交易记录一样被添加到区块链上，又可以
+  <b>
+   在条件满足时被触发执行
+  </b>
+  。这从技术上解决了交易双方的信任问题，提供了点对点的合约，没有中间商赚差价。以太坊也不再是一个单纯的账本，而成为一个去中心化的应用平台。在这个平台之上，开发可以构建更加复杂分布式应用，无需自行实现即可拥有区块链的功能。
+ </p>
+ <p>
+  从程序员的视角来看，以太坊是一个
+  <b>
+   虚拟机
+  </b>
+  。在这个虚拟机之上，我们可以用代码开发自己程序（智能合约）。写好的程序被上传到区块链上，等待条件触发执行。前面说过，区块链的产生是需要有人来计算的，因此在以太坊
+  <b>
+   部署和执行代码需要支付费用（以太币）
+  </b>
+  ，以维持这个系统。
+ </p>
+ <p>
+  以太坊使用的开发语言叫
+  <b>
+   Solidity
+  </b>
+  ，它与 JavaScript 类似，也借鉴了 C++ 和 Python。它因以太坊而生，因此是面向合约的，并自带支付功能。咱们作为一个编程类的干货公众号，此处必须得来一段代码了。
+ </p>
+ <blockquote>
+  <i>
+   Talk is cheap. Show me the code.
+  </i>
+ </blockquote>
+ <p>
+  写一个 Solidity 的 HelloWorld 并不难。我们在官方文档的例子上稍作修改：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-js"><span></span><span class="nx">pragma</span> <span class="nx">solidity</span> <span class="o">^</span><span class="mf">0.4</span><span class="p">.</span><span class="mi">10</span><span class="p">;</span>
+
+<span class="nx">contract</span> <span class="nx">HelloWorld</span> <span class="p">{</span>
+  <span class="nx">string</span> <span class="nx">greeting</span><span class="p">;</span>
+
+  <span class="kd">function</span> <span class="nx">set</span><span class="p">(</span><span class="nx">string</span> <span class="nx">s</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
+    <span class="nx">greeting</span> <span class="o">=</span> <span class="nx">s</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">function</span> <span class="nx">get</span><span class="p">()</span> <span class="kr">public</span> <span class="nx">constant</span> <span class="nx">returns</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">greeting</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+ </div>
+ <p>
+  这是一段很基础的面向对象代码，
+  <b>
+   合约（contract）
+  </b>
+  HelloWorld 有一个变量 greeting，get/set 两个方法分别获取和修改这个变量。第一行 pragma 则是指明使用的 solidity 版本。
+ </p>
+ <p>
+  要执行这段代码，可以使用在线开发环境
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//remix.ethereum.org" rel="nofollow noreferrer" target="_blank">
+   remix.ethereum.org
+  </a>
+  。将代码复制到编辑区，点击“
+  <b>
+   Compile
+  </b>
+  ”-“
+  <b>
+   Start to compile
+  </b>
+  ”，就得到了编译好的可执行代码。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-486d9bf1e4e1944ac81a1592775f7e9f_r.jpg" data-rawheight="438" data-rawwidth="1080" data-size="normal" src="https://pic1.zhimg.com/v2-486d9bf1e4e1944ac81a1592775f7e9f_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-486d9bf1e4e1944ac81a1592775f7e9f_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-486d9bf1e4e1944ac81a1592775f7e9f_r.jpg" data-rawheight="438" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='438'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  在“
+  <b>
+   Run
+  </b>
+  ”页面，选择“
+  <b>
+   JavaScript VM
+  </b>
+  ”作为环境。
+  <b>
+   Account
+  </b>
+  中，已经为我们准备好了几个余额（以太币）充足的账号。点击“
+  <b>
+   Create
+  </b>
+  ”，合约就被部署到了区块链上，而相应的账号也被扣去部署费用。同时，下方出现我们定义的 set/get 方法。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-1788e317af9291ac965fe4dd06f9ea8b_r.jpg" data-rawheight="1038" data-rawwidth="720" data-size="normal" src="https://pic4.zhimg.com/v2-1788e317af9291ac965fe4dd06f9ea8b_b.jpg" width="720"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-1788e317af9291ac965fe4dd06f9ea8b_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-1788e317af9291ac965fe4dd06f9ea8b_r.jpg" data-rawheight="1038" data-rawwidth="720" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='720'%20height='1038'&gt;&lt;/svg&gt;" width="720"/>
+ </figure>
+ <p>
+  在“Set”后面的框里输入
+  <u>
+   "Hello World, Crossin"
+  </u>
+  （同py2一样，别少了英文引号），点击“Set”，账号再次被扣去执行的费用。从控制台可以看到合约执行的详细信息。
+ </p>
+ <p>
+  点击“Get”，则会看到我们刚刚写入的
+  <u>
+   Hello World, Crossin
+  </u>
+  。因为 Get 定义的是
+  <b>
+   常函数（constant）
+  </b>
+  ，不会修改区块链中的数据，因此不消耗费用。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-7710e84c7171ab6a7c3c67e3cd2a3da6_r.jpg" data-rawheight="599" data-rawwidth="1080" data-size="normal" src="https://pic4.zhimg.com/v2-7710e84c7171ab6a7c3c67e3cd2a3da6_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-7710e84c7171ab6a7c3c67e3cd2a3da6_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-7710e84c7171ab6a7c3c67e3cd2a3da6_r.jpg" data-rawheight="599" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='599'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  这就是用 solidity 实现的一个最简单的智能合约。
+ </p>
+ <p>
+  看到这里，你是否对区块链有了更多的认识？
+ </p>
+ <p>
+  但所谓术业有专攻，在区块链领域，我也只是一个学习者。理解上若有偏差，欢迎大家留言指正和讨论。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   精选
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   Python
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   问答
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/36064871">
+   Python单词表
+  </a>
+ </p>
+ <p>
+  欢迎关注：
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+</div></body></html>

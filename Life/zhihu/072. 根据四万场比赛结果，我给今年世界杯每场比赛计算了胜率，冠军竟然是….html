@@ -1,0 +1,367 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>根据四万场比赛结果，我给今年世界杯每场比赛计算了胜率，冠军竟然是…</h1><div class="RichText ztext Post-RichText">
+ <p>
+  四年一度的世界杯本周就要开赛啦！如果你和我一样是一名伪球迷，请先了解以下注意事项：
+ </p>
+ <ol>
+  <li>
+   本届世界杯是在俄罗斯举办
+  </li>
+  <li>
+   一共32只球队分8个小组，每组前2名进入淘汰赛
+  </li>
+  <li>
+   比赛持续一个月
+  </li>
+  <li>
+   共64场比赛在俄罗斯多个城市举行
+  </li>
+  <li>
+   没有中国队，因为没出线
+  </li>
+  <li>
+   没有意大利队、荷兰队，因为也没出线
+  </li>
+  <li>
+   是国家队间比赛，因此没有巴萨、皇马、曼联、拜仁……
+  </li>
+  <li>
+   比赛常规时间，上下半场各45分钟
+  </li>
+  <li>
+   淘汰赛阶段常规时间打平，进入30分钟加时赛，再打平才是点球大战
+  </li>
+  <li>
+   梅西是阿根廷的，C罗是葡萄牙的，内马尔是巴西的，他们都不是西班牙的
+  </li>
+  <li>
+   大罗、小罗、卡卡、贝克汉姆都不参加
+  </li>
+  <li>
+   世界杯是足球比赛，没有哈登、库里、杜兰特
+  </li>
+ </ol>
+ <p>
+  <br/>
+ </p>
+ <p>
+  每到世界杯，一项保留节目就是预测当年冠军，各路大神啦、名嘴啦、章鱼啦、猫猫狗狗啦都少不了。这次我也来预测一把。但我不懂球啊怎么办？没关系，我可以用程序！（反正都是蒙呗）
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <b>
+   数据来源
+  </b>
+ </p>
+ <p>
+  这份数据来自
+  <b>
+   Kaggle
+  </b>
+  ，是从1872年到2018年共38929场比赛的结果。我们这次就用这份数据作为预测的基础。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-2e7da092af2b2afa6d75a42423e55dc6_r.jpg" data-rawheight="347" data-rawwidth="1080" data-size="normal" src="https://pic3.zhimg.com/v2-2e7da092af2b2afa6d75a42423e55dc6_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-2e7da092af2b2afa6d75a42423e55dc6_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-2e7da092af2b2afa6d75a42423e55dc6_r.jpg" data-rawheight="347" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='347'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/v2-d6e39ef69358d1afbfe7e656b1d1f0ef_r.jpg" data-rawheight="437" data-rawwidth="1080" data-size="normal" src="https://pic1.zhimg.com/v2-d6e39ef69358d1afbfe7e656b1d1f0ef_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-d6e39ef69358d1afbfe7e656b1d1f0ef_b.jpg" data-original="https://pic1.zhimg.com/v2-d6e39ef69358d1afbfe7e656b1d1f0ef_r.jpg" data-rawheight="437" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='437'&gt;&lt;/svg&gt;" width="1080"/>
+  <figcaption>
+   https://www.kaggle.com/martj42/international-football-results-from-1872-to-2017/data
+  </figcaption>
+ </figure>
+ <p>
+  可从文末项目中获取。
+ </p>
+ <p>
+  另外介绍下 Kaggle，它一个数据科学竞赛平台，强烈建议研究数据分析、机器学习这方面的同学多上去玩耍。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <b>
+   建立模型
+  </b>
+ </p>
+ <p>
+  有了这么多历史比赛数据，要怎么来预测呢？我建立了如下几条规则：
+ </p>
+ <ol>
+  <li>
+   太久远的数据对于当下球队的参考价值有限，所以设定一个
+   <b>
+    起始年限
+   </b>
+  </li>
+  <li>
+   查找对阵双方从起始年限至今的对战数据，并计算
+   <br/>
+   <b>
+    胜利概率=(胜利场次+平局场次/2)/总场次
+   </b>
+  </li>
+  <li>
+   小组赛阶段，胜利概率超过一定阈值（比如0.7）的球队赢，否则为平局
+  </li>
+  <li>
+   淘汰赛阶段，胜利概率大的球队赢
+  </li>
+  <li>
+   如果两队从起始年限至今没有进行过比赛，就
+   <b>
+    往前再多选取N年
+   </b>
+   的数据（一般出现在参加大赛较少的球队）
+  </li>
+  <li>
+   如果仍然没有交手过，则以各自对阵本届杯赛其余所有球队的战绩为基础，分别计算胜利概率。概率高的球队胜。但如果是小组赛，概率差必须高过一定阈值（比如0.1），否则为平局
+  </li>
+ </ol>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <b>
+   赛程模拟
+  </b>
+ </p>
+ <p>
+  基于以上的规则模型，我们导入数据，通过 Python 程序模拟本届世界杯32支球队的64场比赛。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-74f73831829cd55acafe018792f3c217_r.jpg" data-rawheight="938" data-rawwidth="1080" data-size="normal" src="https://pic3.zhimg.com/v2-74f73831829cd55acafe018792f3c217_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-74f73831829cd55acafe018792f3c217_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-74f73831829cd55acafe018792f3c217_r.jpg" data-rawheight="938" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='938'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  这样就“预测”了比赛的结果。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <b>
+   预测结果
+  </b>
+ </p>
+ <p>
+  所以，究竟这份代码 run 出怎样的结果？
+ </p>
+ <p>
+  因为不同的起始年限和平局阈值会得到不一样的结果。我尝试使用
+  <b>
+   2006~2016
+  </b>
+  11个不同年限，和4组N的取值，得到共44组比赛结果。最终夺冠的次数是：
+ </p>
+ <blockquote>
+  <b>
+   巴西 23 次
+  </b>
+  <br/>
+  <b>
+   西班牙 12 次
+  </b>
+  <br/>
+  <b>
+   德国 6 次
+  </b>
+  <br/>
+  <b>
+   英格兰 3 次
+  </b>
+ </blockquote>
+ <p>
+  看来，巴西队还是毋庸置疑的夺冠热门。难怪各大菠菜网站都给他们开出最低的赔率。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-c9030ba3886f4be53eb95f65004a6f8b_r.jpg" data-rawheight="383" data-rawwidth="743" data-size="normal" src="https://pic3.zhimg.com/v2-c9030ba3886f4be53eb95f65004a6f8b_b.jpg" width="743"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-c9030ba3886f4be53eb95f65004a6f8b_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-c9030ba3886f4be53eb95f65004a6f8b_r.jpg" data-rawheight="383" data-rawwidth="743" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='743'%20height='383'&gt;&lt;/svg&gt;" width="743"/>
+ </figure>
+ <p>
+  但是抛开巴西队不谈，在我的结果中，英格兰队的表现异常得好。这主要源于他们近几年对战巴西的良好战绩：1胜2平0负。而相比之下，阿根廷恐怕又要“没戏”了。
+ </p>
+ <p>
+  另外，
+  <b>
+   塞内加尔
+  </b>
+  和
+  <b>
+   伊朗
+  </b>
+  值得关注下，他们这几年对战其他球队的战绩不错，或许会成为黑马：
+ </p>
+ <blockquote>
+  2012年以来
+  <br/>
+  <br/>
+  塞内加尔 4胜3平1负
+  <br/>
+  伊朗 5胜6平3负
+ </blockquote>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <b>
+   历史战绩查询工具
+  </b>
+ </p>
+ <p>
+  当然，我这个模型是很粗糙的。不过本来嘛，足球是圆的，拿历史数据预测比赛结果也就是娱乐一下，给看球增加点乐趣。如果你有自己的规则想实现，也可以在我代码的基础上进行修改。代码和数据的获取方法见文末说明。
+ </p>
+ <p>
+  另外，我把部分数据导出，做了一个在线查询的小工具，方便你直接查询任意两支球队之间的对战历史。
+ </p>
+ <h2>
+  点击进入：
+  <b>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//lab.crossincode.com/worldcup/" rel="nofollow noreferrer" target="_blank">
+    历史战绩在线查询工具
+   </a>
+  </b>
+ </h2>
+ <p>
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-5ad1e5c1797e844b9748fefe88f62f87_r.jpg" data-rawheight="1302" data-rawwidth="748" data-size="normal" src="https://pic4.zhimg.com/v2-5ad1e5c1797e844b9748fefe88f62f87_b.jpg" width="748"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-5ad1e5c1797e844b9748fefe88f62f87_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-5ad1e5c1797e844b9748fefe88f62f87_r.jpg" data-rawheight="1302" data-rawwidth="748" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='748'%20height='1302'&gt;&lt;/svg&gt;" width="748"/>
+ </figure>
+ <p>
+  可以选择不同的年限。同时我还自创了一套“赔率”计算，以供参考。
+ </p>
+ <p>
+  <b>
+   主队综合胜率=总场数/(主队胜场+客队负场)
+  </b>
+ </p>
+ <p>
+  因为这个赔率模型基于的更多是历史战绩，而强队的对手多是强队，弱队的对手多是弱队，导致赔率上的差异并没有市面上的那么大，但总的来看也基本符合胜负关系。如果你发现有某场比赛计算出的结果和别人开出的结果差异很大，那或许这会是场会爆冷的比赛哦😏
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <b>
+   预测结果仅供参考，如有雷同纯属巧合
+  </b>
+  。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  最后，我突然想到，咱们国足对这32支球队的战绩如何呢？如果在另一个平行宇宙中有幸参赛，大概会是个什么结果？于是……
+ </p>
+ <blockquote>
+  2014年以来：2胜, 5平, 8负
+  <br/>
+  2002年以来：8胜, 19平, 35负
+  <br/>
+  似乎只有和从未交过手的巴拿马在战绩上可以一战。
+ </blockquote>
+ <p>
+  <br/>
+ </p>
+ <p>
+  好吧，当我没说。还是让我们安心享受世界杯的欢乐吧！
+ </p>
+ <p>
+  <br/>
+ </p>
+ <h2>
+  本文中使用到的数据和代码，可在公众号（
+  <b>
+   Crossin的编程教室
+  </b>
+  ）里获取，回复关键字
+  <b>
+   世界杯
+  </b>
+ </h2>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   精选
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   Python
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   问答
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/36064871">
+   Python单词表
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36538511">
+   区块链
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36581953">
+   人工智能
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/30932804">
+   双11
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/29043669">
+   嘻哈
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/28726244">
+   爬虫
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37430943">
+   排序算法
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37664927">
+   我用Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37814595">
+   高考
+  </a>
+ </p>
+ <p>
+  欢迎搜索及关注：
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+</div></body></html>

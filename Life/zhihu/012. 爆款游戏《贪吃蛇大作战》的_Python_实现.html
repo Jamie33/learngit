@@ -1,0 +1,156 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>爆款游戏《贪吃蛇大作战》的_Python_实现</h1><div class="RichText ztext Post-RichText">
+ <p>
+  感觉游戏审核新政实施后，国内手游市场略冷清，是不是各家的新游戏都在排队等审核。媒体们除了之前竞相追捧《Pokemon Go》热闹了一把，似乎也听不到什么声音了。直到最近几天，突然听见好几人都提到同一个游戏，网上还有人表示朋友圈被它刷屏了。（不过现在微信已经悍然屏蔽了它的分享）
+ </p>
+ <p>
+  这个游戏就是现在iOS免费榜排名第一的《贪吃蛇大作战》。一个简单到不行的游戏，也不知道怎么就火了。反正一款游戏火了，各路媒体、专家总能说出种种套路来，所以我就不发表意见了。不过这实在是一个挺好实现的游戏，于是一时技痒，拿 Python 做了一个实现。
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mmbiz.qpic.cn/mmbiz_gif/icic13vic5h8JHuibvKGI3VcWVX0TYGFSKRWFE1VTlAN2lS9sW3qDuKgx0LicZgiaG6NnTvVdKFJzrjFRlglEJPVicycg/0%3Fwx_fmt%3Dgif%26tp%3Dwebp%26wxfrom%3D5%26wx_lazy%3D1" rel="nofollow noreferrer" target="_blank">
+   【动图】
+  </a>
+  |
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//v.qq.com/iframe/player.html%3Fvid%3Df1309ieuz4y%26width%3D670%26height%3D502.5%26auto%3D0" rel="nofollow noreferrer" target="_blank">
+   【演示视频】
+  </a>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/da2d06653124cc1b421d5f8d329cf00a_r.jpg" data-rawheight="360" data-rawwidth="576" data-size="normal" src="https://pic1.zhimg.com/da2d06653124cc1b421d5f8d329cf00a_b.jpg" width="576"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/da2d06653124cc1b421d5f8d329cf00a_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/da2d06653124cc1b421d5f8d329cf00a_r.jpg" data-rawheight="360" data-rawwidth="576" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='576'%20height='360'&gt;&lt;/svg&gt;" width="576"/>
+ </figure>
+ <p>
+  demo 花了大约一整天时间，实现了基本效果（没做加速）。公众号（crossincode）里回复『 贪吃蛇 』可获取源代码。
+ </p>
+ <p>
+  使用了 cocos2d-python 作为游戏引擎。如果要运行代码，需要安装 Python 2.7 和 cocos2d 库。
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>pip install cocos2d
+</code></pre>
+ </div>
+ <p>
+  代码实现上的几个难点：
+ </p>
+ <ul>
+  <li>
+   运动方向的控制。键盘上只有上下左右四个键，要转换到 360 度的运动方向，需要用到不少三角函数运算。
+  </li>
+  <li>
+   蛇身子的处理。这里我用了一个路径列表，记录蛇头经过的位置，身子则根据路径中的对应数据更新位置。
+  </li>
+  <li>
+   电脑的运动策略。这里我用的方法是，对于在头部范围内的其他蛇身，计算蛇身与蛇头连线的角度，和自身的运动方向进行比较，如果角度相差很小，就意味着会撞上，于是调整当前运动方向。
+  </li>
+  <li>
+   运行效率。最大的效率瓶颈在于屏幕上的图片绘制。最开始完成的版本，场上蛇身总量达到 300 左右就卡顿严重了。后来用 cocos 的 BatchNode 替代直接添加，大大减少了图片绘制次数，可保证游戏顺畅运行。但如果玩到分钟很高，依然会出现效率问题，暂时没有解决。
+  </li>
+ </ul>
+ <p>
+  平心而论，Python 并不适合做商业游戏，而用来学习或者开发原型倒也是个不错的选择。现在很流行的手机游戏开发引擎 cocos2d-x，最初就是源于 Python 的版本，也就我这次使用的 cocos2d 库。虽然在功能上有一定差距，但引擎结构是非常接近的，包括其中场景和层的概念、动作、事件、刷新等。
+ </p>
+ <p>
+  只是心血来潮，随手写写，代码没怎么优化，注释也基本没有。大家凑合看看。如果点赞、转发的人多，之后会考虑继续优化，并专门做一个系列教程。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <b>
+   <u>
+    公众号（crossincode）里回复『 贪吃蛇 』可获取 demo 源代码。
+   </u>
+  </b>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <u>
+   其他文章及回答：
+  </u>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22261597">
+   Python 与 Excel 不得不说的事 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21886694">
+   想用 Python 做数据分析？先玩玩这个再说 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21624000">
+   用 Python 实现你的量化交易策略 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20683456?refer=crossin">
+   编程初学者如何使用搜索引擎 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20721034?refer=crossin">
+   如何直观地理解程序的运行过程？- Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21304838">
+   如何在 Python 中使用断点调试 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21057822">
+   Python 抓取网页乱码原因分析 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21438729">
+   极简 Github 上手教程 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  微信ID：crossincode
+ </p>
+ <p>
+  论坛：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室
+  </a>
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>

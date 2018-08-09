@@ -1,0 +1,231 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>编程新手：看懂很多示例，却依然写不好一个程序</h1><div class="RichText ztext Post-RichText">
+ <p>
+  最近在和学员的沟通中，发现不少初学者面临这样一个问题：了解了一些基本的语法，看得懂书上的示例，但是面临一个新的编程问题时，依然感到无从下手。究其原因，主要是两个方面：
+ </p>
+ <ol>
+  <li>
+   整体上，不晓得如何把问题转化为程序语言。
+  </li>
+  <li>
+   细节上，不知道用什么方法去实现某个功能。
+  </li>
+ </ol>
+ <p>
+  比如我们码上行动的编程实例里有一道题，大意是：
+ </p>
+ <blockquote>
+  生成 200 个优惠码，每个优惠码由8位字母组成（包括大小写）。
+ </blockquote>
+ <p>
+  当然题目本身难度不高，和我们公众号
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//mp.weixin.qq.com/s/eq_XVoMoKgjAQ_koyNUWqQ" rel="nofollow noreferrer" target="_blank">
+   【每周一坑】
+  </a>
+  栏目里的题相比，这个算是小 case 了。不过如果你是一个刚刚接触编程不久，才掌握条件判断、循环、列表的新手来说，还是有点小挑战的。
+ </p>
+ <p>
+  以这题来说，有人是直接对生成一串字符没有想法，不知道怎么办。更多的人可能会有些思路，但在具体的环节，比如如何产生随机字母、如何拼成字符串、如果判断重复上遇到麻烦。从学员的评论中可以看出，很多人惊呼：原来还有 xxx 这个函数、还有 yyy 这个模块，完全都不知道。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  那么在开发程序的时候，怎么去解决类似的问题，并且找到合适的方法呢？我简单分享下几点经验：
+ </p>
+ <h2>
+  <b>
+   1. 学会分解问题
+  </b>
+ </h2>
+ <p>
+  有个关于数学家当消防员的笑话：
+ </p>
+ <blockquote>
+  消防队长问：如果巷子里一个货仓着火了怎么？数学家答：把软管接到消火栓上，打开水龙头，把火浇灭。队长说：完全正确！那如果你来到巷子发现货仓没着火怎么处理？数学家答：把货仓点着，这样问题简化到一个已知问题上了。
+ </blockquote>
+ <p>
+  抛开笑话本身的夸张，作为一个程序员，你也需要有类似的逻辑思维：分解和转化问题。
+ </p>
+ <ul>
+  <li>
+   生成 200 个优惠码 =&gt; 生成 1 个优惠码，循环 200 次
+  </li>
+  <li>
+   生成 1 个 8 位优惠码 =&gt; 生成 1 个字符，循环 8 次
+  </li>
+  <li>
+   生成 1 个随机字符 =&gt; 生成一个随机数，转成字符
+  </li>
+ </ul>
+ <p>
+  生成一个随机数，这是个我们很早就提过的一个问题，用 random 模块即可实现。那么这个问题的思路就已经比较清楚了。剩下的就是处理好过程中的细节：如果从数字转换为字符、如何循环、如何拼接等等。
+ </p>
+ <p>
+  不过肯定会有同学说，我都不知道数字还能转成字符。也会有同学表示，其实根本不用绕这个弯，明明可以直接生成随机的字符。没错，就和点燃货仓的数学家一样，我们这个逻辑没问题，但实际看来还是有点二。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  所以另外一个重要的经验：
+ </p>
+ <h2>
+  <b>
+   2. 学会使用搜索
+  </b>
+ </h2>
+ <p>
+  虽然大多数程序员在大学里的专业属于计算机科学（science），但在企业中的角色却是工程师（engineer）。也就是说，编程是一项更偏向实践而非理论的工作。我们的目标是解决问题，需要掌握的是解决问题的手段和方法。对于程序员来说，搜索就是非常有效的一种寻找解法的途径。
+ </p>
+ <p>
+  但可能很多没有编程经验的同学会觉得，学编程时通过搜索找到一个解法是一种“作弊”的方式，自己并没有真正理解怎么解决问题。这种想法大可不必。即使经验丰富的程序员，也会在处理问题之前，通过搜索来寻找有没有更合适的解决方案。通过搜索找到解法这个行为本身会比写出这个小程序对你来说更有价值。这里我曾写过一篇，关于如何使用搜索引擎：
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20683456">
+   编程初学者如何使用搜索引擎
+  </a>
+  。
+ </p>
+ <p>
+  就优惠码这个问题来说，通过一些简单的搜索，就可以发现不少类似的问题解法。当然你不能去搜“如何制作 8 位优惠码”，而是搜“Python 生成随机字符串”这样的关键字。然后你就了解到：可以用 random 的 sample、shuffle，另外还有 string 这种模块可以利用。
+ </p>
+ <p>
+  顺便扯远些。有同学曾经问过：你们的教程是不是包括了找工作需要的知识点。这也是一种类似的误区。我们不是去参加高考，按照考纲复习完备，然后再上考场。现在的计算机行业可以说比任何一个行业的更新都要快，你永远不可能“完全”掌握某个领域的知识之后再去开发，你需要不断去面对新的技术和新的问题。所以编程相关的知识是变化的，要掌握的是不变的解决方法。
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="355" data-rawwidth="394" src="https://pic1.zhimg.com/v2-4fda358279c7058084c2e5a72d1817e0_b.jpg" width="394"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic1.zhimg.com/v2-4fda358279c7058084c2e5a72d1817e0_b.jpg" data-rawheight="355" data-rawwidth="394" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='394'%20height='355'&gt;&lt;/svg&gt;" width="394"/>
+ </figure>
+ <p>
+  况且对于任何一个领域来说，知识的分布就像这张图，当你越进一步，你面对的知识空白就越多。这也是为什么很多同学学完基础之后，表示找不到一本合适的教材来进阶。因为根本就不存在这样的教材。在初级阶段，你提升能力的模式是
+  <b>
+   学习技能-&gt;拿技能去练习
+  </b>
+  ，而到了一定程度之后，提升能力的方式则必须是
+  <b>
+   遇到问题-&gt;想办法去解决问题
+  </b>
+  ，是一个由被动变主动的过程。所以，想更进一步的同学，不要去找教材，而是去找问题，再用好“搜索”这个伟大工具去解决它。
+ </p>
+ <p>
+  我对待编程学习者也是这样：我不是给你教材，全互联网的资源都应该是你的教材。我只给你问题，以及如何去找解决问题的方法。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <h2>
+  <b>
+   3. 学会查文档
+  </b>
+ </h2>
+ <p>
+  在程序员届有这样一个词：
+  <b>
+   RTFM
+  </b>
+  （Read The Fuxxing Manual，去读TMD文档手册）
+ </p>
+ <p>
+  类似还有一个
+  <b>
+   STFW
+  </b>
+  （Search The Fuxxing Web），就是对应我前面说的第 2 点。
+ </p>
+ <p>
+  我曾经一位老师指着一本厚厚的编程教材跟我们说：你们根本不用去记这些函数，只要用的时候知道去哪里查就足够了。
+ </p>
+ <p>
+  搜索可以告诉你有哪些解决方法，而官方的文档则是更明确的告诉你该怎样使用，参数有什么限制，需要注意的地方等等。唯一遗憾的是，大多数 Fuxxing Manual 都是英文写的。所以你说，英语不好到底能不能学编程。我只能说，可以，但强烈建议你好好补一下英语。（预告一下：我们已经整理了一份适合 Python 学习的英语词汇表，并做成了单词本，即将放出。）
+ </p>
+ <p>
+  还是回到这道题目，通过 Python 官方文档，你就会知道 random 模块还能做哪些随机操作，以及 string 模块可以生成哪些字符串。
+ </p>
+ <p>
+  我没有找到特别好的 Python 官方文档中文版，
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//usyiyi.cn/" rel="nofollow noreferrer" target="_blank">
+   一译中文文档
+  </a>
+  这个算是相对新且完整的。如果各位有知道更好的，欢迎留言指出。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  最后，还有提一点老生常谈：
+ </p>
+ <h2>
+  <b>
+   4. 不断练习，积累经验
+  </b>
+ </h2>
+ <p>
+  我已说过无数遍：编程如乐器，学会语法只是开始，还需要不断练习来掌握。每个程序员都是一行行代码堆出来的。如果你刚学编程不久，觉得自己缺少编程思维，经常感叹原来还有这种操作，写长一点代码就老出 bug 的话，相信我，你只是写得太少，看得太少。不用妄自菲薄，也不用急于求成，踏踏实实地先多练一练。等你把一本教程的示例代码都自己在电脑上输入运行一遍之后，我们再来谈谈什么是编程思维。这不是什么我独创的奇葩教学法，大多数程序员和计算机教师应该都认同这点。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  扯了不少，希望对需要的人有所帮助。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+ </p>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/26066151">
+   喏，你们要的 PyCharm 快速上手指南
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   给伸手党的福利：Python 新手入门引导
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25499306">
+   如何用100行Python代码做出魔性声控游戏“八分音符酱”
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？
+  </a>
+ </p>
+ <h2>
+  Crossin的编程教室
+ </h2>
+ <p>
+  微信公众号ID：crossincode
+  <br/>
+  网站：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/" rel="nofollow noreferrer" target="_blank">
+   crossincode.com
+  </a>
+  <br/>
+  QQ群：660296565
+  <br/>
+  微信加群：crossin123
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="258" data-rawwidth="258" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>

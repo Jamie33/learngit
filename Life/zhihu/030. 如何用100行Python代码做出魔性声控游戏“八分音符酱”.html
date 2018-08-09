@@ -1,0 +1,244 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>如何用100行Python代码做出魔性声控游戏“八分音符酱”</h1><div class="RichText ztext Post-RichText">
+ <p>
+  最近几天，一款魔性的小游戏在微博上刷屏了，各大平台的主播也纷纷如感染病毒一样直播自己怎么玩这个游戏（被游戏玩）。
+ </p>
+ <p>
+  这个游戏叫做《不要停！八分音符酱♪》。它是一款来自岛国的恶搞游戏，主角是一只可爱的小生物 — 八分音符酱，玩家通过对它喊话来控制其前进和跳跃。
+ </p>
+ <p>
+  因为操作方式太奇葩，所以玩游戏的人本身似乎会比游戏更好玩……
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-040bcd606434414022b8cd948d8f668c_r.jpg" data-rawheight="468" data-rawwidth="750" data-size="normal" src="https://pic3.zhimg.com/v2-040bcd606434414022b8cd948d8f668c_b.jpg" width="750"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-040bcd606434414022b8cd948d8f668c_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-040bcd606434414022b8cd948d8f668c_r.jpg" data-rawheight="468" data-rawwidth="750" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='750'%20height='468'&gt;&lt;/svg&gt;" width="750"/>
+ </figure>
+ <p>
+  不过这不是我今天重点。我们是编程教室啊，肯定不能像游戏主播一样打个游戏卖个萌就完啦！
+  <br/>
+ </p>
+ <p>
+  所以，我就用了大约 100 行 Python 代码，自己实现了一个。而且，还配了个超霸气的主角：海中霸主皮皮虾！
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-17f91016b3d0460d05edb2c02da5f72f_r.jpg" data-rawheight="360" data-rawwidth="640" data-size="normal" src="https://pic4.zhimg.com/v2-17f91016b3d0460d05edb2c02da5f72f_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-17f91016b3d0460d05edb2c02da5f72f_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-17f91016b3d0460d05edb2c02da5f72f_r.jpg" data-rawheight="360" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='360'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  先上效果（优化后的版本）：
+  <br/>
+ </p>
+ <a class="video-box" data-lens-id="" data-name="魔性声控游戏 - 暴走皮皮虾 - 腾讯视频" data-poster="//puui.qpic.cn/qqvideo_ori/0/z0380ogn3e7_228_128/0" data-video-id="" data-video-playable="false" href="https://link.zhihu.com/?target=https%3A//v.qq.com/x/page/z0380ogn3e7.html" target="_blank">
+  <img class="thumbnail" src="//puui.qpic.cn/qqvideo_ori/0/z0380ogn3e7_228_128/0"/>
+  <span class="content">
+   <span class="title">
+    魔性声控游戏 - 暴走皮皮虾 - 腾讯视频
+    <span class="z-ico-extern-gray">
+    </span>
+    <span class="z-ico-extern-blue">
+    </span>
+   </span>
+   <span class="url">
+    <span class="z-ico-video">
+    </span>
+    https://v.qq.com/x/page/z0380ogn3e7.html
+   </span>
+  </span>
+ </a>
+ <p>
+  <br/>
+ </p>
+ <p>
+  最初的仿制版本用了大约100行 Python 代码，花了半天时间。后来又花一天时间，根据自己的恶趣味，加了点更魔性的功能。另外加了个联机的排行榜。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-85857cdbefb0acdae5951ae75797cedc_r.jpg" data-rawheight="1004" data-rawwidth="2560" data-size="normal" src="https://pic3.zhimg.com/v2-85857cdbefb0acdae5951ae75797cedc_b.jpg" width="2560"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-85857cdbefb0acdae5951ae75797cedc_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-85857cdbefb0acdae5951ae75797cedc_r.jpg" data-rawheight="1004" data-rawwidth="2560" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='2560'%20height='1004'&gt;&lt;/svg&gt;" width="2560"/>
+ </figure>
+ <p>
+  执行文件和代码都上传了，不用安装 Python 也可以玩。具体细节可以对照源码看，代码不长。
+  <br/>
+ </p>
+ <p>
+  这里简单说下实现的核心思路，主要用到两个模块：
+ </p>
+ <h2>
+  cocos2d-python
+ </h2>
+ <p>
+  这个之前的贪吃蛇大作战 Python 版就用到。参见
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22339492">
+   爆款游戏《贪吃蛇大作战》的 Python 实现 - 知乎专栏
+  </a>
+  。负责游戏的主循环、图像渲染、事件响应等。
+ </p>
+ <h2>
+  pyaudio
+ </h2>
+ <p>
+  基于开源声音库 PortAudio 的 Python 模块。靠它实现这个游戏的核心玩法：声控。
+ </p>
+ <p>
+  有了这两样东西，其他就没什么特别的了。如果你用 cocos2d 开发过小游戏，剩下的就是一些常规工作。通过几个代码片段粗略地说下：
+ </p>
+ <ul>
+  <li>
+   定义角色，添加在场景上
+  </li>
+ </ul>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="c1"># 定义 sprite</span>
+<span class="k">class</span> <span class="nc">PPX</span><span class="p">(</span><span class="n">cocos</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">Sprite</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PPX</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="s1">'ppx.png'</span><span class="p">)</span>
+        <span class="o">...</span> <span class="c1"># 略</span>
+<span class="c1"># 创建并添加</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">ppx</span> <span class="o">=</span> <span class="n">PPX</span><span class="p">()</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ppx</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <ul>
+  <li>
+   给角色增加重力的效果
+  </li>
+ </ul>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">+=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">dt</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">80</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <ul>
+  <li>
+   获取麦克风的声音
+  </li>
+ </ul>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="c1"># 初始化</span>
+<span class="n">pa</span> <span class="o">=</span> <span class="n">PyAudio</span><span class="p">()</span>
+<span class="n">SAMPLING_RATE</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">get_device_info_by_index</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="s1">'defaultSampleRate'</span><span class="p">])</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">stream</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="n">paInt16</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="n">SAMPLING_RATE</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">frames_per_buffer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">NUM_SAMPLES</span><span class="p">)</span>
+<span class="c1"># 每帧中获取音量</span>
+<span class="n">string_audio_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">NUM_SAMPLES</span><span class="p">)</span>
+<span class="n">k</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s1">'1000h'</span><span class="p">,</span> <span class="n">string_audio_data</span><span class="p">))</span>
+</code></pre>
+ </div>
+ <ul>
+  <li>
+   通过音量判断行走和跳跃
+  </li>
+ </ul>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="k">if</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">3000</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">floor</span><span class="o">.</span><span class="n">x</span> <span class="o">-=</span> <span class="nb">min</span><span class="p">((</span><span class="n">k</span> <span class="o">/</span> <span class="mf">20.0</span><span class="p">),</span> <span class="mi">150</span><span class="p">)</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="k">if</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">8000</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">ppx</span><span class="o">.</span><span class="n">jump</span><span class="p">((</span><span class="n">k</span> <span class="o">-</span> <span class="mi">8000</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.0</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  目前只是通过试验随意设置了下参数，不能保证在每台电脑上的效果。
+ </p>
+ <p>
+  这里，地面上的每个块是放在一个整体的容器里，皮皮虾的“行走”，其实是通过地面整体向后退来实现的。
+ </p>
+ <ul>
+  <li>
+   简单的碰撞检测
+  </li>
+ </ul>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="k">def</span> <span class="nf">collide</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">px</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ppx</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">floor</span><span class="o">.</span><span class="n">x</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">floor</span><span class="o">.</span><span class="n">get_children</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">px</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ppx</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="mf">0.8</span> <span class="ow">and</span> <span class="n">px</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ppx</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="mf">0.2</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">width</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ppx</span><span class="o">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">.</span><span class="n">height</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ppx</span><span class="o">.</span><span class="n">land</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+                <span class="k">break</span>
+</code></pre>
+ </div>
+ <p>
+  如果你现在对上面的代码还一脸懵逼，没关系，赶紧去看一看我们公众号里超好懂的入门教程。我们之后也还会对游戏开发、爬虫、数据分析等方面做进一步的介绍。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <u>
+   公众号（Crossin的编程教室）里回复
+   <b>
+    皮皮虾
+   </b>
+   ，获取游戏程序和源代码。
+  </u>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25109074">
+   数据分析：当赵雷唱民谣时他唱些什么？
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25208016">
+   我去扒了杜蕾斯的微博
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25009370">
+   一行代码扫出“敬业福”
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/24606846">
+   今天，你抢到票了吗？
+  </a>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <h2>
+  Crossin的编程教室
+ </h2>
+ <ul>
+  <li>
+   微信公众号ID：crossincode
+  </li>
+  <li>
+   网站：
+   <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/" rel="nofollow noreferrer" target="_blank">
+    crossincode.com
+   </a>
+  </li>
+ </ul>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>

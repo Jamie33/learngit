@@ -1,0 +1,179 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>Python_抓取网页乱码原因分析</h1><div class="RichText ztext Post-RichText">
+ <p>
+  在用 python2 抓取网页的时候，经常会遇到抓下来的内容显示出来是乱码。
+ </p>
+ <p>
+  发生这种情况的最大可能性就是编码问题：
+  <strong>
+   运行环境的字符编码和网页的字符编码不一致。
+  </strong>
+ </p>
+ <p>
+  比如，在 windows 的控制台（gbk）里抓取了一个 utf-8 编码的网站。或者，在 Mac / Linux 的终端（utf-8）里抓取了一个 gbk 编码的网站。因为多数网站采用 utf-8 编码，而不少人又是用 windows，所有这种情况相当常见。
+ </p>
+ <p>
+  如果你发现你抓下来的内容，看上去英文、数字、符号都是对的，但中间夹杂了一些乱码，那基本可以断定是此情况。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/ecb36f7b4ae0b7783dcc9537166af978_r.jpg" data-rawheight="170" data-rawwidth="578" src="https://pic1.zhimg.com/ecb36f7b4ae0b7783dcc9537166af978_b.jpg" width="578"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/ecb36f7b4ae0b7783dcc9537166af978_b.jpg" data-original="https://pic1.zhimg.com/ecb36f7b4ae0b7783dcc9537166af978_r.jpg" data-rawheight="170" data-rawwidth="578" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='578'%20height='170'&gt;&lt;/svg&gt;" width="578"/>
+ </figure>
+ <p>
+  解决这个问题的办法就是，把结果先按网页的编码方式 decode 解码成 unicode，再输出。如果不确定网页的编码，可参照以下代码：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="n">req</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s2">"http://some.web.site"</span><span class="p">)</span>
+<span class="n">info</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">charset</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">getparam</span><span class="p">(</span><span class="s1">'charset'</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">charset</span><span class="p">,</span> <span class="s1">'ignore'</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  'ignore' 参数的作用是忽略掉无法解码的字符。
+ </p>
+ <p>
+  不过这种方法不总是有效。还有种方式就是通过正则直接匹配网页代码中的编码设置：
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-html"><span></span><span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">Content-Type</span> <span class="na">content</span><span class="o">=</span><span class="s">"text/html;charset=utf-8"</span><span class="p">&gt;</span>
+</code></pre>
+ </div>
+ <br/>
+ <p>
+  除了编码问题造成乱码之外，还有种常被忽视的情况，就是
+  <strong>
+   目标网页启用了 gzip 压缩
+  </strong>
+  。压缩后的网页传输数据少了，打开速度更快。在浏览器中打开时，浏览器会根据网页的 header 信息自动做解压。但直接用代码抓取则不会。因此很可能就被搞糊涂了，为什么明明打开网页地址是对的，但程序抓取就不行。连我自己也曾经被这个问题坑过。
+ </p>
+ <p>
+  这种情况的表现是抓取的内容几乎全是乱码，甚至无法显示。
+ </p>
+ <p>
+  要判断网页是否启用了压缩并对其解压，可参考以下代码：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">gzip</span>
+<span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<span class="n">req</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s2">"http://some.web.site"</span><span class="p">)</span>
+<span class="n">info</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">encoding</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">getheader</span><span class="p">(</span><span class="s1">'Content-Encoding'</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">encoding</span> <span class="o">==</span> <span class="s1">'gzip'</span><span class="p">:</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="n">gf</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">GzipFile</span><span class="p">(</span><span class="n">fileobj</span><span class="o">=</span><span class="n">buf</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">content</span>
+</code></pre>
+ </div>
+ <br/>
+ <p>
+  在我们教室的编程实例
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com/forum.php%3Fmod%3Dviewthread%26tid%3D8" rel="nofollow noreferrer" target="_blank">
+   查天气系列(点击查看)
+  </a>
+  中，这两个问题困扰了相当多人。在此特别讲解一下。
+ </p>
+ <br/>
+ <br/>
+ <p>
+  最后，还有个“利器”要介绍一下。如果一开始就用它，你甚至不知道还有上述两个问题的存在。
+ </p>
+ <p>
+  这就是
+  <strong>
+   requests
+  </strong>
+  模块。
+ </p>
+ <p>
+  同样抓取网页，只需要：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>import requests
+print requests.get("http://some.web.site").text
+</code></pre>
+ </div>
+ <p>
+  没有编码问题，没有压缩问题。
+ </p>
+ <br/>
+ <blockquote>
+  <b>
+   This is why I love Python.
+  </b>
+ </blockquote>
+ <p>
+  至于如何安装 requests 模块，请参考之前的文章：
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20760860">
+   如何安装 Python 的第三方模块 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-bash"><span></span>pip install requests
+</code></pre>
+ </div>
+ <br/>
+ <p>
+  其他文章及回答：
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20683456?refer=crossin">
+   编程初学者如何使用搜索引擎 - Crossin的文章 - 知乎专栏
+  </a>
+  <br/>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20721034?refer=crossin">
+   如何直观地理解程序的运行过程？ - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/20832723">
+  如何在一台电脑上同时使用 Python 2 和 Python 3 - Crossin的编程教室 - 知乎专栏
+ </a>
+ <br/>
+ <br/>
+ <p>
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+ <p>
+  微信ID：crossincode
+ </p>
+ <p>
+  论坛：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室
+  </a>
+ </p>
+ <p>
+  QQ群：498545096
+ </p>
+ <br/>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="258" data-rawwidth="258" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+</div></body></html>

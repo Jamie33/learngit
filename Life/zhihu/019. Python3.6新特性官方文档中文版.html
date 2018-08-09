@@ -1,0 +1,4371 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>Python3.6新特性官方文档中文版</h1><div class="RichText ztext Post-RichText">
+ <p>
+  由于译者时间及水平有限，翻译难免有误，欢迎批评指正！若发现有错误的地方可以在github repo中提交PR，感谢大家的支持！文档中还有部分没有翻译完，留给读者参与其中，共同学习进步，同时欢迎各路大神帮忙改进和review，Github地址：
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//github.com/PyCN/PTR" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    github.com/PyCN/PTR
+   </span>
+   <span class="invisible">
+   </span>
+  </a>
+ </p>
+ <p>
+  <b>
+   原文
+  </b>
+  ：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/whatsnew/3.6.html" rel="nofollow noreferrer" target="_blank">
+   What’s New In Python 3.6
+  </a>
+ </p>
+ <p>
+  <b>
+   翻译团队
+  </b>
+  ：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/PyCN/PTR" rel="nofollow noreferrer" target="_blank">
+   Py字幕组
+  </a>
+  <br/>
+  <b>
+   首发刊物
+  </b>
+  ：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//pycntech.github.io/" rel="nofollow noreferrer" target="_blank">
+   PyCN技术评论
+  </a>
+  <br/>
+  <b>
+   Github
+  </b>
+  ：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/PyCN/PTR/blob/master/What%25E2%2580%2599s%2520New%2520In%2520Python%25203.6.md" rel="nofollow noreferrer" target="_blank">
+   PyCN/PTR
+  </a>
+ </p>
+ <p>
+  由阿橙(
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/sinoandywong" rel="nofollow noreferrer" target="_blank">
+   @sinoandywong
+  </a>
+  )召集，Ele(
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/ictar" rel="nofollow noreferrer" target="_blank">
+   @ictar
+  </a>
+  )、苍冥(
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/eastrd" rel="nofollow noreferrer" target="_blank">
+   @eastrd
+  </a>
+  )组织翻译。
+ </p>
+ <p>
+  <b>
+   译者
+  </b>
+  ：
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/eastrd" rel="nofollow noreferrer" target="_blank">
+   eastrd
+  </a>
+  ：苍冥
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/ictar" rel="nofollow noreferrer" target="_blank">
+   ictar
+  </a>
+  ：Ele
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/linchart" rel="nofollow noreferrer" target="_blank">
+   linchart
+  </a>
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/szthanatos" rel="nofollow noreferrer" target="_blank">
+   szthanatos
+  </a>
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/alex-marmot" rel="nofollow noreferrer" target="_blank">
+   alex-marmot
+  </a>
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/heyuanree" rel="nofollow noreferrer" target="_blank">
+   heyuanree
+  </a>
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/sinoandywong" rel="nofollow noreferrer" target="_blank">
+   sinoandywong
+  </a>
+  ：阿橙
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/sxqs-yang" rel="nofollow noreferrer" target="_blank">
+   sxqs-yang
+  </a>
+  :若木羊
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/zilongcc" rel="nofollow noreferrer" target="_blank">
+   zilongcc
+  </a>
+  ：水手
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//www.bububupt.com/" rel="nofollow noreferrer" target="_blank">
+   bubuyo
+  </a>
+  :铲屎官
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/yifan1024" rel="nofollow noreferrer" target="_blank">
+   yifan1024
+  </a>
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/YoungZiyi" rel="nofollow noreferrer" target="_blank">
+   YoungZiyi
+  </a>
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/fuckexception" rel="nofollow noreferrer" target="_blank">
+   fuckexception
+  </a>
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/Lving" rel="nofollow noreferrer" target="_blank">
+   Lving
+  </a>
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/LoveSn0w" rel="nofollow noreferrer" target="_blank">
+   LoveSn0w
+  </a>
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/phdhorse41" rel="nofollow noreferrer" target="_blank">
+   phdhorse41
+  </a>
+ </p>
+ <p>
+  <b>
+   特别感谢
+  </b>
+  ：
+  <br/>
+  Ele(
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/ictar" rel="nofollow noreferrer" target="_blank">
+   @ictar
+  </a>
+  )：她为本文档的翻译做了大量工作，一个热爱美食的菇凉。
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/PyCN/PTR" rel="nofollow noreferrer" target="_blank">
+   Py字幕组
+  </a>
+  ：一个各路大(dou)神(bi)聚集的团队。
+ </p>
+ <p>
+  感谢他们所作出的工作，圣诞快乐！
+  <br/>
+  2016.12.25
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/v2-799a51bb2c5879575030208729ce44a5_r.jpg" data-rawheight="170" data-rawwidth="457" src="https://pic2.zhimg.com/v2-799a51bb2c5879575030208729ce44a5_b.jpg" width="457"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-799a51bb2c5879575030208729ce44a5_b.jpg" data-original="https://pic2.zhimg.com/v2-799a51bb2c5879575030208729ce44a5_r.jpg" data-rawheight="170" data-rawwidth="457" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='457'%20height='170'&gt;&lt;/svg&gt;" width="457"/>
+ </figure>
+ <p>
+  另请参阅这篇文章介绍了与3.5相比， Python 3.6中多出的新特性。
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0494" rel="nofollow noreferrer" target="_blank">
+   PEP 494
+  </a>
+  - Python 3.6 发布时间表
+ </p>
+ <br/>
+ <br/>
+ <h2>
+  摘要 - 发布亮点
+ </h2>
+ <p>
+  新的语法特性：
+ </p>
+ <ul>
+  <li>
+   PEP 498, 格式化字符串字面量
+  </li>
+  <li>
+   PEP 515, 数字字面量中的下划线
+  </li>
+  <li>
+   PEP 526, 变量注解中的语法
+  </li>
+  <li>
+   PEP 525, 异步生成器
+  </li>
+  <li>
+   PEP 520: 异步解析式
+  </li>
+ </ul>
+ <p>
+  新的库模块
+ </p>
+ <ul>
+  <li>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/secrets.html%23module-secrets" rel="nofollow noreferrer" target="_blank">
+    secrets
+   </a>
+   : PEP 506 - 在标准库中添加了Secrets模块
+  </li>
+ </ul>
+ <p>
+  CPython实现的改进：
+ </p>
+ <ul>
+  <li>
+   重新实现了
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/stdtypes.html%23typesmapping" rel="nofollow noreferrer" target="_blank">
+    字典(dict)
+   </a>
+   类型，以便能像
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//morepypy.blogspot.com/2015/01/faster-more-memory-efficient-and-more.html" rel="nofollow noreferrer" target="_blank">
+    PyPy的字典类型
+   </a>
+   一样使用更紧凑的表达方式。与Python 3.5相比，这使字典的内存用量减少了20%到25%。
+  </li>
+  <li>
+   用新协定优化了类的自定义建立。
+  </li>
+  <li>
+   类属性定义顺序(class attribute definition order)现在被保留了。
+  </li>
+  <li>
+   **kwargs内的元素顺序现在对应于将关键字(保留字）参数传递给函数的顺序。
+  </li>
+  <li>
+   新增了对DTrace和SystemTap probing的支持。
+  </li>
+  <li>
+   新PYTHONMALLOC环境变量现在可用于调试解释器内存分配与访问错误。
+  </li>
+ </ul>
+ <p>
+  标准库的重大改进：
+ </p>
+ <ul>
+  <li>
+   为
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncio.html%23module-asyncio" rel="nofollow noreferrer" target="_blank">
+    asyncio
+   </a>
+   模块开发了新功能、显著的可用性、性能优化，以及大量的错误修复。 从Python 3.6开始，asyncio模块不再是临时的了，其API也进入了稳定状态。
+  </li>
+  <li>
+   实现了用于支持
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-path-like-object" rel="nofollow noreferrer" target="_blank">
+    类路径对象(path-like objects)
+   </a>
+   的新文件系统路径协议。 所有在路径(path)上使用的标准库函数都已更新，以便适应于新协议。
+  </li>
+  <li>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/datetime.html%23module-datetime" rel="nofollow noreferrer" target="_blank">
+    datetime
+   </a>
+   模块已获得对本地时间消歧(Local Time Disambiguation)的支持。
+  </li>
+  <li>
+   针对
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/typing.html%23module-typing" rel="nofollow noreferrer" target="_blank">
+    typing
+   </a>
+   模块的一些改进，使其不再是临时模块。
+  </li>
+  <li>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/tracemalloc.html%23module-tracemalloc" rel="nofollow noreferrer" target="_blank">
+    tracemalloc
+   </a>
+   模块已重大改进，现用于为ResourceWarning提供更好的输出，并为内存分配错误提供更好的诊断。 欲知详情，请参阅PYTHONMALLOC部分。
+  </li>
+ </ul>
+ <p>
+  安全相关的改进:
+ </p>
+ <ul>
+  <li>
+   新
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/secrets.html%23module-secrets" rel="nofollow noreferrer" target="_blank">
+    secrets模块
+   </a>
+   被用于简化那些适用于管理密文的密码学安全伪随机数生成器(cryptographically strong pseudo-random numbers)的生成过程，如认证、token等。
+  </li>
+  <li>
+   在Linux上，现将
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.urandom" rel="nofollow noreferrer" target="_blank">
+    os.urandom()
+   </a>
+   改成了阻塞模式，直到系统的urandom的熵池(entropy pool)的初始化具有更高的安全性。 解释请参见
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0524" rel="nofollow noreferrer" target="_blank">
+    PEP 524
+   </a>
+   。
+  </li>
+  <li>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/hashlib-blake2.html%23module-hashlib" rel="nofollow noreferrer" target="_blank">
+    hashlib
+   </a>
+   和
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/ssl.html%23module-ssl" rel="nofollow noreferrer" target="_blank">
+    ssl
+   </a>
+   模块现已支持OpenSSL 1.1.0。
+  </li>
+  <li>
+   改进了
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/ssl.html%23module-ssl" rel="nofollow noreferrer" target="_blank">
+    ssl模块
+   </a>
+   的默认设置和特性集。
+  </li>
+  <li>
+   新增了
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/hashlib-blake2.html%23module-hashlib" rel="nofollow noreferrer" target="_blank">
+    hashlib模块
+   </a>
+   对BLAKE2、SHA-3、SHAKE哈希算法以及
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/hashlib.html%23hashlib.scrypt" rel="nofollow noreferrer" target="_blank">
+    scrypt()
+   </a>
+   密钥导出函数的支持。
+  </li>
+ </ul>
+ <p>
+  Windows上的改进:
+ </p>
+ <ul>
+  <li>
+   PEP 528与PEP 529，Windows文件系统和控制台的编码已更改为UTF-8。
+  </li>
+  <li>
+   当用户没有指定版本（通过命令行参数或配置文件）时，py.exe启动器以交互方式使用时，不再以Python 2优先于Python 3。 处理shebang行的方式保持不变 - 此处的“python”依旧指Python 2。
+  </li>
+  <li>
+   python.exe和pythonw.exe已标记为长路径敏感(long-path aware)，这意味着260字符路径限制可能不再适用。 有关详细信息，请参阅
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/using/windows.html%23max-path" rel="nofollow noreferrer" target="_blank">
+    删除MAX_PATH限制
+   </a>
+   。
+  </li>
+  <li>
+   可以添加._pth文件以强制隔离模式(isolated mode)并完全指定所有搜索路径，以避免注册表查找和环境查找。 有关详细信息，请参阅
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/using/windows.html%23finding-modules" rel="nofollow noreferrer" target="_blank">
+    文档
+   </a>
+   。
+  </li>
+  <li>
+   一个python36.zip文件现可用作一个地标(landmark)以臆指
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/using/cmdline.html%23envvar-PYTHONHOME" rel="nofollow noreferrer" target="_blank">
+    PYTHONHOME
+   </a>
+   。 有关详细信息，请参阅
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/using/windows.html%23finding-modules" rel="nofollow noreferrer" target="_blank">
+    文档
+   </a>
+   。
+  </li>
+ </ul>
+ <br/>
+ <h2>
+  新特性
+ </h2>
+ <br/>
+ <h3>
+  PEP 498: 格式化字符串
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0498" rel="nofollow noreferrer" target="_blank">
+   PEP 498
+  </a>
+  引入了一种新的字符串：_f-strings_, 或者
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/reference/lexical_analysis.html%23f-strings" rel="nofollow noreferrer" target="_blank">
+   格式化字符串
+  </a>
+  。
+ </p>
+ <p>
+  格式化字符串带'f'前缀，类似于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/stdtypes.html%23str.format" rel="nofollow noreferrer" target="_blank">
+   str.format()
+  </a>
+  接受的格式字符串。它们包含了由花括号括起来的替换字段。替换字段是表达式，它们会在运行时计算，然后使用
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/functions.html%23format" rel="nofollow noreferrer" target="_blank">
+   format()
+  </a>
+  协议进行格式化：
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>    &gt;&gt;&gt; name = "Fred"    &gt;&gt;&gt; f"He said his name is {name}."    'He said his name is Fred.'    &gt;&gt;&gt; width = 10    &gt;&gt;&gt; precision = 4    &gt;&gt;&gt; value = decimal.Decimal("12.34567")    &gt;&gt;&gt; f"result: {value:{width}.{precision}}"  # nested fields    'result:      12.35'
+</code></pre>
+ </div>
+ <p>
+  又见
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0498" rel="nofollow noreferrer" target="_blank">
+   PEP 498
+  </a>
+  - 字符串插值。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>PEP由Eric V. Smith编写和实现。
+</code></pre>
+ </div>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/reference/lexical_analysis.html%23f-strings" rel="nofollow noreferrer" target="_blank">
+   特性文档
+  </a>
+  。
+ </p>
+ <br/>
+ <h3>
+  PEP 526: 变量注解语法
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0484" rel="nofollow noreferrer" target="_blank">
+   PEP 484
+  </a>
+  引入了函数参数的类型注释的标准，又名类型提示。这个PEP添加了用来注释变量（包括类变量和实例变量）类型的语法：
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>    primes: List[int] = []    captain: str  # Note: no initial value!    class Starship:        stats: Dict[str, int] = {}
+</code></pre>
+ </div>
+ <p>
+  正如函数注释，Python解释器不附加任何特殊意义到变量注解上，只是将它们存储在一个类或者模块的__annotations__属性中。
+ </p>
+ <p>
+  与静态类型语言中的变量声明相比，注释语法的目的在于提供一种简单的方式，通过抽象语法树和__annotations__属性，来为第三方工具和库指定结构化类型元数据。
+ </p>
+ <p>
+  又见
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0526" rel="nofollow noreferrer" target="_blank">
+   PEP 526
+  </a>
+  - 变量注解语法。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>PEP由Ryan Gonzalez, Philip House, Ivan Levkivskyi, Lisa Roach, 和Guido van Rossum编写。由Ivan Levkivskyi实现。
+</code></pre>
+ </div>
+ <p>
+  使用或将要使用这个新语法的工具：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//github.com/python/mypy" rel="nofollow noreferrer" target="_blank">
+   mypy
+  </a>
+  ,
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//github.com/google/pytype" rel="nofollow noreferrer" target="_blank">
+   pytype
+  </a>
+  , PyCharm等等。
+ </p>
+ <br/>
+ <h3>
+  PEP 515: 数值文字中的下划线
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0515" rel="nofollow noreferrer" target="_blank">
+   PEP 515
+  </a>
+  添加了在数值文字中使用下划线的能力，以提高可读性。例如：
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>    &gt;&gt;&gt; 1_000_000_000_000_000    1000000000000000    &gt;&gt;&gt; 0x_FF_FF_FF_FF    4294967295
+</code></pre>
+ </div>
+ <p>
+  数字之间和任何基本符号之后允许单个下划线。不允许前置、后置或者多个连续的下划线。
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/string.html%23formatspec" rel="nofollow noreferrer" target="_blank">
+   字符串格式化
+  </a>
+  语言现在还支持'_'选项，该选项用来通知对浮点表示类型和整型表示类型'd'，会把下划线当成千位分隔符使用。对于整型表示类型'b', 'o', 'x', 和'X', 下划线将会被插入到每4个数字之间：
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>    &gt;&gt;&gt; '{:_}'.format(1000000)    '1_000_000'    &gt;&gt;&gt; '{:_x}'.format(0xFFFFFFFF)    'ffff_ffff'
+</code></pre>
+ </div>
+ <p>
+  又见
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0515" rel="nofollow noreferrer" target="_blank">
+   PEP 515
+  </a>
+  - 数值文字中的下划线
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>PEP由Georg Brandl和Serhiy Storchaka编写。
+</code></pre>
+ </div>
+ <br/>
+ <h3>
+  PEP 525: 异步生成器
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0492" rel="nofollow noreferrer" target="_blank">
+   PEP 492
+  </a>
+  引入支持原生协程和async /await的语法到Python 3.5。 在Python 3.5实现里的一个值得注意的
+  <br/>
+  局限性就在于它不可能使用await和`yield'在同一个函数体中。 而在Python 3.6中，这个限制
+  <br/>
+  已解除，这使得定义
+  <em>
+   异步生成器
+  </em>
+  成为可能：
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>    async def ticker(delay, to):        """Yield numbers from 0 to *to* every *delay* seconds."""        for i in range(to):            yield i            await asyncio.sleep(delay)
+</code></pre>
+ </div>
+ <p>
+  新的语法允许更快更简洁的代码。
+ </p>
+ <p>
+  参见
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0525" rel="nofollow noreferrer" target="_blank">
+   PEP 525
+  </a>
+  - 异步生成器
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>由Yury Selivanov撰写并实现的PEP。
+</code></pre>
+ </div>
+ <br/>
+ <h3>
+  PEP 530: 异步解析式
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0530" rel="nofollow noreferrer" target="_blank">
+   PEP 530
+  </a>
+  添加了对async for在list、set、dict解析式以及generator表达式中的使用支持：
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>    result = [i async for i in aiter() if i % 2]
+</code></pre>
+ </div>
+ <p>
+  此外，所有解析式都支持“await”表达式：
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>    result = [await fun() for fun in funcs if await condition()]
+</code></pre>
+ </div>
+ <p>
+  参见
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0530" rel="nofollow noreferrer" target="_blank">
+   PEP 530
+  </a>
+  - 异步解析式
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>由Yury Selivanov撰写并实现的PEP。
+</code></pre>
+ </div>
+ <br/>
+ <h3>
+  PEP 487: 用于建立类的更简单的自定义
+ </h3>
+ <p>
+  现在可以在不使用元类的情况下自定义子类。每当创建一个新的子类时，新的__init_subclass__类方法将在基类上被调用，：
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>    class PluginBase:        subclasses = []        def __init_subclass__(cls, **kwargs):            super().__init_subclass__(**kwargs)            cls.subclasses.append(cls)    class Plugin1(PluginBase):        pass    class Plugin2(PluginBase):        pass
+</code></pre>
+ </div>
+ <p>
+  为了允许零参数
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/functions.html%23super" rel="nofollow noreferrer" target="_blank">
+   super（）
+  </a>
+  从
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/reference/datamodel.html%23object.__init_subclass__" rel="nofollow noreferrer" target="_blank">
+   _init_subclass __（）
+  </a>
+  实现中被正确的调用并工作，自定义元类必须确保新的__classcell__命名空间输入传递到type .__ new__（如
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/reference/datamodel.html%23class-object-creation" rel="nofollow noreferrer" target="_blank">
+   创建类对象
+  </a>
+  )
+ </p>
+ <p>
+  参见
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0487" rel="nofollow noreferrer" target="_blank">
+   PEP 487
+  </a>
+  - 用于建立类的更简单的自定义
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>由Martin Teichmann撰写并实现的PEP。
+</code></pre>
+ </div>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/reference/datamodel.html%23class-customization" rel="nofollow noreferrer" target="_blank">
+   功能文档
+  </a>
+ </p>
+ <br/>
+ <h3>
+  PEP 487: 描述符协议增强
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0487" rel="nofollow noreferrer" target="_blank">
+   PEP 487
+  </a>
+  扩展描述符协议必须包括新的可选的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/reference/datamodel.html%23object.__set_name__" rel="nofollow noreferrer" target="_blank">
+   __set_name __（）
+  </a>
+  方法。 每当定义一个新类时，新方法将会调用定义中所有的描述符，并给它们提供定义类的引用，以及类命名空间中给予描述符的名字。 换句话说，描述符的实例现在可以获知所有者类的属性名：
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>    class IntField:        def __get__(self, instance, owner):            return instance.__dict__[self.name]        def __set__(self, instance, value):            if not isinstance(value, int):                raise ValueError(f'expecting integer in {self.name}')            instance.__dict__[self.name] = value        # this is the new initializer:        def __set_name__(self, owner, name):            self.name = name    class Model:        int_field = IntField()
+</code></pre>
+ </div>
+ <p>
+  参见
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0487" rel="nofollow noreferrer" target="_blank">
+   PEP 487
+  </a>
+  - 用于建立类的更简单的自定义
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>由Yury Selivanov撰写并实现的PEP。
+</code></pre>
+ </div>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/reference/datamodel.html%23descriptors" rel="nofollow noreferrer" target="_blank">
+   功能文档
+  </a>
+ </p>
+ <br/>
+ <h3>
+  PEP 519: 添加文件系统路径协议
+ </h3>
+ <p>
+  文件系统路径过去被表示为
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/stdtypes.html%23str" rel="nofollow noreferrer" target="_blank">
+   str
+  </a>
+  或
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/functions.html%23bytes" rel="nofollow noreferrer" target="_blank">
+   bytes
+  </a>
+  对象。这会导致那些编写操作文件系统路径代码的人，假定这些对象只能是这两种类型之一(一个代表着文件描述符的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/functions.html%23int" rel="nofollow noreferrer" target="_blank">
+   int
+  </a>
+  对象将不被计入即它不是一个文件路径)。
+  <br/>
+  不幸的是，这种假设局限了文件系统路径表示代方法，如已经存在的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/pathlib.html%23module-pathlib" rel="nofollow noreferrer" target="_blank">
+   pathlib
+  </a>
+  ，同时也包括python的一些标准库。
+  <br/>
+  为了解决这种情况，定义了一个由
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.PathLike" rel="nofollow noreferrer" target="_blank">
+   os.PathLike
+  </a>
+  表示的新接口。通过实现
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.PathLike.__fspath__" rel="nofollow noreferrer" target="_blank">
+   __fspath__()
+  </a>
+  方法，一个对象表示一个路径，然后，可以将文件系统路径表示为一个较低等级的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/stdtypes.html%23str" rel="nofollow noreferrer" target="_blank">
+   str
+  </a>
+  或者
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/functions.html%23bytes" rel="nofollow noreferrer" target="_blank">
+   bytes
+  </a>
+  对象。这意味着，如果一个对象实现
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.PathLike" rel="nofollow noreferrer" target="_blank">
+   os.PathLike
+  </a>
+  或者是
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/stdtypes.html%23str" rel="nofollow noreferrer" target="_blank">
+   str
+  </a>
+  或
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/functions.html%23bytes" rel="nofollow noreferrer" target="_blank">
+   bytes
+  </a>
+  ，该对象被认为是
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-path-like-object" rel="nofollow noreferrer" target="_blank">
+   path-like
+  </a>
+  ,它代表一个文件系统路径。你可以使用
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.fspath" rel="nofollow noreferrer" target="_blank">
+   os.fspath()
+  </a>
+  ,
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.fsdecode" rel="nofollow noreferrer" target="_blank">
+   os.fsdecode()
+  </a>
+  或
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.fsencode" rel="nofollow noreferrer" target="_blank">
+   os.fsencode()
+  </a>
+  显式获取
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/stdtypes.html%23str" rel="nofollow noreferrer" target="_blank">
+   str
+  </a>
+  以及/或
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/functions.html%23bytes" rel="nofollow noreferrer" target="_blank">
+   bytes
+  </a>
+  来表示一个path-like对象。
+  <br/>
+  内建函数
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/functions.html%23open" rel="nofollow noreferrer" target="_blank">
+   open()
+  </a>
+  已经更新，可以接受
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.PathLike" rel="nofollow noreferrer" target="_blank">
+   os.PathLike
+  </a>
+  对象，以及在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23module-os" rel="nofollow noreferrer" target="_blank">
+   os
+  </a>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.path.html%23module-os.path" rel="nofollow noreferrer" target="_blank">
+   os.path
+  </a>
+  模块中的所有函数，以及标准库中的大多数其他函数和类。类
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.DirEntry" rel="nofollow noreferrer" target="_blank">
+   os.DirEntry
+  </a>
+  以及
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/pathlib.html%23module-pathlib" rel="nofollow noreferrer" target="_blank">
+   pathlib
+  </a>
+  中相关的类也已经可以实现
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.PathLike" rel="nofollow noreferrer" target="_blank">
+   os.PathLike
+  </a>
+  。
+  <br/>
+  希望对操作文件系统路径基本功能的更新能够让第三方代码在不改变任何代码，或者至少是非常少的代码（例如，在操作path-like对象之前，在代码的开头调用
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.fspath" rel="nofollow noreferrer" target="_blank">
+   os.fspath()
+  </a>
+  ）的情况下，能够隐含地支持所有
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-path-like-object" rel="nofollow noreferrer" target="_blank">
+   path-like objects
+  </a>
+  对象。
+  <br/>
+  下面举一些例子说明新接口是如何让预先存在的代码简单透明地使用
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/pathlib.html%23pathlib.Path" rel="nofollow noreferrer" target="_blank">
+   pathlib.Path
+  </a>
+  :
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>    &gt;&gt;&gt; import pathlib    &gt;&gt;&gt; with open(pathlib.Path("README")) as f:    ...     contents = f.read()    ...    &gt;&gt;&gt; import os.path    &gt;&gt;&gt; os.path.splitext(pathlib.Path("some_file.txt"))    ('some_file', '.txt')    &gt;&gt;&gt; os.path.join("/a/b", pathlib.Path("c"))    '/a/b/c'    &gt;&gt;&gt; import os    &gt;&gt;&gt; os.fspath(pathlib.Path("some_file.txt"))    'some_file.txt'
+</code></pre>
+ </div>
+ <p>
+  （由Brett Cannon, Ethan Furman, Dusty Phillips, and Jelle Zijlstra实现）
+ </p>
+ <p>
+  参见
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0519" rel="nofollow noreferrer" target="_blank">
+   PEP 519
+  </a>
+  - 添加文件系统路径协议
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>PEP 由Brett Cannon 和 Koos Zevenhoven撰写.
+</code></pre>
+ </div>
+ <br/>
+ <h3>
+  PEP 495: 本地时间消歧
+ </h3>
+ <p>
+  世界上大多数地方，都曾经出现也将出现多次的时间回调。在这种时候，引入时间间隔用以表示本地时钟在同一天中出现两次相同的时间的情况，在这些情况下，本地时钟显示的时间（或存在在python datetime中的实例）不足及时表示特定的时刻。
+  <br/>
+  为了区分本地时间相同的两个时刻，
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0495" rel="nofollow noreferrer" target="_blank">
+   PEP 495
+  </a>
+  在类
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/datetime.html%23datetime.datetime" rel="nofollow noreferrer" target="_blank">
+   datetime.datetime
+  </a>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/datetime.html%23datetime.time" rel="nofollow noreferrer" target="_blank">
+   `datetime.time`
+  </a>
+  的实例中增加了新的fold属性:
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>    &gt;&gt;&gt; u0 = datetime(2016, 11, 6, 4, tzinfo=timezone.utc)    &gt;&gt;&gt; for i in range(4):    ...     u = u0 + i*HOUR    ...     t = u.astimezone(Eastern)    ...     print(u.time(), 'UTC =', t.time(), t.tzname(), t.fold)    ...    04:00:00 UTC = 00:00:00 EDT 0    05:00:00 UTC = 01:00:00 EDT 0    06:00:00 UTC = 01:00:00 EST 1    07:00:00 UTC = 02:00:00 EST 0
+</code></pre>
+ </div>
+ <p>
+  属性
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/datetime.html%23datetime.datetime.fold" rel="nofollow noreferrer" target="_blank">
+   fold
+  </a>
+  的值除了表示不明确情况下的第二（时间顺序）时刻之外，其他所有实例的值都为 0。
+  <br/>
+  又见
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0495" rel="nofollow noreferrer" target="_blank">
+   PEP 495
+  </a>
+  - 本地时间消歧
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>PEP 由 Alexander Belopolsky 和 Tim Peters撰写, 由Alexander Belopolsky实现.
+</code></pre>
+ </div>
+ <br/>
+ <h3>
+  PEP 529: 更改windows下文件系统编码格式为UTF-8
+ </h3>
+ <p>
+  使用str (Unicode) 表示文件系统路径比bytes能获得更好的效果。尽管如此，在某些情况下bytes也足以胜任并且也是正确的。
+ </p>
+ <p>
+  在3.6之前,使用bytes路径可能导致数据丢失。改进后, windows下现在支持使用bytes表示路径,这些bytes将以
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/sys.html%23sys.getfilesystemencoding" rel="nofollow noreferrer" target="_blank">
+   sys.getfilesy stemencoding()
+  </a>
+  的方式编码，默认编码格式为'utf-8'。
+ </p>
+ <p>
+  不使用str方式表示路径的应用程序应当使用
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.fsencode" rel="nofollow noreferrer" target="_blank">
+   os.fsencode()
+  </a>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.fsdecode" rel="nofollow noreferrer" target="_blank">
+   os.fsdecode()
+  </a>
+  以确保他们的bytes被正确编码。要回复到之前的状态, 设置
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/using/cmdline.html%23envvar-PYTHONLEGACYWINDOWSFSENCODING" rel="nofollow noreferrer" target="_blank">
+   PYTHONLEGACYWINDOWSFSENCODING
+  </a>
+  或者调用
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/sys.html%23sys._enablelegacywindowsfsencoding" rel="nofollow noreferrer" target="_blank">
+   sys._enablelegacywindowsfsencoding()
+  </a>
+  。
+ </p>
+ <p>
+  查看
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0529" rel="nofollow noreferrer" target="_blank">
+   PEP 529
+  </a>
+  以获取更多信息并讨论可能需要变更的代码。
+ </p>
+ <br/>
+ <h3>
+  PEP 528: 更改windows控制台编码为UTF-8
+ </h3>
+ <p>
+  windows下的默认控制台现在支持所有的Unicode字符并可以正确读取Python代码中的str对象。 sys.stdin, sys.stdout
+  <br/>
+  以及 sys.stderr 现在的默认使用utf-8编码。
+ </p>
+ <p>
+  这一变化仅适用于使用交互控制台之时，而非重定向文件或者管道。如果要使用之前的交互控制台, 需设置
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/using/cmdline.html%23envvar-PYTHONLEGACYWINDOWSIOENCODING" rel="nofollow noreferrer" target="_blank">
+   PYTHONLEGACYWINDOWSIOENCODING
+  </a>
+  。
+ </p>
+ <p>
+  另请参阅
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0528" rel="nofollow noreferrer" target="_blank">
+   PEP 528
+  </a>
+  - 修改windows控制台编码为UTF-8
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>PEP 由Steve Dower编写和实现。
+</code></pre>
+ </div>
+ <br/>
+ <h3>
+  PEP 520: 保存类属性定义顺序
+ </h3>
+ <p>
+  类的定义体中的属性有一个自然顺序：即源码中属性名出现的顺序。 这个顺序现在保存在新的类
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/stdtypes.html%23object.__dict__" rel="nofollow noreferrer" target="_blank">
+   __dict__
+  </a>
+  的属性中.
+ </p>
+ <p>
+  同样， 有效的缺省类和执行空间 (从
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/reference/datamodel.html%23prepare" rel="nofollow noreferrer" target="_blank">
+   type.prepare()
+  </a>
+  返回)是一个保存插入顺序的映射。
+ </p>
+ <p>
+  另请参阅
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0520" rel="nofollow noreferrer" target="_blank">
+   PEP 520
+  </a>
+  - 保存类属性定义顺序
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>该PEP由Eric Snow编写和实现。
+</code></pre>
+ </div>
+ <br/>
+ <h3>
+  PEP 468: 保存关键字参数顺序
+ </h3>
+ <p>
+  函数声明中的**kwargs 的顺序现在被保证是插入顺序的映射。
+ </p>
+ <p>
+  另请参阅
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0468" rel="nofollow noreferrer" target="_blank">
+   PEP 468
+  </a>
+  - 保存关键字参数顺序
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>该PEP由Eric Snow编写和实现。
+</code></pre>
+ </div>
+ <br/>
+ <h3>
+  新的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/stdtypes.html%23typesmapping" rel="nofollow noreferrer" target="_blank">
+   字典dict
+  </a>
+  类型的实现
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/stdtypes.html%23typesmapping" rel="nofollow noreferrer" target="_blank">
+   字典dict
+  </a>
+  类型现在使用
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//morepypy.blogspot.com/2015/01/faster-more-memory-efficient-and-more.html" rel="nofollow noreferrer" target="_blank">
+   PyPy首创
+  </a>
+  的 "紧凑" 表达方式。 新
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/stdtypes.html%23dict" rel="nofollow noreferrer" target="_blank">
+   字典dict()
+  </a>
+  的内存占用比Python3.5中减少20%到25%。
+ </p>
+ <p>
+  新的实现中保存顺序的功能被认为是不可过于依赖的(未来也许会改变，不过在将所有当前和未来的Python实现的语言规范转换为保证顺序的语法之前的几个版本中，新的dict有望被实现的; 这也能帮助保证对那些仍旧是随机迭代顺序的旧版本的向后兼容，比如Python 3.5)。
+ </p>
+ <p>
+  (由INADA Naoki在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27350" rel="nofollow noreferrer" target="_blank">
+   issue 27350
+  </a>
+  提供。 想法
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//mail.python.org/pipermail/python-dev/2012-December/123028.html" rel="nofollow noreferrer" target="_blank">
+   最初由Raymond Hettinger提出
+  </a>
+  .)
+ </p>
+ <br/>
+ <h3>
+  PEP 523：添加一个frame解析API到CPython
+ </h3>
+ <p>
+  虽然Python提供了自定义代码执行方式的广泛支持，但是还有一个它没这样做的地方是frame对象的解析。如果你想要通过某些方式在Python中拦截frame解析，那么除了直接对定义的函数操作函数指针之外，真的没有什么其他方式。
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0523" rel="nofollow noreferrer" target="_blank">
+   PEP 523
+  </a>
+  改变了这个处境，它提供了一个API，让frame解析在C层次上可插拔。这将允许诸如调试器或者JIT这样的工具在Python代码开始执行之前拦截frame解析。这使得python代码的可替换解析实现、跟踪frame解析等地使用成为可能。
+ </p>
+ <p>
+  这个API并不是受限的C API的一部分，并且被标为私有，表示期望限制这个API的使用，并且只能应用在非常选定的低层次用例上。这个API的语义将在必要的时候随着Python改动。
+ </p>
+ <p>
+  又见
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0523" rel="nofollow noreferrer" target="_blank">
+   PEP 523
+  </a>
+  - 添加一个frame解析API到CPython
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>PEP由Brett Cannon和Dino Viehland编写
+</code></pre>
+ </div>
+ <br/>
+ <h3>
+  PYTHONMALLOC环境变量
+ </h3>
+ <p>
+  新的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/using/cmdline.html%23envvar-PYTHONMALLOC" rel="nofollow noreferrer" target="_blank">
+   PYTHONMALLOC
+  </a>
+  环境变量允许设置Python内存分配器和安装调试钩子。
+ </p>
+ <p>
+  现在有可能在发布模式下使用PYTHONMALLOC=debug编译的Python中，在Python内存分配器上安装调试钩子。调试钩子的效果：
+ </p>
+ <ul>
+  <li>
+   新分配内存由字节0xCB填充
+  </li>
+  <li>
+   被释放内存由字节0xDB填充
+  </li>
+  <li>
+   检测Python内存分配器API的违规。例如，在由
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/memory.html%23c.PyMem_Malloc" rel="nofollow noreferrer" target="_blank">
+    PyMem_Malloc()
+   </a>
+   分配的内存块上调用PyObject_Free()。
+  </li>
+  <li>
+   检测缓存开始位置之前的写入 (缓存下溢)
+  </li>
+  <li>
+   检测缓存结束位置之后的写入 (缓存上溢)
+  </li>
+  <li>
+   当调用了
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/memory.html%23c.PYMEM_DOMAIN_OBJ" rel="nofollow noreferrer" target="_blank">
+    PYMEM_DOMAIN_OBJ
+   </a>
+   (例如，PyObject_Malloc())和
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/memory.html%23c.PYMEM_DOMAIN_MEM" rel="nofollow noreferrer" target="_blank">
+    PYMEM_DOMAIN_MEM
+   </a>
+   (例如，
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/memory.html%23c.PyMem_Malloc" rel="nofollow noreferrer" target="_blank">
+    PyMem_Malloc()
+   </a>
+   )域的分配器函数时，检测持有
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-global-interpreter-lock" rel="nofollow noreferrer" target="_blank">
+    GIL
+   </a>
+   。
+  </li>
+ </ul>
+ <p>
+  检测是否持有GIL也是Python 3.6的一个新特性。
+ </p>
+ <p>
+  见
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/memory.html%23c.PyMem_SetupDebugHooks" rel="nofollow noreferrer" target="_blank">
+   PyMem_SetupDebugHooks()
+  </a>
+  函数，了解更多关于Python内存分配器上的调试钩子信息。
+ </p>
+ <p>
+  现在也有可能使用PYTHONMALLOC=malloc，从而强制所有Python内存分配使用C库的malloc()分配器。这在以发布模式编译的Python上，使用诸如Valgrind这样的外部内存调试器是有帮助的。
+ </p>
+ <p>
+  对于错误，Python内存分配器上的调试钩子现在使用
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/tracemalloc.html%23module-tracemalloc" rel="nofollow noreferrer" target="_blank">
+   tracemalloc
+  </a>
+  模块来获取分配内存块的地址的回溯信息。
+ </p>
+ <p>
+  使用python3.6 -X tracemalloc=5 (存储5个帧到回溯中)时，在缓存上溢时的致命错误的例子：
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>    Debug memory block at address p=0x7fbcd41666f8: API 'o'        4 bytes originally requested        The 7 pad bytes at p-7 are FORBIDDENBYTE, as expected.        The 8 pad bytes at tail=0x7fbcd41666fc are not all FORBIDDENBYTE (0xfb):            at tail+0: 0x02 *** OUCH            at tail+1: 0xfb            at tail+2: 0xfb            at tail+3: 0xfb            at tail+4: 0xfb            at tail+5: 0xfb            at tail+6: 0xfb            at tail+7: 0xfb        The block was made by call #1233329 to debug malloc/realloc.        Data at p: 1a 2b 30 00    Memory block allocated at (most recent call first):      File "test/test_bytes.py", line 323      File "unittest/case.py", line 600      File "unittest/case.py", line 648      File "unittest/suite.py", line 122      File "unittest/suite.py", line 84    Fatal Python error: bad trailing pad byte    Current thread 0x00007fbcdbd32700 (most recent call first):      File "test/test_bytes.py", line 323 in test_hex      File "unittest/case.py", line 600 in run      File "unittest/case.py", line 648 in __call__      File "unittest/suite.py", line 122 in run      File "unittest/suite.py", line 84 in __call__      File "unittest/suite.py", line 122 in run      File "unittest/suite.py", line 84 in __call__      ...
+</code></pre>
+ </div>
+ <p>
+  (由Victor Stinner于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26516" rel="nofollow noreferrer" target="_blank">
+   issue 26516
+  </a>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26564" rel="nofollow noreferrer" target="_blank">
+   issue 26564
+  </a>
+  贡献。)
+ </p>
+ <br/>
+ <h3>
+  DTrace和SystemTap探测支持
+ </h3>
+ <p>
+  Python现在可以使用--with-dtrace来构建，它为解释器中的以下事件启用了静态标志器：
+ </p>
+ <ul>
+  <li>
+   函数调用／返回
+  </li>
+  <li>
+   垃圾回收开始/结束
+  </li>
+  <li>
+   执行代码行。
+  </li>
+ </ul>
+ <p>
+  这可以被用来检测生产中运行的解释器，而无需重新编译指定调试构建，或者提供应用特有的配置/调试代码。
+ </p>
+ <p>
+  详情请见
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/howto/instrumentation.html%23instrumentation" rel="nofollow noreferrer" target="_blank">
+   用DTrace和SystemTap检测CPython
+  </a>
+  。
+ </p>
+ <p>
+  在Linux和macOS上测试了当前实现。未来可能会添加额外的标志器。
+ </p>
+ <p>
+  (由Łukasz Langa在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue21590" rel="nofollow noreferrer" target="_blank">
+   issue 21590
+  </a>
+  中贡献，基于Cea Avión, David Malcolm, 和Nikhil Benesch提供的补丁)
+ </p>
+ <br/>
+ <h2>
+  其他语言方面的变化
+ </h2>
+ <p>
+  我们还对 Python 语言的核心做了一些小的改变：
+ </p>
+ <ul>
+  <li>
+   现在在同一作用域内的 global 或 nonlocal 语句必须在受其影响的命名使用前显式出现。在先前版本中会发出语法警告。
+  </li>
+  <li>
+   现在能以将
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/reference/datamodel.html%23specialnames" rel="nofollow noreferrer" target="_blank">
+    魔术方法
+   </a>
+   设置为 None 的方式来表示相应的操作不可用。 例如，如果将一个类的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/reference/datamodel.html%23object.__iter__" rel="nofollow noreferrer" target="_blank">
+    __iter__()
+   </a>
+   设置为None，则该类不可迭代。(由 Andrew Barnert 和 Ivan Levkivskyi 在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25958" rel="nofollow noreferrer" target="_blank">
+    issue 25958
+   </a>
+   中贡献。)
+  </li>
+  <li>
+   在 traceback 中大量重复出现的 traceback lines 将会被略写成 "[前一行已经重复出现 {count} 次了]" (以 traceback 为例。). (由 Emanuel Barry 在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26823" rel="nofollow noreferrer" target="_blank">
+    issue 26823
+   </a>
+   中贡献。)
+  </li>
+  <li>
+   现在模块导入在找不到模块时引发新的异常
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23ModuleNotFoundError" rel="nofollow noreferrer" target="_blank">
+    ModuleNotFoundError
+   </a>
+   （
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23ImportError" rel="nofollow noreferrer" target="_blank">
+    ImportError
+   </a>
+   的子类）。 当前检测 ImportError 的代码（try-except中）仍然可以工作。(由 Eric Snow 在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue15767" rel="nofollow noreferrer" target="_blank">
+    issue 15767
+   </a>
+   中贡献。)
+  </li>
+  <li>
+   在类创建时，被元类调用的依赖无参数的 super() 的类方法时会正确工作。(由 Martin Teichmann 在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue23722" rel="nofollow noreferrer" target="_blank">
+    issue 23722
+   </a>
+   中贡献。)
+  </li>
+ </ul>
+ <br/>
+ <h2>
+  新增模块
+ </h2>
+ <br/>
+ <h3>
+  secrets
+ </h3>
+ <p>
+  新增模块
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/secrets.html%23module-secrets" rel="nofollow noreferrer" target="_blank">
+   secrets
+  </a>
+  的主要目的是：提供一个显式可靠的方式来产生适合于管理诸如账户认证，令牌之类的保密信息的加密的强伪随机值。
+ </p>
+ <p>
+  警告
+ </p>
+ <p>
+  注意在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/random.html%23module-random" rel="nofollow noreferrer" target="_blank">
+   random
+  </a>
+  模块中的随机数生成器 不该 用于安全目的。Python 3.6 及以上版本请使用
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/secrets.html%23module-secrets" rel="nofollow noreferrer" target="_blank">
+   secrets
+  </a>
+  而 Python 3.5 及更早的版本请使用
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.urandom" rel="nofollow noreferrer" target="_blank">
+   os.urandom()
+  </a>
+  。
+ </p>
+ <p>
+  又见
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0506" rel="nofollow noreferrer" target="_blank">
+   PEP 506
+  </a>
+  - 向标准库添加 Secrets 模块
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>PEP 由 Steven D'Aprano 编写及实现。
+</code></pre>
+ </div>
+ <br/>
+ <h2>
+  改进模块
+ </h2>
+ <br/>
+ <h3>
+  array
+ </h3>
+ <p>
+  耗尽的迭代器
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/array.html%23array.array" rel="nofollow noreferrer" target="_blank">
+   array.array
+  </a>
+  现在将会保持被耗尽，即使被迭代的数组被拓展了。这与其他可变序列的行为保持了一致性。
+ </p>
+ <p>
+  由Serhiy Storchaka在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26492" rel="nofollow noreferrer" target="_blank">
+   issue 26492
+  </a>
+  中贡献
+ </p>
+ <br/>
+ <h3>
+  ast
+ </h3>
+ <p>
+  添加了新的ast.Constant的AST节点。它可以被外部的AST优化器出于永久聚合(constant foldind)。
+ </p>
+ <p>
+  由Victor Stinner在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26146" rel="nofollow noreferrer" target="_blank">
+   issue 26146
+  </a>
+  中贡献
+ </p>
+ <br/>
+ <h3>
+  asyncio
+ </h3>
+ <p>
+  始于Python 3.6，asyncio模块将不再是临时的了，并且它的API被认为是稳定的。
+ </p>
+ <p>
+  从Python 3.5开始，在asyncio模块中值得注意的变化（由于临时的状态，所有的修改都应用到了3.5.x）:
+ </p>
+ <ul>
+  <li>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncio-eventloops.html%23asyncio.get_event_loop" rel="nofollow noreferrer" target="_blank">
+    get_event_loop()
+   </a>
+   函数已经被改变为，当从协同程序中调用和被回调调用时，总是返回当前正在运行的循环。（由 Yury Selivanovgong贡献于
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue28613" rel="nofollow noreferrer" target="_blank">
+    issue 28613
+   </a>
+   。）
+  </li>
+  <li>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncio-task.html%23asyncio.ensure_future" rel="nofollow noreferrer" target="_blank">
+    ensure_future()
+   </a>
+   函数和所有使用其的函数，比如loop.run_until_complete()，现在接收所有种类的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-awaitable" rel="nofollow noreferrer" target="_blank">
+    awaitable objects
+   </a>
+   。（由 Yury Selivanov贡献）。
+  </li>
+  <li>
+   新的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncio-task.html%23asyncio.run_coroutine_threadsafe" rel="nofollow noreferrer" target="_blank">
+    run_coroutine_threadsafe()
+   </a>
+   函数去从其他线程中提交协同程序到事件循环中。（由Vincent Michel贡献）
+  </li>
+  <li>
+   新的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncio-protocol.html%23asyncio.BaseTransport.is_closing" rel="nofollow noreferrer" target="_blank">
+    Transport.is_closing()
+   </a>
+   方法去检查是否传输是关闭的或被关闭了（由Yury Selivanov贡献）。
+  </li>
+  <li>
+   loop.creat_server()现在可以以列表接收主机了。（由Yann Sionneaugong贡献）
+  </li>
+  <li>
+   新的loop.creat_future()方法去创建一个Future对象。这允许了替代事件循环的实现，比如
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/MagicStack/uvloop" rel="nofollow noreferrer" target="_blank">
+    uvloop
+   </a>
+   ，去提供了一种更快的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncio-task.html%23asyncio.Future" rel="nofollow noreferrer" target="_blank">
+    asyncio.Future
+   </a>
+   的实现。（由Yury Selivanov在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27041" rel="nofollow noreferrer" target="_blank">
+    issue 27041
+   </a>
+   中贡献）
+  </li>
+  <li>
+   新的loop.get_exception_handler()方法去得到一个当时的异常的句柄。（由Yury Selivanov在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27040" rel="nofollow noreferrer" target="_blank">
+    issue 27040
+   </a>
+   中贡献）
+  </li>
+  <li>
+   新的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncio-stream.html%23asyncio.StreamReader.readuntil" rel="nofollow noreferrer" target="_blank">
+    StreamReader.readuntil()
+   </a>
+   方法从流中读取数据读取数据直到出现分隔符字符序列。（由Mark Korenberg贡献）
+  </li>
+  <li>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncio-stream.html%23asyncio.StreamReader.readexactly" rel="nofollow noreferrer" target="_blank">
+    StreamReader.readexactly()
+   </a>
+   的表现被提升了。（由Mark Korenberg在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue28370" rel="nofollow noreferrer" target="_blank">
+    issue 28370
+   </a>
+   中贡献）
+  </li>
+  <li>
+   loop.getaddrinfo()方法被优化了，避免了如果地址问题已经解决，去调用系统函数getaddrinfo。（由A. Jesse Jiryu Davis贡献）
+  </li>
+  <li>
+   loop.stop()方法已经被更改，以便在当前迭代后立即停止循环。任何新的，作为最后一次迭代的结果的预定的回调将会被丢弃。（由Guido van Rossum在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25593" rel="nofollow noreferrer" target="_blank">
+    issue 25593
+   </a>
+   中贡献）
+  </li>
+  <li>
+   Future.set_exception在通过了一个
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23StopIteration" rel="nofollow noreferrer" target="_blank">
+    StopIteration
+   </a>
+   实例的异常后，将会引发
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23TypeError" rel="nofollow noreferrer" target="_blank">
+    TypeError
+   </a>
+   。（由Chris Angelico在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26221" rel="nofollow noreferrer" target="_blank">
+    issue 26221
+   </a>
+   贡献）
+  </li>
+  <li>
+   新的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncio-eventloop.html%23asyncio.BaseEventLoop.connect_accepted_socket" rel="nofollow noreferrer" target="_blank">
+    loop.connect_accepted_socket()
+   </a>
+   方法被服务器用来接收asyncio外部的连接，但是使用asyncio去处理。（由Jim Fulton在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27392" rel="nofollow noreferrer" target="_blank">
+    issue 27392
+   </a>
+   中贡献）
+  </li>
+  <li>
+   TCP_NODELAY标志位现在被默认设置为TCP传输。（由Yury Selivanov在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27456" rel="nofollow noreferrer" target="_blank">
+    issue 27456
+   </a>
+   中贡献）
+  </li>
+  <li>
+   新的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncio-eventloop.html%23asyncio.AbstractEventLoop.shutdown_asyncgens" rel="nofollow noreferrer" target="_blank">
+    loop.shutdown_asyncgens()
+   </a>
+   在关闭循环之前恰当的关闭挂起的异步生成器。（由 Yury Selivanov在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue28003" rel="nofollow noreferrer" target="_blank">
+    issue 28003
+   </a>
+   中贡献）
+  </li>
+  <li>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncio-task.html%23asyncio.Future" rel="nofollow noreferrer" target="_blank">
+    Future
+   </a>
+   和
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncio-task.html%23asyncio.Task" rel="nofollow noreferrer" target="_blank">
+    Task
+   </a>
+   类现在有一个已优化的C语言的实现，使得asyncio编码速度提高了30%。（由Yury Selivanov和INADA Naoki在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26081" rel="nofollow noreferrer" target="_blank">
+    issue 26081
+   </a>
+   和
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue28544" rel="nofollow noreferrer" target="_blank">
+    issue 28544
+   </a>
+   中贡献）
+  </li>
+ </ul>
+ <br/>
+ <h3>
+  binascii
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/binascii.html%23binascii.b2a_base64" rel="nofollow noreferrer" target="_blank">
+   b2a_base64()
+  </a>
+  功能现在接收现在接收一个可选
+  <em>
+   newline
+  </em>
+  的关键词参数去控制是否新的一行的字符被加到返回值中。（由Victor Stinnergong贡献于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25357" rel="nofollow noreferrer" target="_blank">
+   issue25357
+  </a>
+  。）
+ </p>
+ <br/>
+ <h3>
+  cmath
+ </h3>
+ <p>
+  新增了方法
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/cmath.html%23cmath.tau" rel="nofollow noreferrer" target="_blank">
+   cmath.tau
+  </a>
+  来表示(τ) 常量. (由Lisa Roach在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue12345" rel="nofollow noreferrer" target="_blank">
+   issue 12345
+  </a>
+  中贡献, 详情请查看
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0628" rel="nofollow noreferrer" target="_blank">
+   **PEP628**
+  </a>
+  .)
+ </p>
+ <p>
+  新增的常量还有:
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/cmath.html%23cmath.inf" rel="nofollow noreferrer" target="_blank">
+   cmath.inf
+  </a>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/cmath.html%23cmath.nan" rel="nofollow noreferrer" target="_blank">
+   cmath.nan
+  </a>
+  来对应
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/math.html%23math.inf" rel="nofollow noreferrer" target="_blank">
+   math.inf
+  </a>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/math.html%23math.nan" rel="nofollow noreferrer" target="_blank">
+   math.nan
+  </a>
+  , 另外还有
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/cmath.html%23cmath.infj" rel="nofollow noreferrer" target="_blank">
+   cmath.infj
+  </a>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/cmath.html%23cmath.nanj" rel="nofollow noreferrer" target="_blank">
+   cmath.nanj
+  </a>
+  来匹配复数表达式的格式化. (由MarkDickinson在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue23229" rel="nofollow noreferrer" target="_blank">
+   issue 23229
+  </a>
+  中贡献.)
+ </p>
+ <br/>
+ <h3>
+  collections
+ </h3>
+ <p>
+  新的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/collections.abc.html%23collections.abc.Collection" rel="nofollow noreferrer" target="_blank">
+   Collection
+  </a>
+  抽象基类已经增加到可表示大小的迭代器类里面
+  <br/>
+  (由Ivan Levkivskyi贡献, 文档由Neil Girdhar在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27598" rel="nofollow noreferrer" target="_blank">
+   issue 27598
+  </a>
+  中贡献.)
+ </p>
+ <p>
+  新的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/collections.abc.html%23collections.abc.Reversible" rel="nofollow noreferrer" target="_blank">
+   Reversible
+  </a>
+  有迭代器类的抽象基类
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/reference/datamodel.html%23object.__reversed__" rel="nofollow noreferrer" target="_blank">
+   __reversed__()
+  </a>
+  方法. (由Ivan Levkivskyi在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25987" rel="nofollow noreferrer" target="_blank">
+   issue25987
+  </a>
+  中贡献.)
+ </p>
+ <p>
+  新的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/collections.abc.html%23collections.abc.AsyncGenerator" rel="nofollow noreferrer" target="_blank">
+   AsyncGenerator
+  </a>
+  ，是一种异步生成器类的抽象基类. (Contributed by Yury Selivanov in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue28720" rel="nofollow noreferrer" target="_blank">
+   issue 28720
+  </a>
+  .)
+ </p>
+ <p>
+  这个
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/collections.html%23collections.namedtuple" rel="nofollow noreferrer" target="_blank">
+   namedtuple()
+  </a>
+  函数现在接受一个可选的关键字参数
+  <em>
+   module
+  </em>
+  ,它指定用于__module__返回的命名元组类的属性. (由Raymond Hettinger在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue17941" rel="nofollow noreferrer" target="_blank">
+   issue 17941
+  </a>
+  中贡献.
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/collections.html%23collections.namedtuple" rel="nofollow noreferrer" target="_blank">
+   namedtuple()
+  </a>
+  的
+  <em>
+   verbose
+  </em>
+  和
+  <em>
+   rename
+  </em>
+  参数是强制关键字参数. (由Raymond Hettinger 在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25628" rel="nofollow noreferrer" target="_blank">
+   issue 25628
+  </a>
+  中贡献.)
+ </p>
+ <p>
+  递归方法
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/collections.html%23collections.deque" rel="nofollow noreferrer" target="_blank">
+   collections.deque
+  </a>
+  实例现在可使用pickle持久化存储.
+  <br/>
+  (由Serhiy Storchaka在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26482" rel="nofollow noreferrer" target="_blank">
+   issue26482
+  </a>
+  中贡献.)
+ </p>
+ <br/>
+ <h3>
+  concurrent.futures¶
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/concurrent.futures.html%23concurrent.futures.ThreadPoolExecutor" rel="nofollow noreferrer" target="_blank">
+   ThreadPoolExecutor
+  </a>
+  类的构造函数现在接受一个可选的
+  <em>
+   thread_name_prefix
+  </em>
+  参数，使自定义线程池中的线程名字成为可能 (由Gregory P. Smith 贡献在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27664" rel="nofollow noreferrer" target="_blank">
+   issue 27664
+  </a>
+  .)
+ </p>
+ <br/>
+ <h3>
+  contextlib¶
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/contextlib.html%23contextlib.AbstractContextManager" rel="nofollow noreferrer" target="_blank">
+   contextlib.AbstractContextManager
+  </a>
+  类已经成为上下文管理器中的一个抽象基类
+  <br/>
+  。它提供了一个合理的默认返回self的 enter()方法，和一个exit()抽象方法. 一个匹配的类
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/typing.html%23typing.ContextManager" rel="nofollow noreferrer" target="_blank">
+   `typing.ContextManager`
+  </a>
+  .被添加到
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/typing.html%23module-typing" rel="nofollow noreferrer" target="_blank">
+   typing
+  </a>
+  。 (由 Brett Cannon 贡献在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25609" rel="nofollow noreferrer" target="_blank">
+   issue25609
+  </a>
+  .)
+ </p>
+ <br/>
+ <h3>
+  datetime
+ </h3>
+ <br/>
+ <h3>
+  decimal
+ </h3>
+ <br/>
+ <h3>
+  distutils
+ </h3>
+ <br/>
+ <h3>
+  email
+ </h3>
+ <br/>
+ <h3>
+  encodings
+ </h3>
+ <br/>
+ <h3>
+  enum
+ </h3>
+ <br/>
+ <h3>
+  faulthandler
+ </h3>
+ <p>
+  在Windows平台,
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/faulthandler.html%23module-faulthandler" rel="nofollow noreferrer" target="_blank">
+   faulthandler
+  </a>
+  模块安装了一个指示Windows异常的句柄 : 详情可见于 [faulthandler.enable()](
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.p/" rel="nofollow noreferrer" target="_blank">
+   https://docs.p
+  </a>
+  <br/>
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//ython.org/3.6/library/faulthandler.html%23faulthandler.enable" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    ython.org/3.6/library/f
+   </span>
+   <span class="invisible">
+    aulthandler.html#faulthandler.enable
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+  "faulthandler.enable" ). (由 Victor Stinner 在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue23848" rel="nofollow noreferrer" target="_blank">
+   issue23848
+  </a>
+  中贡献.)
+ </p>
+ <br/>
+ <h3>
+  fileinput
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/fileinput.html%23fileinput.hook_encoded" rel="nofollow noreferrer" target="_blank">
+   hook_encoded()
+  </a>
+  模块现在可支持errors参数.
+  <br/>
+  (由 Joseph Hackman 在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25788" rel="nofollow noreferrer" target="_blank">
+   issue25788
+  </a>
+  贡献.)
+ </p>
+ <br/>
+ <h3>
+  hashlib
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/hashlib-blake2.html%23module-hashlib" rel="nofollow noreferrer" target="_blank">
+   hashlib
+  </a>
+  支持 OpenSSL 1.1.0。推荐使用的最低版本为1.0.2. (由Christian Heimes 在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26470" rel="nofollow noreferrer" target="_blank">
+   issue 26470
+  </a>
+  贡献.)
+ </p>
+ <p>
+  BLAKE2 hash 函数也被收录进这一模块.
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/hashlib-blake2.html%23hashlib.blake2b" rel="nofollow noreferrer" target="_blank">
+   blake2b()
+  </a>
+  与
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/hashlib-blake2.html%23hashlib.blake2s" rel="nofollow noreferrer" target="_blank">
+   blake2s()
+  </a>
+  将长期支持BLAKE2的所有特性. (由Christian Heimes依据Dmitry Chestnykh 和 Samuel Neves的代码在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26798" rel="nofollow noreferrer" target="_blank">
+   issue 26798
+  </a>
+  贡献. 文档由Dmitry Chestnykh撰写.)
+ </p>
+ <p>
+  新增SHA-3哈希函数sha3_224(),sha3_256(),sha3_384(),sha3_512(), 与SHAKE 哈希函数 shake_128() 、shake_256() . (由Christian Heimes 在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue16113" rel="nofollow noreferrer" target="_blank">
+   issue16113
+  </a>
+  贡献. Keccak 代码包由Guido Bertoni, Joan Daemen, Michaël Peeters, Gilles Van Assche, and Ronny Van Keer撰写.)
+ </p>
+ <p>
+  基于密码的密钥导出函数
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/hashlib.html%23hashlib.scrypt" rel="nofollow noreferrer" target="_blank">
+   scrypt()
+  </a>
+  可使用 OpenSSL 1.1.0 或更新版本. (由Christian Heimes 在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27928" rel="nofollow noreferrer" target="_blank">
+   issue 27928
+  </a>
+  中贡献.)
+ </p>
+ <br/>
+ <h3>
+  http.client
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/http.client.html%23http.client.HTTPConnection.request" rel="nofollow noreferrer" target="_blank">
+   HTTPConnection.request()
+  </a>
+  and
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/http.client.html%23http.client.HTTPConnection.endheaders" rel="nofollow noreferrer" target="_blank">
+   endheaders()
+  </a>
+  将全部支持分块编码请求体. (由Demian Brecht and Rolf Krahl 在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue12319" rel="nofollow noreferrer" target="_blank">
+   issue 12319
+  </a>
+  中贡献.)
+ </p>
+ <br/>
+ <h3>
+  idlelib and IDLE
+ </h3>
+ <p>
+  对idle包做了现代化的改进与重构，使得IDLE更美观、更好用的同时令编程更易于理解、测试与改进。在IDLE的美化方面，特备针对Linux和Mac用户，我们在大多数对话框上应用了ttk插件。总之，IDLE将不再支持tcl/tk 8.4。现在要求有 tcl/tk 8.5 或 8.6。我们建议在使用时运行最新的版本.
+ </p>
+ <p>
+  “现代化”包括对idlelib模块的重命名和整合.重命名文件部分大写的名字是与之前版本类似的命名，例如，Tkinter和TkFont对应3.0版本中的Tkinter和tkinter.font 。因此，对idlelib在3.5环境下导入的文件通常不会工作在3.6。至少一个模块的名称需要改变（见idlelib / readme.txt），有时甚至会更多。(名称变更由Al Swiegart 与 Terry Reedy 在
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue24225" rel="nofollow noreferrer" target="_blank">
+   issue 24225
+  </a>
+  中贡献. 大多数idle补丁均会加入这一改进。)
+ </p>
+ <p>
+  做点补充，最终的结果是，一些idlelib类会更容易使用，将具有更好的API文档与字符串的解释。其他有用的信息会在可用时被及时添加到idlelib。
+ </p>
+ <br/>
+ <h3>
+  importlib
+ </h3>
+ <p>
+  当无法找到被导入模块时会跳出一个新的异常提示
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23ModuleNotFoundError" rel="nofollow noreferrer" target="_blank">
+   ModuleNotFoundError
+  </a>
+  (
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23ImportError" rel="nofollow noreferrer" target="_blank">
+   ImportError
+  </a>
+  的一个子类)。检测ImportError的代码（try-except）依然会工作。 (由 Eric Snow在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue15767" rel="nofollow noreferrer" target="_blank">
+   issue15767
+  </a>
+  中贡献.)
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/importlib.html%23importlib.util.LazyLoader" rel="nofollow noreferrer" target="_blank">
+   importlib.util.LazyLoader
+  </a>
+  在打包好的装载器上更名为
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/importlib.html%23importlib.abc.Loader.create_module" rel="nofollow noreferrer" target="_blank">
+   `create_module()`
+  </a>
+  , 去除了
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/importlib.html%23importlib.machinery.BuiltinImporter" rel="nofollow noreferrer" target="_blank">
+   importlib.machinery.BuiltinImporter
+  </a>
+  与
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/importlib.html%23importlib.machinery.ExtensionFileLoader" rel="nofollow noreferrer" target="_blank">
+   `importlib.machinery.ExtensionFileLoader`
+  </a>
+  <br/>
+  不能同
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/importlib.html%23importlib.util.LazyLoader" rel="nofollow noreferrer" target="_blank">
+   importlib.util.LazyLoader
+  </a>
+  一起使用的限制.
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/importlib.html%23importlib.util.cache_from_source" rel="nofollow noreferrer" target="_blank">
+   importlib.util.cache_from_source()
+  </a>
+  ,
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/importlib.html%23importlib.util.source_from_cache" rel="nofollow noreferrer" target="_blank">
+   importlib.util.source_from_cache()
+  </a>
+  , 和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/importlib.html%23importlib.util.spec_from_file_location" rel="nofollow noreferrer" target="_blank">
+   importlib.util.spec_from_file_location()
+  </a>
+  现在可接受
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-path-like-object" rel="nofollow noreferrer" target="_blank">
+   path-likeobject
+  </a>
+  .
+ </p>
+ <br/>
+ <h3>
+  inspect
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/inspect.html%23inspect.signature" rel="nofollow noreferrer" target="_blank">
+   inspect.signature()
+  </a>
+  函数现在支持报告由编译器为推导式和生成器表达式范围生成的隐式.0参数，就好像它们是名为implicit0的仅位置参数。 (由Jelle Zijlstra在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue19611" rel="nofollow noreferrer" target="_blank">
+   issue 19611
+  </a>
+  中贡献。)
+ </p>
+ <p>
+  为了减少从Python2.7和旧版
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/inspect.html%23inspect.getargspec" rel="nofollow noreferrer" target="_blank">
+   `inspect.getargspec()`
+  </a>
+  API升级时的代码改动，先前记录的对
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/inspect.html%23inspect.getfullargspec" rel="nofollow noreferrer" target="_blank">
+   `inspect.getfullargspec()`
+  </a>
+  对弃用已经撤销。虽然这个函数对于单个/源Python2/3代码库是很方便的，但是更丰富的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/inspect.html%23inspect.signature" rel="nofollow noreferrer" target="_blank">
+   `inspect.signature()`
+  </a>
+  接口仍然是新代码的推荐方法。(由Nick Coghlan在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27172" rel="nofollow noreferrer" target="_blank">
+   issue27172
+  </a>
+  中贡献)
+ </p>
+ <br/>
+ <h3>
+  json
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/json.html%23json.load" rel="nofollow noreferrer" target="_blank">
+   json.load()
+  </a>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/json.html%23json.loads" rel="nofollow noreferrer" target="_blank">
+   json.loads()
+  </a>
+  现在支持二进制输入。已编码的JSON应该用UTF-8, UTF-16, 或者UTF-32来表示。(由Serhiy Storchaka在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue17909" rel="nofollow noreferrer" target="_blank">
+   issue 17909
+  </a>
+  中贡献。)
+ </p>
+ <br/>
+ <h3>
+  logging
+ </h3>
+ <p>
+  已添加新的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/logging.handlers.html%23logging.handlers.WatchedFileHandler.reopenIfNeeded" rel="nofollow noreferrer" target="_blank">
+   WatchedFileHandler.reopenIfNeeded()
+  </a>
+  方法来增加检查日志文件是否需要被重新打开的能力。(由Marian Horban在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue24884" rel="nofollow noreferrer" target="_blank">
+   issue 24884
+  </a>
+  中贡献。)
+ </p>
+ <br/>
+ <h3>
+  math
+ </h3>
+ <p>
+  已添加tau (τ)常量到
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/math.html%23module-math" rel="nofollow noreferrer" target="_blank">
+   math
+  </a>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/cmath.html%23module-cmath" rel="nofollow noreferrer" target="_blank">
+   cmath
+  </a>
+  模块中。(由Lisa Roach在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue12345" rel="nofollow noreferrer" target="_blank">
+   issue 12345
+  </a>
+  中贡献，见
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0628" rel="nofollow noreferrer" target="_blank">
+   **PEP 628**
+  </a>
+  以了解详情。)
+ </p>
+ <br/>
+ <h3>
+  multiprocessing
+ </h3>
+ <p>
+  multiprocessing.Manager()返回的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/multiprocessing.html%23multiprocessing-proxy-objects" rel="nofollow noreferrer" target="_blank">
+   Proxy对象
+  </a>
+  现在可以被嵌套。(由Davin Potts在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue6766" rel="nofollow noreferrer" target="_blank">
+   issue6766
+  </a>
+  中贡献。)
+ </p>
+ <br/>
+ <h3>
+  os
+ </h3>
+ <p>
+  见
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/whatsnew/3.6.html%23whatsnew36-pep519" rel="nofollow noreferrer" target="_blank">
+   PEP 519
+  </a>
+  的摘要，以获取关于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23module-os" rel="nofollow noreferrer" target="_blank">
+   os
+  </a>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.path.html%23module-os.path" rel="nofollow noreferrer" target="_blank">
+   os.path
+  </a>
+  模块现在如何支持
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-path-like-object" rel="nofollow noreferrer" target="_blank">
+   类路径（path-like）对象
+  </a>
+  的详情。
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.scandir" rel="nofollow noreferrer" target="_blank">
+   scandir()
+  </a>
+  现在支持Windows上的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/functions.html%23bytes" rel="nofollow noreferrer" target="_blank">
+   bytes
+  </a>
+  路径。
+ </p>
+ <p>
+  一个新的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.scandir.close" rel="nofollow noreferrer" target="_blank">
+   close()
+  </a>
+  方法允许显式关闭一个
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.scandir" rel="nofollow noreferrer" target="_blank">
+   scandir()
+  </a>
+  迭代器。
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.scandir" rel="nofollow noreferrer" target="_blank">
+   scandir()
+  </a>
+  迭代器现在支持
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-context-manager" rel="nofollow noreferrer" target="_blank">
+   上下文管理器
+  </a>
+  协议。如果一个scandir()迭代器既不是被耗尽，也不是被显式关闭，那么在其析构函数中将会抛出一个
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23ResourceWarning" rel="nofollow noreferrer" target="_blank">
+   ResourceWarning
+  </a>
+  。(由Serhiy Storchaka在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25994" rel="nofollow noreferrer" target="_blank">
+   issue 25994
+  </a>
+  中贡献。)
+ </p>
+ <p>
+  在Linux上，
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.urandom" rel="nofollow noreferrer" target="_blank">
+   os.urandom()
+  </a>
+  现在会阻塞，直到系统的urandom entropy池被初始化，以提高安全性。见
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0524" rel="nofollow noreferrer" target="_blank">
+   **PEP 524**
+  </a>
+  以了解缘由。
+ </p>
+ <p>
+  Linux的getrandom()系统调用(获取随机字节)现在作为新的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.getrandom" rel="nofollow noreferrer" target="_blank">
+   os.getrandom()
+  </a>
+  函数公开。(由Victor Stinner贡献，属于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0524" rel="nofollow noreferrer" target="_blank">
+   **PEP 524**
+  </a>
+  部分)
+ </p>
+ <br/>
+ <h3>
+  pathlib
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/pathlib.html%23module-pathlib" rel="nofollow noreferrer" target="_blank">
+   pathlib
+  </a>
+  现在支持
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-path-like-object" rel="nofollow noreferrer" target="_blank">
+   类路径（path-like）对象
+  </a>
+  。
+  <br/>
+  (由Brett Cannon在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27186" rel="nofollow noreferrer" target="_blank">
+   issue 27186
+  </a>
+  中贡献。)
+ </p>
+ <p>
+  见PEP 519的摘要了解详情。
+ </p>
+ <br/>
+ <h3>
+  pdb
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/pdb.html%23pdb.Pdb" rel="nofollow noreferrer" target="_blank">
+   Pdb
+  </a>
+  类构造器有一个新的可选
+  <em>
+   readrc
+  </em>
+  参数，用来控制是否应该读取.pdbrc文件。
+ </p>
+ <br/>
+ <h3>
+  pickle
+ </h3>
+ <p>
+  对象，现在可以使用关键参数 __new__进行持久存储
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/pickle.html%23pickle-protocols" rel="nofollow noreferrer" target="_blank">
+   pickle协议
+  </a>
+  超过已有的协议版本4.支持这种情况. (由Serhiy Storchaka在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue24164" rel="nofollow noreferrer" target="_blank">
+   issue24164
+  </a>
+  的贡献。)
+ </p>
+ <br/>
+ <h3>
+  pickletools
+ </h3>
+ <p>
+  现在[pickletools.dis()](
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/pickletools.html%23pic" rel="nofollow noreferrer" target="_blank">
+   32.13. pickletools - Tools for pickle developers - Python 3.6.0 documentation
+  </a>
+  <br/>
+  kletools.dis "pickletools.dis" )输出的隐含备注是MEMOIZE操作码的索引。 (由Serhiy Storchaka在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25382" rel="nofollow noreferrer" target="_blank">
+   issue25382
+  </a>
+  的贡献。)
+ </p>
+ <br/>
+ <h3>
+  pydoc
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/pydoc.html%23module-pydoc" rel="nofollow noreferrer" target="_blank">
+   pydoc
+  </a>
+  模块已经学会遵守MANPAGER环境变量。 (由Matthias Klose在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue8637" rel="nofollow noreferrer" target="_blank">
+   issue 8637
+  </a>
+  的贡献。)
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/functions.html%23help" rel="nofollow noreferrer" target="_blank">
+   help()
+  </a>
+  <br/>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/pydoc.html%23module-pydoc" rel="nofollow noreferrer" target="_blank">
+   pydoc
+  </a>
+  现在能用指定的元组字段定义的顺序来显示列表，而不是按字母顺序。(由Raymond Hettinger在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue24879" rel="nofollow noreferrer" target="_blank">
+   issue24879
+  </a>
+  的贡献。)
+ </p>
+ <br/>
+ <h3>
+  random
+ </h3>
+ <p>
+  这个新
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/random.html%23random.choices" rel="nofollow noreferrer" target="_blank">
+   choices()
+  </a>
+  函数返回一个指定元素大小的列表，通过可选权重给出它的规模。(由Raymond Hettinger在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue18844" rel="nofollow noreferrer" target="_blank">
+   issue 18844
+  </a>
+  的贡献。)
+ </p>
+ <br/>
+ <h3>
+  re
+ </h3>
+ <p>
+  在正则表达式中，增加对 spans 修饰符的支持。 示例:
+  <br/>
+  '(?i:p)ython' 匹配 'python' 和 'Python', 但不匹配'PYTHON'；'(?i)g(?-i:v)r' 匹配 'GvR' 和 'gvr', 但不匹配'GVR'。(由Serhiy Storchaka在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue433028" rel="nofollow noreferrer" target="_blank">
+   issue 433028
+  </a>
+  的贡献。)
+ </p>
+ <p>
+  匹配对象组可通过 __getitem__访问, 它就等价于 group()。因此， 现在mo['name'] 就等价于 mo.group('name')。(由 Eric Smith 在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue24454" rel="nofollow noreferrer" target="_blank">
+   issue 24454
+  </a>
+  的贡献。)
+ </p>
+ <p>
+  现在，Match 对象支持
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/reference/datamodel.html%23object.__index__" rel="nofollow noreferrer" target="_blank">
+   index-like objects
+  </a>
+  一样的组索引。 (由Jeroen Demeyer and Xiang Zhang在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27177" rel="nofollow noreferrer" target="_blank">
+   issue27177
+  </a>
+  的贡献。)
+ </p>
+ <br/>
+ <h3>
+  readline
+ </h3>
+ <p>
+  增加了
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/readline.html%23readline.set_auto_history" rel="nofollow noreferrer" target="_blank">
+   set_auto_history()
+  </a>
+  启用或停用自动把输入加到历史列表中。 (由Tyler Crompton在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26870" rel="nofollow noreferrer" target="_blank">
+   issue26870
+  </a>
+  的贡献。)
+ </p>
+ <br/>
+ <h3>
+  rlcompleter
+ </h3>
+ <p>
+  现在，除非前缀开始使用下划线，否则私有和特殊属性名称就被忽略。在一些完成的关键字后面添加一个空格或冒号。
+  <br/>
+  (由Serhiy Storchaka在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25011" rel="nofollow noreferrer" target="_blank">
+   issue25011
+  </a>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25209" rel="nofollow noreferrer" target="_blank">
+   issue25209
+  </a>
+  的贡献。)
+ </p>
+ <br/>
+ <h3>
+  shlex
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/shlex.html%23shlex.shlex" rel="nofollow noreferrer" target="_blank">
+   shlex
+  </a>
+  已经大大
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/shlex.html%23improved-shell-compatibility" rel="nofollow noreferrer" target="_blank">
+   改进shell的兼容性
+  </a>
+  ,通过新的
+  <em>
+   punctuation_chars
+  </em>
+  参数来控制，哪些字符被作为标点符号。 (由Vinay Sajip 在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue1521950" rel="nofollow noreferrer" target="_blank">
+   issue1521950
+  </a>
+  的贡献。)
+ </p>
+ <br/>
+ <h3>
+  site
+ </h3>
+ <p>
+  在一个.pth文件里，当指定路径添加到
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/sys.html%23sys.path" rel="nofollow noreferrer" target="_blank">
+   sys.path
+  </a>
+  中,可能你现在要在目录之上指定文件路径 (例如：zip文件)。 (由Wolfgang Langner 在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26587" rel="nofollow noreferrer" target="_blank">
+   issue26587
+  </a>
+  的贡献)。
+ </p>
+ <br/>
+ <h3>
+  sqlite3
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/sqlite3.html%23sqlite3.Cursor.lastrowid" rel="nofollow noreferrer" target="_blank">
+   sqlite3.Cursor.lastrowid
+  </a>
+  现在支持REPLACE 声明. (贡献者： Alex LordThorsen 于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue16864" rel="nofollow noreferrer" target="_blank">
+   issue16864
+  </a>
+  .)
+ </p>
+ <br/>
+ <h3>
+  socket
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/socket.html%23socket.socket.ioctl" rel="nofollow noreferrer" target="_blank">
+   ioctl()
+  </a>
+  函数现在支持
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/socket.html%23socket.SIO_LOOPBACK_FAST_PATH" rel="nofollow noreferrer" target="_blank">
+   `SIO_LOOPBACK_FAST_PATH`
+  </a>
+  控制代码. (贡献者： Daniel Stokes 于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26536" rel="nofollow noreferrer" target="_blank">
+   issue 26536
+  </a>
+  .)
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/socket.html%23socket.socket.getsockopt" rel="nofollow noreferrer" target="_blank">
+   getsockopt()
+  </a>
+  常量 SO_DOMAIN,
+  <br/>
+  SO_PROTOCOL, SO_PEERSEC, 和 SO_PASSSEC 现已被支持. (贡献者：Christian Heimes 于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26907" rel="nofollow noreferrer" target="_blank">
+   issue 26907
+  </a>
+  .)
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/socket.html%23socket.socket.setsockopt" rel="nofollow noreferrer" target="_blank">
+   setsockopt()
+  </a>
+  现在支持setsockopt(level, optname, None, optlen: int) 形式. (贡献者：Christian Heimes 于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27744" rel="nofollow noreferrer" target="_blank">
+   issue 27744
+  </a>
+  .)
+ </p>
+ <p>
+  socket 模块现在支持地址族
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/socket.html%23socket.AF_ALG" rel="nofollow noreferrer" target="_blank">
+   AF_ALG
+  </a>
+  来和Linux Kernel crypto API连接. 添加了ALG_*,SOL_ALG 和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/socket.html%23socket.socket.sendmsg_afalg" rel="nofollow noreferrer" target="_blank">
+   sendmsg_afalg()
+  </a>
+  .(贡献者： Christian Heimes 于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27744" rel="nofollow noreferrer" target="_blank">
+   issue27744
+  </a>
+  在Victor Stinner帮助下完成.)
+ </p>
+ <br/>
+ <h3>
+  socketserver
+ </h3>
+ <p>
+  基于
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/socketserver.html%23module-socketserver" rel="nofollow noreferrer" target="_blank">
+   socketserver
+  </a>
+  模块,包括了
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/http.server.html%23module-http.server" rel="nofollow noreferrer" target="_blank">
+   http.server
+  </a>
+  ,
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/xmlrpc.server.html%23module-xmlrpc.server" rel="nofollow noreferrer" target="_blank">
+   xmlrpc.server
+  </a>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/wsgiref.html%23module-wsgiref.simple_server" rel="nofollow noreferrer" target="_blank">
+   wsgiref.simple_server
+  </a>
+  的Servers 现在支持
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-context-manager" rel="nofollow noreferrer" target="_blank">
+   contextmanager
+  </a>
+  protocol. (Contributed by Aviv Palivoda in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26404" rel="nofollow noreferrer" target="_blank">
+   issue26404
+  </a>
+  .)
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/socketserver.html%23socketserver.StreamRequestHandler" rel="nofollow noreferrer" target="_blank">
+   StreamRequestHandler
+  </a>
+  类的 wfile 属性 现在实现 the
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/io.html%23io.BufferedIOBase" rel="nofollow noreferrer" target="_blank">
+   `io.BufferedIOBase`
+  </a>
+  可写接口. 特别地, 调用
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/io.html%23io.BufferedIOBase.write" rel="nofollow noreferrer" target="_blank">
+   write()
+  </a>
+  现在可以保证完全发送数据.
+  <br/>
+  (贡献者： Martin Panter于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26721" rel="nofollow noreferrer" target="_blank">
+   issue26721
+  </a>
+  .)
+ </p>
+ <br/>
+ <h3>
+  ssl
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue11734" rel="nofollow noreferrer" target="_blank">
+   ssl
+  </a>
+  已支持 OpenSSL 1.1.0. 最低推荐版本号是 1.0.2. (贡献者： Christian Heimes 于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26470" rel="nofollow noreferrer" target="_blank">
+   issue26470
+  </a>
+  .)
+ </p>
+ <p>
+  3DES 已从默认密码套件default cipher suites中删除添加了密码套件ChaCha20 Poly1305. (贡献者： Christian Heimes 于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27850" rel="nofollow noreferrer" target="_blank">
+   issue27850
+  </a>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27766" rel="nofollow noreferrer" target="_blank">
+   issue27766
+  </a>
+  .)
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/ssl.html%23ssl.SSLContext" rel="nofollow noreferrer" target="_blank">
+   SSLContext
+  </a>
+  有更好的默认配置选项和密码.(贡献者： Christian Heimes 于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue28043" rel="nofollow noreferrer" target="_blank">
+   issue28043
+  </a>
+  .)
+ </p>
+ <p>
+  SSL session 可以使用新的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/ssl.html%23ssl.SSLSession" rel="nofollow noreferrer" target="_blank">
+   SSLSession
+  </a>
+  类从一个客户端连接复制到另一个客户端连接.TLS会话恢复可以加速初始握手，减少延迟并提高性能 (贡献者： Christian Heimes 于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue19500" rel="nofollow noreferrer" target="_blank">
+   issue19500
+  </a>
+  ，基于Alex Warhawk的草案.)
+ </p>
+ <p>
+  新的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/ssl.html%23ssl.SSLContext.get_ciphers" rel="nofollow noreferrer" target="_blank">
+   get_ciphers()
+  </a>
+  方法可以用来得到一个按密码优先级顺序的已启用密码列表.
+ </p>
+ <p>
+  所有的 constants and flags已转换为
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/enum.html%23enum.IntEnum" rel="nofollow noreferrer" target="_blank">
+   IntEnum
+  </a>
+  和 IntFlags. (贡献者 ：Christian Heimes于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue28025" rel="nofollow noreferrer" target="_blank">
+   issue28025
+  </a>
+  .)
+ </p>
+ <p>
+  Server 和 client-side添加
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/ssl.html%23ssl.SSLContext" rel="nofollow noreferrer" target="_blank">
+   SSLContext
+  </a>
+  特定 TLS 协议. (贡献者： Christian Heimes 于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue28085" rel="nofollow noreferrer" target="_blank">
+   issue28085
+  </a>
+  .)
+ </p>
+ <br/>
+ <h3>
+  statistics
+ </h3>
+ <p>
+  已添加一个新的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/statistics.html%23statistics.harmonic_mean" rel="nofollow noreferrer" target="_blank">
+   harmonic_mean()
+  </a>
+  函数。 (由Steven D'Aprano在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27181" rel="nofollow noreferrer" target="_blank">
+   issue 27181
+  </a>
+  中贡献。)
+ </p>
+ <br/>
+ <h3>
+  struct
+ </h3>
+ <p>
+  通过'e'格式限定符，
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/struct.html%23module-struct" rel="nofollow noreferrer" target="_blank">
+   struct
+  </a>
+  现在支持IEEE 754半精度浮点。(由Eli Stevens, Mark Dickinson在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue11734" rel="nofollow noreferrer" target="_blank">
+   issue 11734
+  </a>
+  中贡献。)
+ </p>
+ <br/>
+ <h3>
+  subprocess
+ </h3>
+ <p>
+  当子系统仍然运行着的时候，
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/subprocess.html%23subprocess.Popen" rel="nofollow noreferrer" target="_blank">
+   subprocess.Popen
+  </a>
+  析构函数现在发出一个
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23ResourceWarning" rel="nofollow noreferrer" target="_blank">
+   ResourceWarning
+  </a>
+  警告。使用上下文管理器协议(with proc: ...)或者明确调用
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/subprocess.html%23subprocess.Popen.wait" rel="nofollow noreferrer" target="_blank">
+   wait()
+  </a>
+  方法来读取子进程的退出状态。
+  <br/>
+  (由Victor Stinner在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26741" rel="nofollow noreferrer" target="_blank">
+   issue 26741
+  </a>
+  中贡献。)
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/subprocess.html%23subprocess.Popen" rel="nofollow noreferrer" target="_blank">
+   subprocess.Popen
+  </a>
+  构造函数和所有传给它的函数现在接受
+  <em>
+   encoding
+  </em>
+  和
+  <em>
+   errors
+  </em>
+  参数。指定其中一个将会为
+  <em>
+   stdin
+  </em>
+  ,
+  <em>
+   stdout
+  </em>
+  和
+  <em>
+   stderr
+  </em>
+  流启用文本模式。(由Steve Dower在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue6135" rel="nofollow noreferrer" target="_blank">
+   issue 6135
+  </a>
+  中贡献。)
+ </p>
+ <br/>
+ <h3>
+  sys
+ </h3>
+ <p>
+  新的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/sys.html%23sys.getfilesystemencodeerrors" rel="nofollow noreferrer" target="_blank">
+   getfilesystemencodeerrors()
+  </a>
+  函数返回用来在Unicode文件名和字节文件名之间转换的错误模式的名字。(由Steve Dower在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27781" rel="nofollow noreferrer" target="_blank">
+   issue 27781
+  </a>
+  中贡献。)
+ </p>
+ <p>
+  在Windows上，
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/sys.html%23sys.getwindowsversion" rel="nofollow noreferrer" target="_blank">
+   getwindowsversion()
+  </a>
+  函数的返回值现在包含了
+  <em>
+   platform_version
+  </em>
+  字段，它包含当前操作系统准确的最大版本、最小版本和构建版本，而不是模拟进程的版本 (由Steve Dower在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27932" rel="nofollow noreferrer" target="_blank">
+   issue 27932
+  </a>
+  中贡献。)
+ </p>
+ <br/>
+ <h3>
+  telnetlib
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/telnetlib.html%23telnetlib.Telnet" rel="nofollow noreferrer" target="_blank">
+   Telnet
+  </a>
+  现在是一个上下文管理器了 (由Stéphane Wirtel在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25485" rel="nofollow noreferrer" target="_blank">
+   issue 25485
+  </a>
+  中贡献)。
+ </p>
+ <br/>
+ <h3>
+  time
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/time.html%23time.struct_time" rel="nofollow noreferrer" target="_blank">
+   struct_time
+  </a>
+  的属性tm_gmtoff和tm_zone现在在所有平台上都可用了。
+ </p>
+ <br/>
+ <h3>
+  timeit
+ </h3>
+ <p>
+  已添加新的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/timeit.html%23timeit.Timer.autorange" rel="nofollow noreferrer" target="_blank">
+   Timer.autorange()
+  </a>
+  便捷方法来反复调用
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/timeit.html%23timeit.Timer.timeit" rel="nofollow noreferrer" target="_blank">
+   Timer.timeit()
+  </a>
+  ，以便总运行时间大于或等于200毫秒(由Steven D'Aprano在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue6422" rel="nofollow noreferrer" target="_blank">
+   issue 6422
+  </a>
+  中贡献。)
+ </p>
+ <p>
+  当在最佳和最差时间之间存在一个很大（4x）的差时，
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/timeit.html%23module-timeit" rel="nofollow noreferrer" target="_blank">
+   timeit
+  </a>
+  现在会告警。(由Serhiy Storchaka在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue23552" rel="nofollow noreferrer" target="_blank">
+   issue 23552
+  </a>
+  中贡献。)
+ </p>
+ <br/>
+ <h3>
+  tkinter
+ </h3>
+ <p>
+  在tkinter.Variable类中添加了方法trace_add（），trace_remove（）和trace_info（）。它们代替了之前版本中的trace_variable（），trace（），trace_vdelete（）和trace_vinfo（）方法，这些方法使用过时的Tcl命令，而在未来版本的Tcl中，这些Tcl命令可能不起作用。（由Serhiy Storchaka在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue22115" rel="nofollow noreferrer" target="_blank">
+   issue22115
+  </a>
+  提供）。
+ </p>
+ <br/>
+ <h3>
+  traceback
+ </h3>
+ <p>
+  traceback模块和解释器内置的异常展示现在都省略回溯中重复行的长串，如以下例子所示：
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>    &gt;&gt;&gt; def f(): f()    ...    &gt;&gt;&gt; f()    Traceback (most recent call last):      File "&lt;stdin&gt;", line 1, in &lt;module&gt;      File "&lt;stdin&gt;", line 1, in f      File "&lt;stdin&gt;", line 1, in f      File "&lt;stdin&gt;", line 1, in f      [Previous line repeated 995 more times]    RecursionError: maximum recursion depth exceeded
+</code></pre>
+ </div>
+ <p>
+  (由Emanuel Barry在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26823" rel="nofollow noreferrer" target="_blank">
+   issue 26823
+  </a>
+  中贡献。)
+ </p>
+ <br/>
+ <h3>
+  tracemalloc
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/tracemalloc.html%23module-tracemalloc" rel="nofollow noreferrer" target="_blank">
+   tracemalloc
+  </a>
+  模块限制支持跟踪多个不同地址空间内的内存分配。
+ </p>
+ <p>
+  已添加新的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/tracemalloc.html%23tracemalloc.DomainFilter" rel="nofollow noreferrer" target="_blank">
+   DomainFilter
+  </a>
+  过滤器类来根据地址空间（域）过滤块跟踪。
+ </p>
+ <p>
+  (由Victor Stinner在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26588" rel="nofollow noreferrer" target="_blank">
+   issue 26588
+  </a>
+  中贡献。)
+ </p>
+ <br/>
+ <h3>
+  typing
+ </h3>
+ <p>
+  从Python 3.6起，
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/typing.html%23module-typing" rel="nofollow noreferrer" target="_blank">
+   typing
+  </a>
+  模块不再是临时的了，可以把它的API当成稳定版本使用。
+ </p>
+ <p>
+  由于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/typing.html%23module-typing" rel="nofollow noreferrer" target="_blank">
+   typing
+  </a>
+  模块在Python 3.5中是
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-provisional-api" rel="nofollow noreferrer" target="_blank">
+   临时的
+  </a>
+  ，因此Python 3.6中引入的所有变动也已向后移植到Python 3.5.x。
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/typing.html%23module-typing" rel="nofollow noreferrer" target="_blank">
+   typing
+  </a>
+  模块很大提高了对范型别名的支持。例如，Dict[str,Tuple[S,T]]现在是一个有效的类型注释了。(由Guido van Rossum在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/python/typing/pull/195" rel="nofollow noreferrer" target="_blank">
+   Github#195
+  </a>
+  中贡献。)
+ </p>
+ <p>
+  已添加
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/typing.html%23typing.ContextManager" rel="nofollow noreferrer" target="_blank">
+   typing.ContextManager
+  </a>
+  类来展示
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/contextlib.html%23contextlib.AbstractContextManager" rel="nofollow noreferrer" target="_blank">
+   contextlib.AbstractContextManager
+  </a>
+  。(由Brett Cannon在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25609" rel="nofollow noreferrer" target="_blank">
+   issue25609
+  </a>
+  中贡献。)
+ </p>
+ <p>
+  已添加
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/typing.html%23typing.Collection" rel="nofollow noreferrer" target="_blank">
+   typing.Collection
+  </a>
+  类来展示
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/collections.abc.html%23collections.abc.Collection" rel="nofollow noreferrer" target="_blank">
+   collections.abc.Collection
+  </a>
+  。 (由Ivan Levkivskyi在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27598" rel="nofollow noreferrer" target="_blank">
+   issue27598
+  </a>
+  中贡献。)
+ </p>
+ <p>
+  已添加
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/typing.html%23typing.ClassVar" rel="nofollow noreferrer" target="_blank">
+   typing.ClassVar
+  </a>
+  类型构造，来标识类变量。如
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0526" rel="nofollow noreferrer" target="_blank">
+   **PEP 526**
+  </a>
+  中所述，封装在ClassVar中的一个变量注解暗示着一个给定的属性打算作为一个类变量使用，并且不应该在那个类的实例上设置它。(由Ivan Levkivskyi在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/python/typing/issues/280" rel="nofollow noreferrer" target="_blank">
+   Github#280
+  </a>
+  中贡献。)
+ </p>
+ <p>
+  一个新的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/typing.html%23typing.TYPE_CHECKING" rel="nofollow noreferrer" target="_blank">
+   TYPE_CHECKING
+  </a>
+  常量被静态类型检查器假设为True，但在运行时则为False。 (由Guido van Rossum在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/python/typing/issues/230" rel="nofollow noreferrer" target="_blank">
+   Github#230
+  </a>
+  中贡献。)
+ </p>
+ <p>
+  已添加一个新的
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/typing.html%23typing.NewType" rel="nofollow noreferrer" target="_blank">
+   NewType()
+  </a>
+  辅助函数来为注释创建轻量单值类型：
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>    from typing import NewType    UserId = NewType('UserId', int)    some_id = UserId(524313)
+</code></pre>
+ </div>
+ <p>
+  静态类型检查器将会把新的类型当成原始类型的一个子类。 (由Ivan Levkivskyi在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/python/typing/issues/189" rel="nofollow noreferrer" target="_blank">
+   Github #189
+  </a>
+  中贡献。)
+ </p>
+ <br/>
+ <h3>
+  unicodedata
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/unicodedata.html%23module-unicodedata" rel="nofollow noreferrer" target="_blank">
+   unicodedata
+  </a>
+  模块现在使用来自
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//unicode.org/versions/Unicode9.0.0/" rel="nofollow noreferrer" target="_blank">
+   Unicode 9.0.0
+  </a>
+  的数据。
+  <br/>
+  (由Benjamin Peterson贡献)
+ </p>
+ <br/>
+ <h3>
+  unittest.mock
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/unittest.mock.html%23unittest.mock.Mock" rel="nofollow noreferrer" target="_blank">
+   Mock
+  </a>
+  类有以下改进：
+ </p>
+ <ul>
+  <li>
+   两个新的方法，
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/unittest.mock.html%23unittest.mock.Mock.assert_called" rel="nofollow noreferrer" target="_blank">
+    Mock.assert_called()
+   </a>
+   和
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/unittest.mock.html%23unittest.mock.Mock.assert_called_once" rel="nofollow noreferrer" target="_blank">
+    Mock.assert_called_once()
+   </a>
+   ，用来检测是否调用了mock对象。(由Amit Saha在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26323" rel="nofollow noreferrer" target="_blank">
+    issue 26323
+   </a>
+   中贡献。)
+  </li>
+  <li>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/unittest.mock.html%23unittest.mock.Mock.reset_mock" rel="nofollow noreferrer" target="_blank">
+    Mock.reset_mock()
+   </a>
+   方法现在拥有两个可选的仅关键字参数：
+   <em>
+    return_value
+   </em>
+   和
+   <em>
+    side_effect
+   </em>
+   。 (由Kushal Das在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue21271" rel="nofollow noreferrer" target="_blank">
+    issue 21271
+   </a>
+   中贡献。)
+  </li>
+ </ul>
+ <br/>
+ <h3>
+  urllib.request
+ </h3>
+ <p>
+  如果一个HTTP请求具有一个文件或者可迭代请求体 (不同于一个bytes对象)，但是没有Content-Length头，那么现在AbstractHTTPHandler会回退到使用分块传输编码，而不是抛出一个错误。
+  <br/>
+  (由Demian Brecht和Rolf Krahl在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue12319" rel="nofollow noreferrer" target="_blank">
+   issue 12319
+  </a>
+  中贡献。)
+ </p>
+ <br/>
+ <h3>
+  urllib.robotparser
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/urllib.robotparser.html%23urllib.robotparser.RobotFileParser" rel="nofollow noreferrer" target="_blank">
+   RobotFileParser
+  </a>
+  现在支持Crawl-delay和Request-rate扩展。(由Nikolay Bogoychev在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue16099" rel="nofollow noreferrer" target="_blank">
+   issue 16099
+  </a>
+  中贡献。)
+ </p>
+ <br/>
+ <h3>
+  venv
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/venv.html%23module-venv" rel="nofollow noreferrer" target="_blank">
+   venv
+  </a>
+  接受一个新的参数--prompt。这个参数为虚拟环境提供一个可替换的前缀。(在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue22829" rel="nofollow noreferrer" target="_blank">
+   issue22829
+  </a>
+  中，由Łukasz Balcerzak提出，并由Stéphane Wirtel移植到3.6。)
+ </p>
+ <br/>
+ <h3>
+  warnings
+ </h3>
+ <p>
+  增加一个可选参数到
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/warnings.html%23warnings.warn_explici%250At" rel="nofollow noreferrer" target="_blank">
+   warnings.warn_explicit（）
+  </a>
+  函数中：引发
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23Resource%250AWarning" rel="nofollow noreferrer" target="_blank">
+   ResourceWarning
+  </a>
+  的已销毁对象。 同时，属性也添加到warnings.WarningMessage 中。（由Victor Stinner在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26568" rel="nofollow noreferrer" target="_blank">
+   issue26568
+  </a>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26567" rel="nofollow noreferrer" target="_blank">
+   issue26567
+  </a>
+  中提供）。
+ </p>
+ <p>
+  当引发
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html" rel="nofollow noreferrer" target="_blank">
+   ResourceWarning
+  </a>
+  警告时，
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/tracemalloc.html%23module-%250Atracemalloc" rel="nofollow noreferrer" target="_blank">
+   tracemalloc
+  </a>
+  模块就尝试检索分配了销毁对象的跟踪。
+ </p>
+ <p>
+  一个名为 example.py的例子
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>    import warnings    def func():        return open(__file__)    f = func()    f = None
+</code></pre>
+ </div>
+ <p>
+  输出命令 python3.6 -Wd -X tracemalloc=5 example.py :
+ </p>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>    example.py:7: ResourceWarning: unclosed file &lt;_io.TextIOWrapper name='example.py' mode='r' encoding='UTF-8'&gt;      f = None    Object allocated at (most recent call first):      File "example.py", lineno 4          return open(__file__)      File "example.py", lineno 6          f = func()
+</code></pre>
+ </div>
+ <p>
+  “对象分配”跟踪是新的，并且只有当
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/tracemalloc.html%23module-%250Atracemalloc" rel="nofollow noreferrer" target="_blank">
+   tracemalloc
+  </a>
+  正在跟踪Python内存分配，并且
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/warnings.html%23module-warnings" rel="nofollow noreferrer" target="_blank">
+   warnings
+  </a>
+  模块已经导入时才会显示。
+ </p>
+ <br/>
+ <h3>
+  winreg
+ </h3>
+ <p>
+  新增64位整数类型
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/winreg.html%23winreg.REG_QWORD" rel="nofollow noreferrer" target="_blank">
+   REG_QWORD
+  </a>
+  . (Contributed by Clement Rouault in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue23026" rel="nofollow noreferrer" target="_blank">
+   issue23026
+  </a>
+  .)
+ </p>
+ <br/>
+ <h3>
+  winsound
+ </h3>
+ <p>
+  允许传递关键词参数到
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/winsound.html%23winsound.Beep" rel="nofollow noreferrer" target="_blank">
+   Beep
+  </a>
+  ,
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/winsound.html%23winsound.MessageBeep" rel="nofollow noreferrer" target="_blank">
+   MessageBeep
+  </a>
+  , 和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/winsound.html%23winsound.PlaySound" rel="nofollow noreferrer" target="_blank">
+   PlaySound
+  </a>
+  方法。 (
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27982" rel="nofollow noreferrer" target="_blank">
+   issue 27982
+  </a>
+  ).
+ </p>
+ <br/>
+ <h3>
+  xmlrpc.client
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/xmlrpc.client.html%23module-xmlrpc.client" rel="nofollow noreferrer" target="_blank">
+   xmlrpc.client
+  </a>
+  模块现支持解压由apache XML-RPC实现用于数字和'None'的附加数据类型。(Contributed by Serhiy Storchaka in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26885" rel="nofollow noreferrer" target="_blank">
+   issue 26885
+  </a>
+  .)
+ </p>
+ <br/>
+ <h3>
+  zipfile
+ </h3>
+ <p>
+  一个新的类方法
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/zipfile.html%23zipfile.ZipInfo.from_file" rel="nofollow noreferrer" target="_blank">
+   ZipInfo.from_file()
+  </a>
+  允许从文件系统文件中生成一个
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/zipfile.html%23zipfile.ZipInfo" rel="nofollow noreferrer" target="_blank">
+   ZipInfo
+  </a>
+  实例。
+  <br/>
+  一个新的方法
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/zipfile.html%23zipfile.ZipInfo.is_dir" rel="nofollow noreferrer" target="_blank">
+   ZipInfo.is_dir()
+  </a>
+  能够用来检查
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/zipfile.html%23zipfile.ZipInfo" rel="nofollow noreferrer" target="_blank">
+   ZipInfo
+  </a>
+  实例是否表示一个目录。 (Contributed by Thomas Kluyver in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26039" rel="nofollow noreferrer" target="_blank">
+   issue 26039
+  </a>
+  .)
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/zipfile.html%23zipfile.ZipFile.open" rel="nofollow noreferrer" target="_blank">
+   ZipFile.open()
+  </a>
+  方法现在能够将数据写入到一个ZIP文件，也能够从中提取数据。 (Contributed by Thomas Kluyver in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26039" rel="nofollow noreferrer" target="_blank">
+   issue 26039
+  </a>
+  .)
+ </p>
+ <br/>
+ <h3>
+  zlib
+ </h3>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/zlib.html%23zlib.compress" rel="nofollow noreferrer" target="_blank">
+   compress()
+  </a>
+  以及
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/zlib.html%23zlib.decompress" rel="nofollow noreferrer" target="_blank">
+   decompress()
+  </a>
+  函数现接受关键词参数。 (Contributed by Aviv Palivoda in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26243" rel="nofollow noreferrer" target="_blank">
+   issue 26243
+  </a>
+  and Xiang Zhang in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue16764" rel="nofollow noreferrer" target="_blank">
+   issue16764
+  </a>
+  respectively.)
+ </p>
+ <br/>
+ <h2>
+  优化
+ </h2>
+ <ul>
+  <li>
+   Python解释器现在使用16位编码而不是字节码，这使得你可以实现多种操作码的优化。(由Demur Rumed，Serhiy Storchaka和Victor Stinner在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26647" rel="nofollow noreferrer" target="_blank">
+    issue 26647
+   </a>
+   以及
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue28050" rel="nofollow noreferrer" target="_blank">
+    issue 28050
+   </a>
+   中贡献。)
+  </li>
+  <li>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncio-task.html%23asyncio.Future" rel="nofollow noreferrer" target="_blank">
+    asyncio.Future
+   </a>
+   类现在有一种优化的C实现。(由Yury Selivanov和INADA Naoki在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26081" rel="nofollow noreferrer" target="_blank">
+    issue 26081
+   </a>
+   中贡献。)
+  </li>
+  <li>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncio-task.html%23asyncio.Task" rel="nofollow noreferrer" target="_blank">
+    asyncio.Task
+   </a>
+   类现在有一种优化的C实现。(由Yury Selivanov在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue28544" rel="nofollow noreferrer" target="_blank">
+    issue 28544
+   </a>
+   中贡献。)
+  </li>
+  <li>
+   在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/typing.html%23module-typing" rel="nofollow noreferrer" target="_blank">
+    typing
+   </a>
+   模块中通过各种改进的实施(如泛型类型的缓存)，使得其允许高达30倍的性能优化，并且减少了内存占用。
+  </li>
+  <li>
+   ASCII解码器的错误处理程序 surrogateescape, ignore 以及replace 速度提高了60倍。(由Victor Stinner在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue24870" rel="nofollow noreferrer" target="_blank">
+    issue 24870
+   </a>
+   中贡献)。
+  </li>
+  <li>
+   ASCII和Latin1解码器的错误处理程序 surrogateescape 速度提高了3倍。(由Victor Stinner在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25227" rel="nofollow noreferrer" target="_blank">
+    issue 25227
+   </a>
+   中贡献)。
+  </li>
+  <li>
+   UTF-8解码器的错误处理程序 ignore, replace,surrogateescape, surrogatepass速度提高了75倍。(由Victor Stinner在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25267" rel="nofollow noreferrer" target="_blank">
+    issue 25267
+   </a>
+   中贡献)。
+  </li>
+  <li>
+   UTF-8解码器的错误处理程序ignore, replace andsurrogateescape速度提高了15倍。由Victor Stinner在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25301" rel="nofollow noreferrer" target="_blank">
+    issue 25301
+   </a>
+   中贡献)。
+  </li>
+  <li>
+   bytes % args现在速度可以提高到2倍。(由Victor Stinner在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25349" rel="nofollow noreferrer" target="_blank">
+    issue 25349
+   </a>
+   中贡献)。
+  </li>
+  <li>
+   bytearray % args 现在速度是以前的2.5到5倍。(由Victor Stinner在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25399" rel="nofollow noreferrer" target="_blank">
+    issue 25399
+   </a>
+   中贡献)。
+  </li>
+  <li>
+   对
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/stdtypes.html%23bytes.fromhex" rel="nofollow noreferrer" target="_blank">
+    bytes.fromhex()
+   </a>
+   和
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/stdtypes.html%23bytearray.fromhex" rel="nofollow noreferrer" target="_blank">
+    bytearray.fromhex()
+   </a>
+   进行优化:现在比以前快2x到3.5x倍。(由Victor Stinner在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25401" rel="nofollow noreferrer" target="_blank">
+    issue 25401
+   </a>
+   中贡献)。
+  </li>
+  <li>
+   对bytes.replace(b'', b'.')和bytearray.replace(b'', b'.')进行优化:速度可提高80%。 (由Josh Snider在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26574" rel="nofollow noreferrer" target="_blank">
+    issue 26574
+   </a>
+   中贡献)。
+  </li>
+  <li>
+   现在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/memory.html%23c.PyMem_Malloc" rel="nofollow noreferrer" target="_blank">
+    PyMem_Malloc()
+   </a>
+   域(
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/memory.html%23c.PYMEM_DOMAIN_MEM" rel="nofollow noreferrer" target="_blank">
+    PYMEM_DOMAIN_MEM
+   </a>
+   )的分配函数使用
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/memory.html%23pymalloc" rel="nofollow noreferrer" target="_blank">
+    pymalloc memory allocator
+   </a>
+   ，而不是C库中的malloc()函数。 pymalloc分配器针对大小小于等于512字节、生命周期较短的对象进行了优化，而当需要占用较大内存块时则使用malloc()。 (由Victor Stinner在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26249" rel="nofollow noreferrer" target="_blank">
+    issue 26249
+   </a>
+   中贡献)。
+  </li>
+  <li>
+   当对大量小对象进行反序列化时，
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/pickle.html%23pickle.load" rel="nofollow noreferrer" target="_blank">
+    pickle.load()
+   </a>
+   和
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/pickle.html%23pickle.loads" rel="nofollow noreferrer" target="_blank">
+    pickle.loads()
+   </a>
+   的速度可提高10%。(由Victor Stinner在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27056" rel="nofollow noreferrer" target="_blank">
+    issue 27056
+   </a>
+   中贡献)。
+  </li>
+  <li>
+   与传递
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-positional-argument" rel="nofollow noreferrer" target="_blank">
+    位置参数
+   </a>
+   相比，将
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-keyword-argument" rel="nofollow noreferrer" target="_blank">
+    关键字参数
+   </a>
+   传递给函数会带来额外的开销。 现在在通过使用Argument Clinic实现的扩展功能中，这种开销将会显著的降低。(由Serhiy Storchaka在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27574" rel="nofollow noreferrer" target="_blank">
+    issue 27574
+   </a>
+   中贡献)。
+  </li>
+  <li>
+   对
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/glob.html%23module-glob" rel="nofollow noreferrer" target="_blank">
+    glob
+   </a>
+   模块中的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/glob.html%23glob.glob" rel="nofollow noreferrer" target="_blank">
+    glob()
+   </a>
+   及
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/glob.html%23glob.iglob" rel="nofollow noreferrer" target="_blank">
+    iglob()
+   </a>
+   进行优化;使得它们现在大概快了3-6倍。(由Serhiy Storchaka在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25596" rel="nofollow noreferrer" target="_blank">
+    issue 25596
+   </a>
+   中贡献)。
+  </li>
+  <li>
+   使用
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.scandir" rel="nofollow noreferrer" target="_blank">
+    os.scandir()
+   </a>
+   对
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/pathlib.html%23module-pathlib" rel="nofollow noreferrer" target="_blank">
+    pathlib
+   </a>
+   中的glob进行优化;使它大概快了1.5-4倍。(由Serhiy Storchaka在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26032" rel="nofollow noreferrer" target="_blank">
+    issue 26032
+   </a>
+   中贡献)。
+  </li>
+  <li>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/xml.etree.elementtree.html%23module-xml.etree.ElementTree" rel="nofollow noreferrer" target="_blank">
+    xml.etree.ElementTree
+   </a>
+   中解析、迭代和深拷贝的性能有了显著的提高。 (由Serhiy Storchaka在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25638" rel="nofollow noreferrer" target="_blank">
+    issue 25638
+   </a>
+   、
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25873" rel="nofollow noreferrer" target="_blank">
+    issue 25873
+   </a>
+   及
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25869" rel="nofollow noreferrer" target="_blank">
+    issue 25869
+   </a>
+   中贡献。)
+  </li>
+  <li>
+   由浮点数和小数创建
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/fractions.html%23fractions.Fraction" rel="nofollow noreferrer" target="_blank">
+    fractions.Fraction
+   </a>
+   实例的速度提高了2到3倍。(由Serhiy Storchaka在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25971" rel="nofollow noreferrer" target="_blank">
+    issue 25971
+   </a>
+   中贡献。)
+  </li>
+ </ul>
+ <br/>
+ <h2>
+  构建和C API变动
+ </h2>
+ <ul>
+  <li>
+   Python现在构建需要工具链中的一些C99支持。最值得注意的是，Python现在使用标准的整型类型和宏来替代诸如PY_LONG_LONG的自定义宏。欲知详情，见
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0007" rel="nofollow noreferrer" target="_blank">
+    PEP 7
+   </a>
+   和
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue17884" rel="nofollow noreferrer" target="_blank">
+    issue 17884
+   </a>
+   。
+  </li>
+  <li>
+   带Android NDK和Android API level 21 (Android 5.0 Lollilop) 或者更高版本交叉编译CPython可以成功运行。虽然Android尚未是一个支持的平台，但是Python测试套件在Android模拟器上运行只有大约16个测试错误。见Android元问题
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26865" rel="nofollow noreferrer" target="_blank">
+    issue 26865
+   </a>
+   。
+  </li>
+  <li>
+   已添加--enable-optimizations配置标志。打开它将会激活昂贵的优化，例如PGO。(原始补丁由Intel的Alecsandru Patrascu在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26539" rel="nofollow noreferrer" target="_blank">
+    issue 26539
+   </a>
+   中提出。)
+  </li>
+  <li>
+   当
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/memory.html%23c.PYMEM_DOMAIN_OBJ" rel="nofollow noreferrer" target="_blank">
+    PYMEM_DOMAIN_OBJ
+   </a>
+   (例如：PyObject_Malloc())和
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/memory.html%23c.PYMEM_DOMAIN_MEM" rel="nofollow noreferrer" target="_blank">
+    PYMEM_DOMAIN_MEM
+   </a>
+   (例如：
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/memory.html%23c.PyMem_Malloc" rel="nofollow noreferrer" target="_blank">
+    PyMem_Malloc()
+   </a>
+   )域的分配函数被调用的时候，现在必须使用
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-global-interpreter-lock" rel="nofollow noreferrer" target="_blank">
+    GIL
+   </a>
+   。
+  </li>
+  <li>
+   新的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/init.html%23c.Py_FinalizeEx" rel="nofollow noreferrer" target="_blank">
+    Py_FinalizeEx()
+   </a>
+   API，它表示是否清除缓冲数据失败。 (由Martin Panter在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue5319" rel="nofollow noreferrer" target="_blank">
+    issue 5319
+   </a>
+   中贡献。)
+  </li>
+  <li>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/arg.html%23c.PyArg_ParseTupleAndKeywords" rel="nofollow noreferrer" target="_blank">
+    PyArg_ParseTupleAndKeywords()
+   </a>
+   现在支持
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23positional-only-parameter" rel="nofollow noreferrer" target="_blank">
+    仅位置参数
+   </a>
+   。仅位置参数是由空名称定义的。 (由Serhiy Storchaka在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26282" rel="nofollow noreferrer" target="_blank">
+    issue 26282
+   </a>
+   中贡献)。
+  </li>
+  <li>
+   PyTraceback_Print方法现在省略了重复行的长串，变成"[Previous line repeated {count} more times]"。 (由Emanuel Barry在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26823" rel="nofollow noreferrer" target="_blank">
+    issue 26823
+   </a>
+   中贡献。)
+  </li>
+  <li>
+   新的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/exceptions.html%23c.PyErr_SetImportErrorSubclass" rel="nofollow noreferrer" target="_blank">
+    PyErr_SetImportErrorSubclass()
+   </a>
+   函数指定要引发的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23ImportError" rel="nofollow noreferrer" target="_blank">
+    ImportError
+   </a>
+   的子类。 (由Eric Snow在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue15767" rel="nofollow noreferrer" target="_blank">
+    issue 15767
+   </a>
+   中贡献。)
+  </li>
+  <li>
+   新的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/exceptions.html%23c.PyErr_ResourceWarning" rel="nofollow noreferrer" target="_blank">
+    PyErr_ResourceWarning()
+   </a>
+   函数可以被用来生成一个
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23ResourceWarning" rel="nofollow noreferrer" target="_blank">
+    ResourceWarning
+   </a>
+   ，提供资源分配的来源。(由Victor Stinner在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26567" rel="nofollow noreferrer" target="_blank">
+    issue 26567
+   </a>
+   中贡献。)
+  </li>
+  <li>
+   新的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/sys.html%23c.PyOS_FSPath" rel="nofollow noreferrer" target="_blank">
+    PyOS_FSPath()
+   </a>
+   函数返回一个
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-path-like-object" rel="nofollow noreferrer" target="_blank">
+    类路径(path-like)对象
+   </a>
+   的文件系统表示。(由Brett Cannon在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27186" rel="nofollow noreferrer" target="_blank">
+    issue 27186
+   </a>
+   中贡献。)
+  </li>
+  <li>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/unicode.html%23c.PyUnicode_FSConverter" rel="nofollow noreferrer" target="_blank">
+    PyUnicode_FSConverter()
+   </a>
+   和
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/unicode.html%23c.PyUnicode_FSDecoder" rel="nofollow noreferrer" target="_blank">
+    PyUnicode_FSDecoder()
+   </a>
+   函数现在会接受
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-path-like-object" rel="nofollow noreferrer" target="_blank">
+    类路径(path-like)对象
+   </a>
+   。
+  </li>
+ </ul>
+ <br/>
+ <h2>
+  其他改进
+ </h2>
+ <ul>
+  <li>
+   当使用
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/using/cmdline.html%23cmdoption--version" rel="nofollow noreferrer" target="_blank">
+    --version
+   </a>
+   (短格式：
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/using/cmdline.html%23cmdoption-V" rel="nofollow noreferrer" target="_blank">
+    -V
+   </a>
+   )两次的时候，Python打印
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/sys.html%23sys.version" rel="nofollow noreferrer" target="_blank">
+    sys.version
+   </a>
+   以获得详细信息。
+  </li>
+ </ul>
+ <br/>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>$ ./python -VV    Python 3.6.0b4+ (3.6:223967b49e49+, Nov 21 2016, 20:55:04)    [GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.42.1)]
+</code></pre>
+ </div>
+ <br/>
+ <h2>
+  弃用的模块，包以及函数
+ </h2>
+ <br/>
+ <h3>
+  新的关键词
+ </h3>
+ <p>
+  在后续的Python 3.7 中，async 和 await 将作为关键字使用， 因此不再建议使用它们作为变量名,类名，函数名以及模块名称。
+  <br/>
+  详见Python 3.5
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/dev/peps/pep-0492" rel="nofollow noreferrer" target="_blank">
+   **PEP492**
+  </a>
+  .
+  <br/>
+  从 Python 3.6 开始, async或await的使用将会引发[DeprecationWarning](
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//doc/" rel="nofollow noreferrer" target="_blank">
+   https://doc
+  </a>
+  <br/>
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//s.python.org/3.6/library/exceptions.html%23DeprecationWarning" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    s.python.org/3.6/librar
+   </span>
+   <span class="invisible">
+    y/exceptions.html#DeprecationWarning
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+  <br/>
+  "DeprecationWarning" )
+ </p>
+ <br/>
+ <h3>
+  已弃用的 Python 行为
+ </h3>
+ <p>
+  Python 3.7 中, 在生成器中引发
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23StopIteration" rel="nofollow noreferrer" target="_blank">
+   StopIteration
+  </a>
+  异常，现在将会导致
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23DeprecationWarning" rel="nofollow noreferrer" target="_blank">
+   DesprecationWarning
+  </a>
+  ,并且触发
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23RuntimeError" rel="nofollow noreferrer" target="_blank">
+   `RuntimeError`
+  </a>
+  . 查阅
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/whatsnew/3.5.html%23whatsnew-pep-479" rel="nofollow noreferrer" target="_blank">
+   PEP 479: Change StopIteration handlinginside generators
+  </a>
+  获得相关细节.
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/reference/datamodel.html%23object.__aiter__" rel="nofollow noreferrer" target="_blank">
+   __aiter__()
+  </a>
+  方法现在被期望返回异步迭代器，
+  <br/>
+  而不是之前版本中的可等待迭代器，在 Python 3.6 中调用__aiter__()将会触发
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23DeprecationWarning" rel="nofollow noreferrer" target="_blank">
+   DeprecationWarning
+  </a>
+  。 Python 3.7将会移除其的后向兼容性。(Contributed by Yury Selivanov in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27243" rel="nofollow noreferrer" target="_blank">
+   issue27243
+  </a>
+  .)
+ </p>
+ <p>
+  反斜杠对现在不能再作为有效的转义字符串使用，其会导致
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23DeprecationWarning" rel="nofollow noreferrer" target="_blank">
+   DeprecationWarning
+  </a>
+  .在接下来的几个Python版本，其最终会成为一个语法错误
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23SyntaxError" rel="nofollow noreferrer" target="_blank">
+   SyntaxError
+  </a>
+  。(Contributed by Emanuel Barry in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27364" rel="nofollow noreferrer" target="_blank">
+   issue 27364
+  </a>
+  .)
+ </p>
+ <p>
+  在执行相对引用, 且__spec__ 或 __package__未定义时，转而调用__name__ 和 __path__模块的行为, 现在将会引发
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23ImportWarning" rel="nofollow noreferrer" target="_blank">
+   ImportWarning
+  </a>
+  异常. (Contributed by Rose Ames in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25791" rel="nofollow noreferrer" target="_blank">
+   issue25791
+  </a>
+  .)
+ </p>
+ <br/>
+ <h3>
+  弃用的 Python 模块，函数和方法
+ </h3>
+ <br/>
+ <h4>
+  asynchat
+ </h4>
+ <p>
+  为了支持
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncio.html%23module-asyncio" rel="nofollow noreferrer" target="_blank">
+   asyncio
+  </a>
+  ，
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asynchat.html%23module-asynchat" rel="nofollow noreferrer" target="_blank">
+   asynchat
+  </a>
+  已被弃用。(Contributed
+  <br/>
+  by Mariatta in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25002" rel="nofollow noreferrer" target="_blank">
+   issue 25002
+  </a>
+  .)
+ </p>
+ <br/>
+ <h4>
+  asyncore
+ </h4>
+ <p>
+  为了支持
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncio.html%23module-asyncio" rel="nofollow noreferrer" target="_blank">
+   asyncio
+  </a>
+  模块.
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/asyncore.html%23module-asyncore" rel="nofollow noreferrer" target="_blank">
+   asyncore
+  </a>
+  模块已被弃用. (Contributed by Mariatta in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25002" rel="nofollow noreferrer" target="_blank">
+   issue 25002
+  </a>
+  .),
+ </p>
+ <br/>
+ <h4>
+  dbm
+ </h4>
+ <p>
+  与其他
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/dbm.html%23module-dbm" rel="nofollow noreferrer" target="_blank">
+   dbm
+  </a>
+  模块的的实现方式不同，
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/dbm.html%23module-dbm.dumb" rel="nofollow noreferrer" target="_blank">
+   dbm.dumb
+  </a>
+  模块可以通过'rw'模式创建数据库
+  <br/>
+  并允许通过'r'模式来修改数据库，不过这种行为现在将被弃用，在Python3.8将会被移除。(Contributed by Serhiy Storchaka in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue21708" rel="nofollow noreferrer" target="_blank">
+   issue21708
+  </a>
+  .)
+ </p>
+ <br/>
+ <h4>
+  distutils
+ </h4>
+ <p>
+  Distribution构造器中extra_path参数现在被认为是过时的，如果在 Python 3.6中对其进行设置的话将会引发一个警告。
+  <br/>
+  对这个参数的支持将会在后续 Python版本中移除。详情请参阅
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27919" rel="nofollow noreferrer" target="_blank">
+   issue 27919
+  </a>
+ </p>
+ <br/>
+ <h4>
+  grp
+ </h4>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/grp.html%23grp.getgrgid" rel="nofollow noreferrer" target="_blank">
+   getgrgid()
+  </a>
+  中对非整数参数的支持，现在已被移除。(Contributed by Serhiy Storchaka in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26129" rel="nofollow noreferrer" target="_blank">
+   issue 26129
+  </a>
+  .)
+ </p>
+ <br/>
+ <h4>
+  importlib
+ </h4>
+ <p>
+  为了用来在之前的版本中支持
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/importlib.html%23importlib.abc.Loader.exec_module" rel="nofollow noreferrer" target="_blank">
+   `importlib.abc.Loader.exec_module()`
+  </a>
+  ，
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/importlib.html%23importlib.machinery.SourceFileLoader.load_module" rel="nofollow noreferrer" target="_blank">
+   importlib.machinery.SourceFileLoader.load_module()
+  </a>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/importlib.html%23importlib.machinery.SourcelessFileLoader.load_module" rel="nofollow noreferrer" target="_blank">
+   `importlib.machinery.SourcelessFileLoader.load_module()`
+  </a>
+  ，所以他们是
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/importlib.html%23module-importlib" rel="nofollow noreferrer" target="_blank">
+   importlib
+  </a>
+  中
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/importlib.html%23importlib.abc.Loader.load_module" rel="nofollow noreferrer" target="_blank">
+   `importlib.abc.Loader.load_module()`
+  </a>
+  仅存的未被弃用的实现方式，
+  <br/>
+  不过在 Python 3.6 中，其也已经被弃用。
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/importlib.html%23importlib.machinery.WindowsRegistryFinder" rel="nofollow noreferrer" target="_blank">
+   importlib.machinery.WindowsRegistryFinder
+  </a>
+  类已被弃用。 在 Python 3.6.0中，它被移动到
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/sys.html%23sys.meta_path" rel="nofollow noreferrer" target="_blank">
+   sys.meta_path
+  </a>
+  中， 不过在将来这可能会发生变化。
+ </p>
+ <br/>
+ <h4>
+  os
+ </h4>
+ <p>
+  在
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23module-os" rel="nofollow noreferrer" target="_blank">
+   os
+  </a>
+  中对作为路径的通用
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-bytes-like-object" rel="nofollow noreferrer" target="_blank">
+   bytes-like objects
+  </a>
+  ，
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/functions.html%23compile" rel="nofollow noreferrer" target="_blank">
+   compile()
+  </a>
+  以及对类函数的非正式支持，现在已经弃用。
+ </p>
+ <br/>
+ <h4>
+  re
+ </h4>
+ <p>
+  对正则式中间的内联标志(?letters)的支持已被弃用，并将在后续Python版本中移除。对正则式开头的标志的支持仍然被保留。(Contributed by Serhiy Storchaka in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue22493" rel="nofollow noreferrer" target="_blank">
+   issue 22493
+  </a>
+  .)
+ </p>
+ <br/>
+ <h4>
+  ssl
+ </h4>
+ <p>
+  OpenSSL 0.9.8, 1.0.0 和 1.0.1 已被弃用，不再支持。以后
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/ssl.html%23module-ssl" rel="nofollow noreferrer" target="_blank">
+   ssl
+  </a>
+  模块至少需要 OpenSSL 1.0.2或者OpenSSL 1.1.0
+ </p>
+ <p>
+  为了支持context，SSL的相关参数如：certfile, keyfileandcheck_hostname
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/ftplib.html%23module-ftplib" rel="nofollow noreferrer" target="_blank">
+   ftplib
+  </a>
+  ,http.client,
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/imaplib.html%23module-imaplib" rel="nofollow noreferrer" target="_blank">
+   imaplib
+  </a>
+  ,
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/poplib.html%23module-poplib" rel="nofollow noreferrer" target="_blank">
+   poplib
+  </a>
+  , 和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/smtplib.html%23module-smtplib" rel="nofollow noreferrer" target="_blank">
+   smtplib
+  </a>
+  已被弃用。(Contributed by Christian Heimes in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue28022" rel="nofollow noreferrer" target="_blank">
+   issue28022
+  </a>
+  .)
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/ssl.html%23module-ssl" rel="nofollow noreferrer" target="_blank">
+   ssl
+  </a>
+  的部分协议及函数，现已被弃用。后续的 OpenSSL 版本中，部分现有特征将不再可用。
+  <br/>
+  为了引入新的API，其他的特征也已经被弃用。 (Contributed by Christian Heimes in
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue28022" rel="nofollow noreferrer" target="_blank">
+   issue 28022
+  </a>
+  和
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26470" rel="nofollow noreferrer" target="_blank">
+   issue26470
+  </a>
+  .)
+ </p>
+ <br/>
+ <h4>
+  tkinter
+ </h4>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/tkinter.tix.html%23module-tkinter.tix" rel="nofollow noreferrer" target="_blank">
+   tkinter.tix
+  </a>
+  模块已被弃用。原
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/tkinter.html%23module-tkinter" rel="nofollow noreferrer" target="_blank">
+   tkinter
+  </a>
+  的使用者，可以使用
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/tkinter.ttk.html%23module-tkinter.ttk" rel="nofollow noreferrer" target="_blank">
+   tkinter.ttk
+  </a>
+  来代替。
+ </p>
+ <br/>
+ <h4>
+  venv
+ </h4>
+ <p>
+  为了引入python3 -m venv命令，pyvenv 已被弃用。 这可以防止混淆何种 Python 解释器将被pyvenv连接
+  <br/>
+  以及何种 Python 解释器将被用在虚拟环境中。(Contributed by Brett Cannon in
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25154" rel="nofollow noreferrer" target="_blank">
+   issue 25154
+  </a>
+  .)
+ </p>
+ <br/>
+ <h3>
+  弃用C API的函数和类型
+ </h3>
+ <p>
+  现在，弃用未公开函数PyUnicode_AsEncodedObject()，PyUnicode_AsDecodedObject()，PyUnicode_AsEncodedUnicode()和PyUnicode_AsDecodedUnicode()。使用
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/codec.html%23codec-registry" rel="nofollow noreferrer" target="_blank">
+   通用的基于codec的API
+  </a>
+  来代替。
+ </p>
+ <br/>
+ <h3>
+  弃用构建选项
+ </h3>
+ <p>
+  在非macOS UNIX平台上，现在默认打开--with-system-ffi配置标志。它也许可以用--without-system-ffi来禁用，但是这个标志的使用已经弃用了，并且在Python 3.7中将不会接受这个标志。macOS不受这个改动的影响。注意，许多OS发行版在构建它们的系统Python时已经使用了--with-system-
+  <br/>
+  ffi标志。
+ </p>
+ <br/>
+ <h2>
+  已移除
+ </h2>
+ <br/>
+ <h3>
+  API和特性移除
+ </h3>
+ <ul>
+  <li>
+   正则表达式中'\'和一个ASCII字母组成的未知转义现在会触发错误。在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/re.html%23re.sub" rel="nofollow noreferrer" target="_blank">
+    re.sub()
+   </a>
+   上的替换模板中，仍然允许使用它们，但是已经弃用了。
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/re.html%23re.LOCALE" rel="nofollow noreferrer" target="_blank">
+    re.LOCALE
+   </a>
+   标志现在只能用于二进制模式。
+  </li>
+  <li>
+   移除inspect.getmoduleinfo() (自CPython 3.3起弃用)。
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/inspect.html%23inspect.getmodulename" rel="nofollow noreferrer" target="_blank">
+    inspect.getmodulename()
+   </a>
+   应该被用于获取一个给定路径的模块名。(由Yury Selivanov在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue13248" rel="nofollow noreferrer" target="_blank">
+    issue 13248
+   </a>
+   中贡献。)
+  </li>
+  <li>
+   traceback.Ignore类和traceback.usage，traceback.modname，traceback.fullmodname，traceback.find_lines_from_code，traceback.find_lines，traceback.find_strings，traceback.find_executable_lines方法已从
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/traceback.html%23module-traceback" rel="nofollow noreferrer" target="_blank">
+    traceback
+   </a>
+   模块移除。它们是自Python 3.2起弃用的未公开方法，并且可以从私有方法获得等价的功能。
+  </li>
+  <li>
+   移除
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/tkinter.html%23module-tkinter" rel="nofollow noreferrer" target="_blank">
+    tkinter
+   </a>
+   widget类中的tk_menuBar()和tk_bindForTraversal()哑方法 (自Tk 4.0起，相应的Tk命令已废弃)。
+  </li>
+  <li>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/zipfile.html%23zipfile.ZipFile" rel="nofollow noreferrer" target="_blank">
+    zipfile.ZipFile
+   </a>
+   类的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/zipfile.html%23zipfile.ZipFile.open" rel="nofollow noreferrer" target="_blank">
+    open()
+   </a>
+   方法不再支持'U'模式 (自Python 3.4起弃用)。使用
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/io.html%23io.TextIOWrapper" rel="nofollow noreferrer" target="_blank">
+    io.TextIOWrapper
+   </a>
+   来在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-universal-newlines" rel="nofollow noreferrer" target="_blank">
+    universal newlines
+   </a>
+   模式下读取压缩文本文件。
+  </li>
+  <li>
+   已移除未公开的IN, CDROM, DLFCN, TYPES, CDIO, 和STROPTS模块。它们在平台特定的Lib/plat-*/目录中可用，但是慢慢过时了，跨平台不一定可用，并且未维护。创建这些模块的脚本在源代码发行版中仍然可以找到，位于
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//hg.python.org/cpython/file/3.6/Tools/scripts/h2py.py" rel="nofollow noreferrer" target="_blank">
+    Tools/scripts/h2py.py
+   </a>
+   中。
+  </li>
+  <li>
+   已移除弃用的asynchat.fifo类。
+  </li>
+ </ul>
+ <br/>
+ <h2>
+  移植到Python 3.6
+ </h2>
+ <p>
+  本节列出了与之前版本相比，一些特性的更改和bug的修复，这些可能会影响到你代码的编写。
+ </p>
+ <br/>
+ <h3>
+  'python'命令行操作变更
+ </h3>
+ <ul>
+  <li>
+   默认情况下，用COUNT_ALLOCS，SHOW_ALLOC_COUNT或SHOW_TRACK_COUNT等宏定义的特殊python输出是关闭的。 它可以使用-X showalloccount选项重新启用. 它现在输出到stderr而不是stdout。 (由Serhiy Storchaka撰写在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue23034" rel="nofollow noreferrer" target="_blank">
+    issue 23034
+   </a>
+   .)
+  </li>
+ </ul>
+ <br/>
+ <h3>
+  Python API中的变化（部分翻译）
+ </h3>
+ <ul>
+  <li>
+   <p>
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/functions.html%23open" rel="nofollow noreferrer" target="_blank">
+     open()
+    </a>
+    'U' 模式不再允许使用'+'拼接. (由Jeff Balogh and John O'Connor撰写在
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue2091" rel="nofollow noreferrer" target="_blank">
+     issue 2091
+    </a>
+    .)
+   </p>
+  </li>
+  <li>
+   <p>
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/sqlite3.html%23module-sqlite3" rel="nofollow noreferrer" target="_blank">
+     sqlite3
+    </a>
+    不允许在DDL语句之前隐式地提交打开的事务。
+   </p>
+  </li>
+  <li>
+   <p>
+    在Linux系统上,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/os.html%23os.urandom" rel="nofollow noreferrer" target="_blank">
+     os.urandom()
+    </a>
+    现在为了增强安全性，系统会一直阻塞直到系统urandom熵池被初始化。
+   </p>
+  </li>
+  <li>
+   <p>
+    当
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/importlib.html%23importlib.abc.Loader.exec_module" rel="nofollow noreferrer" target="_blank">
+     importlib.abc.Loader.exec_module()
+    </a>
+    被定义时,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/importlib.html%23importlib.abc.Loader.create_module" rel="nofollow noreferrer" target="_blank">
+     importlib.abc.Loader.create_module()
+    </a>
+    也必须被定义.
+   </p>
+  </li>
+  <li>
+   <p>
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/exceptions.html%23c.PyErr_SetImportError" rel="nofollow noreferrer" target="_blank">
+     PyErr_SetImportError()
+    </a>
+    现在被设置为
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23TypeError" rel="nofollow noreferrer" target="_blank">
+     TypeError
+    </a>
+    当它的** msg **参数没有设置。 以前只返回“NULL”。
+   </p>
+  </li>
+  <li>
+   <p>
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/compileall.html%23module-compileall" rel="nofollow noreferrer" target="_blank">
+     compileall
+    </a>
+    模块中的函数现在返回布尔类型的值，而不是用1或0来表示成功或失败. 由于布尔值是整数的子类，如果你对'1'或'0'进行身份检查，这只应该是一个问题。 查看
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25768" rel="nofollow noreferrer" target="_blank">
+     issue 25768
+    </a>
+    .
+   </p>
+  </li>
+  <li>
+   <p>
+    读取
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/urllib.parse.html%23urllib.parse.urlsplit" rel="nofollow noreferrer" target="_blank">
+     urllib.parse.urlsplit（）
+    </a>
+    和[urlparse（）]的port属性现在引发超出范围值的
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23ValueError" rel="nofollow noreferrer" target="_blank">
+     ValueError
+    </a>
+    ，而不是返回
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/constants.html%23None" rel="nofollow noreferrer" target="_blank">
+     None
+    </a>
+    . 查看
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue20059" rel="nofollow noreferrer" target="_blank">
+     issue 20059
+    </a>
+    .
+   </p>
+  </li>
+  <li>
+   <p>
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/imp.html%23module-imp" rel="nofollow noreferrer" target="_blank">
+     imp
+    </a>
+    模块现在代替原来的
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23PendingDeprecationWarning" rel="nofollow noreferrer" target="_blank">
+     PendingDeprecationWarning
+    </a>
+    抛出
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23DeprecationWarning" rel="nofollow noreferrer" target="_blank">
+     DeprecationWarning
+    </a>
+    告警 .
+   </p>
+  </li>
+  <li>
+   <p>
+    以下模块已将缺少的API添加到其 __all__ 属性中，匹配文档说明API:
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/calendar.html%23module-calendar" rel="nofollow noreferrer" target="_blank">
+     calendar
+    </a>
+    ,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/cgi.html%23module-cgi" rel="nofollow noreferrer" target="_blank">
+     cgi
+    </a>
+    ,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/csv.html%23module-csv" rel="nofollow noreferrer" target="_blank">
+     csv
+    </a>
+    ,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/xml.etree.elementtree.html%23module-xml.etree.ElementTree" rel="nofollow noreferrer" target="_blank">
+     ElementTree
+    </a>
+    ,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/enum.html%23module-enum" rel="nofollow noreferrer" target="_blank">
+     enum
+    </a>
+    ,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/fileinput.html%23module-fileinput" rel="nofollow noreferrer" target="_blank">
+     fileinput
+    </a>
+    ,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/ftplib.html%23module-ftplib" rel="nofollow noreferrer" target="_blank">
+     ftplib
+    </a>
+    ,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/logging.html%23module-logging" rel="nofollow noreferrer" target="_blank">
+     logging
+    </a>
+    ,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/mailbox.html%23module-mailbox" rel="nofollow noreferrer" target="_blank">
+     mailbox
+    </a>
+    ,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/mimetypes.html%23module-mimetypes" rel="nofollow noreferrer" target="_blank">
+     mimetypes
+    </a>
+    ,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/optparse.html%23module-optparse" rel="nofollow noreferrer" target="_blank">
+     optparse
+    </a>
+    ,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/plistlib.html%23module-plistlib" rel="nofollow noreferrer" target="_blank">
+     plistlib
+    </a>
+    ,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/smtpd.html%23module-smtpd" rel="nofollow noreferrer" target="_blank">
+     smtpd
+    </a>
+    ,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/subprocess.html%23module-subprocess" rel="nofollow noreferrer" target="_blank">
+     subprocess
+    </a>
+    ,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/tarfile.html%23module-tarfile" rel="nofollow noreferrer" target="_blank">
+     tarfile
+    </a>
+    ,
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/threading.html%23module-threading" rel="nofollow noreferrer" target="_blank">
+     threading
+    </a>
+    and
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/wave.html%23module-wave" rel="nofollow noreferrer" target="_blank">
+     wave
+    </a>
+    . 这意味着在使用import *引入时，有一定的变化 . (由Joel Taddei and Jacek Kołodziej i撰写在
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue23883" rel="nofollow noreferrer" target="_blank">
+     issue 23883
+    </a>
+    .)
+   </p>
+  </li>
+  <li>
+   <p>
+    当执行相对导入时，如果__package__不等于__spec __。parent，那么
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23ImportWarning" rel="nofollow noreferrer" target="_blank">
+     ImportWarning
+    </a>
+    警告将被抛出. (由 Brett Cannon 撰写在
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25791" rel="nofollow noreferrer" target="_blank">
+     issue 25791
+    </a>
+    .)
+   </p>
+  </li>
+  <li>
+   <p>
+    当执行相对导入并且没有已知父包时，则将抛出
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23ImportError" rel="nofollow noreferrer" target="_blank">
+     ImportError
+    </a>
+    异常。 以前，是抛出
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23SystemError" rel="nofollow noreferrer" target="_blank">
+     SystemError
+    </a>
+    异常。 (由Brett Cannon 撰写在
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue18018" rel="nofollow noreferrer" target="_blank">
+     issue 18018
+    </a>
+    .)
+   </p>
+  </li>
+  <li>
+   <p>
+    基于
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/socketserver.html%23module-socketserver" rel="nofollow noreferrer" target="_blank">
+     socketserver
+    </a>
+    模块的服务器，包括
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/http.server.html%23module-http.server" rel="nofollow noreferrer" target="_blank">
+     http.server
+    </a>
+    ，
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/xmlrpc.server.html%23module-xmlrpc.server" rel="nofollow noreferrer" target="_blank">
+     xmlrpc.server
+    </a>
+    和[wsgiref.simple_server] ，现在只捕获从
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23Exception" rel="nofollow noreferrer" target="_blank">
+     Exception
+    </a>
+    派生的异常。 因此，如果一个请求处理程序引发了
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23SystemExit" rel="nofollow noreferrer" target="_blank">
+     [SystemExit]
+    </a>
+    或[KeyboardInterrupt]]
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23KeyboardInterrupt" rel="nofollow noreferrer" target="_blank">
+     300
+    </a>
+    异常，则
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/socketserver.html%23socketserver.BaseServer.handle_error" rel="nofollow noreferrer" target="_blank">
+     handle_error（）
+    </a>
+    异常不再被调用，同时异常会终止单线程的服务器。 (由Martin Panter 撰写在
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue23430" rel="nofollow noreferrer" target="_blank">
+     issue 23430
+    </a>
+    .)
+   </p>
+  </li>
+  <li>
+   <p>
+    如果用户没有相关权限，
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/spwd.html%23spwd.getspnam" rel="nofollow noreferrer" target="_blank">
+     spwd.getspnam()
+    </a>
+    现在抛出
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23PermissionError" rel="nofollow noreferrer" target="_blank">
+     PermissionError
+    </a>
+    异常，代替原来的
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/exceptions.html%23KeyError" rel="nofollow noreferrer" target="_blank">
+     KeyError
+    </a>
+    .
+   </p>
+  </li>
+  <li>
+   <p>
+    (如 EBADF) 这样的底层调用错误，
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/socket.html%23socket.socket.close" rel="nofollow noreferrer" target="_blank">
+     socket.socket.close()
+    </a>
+    方法现在会抛出异常。 (由Martin Panter撰写于
+    <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26685" rel="nofollow noreferrer" target="_blank">
+     issue 26685
+    </a>
+    .)
+   </p>
+  </li>
+ </ul>
+ <br/>
+ <h3>
+  在C API上的改动
+ </h3>
+ <ul>
+  <li>
+   旧的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/memory.html%23c.PyMem_Malloc" rel="nofollow noreferrer" target="_blank">
+    PyMem_Malloc()
+   </a>
+   分配算符族将使用新的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/memory.html%23pymalloc" rel="nofollow noreferrer" target="_blank">
+    pymalloc分配算符
+   </a>
+   ，替换掉了系统原有的’malloc()’。应用程序在没有捕获GIL时调用
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/memory.html%23c.PyMem_Malloc" rel="nofollow noreferrer" target="_blank">
+    PyMem_Malloc()
+   </a>
+   会导致崩溃。可通过设置
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/using/cmdline.html%23envvar-PYTHONMALLOC" rel="nofollow noreferrer" target="_blank">
+    pythonmalloc
+   </a>
+   环境变量去’debug’来实现应用程内存的分配。详情请看
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26249" rel="nofollow noreferrer" target="_blank">
+    问题26429
+   </a>
+   。
+  </li>
+  <li>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/c-api/sys.html%23c.Py_Exit" rel="nofollow noreferrer" target="_blank">
+    Py_Exit()
+   </a>
+   （和新的主注释器），如果刷新缓存失败，将覆盖当前状态。详情请看
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue5319" rel="nofollow noreferrer" target="_blank">
+    问题5319
+   </a>
+  </li>
+ </ul>
+ <br/>
+ <h3>
+  CPython 字节码的更改
+ </h3>
+ <p>
+  在Python 3.6中将会出现几个关于
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-bytecode" rel="nofollow noreferrer" target="_blank">
+   字节码
+  </a>
+  要更新。
+  <br/>
+  3.6.
+ </p>
+ <ul>
+  <li>
+   新的Python注释器将使用16位词码去替代老的字符码。（感谢Demur Rumed在Serhiy Storchaka和Victor Stinner
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue26647" rel="nofollow noreferrer" target="_blank">
+    问题26647
+   </a>
+   和
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue28050" rel="nofollow noreferrer" target="_blank">
+    问题28050
+   </a>
+   中做出贡献后的审查）
+  </li>
+  <li>
+   将启用新的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/dis.html%23opcode-FORMAT_VALUE" rel="nofollow noreferrer" target="_blank">
+    FORMAT_VALUE
+   </a>
+   和
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/dis.html%23opcode-BUILD_STRING" rel="nofollow noreferrer" target="_blank">
+    BUILD_STRING
+   </a>
+   操作码作为一部分格式化字符串。（感谢Eric Smith在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue25483" rel="nofollow noreferrer" target="_blank">
+    问题25483
+   </a>
+   和Serhiy Storchaka在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27078" rel="nofollow noreferrer" target="_blank">
+    问题27078
+   </a>
+   的贡献）
+  </li>
+  <li>
+   将启用新的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/dis.html%23opcode-BUILD_CONST_KEY_MAP" rel="nofollow noreferrer" target="_blank">
+    BUILD_CONST_KEY_MAP
+   </a>
+   操作码并伴随常量关键字优化创建字典的过程。（感谢Serhiy Storchaka 提出的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27140" rel="nofollow noreferrer" target="_blank">
+    问题27140
+   </a>
+   .）
+  </li>
+  <li>
+   为了更好的表现和更快捷的启动, 已经对调用操作码的功能进行了深度重做。
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/dis.html%23opcode-MAKE_FUNCTION" rel="nofollow noreferrer" target="_blank">
+    MAKE_FUNCTION
+   </a>
+   ,
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/dis.html%23opcode-CALL_FUNCTION" rel="nofollow noreferrer" target="_blank">
+    CALL_FUNCTION
+   </a>
+   ,
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/dis.html%23opcode-CALL_FUNCTION_KW" rel="nofollow noreferrer" target="_blank">
+    CALL_FUNCTION_KW
+   </a>
+   以及BUILD_MAP_UNPACK_WITH_CALL 这些操作码已经做了修改，并添加了新的CALL_FUNCTION_EX 和BUILD_TUPLE_UNPACK_WITH_CALL。而CALL_FUNCTION_VAR,CALL_FUNCTION_VAR_KW 和MAKE_CLOSURE则在新的Python中被移除。（感谢Demur Rumed在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27095" rel="nofollow noreferrer" target="_blank">
+    问题27905
+   </a>
+   中的贡献以及Serhiy Storchaka在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27213" rel="nofollow noreferrer" target="_blank">
+    问题27213
+   </a>
+   、
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue28257" rel="nofollow noreferrer" target="_blank">
+    问题28257
+   </a>
+   中的贡献）
+  </li>
+  <li>
+   添加了
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/dis.html%23opcode-SETUP_ANNOTATIONS" rel="nofollow noreferrer" target="_blank">
+    SETUP_ANNOTATIONS
+   </a>
+   和
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/library/dis.html%23opcode-STORE_ANNOTATION" rel="nofollow noreferrer" target="_blank">
+    STORE_ANNOTATION
+   </a>
+   操作码，用于支持新的
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/glossary.html%23term-variable-annotation" rel="nofollow noreferrer" target="_blank">
+    变量注解语法
+   </a>
+   。（感谢Ivan Levkivskyi在
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//bugs.python.org/issue27985" rel="nofollow noreferrer" target="_blank">
+    问题27985
+   </a>
+   中的贡献）
+  </li>
+ </ul>
+ <p>
+  (C)
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//docs.python.org/3.6/copyright.html" rel="nofollow noreferrer" target="_blank">
+   Copyright
+  </a>
+  2001-2016,Python软件基金会版权所有。Python软件基金会是一个非营利性组织。
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.python.org/psf/donations/" rel="nofollow noreferrer" target="_blank">
+   欢迎捐赠
+  </a>
+ </p>
+ <p>
+  转载需得到Py字幕组授权，联系邮箱：sinoandywong@gmail.com
+ </p>
+</div></body></html>

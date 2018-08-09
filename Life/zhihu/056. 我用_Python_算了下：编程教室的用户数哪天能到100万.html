@@ -1,0 +1,466 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>我用_Python_算了下：编程教室的用户数哪天能到100万</h1><div class="RichText ztext Post-RichText">
+ <blockquote>
+  这是一篇正经的数据分析案例。
+ </blockquote>
+ <p>
+  去年12月初，在经过四年多的积累后，编程教室微信公众号的关注人数突破
+  <b>
+   10万
+  </b>
+  人。（可回顾
+  <u>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D2650166720%26idx%3D1%26sn%3Dccca24971d36139e9c79a39b9b331e02%26chksm%3Dbe4b58b8893cd1aeb900dd0075c583d6a547b8a2ca9a9b70e7503c0534aa57d2e98f1721dd28%26scene%3D21%23wechat_redirect" rel="nofollow noreferrer" target="_blank">
+    最开始我也没有想过会有这么一天…
+   </a>
+  </u>
+  ）
+ </p>
+ <p>
+  10万人只是另一个开始，让我感到责任更大了。如果不写出更多更好质量的文章和教程，也对不起大家的关注啊。人数不是目的，内容才是王道。
+ </p>
+ <p>
+  但是嘛，偶尔也会 yy 一下，什么时候我们的关注数能到达更高的量级，比如，
+  <b>
+   100万
+  </b>
+  ？😏
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  既然 Python 可以用来做数据分析，何不根据我们公众号现有的用户增长数据来分析一下，
+  <b>
+   什么时候可以迎来第100万个关注者
+  </b>
+  ？
+ </p>
+ <p>
+  说干就干！（
+  <i>
+   <u>
+    不想看过程的直接拉到最后看结论
+   </u>
+  </i>
+  ）
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  微信后台可以导出用户增长数据的 excel 表格。数据从2013年7月开始，每次导出时间间隔最多一年。我们编程教室的账号是2013年6月份创建的，虽然差了一点点，但也足够了。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-433b86de42eb53b723b765e443627a87_r.jpg" data-rawheight="344" data-rawwidth="1080" data-size="normal" src="https://pic3.zhimg.com/v2-433b86de42eb53b723b765e443627a87_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-433b86de42eb53b723b765e443627a87_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-433b86de42eb53b723b765e443627a87_r.jpg" data-rawheight="344" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='344'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  把几年的数据合并一下，我们这次只关注其中的“
+  <b>
+   累积关注人数
+  </b>
+  ”和“
+  <b>
+   时间
+  </b>
+  ”。通过
+  <code>
+   matplotlib
+  </code>
+  把增长曲线绘制出来：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-72af56c1226dca10e685deab5777e40f_r.jpg" data-rawheight="401" data-rawwidth="634" data-size="normal" src="https://pic3.zhimg.com/v2-72af56c1226dca10e685deab5777e40f_b.jpg" width="634"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-72af56c1226dca10e685deab5777e40f_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-72af56c1226dca10e685deab5777e40f_r.jpg" data-rawheight="401" data-rawwidth="634" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='634'%20height='401'&gt;&lt;/svg&gt;" width="634"/>
+ </figure>
+ <p>
+  显然这不是一个简单的匀速增长曲线，而是
+  <b>
+   加速增长
+  </b>
+  ！这让我甚感欣慰。
+ </p>
+ <p>
+  <b>
+   核心代码
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="c1"># x_data 时间列表</span>
+<span class="c1"># y_data 用户数列表</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span><span class="s1">'g'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  那么从数学上来看，有没有能够较好拟合这个增长曲线的模型呢？我们来尝试几个最常用的拟合曲线，看看效果。
+ </p>
+ <h2>
+  <b>
+   多项式拟合
+  </b>
+ </h2>
+ <p>
+  多项式拟合即用形如
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-6aff5517740fc6148d2abbd4e4c51cfd_r.jpg" data-rawheight="76" data-rawwidth="638" data-size="normal" src="https://pic3.zhimg.com/v2-6aff5517740fc6148d2abbd4e4c51cfd_b.jpg" width="638"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-6aff5517740fc6148d2abbd4e4c51cfd_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-6aff5517740fc6148d2abbd4e4c51cfd_r.jpg" data-rawheight="76" data-rawwidth="638" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='638'%20height='76'&gt;&lt;/svg&gt;" width="638"/>
+ </figure>
+ <p>
+  的函数曲线来拟合现有的数据。比如三次多项式拟合就是对公式
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-def8855936eaaaeb27dded5d0d13eb47_r.jpg" data-rawheight="76" data-rawwidth="422" data-size="normal" src="https://pic4.zhimg.com/v2-def8855936eaaaeb27dded5d0d13eb47_b.jpg" width="422"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-def8855936eaaaeb27dded5d0d13eb47_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-def8855936eaaaeb27dded5d0d13eb47_r.jpg" data-rawheight="76" data-rawwidth="422" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='422'%20height='76'&gt;&lt;/svg&gt;" width="422"/>
+ </figure>
+ <p>
+  中的4个系数求解，使得函数曲线与数据“
+  <b>
+   最接近
+  </b>
+  ”。
+  <br/>
+ </p>
+ <p>
+  至于怎样才算是“最接近”？直观来考虑，就是拟合曲线和实际曲线上对应点的距离最短，即绝对值最小。以我们的例子来说，就是
+  <b>
+   拟合函数算出的每天总关注人数和当天实际总关注人数的差
+  </b>
+  ，我们要让这个差值的总和最小。
+ </p>
+ <p>
+  但因为绝对值之和不容易处理，所以通常我们选择差值的平分和来替代。这就是“
+  <b>
+   最小二乘法
+  </b>
+  ”。
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="82" data-rawwidth="246" data-size="normal" src="https://pic4.zhimg.com/v2-17878b460027793ea8602e280d9e3b96_b.jpg" width="246"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/v2-17878b460027793ea8602e280d9e3b96_b.jpg" data-caption="" data-rawheight="82" data-rawwidth="246" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='246'%20height='82'&gt;&lt;/svg&gt;" width="246"/>
+ </figure>
+ <p>
+  更数学化的表述就是，我们要找出拟合曲线中的一组参数 c，使得模型与实际值上每一点的残差 ek 的平方和最小。
+  <br/>
+ </p>
+ <p>
+  我们绘制了从
+  <b>
+   1次多项式
+  </b>
+  （线性函数）到
+  <b>
+   9次多项式
+  </b>
+  的拟合曲线：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-f86a9aa870221f0a08607b9b74e298e8_r.jpg" data-rawheight="573" data-rawwidth="609" data-size="normal" src="https://pic4.zhimg.com/v2-f86a9aa870221f0a08607b9b74e298e8_b.jpg" width="609"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-f86a9aa870221f0a08607b9b74e298e8_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-f86a9aa870221f0a08607b9b74e298e8_r.jpg" data-rawheight="573" data-rawwidth="609" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='609'%20height='573'&gt;&lt;/svg&gt;" width="609"/>
+ </figure>
+ <p>
+  因为我们的目的是要预测之后的趋势，所以选择的拟合天数要大于实际数据的天数。
+ </p>
+ <p>
+  从图上就能比较直观地就看出，1次、2次等低阶曲线不能很好地贴合原数据，
+  <b>
+   3~8次效果都还不错
+  </b>
+  ，而9次曲线在不久之后就会因为过拟合而产生不合理的波动。
+ </p>
+ <p>
+  对于多项式拟合，
+  <code>
+   numpy
+  </code>
+  提供了现成的
+  <code>
+   polyfit
+  </code>
+  和
+  <code>
+   poly1d
+  </code>
+  函数供调用。
+ </p>
+ <p>
+  <b>
+   核心代码
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span># x_np 实际数据，时间
+# y_np 实际数据，用户数
+# x_fit 拟合数据，时间
+coeff = np.polyfit(x_np, y_np, k)
+poly = np.poly1d(coeff)
+y_fit = poly(x_fit)
+plt.plot(x_fit, y_fit)
+</code></pre>
+ </div>
+ <h2>
+  <b>
+   指数拟合
+  </b>
+ </h2>
+ <p>
+  指数函数是重要的基本初等函数之一，这里我们通过确定以 e 为底的函数
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="74" data-rawwidth="244" data-size="normal" src="https://pic4.zhimg.com/v2-d7c165547c45b52a55da76282e229d53_b.jpg" width="244"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/v2-d7c165547c45b52a55da76282e229d53_b.jpg" data-caption="" data-rawheight="74" data-rawwidth="244" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='244'%20height='74'&gt;&lt;/svg&gt;" width="244"/>
+ </figure>
+ <p>
+  中3个参数 a、b、c 来进行拟合。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-6d812cdba38926746c6afa64dfd6ec53_r.jpg" data-rawheight="574" data-rawwidth="609" data-size="normal" src="https://pic1.zhimg.com/v2-6d812cdba38926746c6afa64dfd6ec53_b.jpg" width="609"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-6d812cdba38926746c6afa64dfd6ec53_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-6d812cdba38926746c6afa64dfd6ec53_r.jpg" data-rawheight="574" data-rawwidth="609" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='609'%20height='574'&gt;&lt;/svg&gt;" width="609"/>
+ </figure>
+ <p>
+  看起来拟合效果还不错。
+ </p>
+ <p>
+  <code>
+   numpy
+  </code>
+  没有提供直接的指数拟合函数，但我们可以通过
+  <code>
+   scipy
+  </code>
+  库里的
+  <code>
+   scipy.optimize.leastsq
+  </code>
+  实现最小二乘法。
+ </p>
+ <p>
+  <b>
+   核心代码
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>def func(x, p):
+    a,b,c = p
+    return a * np.exp(b * x) + c
+
+# 残差函数
+def residuals(p, y, x):
+    return y - func(x, p)
+
+pe = [1, 0.0001, 1]  # 初始预测值
+plsq = leastsq(residuals, pe, args=(y_np, x_np))
+y_fit = func(x_fit, plsq[0])
+plt.plot(x_fit, y_fit)
+</code></pre>
+ </div>
+ <h2>
+  <b>
+   幂函数拟合
+  </b>
+ </h2>
+ <p>
+  幂函数和指数函数有点类似，只不过我们使用的函数是
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="86" data-rawwidth="214" data-size="normal" src="https://pic2.zhimg.com/v2-fc072ab5a09591265876790c8d133ccd_b.jpg" width="214"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic2.zhimg.com/v2-fc072ab5a09591265876790c8d133ccd_b.jpg" data-caption="" data-rawheight="86" data-rawwidth="214" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='214'%20height='86'&gt;&lt;/svg&gt;" width="214"/>
+ </figure>
+ <p>
+  同样也是3个参数。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-b0843a3b34a6244cd4a2426f8e1f3cc8_r.jpg" data-rawheight="574" data-rawwidth="609" data-size="normal" src="https://pic4.zhimg.com/v2-b0843a3b34a6244cd4a2426f8e1f3cc8_b.jpg" width="609"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-b0843a3b34a6244cd4a2426f8e1f3cc8_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-b0843a3b34a6244cd4a2426f8e1f3cc8_r.jpg" data-rawheight="574" data-rawwidth="609" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='609'%20height='574'&gt;&lt;/svg&gt;" width="609"/>
+ </figure>
+ <p>
+  拟合的效果与前面的指数函数有点相似。代码中，我们也只要在刚才的基础上，修改一下
+  <code>
+   func
+  </code>
+  函数即可。
+ </p>
+ <p>
+  <b>
+   核心代码
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>def func(x, p):
+    a,b,c = p
+    return a * x ** b + c
+</code></pre>
+ </div>
+ <h2>
+  <b>
+   拟合效果评价
+  </b>
+ </h2>
+ <p>
+  以上几种方法虽然看起来都不错，但结果毕竟有不小的差异，究竟哪一个更“科学”一点呢？
+ </p>
+ <p>
+  我们通过几个评价指标来衡量一下：
+ </p>
+ <ul>
+  <li>
+   <b>
+    均方根误差（RMSE）
+   </b>
+   ：真实值和预测值之差的平方和。这其实就是我们拟合时的判断基础啊。只不过加上了根号，使得结果的量纲更加合理（否则就是均方误差MSE）。
+  </li>
+  <li>
+   <b>
+    平均绝对误差（MAE）
+   </b>
+   ：和 MSE 的区别就在于直接使用真实值和预测值之差的绝对值作为衡量标准。
+  </li>
+  <li>
+   <b>
+    R平方（R2）
+   </b>
+   ：因为 MSE 结果的大小取决于不同数据的本身数值大小，并不统一。R2 则是在此基础上，将其转换至 0~1 之间，以便于评价。
+  </li>
+ </ul>
+ <p>
+  以上指标，
+  <code>
+   sklearn
+  </code>
+  库均在
+  <code>
+   metrics
+  </code>
+  中提供了方法。
+ </p>
+ <p>
+  <b>
+   核心代码
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span># ploy 拟合函数
+rmse = sqrt(metrics.mean_squared_error(y_np, poly(x_np)))
+mae = metrics.mean_absolute_error(y_np, poly(x_np))
+r2 = metrics.r2_score(y_np, poly(x_np))
+</code></pre>
+ </div>
+ <p>
+  当然，这些指标都是基于拟合函数与已有数据的判断，对于未来的预测，谁也说不准，只能是“仅供参考”。毕竟如果可以预知未来，那我大概早就 all in 比特币了。🤦
+ </p>
+ <p>
+  <br/>
+ </p>
+ <h2>
+  <b>
+   最终结果
+  </b>
+ </h2>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-a09f02d0f51518b9834adf30dd1d541a_r.jpg" data-rawheight="570" data-rawwidth="614" data-size="normal" src="https://pic1.zhimg.com/v2-a09f02d0f51518b9834adf30dd1d541a_b.jpg" width="614"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-a09f02d0f51518b9834adf30dd1d541a_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-a09f02d0f51518b9834adf30dd1d541a_r.jpg" data-rawheight="570" data-rawwidth="614" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='614'%20height='570'&gt;&lt;/svg&gt;" width="614"/>
+ </figure>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-53c9db8b52374804f9f83634e2b13d70_r.jpg" data-rawheight="1038" data-rawwidth="1346" data-size="normal" src="https://pic4.zhimg.com/v2-53c9db8b52374804f9f83634e2b13d70_b.jpg" width="1346"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-53c9db8b52374804f9f83634e2b13d70_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-53c9db8b52374804f9f83634e2b13d70_r.jpg" data-rawheight="1038" data-rawwidth="1346" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1346'%20height='1038'&gt;&lt;/svg&gt;" width="1346"/>
+ </figure>
+ <p>
+  综合结果来看，
+  <b>
+   编程教室的百万用户很可能在2019~2022年之间到来
+  </b>
+  。对3~8次多项式、指数函数、幂函数的预测结果做个简单的平均，那么这一天就是：
+ </p>
+ <h2>
+  <b>
+   2020年5月27日
+  </b>
+ </h2>
+ <p>
+  只需要
+  <b>
+   811
+  </b>
+  天，想想还有点小激动呢。
+ </p>
+ <p>
+  忽然，我想到了那个诡异的9次函数，说来也不是不可能哦：当人数过了40万，因为某个不小心被封了号，一切归零。这也不是什么新鲜事儿。
+ </p>
+ <p>
+  所以，我还是老老实实写教程吧。猥琐发育，别浪！
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <u>
+   数据及完整代码已上传，需要的同学请在公众号（Crossin的编程教室）里回复
+   <b>
+    百万
+   </b>
+  </u>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+ </p>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学编程的弯路
+  </a>
+  |
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <blockquote>
+  <b>
+   Crossin的编程教室
+  </b>
+  <br/>
+  微信公众号ID：crossincode
+ </blockquote>
+</div></body></html>

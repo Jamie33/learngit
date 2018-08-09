@@ -1,0 +1,289 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>用_Python_实现你的量化交易策略</h1><div class="RichText ztext Post-RichText">
+ <p>
+  Python 的学习者中，有相当一部分是冲着爬虫去的。因为爬虫可以帮你解决很多工作和生活中的问题，节约你的生命。不过 Python 还有一个神秘而有趣的应用领域，那就是量化交易。
+ </p>
+ <p>
+  量化交易，就是以数学模型替代人的主观判断来制定交易策略。通常会借助计算机程序来进行策略的计算和验证，最终也常直接用程序根据策略设定的规则自动进行交易。
+ </p>
+ <p>
+  Python 由于开发方便，工具库丰富，尤其科学计算方面的支持很强大，所以目前在量化领域的使用很广泛。市面上也出现了很多支持 Python 语言的量化平台。通过这些平台，你可以很方便地实现自己的交易策略，进行验证，甚至对接交易系统（由于政策原因，现在很多交易接口暂停开放）。
+ </p>
+ <p>
+  在交易策略方面，我是外行（虽然曾经也有证券从业资格）。所以本文只是介绍几个 Python 量化平台，以及一些最基本的使用方法。更多的功能、更强大的策略还有待各位自己去挖掘。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  目前国内比较知名的几个平台：
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//uqer.io/home/" rel="nofollow noreferrer" target="_blank">
+   优矿 uqer.io
+  </a>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.joinquant.com/" rel="nofollow noreferrer" target="_blank">
+   聚宽 joinquant.com
+  </a>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.ricequant.com/" rel="nofollow noreferrer" target="_blank">
+   米筐 ricequant.com
+  </a>
+ </p>
+ <p>
+  国外知名平台：
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.quantopian.com/" rel="nofollow noreferrer" target="_blank">
+   quantopian.com
+  </a>
+ </p>
+ <p>
+  它们都可以使用 Python 进行策略开发。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  以优矿为例，注册之后，在“开始研究”页面，新建一个 Notebook，就可以开始用 Python 写你自己的策略。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/9968d9155537f88ca61daf4b953dffee_r.jpg" data-rawheight="279" data-rawwidth="640" data-size="normal" src="https://pic2.zhimg.com/9968d9155537f88ca61daf4b953dffee_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/9968d9155537f88ca61daf4b953dffee_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/9968d9155537f88ca61daf4b953dffee_r.jpg" data-rawheight="279" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='279'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  右上角的下拉框选择“策略”，就会帮你自动填写上策略回测的基本结构代码。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/4e5f4117739ebb5a4cd1f495d18bd48c_r.jpg" data-rawheight="288" data-rawwidth="640" data-size="normal" src="https://pic4.zhimg.com/4e5f4117739ebb5a4cd1f495d18bd48c_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/4e5f4117739ebb5a4cd1f495d18bd48c_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/4e5f4117739ebb5a4cd1f495d18bd48c_r.jpg" data-rawheight="288" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='288'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  开始的一些变量是对回测的基本配置。initialize 里可以做一些初始化的工作。handle_data 则是回测代码的核心，用来实现每个交易日（或每分钟）的交易指令。
+ </p>
+ <p>
+  具体的变量含义，这里不做特别细致的解释，文档里都有说明。仅从命名和注释里也可以看出，设定了回测的时间，股票池，资金，交易频率等。
+ </p>
+ <p>
+  文档里给了一个最简单的日线策略代码：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="k">def</span> <span class="nf">handle_data</span><span class="p">(</span><span class="n">account</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">stock</span> <span class="ow">in</span> <span class="n">account</span><span class="o">.</span><span class="n">universe</span><span class="p">:</span>
+        <span class="n">order</span><span class="p">(</span><span class="n">stock</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  此策略就是，在每个交易日，把股票池里每一只股票都买入一手。
+  <br/>
+ </p>
+ <p>
+  account.universe 就是开头设定的 universe 值。这里遍历股票池中的股票。
+  <br/>
+ </p>
+ <p>
+  order 是买卖指令，函数原型是：order(symbol, amount)
+  <br/>
+ </p>
+ <p>
+  参数 symbol 是股票代码，amount 是买卖数量，正为买入，负为卖出。此处买入 100 股，即 1 手。
+ </p>
+ <p>
+  点击“运行”，或 Ctrl+Enter，即可在页面上看到策略的执行情况。
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/3fbc2e0afc95b9f8a93fce5f0dbe060b_r.jpg" data-rawheight="366" data-rawwidth="640" data-size="normal" src="https://pic4.zhimg.com/3fbc2e0afc95b9f8a93fce5f0dbe060b_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/3fbc2e0afc95b9f8a93fce5f0dbe060b_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/3fbc2e0afc95b9f8a93fce5f0dbe060b_r.jpg" data-rawheight="366" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='366'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  <br/>
+ </p>
+ <p>
+  我们再尝试改动一点点，写一个自己的策略。
+ </p>
+ <p>
+  我拍脑袋想了这样一个策略：
+ </p>
+ <blockquote>
+  如果一只未持有的股票 2 个交易日累计涨了 10% 以上，就以当前资金的 5% 买入它。反过来，如果累计跌了 10% 以上，就全部卖出止损。
+ </blockquote>
+ <p>
+  下面把它实现出来看下回测效果如何。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/714c697dcc6e6b055d52e5cfaabdeb3c_r.jpg" data-rawheight="362" data-rawwidth="640" data-size="normal" src="https://pic1.zhimg.com/714c697dcc6e6b055d52e5cfaabdeb3c_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/714c697dcc6e6b055d52e5cfaabdeb3c_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/714c697dcc6e6b055d52e5cfaabdeb3c_r.jpg" data-rawheight="362" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='362'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  时间设为去年（2015）全年，起始资金 10 万元。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>universe = set_universe('A')
+</code></pre>
+ </div>
+ <p>
+  股票池为 A 股所有股票。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>account.get_attribute_history('closePrice', 3)
+</code></pre>
+ </div>
+ <p>
+  取得股票池中所有股票前 3 天的收盘价（closePrice）。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>hist[s][2] - hist[s][0]
+</code></pre>
+ </div>
+ <p>
+  得到 1 天前和 3 天前收盘价的差值。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>account.valid_secpos
+</code></pre>
+ </div>
+ <p>
+  是账户当前所持有的证券信息。
+ </p>
+ <p>
+  如果收盘价 2 天的差值满足买入条件且未持有，就执行：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>order_pct(s, 0.05)
+</code></pre>
+ </div>
+ <p>
+  order_pct 表示按账户当前总价值的百分比买入股票。
+ </p>
+ <p>
+  如果满足卖出条件则执行：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>order_to(s, 0)
+</code></pre>
+ </div>
+ <p>
+  OK，一个简单到不行的策略已完成。运行一下：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/04b99dcbd4f5122ca36d60d1c49039e9_r.jpg" data-rawheight="482" data-rawwidth="640" data-size="normal" src="https://pic4.zhimg.com/04b99dcbd4f5122ca36d60d1c49039e9_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/04b99dcbd4f5122ca36d60d1c49039e9_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/04b99dcbd4f5122ca36d60d1c49039e9_r.jpg" data-rawheight="482" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='482'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  居然，这么简单的策略在最高的时候有超过 90% 的收益，即使在经历了年中的股灾和下半年的震荡之后，到年底也还有 30% 多的收益率，应该超越了大部分散户去年的成绩吧。如果按照这个策略进行交易，啧啧，想想还有点小激动呢。（喂！快醒醒！）
+ </p>
+ <p>
+  然而现实是残酷的，真实的市场分分钟教你做人。
+ </p>
+ <p>
+  量化投资以及程序化交易是很有前途的行业，但在你想从事这行，甚至用它赚钱之前，请先深入了解它。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  有兴趣的，去看下这个问题：
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22211032">
+   学习量化交易如何入门？
+  </a>
+ </p>
+ <p>
+  前面提到的另外几个平台，和优矿基本类似，API 和功能会有些差异，可以自行尝试，这里不再分别演示。也有人做过比较：
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/35097533">
+   已知国内量化平台的比较， Ricequant / 优矿究竟谁是下一个quantopian，哪家挖矿强？
+  </a>
+ </p>
+ <p>
+  如果你对这个领域充满好奇，不如现在就立刻动手，从你的第一个策略开始。谁知道你会不会成为下一个巴菲特呢：）
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <u>
+   其他文章及回答：
+  </u>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20683456?refer=crossin">
+   编程初学者如何使用搜索引擎 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20721034?refer=crossin">
+   如何直观地理解程序的运行过程？- Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21304838">
+   如何在 Python 中使用断点调试 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21057822">
+   Python 抓取网页乱码原因分析 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21438729">
+   极简 Github 上手教程 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  微信ID：crossincode
+ </p>
+ <p>
+  论坛：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com/" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室
+  </a>
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>

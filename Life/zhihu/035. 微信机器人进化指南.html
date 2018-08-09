@@ -1,0 +1,334 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>微信机器人进化指南</h1><div class="RichText ztext Post-RichText">
+ <p>
+  听说阿尔法狗又要挑战柯洁了。时至今日，人工智能不断刷新我们对这个世界的理解。或许再过不久，你真的不知道跟你在网上聊天的对象还是不是一个“人”，也不知道自己的工作会不会有天就被机器给取代了。
+ </p>
+ <p>
+  要想不被机器淘汰，那只能“进化”得比机器还快！
+ </p>
+ <p>
+  之前我们介绍了一个可以记录微信撤回消息的小工具，参见
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D2650166398%26idx%3D1%26sn%3D60c26ab0f2d43a019217812e0c428f31%26chksm%3Dbe4b5906893cd010a1eb93993dc2d374994912efea2c36eda8c8442d405c35d7fe0c90e1c776%26scene%3D21%23wechat_redirect" rel="nofollow noreferrer" target="_blank">
+   再也不用担心错过几个亿啦：基于Python的微信消息防撤回工具
+  </a>
+  <br/>
+ </p>
+ <p>
+  今天我们就来讲讲它的实现基础 -
+  <strong>
+   itchat
+  </strong>
+  。文末将给出一个基于 itchat 开发的微型微信聊天机器人。
+ </p>
+ <p>
+  itchat 是一个开源的微信个人公众号接口，支持 py2 和 py3 。你可以将其开发为微信群运营助手、自动回复机器人、谁是卧底小游戏的裁判等等，作为一个全能的接口， itchat 支持文本、图片、视频、附件、等内容的收发处理。
+ </p>
+ <p>
+  该库从原理上是登陆网页微信，将收发的信息打包处理为 dict 形式，然后使用 post 请求进行信息交换。简单来说就是一个可编写脚本控制、无界面的网页版微信客户端。
+ </p>
+ <h4>
+  1、安装及入门
+ </h4>
+ <p>
+  itchat 官网地址：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//itchat.readthedocs.io/zh/latest/" rel="nofollow noreferrer" target="_blank">
+   项目简介 - itchat
+  </a>
+ </p>
+ <p>
+  安装 itchat 与其他库并无差别，使用 pip install itchat 即可。
+ </p>
+ <p>
+  在安装完成之后，就可以开始写代码了，我们以分段的形式逐一介绍登陆、发信息、接收信息等功能。
+  <br/>
+ </p>
+ <h2>
+  1.1 登陆
+ </h2>
+ <p>
+  itchat 的登陆函数为 auto_login() ，代码运行之后，会出现一幅二维码图片，使用手机扫码登陆即可。这是因为该库是利用网页微信的接口登陆，这一步相当于登录了网页版微信。整个授权过程的验证部分是通过微信正常的网页登录流程，不涉及账号密码信息。
+ </p>
+ <p>
+  对此登录原理感兴趣的可参考：
+  <br/>
+ </p>
+ <blockquote>
+  <p>
+   <a class="internal" href="https://www.zhihu.com/question/20368066">
+    微信扫描二维码登录网页是什么原理？
+   </a>
+  </p>
+ </blockquote>
+ <p>
+  itchat 在用户本机运行，除了调用微信接口外，不会向外界发送其他信息，并且源代码都是公开的。所以在使用过程中不必担心会有隐私泄露。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">itchat</span>
+<span class="c1"># 普通登陆</span>
+<span class="n">itchat</span><span class="o">.</span><span class="n">auto_login</span><span class="p">()</span>
+<span class="c1"># 运行并保持在线状态</span>
+<span class="n">itchat</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  登陆上之后，会提示登陆成功信息：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/v2-c0d42ce6b61af78bdcf57ad02bf5af41_r.jpg" data-rawheight="147" data-rawwidth="525" src="https://pic2.zhimg.com/v2-c0d42ce6b61af78bdcf57ad02bf5af41_b.jpg" width="525"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-c0d42ce6b61af78bdcf57ad02bf5af41_b.jpg" data-original="https://pic2.zhimg.com/v2-c0d42ce6b61af78bdcf57ad02bf5af41_r.jpg" data-rawheight="147" data-rawwidth="525" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='525'%20height='147'&gt;&lt;/svg&gt;" width="525"/>
+ </figure>
+ <p>
+  itchat 也提供短时间内断线重连的功能，只需要添加 hotReload = True 参数，其原理是在登陆之后在 PC 端保存登陆信息，下次登陆时会直接读取存储的信息。
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="n">itchat</span><span class="o">.</span><span class="n">auto_login</span><span class="p">(</span><span class="n">hotReload</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  关于登陆更详细的内容参见官方文档：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//itchat.readthedocs.io/zh/latest/intro/login/" rel="nofollow noreferrer" target="_blank">
+   登陆配置 - itchat
+  </a>
+ </p>
+ <h2>
+  1.2 发送消息
+ </h2>
+ <p>
+  itchat 可以发送 文本、图片、视频、附件等内容。
+  <br/>
+  代码示例：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="c1"># 发送一段文字给 文件助手</span>
+<span class="n">itchat</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">'hello,helper'</span><span class="p">,</span><span class="n">toUserName</span><span class="o">=</span><span class="s1">'filehelper'</span><span class="p">)</span>
+<span class="c1"># 同样也可以使用 发送文本函数 </span>
+<span class="n">itchat</span><span class="o">.</span><span class="n">send_msg</span><span class="p">(</span><span class="s1">'hello,helper'</span><span class="p">,</span><span class="n">toUserName</span><span class="o">=</span><span class="s1">'filehelper'</span><span class="p">)</span>
+<span class="c1"># 发送一张图片，给出图片的地址</span>
+<span class="n">itchat</span><span class="o">.</span><span class="n">send_image</span><span class="p">(</span><span class="s1">r'photo2.png'</span><span class="p">,</span><span class="n">toUserName</span><span class="o">=</span><span class="s1">'filehelper'</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  运行结果：
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="720" data-rawwidth="405" src="https://pic1.zhimg.com/v2-e03b7377f55f9a8f946bd6680fb53e1a_b.jpg" width="405"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic1.zhimg.com/v2-e03b7377f55f9a8f946bd6680fb53e1a_b.jpg" data-rawheight="720" data-rawwidth="405" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='405'%20height='720'&gt;&lt;/svg&gt;" width="405"/>
+ </figure>
+ <p>
+  <em>
+   不要问我图片是从哪里找的，我也不知道，突然就出现在我电脑上了。
+  </em>
+ </p>
+ <p>
+  同样，发送其他形式的内容参照文档中相应的函数。注意这里的 toUserName 的值为微信号，以下图为例，正确的方式应该是 toUserName='littlecodersh'。
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="290" data-rawwidth="405" src="https://pic4.zhimg.com/v2-9071656408042da75ce72eb0fbe0bebe_b.jpg" width="405"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/v2-9071656408042da75ce72eb0fbe0bebe_b.jpg" data-rawheight="290" data-rawwidth="405" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='405'%20height='290'&gt;&lt;/svg&gt;" width="405"/>
+ </figure>
+ <p>
+  关于消息的发送，更多内容参考：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//itchat.readthedocs.io/zh/latest/intro/reply/" rel="nofollow noreferrer" target="_blank">
+   回复方法 - itchat
+  </a>
+ </p>
+ <h2>
+  1.3 消息的接收
+ </h2>
+ <p>
+  要接受微信中的消息，我们需定义一个消息处理函数 text_reply(msg) ，添加装饰器 @itchat.msg_register(TEXT) 。
+ </p>
+ <p>
+  msg 参数为字典类型，包含了接收信息的所有细节，比如 msg['FromUserName']为发信息者，msg['ToUserName']为消息的接收者，msg['MsgType'] 为信息类型，msg['Text']为信息内容等等。
+ </p>
+ <p>
+  注意这里需要导入 itchat.content 下对消息类型做的包装，比如 TEXT 表示文本消息，PICTURE 表示图片消息等等，这里选择导入所有类型。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">from</span> <span class="nn">itchat.content</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># 注册文本消息，绑定到 text_reply 处理函数</span>
+<span class="nd">@itchat.msg_register</span><span class="p">(</span><span class="n">TEXT</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">text_reply</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="c1"># 打印出传递的消息，利于我们更好的理解 itchat 的运作方式</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="c1"># 将消息返回给发送者</span>
+    <span class="n">itchat</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">'recevied msg : </span><span class="si">%s</span><span class="s1">'</span><span class="o">%</span><span class="n">msg</span><span class="p">[</span><span class="s1">'Text'</span><span class="p">],</span><span class="n">msg</span><span class="p">[</span><span class="s1">'FromUserName'</span><span class="p">])</span>
+<span class="c1"># 图片以及视频消息，绑定到 reply_pic_video 函数</span>
+<span class="nd">@itchat.msg_register</span><span class="p">(</span><span class="n">PICTURE</span><span class="p">,</span><span class="n">VIDEO</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">reply_pic_video</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="c1"># 下载收到的图片或者视频</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s1">'Text'</span><span class="p">](</span><span class="n">msg</span><span class="p">[</span><span class="s1">'FileName'</span><span class="p">])</span>
+    <span class="c1"># 回复发送者</span>
+    <span class="n">itchat</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">'hello world'</span><span class="p">,</span> <span class="n">toUserName</span><span class="o">=</span><span class="n">msg</span><span class="p">[</span><span class="s1">'FromUserName'</span><span class="p">]</span>
+</code></pre>
+ </div>
+ <p>
+  注意：在处理图片、视频、附件信息时，itchat 提供了下载的功能，如代码中所示 msg['Text'] (msg['FileName'])，msg['Text']为下载的方法，msg['FileName']为下载的文件，下载路径为代码的运行路径。
+ </p>
+ <p>
+  详细的消息类型参考：
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//itchat.readthedocs.io/zh/latest/intro/handler/" rel="nofollow noreferrer" target="_blank">
+   注册方法 - itchat
+  </a>
+  <br/>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//itchat.readthedocs.io/zh/latest/intro/messages/" rel="nofollow noreferrer" target="_blank">
+   消息内容 - itchat
+  </a>
+ </p>
+ <h2>
+  1.4 其他功能
+ </h2>
+ <p>
+  除了以上提到的功能，itchat 还拥有添加好友、搜索好友、获取头像、创建群、修改群名、邀请、踢人等等一系列的功能。
+ </p>
+ <p>
+  各项功能可查看源码：
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//github.com/littlecodersh/ItChat/blob/master/itchat/core.py" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    github.com/littlecoders
+   </span>
+   <span class="invisible">
+    h/ItChat/blob/master/itchat/core.py
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <h4>
+  2、实战
+ </h4>
+ <p>
+  这里我们制作了一个简单的微信机器人，在 itchat 的基础上接入了图灵机器人和百度翻译，实现了自动回复与翻译的功能，正常对话调用图灵接口，带 “#” 前缀调用翻译接口，实际效果如下：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic4.zhimg.com/v2-de0ffd0f051173ae17deba53ac531172_r.jpg" data-rawheight="568" data-rawwidth="640" src="https://pic4.zhimg.com/v2-de0ffd0f051173ae17deba53ac531172_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-de0ffd0f051173ae17deba53ac531172_b.jpg" data-original="https://pic4.zhimg.com/v2-de0ffd0f051173ae17deba53ac531172_r.jpg" data-rawheight="568" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='568'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <h2>
+  <u>
+   在公众号（Crossin的编程教室）里回复
+   <strong>
+    机器人
+   </strong>
+   获取完整代码。
+  </u>
+ </h2>
+ <h4>
+  3、小结
+ </h4>
+ <p>
+  itchat 作为一款开源的个人微信接口，提供了一份合适的微信机器人解决方案。在此基础上我们还可以接入图灵机器人、文字游戏平台、签到打卡平台、微信群管理平台等等。
+ </p>
+ <p>
+  不过，itchat 也有其局限性，使用该库不能收发红包（没法自动抢红包是硬伤啊😂），不能发朋友圈等。总的来说就是，网页版微信不能做的事情， itchat 也不行。
+ </p>
+ <p>
+  参考资料：
+  <br/>
+  官方文档：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//itchat.readthedocs.io/zh/latest/" rel="nofollow noreferrer" target="_blank">
+   项目简介 - itchat
+  </a>
+  <br/>
+  github 地址：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//github.com/littlecodersh/ItChat" rel="nofollow noreferrer" target="_blank">
+   littlecodersh/ItChat
+  </a>
+  <br/>
+  Python微信库:itchat：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//www.tuicool.com/articles/VJZRRfn" rel="nofollow noreferrer" target="_blank">
+   Python微信库:itchat - 推酷
+  </a>
+  <br/>
+  python基于itchat实现微信群消息同步机器人：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//www.jb51.net/article/106815.htm" rel="nofollow noreferrer" target="_blank">
+   python基于itchat实现微信群消息同步机器人_python_脚本之家
+  </a>
+ </p>
+ <br/>
+ <p>
+  <i>
+   .
+  </i>
+  <br/>
+ </p>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <i>
+   <a class="internal" href="https://zhuanlan.zhihu.com/p/26066151">
+    喏，你们要的 PyCharm 快速上手指南
+   </a>
+   <br/>
+  </i>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   给伸手党的福利：Python 新手入门引导
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25499306">
+   如何用100行Python代码做出魔性声控游戏“八分音符酱”
+  </a>
+  <br/>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？
+  </a>
+  <br/>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25109074">
+   数据分析：当赵雷唱民谣时他唱些什么？
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25208016">
+   我去扒了杜蕾斯的微博
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25009370">
+   一行代码扫出“敬业福”
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/24606846">
+   今天，你抢到票了吗？
+  </a>
+  <br/>
+ </p>
+ <h2>
+  Crossin的编程教室
+ </h2>
+ <p>
+  微信公众号ID：crossincode
+  <br/>
+  网站：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/" rel="nofollow noreferrer" target="_blank">
+   crossincode.com
+  </a>
+  <br/>
+  QQ群：522415386
+  <br/>
+  微信加群：crossin11
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="258" data-rawwidth="258" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+</div></body></html>

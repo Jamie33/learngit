@@ -1,0 +1,280 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>今天，你抢到票了吗？</h1><div class="RichText ztext Post-RichText">
+ <p>
+  今天网上开始预售除夕前一天的火车票。
+ </p>
+ <p>
+  这几天，办公室的小伙伴们每天准点蹲在电脑前，不停地刷新页面，可最终还是眼睁睁看着一秒之后就显示“无票”了。(╯‵□′)╯︵┻━┻
+ </p>
+ <p>
+  无奈之下，只能寄希望于之后几天会有些余票或者退票被放出来。但总不能接下来一直开着网页不停刷吧……好在我们还有 Python 啊，就让程序定时去查咯。
+ </p>
+ <p>
+  之前也放过查票的代码，参见：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D2650166071%26idx%3D1%26sn%3Db422d9782cb20d41a84574dc82944d42%26chksm%3Dbe4b5e4f893cd759a71d4f482c451f4ce7790a326513dce9e3915993b418ce478471ef536913%26scene%3D21%23wechat_redirect" rel="nofollow noreferrer" target="_blank">
+   刷票有风险，抢购需谨慎
+  </a>
+ </p>
+ <p>
+  在公众号(crossincode)里回复
+  <strong>
+   查票
+  </strong>
+  ，可获取本篇完整示例代码。
+ </p>
+ <p>
+  1. 我们用 Chrome 进入 12306 余票查询网页，打开开发者工具（右键“审查元素”或者 F12/ctrl+shift+i），菜单栏选择 Network。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic4.zhimg.com/v2-f3244cfe2215daa8fa846b94b243368f_r.jpg" data-rawheight="560" data-rawwidth="1020" src="https://pic4.zhimg.com/v2-f3244cfe2215daa8fa846b94b243368f_b.jpg" width="1020"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-f3244cfe2215daa8fa846b94b243368f_b.jpg" data-original="https://pic4.zhimg.com/v2-f3244cfe2215daa8fa846b94b243368f_r.jpg" data-rawheight="560" data-rawwidth="1020" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1020'%20height='560'&gt;&lt;/svg&gt;" width="1020"/>
+ </figure>
+ <p>
+  2. 填写出发地和目的地以及出发日后（这里以1月11日上海到北京为例），点击“查询”，在 Network 栏目下，可以看到发出的所有请求。仔细观察后发现，其中一个带有 query 字样的地址就是余票的查询接口，从信息栏中 Headers 分页下的 Request URL 可以看到它的完整地址。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/v2-498ba385f964979aaf99d6fdada25016_r.jpg" data-rawheight="379" data-rawwidth="640" src="https://pic2.zhimg.com/v2-498ba385f964979aaf99d6fdada25016_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-498ba385f964979aaf99d6fdada25016_b.jpg" data-original="https://pic2.zhimg.com/v2-498ba385f964979aaf99d6fdada25016_r.jpg" data-rawheight="379" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='379'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  这里注意，12306 现在有两个查询余票的页面，不同页面上看到的接口地址是不一样的。分别是：
+  <br/>
+ </p>
+ <p>
+  旧版：
+  <br/>
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//kyfw.12306.cn/otn/lcxxcx/query%3Fpurpose_codes%3DADULT%26queryDate%3D2017-01-11%26from_station%3DBJP%26to_station%3DBJP" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    kyfw.12306.cn/otn/lcxxc
+   </span>
+   <span class="invisible">
+    x/query?purpose_codes=ADULT&amp;queryDate=2017-01-11&amp;from_station=BJP&amp;to_station=BJP
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  新版：
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//kyfw.12306.cn/otn/leftTicket/queryZ%3FleftTicketDTO.train_date%3D2017-01-11%26leftTicketDTO.from_station%3DSHH%26leftTicketDTO.to_station%3DBJP%26purpose_codes%3DADULT" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    kyfw.12306.cn/otn/leftT
+   </span>
+   <span class="invisible">
+    icket/queryZ?leftTicketDTO.train_date=2017-01-11&amp;leftTicketDTO.from_station=SHH&amp;leftTicketDTO.to_station=BJP&amp;purpose_codes=ADULT
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  两个接口的参数和返回值也不相同。这里我们用新版的接口。
+ </p>
+ <p>
+  在 Python 2 中，我们可以通过 urllib2 直接访问接口，获取返回数据。Python 3 可以使用 urllib.request 或者 requests 库。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="n">req_url</span> <span class="o">=</span> <span class="s1">'https://kyfw.12306.cn/otn/leftTicket/queryZ?leftTicketDTO.train_date=2017-01-11&amp;leftTicketDTO.from_station=SHH&amp;leftTicketDTO.to_station=BJP&amp;purpose_codes=ADULT'</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">req_url</span><span class="p">)</span>
+<span class="n">resp_info</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">resp_info</span>
+</code></pre>
+ </div>
+ <p>
+  在程序中输出结果，或者直接在浏览器中打开这个请求地址，可以看到返回值。
+  <br/>
+ </p>
+ <p>
+  如果请求时报错：
+  <br/>
+ </p>
+ <p>
+  &lt;urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:590)&gt;
+ </p>
+ <p>
+  需要加上以下代码，忽略 ssl 证书的验证：
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+</code></pre>
+ </div>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/v2-a0c9ef58f77d05c4e670ade3d97331cf_r.jpg" data-rawheight="366" data-rawwidth="640" src="https://pic1.zhimg.com/v2-a0c9ef58f77d05c4e670ade3d97331cf_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-a0c9ef58f77d05c4e670ade3d97331cf_b.jpg" data-original="https://pic1.zhimg.com/v2-a0c9ef58f77d05c4e670ade3d97331cf_r.jpg" data-rawheight="366" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='366'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  这些密密麻麻看上去有点像是字典格式的数据就是 json 数据。通过浏览器 json 插件或者搜索下 json 在线解析工具，可以让这些数据显示得更人性化。
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic4.zhimg.com/v2-9d011dcd6b4e78f5d434aaad19973b34_r.jpg" data-rawheight="993" data-rawwidth="640" src="https://pic4.zhimg.com/v2-9d011dcd6b4e78f5d434aaad19973b34_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-9d011dcd6b4e78f5d434aaad19973b34_b.jpg" data-original="https://pic4.zhimg.com/v2-9d011dcd6b4e78f5d434aaad19973b34_r.jpg" data-rawheight="993" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='993'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  不难看出，我们需要的车次余票信息就在每一车次全部相关信息中，而这也信息以字典列表的形式，储存在“data”的值中。因此，我们若要查询余票，就该先把 json 格式的数据转为字典，获取其中的 data 列表，然后遍历列表，查询车次，最后从该车次对应的字典字段中，查询余票。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="n">info_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resp_info</span><span class="p">)</span>
+<span class="n">info</span> <span class="o">=</span> <span class="n">info_json</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">train_data</span> <span class="ow">in</span> <span class="n">info</span><span class="p">:</span>
+    <span class="n">train</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[</span><span class="s1">'queryLeftNewDTO'</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">train</span><span class="p">[</span><span class="s1">'station_train_code'</span><span class="p">]</span> <span class="o">==</span> <span class="n">TRAIN</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s1">'商务座：'</span><span class="p">,</span> <span class="n">train</span><span class="p">[</span><span class="s1">'swz_num'</span><span class="p">]</span>
+        <span class="k">print</span> <span class="s1">'特等座'</span><span class="p">,</span> <span class="n">train</span><span class="p">[</span><span class="s1">'tz_num'</span><span class="p">]</span>
+        <span class="o">...</span>
+        <span class="k">print</span> <span class="s1">'无座'</span><span class="p">,</span> <span class="n">train</span><span class="p">[</span><span class="s1">'wz_num'</span><span class="p">]</span>
+        <span class="k">print</span> <span class="s1">'其它'</span><span class="p">,</span> <span class="n">train</span><span class="p">[</span><span class="s1">'qt_num'</span><span class="p">]</span>
+</code></pre>
+ </div>
+ <p>
+  为了让程序一直查询下去，我们用一个条件为 True 的 while 循环。再配合上 time 模块的 sleep 方法（参数单位为秒），让程序每查询一次就休息一会儿。毕竟我们只是想要定时刷一下页面，没必要一直发送请求。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="c1"># 查询余票代码</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">600</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  现在，在你的电脑上运行代码，就可以每隔 10 分钟自动去访问一次页面，看看是否有新的余票放出。当然，你得根据自己的需要，去修改请求地址里的日期和出发、到达站的代号。
+  <br/>
+ </p>
+ <p>
+  在公众号『Crossin的编程教室』（crossincode）里回复
+  <strong>
+   查票
+  </strong>
+  ，获取本篇的完整示例代码。
+  <br/>
+ </p>
+ <p>
+  如果你还希望程序在刷出票后，能给你发个邮件提醒的话，请查看我们之前的文章：
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/24180606">
+   简单三步，用 Python 发邮件 - Crossin的编程教室 - 知乎专栏
+  </a>
+  或者在公众号里回复
+  <strong>
+   邮件
+  </strong>
+  。
+ </p>
+ <p>
+  说明几点：
+ </p>
+ <ol>
+  <li>
+   <p>
+    这个程序只是定时访问公开页面，查询余票信息，无需登录和验证码，但并不能自动替你购票。
+   </p>
+  </li>
+  <li>
+   <p>
+    请设定适当的查询间隔，没必要高频刷新。合理使用此脚本不会比手动刷新页面给网站带来更大压力，只是免去了你时刻关注页面的烦躁。
+   </p>
+  </li>
+  <li>
+   <p>
+    掌握这个方法，也可以查询其他购票网站，或用在类似的页面信息查询上。
+    <br/>
+   </p>
+  </li>
+  <li>
+   <p>
+    由于最近在春运购票高峰，接口访问可能会比较慢，甚至请求失败。
+   </p>
+  </li>
+  <li>
+   <p>
+    这不是抢票工具，它做不到，我们也不建议使用类似工具干扰正常的购票秩序。
+   </p>
+  </li>
+ </ol>
+ <p>
+  最后，祝大家身体健康，都能买上票，高高兴兴回家过年！
+ </p>
+ <br/>
+ <br/>
+ <p>
+  <u>
+   其他文章及回答：
+  </u>
+ </p>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/22261597">
+  Python 与 Excel 不得不说的事 - Crossin的编程教室 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/23998083">
+  Python-Excel 模块哪家强？- Crossin的编程教室 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/22339492">
+  爆款游戏《贪吃蛇大作战》的 Python 实现 - Crossin的编程教室 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/22917775">
+  NBA 举办编程马拉松 - 数据分析时代的到来 - Crossin的文章 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/21886694">
+  想用 Python 做数据分析？先玩玩这个再说 - Crossin的文章 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/21624000">
+  用 Python 实现你的量化交易策略 - Crossin的文章 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+  学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？ - Crossin 的回答
+ </a>
+ <br/>
+ <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+  你是如何自学 Python 的？ - Crossin 的回答
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/21057822">
+  Python 抓取网页乱码原因分析 - Crossin的编程教室 - 知乎专栏
+ </a>
+ <br/>
+ <p>
+  <b>
+   Crossin的编程教室
+  </b>
+  <br/>
+ </p>
+ <br/>
+ 微信ID：crossincode
+ <br/>
+ 论坛：
+ <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com" rel="nofollow noreferrer" target="_blank">
+  Crossin的编程教室
+ </a>
+ <br/>
+ QQ群：167478032
+ <br/>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="258" data-rawwidth="258" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+</div></body></html>

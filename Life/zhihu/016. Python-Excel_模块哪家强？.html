@@ -1,0 +1,589 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>Python-Excel_模块哪家强？</h1><div class="RichText ztext Post-RichText">
+ <h2>
+  <b>
+   0. 前言
+  </b>
+ </h2>
+ <p>
+  从网页爬下来的大量数据需要清洗？
+  <br/>
+ </p>
+ <p>
+  成堆的科学实验数据需要导入 Excel 进行分析？
+ </p>
+ <p>
+  有成堆的表格等待统计？
+ </p>
+ <p>
+  作为人生苦短的 Python 程序员，该如何优雅地操作 Excel？
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  得益于前人的辛勤劳作，Python 处理 Excel 已有很多现成的轮子，使用较多的有：
+ </p>
+ <p>
+  <b>
+   xlwings
+  </b>
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//docs.xlwings.org/en/stable/" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    docs.xlwings.org/en/sta
+   </span>
+   <span class="invisible">
+    ble/
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  <b>
+   openpyxl
+  </b>
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//openpyxl.readthedocs.io/en/latest/" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    openpyxl.readthedocs.io
+   </span>
+   <span class="invisible">
+    /en/latest/
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  <b>
+   pandas
+  </b>
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//pandas.pydata.org/" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    pandas.pydata.org/
+   </span>
+   <span class="invisible">
+   </span>
+  </a>
+ </p>
+ <p>
+  <b>
+   win32com
+  </b>
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//pythonexcels.com/python-excel-mini-cookbook/" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    pythonexcels.com/python
+   </span>
+   <span class="invisible">
+    -excel-mini-cookbook/
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  <b>
+   xlsxwriter
+  </b>
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//xlsxwriter.readthedocs.io/" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    xlsxwriter.readthedocs.io
+   </span>
+   <span class="invisible">
+    /
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  <b>
+   DataNitro
+  </b>
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//datanitro.com/" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    datanitro.com/
+   </span>
+   <span class="invisible">
+   </span>
+  </a>
+ </p>
+ <p>
+  <b>
+   xlutils
+  </b>
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//pypi.python.org/pypi/xlutils/" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    pypi.python.org/pypi/xl
+   </span>
+   <span class="invisible">
+    utils/
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  上次我们介绍了下
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22261597">
+   xlutils
+  </a>
+  ，不少读者留言表示有比它更好使的模块，于是我们又把另外几个都体验了一遍。
+ </p>
+ <p>
+  本文将从运行环境、文档操作、基本功能和性能等方面对以上模块进行一次粗浅的比较，供大家参考。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <h2>
+  <b>
+   1. 环境配置
+  </b>
+ </h2>
+ <p>
+  再好的模块，也需要在正确的 Python 版本以及 Excel 版本才可运行。
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="272" data-rawwidth="333" data-size="normal" src="https://pic2.zhimg.com/v2-6971c85b21131c38fe31ef76654193c2_b.jpg" width="333"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic2.zhimg.com/v2-6971c85b21131c38fe31ef76654193c2_b.jpg" data-caption="" data-rawheight="272" data-rawwidth="333" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='333'%20height='272'&gt;&lt;/svg&gt;" width="333"/>
+ </figure>
+ <p>
+  提醒及注意：
+ </p>
+ <ul>
+  <li>
+   xlutils 仅支持 xls 文件，即2003以下版本；
+   <br/>
+  </li>
+  <li>
+   win32com 与 DataNitro 仅支持 windows 系统；
+   <br/>
+  </li>
+  <li>
+   xlwings 安装成功后，如果运行提示报错“ImportError: no module named win32api”，请再安装 pypiwin32 或者 pywin32 包；
+   <br/>
+  </li>
+  <li>
+   win32com 不是独立的扩展库，而是集成在其他库中，安装 pypiwin32 或者 pywin32 包即可使用；
+   <br/>
+  </li>
+  <li>
+   DataNitro 是 Excel 的插件，安装需到官网下载。
+   <br/>
+  </li>
+ </ul>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <h2>
+  <b>
+   2. 文档操作
+  </b>
+ </h2>
+ <p>
+  虽然大家都是操作 Excel，但即使最基本的新建文件、修改文件、保存文件等功能，在不同的库中也存在差异。比如 xlsxwriter 并不支持打开或修改现有文件，xlwings 不支持对新建文件的命名，DataNitro 作为 Excel 插件需依托于软件本身，pandas 新建文档需要依赖其他库等等。
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="259" data-rawwidth="243" data-size="normal" src="https://pic4.zhimg.com/v2-92f9947170881ba82cb62c69a31dd805_b.jpg" width="243"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/v2-92f9947170881ba82cb62c69a31dd805_b.jpg" data-caption="" data-rawheight="259" data-rawwidth="243" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='243'%20height='259'&gt;&lt;/svg&gt;" width="243"/>
+ </figure>
+ <p>
+  <br/>
+ </p>
+ <h2>
+  <b>
+   3. 基本功能
+  </b>
+ </h2>
+ <p>
+  由于设计目的不同，每个模块通常着重于某一方面功能，各有所长。
+  <br/>
+ </p>
+ <p>
+  <b>
+   xlwings
+  </b>
+ </p>
+ <p>
+  可结合 VBA 实现对 Excel 编程，强大的数据输入分析能力，同时拥有丰富的接口，结合 pandas/numpy/matplotlib 轻松应对 Excel 数据处理工作。
+ </p>
+ <p>
+  <b>
+   openpyxl
+  </b>
+ </p>
+ <p>
+  简单易用，功能广泛，单元格格式/图片/表格/公式/筛选/批注/文件保护等等功能应有尽有，图表功能是其一大亮点，缺点是对 VBA 支持的不够好。
+ </p>
+ <p>
+  <b>
+   pandas
+  </b>
+ </p>
+ <p>
+  数据处理是 pandas 的立身之本，Excel 作为 pandas 输入/输出数据的容器。
+ </p>
+ <p>
+  <b>
+   win32com
+  </b>
+ </p>
+ <p>
+  从命名上就可以看出，这是一个处理 windows 应用的扩展，Excel 只是该库能实现的一小部分功能。该库还支持 office 的众多操作。需要注意的是，该库不单独存在，可通过安装 pypiwin32 或者 pywin32 获取。
+ </p>
+ <p>
+  <b>
+   xlsxwriter
+  </b>
+ </p>
+ <p>
+  拥有丰富的特性，支持图片/表格/图表/筛选/格式/公式等，功能与openpyxl相似，优点是相比 openpyxl 还支持 VBA 文件导入，迷你图等功能，缺点是不能打开/修改已有文件，意味着使用 xlsxwriter 需要从零开始。
+ </p>
+ <p>
+  <b>
+   DataNitro
+  </b>
+ </p>
+ <p>
+  作为插件内嵌到 Excel 中，可完全替代 VBA，在 Excel 中使用 python 脚本。既然被称为 Excel 中的 python，协同其他 python 库亦是小事一桩。然而，这是付费插件...
+ </p>
+ <p>
+  <b>
+   xlutils
+  </b>
+ </p>
+ <p>
+  基于 xlrd/xlwt，老牌 python 包，算是该领域的先驱，功能特点中规中矩，比较大的缺点是仅支持 xls 文件。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <h2>
+  <b>
+   4.性能
+  </b>
+ </h2>
+ <p>
+  我们对几个库做了最基本的写入和读取测试，分别使用不同库进行添加及读取 1000行 * 700列 数据操作，得到所用时间，重复操作取平均值。另外在不同的电脑配置，不同的环境下结果肯定会有出入，数据仅供参考。
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="226" data-rawwidth="226" data-size="normal" src="https://pic4.zhimg.com/v2-b5e9bc20ec400259d6d8c6165e1ec4fe_b.jpg" width="226"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/v2-b5e9bc20ec400259d6d8c6165e1ec4fe_b.jpg" data-caption="" data-rawheight="226" data-rawwidth="226" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='226'%20height='226'&gt;&lt;/svg&gt;" width="226"/>
+ </figure>
+ <p>
+  注：
+ </p>
+ <ul>
+  <li>
+   xlutils 最多只能写入 256 列，即 1000*256，用时3.8秒，表现不错；
+   <br/>
+  </li>
+  <li>
+   DataNitro 与 xlsxwriter 不能打开 Excel 文件。
+   <br/>
+  </li>
+ </ul>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <h2>
+  <b>
+   5. 小结
+  </b>
+ </h2>
+ <p>
+  通过以上的分析，相信大家对几个库都有了简单的了解。在编写文章的过程中，笔者也在思考各个库最适合的应用场景。
+  <br/>
+ </p>
+ <ul>
+  <li>
+   不想使用 GUI 而又希望赋予 Excel 更多的功能，openpyxl 与 xlsxwriter，你可二者选其一；
+   <br/>
+  </li>
+  <li>
+   需要进行科学计算，处理大量数据，建议 pandas+xlsxwriter 或者 pandas+openpyxl；
+   <br/>
+  </li>
+  <li>
+   想要写 Excel 脚本，会 Python 但不会 VBA 的同学，可考虑 xlwings 或 DataNitro；
+   <br/>
+  </li>
+  <li>
+   至于 win32com，不管是功能还是性能都很强大，有 windows 编程经验的同学可以使用。不过它相当于是 windows COM 的封装，自身并没有很完善的文档，新手使用起来略有些痛苦。
+   <br/>
+  </li>
+ </ul>
+ <p>
+  <br/>
+ </p>
+ <p>
+  你可根据自己的需求和生产环境，选择合适的 Python-Excel 模块。
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <h2>
+  <b>
+   6. 代码示例
+  </b>
+ </h2>
+ <p>
+  最后，附上一些演示代码，大家可自行体会下不同模块的使用。
+  <br/>
+ </p>
+ <p>
+  <b>
+   6.1 xlwings基本代码
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">xlwings</span> <span class="kn">as</span> <span class="nn">xw</span>
+<span class="c1">#连接到excel</span>
+<span class="n">workbook</span> <span class="o">=</span> <span class="n">xw</span><span class="o">.</span><span class="n">Book</span><span class="p">(</span><span class="s1">r'path/myexcel.xlsx'</span><span class="p">)</span><span class="c1">#连接excel文件</span>
+<span class="c1">#连接到指定单元格</span>
+<span class="n">data_range</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">sheets</span><span class="p">(</span><span class="s1">'Sheet1'</span><span class="p">)</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="s1">'A1'</span><span class="p">)</span>
+<span class="c1">#写入数据</span>
+<span class="n">data_range</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="c1">#保存</span>
+<span class="n">workbook</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  <b>
+   6.2 xlsxwriter基本代码
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">xlsxwriter</span> <span class="kn">as</span> <span class="nn">xw</span>
+<span class="c1">#新建excel</span>
+<span class="n">workbook</span>  <span class="o">=</span> <span class="n">xw</span><span class="o">.</span><span class="n">Workbook</span><span class="p">(</span><span class="s1">'myexcel.xlsx'</span><span class="p">)</span>
+<span class="c1">#新建工作薄</span>
+<span class="n">worksheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">add_worksheet</span><span class="p">()</span>
+<span class="c1">#写入数据</span>
+<span class="n">worksheet</span><span class="o">.</span><span class="n">wirte</span><span class="p">(</span><span class="s1">'A1'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1">#关闭保存</span>
+<span class="n">workbook</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  <b>
+   6.3 xlutils基本代码import xlrd #读取数据
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">xlwt</span> <span class="c1">#写入数据</span>
+<span class="kn">import</span> <span class="nn">xlutils</span> <span class="c1">#操作excel</span>
+<span class="c1">#----xlrd库</span>
+<span class="c1">#打开excel文件</span>
+<span class="n">workbook</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="s1">'myexcel.xls'</span><span class="p">)</span>
+<span class="c1">#获取表单</span>
+<span class="n">worksheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">sheet_by_index</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1">#读取数据</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">worksheet</span><span class="o">.</span><span class="n">cell_value</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1">#----xlwt库</span>
+<span class="c1">#新建excel</span>
+<span class="n">wb</span> <span class="o">=</span> <span class="n">xlwt</span><span class="o">.</span><span class="n">Workbook</span><span class="p">()</span>
+<span class="c1">#添加工作薄</span>
+<span class="n">sh</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">add_sheet</span><span class="p">(</span><span class="s1">'Sheet1'</span><span class="p">)</span>
+<span class="c1">#写入数据</span>
+<span class="n">sh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">'data'</span><span class="p">)</span>
+<span class="c1">#保存文件</span>
+<span class="n">wb</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">'myexcel.xls'</span><span class="p">)</span>
+<span class="c1">#----xlutils库</span>
+<span class="c1">#打开excel文件</span>
+<span class="n">book</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="s1">'myexcel.xls'</span><span class="p">)</span>
+<span class="c1">#复制一份</span>
+<span class="n">new_book</span> <span class="o">=</span> <span class="n">xlutils</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+<span class="c1">#拿到工作薄</span>
+<span class="n">worksheet</span> <span class="o">=</span> <span class="n">new_book</span><span class="o">.</span><span class="n">getsheet</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1">#写入数据</span>
+<span class="n">worksheet</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">'new data'</span><span class="p">)</span>
+<span class="c1">#保存</span>
+<span class="n">new_book</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  <b>
+   6.4 win32com基本代码
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">win32com.client</span> <span class="kn">as</span> <span class="nn">wc</span>
+<span class="c1">#启动Excel应用</span>
+<span class="n">excel_app</span> <span class="o">=</span> <span class="n">wc</span><span class="o">.</span><span class="n">Dispatch</span><span class="p">(</span><span class="s1">'Excel.Application'</span><span class="p">)</span>
+<span class="c1">#连接excel</span>
+<span class="n">workbook</span> <span class="o">=</span> <span class="n">excel_app</span><span class="o">.</span><span class="n">Workbooks</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s1">r'e:/myexcel.xlsx'</span> <span class="p">)</span>
+<span class="c1">#写入数据</span>
+<span class="n">workbook</span><span class="o">.</span><span class="n">Worksheets</span><span class="p">(</span><span class="s1">'Sheet1'</span><span class="p">)</span><span class="o">.</span><span class="n">Cells</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">Value</span> <span class="o">=</span> <span class="s1">'data'</span>
+<span class="c1">#关闭并保存</span>
+<span class="n">workbook</span><span class="o">.</span><span class="n">SaveAs</span><span class="p">(</span><span class="s1">'newexcel.xlsx'</span><span class="p">)</span>
+<span class="n">excel_app</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">Quit</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  <b>
+   6.5 openpyxl基本代码
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">openpyxl</span>
+<span class="c1"># 新建文件</span>
+<span class="n">workbook</span> <span class="o">=</span> <span class="n">openpyxl</span><span class="o">.</span><span class="n">Workbook</span><span class="p">()</span> 
+<span class="c1"># 写入文件</span>
+<span class="n">sheet</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">activesheet</span><span class="p">[</span><span class="s1">'A1'</span><span class="p">]</span><span class="o">=</span><span class="s1">'data'</span>
+<span class="c1"># 保存文件 </span>
+<span class="n">workbook</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">'test.xlsx'</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  <b>
+   6.6 DataNitro基本代码
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="c1">#单一单元格赋值</span>
+<span class="n">Cell</span><span class="p">(</span><span class="s1">'A1'</span><span class="p">)</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">'data'</span>
+<span class="c1">#单元区域赋值</span>
+<span class="n">CellRange</span><span class="p">(</span><span class="s1">'A1:B2'</span><span class="p">)</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">'data'</span>
+</code></pre>
+ </div>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <u>
+   其他文章及回答：
+  </u>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22261597">
+   Python 与 Excel 不得不说的事 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22339492">
+   爆款游戏《贪吃蛇大作战》的 Python 实现 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22917775">
+   NBA 举办编程马拉松 - 数据分析时代的到来 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21886694">
+   想用 Python 做数据分析？先玩玩这个再说 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21624000">
+   用 Python 实现你的量化交易策略 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21057822">
+   Python 抓取网页乱码原因分析 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  微信ID：crossincode
+ </p>
+ <p>
+  论坛：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室
+  </a>
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>

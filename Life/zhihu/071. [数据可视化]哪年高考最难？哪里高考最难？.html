@@ -1,0 +1,291 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>[数据可视化]哪年高考最难？哪里高考最难？</h1><div class="RichText ztext Post-RichText">
+ <p>
+  一年一度的高考又到来了。虽然对于大多数人来说，高考已经是过去的事情了。但每年到了这个时候，又难免再次想起那种被支配的恐惧😂。譬如03年的江苏数学卷，十多年过去了仍不断被人提起。作为当时的亲历者之一，我不禁想知道：
+  <b>
+   到底我们是不是最难的一届呢？
+  </b>
+ </p>
+ <p>
+  于是我去找了下历年的高考数据，并使用
+  <b>
+   pyechats
+  </b>
+  库做了一点简单的可视化处理：
+ </p>
+ <p>
+  最直接反映高考难度的，自然是录取率。因为难易是相对的，就算试卷很难，但大家都有学上，那也算不上难考。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic4.zhimg.com/v2-40065d4f85b228870582360b335335e4_r.jpg" data-rawheight="400" data-rawwidth="800" data-size="normal" src="https://pic4.zhimg.com/v2-40065d4f85b228870582360b335335e4_b.jpg" width="800"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-40065d4f85b228870582360b335335e4_b.jpg" data-original="https://pic4.zhimg.com/v2-40065d4f85b228870582360b335335e4_r.jpg" data-rawheight="400" data-rawwidth="800" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='400'&gt;&lt;/svg&gt;" width="800"/>
+  <figcaption>
+   数据来源：新东方在线 http://news.koolearn.com/20180606/1152629.html
+  </figcaption>
+ </figure>
+ <p>
+  代码：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">pyecharts</span> <span class="k">import</span> <span class="n">Bar</span><span class="p">,</span> <span class="n">Line</span><span class="p">,</span> <span class="n">Overlap</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">940</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mf">74.46</span><span class="p">],</span>
+<span class="p">[</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">940</span><span class="p">,</span> <span class="mi">705</span><span class="p">,</span> <span class="mi">75</span><span class="p">],</span>
+<span class="p">[</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">942</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mf">74.3</span><span class="p">],</span>
+<span class="o">...</span>
+<span class="p">[</span><span class="mi">1977</span><span class="p">,</span> <span class="mi">570</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+
+<span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">Bar</span><span class="p">()</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"报考人数"</span><span class="p">,</span><span class="n">arr</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">arr</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"录取人数"</span><span class="p">,</span><span class="n">arr</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">arr</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">line</span> <span class="o">=</span> <span class="n">Line</span><span class="p">()</span>
+<span class="n">line</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"录取率"</span><span class="p">,</span><span class="n">arr</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">arr</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="mi">10</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s1">'green'</span><span class="p">)</span>
+<span class="n">ol</span> <span class="o">=</span> <span class="n">Overlap</span><span class="p">(</span><span class="s2">"历年报考人数与录取率"</span><span class="p">)</span>
+<span class="n">ol</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">bar</span><span class="p">)</span>
+<span class="n">ol</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="n">ol</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  这是自1977年恢复高考以来到2017年的高考报考及录取数据。篇幅所限，省略了部分数据。为了直观展示，对录取率做了尺度上的变换。2000年以后，最难（录取率最低）的一年高考是
+  <b>
+   2007年
+  </b>
+  ，录取率只有
+  <b>
+   56%
+  </b>
+  ，但这也已经比上世纪八九十年代只有
+  <b>
+   百分之二三十
+  </b>
+  的录取率高得多。总体来说，上大学的确是越来越容易了。而数据上看，03年也没有想象中那么糟糕。
+ </p>
+ <p>
+  从图上可以看出，每年的报考人数也有不小的波动。我去找了历年的人口统计数据，与报考人数做了个对比：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic4.zhimg.com/v2-c1944a608eb45828afd36ae5c126980b_r.jpg" data-rawheight="400" data-rawwidth="800" data-size="normal" src="https://pic4.zhimg.com/v2-c1944a608eb45828afd36ae5c126980b_b.jpg" width="800"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-c1944a608eb45828afd36ae5c126980b_b.jpg" data-original="https://pic4.zhimg.com/v2-c1944a608eb45828afd36ae5c126980b_r.jpg" data-rawheight="400" data-rawwidth="800" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='400'&gt;&lt;/svg&gt;" width="800"/>
+  <figcaption>
+   数据来源：国家统计局年度数据 http://data.stats.gov.cn/easyquery.htm?cn=C01
+  </figcaption>
+ </figure>
+ <p>
+  代码：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">data_born</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">124761</span><span class="p">,</span> <span class="mi">123626</span><span class="p">,</span> <span class="mi">122389</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">65994</span><span class="p">],</span> 
+             <span class="p">[</span><span class="mf">14.64</span><span class="p">,</span> <span class="mf">15.64</span><span class="p">,</span> <span class="mf">16.57</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">24.78</span><span class="p">]]</span>
+<span class="n">arr_born</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_born</span><span class="p">)</span>
+<span class="n">list_born</span> <span class="o">=</span> <span class="nb">list</span><span class="p">((</span><span class="n">arr_born</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">arr_born</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="mi">1000</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">Bar</span><span class="p">(</span><span class="s2">"历年报考人数与出生人数"</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"报考人数"</span><span class="p">,</span><span class="n">arr</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">arr</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"出生人数"</span><span class="p">,</span><span class="n">arr</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">list_born</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  由于没有完整的年出生人数数据，我用了1959~1999
+  <b>
+   前一年末总人口数 x 当年出生率
+  </b>
+  来替代出生人数，然后与18年后的高考报名人数作比较。可以看出两点：
+ </p>
+ <ol>
+  <li>
+   高考人口与出生人数有一定的相关性
+  </li>
+  <li>
+   适龄人口的高考率逐渐提高
+  </li>
+ </ol>
+ <p>
+  教育普及率相比较二三十年前大有提高，加之人口增长放缓，越来越多的人可以接受更高程度的教育。不过从比例上可以推断出，上大学仍然不是件人人可以享受得到的事情。
+ </p>
+ <p>
+  看了时间上的分布，那么地域上呢？相较整体的录取率，人们争议更多的还是不同地区高考之前的差异。
+ </p>
+ <p>
+  首先看下2018年各省的报名情况：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/v2-da009df8999919d7f0a29af5c16d3510_r.jpg" data-rawheight="400" data-rawwidth="800" data-size="normal" src="https://pic1.zhimg.com/v2-da009df8999919d7f0a29af5c16d3510_b.jpg" width="800"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-da009df8999919d7f0a29af5c16d3510_b.jpg" data-original="https://pic1.zhimg.com/v2-da009df8999919d7f0a29af5c16d3510_r.jpg" data-rawheight="400" data-rawwidth="800" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='400'&gt;&lt;/svg&gt;" width="800"/>
+  <figcaption>
+   数据来源：中国教育在线 http://gaokao.eol.cn/gkbm/
+  </figcaption>
+ </figure>
+ <p>
+  代码：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="kn">from</span> <span class="nn">pyecharts</span> <span class="k">import</span> <span class="n">Map</span>  
+
+<span class="n">data_prov</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">'北京'</span><span class="p">,</span> <span class="mf">6.3</span><span class="p">),</span> <span class="p">(</span><span class="s1">'重庆'</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="p">(</span><span class="s1">'上海'</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="o">...</span><span class="p">,</span> <span class="p">(</span><span class="s1">'西藏'</span><span class="p">,</span> <span class="mf">2.53</span><span class="p">)]</span>  
+<span class="n">geo</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="s2">"2018各省高考报名人数"</span><span class="p">)</span>
+<span class="n">attr</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">data_prov</span><span class="p">)</span>
+<span class="n">geo</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">visual_range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span> <span class="n">is_visualmap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_map_symbol_show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  
+<span class="n">geo</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  报名人数最多的是
+  <b>
+   河南省98.38万
+  </b>
+  人，
+  <b>
+   广东省75.8万
+  </b>
+  人次之，
+  <b>
+   重庆
+  </b>
+  作为直辖市也有
+  <b>
+   25万
+  </b>
+  人。人数较少的地区：
+  <b>
+   北京6.3万、上海约5万、天津5.5万、青海约4万, 西藏2.53万
+  </b>
+ </p>
+ <p>
+  报名人数与当地本身的人口总量有关，有多有少很正常，关键还是看录取率。下面是2017年各省的一本录取率：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/v2-9705f18a485c8ecf015fb20f21f7cbc7_r.jpg" data-rawheight="400" data-rawwidth="800" data-size="normal" src="https://pic2.zhimg.com/v2-9705f18a485c8ecf015fb20f21f7cbc7_b.jpg" width="800"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-9705f18a485c8ecf015fb20f21f7cbc7_b.jpg" data-original="https://pic2.zhimg.com/v2-9705f18a485c8ecf015fb20f21f7cbc7_r.jpg" data-rawheight="400" data-rawwidth="800" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='400'&gt;&lt;/svg&gt;" width="800"/>
+  <figcaption>
+   数据来源：新东方在线 http://gaokao.koolearn.com/20170728/1119910.html
+  </figcaption>
+ </figure>
+ <p>
+  代码：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">data_prov_ad</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">'湖南'</span><span class="p">,</span> <span class="mf">11.2</span><span class="p">),</span> <span class="p">(</span><span class="s1">'江西'</span><span class="p">,</span> <span class="mf">10.4</span><span class="p">),</span> <span class="p">(</span><span class="s1">'安徽'</span><span class="p">,</span> <span class="mf">14.2</span><span class="p">),</span> <span class="o">...</span><span class="p">,</span> <span class="p">(</span><span class="s1">'浙江'</span><span class="p">,</span> <span class="mi">14</span><span class="p">)]</span>
+<span class="n">geo</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="s2">"2017各省一本录取率"</span><span class="p">)</span>
+<span class="n">attr</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">data_prov_ad</span><span class="p">)</span>
+<span class="n">geo</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">visual_range</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="n">is_visualmap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_map_symbol_show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">geo</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  最难的三个地区：
+  <b>
+   河南7.8%，广西8.44%，山西9.8%
+  </b>
+  <br/>
+  录取率最高的三个地区：
+  <b>
+   北京30.5%，天津24.1%，上海21.8%
+  </b>
+  <br/>
+  （缺海南数据）
+ </p>
+ <p>
+  而江苏去年的12.1%还排不进top10。
+ </p>
+ <p>
+  讲真，看了这数据还是挺心疼河南的小伙伴们，论人数远高于其他地区，论录取率又远低于。难怪周围的河南同学都是学霸。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  教育是件极为重要的事，也是件极为复杂的事。我在这里仅仅是展示一些看得到的客观数据，很难得出更深的结论。我希望今天参加高考的每位考生都可以考上理想的学校，但在教育资源小于受教育需求的前提下，这个愿望显然不可能每个人都实现。所以，能有幸接受到好教育的机会值得珍惜，而因种种原因没能如愿的人，人生还很长，还有千万种可能。
+ </p>
+ <p>
+  从个人角度来看，不要执着于绝对的公平；但从整个社会来看，我们应该让每个人拥有更加公平的机会。相信在不久之后，报名数和录取数的曲线会越来越近，录取率分布图上的颜色也越来越趋向一致。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  本文中使用到的完整数据和代码，可在公众号（
+  <b>
+   Crossin的编程教室
+  </b>
+  ）里获取，回复关键字
+  <b>
+   高考
+  </b>
+ </p>
+ <p>
+  ════
+  <br/>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   精选
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   Python
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   问答
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/36064871">
+   Python单词表
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36538511">
+   区块链
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36581953">
+   人工智能
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/30932804">
+   双11
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/29043669">
+   嘻哈
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/28726244">
+   爬虫
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37430943">
+   排序算法
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37664927">
+   我用Python
+  </a>
+ </p>
+ <p>
+  欢迎搜索及关注：
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+ <p>
+ </p>
+</div></body></html>

@@ -1,0 +1,844 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>给伸手党的福利：Python_新手入门引导</h1><div class="RichText ztext Post-RichText">
+ <p>
+  这是一篇 Python 入门指南，针对那些没有任何编程经验，从零开始学习 Python 的同学。不管你学习的出发点是兴趣驱动、拓展思维，还是工作需要、想要转行，都可以此文作为一个参考。
+ </p>
+ <p>
+  在这个信息爆炸的时代，以 “Python入门” 为关键字搜索出的结果成千上万。不少小白选手难免会东一榔头西一棒槌，最终看了很多文章，却仍没跨过新手那道门槛。
+ </p>
+ <p>
+  结合自身的学习经验以及与很多自学者的沟通了解，我们整理出一条可操作性较强的自学路线，同时收集了多种形式的 Python 优质学习资源，供诸位尚未入门或刚入门不久的同学参考。
+ </p>
+ <h2>
+  <b>
+   0. 心态准备
+  </b>
+ </h2>
+ <p>
+  编程是一门技术，也可说是一门手艺。如同书法、绘画、乐器、雕刻等，技艺纯熟的背后肯定付出了长时间的反复练习。编程的世界浩瀚无边，所以请保持一颗敬畏的心态去学习，认真对待写下的每一行代码，甚至每一个字符。收拾好自己的心态，向着编程的世界出发。
+ </p>
+ <h2>
+  <b>
+   1. 入门阶段
+  </b>
+ </h2>
+ <p>
+  第一步至关重要，是关系到初学者从入门到精通还是从入门到放弃。选一条合适的入门道路，并坚持下去。
+ </p>
+ <h2>
+  1.1 配置 Python 学习环境
+ </h2>
+ <p>
+  Python2 还是 Python3？
+ </p>
+ <p>
+  很多人都在纠结入门应该学 Python2 还是 Python3。这其实不是个问题。我从没听过某个人是 Python2 程序员或 Python3 程序员。二者只是程序不兼容，思想上并无大差别，语法变动也并不多。选择任何一个入手，都没有大影响。
+ </p>
+ <p>
+  如果你仍然无法抉择，那请选择 Python3，毕竟这是未来的趋势，参考知乎回答
+  <br/>
+  <b>
+   Python2 还是 Python3？
+  </b>
+  <a class="internal" href="https://www.zhihu.com/question/24549965">
+   应该学习最新版本的 Python 3 还是旧版本的 Python 2？
+  </a>
+ </p>
+ <p>
+  编辑器该如何选？
+ </p>
+ <p>
+  我推荐
+  <b>
+   pycharm 社区版
+  </b>
+  ，配置简单、功能强大、使用起来省时省心，对初学者友好。并且还是完全免费的！
+ </p>
+ <p>
+  社区版地址：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.jetbrains.com/pycharm/" rel="nofollow noreferrer" target="_blank">
+   PyCharm
+  </a>
+ </p>
+ <p>
+  其他可以尝试的编辑器：
+ </p>
+ <ul>
+  <li>
+   <b>
+    idle
+   </b>
+   ： Python 自带编辑器。如果只是想尽快写出几行代码来，这是最简便的方式。
+  </li>
+  <li>
+   <b>
+    vs code
+   </b>
+   ：
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//code.visualstudio.com/" rel="nofollow noreferrer" target="_blank">
+    Visual Studio Code - Code Editing. Redefined
+   </a>
+  </li>
+  <li>
+   <b>
+    atom
+   </b>
+   ：
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//atom.io/" rel="nofollow noreferrer" target="_blank">
+    A hackable text editor for the 21st Century
+   </a>
+  </li>
+  <li>
+   <b>
+    SublimeText
+   </b>
+   ：
+   <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//www.sublimetext.com/3" rel="nofollow noreferrer" target="_blank">
+    Sublime Text - Download
+   </a>
+  </li>
+  <li>
+   <b>
+    notepad++
+   </b>
+   ：
+   <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//notepad-plus-plus.org/" rel="nofollow noreferrer" target="_blank">
+    Notepad++ Home
+   </a>
+  </li>
+ </ul>
+ <p>
+  为了让初学者集中更多的精力在写代码这件事情上，所以我们就不推荐 vim 和 Emacs 了。
+ </p>
+ <p>
+  操作系统？
+ </p>
+ <p>
+  Python 支持现有所有主流操作平台，不管是 windows 还是 mac 还是 linux，都能很好的运行 Python。并且后两者都默认自带 Python 环境。
+ </p>
+ <h2>
+  1.2 入门教程
+ </h2>
+ <p>
+  <b>
+   《Crossin的编程教室 - Python 入门》
+  </b>
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/course/lesson_list/" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室 - Python入门
+  </a>
+ </p>
+ <p>
+  自认为算得上是最浅显易懂的入门教程，很适合没有任何编程基础的人上手。
+ </p>
+ <p>
+  74篇图文教程，从最简单的 Python 安装到基本语法、数据结构、函数、文件操作、网络请求、面向对象等逐步深入。
+ </p>
+ <p>
+  对于如何加深对一个知识点的印象，最好的办法就是自己写代码实现一遍。如果还是不懂，那就再来一遍。所以无论你使用什么教程，都请将其中的示例代码全部在电脑上输入并运行，learning by doing！
+ </p>
+ <p>
+  配套练习
+ </p>
+ <p>
+  <b>
+   Crossin的编程教室 - 基础练习
+  </b>
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/oj/sample_list/" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室 - 在线练习
+  </a>
+ </p>
+ <p>
+  课外练习
+ </p>
+ <p>
+  <b>
+   《笨办法学Python》
+  </b>
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//www.kancloud.cn/kancloud/learn-python-hard-way/49863" rel="nofollow noreferrer" target="_blank">
+   序言 - [ 笨办法学Python ] - 看云
+  </a>
+ </p>
+ <p>
+  这是本很有名的 Python 书籍，但并不适合纯零基础自学。因为其中重实践但不解释，新手很容易看得一头雾水。作为学习同时的辅助倒更合适。
+ </p>
+ <p>
+  其他推荐教程
+ </p>
+ <p>
+  <b>
+   《父与子的编程之旅》
+  </b>
+  又名
+  <b>
+   《与孩子一起学编程》
+  </b>
+ </p>
+ <p>
+  这也是一本非常适合零基础的 Python 入门书籍。喜欢阅读纸质书的同学可以买一本，不少在线书店有售。
+ </p>
+ <p>
+  <b>
+   《简明 Python 教程》
+  </b>
+ </p>
+ <p>
+  在线阅读：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//www.kuqin.com/abyteofpython_cn/" rel="nofollow noreferrer" target="_blank">
+   简明 Python 教程
+  </a>
+ </p>
+ <p>
+  这是一本言简意赅的 Python 入门教程，简单直白，没有废话。适合有过其他语言基础的人快速了解 Python 语法。
+ </p>
+ <p>
+  以上是我们推荐的学习材料，主要偏重没有太多编程基础的纯新手。其他也有一些不错的资源，可供不同需求的学习者使用：
+ </p>
+ <p>
+  在线文字教程：
+ </p>
+ <ul>
+  <li>
+   <b>
+    廖雪峰的Python教程
+   </b>
+  </li>
+ </ul>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000" rel="nofollow noreferrer" target="_blank">
+   Python教程
+  </a>
+ </p>
+ <p>
+  廖先生的教程涵盖了 Python 知识的方方面面，内容更加系统，有一定深度，有一定基础之后学习会有更多的收获。
+ </p>
+ <p>
+  其他入门书籍：
+ </p>
+ <ul>
+  <li>
+   <b>
+    Head First Python
+   </b>
+  </li>
+  <li>
+   <b>
+    Dive Into Python
+   </b>
+  </li>
+  <li>
+   <b>
+    Python 核心编程
+   </b>
+  </li>
+  <li>
+   <b>
+    深入理解 Python
+   </b>
+  </li>
+  <li>
+   <b>
+    Python 标准库
+   </b>
+  </li>
+  <li>
+   <b>
+    Python 编程指南
+   </b>
+  </li>
+ </ul>
+ <p>
+  我们搜集了一些网上的电子书版本，放在了网盘里：
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//pan.baidu.com/s/1qWuGvF2" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    pan.baidu.com/s/1qWuGvF
+   </span>
+   <span class="invisible">
+    2
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  交互式学习网站：
+ </p>
+ <ul>
+  <li>
+   <b>
+    codecademy
+   </b>
+  </li>
+ </ul>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.codecademy.com/zh/learn/python" rel="nofollow noreferrer" target="_blank">
+   Python
+  </a>
+ </p>
+ <ul>
+  <li>
+   <b>
+    codeschool
+   </b>
+   ：
+  </li>
+ </ul>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.codeschool.com/" rel="nofollow noreferrer" target="_blank">
+   Learn to code by doing | Code School
+  </a>
+ </p>
+ <p>
+  codecademy 与 codeschool 这两个通过互联网学习 Python 的网站均备受好评。不妨去体验一下。
+ </p>
+ <p>
+  在线视频课程：
+ </p>
+ <ul>
+  <li>
+   <b>
+    在线教育网站（Coursera网易云edx课堂腾讯课堂等）有哪些值得推荐的 Python 教程？
+   </b>
+  </li>
+ </ul>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/46835030">
+   在线教育网站（Coursera、网易云课堂、腾讯课堂等）有哪些值得推荐的 Python 课程？
+  </a>
+ </p>
+ <h2>
+  <b>
+   2. 提升阶段
+  </b>
+ </h2>
+ <p>
+  完成入门阶段的基础学习之后，常会陷入一个瓶颈期，通过看教程很难进一步提高编程水平。这时候，需要的是练习，大量的练习。
+ </p>
+ <p>
+  可以从书上的例程开始写，再写小程序片段，然后写完整的项目。
+ </p>
+ <p>
+  我们收集了一些练习题和网站。可根据自己阶段，选择适合的练习去做。建议最好挑选一两个系列重点完成，而不是到处浅尝辄止。
+ </p>
+ <ul>
+  <li>
+   <b>
+    Crossin的编程教室 - 每周一坑
+   </b>
+   ：
+  </li>
+ </ul>
+ <p>
+  编程教室的公众号每周会放出一道题目供练习，并在下一周讲解。欢迎关注微信公众号，和大家一起提交解答。
+ </p>
+ <p>
+  往期题目：
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D2650166313%26idx%3D1%26sn%3D64b26488d1c78188197449016846d7d6%26chksm%3Dbe4b5951893cd047acfd122a6e136bd93dcfc8412e5000beb7da3351050efd0d8b502c778b76%26scene%3D21%23wechat_redirect" rel="nofollow noreferrer" target="_blank">
+   【每周一坑】三门问题
+  </a>
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D2650166324%26idx%3D1%26sn%3D86dddf0a00ff686886e672f0c09ee81d%26chksm%3Dbe4b594c893cd05ac6b3838b7df876d03693eb133b68ad011123ddf593c4af27923e9ccb1a1c%26scene%3D21%23wechat_redirect" rel="nofollow noreferrer" target="_blank">
+   【每周一坑】双色球选号器
+  </a>
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D2650166343%26idx%3D1%26sn%3Dd29aae982850cfa69618128b925e2323%26chksm%3Dbe4b593f893cd029632a0640ae04c5377b27e30d94657b8b2b6b9bad9b728a157fbe2ad51cbd%26scene%3D21%23wechat_redirect" rel="nofollow noreferrer" target="_blank">
+   【每周一坑】统计英文小说词频
+  </a>
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D2650166382%26idx%3D1%26sn%3D3586e1c4bc580e7c4ee6dc410e044a8c%26chksm%3Dbe4b5916893cd00025aaab01bc5be160b62e6bf122cbe80cc59dc1ba64484e3fea9e17fdb772%26scene%3D21%23wechat_redirect" rel="nofollow noreferrer" target="_blank">
+   【每周一坑】特殊回文数
+  </a>
+ </p>
+ <ul>
+  <li>
+   <b>
+    Crossin的编程教室 - 编程实例
+   </b>
+  </li>
+ </ul>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/oj/practice_list/" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室 - 编程实例
+  </a>
+ </p>
+ <p>
+  相对于编程教室基础练习着重于单一知识点，编程实例更注重对知识的融会贯通。
+ </p>
+ <ul>
+  <li>
+   <b>
+    实验楼
+   </b>
+   提升编程水平从做项目开始
+  </li>
+ </ul>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.shiyanlou.com/" rel="nofollow noreferrer" target="_blank">
+   实验楼 - 在线做实验，高效学编程
+  </a>
+ </p>
+ <ul>
+  <li>
+   <b>
+    hackerrank
+   </b>
+   Python 部分难度循序渐进，符合学习曲线
+  </li>
+ </ul>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//www.hackerrank.com/domains/python/py-introduction" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://www.
+   </span>
+   <span class="visible">
+    hackerrank.com/domains/
+   </span>
+   <span class="invisible">
+    python/py-introduction
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <ul>
+  <li>
+   <b>
+    codewar
+   </b>
+   社区型编程练习网站，内容由易到难
+  </li>
+ </ul>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//www.codewars.com/%3Flanguage%3Dpython" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://www.
+   </span>
+   <span class="visible">
+    codewars.com/?
+   </span>
+   <span class="invisible">
+    language=python
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <ul>
+  <li>
+   <b>
+    leetcode
+   </b>
+   为编程面试准备，对初学者稍难
+  </li>
+ </ul>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//leetcode.com/" rel="nofollow noreferrer" target="_blank">
+   LeetCode
+  </a>
+ </p>
+ <ul>
+  <li>
+   <b>
+    牛客网
+   </b>
+   提供 BAT 等大厂笔试题目
+  </li>
+ </ul>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//www.nowcoder.com/" rel="nofollow noreferrer" target="_blank">
+   牛客网-专业IT笔试面试备考平台,最全C++JAVA前端求职题库,全面提升IT编程能力
+  </a>
+ </p>
+ <ul>
+  <li>
+   <b>
+    codecombat
+   </b>
+   一边游戏一边编程
+  </li>
+ </ul>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//www.codecombat.cn/" rel="nofollow noreferrer" target="_blank">
+   CodeCombat中国 - 中国爱好者的 CodeCombat！在游戏中学习编程
+  </a>
+ </p>
+ <ul>
+  <li>
+   <b>
+    projecteuler
+   </b>
+   纯粹的编程练习网站
+  </li>
+ </ul>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//projecteuler.net/archives" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    projecteuler.net/archiv
+   </span>
+   <span class="invisible">
+    es
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <ul>
+  <li>
+   <b>
+    菜鸟教程100例
+   </b>
+   基于 py2 的基础练习
+  </li>
+ </ul>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//www.runoob.com/python/python-100-examples.html" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://www.
+   </span>
+   <span class="visible">
+    runoob.com/python/pytho
+   </span>
+   <span class="invisible">
+    n-100-examples.html
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <ul>
+  <li>
+   <b>
+    知乎：Python3.x基础学习资料整理
+   </b>
+  </li>
+ </ul>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/24249743">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    zhuanlan.zhihu.com/p/24
+   </span>
+   <span class="invisible">
+    249743
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <ul>
+  <li>
+   <b>
+    知乎：Python学习路径及练手项目合集
+   </b>
+  </li>
+ </ul>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/23561159">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    zhuanlan.zhihu.com/p/23
+   </span>
+   <span class="invisible">
+    561159
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <ul>
+  <li>
+   <b>
+    知乎：Python 的练手项目有哪些值得推荐？
+   </b>
+  </li>
+ </ul>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/29372574">
+   <span class="invisible">
+    https://www.
+   </span>
+   <span class="visible">
+    zhihu.com/question/2937
+   </span>
+   <span class="invisible">
+    2574
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <h2>
+  <b>
+   3. 遇到问题怎么办？
+  </b>
+ </h2>
+ <p>
+  学习的过程中或多或少都会有各种问题出现，不要试着逃避，真的勇士敢于直面惨淡的 BUG。
+ </p>
+ <p>
+  第一步肯定是利用好搜索引擎，怎么用也是一门技术活：
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/20683456">
+   编程初学者如何使用搜索引擎
+  </a>
+ </p>
+ <p>
+  第二步，求助于各大同性交友网站（大雾）：
+ </p>
+ <p>
+  <b>
+   StackOverflow
+  </b>
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//stackoverflow.com/" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    stackoverflow.com/
+   </span>
+   <span class="invisible">
+   </span>
+  </a>
+ </p>
+ <p>
+  <b>
+   v2ex
+  </b>
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//www.v2ex.com/" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://www.
+   </span>
+   <span class="visible">
+    v2ex.com/
+   </span>
+   <span class="invisible">
+   </span>
+  </a>
+ </p>
+ <p>
+  <b>
+   segmentfault
+  </b>
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=https%3A//segmentfault.com/" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    https://
+   </span>
+   <span class="visible">
+    segmentfault.com/
+   </span>
+   <span class="invisible">
+   </span>
+  </a>
+ </p>
+ <h2>
+  <b>
+   4. 过来人的建议
+  </b>
+ </h2>
+ <p>
+  在初学编程的过程中，你会有各种各样的疑惑，你会遇到各种各样的坑。这时，前人的经验尤为重要，我们整理了一些知乎问题供参考：
+ </p>
+ <p>
+  <b>
+   你是如何自学Python的？
+  </b>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054">
+   <span class="invisible">
+    https://www.
+   </span>
+   <span class="visible">
+    zhihu.com/question/2070
+   </span>
+   <span class="invisible">
+    2054
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  <b>
+   怎么用最短时间高效而踏实地学习 Python？
+  </b>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/28530832">
+   <span class="invisible">
+    https://www.
+   </span>
+   <span class="visible">
+    zhihu.com/question/2853
+   </span>
+   <span class="invisible">
+    0832
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  <b>
+   对于编程零基础，第一个语言是 Python 的人有什么建议？
+  </b>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22785587">
+   <span class="invisible">
+    https://www.
+   </span>
+   <span class="visible">
+    zhihu.com/question/2278
+   </span>
+   <span class="invisible">
+    5587
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  <b>
+   Python 编程，应该养成哪些好的习惯？
+  </b>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/28966220">
+   <span class="invisible">
+    https://www.
+   </span>
+   <span class="visible">
+    zhihu.com/question/2896
+   </span>
+   <span class="invisible">
+    6220
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  <b>
+   如何处理 Python 入门难以进步的现象？
+  </b>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/27969262">
+   <span class="invisible">
+    https://www.
+   </span>
+   <span class="visible">
+    zhihu.com/question/2796
+   </span>
+   <span class="invisible">
+    9262
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <h2>
+  <b>
+   5. 写在最后
+  </b>
+ </h2>
+ <p>
+  经过第一步和第二步训练，相信一般的小程序都难不倒你了，你已经在编程的世界里已经迈出了关键的一步。接下来就可以去挑战具体的项目了，爬虫、web开发、数据分析、机器学习等等丰富的世界已经向你敞开，选择一个方向重新出发吧！
+ </p>
+ <p>
+  记住：在编程的道路上，没有捷径。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  【
+  <u>
+   公众号（Crossin的编程教室）里回复
+   <b>
+    新手
+   </b>
+   ，获取脱水版资源链接汇总页面。
+  </u>
+  】
+ </p>
+ <p>
+  教程及练习将持续更新，欢迎关注我们。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <ul>
+  <li>
+   <a class="internal" href="https://zhuanlan.zhihu.com/p/25499306">
+    Crossin：如何用100行Python代码做出魔性声控游戏“八分音符酱”
+   </a>
+  </li>
+  <li>
+   <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+    学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？
+   </a>
+  </li>
+  <li>
+   <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+    你是如何自学 Python 的？
+   </a>
+  </li>
+ </ul>
+ <h2>
+  Crossin的编程教室
+ </h2>
+ <ul>
+  <li>
+   微信公众号ID：crossincode
+  </li>
+  <li>
+   网站：
+   <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/home/" rel="nofollow noreferrer" target="_blank">
+    crossincode.com
+   </a>
+  </li>
+ </ul>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>

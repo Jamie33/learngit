@@ -1,0 +1,328 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>这个男人让你的爬虫开发效率提升8倍</h1><div class="RichText ztext Post-RichText">
+ <p>
+  他叫 Kenneth Reitz。现就职于知名云服务提供商 DigitalOcean，曾是云计算平台 Heroku 的 Python 架构师，目前 Github 上 Python 排行榜第一的用户。（star 数超过了包括 google、tensorflow、django 等账号）
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-b7e3531aa3f9aa91ad7f7e6766bf3d8f_r.jpg" data-rawheight="679" data-rawwidth="1080" data-size="normal" src="https://pic3.zhimg.com/v2-b7e3531aa3f9aa91ad7f7e6766bf3d8f_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-b7e3531aa3f9aa91ad7f7e6766bf3d8f_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-b7e3531aa3f9aa91ad7f7e6766bf3d8f_r.jpg" data-rawheight="679" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='679'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  但他被更多路人所熟知的，恐怕还是他从一名技术肥宅逆袭成为文艺高富帅的励志故事：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-3ac89d302cb23db5b94a4fe0cc03a6e7_r.jpg" data-rawheight="536" data-rawwidth="1080" data-size="normal" src="https://pic1.zhimg.com/v2-3ac89d302cb23db5b94a4fe0cc03a6e7_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-3ac89d302cb23db5b94a4fe0cc03a6e7_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-3ac89d302cb23db5b94a4fe0cc03a6e7_r.jpg" data-rawheight="536" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='536'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  看看他的个人主页
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//www.kennethreitz.org" rel="nofollow noreferrer" target="_blank">
+   www.kennethreitz.org
+  </a>
+  上的标签：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-6fff7552f2882742c575863772daf6af_r.jpg" data-rawheight="159" data-rawwidth="1080" data-size="normal" src="https://pic2.zhimg.com/v2-6fff7552f2882742c575863772daf6af_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-6fff7552f2882742c575863772daf6af_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-6fff7552f2882742c575863772daf6af_r.jpg" data-rawheight="159" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='159'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  除了程序员，还有摄影师、音乐家、演讲者……不怪在社交媒体上被称为“程序员届的网红”。
+ </p>
+ <p>
+  然而，作为一个严肃的技术号，今天我们不是要八卦他的开挂人生，而是他的代表作品：
+  <b>
+   Requests
+  </b>
+ </p>
+ <p>
+  （如果你还是想看八卦，给你个传送门：
+  <u>
+   <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzI0NzIwNDgzNg%3D%3D%26mid%3D2649759701%26idx%3D1%26sn%3Dc28214d95f6254ac2f1772aaa181f9f2%26scene%3D21%23wechat_redirect" rel="nofollow noreferrer" target="_blank">
+    谁说程序员不是潜力股？让这位世界前五名的天才程序员来颠覆你三观！
+   </a>
+  </u>
+  ）
+ </p>
+ <hr/>
+ <p>
+  Requests 自我定义为
+  <b>
+   HTTP for Humans
+  </b>
+  ：
+  <b>
+   让 HTTP 服务人类
+  </b>
+  ，或者说最人性化的 HTTP。言外之意，之前的那些 HTTP 库太过繁琐，都不是给人用的。（urllib 表示：怪我咯！）
+ </p>
+ <p>
+  尽管听上去有些自大，但实际上它的的确确配得上这个评价，用过的都说好。我在文首搬出它的网红作者，其实也仅仅是想吸引下你的眼球，然后告诉你，这真的是一个非常值得使用的库。“提升8倍”虽是我胡诌的数据，开发效率的提升却是杠杠滴。
+ </p>
+ <p>
+  我们先来看看它官网上的说法：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-03870bcf5c22b7dcf14fb6400bdfe979_r.jpg" data-rawheight="964" data-rawwidth="1080" data-size="normal" src="https://pic4.zhimg.com/v2-03870bcf5c22b7dcf14fb6400bdfe979_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-03870bcf5c22b7dcf14fb6400bdfe979_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-03870bcf5c22b7dcf14fb6400bdfe979_r.jpg" data-rawheight="964" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='964'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  其他同样非常值得推荐的东西，如 PyCharm、Anaconda 等，我在推荐完之后往往得写上一些教程，并在后续不断解答使用者的问题。
+ </p>
+ <p>
+  而 Requests 却不同，它提供了官方中文文档，其中包括了很清晰的“快速上手”和详尽的高级用法和接口指南。以至于我觉得再把文档里面内容搬运过来都是一种浪费。对于 Requests，要做的仅仅是两件事：
+ </p>
+ <ol>
+  <li>
+   <b>
+    告诉你有这样一个工具，用来开发爬虫很轻松
+   </b>
+  </li>
+  <li>
+   <b>
+    告诉你它的官方文档很好，你去读就可以了
+   </b>
+  </li>
+ </ol>
+ <p>
+  到此为止，本篇的目的已经达到。不过为了更有说服力，以及照顾到一些暂时还不需要但以后可能会去看的同学，我还是再啰嗦几句，演示下 Requests 的威力。
+  <br/>
+  <b>
+   安装
+  </b>
+ </p>
+ <p>
+  <code>
+   pip install requests
+  </code>
+  即可
+ </p>
+ <p>
+  <b>
+   请求网页
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'http://httpbin.org/get'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre>
+ </div>
+ <p>
+  只需一行代码就可以完成 HTTP 请求。然后轻松获取状态码、编码、内容，甚至按 JSON 格式转换数据。虽然这种简单请求用别的库也不复杂，但其实在内部，Requests 已帮你完成了
+  <b>
+   添加 headers、自动解压缩、自动解码
+  </b>
+  等操作。写过课程中“查天气”的同学，很可能踩过 gzip 压缩的坑，用 Requests 就不存在了。如果你发现获取的内容编码不对，也只需要直接给 encoding 赋值正确的编码后再访问 text，就自动完成了编码转换，非常方便。
+ </p>
+ <p>
+  想要
+  <b>
+   下载一张图片
+  </b>
+  ：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://www.baidu.com/img/bd_logo1.png"</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'image.png'</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  把返回结果的 content 保存在文件里就行了。
+ </p>
+ <p>
+  提交一个
+  <b>
+   POST 请求
+  </b>
+  ，同时增加
+  <b>
+   请求头、cookies、代理
+  </b>
+  等信息（此处使用的代理地址不是真实的，测试代码时需去掉）：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">'http://httpbin.org/post'</span>
+<span class="n">cookies</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">some_cookie</span><span class="o">=</span><span class="s1">'working'</span><span class="p">)</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'user-agent'</span><span class="p">:</span> <span class="s1">'chrome'</span><span class="p">}</span>
+<span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'http'</span><span class="p">:</span><span class="s1">'http://10.10.1.10:3128'</span><span class="p">,</span>
+    <span class="s1">'https'</span><span class="p">:</span><span class="s1">'http://10.10.1.10:1080'</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'key1'</span><span class="p">:</span> <span class="s1">'value1'</span><span class="p">,</span> <span class="s1">'key2'</span><span class="p">:</span> <span class="s1">'value2'</span><span class="p">}</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="n">url</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+    <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">,</span>
+    <span class="n">proxies</span><span class="o">=</span><span class="n">proxies</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  上述几个配置，如果使用自带的 urllib 库，代码要增加不少。
+ </p>
+ <p>
+  有时我们做爬虫时，需要保持 cookie 一致，比如登录后才可访问的页面。用
+  <b>
+   Session 会话对象
+  </b>
+  就可以实现：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'http://httpbin.org/cookies/set/sessioncookie/123456789'</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"http://httpbin.org/cookies"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  另外提两个常见小问题：
+  <br/>
+  一个是关于
+  <b>
+   SSL
+  </b>
+  ，也就是 https 证书的问题。如果碰到 HTTPS 证书无效导致无法访问的错误，可以尝试加参数
+  <code>
+   verify=False
+  </code>
+  忽略：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'https://www.12306.cn/'</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  另一个是对于设置了
+  <b>
+   自动跳转
+  </b>
+  的页面，默认会跟随跳转（但仅限于控制域名跳转，无法跟随 js 跳转），也可以加参数
+  <code>
+   allow_redirects=False
+  </code>
+  禁止：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'http://github.com/'</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  上面两个例子，把参数去掉试试看效果。
+ </p>
+ <p>
+  其他更多详细内容不多说了，中文官网地址
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//cn.python-requests.org" rel="nofollow noreferrer" target="_blank">
+   cn.python-requests.org
+  </a>
+  ，顺着看一遍，写一遍，你就掌握这个爬虫神器了。
+ </p>
+ <p>
+  对了，作者今年又发布了个新的库
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//html.python-requests.org/" rel="nofollow noreferrer" target="_blank">
+   Requests-HTML: HTML Parsing for Humans
+  </a>
+  ，用来对抓取到的 HTML 文本进行处理。这是要把 bs4 也一并干掉的节奏啊。现在更新到 0.9 版本，密切关注中。
+ </p>
+ <p>
+  我们编程教室的不少演示项目如
+  <b>
+   电影票价查询、就业岗位分析、IP 代理池
+  </b>
+  里也都使用了 Requests 库，想了解的请在公众号（Crossin的编程教室）里回复
+  <b>
+   项目
+  </b>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   精选
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   Python
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   问答
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/36064871">
+   Python单词表
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36538511">
+   区块链
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36581953">
+   人工智能
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/30932804">
+   双11
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/29043669">
+   嘻哈
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/28726244">
+   爬虫
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37430943">
+   排序算法
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37664927">
+   我用Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37814595">
+   高考
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37981169">
+   世界杯
+  </a>
+ </p>
+ <p>
+  欢迎搜索及关注：
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+</div></body></html>

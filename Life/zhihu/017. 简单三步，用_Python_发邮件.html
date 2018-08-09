@@ -1,0 +1,385 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>简单三步，用_Python_发邮件</h1><div class="RichText ztext Post-RichText">
+ <h2>
+  <b>
+   0. 前言
+  </b>
+ </h2>
+ <p>
+  发送电子邮件是个很常见的开发需求。比如你写了个监控天气的脚本，发现第二天要下雨，或者网站上关注的某个商品降价了，就可以发个邮件到邮箱来提醒自己。
+  <br/>
+ </p>
+ <p>
+  使用 Python 脚本发送邮件并不复杂。不过由于各家邮件的发送机制和安全策略不同，常常会因为一些配置问题造成发送失败。今天我们来举例讲讲如何使用 Python 发送邮件。
+ </p>
+ <p>
+  本文主要内容包括，了解发邮件的思路，发送邮件需要的一些设置，发送一封简单的邮件，发送一封包含附件的邮件，在写代码过程中我们需要注意哪些问题等等。（完整参考代码地址见文末）
+ </p>
+ <h2>
+  <b>
+   1. 思路
+  </b>
+ </h2>
+ <p>
+  使用脚本发送邮件的思路其实和客户端发送邮件一样，过程都是：
+ </p>
+ <p>
+  <b>
+   登录 —&gt; 写邮件 —&gt; 发送
+  </b>
+ </p>
+ <p>
+  只不过通过脚本发送时我们需要考虑到整个过程的方方面面。以下为思路导图：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-e98001644a72c8d492c6893be41d347e_r.jpg" data-rawheight="476" data-rawwidth="521" data-size="normal" src="https://pic2.zhimg.com/v2-e98001644a72c8d492c6893be41d347e_b.jpg" width="521"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-e98001644a72c8d492c6893be41d347e_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-e98001644a72c8d492c6893be41d347e_r.jpg" data-rawheight="476" data-rawwidth="521" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='521'%20height='476'&gt;&lt;/svg&gt;" width="521"/>
+ </figure>
+ <h2>
+  <b>
+   2. Python-email 模块
+  </b>
+ </h2>
+ <p>
+  与发送邮件相关的 Python 模块：
+ </p>
+ <p>
+  <b>
+   smtplib
+  </b>
+ </p>
+ <p>
+  是关于 SMTP（简单邮件传输协议）的操作模块，在发送邮件的过程中起到服务器之间互相通信的作用。
+ </p>
+ <p>
+  <b>
+   email
+  </b>
+ </p>
+ <p>
+  简单来说，即服务器之间通信的信息，包括信息头、信息主体等等。
+  <br/>
+ </p>
+ <p>
+  举个简单的例子，当你登录邮箱，写好邮件后点击发送，这部分是由 SMTP 接管；而写邮件、添加附件是由 email 模块控制。
+ </p>
+ <h2>
+  <b>
+   3. 开通电子邮箱的SMTP功能
+  </b>
+ </h2>
+ <p>
+  在使用脚本发邮件之前，我们需要打开自己邮箱的 SMTP 功能，各家邮箱的设置方法就不一一讲述了，具体使用时可以百度一下，下面以 163 邮箱设置为例做一个简单的演示：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-c5d999eca64f00177d2e3d97da7656b1_r.jpg" data-rawheight="708" data-rawwidth="1192" data-size="normal" src="https://pic2.zhimg.com/v2-c5d999eca64f00177d2e3d97da7656b1_b.jpg" width="1192"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-c5d999eca64f00177d2e3d97da7656b1_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-c5d999eca64f00177d2e3d97da7656b1_r.jpg" data-rawheight="708" data-rawwidth="1192" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1192'%20height='708'&gt;&lt;/svg&gt;" width="1192"/>
+ </figure>
+ <h2>
+  <b>
+   4. 简单代码
+  </b>
+ </h2>
+ <p>
+  实践出真知，我们结合一个简单的代码来理解这一过程：登录 163 邮箱，向 qq 邮箱发送邮件。
+ </p>
+ <p>
+  脚本分为三个步骤：
+ </p>
+ <ol>
+  <li>
+   设置好服务器端信息
+  </li>
+  <li>
+   邮件主体信息
+  </li>
+  <li>
+   登录发送
+  </li>
+ </ol>
+ <p>
+  另外在处理文本时，我们需要使用 MIMEText 类。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="c1">#设置服务器所需信息</span>
+<span class="c1">#163邮箱服务器地址</span>
+<span class="n">mail_host</span> <span class="o">=</span> <span class="s1">'smtp.163.com'</span>  
+<span class="c1">#163用户名</span>
+<span class="n">mail_user</span> <span class="o">=</span> <span class="s1">'159*****02'</span>  
+<span class="c1">#密码(部分邮箱为授权码) </span>
+<span class="n">mail_pass</span> <span class="o">=</span> <span class="s1">'7******x'</span>   
+<span class="c1">#邮件发送方邮箱地址</span>
+<span class="n">sender</span> <span class="o">=</span> <span class="s1">'159*****02@163.com'</span>  
+<span class="c1">#邮件接受方邮箱地址，注意需要[]包裹，这意味着你可以写多个邮件地址群发</span>
+<span class="n">receivers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'59*****02@qq.com'</span><span class="p">]</span>  
+
+<span class="c1">#设置email信息</span>
+<span class="c1">#邮件内容设置</span>
+<span class="n">message</span> <span class="o">=</span> <span class="n">MIMEText</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span><span class="s1">'plain'</span><span class="p">,</span><span class="s1">'utf-8'</span><span class="p">)</span>
+<span class="c1">#邮件主题       </span>
+<span class="n">message</span><span class="p">[</span><span class="s1">'Subject'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'title'</span> 
+<span class="c1">#发送方信息</span>
+<span class="n">message</span><span class="p">[</span><span class="s1">'From'</span><span class="p">]</span> <span class="o">=</span> <span class="n">sender</span> 
+<span class="c1">#接受方信息     </span>
+<span class="n">message</span><span class="p">[</span><span class="s1">'To'</span><span class="p">]</span> <span class="o">=</span> <span class="n">receivers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  
+
+<span class="c1">#登录并发送邮件</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">smtpObj</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">()</span> 
+    <span class="c1">#连接到服务器</span>
+    <span class="n">smtpObj</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">mail_host</span><span class="p">,</span><span class="mi">25</span><span class="p">)</span>
+    <span class="c1">#登录到服务器</span>
+    <span class="n">smtpObj</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">mail_user</span><span class="p">,</span><span class="n">mail_pass</span><span class="p">)</span> 
+    <span class="c1">#发送</span>
+    <span class="n">smtpObj</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span>
+        <span class="n">sender</span><span class="p">,</span><span class="n">receivers</span><span class="p">,</span><span class="n">message</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span> 
+    <span class="c1">#退出</span>
+    <span class="n">smtpObj</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span> 
+    <span class="k">print</span><span class="p">(</span><span class="s1">'success'</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTPException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span><span class="n">e</span><span class="p">)</span> <span class="c1">#打印错误</span>
+</code></pre>
+ </div>
+ <p>
+  结果：
+ </p>
+ <p>
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-633829da1a6cd9aff757287dc2468747_r.jpg" data-rawheight="406" data-rawwidth="570" data-size="normal" src="https://pic1.zhimg.com/v2-633829da1a6cd9aff757287dc2468747_b.jpg" width="570"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-633829da1a6cd9aff757287dc2468747_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-633829da1a6cd9aff757287dc2468747_r.jpg" data-rawheight="406" data-rawwidth="570" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='570'%20height='406'&gt;&lt;/svg&gt;" width="570"/>
+ </figure>
+ <p>
+  注意事项：
+ </p>
+ <p>
+  一些邮箱登录比如 QQ 邮箱需要 SSL 认证，所以 SMTP 已经不能满足要求，而需要SMTP_SSL，解决办法为：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="c1">#启动</span>
+<span class="n">smtpObj</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">()</span>
+<span class="c1">#连接到服务器</span>
+<span class="n">smtpObj</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">mail_host</span><span class="p">,</span><span class="mi">25</span><span class="p">)</span>
+<span class="c1">#######替换为########</span>
+<span class="n">smtpObj</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP_SSL</span><span class="p">(</span><span class="n">mail_host</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <h2>
+  <b>
+   5. 带有附件的email
+  </b>
+ </h2>
+ <p>
+  上面我们介绍了发送字符串的邮件，但这明显不满足现代邮件的需求，下面我们介绍如何发送内容以 HTML 格式，并且带有图片和文本文件的邮件。
+ </p>
+ <p>
+  处理多种形态的邮件主体我们需要 MIMEMultipart 类，而处理图片需要 MIMEImage 类。
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python"><span></span><span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+<span class="kn">from</span> <span class="nn">email.mime.image</span> <span class="kn">import</span> <span class="n">MIMEImage</span>
+
+<span class="c1">#设置登录及服务器信息</span>
+<span class="n">mail_host</span> <span class="o">=</span> <span class="s1">'smtp.163.com'</span>
+<span class="n">mail_user</span> <span class="o">=</span> <span class="s1">'159*****02'</span>
+<span class="n">mail_pass</span> <span class="o">=</span> <span class="s1">'7******x'</span>
+<span class="n">sender</span> <span class="o">=</span> <span class="s1">'159*****02@163.com'</span>
+<span class="n">receivers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'7******0@qq.com'</span><span class="p">]</span>
+
+<span class="c1">#设置eamil信息</span>
+<span class="c1">#添加一个MIMEmultipart类，处理正文及附件</span>
+<span class="n">message</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">()</span>
+<span class="n">message</span><span class="p">[</span><span class="s1">'From'</span><span class="p">]</span> <span class="o">=</span> <span class="n">sender</span>
+<span class="n">message</span><span class="p">[</span><span class="s1">'To'</span><span class="p">]</span> <span class="o">=</span> <span class="n">receivers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">message</span><span class="p">[</span><span class="s1">'Subject'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'title'</span>
+<span class="c1">#推荐使用html格式的正文内容，这样比较灵活，可以附加图片地址，调整格式等</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'abc.html'</span><span class="p">,</span><span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1">#设置html格式参数</span>
+<span class="n">part1</span> <span class="o">=</span> <span class="n">MIMEText</span><span class="p">(</span><span class="n">content</span><span class="p">,</span><span class="s1">'html'</span><span class="p">,</span><span class="s1">'utf-8'</span><span class="p">)</span>
+<span class="c1">#添加一个txt文本附件</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'abc.txt'</span><span class="p">,</span><span class="s1">'r'</span><span class="p">)</span><span class="k">as</span> <span class="n">h</span><span class="p">:</span>
+    <span class="n">content2</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1">#设置txt参数</span>
+<span class="n">part2</span> <span class="o">=</span> <span class="n">MIMEText</span><span class="p">(</span><span class="n">content2</span><span class="p">,</span><span class="s1">'plain'</span><span class="p">,</span><span class="s1">'utf-8'</span><span class="p">)</span>
+<span class="c1">#附件设置内容类型，方便起见，设置为二进制流</span>
+<span class="n">part2</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/octet-stream'</span>
+<span class="c1">#设置附件头，添加文件名</span>
+<span class="n">part2</span><span class="p">[</span><span class="s1">'Content-Disposition'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'attachment;filename="abc.txt"'</span>
+<span class="c1">#添加照片附件</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'1.png'</span><span class="p">,</span><span class="s1">'rb'</span><span class="p">)</span><span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">picture</span> <span class="o">=</span> <span class="n">MIMEImage</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="c1">#与txt文件设置相似</span>
+    <span class="n">picture</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'application/octet-stream'</span>
+    <span class="n">picture</span><span class="p">[</span><span class="s1">'Content-Disposition'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'attachment;filename="1.png"'</span>
+<span class="c1">#将内容附加到邮件主体中</span>
+<span class="n">message</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">part1</span><span class="p">)</span>
+<span class="n">message</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">part2</span><span class="p">)</span>
+<span class="n">message</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">picture</span><span class="p">)</span>
+
+<span class="c1">#登录并发送</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">smtpObj</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">()</span>
+    <span class="n">smtpObj</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">mail_host</span><span class="p">,</span><span class="mi">25</span><span class="p">)</span>
+    <span class="n">smtpObj</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">mail_user</span><span class="p">,</span><span class="n">mail_pass</span><span class="p">)</span>
+    <span class="n">smtpObj</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span>
+        <span class="n">sender</span><span class="p">,</span><span class="n">receivers</span><span class="p">,</span><span class="n">message</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'success'</span><span class="p">)</span>
+    <span class="n">smtpObj</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTPException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <h2>
+  <b>
+   6.小结
+  </b>
+ </h2>
+ <p>
+  通过上面的代码，想必大家已经对发邮件有了基本的认识。
+ </p>
+ <p>
+  从整体上我们要把握整个过程的思路：
+ </p>
+ <ol>
+  <li>
+   登录
+  </li>
+  <li>
+   写邮件
+  </li>
+  <li>
+   发送
+  </li>
+ </ol>
+ <p>
+  微观上我们需要了解：
+ </p>
+ <ul>
+  <li>
+   smtplib/email 模块的代码规则；
+  </li>
+  <li>
+   什么时候使用 SMTP，什么时候使用 SMTP_SSL？
+  </li>
+  <li>
+   针对不同的邮件内容需要使用到不同的类，MIMEmultipart、MIMEText、MIMEIamge 等等；
+  </li>
+  <li>
+   怎么去设置附件信息
+  </li>
+ </ul>
+ <p>
+  当然，看再多教程，不如亲自动手写一段代码。大家不妨都自己发一封邮件试一试。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <u>
+   <b>
+    在公众号（crossincode）中回复『email』，可以获取实例代码。
+   </b>
+  </u>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <u>
+   其他文章及回答：
+  </u>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22261597">
+   Python 与 Excel 不得不说的事 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/23998083">
+   Python-Excel 模块哪家强？- Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22339492">
+   爆款游戏《贪吃蛇大作战》的 Python 实现 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22917775">
+   NBA 举办编程马拉松 - 数据分析时代的到来 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21886694">
+   想用 Python 做数据分析？先玩玩这个再说 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21624000">
+   用 Python 实现你的量化交易策略 - Crossin的文章 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？ - Crossin 的回答
+  </a>
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21057822">
+   Python 抓取网页乱码原因分析 - Crossin的编程教室 - 知乎专栏
+  </a>
+ </p>
+ <p>
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  微信ID：crossincode
+ </p>
+ <p>
+  论坛：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室
+  </a>
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>

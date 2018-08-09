@@ -1,0 +1,503 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>用_GitHub_+_Hexo_建立你的第一个博客</h1><div class="RichText ztext Post-RichText">
+ <p>
+  作为一个程序员，拥有一个自己的博客，平时记录一下，分享点技术文章，还是挺有必要的。建立博客的通常渠道包括：
+  <br/>
+ </p>
+ <ol>
+  <li>
+   <p>
+    在博客平台上注册，比如 博客园、CSDN、新浪博客 等。
+   </p>
+  </li>
+  <li>
+   <p>
+    利用博客框架搭建，如 WordPress、Jekyll、hexo 等。
+   </p>
+  </li>
+  <li>
+   <p>
+    自己用代码写一个。
+   </p>
+  </li>
+ </ol>
+ <p>
+  其中，第一种最简单，也最受限，说不定还会被删帖删号。第二种稍复杂，另外需要自己找部署的服务器，但可定制化较高，是很多程序员的选择。最后一种，是在重复造轮子，不过从另一个方面来看，倒是锻炼编程能力的好方式。
+ </p>
+ <p>
+  下面我们就来看下第二种搭建博客的方式。由于内容较多，会分为几篇内容，今天是第一篇：
+ </p>
+ <ol>
+  <li>
+   <p>
+    github＋hexo 建立你的第一个博客
+   </p>
+  </li>
+  <li>
+   <p>
+    <a class="internal" href="https://zhuanlan.zhihu.com/p/22498474">
+     Hexo(2)-部署博客及更新博文 - Crossin的编程教室 - 知乎专栏
+    </a>
+    <br/>
+   </p>
+  </li>
+  <li>
+   <p>
+    <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D2650166056%26idx%3D1%26sn%3D5693b76cd7528d76305f420deb2f2598%26scene%3D1%26srcid%3D0919BiBAnqYyqbJsCc0dzyTM%23rd" rel="nofollow noreferrer" target="_blank">
+     Hexo(3)-安装自己喜欢的主题
+    </a>
+   </p>
+  </li>
+  <li>
+   <p>
+    <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D502682429%26idx%3D1%26sn%3Db02318724303e8632bcb08bf340ddd29%26chksm%3D3e4b5e45093cd753607031d131e35a69cd4d97cb6e60048ebb606b935a1307aa9a4a57c2f971%26scene%3D1%26srcid%3D0919oLK4LqP9Cj8r0LXp31hD%23rd" rel="nofollow noreferrer" target="_blank">
+     Hexo(4)-安装多说评论框
+    </a>
+    <br/>
+   </p>
+  </li>
+  <li>
+   <p>
+    <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D502682429%26idx%3D2%26sn%3D69cc7685dbd7a395c0254366c9b2d30b%26chksm%3D3e4b5e45093cd7538b6bc2e5ba5ab1e5f090117a8e9e44260cb11f76d8814786825b129bb591%26scene%3D1%26srcid%3D0919B9JktkjwIQwnvnije6ZD%23rd" rel="nofollow noreferrer" target="_blank">
+     Hexo(5)-购买并绑定域名
+    </a>
+   </p>
+  </li>
+ </ol>
+ <p>
+  感谢本文作者 大懒虫 同学的投稿。
+ </p>
+ <h2>
+  <strong>
+   前言
+  </strong>
+ </h2>
+ <p>
+  其实呢，建立博客是非常简单的（哈哈，不管什么东西，你会的就觉得简单，不会的怎样都难），我来给大家说说如何使用 GitHubPages 和 Hexo 建立自己的博客。
+ </p>
+ <p>
+  这个有一点难度，但是不要怕，我会一步一步的给大家完成指导的，如果有任何问题也可以随时联系我，我会尽力给大家解决的！
+  <br/>
+ </p>
+ <p>
+  下面先介绍为何选择 GitHubPages 和 Hexo 来搭建博客，然后介绍搭建博客的详细过程。
+ </p>
+ <h2>
+  <strong>
+   Why GitHub Pages and Hexo
+  </strong>
+ </h2>
+ <p>
+  因为 GitHub 的存在，我们得以简单快速地搭建个人博客。
+ </p>
+ <p>
+  <strong>
+   GitHub
+  </strong>
+ </p>
+ <p>
+  GitHub，是一个代码托管网站和社交编程网站。这里聚集了世界上各路技术牛叉的大牛，和最优秀的代码库。把你的博客托管在这里，还有什么不放心的呢O(∩_∩)O。
+ </p>
+ <p>
+  <strong>
+   GitHub Pages
+  </strong>
+ </p>
+ <p>
+  GitHub Pages，是用来托管 GitHub 上静态网页的免费站点，那 GitHub Pages具体有哪些功能呢：
+ </p>
+ <ul>
+  <li>
+   <p>
+    有足够的免费空间（1G），资料自己管理，保存可靠；
+   </p>
+  </li>
+  <li>
+   <p>
+    享受 GitHub 的便利，上面有很多大牛，眼界会开阔很多；
+   </p>
+  </li>
+  <li>
+   <p>
+    可以使用很多现成的博客框架，搭建过程简单快速。
+   </p>
+  </li>
+ </ul>
+ <p>
+  <strong>
+   HEXO
+  </strong>
+ </p>
+ <p>
+  Hexo 是一个简单、快速、强大的静态博客框架,出自台湾大学生 tommy351 之手。我也看过使用 Jekyll、Octopress 搭建个人博客的过程，确实要繁琐许多。相比之下 Hexo 更轻便更快捷，下面是其官网强调的四大特点：
+ </p>
+ <ol>
+  <li>
+   <p>
+    极速生成静态页面
+   </p>
+  </li>
+  <li>
+   <p>
+    一键部署博客
+   </p>
+  </li>
+  <li>
+   <p>
+    丰富的插件支持
+   </p>
+  </li>
+  <li>
+   <p>
+    支持 Markdown
+   </p>
+  </li>
+ </ol>
+ <p>
+  相信大家对 GitHub Pages 和 Hexo 有了一定的了解，下面进入正题。
+ </p>
+ <h2>
+  <strong>
+   使用 GitHub Pages 建立博客站点
+  </strong>
+ </h2>
+ <p>
+  <strong>
+   注册 GitHub
+  </strong>
+ </p>
+ <p>
+  访问 GitHub，注册十分简单，一定要记住注册时使用的邮箱，因为 GitHub 上很多通知都是通过邮箱的。如下图所示：
+  <br/>
+  <figure>
+   <noscript>
+    <img class="content_image" data-rawheight="406" data-rawwidth="420" src="https://pic2.zhimg.com/0016cf1fa39982df1f79b987150206bf_b.jpg" width="420"/>
+   </noscript>
+   <img class="content_image lazy" src="https://pic2.zhimg.com/0016cf1fa39982df1f79b987150206bf_b.jpg" data-rawheight="406" data-rawwidth="420" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='420'%20height='406'&gt;&lt;/svg&gt;" width="420"/>
+  </figure>
+  申请成功后，在 GitHub 官网上登录，并验证邮箱即可。
+ </p>
+ <p>
+  <strong>
+   在 GitHub 上建立仓库
+  </strong>
+ </p>
+ <p>
+  与 GitHub 建立好连接之后，就可以方便的使用它提供的 Pages 服务，GitHub Pages 分两种，一种是用你的 GitHub 用户名建立的
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//username.github.io" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    username.github.io
+   </span>
+   <span class="invisible">
+   </span>
+  </a>
+  这样的用户&amp;组织站点，另一种是依附项目的 Pages。
+ </p>
+ <p>
+  想建立个人博客是用的第一种，形如
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//username.github.io" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    username.github.io
+   </span>
+   <span class="invisible">
+   </span>
+  </a>
+  这样的可访问的站点，每个用户名下面只能建立一个。如下图所示：
+ </p>
+ <p>
+  <figure>
+   <noscript>
+    <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/0ddd2851a42f554c118a048eca3c8b32_r.jpg" data-rawheight="413" data-rawwidth="640" src="https://pic2.zhimg.com/0ddd2851a42f554c118a048eca3c8b32_b.jpg" width="640"/>
+   </noscript>
+   <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/0ddd2851a42f554c118a048eca3c8b32_b.jpg" data-original="https://pic2.zhimg.com/0ddd2851a42f554c118a048eca3c8b32_r.jpg" data-rawheight="413" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='413'&gt;&lt;/svg&gt;" width="640"/>
+  </figure>
+  <figure>
+   <noscript>
+    <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/f1ceb7c4c768a5141083ce09cbf1a340_r.jpg" data-rawheight="436" data-rawwidth="640" src="https://pic1.zhimg.com/f1ceb7c4c768a5141083ce09cbf1a340_b.jpg" width="640"/>
+   </noscript>
+   <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/f1ceb7c4c768a5141083ce09cbf1a340_b.jpg" data-original="https://pic1.zhimg.com/f1ceb7c4c768a5141083ce09cbf1a340_r.jpg" data-rawheight="436" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='436'&gt;&lt;/svg&gt;" width="640"/>
+  </figure>
+  关于 Github 的使用，我的老师 Crossin先生 也写了一篇通俗易懂的教程，大家可以去看看
+ </p>
+ <p>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/21438729">
+   极简 Github 上手教程
+  </a>
+ </p>
+ <h2>
+  <strong>
+   安装软件
+  </strong>
+ </h2>
+ <p>
+  <strong>
+   Node.js
+  </strong>
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//nodejs.org/en/" rel="nofollow noreferrer" target="_blank">
+   Node.js 下载
+  </a>
+ </p>
+ <p>
+  下载完成后根据提示一步一步安装就好，这个没有什么需要特别说明的。
+  <br/>
+ </p>
+ <p>
+  <strong>
+   GitHub for Windows
+  </strong>
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=https%3A//desktop.github.com/" rel="nofollow noreferrer" target="_blank">
+   GitHub Desktop 下载
+  </a>
+ </p>
+ <p>
+  这里有一点说明，下载这个 github 时因为是先从官网下载下来了一个下载器，然后再在本地下载，因为是外网，可能有点卡，所以下载好了全部并整理好了离线版本，你下载这个直接就自动安装了：
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//pan.baidu.com/s/1bZthpW" rel="nofollow noreferrer" target="_blank">
+   GitHub 离线版 下载
+  </a>
+  密码：olr2
+  <br/>
+ </p>
+ <p>
+  下载并安装下面两个软件，一直点击下一步即可。
+ </p>
+ <br/>
+ <h2>
+  <strong>
+   使用 GitHub for Windows 登录 GitHub
+  </strong>
+ </h2>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/6d31f438528e8661ffe7d888c94fae18_r.jpg" data-rawheight="353" data-rawwidth="640" src="https://pic2.zhimg.com/6d31f438528e8661ffe7d888c94fae18_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/6d31f438528e8661ffe7d888c94fae18_b.jpg" data-original="https://pic2.zhimg.com/6d31f438528e8661ffe7d888c94fae18_r.jpg" data-rawheight="353" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='353'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/85e80617e9a8657e96a00d965052f453_r.jpg" data-rawheight="339" data-rawwidth="640" src="https://pic2.zhimg.com/85e80617e9a8657e96a00d965052f453_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/85e80617e9a8657e96a00d965052f453_b.jpg" data-original="https://pic2.zhimg.com/85e80617e9a8657e96a00d965052f453_r.jpg" data-rawheight="339" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='339'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic4.zhimg.com/ffed902ba855f0ece79dd1a5dd86a30b_r.jpg" data-rawheight="339" data-rawwidth="640" src="https://pic4.zhimg.com/ffed902ba855f0ece79dd1a5dd86a30b_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/ffed902ba855f0ece79dd1a5dd86a30b_b.jpg" data-original="https://pic4.zhimg.com/ffed902ba855f0ece79dd1a5dd86a30b_r.jpg" data-rawheight="339" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='339'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <h2>
+  <strong>
+   配置 SSH
+  </strong>
+ </h2>
+ <p>
+  我们如何让本地 git 项目与远程的 GitHub 建立联系呢？方法是用 SSH。打开命令行，输入以下命令：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>ssh -T git@github.com
+</code></pre>
+ </div>
+ <p>
+  如图：
+  <br/>
+  <figure>
+   <noscript>
+    <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/8bd580a57c3699001249740ddff4f125_r.jpg" data-rawheight="418" data-rawwidth="640" src="https://pic1.zhimg.com/8bd580a57c3699001249740ddff4f125_b.jpg" width="640"/>
+   </noscript>
+   <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/8bd580a57c3699001249740ddff4f125_b.jpg" data-original="https://pic1.zhimg.com/8bd580a57c3699001249740ddff4f125_r.jpg" data-rawheight="418" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='418'&gt;&lt;/svg&gt;" width="640"/>
+  </figure>
+  如果是下面之类的反馈（或者显示 Hi xxx）：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>The authenticity of host 'github.com (207.97.227.239)' can't be established. RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48. Are you sure you want to continue connecting (yes/no)?
+</code></pre>
+ </div>
+ <p>
+  不用紧张，输入 yes 之后,看到下图的结果，就配置成功了。
+  <br/>
+  <figure>
+   <noscript>
+    <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/8f039c7f82df74f7a92a74c6d26aaccc_r.jpg" data-rawheight="418" data-rawwidth="640" src="https://pic1.zhimg.com/8f039c7f82df74f7a92a74c6d26aaccc_b.jpg" width="640"/>
+   </noscript>
+   <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/8f039c7f82df74f7a92a74c6d26aaccc_b.jpg" data-original="https://pic1.zhimg.com/8f039c7f82df74f7a92a74c6d26aaccc_r.jpg" data-rawheight="418" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='418'&gt;&lt;/svg&gt;" width="640"/>
+  </figure>
+ </p>
+ <h2>
+  <strong>
+   使用 Hexo 创建博客框架
+  </strong>
+ </h2>
+ <p>
+  <strong>
+   Hexo 安装
+  </strong>
+ </p>
+ <p>
+  打开命令行，依次输入以下命令：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>cd /
+npm install hexo-cli -g
+</code></pre>
+ </div>
+ <p>
+  如图：
+  <br/>
+  <figure>
+   <noscript>
+    <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/56e66c9de6fef7426214b1d7b6c81ffb_r.jpg" data-rawheight="418" data-rawwidth="640" src="https://pic1.zhimg.com/56e66c9de6fef7426214b1d7b6c81ffb_b.jpg" width="640"/>
+   </noscript>
+   <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/56e66c9de6fef7426214b1d7b6c81ffb_b.jpg" data-original="https://pic1.zhimg.com/56e66c9de6fef7426214b1d7b6c81ffb_r.jpg" data-rawheight="418" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='418'&gt;&lt;/svg&gt;" width="640"/>
+  </figure>
+  提示：cd / 作用是返回根目录，Git Shell 默认装在 C 盘，启动时默认路径为 C:\Users\xxx(用户名)\Documents\GitHub，输入 cd / 命令后就返回到了 C 盘根目录下，需不需要使用 cd / 看个人习惯（下同）
+ </p>
+ <h2>
+  <strong>
+   Hexo 部署
+  </strong>
+ </h2>
+ <p>
+  Hexo 的部署可采用如下方法，输入命令：
+ </p>
+ <p>
+  hexo init [文件名]。
+ </p>
+ <p>
+  打开控制台，依次输入以下命令：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>cd /
+hexo init Hexo
+</code></pre>
+ </div>
+ <p>
+  回车后出现该提示则表示正确：
+  <br/>
+  <figure>
+   <noscript>
+    <img class="origin_image zh-lightbox-thumb" data-original="https://pic3.zhimg.com/16b4536ec2bb5e1bfcca1459aa42f9d1_r.jpg" data-rawheight="82" data-rawwidth="640" src="https://pic3.zhimg.com/16b4536ec2bb5e1bfcca1459aa42f9d1_b.jpg" width="640"/>
+   </noscript>
+   <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/16b4536ec2bb5e1bfcca1459aa42f9d1_b.jpg" data-original="https://pic3.zhimg.com/16b4536ec2bb5e1bfcca1459aa42f9d1_r.jpg" data-rawheight="82" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='82'&gt;&lt;/svg&gt;" width="640"/>
+  </figure>
+  部署成功之后，Hexo 会自动在目标文件夹建立博客网站所需要的所有文件。此时可以通过输入以下命令在本地进行预览（在刚才创建的文件夹里）：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>hexo generate 
+hexo server
+</code></pre>
+ </div>
+ <p>
+  系统可能会出现提示，请点击允许。如下图所示则表示正确：
+  <br/>
+  <figure>
+   <noscript>
+    <img class="origin_image zh-lightbox-thumb" data-original="https://pic4.zhimg.com/49895df5d16a25a7847662ddad711e59_r.jpg" data-rawheight="418" data-rawwidth="640" src="https://pic4.zhimg.com/49895df5d16a25a7847662ddad711e59_b.jpg" width="640"/>
+   </noscript>
+   <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/49895df5d16a25a7847662ddad711e59_b.jpg" data-original="https://pic4.zhimg.com/49895df5d16a25a7847662ddad711e59_r.jpg" data-rawheight="418" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='418'&gt;&lt;/svg&gt;" width="640"/>
+  </figure>
+  此时打开浏览器，在浏览器地址栏输入
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//localhost%3A4000/" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    localhost:4000/
+   </span>
+   <span class="invisible">
+   </span>
+  </a>
+  （默认端口为4000）, 便可以看到最原始的博客了。以后发表博文想先预览，也可以通过 hexo server 在本地先跑起来，看看效果。
+ </p>
+ <p>
+  效果如下图所示：
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/e1c9f0ebbff6f527c7619f9bc4be3769_r.jpg" data-rawheight="360" data-rawwidth="640" src="https://pic1.zhimg.com/e1c9f0ebbff6f527c7619f9bc4be3769_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/e1c9f0ebbff6f527c7619f9bc4be3769_b.jpg" data-original="https://pic1.zhimg.com/e1c9f0ebbff6f527c7619f9bc4be3769_r.jpg" data-rawheight="360" data-rawwidth="640" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='360'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  恭喜，到目前为止个人博客的雏形已经有了。
+ </p>
+ <p>
+  在 Git Shell 中按 Ctrl + C 并输入 y 可以停止该服务。
+ </p>
+ <br/>
+ <br/>
+ <p>
+  <u>
+   其他文章及回答：
+  </u>
+ </p>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/21886694">
+  想用 Python 做数据分析？先玩玩这个再说 - Crossin的文章 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/21624000">
+  用 Python 实现你的量化交易策略 - Crossin的文章 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+  学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？ - Crossin 的回答
+ </a>
+ <br/>
+ <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+  你是如何自学 Python 的？ - Crossin 的回答
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/20683456?refer=crossin">
+  编程初学者如何使用搜索引擎 - Crossin的文章 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/20721034?refer=crossin">
+  如何直观地理解程序的运行过程？- Crossin的文章 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/21304838">
+  如何在 Python 中使用断点调试 - Crossin的文章 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/21057822">
+  Python 抓取网页乱码原因分析 - Crossin的编程教室 - 知乎专栏
+ </a>
+ <br/>
+ <a class="internal" href="https://zhuanlan.zhihu.com/p/21438729">
+  极简 Github 上手教程 - Crossin的编程教室 - 知乎专栏
+ </a>
+ <br/>
+ <p>
+  <b>
+   Crossin的编程教室
+  </b>
+  <br/>
+ </p>
+ <br/>
+ 微信ID：crossincode
+ <br/>
+ 论坛：
+ <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//bbs.crossincode.com" rel="nofollow noreferrer" target="_blank">
+  Crossin的编程教室
+ </a>
+ <br/>
+ QQ群：521603553
+ <br/>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="258" data-rawwidth="258" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+</div></body></html>

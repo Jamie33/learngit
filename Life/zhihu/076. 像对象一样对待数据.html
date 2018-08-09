@@ -1,0 +1,397 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>像对象一样对待数据</h1><div class="RichText ztext Post-RichText">
+ <p>
+  咱们编程教室有不少同学，学完了基础课程，掌握了一定的编程能力，开始做项目了。然后很可能遇到一个问题：管理数据。课程里有讲过用文件保存数据，还有
+  <b>
+   pickle
+  </b>
+  、
+  <b>
+   csv
+  </b>
+  等模块辅助。但对于稍微复杂一点的数据，往往不够方便。成熟的解决方案就是使用
+  <b>
+   数据库
+  </b>
+  。
+ </p>
+ <p>
+  估计每个刚刚使用数据库的人都会被坑得遍体鳞伤。对于一个刚刚学会 Python 不久的开发新手来说，使用数据库的
+  <b>
+   SQL 语句
+  </b>
+  几乎相当于再学一种新的语言。虽然
+  <b>
+   sqlite
+  </b>
+  、
+  <b>
+   pymysql
+  </b>
+  等模块提供了与数据的连接，但仍然需要自己去拼接 SQL 语句。Python 语法和 SQL 语法、各种引号、百分号、转义字符混杂在一起的酸爽，用过的人都忘不了。
+ </p>
+ <p>
+  所以实际开发中，如无特殊需求，一般不会直接写 SQL，而是用更为方便的
+  <b>
+   ORM（对象关系映射，Object Relational Mapping）
+  </b>
+  。顾名思义，就是将关系型数据库与 Python 中的对象关联起来，提供了一种操作数据的简便方式，相当于对数据库加了一层更友好的接口。
+ </p>
+ <p>
+  目前 Python 中比较流行的 ORM 解决方案有三种：
+ </p>
+ <ol>
+  <li>
+   <b>
+    Django ORM
+   </b>
+   。使用方便，但很难脱离 Django 单独使用。
+  </li>
+  <li>
+   <b>
+    SQLAlchemy
+   </b>
+   。功能强大，成熟可扩展，但学习门槛较高。
+  </li>
+  <li>
+   <b>
+    peewee
+   </b>
+   。轻量，可扩展，易学习，但功能有限。
+  </li>
+ </ol>
+ <p>
+  对于偏初级的小型项目，通常用不到很复杂的功能，这时候 peewee 或许是最好的选择。今天我们就来重点介绍下 peewee 这个 Python ORM 库。
+ </p>
+ <p>
+  <b>
+   &gt; 安装
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-bash"><span></span>pip install peewee
+</code></pre>
+ </div>
+ <p>
+  <b>
+   &gt; 连接数据库
+  </b>
+ </p>
+ <p>
+  以 SQLite 为例：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="kn">import</span> <span class="nn">peewee</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">SqliteDatabase</span><span class="p">(</span><span class="s1">'people.db'</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  people.db 是 SQLite 的数据库文件，如果不存在会自己新建。
+ </p>
+ <p>
+  如果是 MySQL，要稍微复杂点，需再提供地址、用户名、密码等信息，并且必须先手动建好库：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">db</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">MySQLDatabase</span><span class="p">(</span><span class="s1">'people'</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">'127.0.0.1'</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s1">'root'</span><span class="p">,</span> <span class="n">passwd</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">charset</span><span class="o">=</span><span class="s1">'utf8'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">3306</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  特别要记住的一点是，代码进行完所有数据库操作后，要主动关闭数据库：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  <b>
+   &gt; 创建数据类型
+  </b>
+ </p>
+ <p>
+  既然是与对象关联，自然需要以面向对象的方式定义数据结构。我们假定一个表示人的类型 Person，包含姓名 name 和生日 birthday 两个字段：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">database</span> <span class="o">=</span> <span class="n">db</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+    <span class="n">birthday</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">DateField</span><span class="p">()</span>
+
+<span class="n">Person</span><span class="o">.</span><span class="n">create_table</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  如果是用过 Django 的同学，对这个 Model 应该非常熟悉了。要注意的就是，需要在 Meta 里定义 database 为前面创建的数据库。然后使用相应的 Field 类型定义字段即可。
+ </p>
+ <p>
+  <b>
+   &gt; 新增数据对象
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">date</span>
+<span class="c1"># 方法1</span>
+<span class="n">uncle_bob</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Bob'</span><span class="p">,</span> <span class="n">birthday</span><span class="o">=</span><span class="n">date</span><span class="p">(</span><span class="mi">1960</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="n">uncle_bob</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+<span class="c1"># 方法2</span>
+<span class="n">Person</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Crossin'</span><span class="p">,</span> <span class="n">birthday</span><span class="o">=</span><span class="n">date</span><span class="p">(</span><span class="mi">1985</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</code></pre>
+ </div>
+ <p>
+  直接创建数据对象，需要调用
+  <code>
+   save
+  </code>
+  方法保存到数据库中。而使用
+  <code>
+   create
+  </code>
+  方法创建则不用。
+ </p>
+ <p>
+  <b>
+   &gt; 查找数据对象
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">bob</span> <span class="o">=</span> <span class="n">Person</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Person</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">'Bob'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bob</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">bob</span><span class="o">.</span><span class="n">birthday</span><span class="p">)</span>
+<span class="c1"># 获取所有数据</span>
+<span class="k">for</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">Person</span><span class="o">.</span><span class="n">select</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  注意这里的查找条件写法，这与 Django 是不同的。查找还可以用
+  <code>
+   where
+  </code>
+  语句，这里不做演示，可以参考官方文档。
+ </p>
+ <p>
+  <b>
+   &gt; 修改数据对象
+  </b>
+ </p>
+ <p>
+  对于上一步找到的 bob 变量：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">bob</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Robert'</span>
+<span class="n">bob</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  直接向属性赋值，修改完记得要
+  <code>
+   save
+  </code>
+  。
+ </p>
+ <p>
+  <b>
+   &gt; 删除数据对象
+  </b>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">bob</span><span class="o">.</span><span class="n">delete_instance</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  顺便说句，一般不建议在数据库里删除数据，因为数据删了就不好找回来了，而且可能还会引发关联数据的报错。通常是增加一个
+  <code>
+   is_deleted
+  </code>
+  字段标记已删除的内容。（所以，不要以为在网上把发布过的内容删掉就真的不存在了）
+ </p>
+ <p>
+  <b>
+   &gt; 创建关联数据
+  </b>
+ </p>
+ <p>
+  在程序中，经常会有一些具有关联关系的数据。比如我们再创建一个宠物类 Pet，每个宠物有名字 name 和主人 owner。owner 对应的就是我们前面创建的 Person 类：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">class</span> <span class="nc">Pet</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">database</span> <span class="o">=</span> <span class="n">db</span>
+    <span class="n">owner</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">ForeignKeyField</span><span class="p">(</span><span class="n">Person</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s1">'pets'</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">peewee</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+</code></pre>
+ </div>
+ <p>
+  这样一来，我们就可以很方便的通过宠物找到它的主人：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">bob_kitty</span> <span class="o">=</span> <span class="n">Pet</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">owner</span><span class="o">=</span><span class="n">bob</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Kitty'</span><span class="p">)</span>
+<span class="n">bob_fido</span> <span class="o">=</span> <span class="n">Pet</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">owner</span><span class="o">=</span><span class="n">bob</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Fido'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bob_kitty</span><span class="o">.</span><span class="n">owner</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  也可以找到一个人养的所有宠物：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="k">for</span> <span class="n">pet</span> <span class="ow">in</span> <span class="n">bob</span><span class="o">.</span><span class="n">pets</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pet</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  以上就是 peewee 的基本操作，如果你了解面向对象，应该不难理解。这些例子取自其官方文档的快速上手 Quickstart。虽然没有像 Requests 那样贴心地提供中文版，但也同样足够人性化。
+ </p>
+ <p>
+  地址：
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//docs.peewee-orm.com/en/latest/peewee/quickstart.html" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    docs.peewee-orm.com/en/
+   </span>
+   <span class="invisible">
+    latest/peewee/quickstart.html
+   </span>
+   <span class="ellipsis">
+   </span>
+  </a>
+ </p>
+ <p>
+  <b>
+   &gt; 自动生成代码
+  </b>
+ </p>
+ <p>
+  peewee 提供了一个功能，可以从已有的数据库反向生成数据模型代码。以 SQLite 为例：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-bash"><span></span>python -m pwiz -e sqlite people.db &gt; db.py
+</code></pre>
+ </div>
+ <p>
+  在你的数据库文件所在路径下执行这条命令，就可以在 db.py 中自动生成代码。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/v2-0f40bb9aaa84fa0057001ff1bf123f40_r.jpg" data-rawheight="708" data-rawwidth="1080" data-size="normal" src="https://pic1.zhimg.com/v2-0f40bb9aaa84fa0057001ff1bf123f40_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-0f40bb9aaa84fa0057001ff1bf123f40_b.jpg" data-original="https://pic1.zhimg.com/v2-0f40bb9aaa84fa0057001ff1bf123f40_r.jpg" data-rawheight="708" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='708'&gt;&lt;/svg&gt;" width="1080"/>
+  <figcaption>
+   自动生成的代码
+  </figcaption>
+ </figure>
+ <p>
+  在本专栏先前的案例中，有一些就使用了 peewee。比如
+  <b>
+   Python 高频词汇表
+  </b>
+  （关键字：
+  <b>
+   单词
+  </b>
+  ）和
+  <b>
+   押韵检索工具
+  </b>
+  （关键字：
+  <b>
+   押韵
+  </b>
+  ）。在本公众号（
+  <b>
+   Crossin的编程教室
+  </b>
+  ）里回复相应关键字可查看文章及代码。
+ </p>
+ <p>
+  最后提一下，除了使用 ORM 外，对于数据存储还有一种解决方案，就是使用非关系型数据库，比如
+  <b>
+   mongodb
+  </b>
+  。尽管坑也不少，但对于简单的数据存储来说，它有个巨大的优势就是
+  <b>
+   同 Python 内置的 dict、list 等类型兼容良好
+  </b>
+  ，可以直接存取，让你甚至感觉不到有数据库的存在，也根本无需关心 SQL 语句。爬虫实战课程中的部分案例，就选择了 mongodb 作为数据存储方案。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+  ════
+  <br/>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   精选
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   Python
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   问答
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/36064871">
+   Python单词表
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36538511">
+   区块链
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36581953">
+   人工智能
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/30932804">
+   双11
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/29043669">
+   嘻哈
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/28726244">
+   爬虫
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37430943">
+   排序算法
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37664927">
+   我用Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37814595">
+   高考
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37981169">
+   世界杯
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/38466193">
+   requests
+  </a>
+ </p>
+ <p>
+  欢迎搜索及关注：
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+</div></body></html>

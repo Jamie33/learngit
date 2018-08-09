@@ -1,0 +1,437 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>还你系统空间的_Python_小程序</h1><div class="RichText ztext Post-RichText">
+ <p>
+  Windows 系统用久了，磁盘中就会产生大量的“垃圾”文件。这些文件有的是程序使用过的临时文件，有的是操作记录和日志信息等。因为往往不能被有效地清理干净，越积越多，导致用户的可用空间越来越小。同时也会因为碎片文件过多，使得系统的运行速度受到一定影响。
+ </p>
+ <p>
+  像我这种强迫症用户显然受不了这种状况，定期清理垃圾文件很有必要。
+ </p>
+ <p>
+  对于 Windows 系统，网上有一些现成的垃圾文件清理脚本。不过作为一个 Python 学习者，当然要自己动手来实现一个才合理嘛。
+ </p>
+ <p>
+  Python 的 os 模块，提供了较为丰富的处理系统文件与路径的函数。下面我们就靠它，来实现一个自己的磁盘清理小程序。
+ </p>
+ <p>
+  动手前的友情提示：
+ </p>
+ <ul>
+  <li>
+   <p>
+    本文附带代码运行环境为 WIN7 + Python 2.7。
+   </p>
+  </li>
+  <li>
+   <p>
+    某些缓存文件可以提高程序的执行速度，比如缓存 cookie、使用记录 recent、预读取 prefetch 等。所以清理临时文件并不代表系统运行就会变快，有时也可能变慢。
+   </p>
+  </li>
+  <li>
+   <p>
+    由于牵涉到文件删除操作，请在动手前务必反复确认代码，万一导致什么重要文件被删，本人可概不负责啊。别问我为什么要这么说，写了好几天的代码在调试时被误删了，我再去哭一会儿……(;´༎ຶД༎ຶ`)
+   </p>
+  </li>
+ </ul>
+ <p>
+  言归正传，电脑中的垃圾文件及文件夹主要有下面几类：
+ </p>
+ <blockquote>
+  <p>
+   系统盘 %system% 下文件类型：
+   <br/>
+   【临时文件（*.tmp）】
+   <br/>
+   【临时文件（*._mp）】
+   <br/>
+   【日志文件（*.log）】
+   <br/>
+   【临时帮助文件（*.gid）】
+   <br/>
+   【磁盘检查文件（*.chk）】
+   <br/>
+   【临时备份文件（*.old）】
+   <br/>
+   【Excel备份文件（*.xlk）】
+   <br/>
+   【临时备份文件（*.bak）】
+   <br/>
+   --------------------------------
+   <br/>
+   用户目录 %userprofile% 下文件夹
+   <br/>
+   【COOKIE】 cookies\*.*
+   <br/>
+   【文件使用记录】 recent\*.*
+   <br/>
+   【IE临时文件】 Temporary Internet Files\*.*
+   <br/>
+   【临时文件文件夹】 Temp\*.*
+   <br/>
+   --------------------------------
+   <br/>
+   Windows 目录 %windir% 下文件夹
+   <br/>
+   【预读取数据文件夹】 prefetch\*.*
+   <br/>
+   【临时文件】 temp\*.*
+  </p>
+ </blockquote>
+ <p>
+  如果你了解自己使用的软件产生的其它垃圾文件，也可以添加至待删除的列表上。
+  <br/>
+ </p>
+ <p>
+  与我们直接在 Windows 可视化窗口删除文件或文件夹类似，使用 Python 清理磁盘大致亦可分为
+  <strong>
+   获取文件地址
+  </strong>
+  、
+  <strong>
+   判断垃圾文件
+  </strong>
+  、
+  <strong>
+   删除垃圾文件和文件夹
+  </strong>
+  三步：
+  <br/>
+ </p>
+ <h2>
+  <strong>
+   1. 获取文件地址
+  </strong>
+ </h2>
+ <p>
+  在可视化窗口中，我们点击每个文件夹的图标，打开不同文件夹，可以看见窗口的地址栏也随之切换到了对应的目录下，在 Python  os 模块中，同样是根据文件地址来查找文件，相应的函数如下：
+ </p>
+ <p>
+  获取当前目录路径
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>&gt;&gt;&gt; import os
+&gt;&gt;&gt; os.getcwd()
+'E:\\Software\\Python27'
+</code></pre>
+ </div>
+ <p>
+  跳转至指定的文件目录
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>&gt;&gt;&gt; os.chdir('d://temporary')
+&gt;&gt;&gt; os.getcwd()
+'d:\\temporary'
+</code></pre>
+ </div>
+ <p>
+  获取系统盘符
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>&gt;&gt;&gt; os.environ['systemdrive']
+'C:'
+</code></pre>
+ </div>
+ <p>
+  获取用户目录
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>&gt;&gt;&gt; os.environ['userprofile']
+'C:\\Users\\Administrator'
+</code></pre>
+ </div>
+ <p>
+  获取 Windows 目录
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>&gt;&gt;&gt; os.environ['windir']
+'C:\\Windows'
+</code></pre>
+ </div>
+ <p>
+  调用 os.environ 函数得到字典格式的系统环境映射表，通过关键字可以很方便地得到我们想要的地址。
+ </p>
+ <p>
+  使用 os.walk 函数，可生成并展开以指定目录为根目录的目录树。
+ </p>
+ <p>
+  参数 topdown 指定展开方式是否从顶层到底层
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>all_info = os.walk('d:\\temporary\\', topdown=False)
+</code></pre>
+ </div>
+ <p>
+  os.walk() 函数一般配合如下的 for 循环使用，遍历目录树中每一层的根目录 roots，子目录 dirs 以及文件 files，并将值储存在对应的变量中：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>for roots, dirs, files in all_info:  
+    ...
+</code></pre>
+ </div>
+ <p>
+  例如，对于 D 盘下根目录 AAA 目录树展开如下：
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="415" data-rawwidth="272" src="https://pic4.zhimg.com/v2-eff070ff58f8c66b5faa10aa666d47fb_b.jpg" width="272"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/v2-eff070ff58f8c66b5faa10aa666d47fb_b.jpg" data-rawheight="415" data-rawwidth="272" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='272'%20height='415'&gt;&lt;/svg&gt;" width="272"/>
+ </figure>
+ <p>
+  用 walk 函数遍历并输出后，结果如下：
+  <br/>
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="554" data-rawwidth="370" src="https://pic3.zhimg.com/v2-fbc077564e10dbf8066b5c33fcbb79f5_b.jpg" width="370"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic3.zhimg.com/v2-fbc077564e10dbf8066b5c33fcbb79f5_b.jpg" data-rawheight="554" data-rawwidth="370" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='370'%20height='554'&gt;&lt;/svg&gt;" width="370"/>
+ </figure>
+ <p>
+  将两个给定的目录进行组合
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>&gt;&gt;&gt; os.path.join('d:\\', 'temporary')
+'d:\\temporary'
+</code></pre>
+ </div>
+ <p>
+  用 join 函数，配合 walk 函数得到的根目录与文件名，就能组合出我们想要的文件地址了。
+  <br/>
+ </p>
+ <h2>
+  <strong>
+   2. 判断垃圾文件
+  </strong>
+ </h2>
+ <p>
+  我们现在已知垃圾文件的扩展名（以及垃圾文件夹名），通过 walk 函数与 join 函数也得到了完整的文件名，要判断文件是不是垃圾文件，可以用正则表达式进行匹配判断，正则表达式还不牢固的同学请移步
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/mp/appmsg/show%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26appmsgid%3D10000286%26itemidx%3D1%26sign%3D99fb22cd4f2d7719c6ecc03533d7fc6f%23wechat_redirect" rel="nofollow noreferrer" target="_blank">
+   【Python 第55课】 正则表达式（1）
+  </a>
+  <br/>
+ </p>
+ <p>
+  如果对正则表达式的语法深感头疼，os 模块也有提供其它解决方案：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>&gt;&gt;&gt; os.path.splitext(r'aaa\bbb\ccc.ddd')
+('aaa\\bbb\\ccc', '.ddd')
+</code></pre>
+ </div>
+ <p>
+  os.path.splitext 函数可以将文件的文件名与扩展名进行分离，并返回一个包含文件名与扩展名的二元元组。
+  <br/>
+ </p>
+ <p>
+  得到了文件的扩展名，我们可以用 ‘in’ 来 判断该扩展名是否在需要删除的扩展名列表中：
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>extension = os.path.splitext(r'aaa\bbb\ccc.ddd')
+extension_to_del = ['.aaa', '.bbb', '.ccc', '.ddd']
+if extension[1] in extension_to_del:
+    # to be deleted
+</code></pre>
+ </div>
+ <p>
+  这里可能会踩到的一个坑是字符“\”，它既是 Windows 路径的分隔符，又是 Python 字符串中的转义符。在处理路径时，需要额外注意。
+  <br/>
+ </p>
+ <h2>
+  <strong>
+   3. 删除文件
+  </strong>
+ </h2>
+ <p>
+  使用 os 模块删除数据有三点需要注意：
+  <br/>
+ </p>
+ <p>
+  <b>
+   其一，删除文件与删除文件夹调用的是不同的函数。
+   <br/>
+  </b>
+ </p>
+ <p>
+  删除文件
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>os.remove('d:temporary/test/test.txt')
+</code></pre>
+ </div>
+ <p>
+  删除文件夹
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>os.rmdir('d:temporary/test/empty')
+</code></pre>
+ </div>
+ <p>
+  如果你在尝试调用这个代码删除文件/文件夹时无效，确认下文件名是否带有中文、空格和特殊符号。建议先在纯英文的简单路径下调试成功再说。
+  <br/>
+ </p>
+ <p>
+  无法删除的还有一个常见原因是另一个要注意的地方：
+  <br/>
+ </p>
+ <p>
+  <b>
+   其二，os.rmdir 只能删除空文件夹，如果文件夹非空，则会报错。
+   <br/>
+  </b>
+ </p>
+ <p>
+  所以，如果要把匹配到的垃圾文件夹整个删除，可能我们不得不选择先把文件夹中的所有文件全部删除，再从最内层文件夹开始往外逐层删除。这实在是挺麻烦的，那有没有其它解决方案呢？
+  <br/>
+ </p>
+ <p>
+  有，但要依靠 os 以外的帮助。
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>import shutil
+shutil.rmtree('d:/temporary/test/aaa')
+</code></pre>
+ </div>
+ <p>
+  上面的解决办法是引用另外一个模块 shutil 的函数来删除非空文件夹，其实，这个外部引用的函数还是用 os 模块的函数来写的，想挑战的话，也可以自己写一个试试。
+  <br/>
+ </p>
+ <p>
+  当然，直接调用 cmd 命令也是极好的：
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>os.system('rd/s/q "d:temporary/test"')
+</code></pre>
+ </div>
+ <p>
+  注意，整个命令是一个字符串，其中目录地址要额外加引号。
+  <br/>
+ </p>
+ <p>
+  在某些情况下，尤其是当前有较多其它程序在运行时，即使用 shutil.rmtree 函数仍然会报错，甚至连删除文件都会报错，这就是第三个注意事项了：
+  <br/>
+ </p>
+ <p>
+  <b>
+   其三，文件正在运行或者受到保护、当前账户没有足够权限时，删除会报错。
+  </b>
+  <br/>
+ </p>
+ <p>
+  这个情况下，对应的文件最后就不要强行删了，不然轻则即使删除了，也会再次自动生成、重则还可能导致正在运行的程序崩溃。
+  <br/>
+ </p>
+ <p>
+  因此，我们在删除文件或文件夹时，加上一个 try except 逻辑结构，跳过那些无法删除的文件:
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>try:
+    os.remove(r'd:\temporary\using.xxx')
+except WindowsError:
+    print 'nothing has being removed'
+</code></pre>
+ </div>
+ <p>
+  按照上面三个步骤写下来，磁盘清理脚本基本功能已经完善。不过除此之外，我们还可以添加一些数据监控代码，多一些对用户友好的人机交互，比如：
+  <br/>
+ </p>
+ <p>
+  显示文件夹（路径）大小，单位 bite
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>&gt;&gt;&gt; os.path.getsize('d://temporary/test')
+4096
+</code></pre>
+ </div>
+ <p>
+  显示文件大小
+  <br/>
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>&gt;&gt;&gt; os.path.getsize('d://temporary/test/aaa.txt')
+135
+</code></pre>
+ </div>
+ <p>
+  其它功能诸如 定时清理、开关机清理、清理时间统计 等等，都可以尝试实现。欢迎在留言区和论坛上讨论。
+  <br/>
+ </p>
+ <br/>
+ <p>
+  <u>
+   在公众号（Crossin的编程教室）回复
+   <strong>
+    清理
+   </strong>
+   ，可获取本文演示代码。
+  </u>
+ </p>
+ <br/>
+ <br/>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？
+  </a>
+  <br/>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25109074">
+   数据分析：当赵雷唱民谣时他唱些什么？
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25208016">
+   我去扒了杜蕾斯的微博
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25009370">
+   一行代码扫出“敬业福”
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/24606846">
+   今天，你抢到票了吗？
+  </a>
+  <br/>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/22339492">
+   爆款游戏《贪吃蛇大作战》的 Python 实现
+  </a>
+  <br/>
+  <br/>
+ </p>
+ <p>
+  Crossin的编程教室
+ </p>
+ <p>
+  微信公众号ID：crossincode
+  <br/>
+  网站：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/" rel="nofollow noreferrer" target="_blank">
+   crossincode.com
+  </a>
+  <br/>
+  QQ群：453300655
+  <br/>
+  微信加群：crossin11
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="258" data-rawwidth="258" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-rawheight="258" data-rawwidth="258" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+</div></body></html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>我用Python做过些什么？</h1><div class="RichText ztext Post-RichText">
+ <p>
+  上周我整理了一篇
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/37184773">
+   学了 Python 能用来做什么？
+  </a>
+  ，介绍了下 Python 当下的一些应用场景，
+  <b>
+   给打算学习或刚学习此语言的同学一个参考
+  </b>
+  。当然也有人说这个内容太水了，甚至觉得我是抄来的。这没办法，不管谁来写，应用场景也就是这些，况且知乎上关于有哪些使用 Python 的公司那个回答也是我最早在2013年整理的。
+ </p>
+ <p>
+  其实那篇文章本是个引子，主要是我想回顾下自己用 Python 做过的事情。后来发现内容太多就拆成了两篇。今天就来分享下我自己的 Python 开发经历。（这不会再有人说是网上抄来的吧。）当然肯定会有人看不上这些微小的工作，不过如果让一部分同学，尤其是
+  <b>
+   学完基础想要找点方向找点项目进一步深入的同学能有一些启发
+  </b>
+  ，也就够了。
+ </p>
+ <p>
+  <b>
+   【工作篇】
+  </b>
+ </p>
+ <p>
+  <b>
+   1. 网站后台
+  </b>
+ </p>
+ <p>
+  <b>
+   做项目是最快的学习方式
+  </b>
+  。我比较幸运，在还不会 Python 的时候就接到了一个兼职项目：和同学一起开发一个
+  <b>
+   文书翻译网站
+  </b>
+  。因为大家的网站开发经验都不多，项目时间也比较紧，于是最终选定了
+  <b>
+   Django 框架
+  </b>
+  。通过这个项目，我完成了 Python 和 Web 开发的入门。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic3.zhimg.com/v2-c66d19b7e41fb0413ea3de1bc7ed78ac_r.jpg" data-rawheight="698" data-rawwidth="1080" data-size="normal" src="https://pic3.zhimg.com/v2-c66d19b7e41fb0413ea3de1bc7ed78ac_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-c66d19b7e41fb0413ea3de1bc7ed78ac_b.jpg" data-original="https://pic3.zhimg.com/v2-c66d19b7e41fb0413ea3de1bc7ed78ac_r.jpg" data-rawheight="698" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='698'&gt;&lt;/svg&gt;" width="1080"/>
+  <figcaption>
+   一个提供留学申请的咨询、翻译等服务的网站
+  </figcaption>
+ </figure>
+ <p>
+  后来作为后端工程师加入一个创业团队。这一次，不仅是网站，而是通过
+  <b>
+   RESTful API
+  </b>
+  实现前后端分离，一个后台同时支持
+  <b>
+   PC 网页、移动页面、App、微信公众号
+  </b>
+  。Python 及其框架的开发效率很高，因此很适合小团队快速开发的需求。期间我和另一位 ACM 班的学弟用11天就开发了一个完整的网站产品。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/v2-8e81b45117a4f9ab5d0af972d347892c_r.jpg" data-rawheight="405" data-rawwidth="1080" data-size="normal" src="https://pic1.zhimg.com/v2-8e81b45117a4f9ab5d0af972d347892c_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-8e81b45117a4f9ab5d0af972d347892c_b.jpg" data-original="https://pic1.zhimg.com/v2-8e81b45117a4f9ab5d0af972d347892c_r.jpg" data-rawheight="405" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='405'&gt;&lt;/svg&gt;" width="1080"/>
+  <figcaption>
+   一个小众的项目，或许有同学还知道
+  </figcaption>
+ </figure>
+ <p>
+  <b>
+   2. 游戏后台
+  </b>
+ </p>
+ <p>
+  这是我主导技术开发的一个创业项目。对于非实时对战的
+  <b>
+   弱联网游戏
+  </b>
+  来说，游戏后台和网站后台并无本质的不同。只不过游戏项目可能需要应对更高的并发，以及不断更新的运营需求。可能很多人都觉得 Python 效率慢，但正如 Instagram 在 PyCon 大会上的演讲里所说，直到他们的用户数超过 int 的最大值（约20亿），Django 框架本身也没有成为瓶颈。事实上绝大多数的瓶颈在于开发者写的代码逻辑，这个锅不要扔给语言。
+ </p>
+ <p>
+  另外值得一提的是，我们游戏引擎用的是使用 C++ 的
+  <b>
+   cocos2d-x
+  </b>
+  ，而它的起源就是
+  <b>
+   cocos2d-python
+  </b>
+  。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic3.zhimg.com/v2-b36dff3409c717a6f8a50a929f6291bc_r.jpg" data-rawheight="1362" data-rawwidth="762" data-size="small" src="https://pic3.zhimg.com/v2-b36dff3409c717a6f8a50a929f6291bc_b.jpg" width="762"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-b36dff3409c717a6f8a50a929f6291bc_b.jpg" data-original="https://pic3.zhimg.com/v2-b36dff3409c717a6f8a50a929f6291bc_r.jpg" data-rawheight="1362" data-rawwidth="762" data-size="small" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='762'%20height='1362'&gt;&lt;/svg&gt;" width="762"/>
+  <figcaption>
+   动作卡牌类对战手游
+  </figcaption>
+ </figure>
+ <p>
+  <b>
+   3. 影院点播系统
+  </b>
+ </p>
+ <p>
+  这是一个朋友的线下连锁项目，我帮忙开发了早期的
+  <b>
+   点播系统
+  </b>
+  ，效果类似于 KTV 里的点歌机。开发时间不到一个月，但却使用了很长一段时间，为他们的业务提供了必要保障。此项目仍在运营中，且发展得很好，或许你们有人就去体验过。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic1.zhimg.com/v2-ca7df48ff1eff0bd572f50f5f933ff2e_r.jpg" data-rawheight="373" data-rawwidth="560" data-size="normal" src="https://pic1.zhimg.com/v2-ca7df48ff1eff0bd572f50f5f933ff2e_b.jpg" width="560"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-ca7df48ff1eff0bd572f50f5f933ff2e_b.jpg" data-original="https://pic1.zhimg.com/v2-ca7df48ff1eff0bd572f50f5f933ff2e_r.jpg" data-rawheight="373" data-rawwidth="560" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='560'%20height='373'&gt;&lt;/svg&gt;" width="560"/>
+  <figcaption>
+   网上找了张不相干的图片作为示意，非实际系统
+  </figcaption>
+ </figure>
+ <p>
+  <b>
+   4. 计算机视觉
+  </b>
+ </p>
+ <p>
+  目前正在参与的，与某国外大厂的合作项目，主要涉及
+  <b>
+   数字图像处理
+  </b>
+  和
+  <b>
+   计算机视觉
+  </b>
+  相关的算法和产品开发，也会用到一些
+  <b>
+   深度学习
+  </b>
+  算法。Python 是主要开发语言，包括原型产品的
+  <b>
+   GUI 界面、硬件接口
+  </b>
+  调用等也多半选择用 Python 实现。
+ </p>
+ <p>
+  顺便夹带个私货：在我的知识星球或在朋友圈的同学前几天可能有看到我发的
+  <b>
+   招聘
+  </b>
+  ，目前仍然有效，欢迎有
+  <b>
+   图像和视觉相关经验
+  </b>
+  的朋友加入，
+  <b>
+   实习/全职
+  </b>
+  皆可。项目细节暂不方便透露更多，给几个关键词：
+  <b>
+   定位、寻路、检测
+  </b>
+  。有想法的请给我留言。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-original="https://pic2.zhimg.com/v2-c89417b28a893fea5de2c554ba1a20b7_r.jpg" data-rawheight="1440" data-rawwidth="1080" data-size="small" src="https://pic2.zhimg.com/v2-c89417b28a893fea5de2c554ba1a20b7_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-c89417b28a893fea5de2c554ba1a20b7_b.jpg" data-original="https://pic2.zhimg.com/v2-c89417b28a893fea5de2c554ba1a20b7_r.jpg" data-rawheight="1440" data-rawwidth="1080" data-size="small" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='1440'&gt;&lt;/svg&gt;" width="1080"/>
+  <figcaption>
+   放个摄像头意思一下
+  </figcaption>
+ </figure>
+ <p>
+  在大约十年前，我在学校的时候，做了一个
+  <b>
+   基于摄像头的动作识别系统
+  </b>
+  ，当时是用的 C++。现如今相关技术已经成熟许多，而其中使用到的
+  <b>
+   OpenCV、libSVM
+  </b>
+  ，以及近年出现的
+  <b>
+   OpenPose
+  </b>
+  都有了 Python 实现，比当时开发起来要更加方便许多。
+ </p>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="224" data-rawwidth="292" data-size="normal" src="https://pic1.zhimg.com/v2-1a9c7142a8e529c3d9a26f9985588b8b_b.jpg" width="292"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic1.zhimg.com/v2-1a9c7142a8e529c3d9a26f9985588b8b_b.jpg" data-rawheight="224" data-rawwidth="292" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='292'%20height='224'&gt;&lt;/svg&gt;" width="292"/>
+  <figcaption>
+   真人出镜
+  </figcaption>
+ </figure>
+ <p>
+  <b>
+   5. 编程教室
+  </b>
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室 - 编程世界的新手村
+  </a>
+ </p>
+ <p>
+  单独拿出来说下，因为这是完全由我个人开发、长期维护的项目，是一个用
+  <b>
+   Python 开发
+  </b>
+  的、可以
+  <b>
+   在线执行 Python
+  </b>
+  的代码的
+  <b>
+   Python 学习
+  </b>
+  网站。
+ </p>
+ <p>
+  关于其中这个
+  <b>
+   在线写 Python
+  </b>
+  的小功能，我还有幸在几年前的某届
+  <b>
+   PyCon China
+  </b>
+  上介绍过，那时候项目刚刚开始不久。此功能网站上有入口，公众号里回复
+  <b>
+   code
+  </b>
+  也可以看到。
+ </p>
+ <p>
+  后来这个功能也被我搬上了
+  <b>
+   微信小程序
+  </b>
+  ，只是因为想再完善一下，多增加点功能，所以我后来一直没怎么对外说，打算下半年做一些更新。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-35c0427260c0a0c206c39dfd03390805_r.jpg" data-rawheight="1294" data-rawwidth="748" data-size="small" src="https://pic4.zhimg.com/v2-35c0427260c0a0c206c39dfd03390805_b.jpg" width="748"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-35c0427260c0a0c206c39dfd03390805_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-35c0427260c0a0c206c39dfd03390805_r.jpg" data-rawheight="1294" data-rawwidth="748" data-size="small" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='748'%20height='1294'&gt;&lt;/svg&gt;" width="748"/>
+ </figure>
+ <figure>
+  <noscript>
+   <img class="content_image" data-rawheight="258" data-rawwidth="258" data-size="normal" src="https://pic2.zhimg.com/v2-5fd2ff7a2d0aea87c6cc6a838224c27b_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic2.zhimg.com/v2-5fd2ff7a2d0aea87c6cc6a838224c27b_b.jpg" data-rawheight="258" data-rawwidth="258" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+  <figcaption>
+   小程序里搜索 Python入门指南
+  </figcaption>
+ </figure>
+ <p>
+  以上这些就是我用 Python 开发的一些商业项目。可以看出，我的开发经历主要集中在
+  <b>
+   Web 开发
+  </b>
+  ，且都是使用的
+  <b>
+   Django 框架
+  </b>
+  。另外因为以前的专业方向相关，对于
+  <b>
+   图形图像视觉
+  </b>
+  等方面有一些无足挂齿的研究。
+ </p>
+ <p>
+  <b>
+   【教学篇】
+  </b>
+ </p>
+ <p>
+  在创建了编程教室之后，我以及之前参与过的几位助教开发了不少教学项目，一部分我们保留在了
+  <b>
+   码上行动
+  </b>
+  和
+  <b>
+   实战训练营
+  </b>
+  的课程里，另一部分作为演示案例，放在了
+ </p>
+ <p>
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//lab.crossincode.com" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    lab.crossincode.com
+   </span>
+   <span class="invisible">
+   </span>
+  </a>
+  上，网站上通过
+  <b>
+   实战项目
+  </b>
+  栏目可以进入查看效果。
+ </p>
+ <p>
+  以下是主要的一些项目，
+  <b>
+   公众号（Crossin的编程教室）里回复关键词
+  </b>
+  可以查看项目
+  <b>
+   代码和详细说明
+  </b>
+  的地址：
+ </p>
+ <ul>
+  <li>
+   电影票比价网
+  </li>
+  <li>
+   关键词：
+   <b>
+    电影票
+   </b>
+  </li>
+  <li>
+   Python招聘职位分析
+   <br/>
+   关键词：
+   <b>
+    招聘
+   </b>
+  </li>
+  <li>
+   押韵词查询工具
+   <br/>
+   关键词：
+   <b>
+    嘻哈
+   </b>
+  </li>
+  <li>
+   Python高频词汇抓取
+   <br/>
+   关键词：
+   <b>
+    单词
+   </b>
+  </li>
+  <li>
+   扫码入库工具（微信小程序）
+   <br/>
+   关键词：
+   <b>
+    扫码
+   </b>
+  </li>
+  <li>
+   IP代理池
+   <br/>
+   关键词：
+   <b>
+    ip
+   </b>
+  </li>
+  <li>
+   声控游戏：皮皮虾我们走
+   <br/>
+   关键词：
+   <b>
+    皮皮虾
+   </b>
+  </li>
+  <li>
+   游戏：贪吃蛇大作战
+   <br/>
+   关键词：
+   <b>
+    贪吃蛇
+   </b>
+  </li>
+  <li>
+   排序算法演示
+   <br/>
+   关键词：
+   <b>
+    排序
+   </b>
+  </li>
+  <li>
+   赵雷歌词分析
+   <br/>
+   关键词：
+   <b>
+    赵雷
+   </b>
+  </li>
+  <li>
+   微信聊天机器人
+   <br/>
+   关键词：
+   <b>
+    机器人
+   </b>
+  </li>
+  <li>
+   送你一顶圣诞帽
+   <br/>
+   关键词：
+   <b>
+    圣诞帽
+   </b>
+  </li>
+ </ul>
+ <p>
+  码上行动及训练营中的部分教学案例：
+ </p>
+ <ul>
+  <li>
+   收集豆瓣电影
+  </li>
+  <li>
+   寻找知乎大V
+  </li>
+  <li>
+   下载淘女郎图片库
+  </li>
+  <li>
+   分析58同城招聘信息
+  </li>
+  <li>
+   简易个人博客
+  </li>
+  <li>
+   仿知乎
+  </li>
+  <li>
+   豆瓣评分与票房关系分析
+  </li>
+  <li>
+   股票交易回测系统
+  </li>
+  <li>
+   NBA数据分析
+  </li>
+ </ul>
+ <p>
+  另外在微信教程里，大家也都看过的
+  <b>
+   猜数字、查天气、打飞机小游戏、罚点球小游戏、统计分数
+  </b>
+  等的教学代码。除此之外，还有我平常自己写的自用小工具，比如
+  <b>
+   查询火车票、批量处理文件、新番提示、自动发帖机
+  </b>
+  等等，这里不再一一列举。
+ </p>
+ <p>
+  这些大约就是我用 Python 做过的事情，没太多了不起的东西，但都是一行行代码写过来。对于每个编程学习者来说，当你的代码量足够多时，代码能力自然会有质的提升。所以
+ </p>
+ <blockquote>
+  <b>
+   Talk is cheap.
+  </b>
+  <br/>
+  <b>
+   Show me the Code.
+  </b>
+ </blockquote>
+ <p>
+  <br/>
+  ════
+  <br/>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   精选
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   Python
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   问答
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/36064871">
+   Python单词表
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36538511">
+   区块链
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36581953">
+   人工智能
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/30932804">
+   双11
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/29043669">
+   嘻哈
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/28726244">
+   爬虫
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37430943">
+   排序算法
+  </a>
+ </p>
+ <p>
+  欢迎搜索及关注：
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+</div></body></html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>一名python学习者打开双11的正确姿势</h1><div class="RichText ztext Post-RichText">
+ <p>
+  11月11日是个有趣的日子。客观来说，它和一年中其他364（365）天一样没什么特殊，但偏偏又总被人赋予特殊的含义。十年之前，大家谈论的是如何打发“光棍节”（跟 和菜头 一样，此节日的发源地也是本人的母校）。到了近些年，这一天显然又成了“剁手”的代名词，阿猫阿狗们早早地就开始了铺天盖地的宣传。
+ </p>
+ <p>
+  不过还没到正日子，这几天我就碰上了两件闹心的事：
+ </p>
+ <ol>
+  <li>
+   刚下单的商品，第二天就降价了！
+  </li>
+  <li>
+   打算再等等的商品，准备买的时候居然价格涨回去了！
+  </li>
+ </ol>
+ <p>
+  所以别看折扣打得狠，优惠券给得大方，你究竟有占到多少便宜，自己心里还真没点数。于是，我设想了这样一个方案来应对商家们的套路：
+ </p>
+ <p>
+  <b>
+   【初级版】
+  </b>
+ </p>
+ <p>
+  1. 从关注的商品页面上找到价格，用 Python 脚本自动
+  <u>
+   把价格抓下来
+  </u>
+  。推荐使用 requests 库；
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-c6276be3236dc9cdc9a340b1f272c9b6_r.jpg" data-rawheight="510" data-rawwidth="640" data-size="normal" src="https://pic3.zhimg.com/v2-c6276be3236dc9cdc9a340b1f272c9b6_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-c6276be3236dc9cdc9a340b1f272c9b6_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-c6276be3236dc9cdc9a340b1f272c9b6_r.jpg" data-rawheight="510" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='510'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  2. 把 商品名称、价格、id、网址、日期
+  <u>
+   保存到数据库
+  </u>
+  ；
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-f4b7380bedc09c8b8e9fd0903c0eca14_r.jpg" data-rawheight="307" data-rawwidth="640" data-size="normal" src="https://pic4.zhimg.com/v2-f4b7380bedc09c8b8e9fd0903c0eca14_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-f4b7380bedc09c8b8e9fd0903c0eca14_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-f4b7380bedc09c8b8e9fd0903c0eca14_r.jpg" data-rawheight="307" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='307'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  3. 用 Windows 的计划任务或者 Linux 的 crontab 去
+  <u>
+   每天去抓一遍
+  </u>
+  ；
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-728e0f81d991ff96c41fdf1edbdcb09f_r.jpg" data-rawheight="436" data-rawwidth="640" data-size="normal" src="https://pic3.zhimg.com/v2-728e0f81d991ff96c41fdf1edbdcb09f_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-728e0f81d991ff96c41fdf1edbdcb09f_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-728e0f81d991ff96c41fdf1edbdcb09f_r.jpg" data-rawheight="436" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='436'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  4. 绘制出商品价格随日期
+  <u>
+   变化的曲线
+  </u>
+  。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-229bc3211a6f7516f54ea3c6b6babbcf_r.jpg" data-rawheight="589" data-rawwidth="640" data-size="normal" src="https://pic3.zhimg.com/v2-229bc3211a6f7516f54ea3c6b6babbcf_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-229bc3211a6f7516f54ea3c6b6babbcf_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-229bc3211a6f7516f54ea3c6b6babbcf_r.jpg" data-rawheight="589" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='589'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  这样，当你打算出手的时候，是不是真的划算就一目了然了。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  可惜事实并没有这么简单……你会发现很多商品的价格不是那么容易获取到。毕竟这也是人家的敏感数据，怎么能轻轻松松全让你扒了去，回头再写篇文章来把平台批判一番？
+ </p>
+ <p>
+  当然也不是完全没有办法。通常来说对方有这么几种手段：
+ </p>
+ <p>
+  1. 校验你的请求头，明显的代码抓取会被屏蔽，也可能会记录你的 IP 或来源信息，限制你的请求频率。
+ </p>
+ <p>
+  这个只要
+  <u>
+   把 header 信息伪装好点
+  </u>
+  就不是事，
+  <u>
+   必要时加上 cookie
+  </u>
+  。至于 IP，
+  <u>
+   用几个代理轮换请求
+  </u>
+  即可。这个可以参考我们之前的 IP 池项目，参见《
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/28726244">
+   听说你好不容易写了个爬虫，结果没抓几个就被封了？
+  </a>
+  》。
+ </p>
+ <p>
+  2. 价格没有随 HTML 页面返回，而是放在别的异步请求里获取。
+ </p>
+ <p>
+  通过 Chrome 开发者工具的
+  <u>
+   Network 查看页面发出的请求
+  </u>
+  ，耐下心找一找，一般总归能发现。
+ </p>
+ <p>
+  3. 请求数据中的价格不是直接给出，而是加过密的，甚至是用图片拼出来的。
+ </p>
+ <p>
+  这个比较复杂，一种方法是慢慢
+  <u>
+   寻找加密或拼接的代码
+  </u>
+  ，这个肯定是在前端的 JS 代码中，找到之后自然就搞定。另一种方法是
+  <u>
+   用 Selenium 来直接获取
+  </u>
+  页面上的最终结果。图片价格的话也可以考虑用 OCR 识别。
+ </p>
+ <p>
+  4. 还有更复杂的，比如对用户浏览行为进行判定，以及对异常请求的返回数值做手脚等等。因为对抗难度较大且需要具体情况具体分析，这里不展开讨论。
+ </p>
+ <p>
+  除此之外，一个小技巧就是，移动端网站往往反爬措施没有 PC 网页版那么严格，所以可以尝试
+  <u>
+   用移动站来抓取
+  </u>
+  。同样可以使用 Chrome 的开发者工具，模拟手机环境。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-f619a0c4e910b3d9367963b688f03d93_r.jpg" data-rawheight="431" data-rawwidth="640" data-size="normal" src="https://pic4.zhimg.com/v2-f619a0c4e910b3d9367963b688f03d93_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-f619a0c4e910b3d9367963b688f03d93_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-f619a0c4e910b3d9367963b688f03d93_r.jpg" data-rawheight="431" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='431'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  那么在前面的基础上，升级一下：
+ </p>
+ <p>
+  <b>
+   【中级版】
+  </b>
+ </p>
+ <ol>
+  <li>
+   选择移动端网站抓取，找到包含价格信息的请求；
+  </li>
+  <li>
+   请求时尽可能补全 header 信息；
+  </li>
+  <li>
+   轮换代理 IP；
+  </li>
+  <li>
+   难以提取信息的，尝试用 Selenium 来解决。
+  </li>
+ </ol>
+ <p>
+  你以为这样就完了吗？
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-fb61b46ec443481129f70982edc1770f_r.jpg" data-rawheight="775" data-rawwidth="720" data-size="normal" src="https://pic1.zhimg.com/v2-fb61b46ec443481129f70982edc1770f_b.jpg" width="720"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-fb61b46ec443481129f70982edc1770f_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-fb61b46ec443481129f70982edc1770f_r.jpg" data-rawheight="775" data-rawwidth="720" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='720'%20height='775'&gt;&lt;/svg&gt;" width="720"/>
+ </figure>
+ <p>
+  看看上面这些，你满减了吗？你膨胀了吗？即使你把价格曲线画出来，也没法准确计算价格。我们不太可能为每种优惠编写计算规则，简便的改进方法是
+  <u>
+   把商品的优惠描述一并抓取
+  </u>
+  下来，标记上时间，为价格曲线作参考。比如这样：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-f8b07cb3836b4b2c038b3cc1c82fe7d6_r.jpg" data-rawheight="581" data-rawwidth="640" data-size="normal" src="https://pic4.zhimg.com/v2-f8b07cb3836b4b2c038b3cc1c82fe7d6_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-f8b07cb3836b4b2c038b3cc1c82fe7d6_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-f8b07cb3836b4b2c038b3cc1c82fe7d6_r.jpg" data-rawheight="581" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='581'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  另外，光是一家平台历史价格的纵向对比还不够，
+  <u>
+   几家平台的横向对比
+  </u>
+  才更有意义：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-65213954b864bb8475886eca6d500ea4_r.jpg" data-rawheight="380" data-rawwidth="640" data-size="normal" src="https://pic4.zhimg.com/v2-65213954b864bb8475886eca6d500ea4_b.jpg" width="640"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-65213954b864bb8475886eca6d500ea4_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-65213954b864bb8475886eca6d500ea4_r.jpg" data-rawheight="380" data-rawwidth="640" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='640'%20height='380'&gt;&lt;/svg&gt;" width="640"/>
+ </figure>
+ <p>
+  【高级版】
+ </p>
+ <ol>
+  <li>
+   抓取并按日期记录优惠信息；
+  </li>
+  <li>
+   将商品名称在其他平台上搜索，获取相关产品的价格信息；
+  </li>
+  <li>
+   当发生降价时
+   <u>
+    发送邮件通知
+   </u>
+   提醒。
+  </li>
+ </ol>
+ <p>
+  去动手干吧，少年！等你开发出这套系统，每天自动抓取，明年双11的时候就可以更理性地买买买啦！（手动滑稽
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  什么？你觉得费劲折腾这个并没有什么用？
+ </p>
+ <p>
+  <u>
+   好吧，你以为我真的是在跟你谈论双11怎么省钱吗？
+  </u>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  类似的工具网上已经有很多了，如果你习惯用搜索引擎解决问题，很容易就能找到，的确没有必要自己去写。而“双11”到底是真的实惠，还是平台和商家的套路，我也一点都不关心。我真正要说的是，
+  <u>
+   如果你学了 Python，却不知道去哪里找项目练手进一步提高，为什么不从身边的需求出发，去开发一些工具，做一点数据的分析
+  </u>
+  。你若完整实现了这样一个项目，去找一份开发工作绝对没有问题。这个价值和你多占了一两折的便宜相比，如何？
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  类似的案例项目，我们编程教室做了不少，其中的一些放在了
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//lab.crossincode.com/" rel="nofollow noreferrer" target="_blank">
+   lab.crossincode.com
+  </a>
+  上，欢迎围观。
+ </p>
+ <p>
+  另外我们的精品课程之二《
+  <b>
+   码上行动 - 爬虫实战
+  </b>
+  》基于多个实例由浅入深地讲解了 Python 爬虫的开发技巧，其中就包括了对京东、淘宝网站进行抓取的案例。感兴趣的同学可在公众号（Crossin的编程教室）里回复
+  <b>
+   码上行动
+  </b>
+  了解课程详情。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+ </p>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <blockquote>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/30270181">
+   用 Python 解读十九工作报告
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/29043669">
+   Python有嘻哈：Crossin教你用代码写出押韵的verse
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/28726244">
+   听说你好不容易写了个爬虫，结果没抓几个就被封了？
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/26066151">
+   喏，你们要的 PyCharm 快速上手指南
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/28206656">
+   编程新手：看懂很多示例，却依然写不好一个程序
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   给伸手党的福利：Python 新手入门引导
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25499306">
+   如何用100行Python代码做出魔性声控游戏“八分音符酱”
+  </a>
+  <a class="internal" href="https://www.zhihu.com/question/22863981/answer/22923499">
+   学习编程的过程中可能会走哪些弯路，有哪些经验可以参考？
+  </a>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   你是如何自学 Python 的？
+  </a>
+ </blockquote>
+ <p>
+  Crossin的编程教室
+ </p>
+ <blockquote>
+  微信公众号ID：crossincode
+  <br/>
+  网站：
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/" rel="nofollow noreferrer" target="_blank">
+   crossincode.com
+  </a>
+ </blockquote>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" width="258"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic4.zhimg.com/5b886398336f8058c0ecafdc5d85c857_b.jpg" data-caption="" data-rawheight="258" data-rawwidth="258" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='258'%20height='258'&gt;&lt;/svg&gt;" width="258"/>
+ </figure>
+ <p>
+ </p>
+</div></body></html>
