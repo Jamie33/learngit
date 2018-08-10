@@ -1,0 +1,420 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>大家都是拷贝，凭什么你这么秀？</h1><div class="RichText ztext Post-RichText">
+ <p>
+  之前关于 Python 的作用域、赋值、参数传递，我们接连谈了几篇文章：
+ </p>
+ <ul>
+  <li>
+   <a class="internal" href="https://zhuanlan.zhihu.com/p/37585716">
+    全菊变量和菊部变量
+   </a>
+  </li>
+  <li>
+   <a class="internal" href="https://zhuanlan.zhihu.com/p/38375434">
+    关于函数参数传递，80%人都错了
+   </a>
+  </li>
+  <li>
+   <a class="internal" href="https://zhuanlan.zhihu.com/p/39566815">
+    可变对象与不可变对象
+   </a>
+  </li>
+ </ul>
+ <p>
+  今天我们依然要就相关话题继续下去。
+ </p>
+ <p>
+  首先是上次最后的思考题：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">m</span><span class="p">[:]</span>
+<span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  m 的结果是什么？
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-9265bf6a590d4f191dfd66d2b098a5a9_r.jpg" data-rawheight="705" data-rawwidth="1080" data-size="normal" src="https://pic3.zhimg.com/v2-9265bf6a590d4f191dfd66d2b098a5a9_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-9265bf6a590d4f191dfd66d2b098a5a9_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-9265bf6a590d4f191dfd66d2b098a5a9_r.jpg" data-rawheight="705" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='705'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  正确答案是
+  <b>
+   [1, 2, [5]]
+  </b>
+  ，这次比上次好点，有 35% 的正确率。😁
+ </p>
+ <p>
+  当时我留了个提示，说和浅拷贝、深拷贝有关，现在我们就来具体说一说。
+ </p>
+ <p>
+  假设有这样一个 list 变量 m，其中有 4 个元素（别被嵌套迷惑了）：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]]</span>
+</code></pre>
+ </div>
+ <p>
+  为了更直观的表示，我来画个图：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-55bef2b6c3d66bce038f802b4c0525cf_r.jpg" data-rawheight="338" data-rawwidth="682" data-size="normal" src="https://pic2.zhimg.com/v2-55bef2b6c3d66bce038f802b4c0525cf_b.jpg" width="682"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-55bef2b6c3d66bce038f802b4c0525cf_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-55bef2b6c3d66bce038f802b4c0525cf_r.jpg" data-rawheight="338" data-rawwidth="682" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='682'%20height='338'&gt;&lt;/svg&gt;" width="682"/>
+ </figure>
+ <p>
+  现在我们想要再来“复制”一个同样的变量。也许第一个闪过脑中的念头就是：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">m</span>
+</code></pre>
+ </div>
+ <p>
+  但看了前面的文章后你应该知道，这样的
+  <b>
+   赋值只相当于增加了一个标签，并没有新的对象产生
+  </b>
+  ：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-cbb0523ce24e937085563c323879e5a0_r.jpg" data-rawheight="412" data-rawwidth="668" data-size="normal" src="https://pic4.zhimg.com/v2-cbb0523ce24e937085563c323879e5a0_b.jpg" width="668"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-cbb0523ce24e937085563c323879e5a0_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-cbb0523ce24e937085563c323879e5a0_r.jpg" data-rawheight="412" data-rawwidth="668" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='668'%20height='412'&gt;&lt;/svg&gt;" width="668"/>
+ </figure>
+ <p>
+  用
+  <code>
+   id
+  </code>
+  验证下就知道，
+  <b>
+   m 和 n 仍然是同一个东西
+  </b>
+  。那么他们内部的元素自然也是一样的，对其中一个进行修改，另一个也会跟着变：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'m:'</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">([</span><span class="nb">id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">m</span><span class="p">])</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">m</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'n:'</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">([</span><span class="nb">id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">n</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span> <span class="ow">is</span> <span class="n">m</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">is</span> <span class="n">m</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  输出
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>m: 4564554888
+[4556507504, 4556507536, 4564554760, 4564555016]
+n: 4564554888
+[4556507504, 4556507536, 4564554760, 4564555016]
+True
+True
+True
+[-1, 2, [3, 4], [5, [6, 7]]]
+[-1, 2, [3, -1], [5, [6, 7]]]
+</code></pre>
+ </div>
+ <p>
+  因此有人将此操作称为“
+  <b>
+   旧瓶装旧酒
+  </b>
+  ”，只是多贴了一层标签，这不能达到我们的目的。要得到一个对象的“拷贝”，我们需要用到
+  <code>
+   copy
+  </code>
+  方法：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span>
+<span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'m:'</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">([</span><span class="nb">id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">m</span><span class="p">])</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'n:'</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">([</span><span class="nb">id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">n</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span> <span class="ow">is</span> <span class="n">m</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">is</span> <span class="n">m</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  输出
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>m: 4340253832
+[4333009264, 4333009296, 4340253704, 4340253960]
+n: 4340268104
+[4333009264, 4333009296, 4340253704, 4340253960]
+False
+True
+True
+[1, 2, [3, 4], [5, [6, 7]]]
+[1, 2, [3, -1], [5, [6, 7]]]
+</code></pre>
+ </div>
+ <p>
+  从结果中可以看出，
+  <b>
+   n 和 m 已不是同一个对象
+  </b>
+  ，对于某个元素的重新赋值不会影响原对象。但是，它们
+  <b>
+   内部的元素全都是一样的
+  </b>
+  ，所以对一个可变类型元素的修改，则仍然会反应在原对象中。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-41706d74b99c27628af00b8dd180ce01_r.jpg" data-rawheight="410" data-rawwidth="676" data-size="normal" src="https://pic3.zhimg.com/v2-41706d74b99c27628af00b8dd180ce01_b.jpg" width="676"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-41706d74b99c27628af00b8dd180ce01_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-41706d74b99c27628af00b8dd180ce01_r.jpg" data-rawheight="410" data-rawwidth="676" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='676'%20height='410'&gt;&lt;/svg&gt;" width="676"/>
+ </figure>
+ <p>
+  （其实这里1、2也是指向同一个对象，但作为不可变对象来说，它们互不影响，直观上的感受就相当于是复制了一份，故简化如图上所示）
+ </p>
+ <p>
+  这种复制方法叫做
+  <b>
+   浅拷贝
+  </b>
+  （
+  <b>
+   shallow copy
+  </b>
+  ），又被人形象地称作“
+  <b>
+   新瓶装旧酒
+  </b>
+  ”，虽然产生了新对象，但里面的内容还是来自同一份。
+ </p>
+ <p>
+  如果要彻底地产生一个和原对象完全独立的复制品，得使用
+  <b>
+   深拷贝
+  </b>
+  （
+  <b>
+   deep copy
+  </b>
+  ）：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+<span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'m:'</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">([</span><span class="nb">id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">m</span><span class="p">])</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'n:'</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">([</span><span class="nb">id</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">n</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span> <span class="ow">is</span> <span class="n">m</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">is</span> <span class="n">m</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  输出
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>m: 4389131400
+[4381886832, 4381886864, 4389131272, 4389131528]
+n: 4389131208
+[4381886832, 4381886864, 4389131656, 4389145736]
+False
+True
+False
+[1, 2, [3, 4], [5, [6, 7]]]
+[1, 2, [3, 4], [5, [6, 7]]]
+</code></pre>
+ </div>
+ <p>
+  此时，
+  <b>
+   对新对象中元素做任何改动都不会影响原对象
+  </b>
+  。新对象中的子列表，无论有多少层，都是新的对象，有不同的地址。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-6c70bf35073464c82d0c7894f8731eef_r.jpg" data-rawheight="578" data-rawwidth="706" data-size="normal" src="https://pic2.zhimg.com/v2-6c70bf35073464c82d0c7894f8731eef_b.jpg" width="706"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-6c70bf35073464c82d0c7894f8731eef_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-6c70bf35073464c82d0c7894f8731eef_r.jpg" data-rawheight="578" data-rawwidth="706" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='706'%20height='578'&gt;&lt;/svg&gt;" width="706"/>
+ </figure>
+ <p>
+  按照前面的比喻，深拷贝就是“
+  <b>
+   新瓶装新酒
+  </b>
+  ”。
+ </p>
+ <p>
+  你可能会注意到一个细节：n 中的前两个元素的地址仍然和 m 中一样。这是由于它们是
+  <b>
+   不可变对象，不存在被修改的可能，所以拷贝和赋值是一样的
+  </b>
+  。
+ </p>
+ <p>
+  于是，深拷贝也可以理解为，不仅是对象自身的拷贝，而且对于对象中的每一个子元素，也都进行同样的拷贝操作。这是一种
+  <b>
+   递归
+  </b>
+  的思想。
+ </p>
+ <p>
+  不过额外要说提醒一下的是，
+  <b>
+   深拷贝的实现过程并不是完全的递归
+  </b>
+  ，否则如果对象的某级子元素是它自身的话，这个过程就死循环了。实际上，
+  <b>
+   如果遇到已经处理过的对象，就会直接使用其引用，而不再重复处理
+  </b>
+  。听上去有点难懂是不是？想想这个例子大概就会理解了：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+<span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="nb">id</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="nb">id</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+</code></pre>
+ </div>
+ <p>
+  输出
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>[1, 2, [...]] 4479589576 4479589576
+[1, 2, [...]] 4479575048 4479575048
+</code></pre>
+ </div>
+ <p>
+  最后，还是给各位留个思考：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="n">a</span><span class="p">]]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">n</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  深拷贝后的 n，修改了其中一个元素值，会是怎样的效果？
+ </p>
+ <p>
+  思考一下输出会是什么？
+ </p>
+ <p>
+  然后自己在电脑上或者我们的在线编辑器
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//crossincode.com/oj/wechat/" rel="nofollow noreferrer" target="_blank">
+   Crossin的编程教室 - 在线Python编辑器
+  </a>
+  里输入代码运行下看看结果，再想想为什么。
+ </p>
+ <p>
+  欢迎留言给出你的解释。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+ </p>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   精选
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   Python
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   问答
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/36064871">
+   Python单词表
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36581953">
+   人工智能
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/29043669">
+   嘻哈
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/28726244">
+   爬虫
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37664927">
+   我用Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37814595">
+   高考
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/38466193">
+   requests
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/39937847">
+   AI平台
+  </a>
+ </p>
+ <p>
+  欢迎搜索及关注：
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+ <p>
+ </p>
+ <p>
+ </p>
+ <p>
+ </p>
+ <p>
+ </p>
+</div></body></html>

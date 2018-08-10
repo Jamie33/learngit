@@ -1,0 +1,458 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>爬虫必备工具，掌握它就解决了一半的问题</h1><div class="RichText ztext Post-RichText">
+ <p>
+  网上爬虫的教程实在太多了，知乎上搜一下，估计能找到不下一百篇。大家乐此不疲地从互联网上抓取着一个又一个网站。但只要对方网站一更新，很可能文章里的方法就不再有效了。
+ </p>
+ <p>
+  每个网站抓取的代码各不相同，不过背后的原理是相通的。对于绝大部分网站来说，抓取的套路就那么一些。今天这篇文章不谈任何具体网站的抓取，只来说一个共性的东西：
+ </p>
+ <p>
+  如何通过
+  <b>
+   Chrome 开发者工具
+  </b>
+  寻找一个网站上特定数据的抓取方式。
+ </p>
+ <p>
+  （我这里演示的是 Mac 上的英文版 Chrome，Windows 中文版的使用方法是一样的。）
+ </p>
+ <h2>
+  <b>
+   &gt; 查看网页源代码
+  </b>
+ </h2>
+ <p>
+  在网页上右击鼠标，选择“
+  <b>
+   查看网页源代码
+  </b>
+  ”（
+  <b>
+   View Page Source
+  </b>
+  ），就会在新标签页中显示这个 URL 对应的 HTML 代码文本。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-b9853c114c4f5af6b6a82f70da8ac3dd_r.jpg" data-rawheight="809" data-rawwidth="1080" data-size="normal" src="https://pic2.zhimg.com/v2-b9853c114c4f5af6b6a82f70da8ac3dd_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-b9853c114c4f5af6b6a82f70da8ac3dd_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-b9853c114c4f5af6b6a82f70da8ac3dd_r.jpg" data-rawheight="809" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='809'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  此功能并不算是“开发者工具”一部分，但也很常用。这个内容和你直接通过代码向此 URL 发送 GET 请求得到的结果是一样的（不考虑权限问题）。如果在这个源代码页面上可以搜索到你要内容，则可以按照其规则，通过
+  <b>
+   正则、bs4、xpath
+  </b>
+  等方式对文本中的数据进行提取。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-b4aefce2d4123cc8263ca9f9046fed0b_r.jpg" data-rawheight="358" data-rawwidth="1080" data-size="normal" src="https://pic3.zhimg.com/v2-b4aefce2d4123cc8263ca9f9046fed0b_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-b4aefce2d4123cc8263ca9f9046fed0b_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-b4aefce2d4123cc8263ca9f9046fed0b_r.jpg" data-rawheight="358" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='358'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  不过，对于很多异步加载数据的网站，从这个页面上并不能搜到你要的东西。或者因为权限、验证等限制，代码中获取到的结果和页面显示不一致。这些情况我们就需要更强大的开发者工具来帮忙了。
+ </p>
+ <h2>
+  <b>
+   &gt; Elements
+  </b>
+ </h2>
+ <p>
+  在网页上右击鼠标，选择“
+  <b>
+   审查元素
+  </b>
+  ”（
+  <b>
+   Inspect
+  </b>
+  ），可进入 Chrome 开发者工具的
+  <b>
+   元素选择器
+  </b>
+  。在工具中是
+  <b>
+   Elements
+  </b>
+  标签页。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-95b6aef58f8502cecfc1b3d6afda4f81_r.jpg" data-rawheight="622" data-rawwidth="1080" data-size="normal" src="https://pic3.zhimg.com/v2-95b6aef58f8502cecfc1b3d6afda4f81_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-95b6aef58f8502cecfc1b3d6afda4f81_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-95b6aef58f8502cecfc1b3d6afda4f81_r.jpg" data-rawheight="622" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='622'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  Elements 有几个功能：
+ </p>
+ <ul>
+  <li>
+   <b>
+    选择元素
+   </b>
+   ：通过鼠标去选择页面上某个元素，并定位其在代码中的位置。
+  </li>
+  <li>
+   <b>
+    模拟器
+   </b>
+   ：模拟不同设备的显示效果，且可以模拟带宽。
+  </li>
+  <li>
+   <b>
+    代码区
+   </b>
+   ：显示页面代码，以及选中元素对应的路径
+  </li>
+  <li>
+   <b>
+    样式区
+   </b>
+   ：显示选中元素所受的 CSS 样式影响
+  </li>
+ </ul>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-edc68a2ae30f97216f5ae814de6ced3d_r.jpg" data-rawheight="630" data-rawwidth="1080" data-size="normal" src="https://pic3.zhimg.com/v2-edc68a2ae30f97216f5ae814de6ced3d_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-edc68a2ae30f97216f5ae814de6ced3d_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-edc68a2ae30f97216f5ae814de6ced3d_r.jpg" data-rawheight="630" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='630'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  从 Elements 工具里定位数据比我们前面直接在源代码中搜索要方便，因为你可以清楚看到它所处的元素结构。但这边特别提醒的是：
+ </p>
+ <p>
+  <b>
+   Elements 里看到的代码不等于请求网址拿到的返回值
+  </b>
+  。
+ </p>
+ <p>
+  它是网页经过浏览器渲染后最终呈现出的效果，包含了异步请求数据，以及浏览器自身对于代码的优化改动。所以，你并不能完全按照 Elements 里显示的结构来获取元素，那样的话很可能得不到正确的结果。
+ </p>
+ <h2>
+  <b>
+   &gt; Network
+  </b>
+ </h2>
+ <p>
+  在开发者工具里选择
+  <b>
+   Network
+  </b>
+  标签页就进入了网络监控功能，也就是常说的“
+  <b>
+   抓包
+  </b>
+  ”。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-c5c674252424dce0c496da22cf09ff1a_r.jpg" data-rawheight="573" data-rawwidth="1080" data-size="normal" src="https://pic2.zhimg.com/v2-c5c674252424dce0c496da22cf09ff1a_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-c5c674252424dce0c496da22cf09ff1a_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-c5c674252424dce0c496da22cf09ff1a_r.jpg" data-rawheight="573" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='573'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  这是爬虫所用到的最重要功能。它主要解决两个问题：
+ </p>
+ <ol>
+  <li>
+   抓什么
+  </li>
+  <li>
+   怎么抓
+  </li>
+ </ol>
+ <p>
+  <b>
+   抓什么
+  </b>
+  ，是指对于那些通过异步请求获取到的数据，如何找到其来源。
+ </p>
+ <p>
+  打开 Network 页面，开启记录，然后刷新页面，就可以看到发出的所有请求，包括数据、JS、CSS、图片、文档等等都会显示其中。从请求列表中可以寻找你的目标。
+ </p>
+ <p>
+  一个个去找会很痛苦。分享几个小技巧：
+ </p>
+ <ul>
+  <li>
+   点击“
+   <b>
+    搜索
+   </b>
+   ”功能，直接对内容进行查找。
+  </li>
+  <li>
+   选中
+   <b>
+    Preseve log
+   </b>
+   ，这样页面刷新和跳转之后，列表不会清空。
+  </li>
+  <li>
+   <b>
+    Filter 栏
+   </b>
+   可以按类型和关键字筛选请求。
+  </li>
+ </ul>
+ <p>
+  找到包含数据的请求之后，接下来就是用程序获取数据。这时就是第二个问题：
+  <b>
+   怎么抓
+  </b>
+  。
+ </p>
+ <p>
+  并不是所有 URL 都能直接通过 GET 获取（相当于在浏览器里打开地址），通常还要考虑这几样东西：
+ </p>
+ <ol>
+  <li>
+   <b>
+    请求方法
+   </b>
+   ，是 GET 还是 POST。
+  </li>
+  <li>
+   <b>
+    请求附带的参数数据
+   </b>
+   。GET 和 POST 传递参数的方法不一样。
+  </li>
+  <li>
+   <b>
+    Headers 信息
+   </b>
+   。常用的包括 user-agent、host、referer、cookie 等。其中
+   <b>
+    cookie
+   </b>
+   是用来识别请求者身份的关键信息，对于需要登录的网站，这个值少不了。而另外几项，也经常会被网站用来识别请求的合法性。同样的请求，浏览器里可以，程序里不行，多半就是 Headers 信息不正确。你可以从 Chrome 上把这些信息照搬到程序里，以此绕过对方的限制。
+  </li>
+ </ol>
+ <p>
+  点击列表中的一个具体请求，上述信息都可以找到。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-a72fc26ede4d160dbbee4e686c5eda6d_r.jpg" data-rawheight="670" data-rawwidth="1080" data-size="normal" src="https://pic1.zhimg.com/v2-a72fc26ede4d160dbbee4e686c5eda6d_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-a72fc26ede4d160dbbee4e686c5eda6d_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-a72fc26ede4d160dbbee4e686c5eda6d_r.jpg" data-rawheight="670" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='670'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-21ff40b133291cc33135169ba7731d5b_r.jpg" data-rawheight="830" data-rawwidth="1080" data-size="normal" src="https://pic4.zhimg.com/v2-21ff40b133291cc33135169ba7731d5b_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-21ff40b133291cc33135169ba7731d5b_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-21ff40b133291cc33135169ba7731d5b_r.jpg" data-rawheight="830" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='830'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-25a0d488a33476e1e96ecde743d6961d_r.jpg" data-rawheight="662" data-rawwidth="1080" data-size="normal" src="https://pic2.zhimg.com/v2-25a0d488a33476e1e96ecde743d6961d_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-25a0d488a33476e1e96ecde743d6961d_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-25a0d488a33476e1e96ecde743d6961d_r.jpg" data-rawheight="662" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='662'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  找对
+  <b>
+   请求
+  </b>
+  ，设对
+  <b>
+   方法
+  </b>
+  ，传对
+  <b>
+   参数
+  </b>
+  以及
+  <b>
+   Headers
+  </b>
+  信息，大部分的网站上的信息都可以搞定了。
+ </p>
+ <p>
+  Network 还有个功能：右键点击列表，选择“
+  <b>
+   Save as HAR with content
+  </b>
+  ”，保存到文件。这个文件包含了列表中
+  <b>
+   所有请求的各项参数及返回值信息
+  </b>
+  ，以便你查找分析。（实际操作中，我发现经常有直接搜索无效的情况，只能保存到文件后搜索）
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-56c23433ccd050ffb727f27c9f031feb_r.jpg" data-rawheight="881" data-rawwidth="1080" data-size="normal" src="https://pic2.zhimg.com/v2-56c23433ccd050ffb727f27c9f031feb_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-56c23433ccd050ffb727f27c9f031feb_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-56c23433ccd050ffb727f27c9f031feb_r.jpg" data-rawheight="881" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='881'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  除了 Elements 和 Network，开发者工具中还有一些功能，比如：
+ </p>
+ <p>
+  <b>
+   Sources
+  </b>
+  ，查看资源列表和调试 JS。
+ </p>
+ <p>
+  <b>
+   Console
+  </b>
+  ，显示页面的报错和输出，并且可以执行 JS 代码。很多网站会在这里放上招聘的彩蛋（自己多找些知名网站试试）。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-4b6038771b35128bbf2097fdf8a92609_r.jpg" data-rawheight="710" data-rawwidth="1080" data-size="normal" src="https://pic1.zhimg.com/v2-4b6038771b35128bbf2097fdf8a92609_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-4b6038771b35128bbf2097fdf8a92609_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-4b6038771b35128bbf2097fdf8a92609_r.jpg" data-rawheight="710" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='710'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  但这些功能和爬虫关系不大。如果你开发网站和优化网站速度，就需要和其他功能打交道。这里就不多说了。
+ </p>
+ <p>
+  总结一下，其实你就记住这几点：
+ </p>
+ <ol>
+  <li>
+   “
+   <b>
+    查看源代码
+   </b>
+   ”里能看到的数据，可以直接通过程序请求当前 URL 获取。
+  </li>
+  <li>
+   <b>
+    Elements
+   </b>
+   里的 HTML 代码
+   <b>
+    不等于
+   </b>
+   请求返回值，只能作为辅助。
+  </li>
+  <li>
+   在
+   <b>
+    Network
+   </b>
+   里用内容关键字搜索，或保存成
+   <b>
+    HAR
+   </b>
+   文件后搜索，找到包含数据的实际请求
+  </li>
+  <li>
+   查看请求的具体信息，包括
+   <b>
+    方法、headers、参数
+   </b>
+   ，复制到程序里使用。
+  </li>
+ </ol>
+ <p>
+  理解了这几步，大部分网上的数据都可以拿到，说“解决一半的问题”可不是标题党。
+ </p>
+ <p>
+  当然咯，说起来轻松几点，想熟练掌握，还是有很多细节要考虑，需要不断练习。但带着这几点再去看各种爬虫案例，思路会更清晰。
+ </p>
+ <p>
+  如果你想要针对爬虫更详细的讲解和指导，我们的“
+  <b>
+   爬虫实战
+  </b>
+  ”课程了解一下，也有面向零基础的入门课程。
+ </p>
+ <p>
+  课程详情公众号（Crossin的编程教室）里回复
+  <b>
+   码上行动
+  </b>
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  <br/>
+  ════
+  <br/>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   精选
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   Python
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   问答
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/36064871">
+   Python单词表
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36538511">
+   区块链
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36581953">
+   人工智能
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/30932804">
+   双11
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/29043669">
+   嘻哈
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/28726244">
+   爬虫
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37430943">
+   排序算法
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37664927">
+   我用Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37814595">
+   高考
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37981169">
+   世界杯
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/38822438">
+   竞猜
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/38466193">
+   requests
+  </a>
+ </p>
+ <p>
+  欢迎搜索及关注：
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+</div></body></html>

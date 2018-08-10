@@ -1,0 +1,433 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>调教属于你的“贾维斯”（给自己挖了一个很大的坑）</h1><div class="RichText ztext Post-RichText">
+ <p>
+  今天玩一下现在很火的
+  <b>
+   人工智能
+  </b>
+  。
+ </p>
+ <p>
+  废话不多说，先来看几张图：
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic3.zhimg.com/v2-ad3eea46e305798a48ed0d8cf67fe5c6_r.jpg" data-rawheight="960" data-rawwidth="800" data-size="normal" src="https://pic3.zhimg.com/v2-ad3eea46e305798a48ed0d8cf67fe5c6_b.jpg" width="800"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic3.zhimg.com/v2-ad3eea46e305798a48ed0d8cf67fe5c6_b.jpg" data-caption="" data-original="https://pic3.zhimg.com/v2-ad3eea46e305798a48ed0d8cf67fe5c6_r.jpg" data-rawheight="960" data-rawwidth="800" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='960'&gt;&lt;/svg&gt;" width="800"/>
+ </figure>
+ <p>
+  看出什么蹊跷了吗？
+ </p>
+ <p>
+  再来看一个视频：
+ </p>
+ <a class="video-box" data-lens-id="1002567561061511168" data-name="" data-poster="https://pic2.zhimg.com/80/v2-0dab34ade39c0728d9b47543138aa2a1_b.jpg" data-video-id="" data-video-playable="true" href="https://link.zhihu.com/?target=https%3A//www.zhihu.com/video/1002567561061511168" target="_blank">
+  <img class="thumbnail" src="https://pic2.zhimg.com/80/v2-0dab34ade39c0728d9b47543138aa2a1_b.jpg"/>
+  <span class="content">
+   <span class="title">
+    <span class="z-ico-extern-gray">
+    </span>
+    <span class="z-ico-extern-blue">
+    </span>
+   </span>
+   <span class="url">
+    <span class="z-ico-video">
+    </span>
+    https://www.zhihu.com/video/1002567561061511168
+   </span>
+  </span>
+ </a>
+ <p>
+  （
+  <b>
+   演示网址和代码见文末
+  </b>
+  ）
+  <br/>
+  人工智能离我们有多远？你觉得只有战胜柯杰的阿尔法狗才算是人工智能吗？看看周围：你的美颜相机、你刷的抖音推荐、你手机上的语音助手……甚至包括给你送外卖的小哥分配，现在都少不了人工智能的参与。
+ </p>
+ <p>
+  《钢铁侠》中的智能管家
+  <b>
+   贾维斯
+  </b>
+  ，如今看起来也不算那么“科幻”了。不少厂家最近都推出了智能音箱产品，可以语音聊天及控制家里的智能家居设备。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-bd9b27e284a4ab159bd5ac25663205cc_r.jpg" data-rawheight="320" data-rawwidth="700" data-size="normal" src="https://pic1.zhimg.com/v2-bd9b27e284a4ab159bd5ac25663205cc_b.jpg" width="700"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-bd9b27e284a4ab159bd5ac25663205cc_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-bd9b27e284a4ab159bd5ac25663205cc_r.jpg" data-rawheight="320" data-rawwidth="700" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='700'%20height='320'&gt;&lt;/svg&gt;" width="700"/>
+ </figure>
+ <p>
+  不过，我想要一个自己的“贾维斯”。
+ </p>
+ <p>
+  这个想法由来已久。现在看来，实现的可能性越来越高了。因为各种
+  <b>
+   AI平台
+  </b>
+  、
+  <b>
+   智能硬件
+  </b>
+  都已成熟，而
+  <b>
+   Python
+  </b>
+  这个
+  <b>
+   胶水语言
+  </b>
+  又可以很方便地把各种模块拼接起来。
+ </p>
+ <p>
+  最近正好瞥见了一个有意思的新“玩具”--
+  <b>
+   腾讯AI开放平台
+  </b>
+  （
+  <a class=" external" href="https://link.zhihu.com/?target=http%3A//ai.qq.com" rel="nofollow noreferrer" target="_blank">
+   <span class="invisible">
+    http://
+   </span>
+   <span class="visible">
+    ai.qq.com
+   </span>
+   <span class="invisible">
+   </span>
+  </a>
+  ），本来只是想简单给大家分享一下。结果我自己写得停不下来，借此机会开启我的调教之旅。（这回一定是一个深坑）
+ </p>
+ <p>
+  这次用到了AI平台的
+  <b>
+   语音识别
+  </b>
+  、
+  <b>
+   智能闲聊
+  </b>
+  、
+  <b>
+   语音合成
+  </b>
+  ，把这三个功能串起来，实现了语音智能应答的功能。
+ </p>
+ <p>
+  目前功能可以说是十分初级，不过总要有个开始嘛，反正我有的是时间去打造她。
+ </p>
+ <p>
+  接下来的一些计划：
+ </p>
+ <ul>
+  <li>
+   增加
+   <b>
+    摄像头
+   </b>
+   ，实现人脸识别和场景定位
+  </li>
+ </ul>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-34bf6469cd28d0d5717f2b88f4a183de_r.jpg" data-rawheight="314" data-rawwidth="651" data-size="normal" src="https://pic4.zhimg.com/v2-34bf6469cd28d0d5717f2b88f4a183de_b.jpg" width="651"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-34bf6469cd28d0d5717f2b88f4a183de_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-34bf6469cd28d0d5717f2b88f4a183de_r.jpg" data-rawheight="314" data-rawwidth="651" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='651'%20height='314'&gt;&lt;/svg&gt;" width="651"/>
+ </figure>
+ <ul>
+  <li>
+   接上一个机械臂。之后所以无脑操作类的手机游戏，你们就别想跟我一起冲排名了
+  </li>
+ </ul>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-d3c3f096e72c9820cd81f1b35a4bd5b5_r.jpg" data-rawheight="268" data-rawwidth="484" data-size="normal" data-thumbnail="https://pic4.zhimg.com/v2-d3c3f096e72c9820cd81f1b35a4bd5b5_b.jpg" src="https://pic4.zhimg.com/v2-d3c3f096e72c9820cd81f1b35a4bd5b5_b.gif" width="484"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-d3c3f096e72c9820cd81f1b35a4bd5b5_b.gif" data-caption="" data-original="https://pic4.zhimg.com/v2-d3c3f096e72c9820cd81f1b35a4bd5b5_r.jpg" data-rawheight="268" data-rawwidth="484" data-size="normal" data-thumbnail="https://pic4.zhimg.com/v2-d3c3f096e72c9820cd81f1b35a4bd5b5_b.jpg" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='484'%20height='268'&gt;&lt;/svg&gt;" width="484"/>
+ </figure>
+ <ul>
+  <li>
+   安上
+   <b>
+    轮子
+   </b>
+  </li>
+ </ul>
+ <figure>
+  <noscript>
+   <img class="content_image" data-caption="" data-rawheight="400" data-rawwidth="400" data-size="normal" src="https://pic3.zhimg.com/v2-8f683a20ba4645159f77e2f51160f487_b.jpg" width="400"/>
+  </noscript>
+  <img class="content_image lazy" src="https://pic3.zhimg.com/v2-8f683a20ba4645159f77e2f51160f487_b.jpg" data-caption="" data-rawheight="400" data-rawwidth="400" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='400'%20height='400'&gt;&lt;/svg&gt;" width="400"/>
+ </figure>
+ <ul>
+  <li>
+   连接
+   <b>
+    无人机
+   </b>
+  </li>
+ </ul>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic1.zhimg.com/v2-fb153c2cd62bd22886651ca0d5d9f9d4_r.jpg" data-rawheight="300" data-rawwidth="460" data-size="normal" src="https://pic1.zhimg.com/v2-fb153c2cd62bd22886651ca0d5d9f9d4_b.jpg" width="460"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic1.zhimg.com/v2-fb153c2cd62bd22886651ca0d5d9f9d4_b.jpg" data-caption="" data-original="https://pic1.zhimg.com/v2-fb153c2cd62bd22886651ca0d5d9f9d4_r.jpg" data-rawheight="300" data-rawwidth="460" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='460'%20height='300'&gt;&lt;/svg&gt;" width="460"/>
+ </figure>
+ <ul>
+  <li>
+   当然，肯定还少不了
+   <b>
+    树莓派
+   </b>
+  </li>
+ </ul>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-4aeb0a7d1ae14e8d51619a8f9e57a9b9_r.jpg" data-rawheight="376" data-rawwidth="619" data-size="normal" src="https://pic2.zhimg.com/v2-4aeb0a7d1ae14e8d51619a8f9e57a9b9_b.jpg" width="619"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-4aeb0a7d1ae14e8d51619a8f9e57a9b9_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-4aeb0a7d1ae14e8d51619a8f9e57a9b9_r.jpg" data-rawheight="376" data-rawwidth="619" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='619'%20height='376'&gt;&lt;/svg&gt;" width="619"/>
+ </figure>
+ <p>
+  虽然还没想清楚最终会做出个什么东西，但这不重要，对我来说过程已经够有趣了。（应该整不出一个
+  <b>
+   奥创
+  </b>
+  来）
+ </p>
+ <p>
+  另外昨天还顺手拿
+  <b>
+   人脸融合
+  </b>
+  的接口做了个
+  <b>
+   在线换装小工具
+  </b>
+  ，支持
+  <b>
+   50种模板
+  </b>
+  ，想要体验的朋友，由此进入&gt;&gt;&gt;
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//lab.crossincode.com/face/" rel="nofollow noreferrer" target="_blank">
+   人脸融合 - Crossin 的编程实验室
+  </a>
+  。
+ </p>
+ <p>
+  昨天夜里把这个功能上线，朋友圈发了一下，很快就有几百人访问。现在文章推送出去，不知道我那小破服务器能不能顶得住。虽然已经对图片传输做了压缩优化，但还是很危险。如果请求失败，请稍晚些再来体验，或者自己下载代码运行。
+ </p>
+ <hr/>
+ <p>
+  外行看热闹，内行看门道。前面的热闹说完了，如果你还想了解更多，我们接下来就说点有信息量的门道。
+ </p>
+ <p>
+  这次代码用到的
+  <b>
+   腾讯AI开放平台
+  </b>
+  ，现在功能已经不少，主要是
+  <b>
+   自然语言处理
+  </b>
+  、
+  <b>
+   计算机视觉
+  </b>
+  、
+  <b>
+   智能语音
+  </b>
+  三大方向。这次案例的代码，三个方向都涉及到了。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic2.zhimg.com/v2-6f1e887ccd9c0abb19c7059ae907a263_r.jpg" data-rawheight="580" data-rawwidth="1080" data-size="normal" src="https://pic2.zhimg.com/v2-6f1e887ccd9c0abb19c7059ae907a263_b.jpg" width="1080"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic2.zhimg.com/v2-6f1e887ccd9c0abb19c7059ae907a263_b.jpg" data-caption="" data-original="https://pic2.zhimg.com/v2-6f1e887ccd9c0abb19c7059ae907a263_r.jpg" data-rawheight="580" data-rawwidth="1080" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='1080'%20height='580'&gt;&lt;/svg&gt;" width="1080"/>
+ </figure>
+ <p>
+  平台文档还算得上详细，也提供了在线功能演示，建议自己上去捣鼓一下。现在只要注册就能申请使用，
+  <b>
+   不收费
+  </b>
+  ，作为学习来说也几乎没有限制。比较可惜的是我没看到有
+  <b>
+   Python 示例
+  </b>
+  ，所以你可以
+  <b>
+   参考我的代码
+  </b>
+  来写。（尤其是计算签名的部分，可以直接用我的代码。）
+ </p>
+ <p>
+  单看独立的 API 并不复杂，简单来说就是一个
+  <b>
+   网络请求
+  </b>
+  ，你按要求提供了正确的
+  <b>
+   参数
+  </b>
+  ，平台就会返回给你相应的
+  <b>
+   结果
+  </b>
+  。但如果你是刚接触这类接口，我相信你会被坑得鼻青脸肿，因为我也是过来人。😂
+ </p>
+ <p>
+  比较明显的坑大约有三个：
+ </p>
+ <ol>
+  <li>
+   <b>
+    签名
+   </b>
+   。这是开放 API 验证来源身份的标志，也是 API 新手必经的坎。你要了解
+   <b>
+    md5
+   </b>
+   的概念（之前文章有提及过
+   <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMjM5MDEyMDk4Mw%3D%3D%26mid%3D2650166509%26idx%3D1%26sn%3Dc897cd6f0de498d58b81dd28507e62b4%26chksm%3Dbe4b5995893cd0837291eaf67ff1f39d1d61528207a8a043bf2a2cda1dab8371436cc82c67c7%26scene%3D21%23wechat_redirect" rel="nofollow noreferrer" target="_blank">
+    【每周一坑】校验文件哈希
+   </a>
+   ），并且按照 API 的要求生成正确的签名。除了开始时理解上的困难，在开发调试时，因为最终输出只有一串字符，所以出错时很难 debug，只能一遍遍地仔细检查。
+  </li>
+  <li>
+   <b>
+    参数
+   </b>
+   。参数看起来都给你规定好了，但实际用时才发现会有各种问题。比较常见的错误可能是
+   <b>
+    编码
+   </b>
+   。同样，因为缺少调试信息，即使是很低级的错误，也可能让你耗费很长时间。再加上有些你没注意到的文档细节（比如字符长度限制）和错误（语音合成里的请求方法是 POST 但文档上写的是 GET），这个步骤也会让你抓狂。
+  </li>
+  <li>
+   <b>
+    返回值
+   </b>
+   。当你排除万难，终于拿到结果的时候，或许会一脸懵逼……因为除了自然语言接口外，图像和声音的返回值大多是经
+   <b>
+    base64
+   </b>
+   编码后的数据。你需要自己对这些数据进行处理、存储或展示。而如果你像我一样要把几个接口的功能串联起来，那么等待你的将是各种数据、文件类型的转换。好在 Python 在这方面还算方便，不然真的会痛不欲生。
+  </li>
+ </ol>
+ <p>
+  所以，看起来只是简单的接口调用，对于经验不多的开发者来说，也不是容易的事。但这些光靠看是看不出来的，你必须亲手写过才能体会。写了之后就会发现，一些坑我早就给过预警。不用太过纠结于哪个教程更好，自己动起手来才是最好。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  示例代码里包括语音智能聊天和换装的代码、以及一个简版的换装页面（基于django）。获取代码地址请在公众号（
+  <b>
+   Crossin的编程教室
+  </b>
+  ）里回复
+  <b>
+   人工智能
+  </b>
+ </p>
+ <p>
+  如果有搞不定的问题，欢迎加入我的
+  <b>
+   知识星球
+  </b>
+  来跟我讨论，话题不限于示例代码。
+ </p>
+ <p>
+  <a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//lab.crossincode.com/face/" rel="nofollow noreferrer" target="_blank">
+   人脸融合 - Crossin 的编程实验室
+  </a>
+  欢迎体验及转发。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+ </p>
+ <p>
+  <i>
+   其他文章及回答：
+  </i>
+ </p>
+ <p>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   精选
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   Python
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   问答
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/36064871">
+   Python单词表
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36538511">
+   区块链
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36581953">
+   人工智能
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/30932804">
+   双11
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/29043669">
+   嘻哈
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/28726244">
+   爬虫
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37430943">
+   排序算法
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37664927">
+   我用Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37814595">
+   高考
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37981169">
+   世界杯
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/38822438">
+   竞猜
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/38466193">
+   requests
+  </a>
+ </p>
+ <p>
+  欢迎搜索及关注：
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+ <p>
+ </p>
+</div></body></html>

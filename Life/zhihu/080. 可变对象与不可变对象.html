@@ -1,0 +1,443 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1>可变对象与不可变对象</h1><div class="RichText ztext Post-RichText">
+ <p>
+  前阵子我们聊了下函数的参数传递以及变量赋值的一些内容：
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/38375434">
+   关于函数参数传递，80%人都错了
+  </a>
+ </p>
+ <p>
+  简单回顾下要点：
+ </p>
+ <p>
+  1. Python 中的变量不是装有对象的“
+  <b>
+   容器
+  </b>
+  ”，而是贴在对象上的“
+  <b>
+   标签
+  </b>
+  ”。
+ </p>
+ <figure>
+  <noscript>
+   <img class="origin_image zh-lightbox-thumb" data-caption="" data-original="https://pic4.zhimg.com/v2-ec4afe014f1f8cca2464dcb533be7aed_r.jpg" data-rawheight="782" data-rawwidth="740" data-size="normal" src="https://pic4.zhimg.com/v2-ec4afe014f1f8cca2464dcb533be7aed_b.jpg" width="740"/>
+  </noscript>
+  <img class="origin_image zh-lightbox-thumb lazy" src="https://pic4.zhimg.com/v2-ec4afe014f1f8cca2464dcb533be7aed_b.jpg" data-caption="" data-original="https://pic4.zhimg.com/v2-ec4afe014f1f8cca2464dcb533be7aed_r.jpg" data-rawheight="782" data-rawwidth="740" data-size="normal" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='740'%20height='782'&gt;&lt;/svg&gt;" width="740"/>
+ </figure>
+ <p>
+  2. 参数传递相当于一次
+  <b>
+   赋值
+  </b>
+  ：多贴了一个标签。
+ </p>
+ <p>
+  3. 至于在函数内部对参数的修改是否会影响到外部变量的值，取决于你怎样修改：如果是重新赋值就不会，如果是修改对象自身内容则会。
+ </p>
+ <p>
+  讲到这里就有个常被提及的概念：
+  <br/>
+  <b>
+   可变对象和不可变对象
+  </b>
+ </p>
+ <p>
+  在 Python 中，
+  <br/>
+  <b>
+   可变对象
+  </b>
+  包括
+  <b>
+   list、dict、set、自定义类型
+  </b>
+  等；
+  <br/>
+  <b>
+   不可变对象
+  </b>
+  包括
+  <b>
+   int、float、bool、str、tuple
+  </b>
+  等。
+ </p>
+ <p>
+  不可变对象不允许对自身内容进行修改。如果我们对一个不可变对象进行赋值，实际上是生成一个新对象，再让变量指向这个对象。哪怕这个对象简单到只是数字 0 和 1：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</code></pre>
+ </div>
+ <p>
+  输出：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">a</span> <span class="mi">4463151440</span>
+<span class="n">a</span> <span class="mi">4463151472</span>
+</code></pre>
+ </div>
+ <p>
+  因为对象不可变，所以为了提高效率，Python 会使用一些公用的对象：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'b'</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="ow">is</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="s1">'hello world'</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'c'</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+<span class="n">d</span> <span class="o">=</span> <span class="s1">'hello world'</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'d'</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="n">d</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span> <span class="ow">is</span> <span class="n">d</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  输出：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">a</span> <span class="mi">4423761776</span>
+<span class="n">b</span> <span class="mi">4423761776</span>
+<span class="kc">True</span>
+<span class="kc">True</span>
+<span class="n">c</span> <span class="mi">4430180912</span>
+<span class="n">d</span> <span class="mi">4430180912</span>
+<span class="kc">True</span>
+<span class="kc">True</span>
+</code></pre>
+ </div>
+ <p>
+  这里顺便提一下
+  <code>
+   is
+  </code>
+  这个操作符。它和
+  <code>
+   ==
+  </code>
+  的区别在于：
+  <code>
+   ==
+  </code>
+  只判断“值”是不是相等，而
+  <code>
+   is
+  </code>
+  则判断是否为同一个对象，也就是地址一致。比如：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="ow">is</span> <span class="n">b</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  输出：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>True
+False
+</code></pre>
+ </div>
+ <p>
+  而可变对象则可以对自身内容进行修改，如：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'m'</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+<span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'m'</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+<span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'m'</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+</code></pre>
+ </div>
+ <p>
+  输出：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>m [1, 2, 3] 4536815752
+m [1, 4, 3] 4536815752
+m [1, 4, 3, 5] 4536815752
+</code></pre>
+ </div>
+ <p>
+  可以看到，虽然 m 的值发生了变化，但是地址没变，还是原来那个 m。
+ </p>
+ <p>
+  上次我也说到，很多的教程都在用可变和不可变来谈论赋值和参数传递，我觉得这很不好。因为他们说到不可变对象时用的是赋值，而说到可变对象又用了 list 的索引、apeend 等方法，这根本是两码事。如果大家都是赋值，那么无论是否可变，效果都是一样的：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'m'</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+<span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'m'</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+</code></pre>
+ </div>
+ <p>
+  输出
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>m [1, 2, 3] 4329894024
+m [4, 5, 6] 4329910856
+</code></pre>
+ </div>
+ <p>
+  所以理解了 Python 的赋值原理，就明白这与是否可变无关。而可变对象于不可变对象本身的不同仅在于一个可以修改变量的值，而另一个不允许。
+ </p>
+ <p>
+  基于这一设定，两者在功能上的最大区别就是：
+  <b>
+   不可变对象可以作为字典 dict 的键 key
+  </b>
+  ，而可变对象不行。比如 list 不能作为字典的键，但 tuple 可以。
+ </p>
+ <p>
+  另外，明白了可变与不可变的区别，一些方法的效果也就自然理解了：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">'abc'</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'b'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'s'</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'s2'</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">m2</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'m'</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'m2'</span><span class="p">,</span> <span class="n">m2</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  输出：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>s abc
+s2 adc
+m [3, 2, 1]
+m2 None
+</code></pre>
+ </div>
+ <p>
+  因为
+  <code>
+   str
+  </code>
+  是不可变对象，所以它的方法如
+  <code>
+   replace
+  </code>
+  、
+  <code>
+   strip
+  </code>
+  、
+  <code>
+   upper
+  </code>
+  都不可能修改原对象，
+  <b>
+   只会返回一个新对象
+  </b>
+  ，比如重新赋值才可以。而
+  <code>
+   list
+  </code>
+  是可变对象，它的方法如
+  <code>
+   reverse
+  </code>
+  、
+  <code>
+   sort
+  </code>
+  、
+  <code>
+   append
+  </code>
+  ，都是
+  <b>
+   在原有对象上直接修改
+  </b>
+  ，无返回值。
+ </p>
+ <p>
+  不过，有个特殊情况需要注意：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'m'</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+<span class="n">m</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'m'</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'m'</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+</code></pre>
+ </div>
+ <p>
+  输出
+ </p>
+ <div class="highlight">
+  <pre><code class="language-text"><span></span>m [1, 2, 3] 4494164104
+m [1, 2, 3, 4] 4494164104
+m [1, 2, 3, 4, 5] 4494181128
+</code></pre>
+ </div>
+ <p>
+  <code>
+   m = m +
+  </code>
+  和
+  <code>
+   m +=
+  </code>
+  虽然是一样的结果，但 m 指向的对象却发生了变化。原因在于，前者是做了赋值操作，而后者其实是调用的
+  <code>
+   __iadd__
+  </code>
+  方法。
+ </p>
+ <p>
+  如果我们就是需要产生一个 list 对象的副本，可以通过
+  <code>
+   [:]
+  </code>
+  ：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'m'</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">m</span><span class="p">[:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'m'</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  这样对 n 的修改便不再会影响到 m，因为它们已不是同一个对象。
+ </p>
+ <p>
+  那么如果是这样呢：
+ </p>
+ <div class="highlight">
+  <pre><code class="language-python3"><span></span><span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">m</span><span class="p">[:]</span>
+<span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</code></pre>
+ </div>
+ <p>
+  猜一猜 m 的结果是什么？
+ </p>
+ <ol>
+  <li>
+   [1, 2, [3]]
+  </li>
+  <li>
+   [1, 4, [3]]
+  </li>
+  <li>
+   [1, 2, [5]]
+  </li>
+  <li>
+   [1, 4, [5]]
+  </li>
+  <li>
+   其它结果
+  </li>
+ </ol>
+ <p>
+  再去 Python 里执行下看看输出，是不是和预期一样，想想为什么？这个牵涉到浅拷贝、深拷贝的概念，我们下次再聊。
+ </p>
+ <p>
+  <br/>
+ </p>
+ <p>
+  ════
+  <br/>
+  <i>
+   其他文章及回答：
+  </i>
+  <br/>
+  <a class="internal" href="https://www.zhihu.com/question/20702054/answer/19022301">
+   如何自学Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/25824007">
+   新手引导
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   精选
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   Python
+  </a>
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/34685564">
+   问答
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/36064871">
+   Python单词表
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36538511">
+   区块链
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/36581953">
+   人工智能
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/30932804">
+   双11
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/29043669">
+   嘻哈
+  </a>
+  |
+  <a class="internal" href="http://zhuanlan.zhihu.com/p/28726244">
+   爬虫
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37430943">
+   排序算法
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37664927">
+   我用Python
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37814595">
+   高考
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/37981169">
+   世界杯
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/38822438">
+   竞猜
+  </a>
+  |
+  <a class="internal" href="https://zhuanlan.zhihu.com/p/38466193">
+   requests
+  </a>
+  <br/>
+  欢迎搜索及关注：
+  <b>
+   Crossin的编程教室
+  </b>
+ </p>
+ <p>
+ </p>
+ <p>
+ </p>
+</div></body></html>
