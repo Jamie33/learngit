@@ -46,7 +46,7 @@ https://zhuanlan.zhihu.com/p/41055423  （微信币价查询机器人 / A Wechat
 
 ---
 
-如果你想认识我，扫描下方二维码!
+如果你想认识我，用微信扫描下方二维码!
 
 In case you want to get to know me, scan the QR code below to add me on Wechat!
 
