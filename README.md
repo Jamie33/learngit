@@ -1,8 +1,9 @@
-徐玖 
+徐玖 / Jamie
 
 
 四川外国语大学 MTI, 英语翻译3年从业者，Python 编程爱好者
-
+master of Interpretion and translation from Sichuan International Studies University
+have three years of work experience in English translation
 
 
 个人 Github:
