@@ -38,11 +38,11 @@ http://cdmd.cnki.com.cn/Article/CDMD-10650-1015300254.htm
 
 > 满足日常生活需求写的小脚本 / Python scripts for daily needs
 
-https://zhuanlan.zhihu.com/p/47664186  （深圳图书馆自动预借脚本/  Borrowing books whenever it's available from online libaray system）
+https://zhuanlan.zhihu.com/p/47664186  （深圳图书馆自动预借脚本/  Borrowing books whenever it's available from online library system）
 
-https://zhuanlan.zhihu.com/p/41280394  （论坛每天自动获取积分的脚本/ Getting points from forum on a daily basis）
+https://zhuanlan.zhihu.com/p/41280394  （论坛每天自动获取积分的脚本/ Getting points from the forum on a daily basis）
 
-https://zhuanlan.zhihu.com/p/41055423  （微信币价查询机器人 / A wechat bot for check prices of cryptocurrenies）
+https://zhuanlan.zhihu.com/p/41055423  （微信币价查询机器人 / A Wechat bot for check prices of cryptocurrenies）
 
 ---
 
