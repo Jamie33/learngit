@@ -4,15 +4,15 @@
 
 **四川外国语大学 MTI** 
 
-+**Graduated from Sichuan International Studies University as a master of translation and interpreting**  
+-**Graduated from Sichuan International Studies University as a master of translation and interpreting**  
 
 **英语翻译3年从业者**
 
-+**Having three years of work experience in English translation** 
+-**Having three years of work experience in English translation** 
 
 **Python 编程爱好者**
 
-+**Desperately in love with Python**
+-**Desperately in love with Python**
 
 ---
 
@@ -40,7 +40,7 @@ http://cdmd.cnki.com.cn/Article/CDMD-10650-1015300254.htm
 
 https://zhuanlan.zhihu.com/p/47664186  （深圳图书馆自动预借脚本/ automaticly borrow books from online libaray system）
 
-https://zhuanlan.zhihu.com/p/41280394  （论坛每天自动获取积分的脚本/ get points from forum every day）
+https://zhuanlan.zhihu.com/p/41280394  （论坛每天自动获取积分的脚本/ get points from forum on a daily basis）
 
 https://zhuanlan.zhihu.com/p/41055423  （微信币价查询机器人 / A wechat bot for check prices of cryptocurrenies）
 
