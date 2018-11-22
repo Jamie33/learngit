@@ -2,38 +2,36 @@
 
 ## 徐玖 / Jamie
 
-四川外国语大学 MTI 
+**四川外国语大学 MTI** 
 
-Graduated from Sichuan International Studies University as a master of translation and interpreting 
++Graduated from Sichuan International Studies University as a master of translation and interpreting 
 
-英语翻译3年从业者
+**英语翻译3年从业者**
 
-Having three years of work experience in English translation
++Having three years of work experience in English translation
 
-Python 编程爱好者
+**Python 编程爱好者**
 
-Desperately in love with Python
++Desperately in love with Python
 
+---
 
->>> 个人 Github:
+> 个人 Github:
 https://github.com/Jamie33    
 
->>> 知乎主页 / Zhihu homepage：
+> 知乎主页 / Zhihu homepage：
 https://www.zhihu.com/people/xu-jiu-85-74/posts 
 
->>> 个人博客 / Blog：
+> 个人博客 / Blog：
 https://jamie33.github.io/  （基于github pages 和 hexo 搭建 / based on github pages and hexo） 
 
->>> 编译文章 / Previous translation work：
+> 编译文章 / Previous translation work：
 https://www.leiphone.com/author/xusan （雷锋网认证作者592篇 / 592 translated articles ）
 
->>> 硕士论文 / Master paper：
+> 硕士论文 / Master paper：
 http://cdmd.cnki.com.cn/Article/CDMD-10650-1015300254.htm 
 
-
-
-
->>> 满足日常生活需求写的小脚本 / Python scripts for daily needs
+> 满足日常生活需求写的小脚本 / Python scripts for daily needs
 
 https://zhuanlan.zhihu.com/p/47664186  （深圳图书馆自动预借脚本/ automaticly borrow books from online libaray system）
 
