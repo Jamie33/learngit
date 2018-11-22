@@ -5,15 +5,20 @@
 
 
 
-个人 Github: https://github.com/Jamie33   
+个人 Github:
+https://github.com/Jamie33   
 
-知乎主页：https://www.zhihu.com/people/xu-jiu-85-74/posts 
+知乎主页：
+https://www.zhihu.com/people/xu-jiu-85-74/posts 
 
-个人博客：https://jamie33.github.io/  （基于github pages 和 hexo 搭建） 
+个人博客：
+https://jamie33.github.io/  （基于github pages 和 hexo 搭建） 
 
-编译文章：https://www.leiphone.com/author/xusan （雷锋网认证作者592篇）
+编译文章：
+https://www.leiphone.com/author/xusan （雷锋网认证作者592篇）
 
-硕士论文：http://cdmd.cnki.com.cn/Article/CDMD-10650-1015300254.htm
+硕士论文：
+http://cdmd.cnki.com.cn/Article/CDMD-10650-1015300254.htm
 
 
 
