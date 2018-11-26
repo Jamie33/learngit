@@ -2,9 +2,9 @@
 
 ## 徐玖 / Jamie
 
-- **四川外国语大学 MTI** 
+- **四川外国语大学 翻译硕士** 
 
-- **Graduated from Sichuan International Studies University as a master of translation and interpreting**  
+- **Holding a Master of Translation and Interpreting from Sichuan International Studies University**  
 
 - **英语翻译3年从业者**
 
@@ -50,4 +50,4 @@ https://zhuanlan.zhihu.com/p/41055423  （微信币价查询机器人 / A Wechat
 
 In case you want to get to know me, scan the QR code below to add me on Wechat!
 
-![微信图片_20181122103825.jpg](https://i.loli.net/2018/11/22/5bf61b52eb3c5.jpg)
+![微信图片_20181122103825_副本.jpg](https://i.loli.net/2018/11/26/5bfb556d1ed9b.jpg)
