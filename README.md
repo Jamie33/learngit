@@ -2,9 +2,9 @@
 
 ## 徐玖 / Jamie
 
-- **四川外国语大学 MTI** 
+- **四川外国语大学 翻译硕士** 
 
-- **Graduated from Sichuan International Studies University as a master of translation and interpreting**  
+- **Holding a Master of Translation and Interpreting from Sichuan International Studies University**  
 
 - **英语翻译3年从业者**
 
