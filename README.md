@@ -38,7 +38,7 @@ http://cdmd.cnki.com.cn/Article/CDMD-10650-1015300254.htm
 
 > 满足日常生活需求写的小脚本 / Python scripts for daily needs
 
-https://zhuanlan.zhihu.com/p/47664186  （深圳图书馆自动预借脚本/  Borrowing books whenever it's available from online library system）
+https://zhuanlan.zhihu.com/p/47664186  （深圳图书馆自动预借脚本/  Borrowing books whene they are available from online library system）
 
 https://zhuanlan.zhihu.com/p/41280394  （论坛每天自动获取积分的脚本/ Getting points from the forum on a daily basis）
 
