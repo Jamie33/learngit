@@ -32,10 +32,6 @@ https://jamie33.github.io/  （基于github pages 和 hexo 搭建 / Based on git
 
 https://www.leiphone.com/author/xusan （雷锋网认证作者592篇 / 592 translated articles ）
 
-> 硕士论文 / Master paper：
-
-http://cdmd.cnki.com.cn/Article/CDMD-10650-1015300254.htm 
-
 > 满足日常生活需求写的小脚本 / Python scripts for daily needs
 
 https://zhuanlan.zhihu.com/p/47664186  （深圳图书馆自动预借脚本/  Borrowing books whene they are available from online library system）
