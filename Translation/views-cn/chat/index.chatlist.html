@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>聊天列表</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="workman/assets/css/font-awesome.css">
+	<link rel="stylesheet" href="workman/assets/css/index.css">
+</head>
+<body>
+	<header class="head-menu bg-black color-f">
+		<a href="javascript:history.go(-1)" class="fl"><span class="fa fa-angle-left">&nbsp;返回</span></a>
+		<h3 class="box-flex color-f">消息列表</h3>
+		<a href="{url('index', array('uid'=>$user_id))}" class="fr"><span class="fa fa-ellipsis-h"></span></a>
+	</header>
+	<div class="content-box">
+		<ul>
+			{foreach $user as $l}
+			<li>
+				<a href="{url('yunwang/index', array('uid'=>$l.cus_id))}">
+					<div class="chat-left"><img src="{$l.avatar}" alt=""></div>
+					<div class="chat-center">
+						<p class="chat-title clamp clamp1">{$l.nick_name}</p>
+						<span class="chat-info clamp clamp2">{$l.message}</span>
+					</div>
+					<div class="chat-right"><span>{$l.add_time}</span></div>
+				</a>
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+{include file="page_header"}
+<section class="product-sequence dis-box">
+	<a class="box-flex active " sort="goods_id" order="DESC">默认<i class="iconfont icon-xiajiantou"></i></a>
+	<a class="box-flex" sort="amount" order="DESC">兑换量<i class="iconfont icon-xiajiantou"></i></a>
+	<a class="box-flex" sort="popularity" order="DESC">积分值<i class="iconfont icon-xiajiantou"></i></a>
+</section>
+<section class="j-get-i-more j-money-divided">
+	<script id="j-product" type="text/html">
+		<%if totalPage > 0%>
+			<div class="m-top1px b-color-f  product-list-small">
+				<ul>
+					<%each goodslist as list%>
+					<a href="<%list.url%>">
+						<li class="wallet-bt">
+							<div class="product-div">
+								<div class="p-d-img fl">
+									<img class="product-list-img" src="<%list.goods_thumb%>">
+								</div>
+								<div class="product-text-auction">
+									<h5 class="f-06 col-3 onelist-hidden"><%list.goods_name%></h5>
+									<span class="t-first auction-cont-box f-07 m-top04"><%list.exchange_integral%></span><small class="my-auction-small">积分</small>
+									<p class="f-02 col-9">市场价：
+										<%#list.market_price%>
+									</p>
+									<div class="m-top02"><span class="auction-but-cont a-col-red">立即兑换</span></div>
+								</div>
+							</div>
+						</li>
+					</a>
+						<%/each%>
+				</ul>
+			</div>
+			<%else%>
+				<div class="no-div-message">
+					<i class="iconfont icon-biaoqingleiben"></i>
+					<p>亲，此处没有内容～！</p>
+				</div>
+				<%/if%>
+	</script>
+</section>
+     <!--快捷导航-->
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+</body>
+<script>
+	var url = ROOT_URL + 'index.php?m=exchange';
+	var infinite = $('.j-money-divided').infinite({
+		url: url,
+		template: 'j-product'
+	});
+
+	$(".product-sequence a").click(function() {
+		var sort = $(this).attr('sort');
+		var order = $(this).attr('order');
+		infinite.onload('sort=' + sort + '&order=' + order);
+		$(this).addClass("active").siblings().removeClass("active");
+		if (order == 'DESC') {
+			$(this).attr("order", "ASC");
+			$(this).removeClass("a-change");
+		} else {
+			$(this).attr("order", "DESC");
+			$(this).addClass("a-change");
+		}
+
+	})
+</script>
+
+</html>

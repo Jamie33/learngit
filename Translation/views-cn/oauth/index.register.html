@@ -1,0 +1,59 @@
+{include file="page_header"}
+<body class="b-color-f">
+	<div class="con b-color-f">
+		<div class="user-center user-register of-hidden">
+			<div id="j-tab-con">
+				<div class="swiper-wrapper">
+					<section class="swiper-slide swiper-no-swiping">
+						<form action="{url('oauth/index/register')}" method="post" class="validform">
+							<div class="text-all dis-box j-text-all" name="usernamediv">
+								<div class="box-flex input-text">
+									<input class="j-input-text" name="username" type="text" datatype="s6-18" nullmsg="请输入用户名" errormsg="请输入6~18位的用户名"	placeholder="请输入用户名" /> <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+								</div>
+							</div>
+							<div class="text-all dis-box j-text-all" name="passworddiv">
+								<div class="box-flex input-text">
+									<input class="j-input-text" name="password" type="password"	datatype="*6-16" nullmsg="请设置密码" errormsg="密码范围在6~16位" placeholder="请输入密码" /> <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+								</div>
+								<i class="iconfont icon-yanjing is-yanjing j-yanjing disabled"></i>
+							</div>
+							<div class="text-all dis-box j-text-all" name="confirm_passworddiv">
+								<div class="box-flex input-text">
+									<input class="j-input-text" name="confirm_password"	type="password" datatype="*" recheck="password"	nullmsg="请再输入一次密码" errormsg="两次输入的密码不一致"	placeholder="再次输入密码" /> <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+								</div>
+								<i class="iconfont icon-yanjing is-yanjing j-yanjing disabled"></i>
+							</div>
+							<input type="hidden" name="type" value="{$type}" />
+							<input type="hidden" name="back_url" value="{$back_url}" />
+							<button type="submit" class="btn-submit">{$lang.msg_author_register}</button>
+						</form>
+					</section>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="div-messages"></div>
+	<script>
+		$(":input").keyup(function() {
+			var box = this.name + "div";
+			var div = $("div[name=" + box + "]");
+			var value = div.attr("class").indexOf("active")
+			if (value > 0) {
+				div.removeClass("active");
+			}
+		});
+
+		$(".j-tab-title li").on('touchstart mousedown', function(e) {
+			e.preventDefault()
+			$(".j-tab-title .active").removeClass('active')
+			$(this).addClass('active')
+			tabsSwiper.slideTo($(this).index())
+		})
+		$(".j-tab-title li").click(function(e) {
+			e.preventDefault()
+		})
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+{include file="page_header"}
+	<div class="con">
+        {if $consignee_list}      
+        <div class="flow-consignee-list j-get-consignee-one select-three">
+    		{foreach $consignee_list as $consignee}
+			<section class="flow-checkout-adr m-top08" id="list{$consignee.address_id}">
+				<div class="flow-have-adr padding-all">
+					<div class="f-h-adr-title dis-box">
+						<label>{$consignee.consignee}</label> {if $consignee.address_id==$defulte_id }
+						<span class="t-first address-default">默认</span> {/if}
+						<div class="box-flex">
+							<div class="fr"><span class="f-05">{$consignee.mobile}</span></div>
+						</div>
+					</div>
+					<p class="f-04  m-top04" onclick="adderss_user({$consignee.address_id})">{$consignee.address}</p>
+				</div>
+				<!--nav-list-->
+				<div class="flow-set-adr of-hidden padding-all-n">
+					<div class="ect-select fl">
+						<label class="dis-box {if $address_id == $consignee.address_id}active{/if}" onclick="adderss_user({$consignee.address_id})">
+			                      <i class="select-btn active-i"></i>      
+			                      <span class="t-first margin-lr" id="address-defaul">选择</span>                       
+			                    </label>
+					</div>
+					<div class="fr">
+						<a href="{url('flow/index/add_address',array('address_id'=>$consignee.address_id))}">
+							<i class="iconfont icon-bianji"></i>编辑
+						</a>
+						<a onclick="del({$consignee.address_id})">
+							<i class="iconfont icon-xiao10"></i>删除
+						</a>
+					</div>
+				</div>
+			</section>
+          {/foreach}
+		<div class="ect-button-more dis-box filter-btn">
+			<a href="{url('flow/index/add_address')}" class="btn-submit box-flex">新增收货人信息</a>
+		</div>
+		</div>
+		{else}
+		<div class="no-div-message">
+			<i class="iconfont icon-biaoqingleiben"></i>
+			<p>亲，还没有收货地址哦～！</p>
+			<a href="{url('flow/index/add_address')}" class="t-first">点击添加一个收货地址</a>
+		</div>
+		{/if}
+		</div>
+        <!--快捷导航-->
+    {include file="float_nav"} 
+    {include file="float_nav_footer"}
+        <script type="text/javascript">
+            //点击设置地址
+            function adderss_user(address_id){
+                if(address_id){
+                    $.get("{url('flow/index/set_address')}", {address_id:address_id}, function(data){
+                        if(data.status==1){
+                            if(data.url){
+                                window.location.href = data.url;
+                            }
+                        }
+                    },'json') ;
+                }
+            }
+        </script>
+       <script>
+        function del(address_id){
+            $("#list"+address_id).hide();
+            $.get("{url('flow/index/address_list')}",{address_id:address_id},function(){});
+        }
+     </script>
+	</body>
+</html>

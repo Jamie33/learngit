@@ -1,0 +1,151 @@
+{include file="page_header"}
+<div class="con">
+	<section class="search n-wholesale-fixed">
+		<div class="text-all dis-box j-text-all text-all-back">
+
+			<div class="box-flex input-text new-group">
+				<div class="box-flex">
+					<input class="j-input-text" type="text" name="infokeyword" placeholder="请输入关键字" />
+					<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+				</div>
+			</div>
+			<a type="button" class="btn-submit"><i class="iconfont icon-sousuo my-sousou"></i></a>
+		</div>
+	</section>
+	<section class="goods-evaluation">
+		<div class="user-center-1 user-register-1 of-hidden">
+			<div class="category">
+				<section class="product-sequence dis-box">
+					<a class="box-flex active a-change" order="sales_num" sort="DESC">销量<i class="iconfont icon-xiajiantou"></i></a>
+					<a class="box-flex" order="prices" sort="ASC">价格<i class="iconfont icon-xiajiantou"></i></a>
+					<span class="box-flex j-s-filter">选择分类</span>
+				</section>
+			</div>
+			<section class="product-list  j-product-list product-list-small wholesale_list">
+				<ul>
+					<script id="j-wholesale" type="text/html">
+						<%if error == 0%>
+						<%each wholesale_list as list%>
+						<li class="wallet-bt">
+							<a href="<%list.goods_url%>">
+									<div class="product-div">
+										<div class="p-d-img fl">
+											<img class="product-list-img my-auction-img" src="<%list.goods_thumb%>">
+										</div>
+										<div class="product-text-auction">
+											<h5 class="f-06 col-3 onelist-hidden m-top02"><%list.goods_name%></h5>
+											<p><span class="t-first auction-cont-box"><%list.qp_list_min%></span><small class="my-auction-small">批发价</small></p>
+											<p class="f-02 col-9">市场价：
+												<%list.format_shop_price%>
+											</p>
+											<div class="m-top04"><span class="auction-but-cont a-col-red"><i class="iconfont icon-04pifashang my-auction-paimai"></i>去批发</span></div>
+										</div>
+									</div>
+							</a>
+					</li>
+						<%/each%>
+						<%else%>
+						<section class="flow-no-cart">
+							<span class="gwc-bg">
+                            <i class="iconfont icon-gouwuche"></i>
+                        </span>
+							<p class="t-remark text-center">
+								<%msg%>
+							</p>
+							<%if error == 1%>
+							<a href="{url('user/index/index')}" type="button" class="btn-default-new br-5 min-btn">去登录</a>
+							<%else%>
+							<a href="{url('/')}" type="button" class="btn-default-new br-5 min-btn">去逛逛</a>
+							<%/if%>
+						</section>
+						<%/if%>
+					</script>
+				</ul>
+
+			</section>
+
+		</div>
+</section>
+</div>
+<!--右侧浮动导航-->
+<div class="fixed-nav-who"><a href="{url('cart')}"><i class="iconfont icon-dingdan"></i></a></div>
+
+<!--分类-->
+		<div class="j-filter-div filter-div ts-5 c-filter-div">
+			<div class="mask-filter-div"></div>
+			<section class="close-filter-div j-close-filter-div">
+				<div class="close-f-btn">
+					<i class="iconfont icon-fanhui"></i>
+					<span>关闭</span>
+				</div>
+			</section>
+			<section class="con-filter-div">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<div class="select-two j-category-select">
+							<a class="select-title padding-all">
+								<label class="fl" category="0">{$lang.all_category}</label>
+							</a>
+							{foreach $category_list as $key => $list}
+								<a class="select-title padding-all j-menu-select">
+									<label class="fl">{$list.cat_name}</label>
+									<span class="fr t-jiantou j-t-jiantou"><i class="iconfont icon-jiantou tf-180 ts-2"></i></span>
+								</a>
+								<ul class="j-sub-menu padding-all j-get-limit" data-istrue="true">
+									{foreach $list.child_tree as $child}
+									<li class="ect-select parent_{$child.parent_id}">
+										<label class="ts-1"  category="{$child.id}">{$child.name}<i class="fr iconfont icon-gou ts-1"></i></label>
+									</li>
+									{/foreach}
+								</ul>
+							{/foreach}
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+<script>
+	var url = ROOT_URL + 'index.php?m=wholesale&a=WholeList';
+
+	var infinite = $('.wholesale_list').infinite({
+		url: url,
+		template: 'j-wholesale'
+	});
+	var params = {
+		keyword:'',
+		category:'',
+		sort:'',
+		order:''
+	};
+	//搜索
+	$(".btn-submit").click(function() {
+		params.keyword = $("input[name=infokeyword]").val();
+		if(params.keyword || typeof(params.keyword) == "undefined") {
+			infinite.onload('search_keywords=' + params.keyword + '&search_category=' + params.category + '&sort=' + params.sort + '&order=' + params.order);
+		} else {
+			d_messages('请输入搜索关键字');
+		}
+	});
+	// 分类
+	$('.j-category-select label').click(function(){
+		params.category = $(this).attr('category');
+		infinite.onload('search_keywords=' + params.keyword + '&search_category=' + params.category + '&sort=' + params.sort + '&order=' + params.order);
+	});
+	//排序
+	$(".product-sequence a").on('click', function(e) {
+		params.sort = $(this).attr('sort');
+		params.order = $(this).attr('order');
+		$(this).addClass("active").siblings().removeClass("active");
+		if(params.sort == 'DESC') {
+			$(this).attr("sort", "ASC");
+			$(this).removeClass("a-change");
+		} else {
+			$(this).attr("sort", "DESC");
+			$(this).addClass("a-change");
+		}
+		infinite.onload('search_keywords=' + params.keyword + '&search_category=' + params.category + '&sort=' + params.sort + '&order=' + params.order);
+	});
+</script>
+
+{include file="page_footer"}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>{$page_title}</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+    {global_assets('css')}
+    <script type="text/javascript">var ROOT_URL = '__ROOT__/';</script>
+    {global_assets('js')}
+
+</head>
+<body>
+<script>
+    var geolocation = new qq.maps.Geolocation("{C('shop.tengxun_key')}", "myapp");
+    var options = {timeout: 8000};
+
+    geolocation.getLocation(showPosition, showErr, options);
+    function showPosition(position) {
+        //处理
+       $.post(ROOT_URL + "index.php?m=store&c=map", {
+            lng: position.lng,
+            lat: position.lat,
+
+        }, function (data) {
+          
+            if (data.error == 0) {
+                // console.log("Latitude: " + position.coords.latitude + "<br />Longitude: " + position.coords.longitude);
+                window.location.href = data.url;
+            } else {
+                alert(data.message);
+                window.location.href = ROOT_URL + "index.php?m=store&c=index";
+            }
+        }, 'json');
+    };
+    function showErr() {
+        d_messages('定位失败！');
+    };
+    
+
+
+</script>
+</body>
+</html>

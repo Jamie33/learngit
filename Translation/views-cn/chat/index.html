@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <title>在线客服</title>
+    </head>
+    <body>
+    </body>
+    <!-- IE8及以下支持JSON -->
+    <!--[if lt IE 9]>
+        <script src="https://g.alicdn.com/aliww/ww/json/json.js" charset="utf-8"></script>
+    <![endif]-->
+    <!-- 自动适配移动端与pc端 -->
+    <script src="https://g.alicdn.com/aliww/??h5.openim.sdk/1.0.6/scripts/wsdk.js,h5.openim.kit/0.3.3/scripts/kit.js" charset="utf-8"></script>
+    <script>
+        window.onload = function(){
+            WKIT.init({
+                uid: '{$data.uid}', // 需要登录的用户nick
+                appkey: '{$data.appkey}', // 申请的appkey
+                credential:'{$data.credential}', // 需要登录的用户的密码
+                touid: '{$data.touid}', // 客服nick
+                // 展示效果配置项
+                theme: 'lightgreen',
+                imageZoom: true, // 默认显示小图，点击放大图片
+                avatar: '{$data.avatar}', // 登录用户的头像，移动端推荐[2x2]rem (1rem = 屏幕宽度/320*20)
+                toAvatar: '', // 聊天对象的头像，在移动端推荐[2.5x2.5]rem
+                titleBar: false, // 是否显示顶部title条
+                // customUrl: 'http://www.baidu.com', // 自定义区域url
+                // placeholder: '', // 输入框默认文案
+                // welcomeMsg: 'abc', // 显示在对方消息位置的默认欢迎文案
+                hideLoginSuccess: true, // 隐藏登录成功时的提示文案
+                // 消息相关配置项
+               // autoMsg: "{$data.goods_name}",
+                autoMsgType: 0, // autoMsg的消息类型；默认：0
+                sendMsgToCustomService: true, // 使用客服模式即给淘宝/千牛客服发送消息, 默认：false，如果是false千牛那边收不到客户发送的信息
+                 groupId: '0', // 客服模式, 可以传入分组id
+                // customData: {} // 上传自定义数据, 在千牛插件中显示
+            });
+        }
+    </script>
+</html>

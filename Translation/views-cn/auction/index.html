@@ -1,0 +1,92 @@
+{include file="page_header"}
+		<section class="search new-group-search">
+			<div class="text-all dis-box j-text-all text-all-back">
+
+				<div class="box-flex input-text new-group">
+					<div class="box-flex">
+						<input class="j-input-text" type="text" name="infokeyword" placeholder="商品名称" />
+						<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+					</div>
+				</div>
+				<a type="button" class="btn-submit"><i class="iconfont icon-sousuo my-sousou"></i></a>
+			</div>
+		</section>
+		<section class="product-sequence dis-box">
+			<a class="box-flex active " sort="act_id" order="DESC">默认</a>
+			<a class="box-flex" sort="start_time" order="DESC">开始时间<i class="iconfont icon-xiajiantou"></i></a>
+			<a class="box-flex" sort="end_time" order="DESC">结束时间<i class="iconfont icon-xiajiantou"></i></a>
+		</section>
+		<section class="j-get-i-more j-money-divided">
+			<script id="j-product" type="text/html">
+				<%if totalPage > 0%>
+			<div class="b-color-f product-list-small j-get-i-more">
+				<ul>
+					<%each list as auction%>
+					<li class="wallet-bt">
+
+							<a href="<%auction.url%>">
+									<div class="product-div">
+										<div class="p-d-img fl">
+											<img class="product-list-img my-auction-img" src="<%auction.goods_thumb%>">
+										</div>
+										<div class="product-text-auction">
+											<h5 class="f-06 col-3 onelist-hidden"><%auction.goods_name%></h5>
+											<span class="t-first auction-cont-box"><%#auction.formated_start_price%></span><small class="my-auction-small">起拍价</small>
+											<p class="my-auction-small">一口价：<%#auction.formated_end_price%></p>
+											<%if auction.status_no == 1%>
+											<div class="m-top02"><span class="auction-but-cont a-col-red"><i class="iconfont icon-paimai my-auction-paimai"></i>我要出价</span></div>
+											<%else if auction.status_no == 2%>
+												<%if auction.is_winner%>
+												<div class="m-top02"><span class="auction-but-cont a-col-red"><i class="iconfont icon-paimai my-auction-paimai"></i>立即购买</span></div>
+												<%else%>
+												<div class="m-top02"><span class="auction-but-cont btn-disab"><i class="iconfont icon-paimai my-auction-paimai"></i>竞拍结束</span></div>
+												<%/if%>
+											<%/if%>
+										</div>
+									</div>
+							</a>
+
+					</li>
+					<%/each%>
+				</ul>
+			</div>
+				<%else%>
+				<div class="no-div-message">
+					<i class="iconfont icon-biaoqingleiben"></i>
+					<p>亲，此处没有内容～！</p>
+				</div>
+				<%/if%>
+			</script>
+		</section>
+	{include file="float_nav"} 
+    {include file="float_nav_footer"} 
+</body>
+	<script>
+		var url = ROOT_URL + 'index.php?m=auction';
+		var infinite = $('.j-money-divided').infinite({url: url,template: 'j-product'});
+		$(".product-sequence a").click(function (){
+			var sort = $(this).attr('sort');
+			var order = $(this).attr('order');
+			infinite.onload('sort='+sort+'&order='+order);
+			$(this).addClass("active").siblings().removeClass("active");
+			if(order == 'DESC'){
+				$(this).attr("order","ASC");
+				$(this).removeClass("a-change");
+			}else{
+				$(this).attr("order","DESC");
+				$(this).addClass("a-change");
+			}
+		})
+		//搜索
+		$(".btn-submit").click(function (){
+			keyword = $("input[name=infokeyword]").val();
+			if (keyword ||typeof(keyword) == "undefined")
+			{
+				infinite.onload('keyword='+keyword);
+			}else{
+				d_messages('请输入搜索关键字');
+			}
+		})
+	</script>
+
+</html>

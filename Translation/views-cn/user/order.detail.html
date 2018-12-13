@@ -1,0 +1,617 @@
+{include file="page_header"}
+
+<div class="con">
+    <div class="flow-checkout">
+        {if $offline_store}
+        <!--门店自提码  -->
+        <section class="flow-checkout-adr padding-all">
+            <a class="product-div-link" href="{url('offline_store/index/OfflineStoreDetail', array('id'=>$store_id, 'order_id' => $order.order_id))}"></a>
+            <div class="flow-have-adr">
+                <p class="f-h-adr-title ">{$offline_store.stores_name} <em class="f-05 col-7">（提货码{$order.pick_code}）</em></p>
+                <p class="f-04 col-7 m-top02">服务电话：{$offline_store.stores_tel}</p>
+                <p class="f-04 col-7 m-top02">营业时间：{$offline_store.stores_opening_hours}</p>
+            </div>
+            <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180"></i></span>
+        </section>
+        {elseif $order.consignee && !$offline_store }
+        <section class="flow-checkout-adr padding-all">
+            <div class="address-icon"><i class="iconfont icon-dingwei"></i></div>
+            <div class="flow-have-adr">
+                <p class="f-h-adr-title">
+                    <label>{$order.consignee} {$order.mobile}</label>
+                </p>
+                <p class="f-h-adr-con t-remark m-top04">{$order.detail_address}</p>
+            </div>
+        </section>
+        {/if}
+        <section class="m-top10">
+
+            <section class="flow-checkout-pro j-flow-checkout-pro">
+                <header class="b-color-f padding-all">{$order.shop_name} <a  href={$kefu}><span class="fr f-03">联系客服<i class="iconfont icon-kefu color-red f-05" style="padding-left: .3rem"></i></span></a></header>
+                <div class="f-c-p-orderid padding-all m-top1px b-color-f">
+
+                    <h4 class="t-remark2">
+                        <label class="t-remark">订单号：</label>{$order.order_sn}
+                        <!--拼团标识-->
+                        {if $team}
+                        {if $order.failure > 0}
+                        <em class="em-promotion b-tag">拼团失败</em>
+                        {/if}
+                        {/if}
+                        <!--拼团标识 end-->
+                    </h4>
+
+                    <p class="t-remark3 m-top04">{$order.formated_add_time}</p>
+                </div>
+                <div class="product-list-small b-color-f dis-box">
+                    {if $goods_count > 1}
+                    <ul class="flow-checkout-smallpic box-flex">
+                        {foreach $goods_list as $key => $val}
+                        {if $key < 3 && $val.extension_code != 'package_buy'}
+                        <li>
+                        <div class="fl">
+                            <div class="p-d-img">
+                            <img class="product-list-img" src="{$val.goods_thumb}"/>
+                            {if $val.parent_id > 0}
+                            <!-- 配件标识 -->
+                            <span>配件</span>
+                            {elseif $val.is_gift > 0}
+                            <span>赠品</span>
+                            {/if}
+                            </div>
+                        </div>
+                        </li>
+                        {/if}
+                        {/foreach}
+                    </ul>
+                    <ul class="box-flex flow-checkout-bigpic">
+                        {foreach $goods_list as $val}
+                        {if $val.extension_code != 'package_buy'}
+                        <li>
+                            <div class="product-div" {if !empty($val.virtual_info)} style="overflow:inherit" {/if}>
+                                <a class="product-div-link" href="{url('goods/index/index',array('id'=>$val.goods_id))}">
+                                <div class="fl">
+                                    <div class="p-d-img">
+                                    <img class="product-list-img" src="{$val.goods_thumb}"/>
+                                    {if $val.parent_id > 0}
+                                    <!-- 配件标识 -->
+                                    <span>配件</span>
+                                    {elseif $val.is_gift > 0}
+                                    <span>赠品</span>
+                                    {/if}
+                                    </div>
+                                </div>
+                                </a>
+                                <div class="product-text">
+                                    <h4>{$val.goods_name}</h4>
+                                    <p>
+                                        <span class="p-price t-first ">{$val.goods_price}<small class="fr t-remark">x{$val.goods_number}
+                                        </small></span>
+                                    </p>
+                                    {if $val.goods_attr}<p class="dis-box p-t-remark">{nl2br($val.goods_attr)}</p>{/if}
+
+                                    {if $val.dis_amount > 0}
+                                    <!-- 商品优惠 -->
+                                    <p class="dis-box f-03 fr color-00a">{$lang.dis_amount}: {$val.dis_amount_formated}</p>
+                                    {/if}
+                                </div>
+                                
+                                {if !empty($val.virtual_info)}
+                                <div class="ka-mo">
+                                    <i class="iconfont icon-guanbi2 ma-icon fr"></i>
+                                    {foreach $val.virtual_info as $c}
+                                    <div class="virtual-card">
+                                        <p class="p-t-remark">卡号：{$c.card_sn}</p>
+                                        <p class="p-t-remark">密码：{$c.card_password}</p>
+                                        <p class="p-t-remark">截止日期：{$c.end_date}</p>
+                                    </div>
+                                    {/foreach}
+                                </div>
+                                <span class="ka-order-btn click-show-attr">查看卡密</span>
+                                {/if}
+
+                            </div>
+                        </li>
+                        {/if}
+                        {/foreach}
+                    </ul>
+                    <span class="t-jiantou"><span class="f-c-a-count">共{$goods_count} 件</span><i class="iconfont icon-jiantou tf-180"></i></span>
+                    {else}
+                    <ul class="box-flex flow-checkout-bigpic" style="display:block;">
+                        {foreach $goods_list as $val}
+                        {if $val.extension_code != 'package_buy'}
+                        <li>
+                            <div class="product-div" {if !empty($val.virtual_info)}style="overflow:inherit"{/if}>
+                                <a href="{url('goods/index/index',array('id'=>$val.goods_id))}">
+                                <div class="fl">
+                                    <div class="p-d-img">
+                                    <img class="product-list-img" src="{$val.goods_thumb}"/>
+                                    {if $val.parent_id > 0}
+                                    <!-- 配件标识 -->
+                                    <span>配件</span>
+                                    {elseif $val.is_gift > 0}
+                                    <span>赠品</span>
+                                    {/if}
+                                    </div>
+                                </div>
+                                </a>
+                                <div class="product-text">
+                                    <h4 style="padding-right:0">{$val.goods_name}</h4>
+                                    <p>
+                                        <span class="p-price t-first ">{$val.goods_price}<small class="fr t-remark">
+                                            x{$val.goods_number}
+                                        </small></span>
+                                    </p>
+                                    {if $val.goods_attr}<p class="dis-box p-t-remark">{nl2br($val.goods_attr)}</p>{/if}                                                                       
+
+                                    {if !empty($val.virtual_info)}
+                                    <div class="ka-mo">
+                                        <i class="iconfont icon-guanbi2 ma-icon fr"></i>
+                                        {foreach $val.virtual_info as $c}
+                                        <div class="virtual-card">
+                                            <p class="p-t-remark">卡号：{$c.card_sn}</p>
+                                            <p class="p-t-remark">密码：{$c.card_password}</p>
+                                            <p class="p-t-remark">截止日期：{$c.end_date}</p>
+                                        </div>
+                                        {/foreach}
+                                    </div>
+                                    <span class="ka-order-btn click-show-attr">查看卡密</span>
+                                    {/if}
+                                </div>
+                            </div>
+                        </li>
+                        {/if}
+                        {/foreach}
+                    </ul>
+                    {/if}
+                </div>
+            </section>
+            {if $package_goods_count > 0}
+            {foreach $goods_list as $key=>$goods}
+            {if $goods.extension_code == 'package_buy'}
+            <!--超级礼包-->
+            <section class="m-top10">
+                <section class="flow-checkout-pro j-flow-checkout-pro">
+                    <div class="product-list-small m-top1px b-color-f dis-box">
+                        <ul class="flow-checkout-smallpic box-flex" style="display:block;">
+                            <li class="p-r"><img class="product-list-img" src="{$goods.goods_thumb}"/>
+
+                                <div class="gift-tag">礼包</div>
+                            </li>
+                            <div class="gift-cont">
+                                <h5 class="onelist-hidden">[超级礼包]{$goods.goods_name}</label></h5>
+
+                                <p class="f-05 color-red">套餐价:{$goods.format_package_list_total}</p>
+
+                                <p class="f-03">(已优惠 {$goods.format_package_list_saving})</p>
+                            </div>
+                        </ul>
+                        <span class="t-jiantou-gift">共{count($goods.package_goods_list)}件<i
+                                class="iconfont icon-jiantou tf-180 ts-5"></i></span>
+                    </div>
+                </section>
+            </section>
+            <section class="gift-list-box">
+                <section class="flow-checkout-pro j-flow-checkout-pro active">
+                    <div class="product-list-small m-top1px b-color-f dis-box">
+                        <ul class="box-flex flow-checkout-bigpic">
+                            {foreach $goods.package_goods_list as $package}
+                            <li>
+                                <div class="product-div">
+                                    <a class="product-div-link" href="{$package.url}"></a>
+                                    <img class="product-list-img" src="{$package.goods_thumb}"/>
+
+                                    <div class="product-text">
+                                        <h4 style="padding-right:0">{$package.goods_name}</h4>
+
+                                        <p><span class="p-price t-first ">{price_format($package.rank_price)}<small
+                                                class="fr t-remark">x{$package.goods_number}
+                                        </small></span></p>
+                                        <p class="dis-box p-t-remark">{$package.goods_attr}</p>
+
+                                    </div>
+                                </div>
+                            </li>
+                            {/foreach}
+                        </ul>
+                    </div>
+                </section>
+            </section>
+            <!--超级礼包-->
+            {/if}
+            {/foreach}
+            {/if}
+
+            <section class="flow-checkout-select m-top10 b-color-f">
+                <ul>
+                    {if $order.shipping_id}
+                    <li>
+                        <section class="dis-box padding-all">
+                            <label class="t-remark g-t-temark">配送方式</label>
+
+                            <div class="box-flex t-goods1 text-right onelist-hidden">
+                                {if $offline_store}
+                                <span>门店自提</span>
+                                {else}
+                                <span>{$order.shipping_name}</span>
+                                {if $order.shipping_fee > 0}<em class="t-first">{$order.formated_shipping_fee}</em>{/if}
+                                {/if}
+                            </div>
+                        </section>
+                    </li>
+                    {/if}
+                    {if $order.point}
+                    <li class="goods-site-li dis-box padding-all j-point">
+                        <label class="t-remark g-t-temark">自提点</label>
+                        <div class="box-flex t-goods1 text-right onelist-hidden">
+                            <span>{$order.point.name}</span>
+                        </div>
+                        <div class="f-04">
+                            <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180"></i></span>
+                        </div>
+                    </li>
+                    <section class="padding-all point-list hide">
+                        <li class="goods-site-li dis-box ">
+                            <label class="t-remark g-t-temark">联系人</label>
+                            <div class="box-flex t-goods1 text-right onelist-hidden">
+                                <span>{$order.point.user_name}</span>
+                            </div>
+                        </li>
+                        <li class="goods-site-li dis-box m-top06">
+                            <label class="t-remark g-t-temark">联系电话</label>
+                            <div class="box-flex t-goods1 text-right onelist-hidden">
+                                <span>{$order.point.mobile}</span>
+                            </div>
+                        </li>
+                        <li class="goods-site-li dis-box m-top06">
+                            <label class="t-remark g-t-temark">地址</label>
+                            <div class="box-flex t-goods1 text-right onelist-hidden">
+                                <span>{$order.point.address}</span>
+                            </div>
+                        </li>
+                        <li class="goods-site-li dis-box m-top06">
+                            <label class="t-remark g-t-temark">到达线路</label>
+                            <div class="box-flex t-goods1 text-right onelist-hidden">
+                                <span>{$order.point.line}</span>
+                            </div>
+                        </li>
+                        <li class="goods-site-li dis-box m-top06">
+                            <label class="t-remark g-t-temark">提货时间</label>
+                            <div class="box-flex t-goods1 text-right onelist-hidden">
+                                <span>{$order.point.pickDate}</span>
+                            </div>
+                        </li>
+                    <section>
+                    {/if}
+                    {if $order.pack_id}
+                    <li class="dis-box">
+                        <label class="t-remark g-t-temark">商品包装</label>
+
+                        <div class="box-flex t-goods1 text-right onelist-hidden">
+                            <span>{$order.pack_name}</span>
+                            <em class="t-first">{$order.formated_pack_fee}</em>
+                        </div>
+                    </li>
+                    {/if}
+                    {if $order.postscript}
+                    <div class="padding-all">
+                        <label class="t-remark g-t-temark">买家留言</label>
+
+                        <p class="f-04 m-top04">{$order.postscript}</p>
+                    </div>
+                    {/if}
+                </ul>
+            </section>
+        </section>
+
+        <section class="m-top10">
+            <ul>
+                {if $order.extension_code!='wholesale'}
+                <li class="dis-box padding-all m-top1px b-color-f " id="payment">
+                    <label class="t-remark g-t-temark">支付方式</label>
+
+                    <div class="box-flex t-goods1 text-right onelist-hidden">
+                        <span>{$order.pay_name}</span> {if $order.pay_fee > 0}<em class="t-first">{$order.formated_pay_fee}手续费</em>{/if}
+                    </div>
+                    {if $payment_list}
+
+                    <!--支付方式star-->
+                    <div class="show-goods-dist ts-3 b-color-1 j-show-goods-text j-filter-show-div">
+                        <section class="goods-show-title of-hidden padding-all b-color-f">
+                            <h3 class="fl g-c-title-h3">切换支付方式</h3>
+                            <i class="iconfont icon-guanbi1 show-div-guanbi fr"></i>
+                        </section>
+                        <section class="s-g-list-con swiper-scroll">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide select-two">
+                                    <ul class="j-get-one padding-all">
+                                        {foreach $payment_list as $payment}
+                                        <li class="ect-select goods-site" date-payid="{$payment.pay_id}">
+                                            <label class="ts-1 {if $order.pay_id == $payment.pay_id}active{/if}">
+                                                <dd>
+                                                    <span>{$payment.pay_name}{if $payment.pay_fee}<em class="t-remark">[手续费]</em>{/if}</span>
+                                                    {if $payment.pay_fee}<em
+                                                        class="t-first">{$payment.format_pay_fee}</em>{/if}
+                                                </dd>
+                                                <i class="fr iconfont icon-gou ts-1"></i>
+                                            </label>
+                                        </li>
+                                        {/foreach}
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    {/if}
+                </li>
+                {/if}
+                {if C('shop.can_invoice') >0 }
+                <li class=" padding-all m-top1px b-color-f ">
+                    {if $order.vat_id}
+                    <div class="t-remark box-flex t-goods1 onelist-hidden">
+                        <p>发票类型<em class="t-first fr">增值发票</em></p>
+                    </div>
+                    {else}
+                    <div class="dis-box">
+                        <label class="t-remark g-t-temark">发票信息</label>
+                        <div class="box-flex t-goods1 text-right onelist-hidden">
+                            税率金额：<em class="t-first">{$order.formated_tax}</em>
+                        </div>
+                    </div>
+                    <div class="t-remark box-flex t-goods1 m-top08">
+                        <p>发票抬头：{$order.inv_payee}</p>
+
+                        <p class="m-top02">发票内容：{$order.inv_content}</p>
+                    </div>
+                    {/if}
+                </li>
+                {/if}
+                {if $order.bonus_id}
+                <li class="dis-box padding-all m-top1px b-color-f">
+                    <label class="t-remark g-t-temark">红包</label>
+
+                    <div class="box-flex t-goods1 text-right onelist-hidden">
+                        <span>红包金额</span> <em class="t-first">-{$order.formated_bonus}</em>
+                    </div>
+                </li>
+                {/if}
+                {if $order.coupons}
+                {foreach $order.coupons as $val}
+                <li class="dis-box padding-all m-top1px b-color-f">
+                    <label class="t-remark g-t-temark">优惠券</label>
+
+                    <div class="box-flex t-goods1 text-right onelist-hidden">
+                        {if $val.cou_type == 5}
+                        <span class="fr ">免邮券</span>
+                        {else}
+                        <span>优惠券金额</span> <em class="t-first">-{$val.cou_money}</em>
+                        {/if}
+                    </div>
+                </li>
+                {/foreach}
+                {/if}
+            </ul>
+        </section>
+        <section class="m-top10">
+            <section class="flow-checkout-tprice">
+                <header class="b-color-f padding-all">
+                    {$lang.goods_all_price}<span class="t-first fr">{$order.formated_goods_amount}</span>
+                </header>
+                <ul class="m-top1px b-color-f">
+                    <!-- 折扣 -->
+                    {if $order.discount > 0}
+                    <li class="padding-all of-hidden">
+                        <label class="t-remark g-t-temark fl">{$lang.discount}</label>
+                        <span class="t-first fr">-{$order.formated_discount}</span>
+                    </li>
+                    {/if}
+                    <!-- 配送费用 -->
+                    {if $order.shipping_fee > 0 && empty($order.point)}
+                    <li class="padding-all of-hidden">
+                        <label class="t-remark g-t-temark fl">{$lang.shipping_fee}</label>
+                        <span class="t-first fr">+{$order.formated_shipping_fee}</span>
+                    </li>
+                    {/if}
+                    <!-- 使用积分 -->
+                    {if $order.integral > 0}
+                    <li class="padding-all of-hidden">
+                        <label class="t-remark g-t-temark fl">{$lang.use_integral}</label>
+                        <span class="fr t-first">-{$order.formated_integral_money}</span>
+                    </li>
+                    {/if}
+                    <!-- 使用红包 -->
+                    {if $order.bonus > 0}
+                    <li class="padding-all of-hidden">
+                        <label class="t-remark g-t-temark fl">{$lang.use_bonus}</label>
+                        <span class="fr t-first">-{$order.formated_bonus}</span>
+                    </li>
+                    {/if}
+                    {if $order.use_val>0}
+                    <li class="padding-all of-hidden">
+                        <label class="t-remark g-t-temark fl">使用储值卡</label>
+                        <span class="fr t-first">-{$order.formated_value_card}</span>
+                    </li>
+                    {/if}
+
+                    {if $order.coupons > 0}
+                    {foreach $order.coupons as $val}
+                    <li class="padding-all of-hidden">
+                        <label class="t-remark g-t-temark fl">使用优惠券</label>
+                        {if $val.cou_type == 5}
+                        <span class="fr t-first">减免运费</span>
+                        {else}
+                        <span class="fr t-first">-{$val.cou_money}</span>
+                        {/if}
+                    </li>
+                    {/foreach}
+                    {/if}
+                    {if $order.msg}
+                    <li class="padding-all of-hidden">
+                        <label class="t-remark g-t-temark fl">{$order.msg}</label>
+                    </li>
+                    {/if}
+                </ul>
+            </section>
+            {if $order.delay == 1}
+            <section class="flow-checkout-tprice">
+                <header class="delay-order b-color-f padding-all" data-item="{$order.order_id}">
+                    延迟收货<span class="t-first fr">{$order.delay_type}</span>
+                </header>
+            </section>
+            {/if}
+            <section class="flow-checkout-tprice">
+
+            </section>
+        </section>
+
+    </div>
+
+</div>
+{if $payment_list}
+<div class="mask-filter-div"></div>
+{/if}
+
+<!--悬浮btn star-->
+<div class="filter-btn f-checkout-filter-btn checkout-order-btn  dis-box">
+    <p class="u-o-checkout-price t-remark text-left box-flex padding-all">
+        应付总额：<span class="t-first">{$order.formated_order_amount}</span>
+    </p>
+    {if $team && $order.failure > 0}
+    <div class="n-right-width">
+        <button class="btn-default btn-submit min-two-btn" type="button">订单过期</button>
+    </div>
+    {else}
+    {if $order.order_amount > 0 && empty($order.hidden_pay_button)}
+    <div class="n-right-width">
+
+        <a type="button" class="box-flex btn-submit min-two-btn" href="{$order.pay_online}">立即付款</a>
+    </div>
+    {/if}
+    {/if}
+
+    {if $order.handler}
+    <div class="n-right-width">{$order.handler}</div>
+    {/if}
+
+    {if $order.invoice_no}
+    {$order.invoice_no}
+    {/if}
+
+ </div>
+ <!--悬浮btn end-->
+<div class="mask-filter-div-box"></div>
+<!--快捷导航-->
+{include file="float_nav"}
+<li>
+    <a href="{url('user/order/index',array('status'=>'0'))}">
+        <i class="iconfont icon-dingdan"></i>
+        <p>我的订单</p>
+    </a>
+</li>
+{include file="float_nav_footer"}
+<script type="text/javascript">
+    $(function () {
+
+        var scorll_swiper = new Swiper('.swiper-scroll', {
+            direction: 'vertical',
+            slidesPerView: 'auto',
+            mousewheelControl: true,
+            freeMode: true
+        });
+
+        $(".ect-select").click(function () {
+            var url = "{url('changepayment')}";
+            var args = new Array(2);
+            args['order_id'] = {$order.order_id};
+            args['pay_id'] = $(this).attr('date-payid');
+            StandardPost(url, args);
+        })
+
+        function StandardPost(url, args) {
+            var form = $("<form method='post'></form>");
+            $(document.body).append(form)
+            form.attr({"action": url});
+            for (arg in args) {
+                var input = $("<input type='hidden'>");
+                input.attr({"name": arg});
+                input.val(args[arg]);
+                form.append(input);
+            }
+            form.submit();
+        }
+
+        //延迟收货
+        $(".flow-checkout-tprice").on('click','.delay-order', function() {
+            var order_id = $(this).attr('data-item');
+            var url='{url("user/order/delay")}';
+            layer.open({
+                content: '是否延迟收货此订单',
+                btn: ['确定', '取消'],
+                shadeClose: false,
+                yes: function() {
+                    $.post(url, {order_id:order_id}, function(result) {
+                        layer.open({
+                        content: result.msg
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                        });
+                        if (result.y == 1) {
+                            document.location.reload();
+                        }
+                        return false;
+                    }, 'json');
+                },
+                no: function() {}
+            });
+        });
+
+        //确认订单
+        $(".filter-btn").on('click', '.received-order', function () {
+            var order_id = $(this).attr('data-item');
+            var url = "{url('user/order/affirmreceived')}";
+            layer.open({
+                content: '你确认已经收到货物了吗？',
+                btn: ['确定', '取消'],
+                shadeClose: false,
+                yes: function () {
+                    $.post(url, {order_id: order_id},function (result) {
+                        if (result.y == 1) {
+                            window.location.href = "{url('user/order/index')}";
+                        }
+                    }, 'json');
+                },
+                no: function () {}
+            });
+        });
+
+        // 取消订单
+        $(".filter-btn").on('click', '.cancel-order', function() {
+            var order_id = $(this).attr('data-item');
+            var url = "{url('user/order/cancel')}";
+            layer.open({
+                content: '确定要取消该订单吗？取消后将视为无效订单',
+                btn: ['取消订单', '再考虑下'],
+                shadeClose: false,
+                yes: function() {
+                    $.post(url, {order_id:order_id}, function(result) {
+                         if (result.y == 1) {
+                            window.location.reload();
+                         }
+                         return false;
+                    }, 'json');
+                },
+                no: function() {}
+            });
+        });
+
+        // 点击查看自提点信息
+        $('.flow-checkout-select').on('click', '.j-point', function(){
+            $('.point-list').toggleClass('hide');
+        });
+
+    })
+
+</script>
+{include file="meiqia"}
+</body>
+</html>

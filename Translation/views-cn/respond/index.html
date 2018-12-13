@@ -1,0 +1,37 @@
+{include file="page_header"}
+<div class="con">
+    <div class="message">
+        <div class="flow-done-con">
+            <!--{if $msg_type == 0}-->
+            <i class="iconfont icon-hookring2"></i>
+            <!--{/if}-->
+            <!--{if $msg_type == 1}-->
+            <i class="iconfont icon-guanbi1"></i>
+            <!--{/if}-->
+            <!--{if $msg_type == 2}-->
+            <i class="iconfont icon-102"></i>
+            <!--{/if}-->
+            <p>{$message}</p>
+        </div>
+        <div class="padding-all" style="margin-top: 3rem;">
+            <!--{if $msg_type == 0}-->
+            <script>var url = "{$order_url}";</script>
+            <a href="javascript:redirect(url);" class="btn-submit box-flex br-5 min-two-btn">{$lang.order_query}</a>
+            <!--{else}-->
+            <script>var url = ROOT_URL;</script>
+            <a href="javascript:redirect(url);" class="btn-submit box-flex br-5 min-two-btn">{$lang.back_home}</a>
+            <!--{/if}-->
+        </div>
+    </div>
+</div>
+<script>
+    setTimeout(function () {
+        window.location.href = url;
+    }, 2000);
+
+    function redirect(url) {
+        window.location.href = url;
+    }
+</script>
+</body>
+</html>

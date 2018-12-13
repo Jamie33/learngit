@@ -1,0 +1,192 @@
+{include file="page_header"}
+<div class="con">
+    <header class="dis-box header-menu n-header-menu b-color color-whie new-goods-nav ts-5">
+                <h3 class="box-flex">
+        <nav class="n-goods-shop-list-nav box-flex swiper-container-horizontal goods-list-nav-new">
+            <ul class="swiper-wrapper  dis-box text-c">
+                     <a class="a-icon-back box-flex left"  href="javascript:history.go(-1);"><i class="iconfont icon-jiantou col-7"></i></a>
+              <li class="div1 box-flex swiper-slide  position-rel swiper-slide-active" category="1"><a class="product-div-link" href="{url('goods/index/index', array('id'=>$goods_id))}"></a>商品</li>
+              <li class="div3 box-flex swiper-slide position-rel swiper-slide-next" category="3"><a class="product-div-link" href="{url('goods/index/index', array('id'=>$goods_id,'referer'=>'comment'))}"></a>详情</li>
+              <li class="div4 box-flex swiper-slide active position-rel" category="4"><a class="product-div-link" href="{url('goods/index/comment', array('id'=>$goods_id))}"></a>评论</li>
+              <a class="box-flex right j-sharing" href="javascript:;"><i class="iconfont icon-fenxiang col-7"></i></a>
+            </ul>
+                </nav>
+                </h3>
+        </header>
+<div class="comment-nav-box j-tab-title">
+    <ul class="dis-box comment-nav-tab b-color-f">
+        <li class="{if $rank == 'all'}active{/if}" rank="all"><p>全部评价</p><label>{$comment_count.all_comment}</label></li>
+        <li class="{if $rank == 'good'}active{/if}" rank="good"><p>好评</p><label>{$comment_count.good_comment}</label></li>
+        <li class="{if $rank == 'in'}active{/if}" rank="in"><p>中评</p><label>{$comment_count.in_comment}</label></li>
+        <li class="{if $rank == 'rotten'}active{/if}" rank="rotten"><p>差评</p><label>{$comment_count.rotten_comment}</label></li>
+        <li class="{if $rank == 'img'}active{/if}" rank="img"><p>有图</p><label>{$comment_count.img_comment}</label></li>
+    </ul>
+    <div class="comment-tab-content ">
+        <ul style="display:block;">
+                    <!-- 全部评价 -->
+                    <div class="comment-info rank-all" >
+                    <script id="j-product-all" type="text/html">
+                        <%if comments!="" %>
+                        <%each comments as comment%>
+                        <div class="evaluation-list padding-all b-color-f">
+                            <div class="dis-box comment-list-box">
+                                <div class="box-flex p-r">
+                                    <span class="comment-header">
+                                    <%if comment.user_picture !== ''%>
+                                        <div class="img-commom p-r user-head-img-box-1"><img src="<%comment.user_picture%>"></div>
+                                    <%else%>
+                                        <img class="header-img" src="<%elixir('img/no_image.jpg')%>">
+                                    <%/if%>
+                                    </span>
+                                    <span class="f-05 col-7 comment-admin">
+                                    <%if comment.username%>
+                                    <%comment.username%>
+                                    <%else%>
+                                    <%lang.anonymous%>
+                                    <%/if%>
+                                    </span>
+                                </div>
+                                <div class="box-flex"><div class="fr t-remark"><%comment.add_time%></div></div>
+                            </div>
+                            <span class="grade-star g-star-<%comment.rank%>"></span>
+                            <p class="clear f-05 col-3"><%comment.content%></p>
+                            <!--  判断商品属性 是否是购买的商品 -->
+                            <%each comment.goods as g%>
+                                <% if {$goods_id} == g.goods_id%>
+                                 <p class="clear m-top08 t-remark"><%g.goods_attr%></p>
+                                <%/if%>
+                            <%/each%>
+                            <!-- 评论图片 -->
+                            <%if comment.comment_img%>
+                            <div class="g-e-p-pic ">
+                               <div class="my-gallery" data-pswp-uid="2">
+                                 <%each comment.comment_img as img%>
+                                    <figure>
+                                            <div class="comment-img"><a href="<%img%>" data-size="640x640"><img class="img" src="<%img%>"></a></div>
+                                    </figure>
+                                   <%/each%>
+                                </div>
+                            </div>
+                            <%/if%>
+                            <!-- 管理员回复 -->
+                            <%if comment.re_username%>
+                            <p class="m-top10 t-remark">
+                                <label class="admin-text"><%comment.re_username%>回复：</label>
+                                <%comment.re_content%>
+                            </p>
+                            <%/if%>
+                        </div>
+                        <%/each%>
+                        <% else %>
+                        <div class="no-div-message">
+                            <i class="iconfont icon-biaoqingleiben"></i>
+                            <p>亲，此处没有内容～！</p>
+                        </div>
+                        <%/if%>
+                    </script>
+                    </div>
+
+        </ul>
+        <ul>
+           <!-- 好评 -->
+            <div class="comment-info rank-good" ></div>
+        </ul>
+        <ul>
+           <!-- 中评 -->
+            <div class="comment-info rank-in" ></div>
+        </ul>
+        <ul>
+           <!-- 差评 -->
+            <div class="comment-info rank-rotten" ></div>
+
+        </ul>
+        <ul>
+        <!-- 有图 -->
+            <div class="comment-info rank-img" ></div>
+        </ul>
+    </div>
+</div>
+{include file="image"}
+</div>
+<div id="store-box" class="footer-cont"><span><img src="{elixir('img/loading1.gif')}">正在加载……</span></div>
+<!--快捷导航-->
+{include file="float_nav"}
+{include file="float_nav_footer"}
+<script type="text/javascript">
+$(function(){
+    // 点击分享弹窗
+    $(".j-sharing").click(function() {
+            // 验证登录
+            var goods_id = '{$goods_id}';
+            var share_type = '{$share_type}';
+            $.get("{url('sharing')}", {id:goods_id, type: share_type}, function(res){
+                shareResponse(res);
+            }, 'json');
+    });
+    // 首次加载
+    var goods_id = "{$goods_id}";
+    var url = "{url('goods/index/comment', ['id' => $goods_id])}";
+    var rank = $(".j-tab-title .active").attr('rank');
+    var infinite = $('.comment-info').infinite({url: url, params:'rank='+rank+'&id='+goods_id, template: 'j-product-all'});
+    $('.comment-nav-tab li').click(function(){
+        $('.comment-nav-tab li').removeClass();
+        $(this).addClass('active');
+        $('.comment-tab-content ul').css('display','none');
+        $('.comment-tab-content ul').eq($(this).index()).css('display','block');
+        rank = $(".j-tab-title .active").attr('rank');
+        infinite.onload('rank='+rank+'&id='+goods_id, $('.rank-'+rank), 'j-product-'+rank);
+        comment_list()
+    });
+    comment_list()
+    function comment_list(){
+          //加载效果处理
+        if($('.rank-'+rank).outerHeight() > 600){
+            $(".footer-cont").css("display","block");
+        }else{
+            $(".footer-cont").css("display","none");
+        }
+        //头像
+        header_img()
+        window.onresize = function(){
+            header_img()
+        }
+        //评论图片
+        initPhotoSwipeFromDOM('.my-gallery');
+     }
+    var nav_comment = $(".n-header-menu").outerHeight()
+    $(".comment-nav-box").css("padding-top",nav_comment)
+    loadimgCont();
+     $(window).scroll(function() {
+        loadimgCont()
+    });
+    function loadimgCont(){
+             if ($(document).scrollTop() >= $(window).height() <$(document).height() - $(window).height()) {
+                $(".footer-cont").html("<span><img src='{elixir('img/loading1.gif')}'>正在加载……</span>")
+            }
+            if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                $(".footer-cont").html("<span>没有更多了</span>")
+            }
+
+    }
+    
+    // 分享回调
+    function shareResponse(res){
+        if (res.error == 0) {
+            var share_img = res.share_img;
+            //页面层
+            layer.open({
+                type: 1, //0,1,2
+                // btn: ['OK'],
+                content: '<div class="share_goods"><img class="img-rounded" style="width:100%" src="'+share_img+'"></div>',
+                anim: 'up',
+                style: 'position:fixed; top:15%; left:15%; width: 70%; height: 70%;margin:0 auto; border:none;background-color:rgba(0,0,0,0)'
+            });
+        } else if (res.error == 2) {
+            window.location.href = ROOT_URL + 'index.php?m=user&c=login&back_act='+res.back_act;
+        }
+        return false;
+    }
+})
+</script>
+</body>
+</html>

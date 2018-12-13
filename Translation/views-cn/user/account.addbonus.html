@@ -1,0 +1,49 @@
+{include file="page_header"}
+<div class="con">
+	<div class="user-coupon-add-div">
+		<div class="coupon-add-text padding-all">
+            <form action="{url('add_bonus')}" method="post" onsubmit="return check()">
+			<div class="text-all dis-box j-text-all">
+				<div class="input-text input-check  box-flex">
+					<input class="j-input-text" name="bonus_sn" type="text" placeholder="请输入红包口令">
+					<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+				</div>
+			</div>
+			<div class="text-all dis-box j-text-all">
+				<div class="input-text input-check  box-flex">
+					<input class="j-input-text" name="bouns_password" type="password" placeholder="请输入红包密码">
+					<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+				</div>
+			</div>
+			<div class="m-top12">
+				<button type="submit" class="btn-submit">提交</button>
+			</div>
+            </form>
+		</div>
+	</div>
+</div>
+    <!--快捷导航-->
+    {include file="float_nav"}
+                <li>
+                    <a href="{url('user/account/bonus')}">
+                         <i class="iconfont icon-money"></i>
+                         <p>我的红包</p>
+                    </a>
+                </li>
+    {include file="float_nav_footer"}
+<script>
+    function check(){
+        var sn = $("input[name=bonus_sn]").val();
+        var card = $("input[name=bonus_password]").val();
+        if (sn =="") {
+            d_messages('请输入红包口令');
+            return false;
+        }
+        if (card == "") {
+            d_messages('请输入红包密码');
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

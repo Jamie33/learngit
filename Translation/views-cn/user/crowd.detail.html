@@ -1,0 +1,207 @@
+{include file="page_header"}
+		<div class="con">
+			<div class="flow-checkout ">
+				<!--待付款1-->
+				{if $order.pay_status == 0 }
+				<section class="padding-all b-color-f raise-order-header dis-box">
+					<div class="box-flex">
+						<h4 class="f-03 color-whie">等待您的支持</h4>
+					<p class="f-04 color-whie">亲，请您赶快支付哦!</p>
+					</div>
+					<div class="header-right"><i class="iconfont icon-daifukuan raise-font"></i></div>					
+				</section>
+				{/if}
+				<!--已付款-->
+				{if $order.pay_status == 2 }
+				<section class="padding-all b-color-f raise-order-header dis-box">
+					<div class="box-flex">						
+					<p class="f-04 color-whie">下单成功！</p>
+					<h4 class="f-03 color-whie">欢迎下次光临！</h4>
+					</div>
+					<div class="header-right"><i class="iconfont icon-hookring2 raise-font"></i></div>					
+				</section>
+				{/if}
+				<section class="flow-checkout-adr padding-all">
+					<div class="address-icon"><i class="iconfont icon-dingwei"></i></div>
+					<div class="flow-have-adr">
+						<p class="f-h-adr-title">
+							<label>{$order.consignee} </label><span> {$order.mobile}</span></p>
+						<p class="f-h-adr-con t-remark m-top04">{$order.detail_address}</p>
+					</div>
+				</section>
+				<section class="m-top10">
+					<section class="flow-checkout-pro j-flow-checkout-pro active">
+
+						<!-- <section class="raise-list-default">
+							<div class="dis-box raise-header b-color-f">
+								<div class="raise-admin-left">
+									<div class="raise-admin-img"><img src="img/0.jpg"></div>
+								</div>
+								<div class="box-flex"><label class="col-6 f-06">岁月无声</label></div>
+							</div>
+						</section> -->
+
+						<div class="product-list-small m-top1px b-color-f  raise-tuij-box dis-box">
+							<ul class="box-flex flow-checkout-bigpic">
+								<li>
+									<div class="product-div dis-box">
+										<a class="product-div-link" href="{$order.url}"></a>
+										<div class="shop-list-width bd"><img class="product-list-img" src="{$order.title_img}" /></div>
+										<div class="product-text box-flex index-product-text">
+											<h4>{$order.title}</h4>
+											<p class="col-3 f-03"><em class="col-9">已筹资金:</em><em class="color-red">￥{$order.join_money}</em><!-- 元 --><em class="fr col-9 f-03">支持人:<em class="color-red">{$order.join_num}</em>人</em>
+											</p>
+											<div class="raise-progressBar dis-box">
+												<p class="wrap box-flex">
+													<span class="bar" style="width:{$order.baifen_bi}%;"><i class="color"></i></span>
+												</p>
+												<p class="txt">{$order.baifen_bi}%</p>
+											</div>
+											<p class="col-3 f-03">支持<em class="color-red">￥{$order.price}</em><em class="col-9 f-02"><!-- 元 --></em><em class="fr col-9"><!-- ×5 --></em></p>
+											<p class="col-9 f-03">{$order.content}</p>
+										</div>
+
+									</div>
+								</li>
+							</ul>
+						</div>
+					</section>
+
+					<section class="flow-checkout-select m-top10 b-color-f">
+						<ul>
+							<li>
+								<section class="dis-box padding-all">
+									<label class="t-remark g-t-temark">配送方式</label>
+									<div class="box-flex t-goods1 text-right onelist-hidden"><span>{$order.shipping_name}</span> <em class="t-first">¥{$order.shipping_fee}</em></div>
+								</section>
+							</li>
+							<!-- <li>
+								<section class="distribution-time b-color-f ">
+									<div class="text-right distribution-time-con dis-box">
+										<label class="t-remark g-t-temark">时间</label>
+										<span class="t-goods1 d-time-date box-flex">2015-11-25</span>
+									</div>
+								</section>
+
+							</li> -->
+							<li>
+								<section class="dis-box padding-all">
+									<label class="t-remark g-t-temark">支付方式</label>
+									<div class="box-flex t-goods1 text-right onelist-hidden"><span>{$order.pay_name}</span> <em class="t-first">{$order.pay_fee}</em></div>
+								</section>
+							</li>
+							<div class="pb-1 padding-all">
+	                           <label class="t-remark g-t-temark">买家留言</label>
+	                           <p class="f-04 m-top04">{$order.postscript}</p>
+                     		</div>	
+						</ul>
+					</section>
+					<section class="m-top10">
+						<section class="flow-checkout-tprice">
+							<ul class="m-top1px b-color-f">
+								<li class="padding-all of-hidden">
+									<label class="t-remark g-t-temark fl">订单号:</label>
+									<span class="fr col-9">{$order.order_sn}</span>
+								</li>
+								<li class="padding-all of-hidden">
+									<label class="t-remark g-t-temark fl">创建时间:</label>
+									<span class=" fr col-9">{$order.add_time}</span>
+								</li>
+								<!--付款后显示-->
+								{if $order.pay_time !==''}
+								<li class="padding-all of-hidden">
+									<label class="t-remark g-t-temark fl">付款时间:</label>
+									<span class=" fr col-9">{$order.pay_time}</span>
+								</li>
+								{/if}
+									<!--发货后显示-->
+								<!-- <li class="padding-all of-hidden">
+									<label class="t-remark g-t-temark fl">快递单号</label>
+									<span class=" fr col-9">{$order.invoice_no}</span>
+								</li> -->
+							</ul>
+
+						</section>
+					</section>
+				</section>
+
+			</div>
+		</div>
+		<div class="mask-filter-div"></div>
+		<!--待付款1-->
+		{if $order.pay_status == 0 and $order.order_status != 2}
+		<section class="filter-btn f-checkout-filter-btn dis-box n-checkout-filter-btn pl">
+			<span class="box-flex t-remark">实付款 <em class="t-first">¥{$order.total_fee}</em></span>
+			{$order.handler}
+			<section class="n-btn-box">{$order.pay_online}</section>
+		</section>
+		{/if}
+		{if $order.order_status != 0 }
+		<section class="filter-btn f-checkout-filter-btn crowd-checkout-filter-btn dis-box">			
+			{$order.handler}
+			{if $order.invoice_no}
+			{$order.invoice_no}
+			{/if}
+		</section>
+		{/if}
+		<!--已取消-->
+		{if $order.order_status == 2 }
+		<!-- <section class="filter-btn f-checkout-filter-btn dis-box">			
+			{$order.handler}	
+		</section> -->
+		{/if}
+		
+		<!--已付款，已发货-->
+		{if $order.pay_status == 2 and $order.shipping_status == 1 }
+		<!-- <section class="filter-btn f-checkout-filter-btn dis-box">
+			<a href="javascript:;" type="button" class=" box-flex"></a>
+			{$order.handler}
+			{$order.invoice_no}
+			
+			
+		</section> -->
+		{/if}
+		
+		<!--已确认收货，查看物流-->
+		{if $order.pay_status == 2 and $order.shipping_status > 1 }
+		<!-- <section class="filter-btn f-checkout-filter-btn dis-box">
+			<a href="javascript:;" type="button" class=" box-flex"></a>			
+			{$order.handler}
+			{$order.invoice_no}
+		</section> -->
+		{/if}
+<!--快捷导航-->
+    {include file="no_search_nav"} 
+       <li>
+	     <a href="{url('crowd_funding/index/index')}">
+	             <i class="iconfont icon-shequ"></i>
+	              <p>微筹广场</p>
+	       </a> 
+       </li>
+       <li> 
+	         <a href="{url('user/crowd/order')}">
+	             <i class="iconfont icon-dingdan"></i>
+	             <p>微筹订单</p>
+	        </a> 
+        </li>
+        <li>
+	        <a href="{url('user/crowd/index')}">
+	             <i class="iconfont icon-geren"></i>
+	              <p>微筹中心</p>
+	        </a> 
+        </li>
+    {include file="float_nav_footer"}
+		<script>
+			var scorll_swiper = new Swiper('.swiper-scroll', {
+				direction: 'vertical',
+				slidesPerView: 'auto',
+				mousewheelControl: true,
+				freeMode: true
+			});
+		$(function($){
+			commonShopList()
+		})
+		</script>
+	</body>
+
+</html>

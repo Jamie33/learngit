@@ -1,0 +1,110 @@
+{include file="page_header"}
+	<div class="con">
+    {if $list}
+                {foreach $list as $val}
+                {if $val.install == 1}
+                <div class="user_profile_bind  bg-white padding-all dis-box m-top08">
+                    <div class="box-flex"  >
+                        <div class="dis-box">
+                               <div><img src="{elixir('img/oauth/sns_'.$val['type'].'.png')}" alt=""></div>
+                                <div class="box-flex cont">
+                                    {if $val.type == 'qq'}
+                                    <h4 class="f-05 col-3">QQ登录</h4>
+                                    {/if}
+                                    {if $val.type == 'weibo'}
+                                    <h4 class="f-05 col-3">微博登录</h4>
+                                    {/if}
+                                    {if $val.type == 'wechat'}
+                                    <h4 class="f-05 col-3">微信登录</h4>
+                                    {/if}
+                                    {if $val.type == 'facebook'}
+                                    <h4 class="f-05 col-3">facebook登录</h4>
+                                    {/if}
+                                    <p class="f-02 col-7 m-top02">一键登录，更方便，更快捷！</p>
+                                </div>
+                                <i class="iconfont icon-jiantou tf-180"></i>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <!-- 已经绑定 -->
+                        {if $val.user_id == $user_id}
+                        <div class="user_profile_bind_btn">
+                            <a href="javascript:;">
+                               <sapn class="color-red">已绑定</sapn>
+                            </a>
+                            {if $val.type != 'wechat'}
+                            <label>|</label>
+                            <a href="javascript:;" data-item="{$val.id}" class="accountbind">
+                                <sapn class="col-7">解绑</sapn>
+                            </a>
+                            {/if}
+                        </div>
+                        {else}
+                        <div class="user_profile_bind_btn">
+                            <a href="{url('oauth/index/index', array('type' => $val.type, 'user_id' => $user_id, 'back_url' => $back_url))}">
+                                <sapn class="col-7">去绑定</sapn>
+                            </a>
+                         </div>
+                        {/if}
+                    </div>
+				</div>
+                {/if}
+                {/foreach}
+
+                <div class="dis-box user_relation_remark">
+                    <label class="f-02 col-9">注：</label>
+                    <p class="col-9 f-02 box-flex">
+                    解绑后，将不能快捷登录网站，请谨慎操作。
+                    </p>
+                </div>
+
+                {else}
+                <div class="no-div-message">
+                <i class="iconfont icon-biaoqingleiben"></i>
+                <p>亲，没有第三方授权登录插件</p>
+            </div>
+                {/if}
+		</div>
+
+    <!--快捷导航-->
+    {include file="float_nav"}
+                <li>
+                    <a href="javascript:history.go(-1);">
+                         <i class="iconfont icon-qudiandianpumingpianicon"></i>
+                         <p>账户安全</p>
+                    </a>
+                </li>
+    {include file="float_nav_footer"}
+    <script type="text/javascript">
+    $(function(){
+        // 点击
+        $('.accountbind').click(function(){
+            var id = $(this).attr("data-item");
+            //询问框
+            layer.open({
+                content: '您确定要解绑此会员帐号吗？'
+                ,btn: ['确定', '取消']
+                ,yes: function(index){
+
+                    remove_account(id); //解绑
+                }
+            });
+        });
+
+        // 解绑
+        function remove_account(id) {
+            $.post("{url('user/profile/accountbind')}", {id:id}, function(data) {
+                d_messages(data.msg);
+                if(data.url){
+                    window.location.href = data.url;
+                } else {
+                    window.location.reload();
+                }
+                return false;
+            },'json');
+        }
+
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html class="goods-body">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" content="{$description}"/>
+    <meta name="keywords" content="{$keywords}"/>
+    <title>{$page_title}</title>
+    {global_assets('css')}
+    <script type="text/javascript">var ROOT_URL = '__ROOT__/';</script>
+    {global_assets('js')}
+    {include file="jssdk"}
+</head>
+<body class="goods-body">
+<p style="text-align:right; display:none;">{C('shop.stats_code')}</p>
+<div id="loading"><img src="{elixir('img/loading.gif')}" /></div>
+<form name="ECS_FORMBUY" action="{url('buy')}" id="ECS_FORMBUY" method="post" onsubmit="return get_presale();" class="goods-body">
+<div class="swiper-container goods-swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide goods_content cur">
+            <div class="goods-swiper-container-cont">
+                <div class="swiper-wrapper goods_detail">
+                    <div class="swiper-slide goods-swiper-slide">
+                        <div class="con goods" id="checkPage">
+                                <div>
+                                    <div class="goods-photo goods-photo-images j-show-goods-img">
+                                    	<div class="group-time-box" id="fnTimeCountDown" data-end="{$presale.formated_end_date}">
+												<span class="day">00</span>天
+												<span class="hour">00</span>时
+												<span class="mini">00</span>分
+												<span class="sec">00</span>秒
+											</div>
+                                        <span class="goods-num" id="goods-num"><span id="g-active-num"></span>/<span id="g-all-num"></span></span>
+                                        <div class="swiper-wrapper my-gallery-box" data-pswp-uid="10">
+				                        {foreach $goods_img as $goods_img}
+				                            <figure class="swiper-slide tb-lr-center">
+				                                <div class="img-box">
+				                                    <a href="{$goods_img.img_url}" data-size="640x640">
+				                                        <img src="{$goods_img.img_url}" alt="{$goods_img.img_url}" />
+				                                    </a>
+				                                </div>
+				                            </figure>
+				                        {/foreach}
+                                        </div>
+                                    </div>
+                                   <section class="goods-title b-color-f padding-all ">
+										<div class="dis-box">
+											<div class="box-flex">
+										 		<h3 class="twolist-hidden" style="height:inherit;">
+											{if empty($goods.user_id)}
+												<em class="em-promotion">自营</em>
+												{/if}
+												{$goods.goods_name}</h3></div>
+										</div>
+									</section>
+									<section class="goods-price padding-all b-color-f">
+										<p class="p-price"><span class="t-first" id="ECS_SHOPPRICE">{$goods.shop_price_formated}</span></p>
+										<p class="p-market">市场价 <del id="ECS_MARKETPRICE">{$goods.market_price}</del></p>
+										<p class=" dis-box g-p-tthree m-top06">
+											<span class="box-flex text-left">销量 {$goods['sales_volume']} {$goods.measure_unit}</span>
+											{if $cfg.show_goodsnumber}
+											<span class="box-flex text-center">库存 <font class="goods_attr_num">{$goods.goods_number}</font>{$goods.measure_unit}</span>
+											{/if}
+											<span class="box-flex text-right">{$basic_info.province}{$basic_info.city}</span>
+										</p>
+									</section>
+                                   	<section class="m-top04 padding-all b-color-f goods-promotion j-show-div j-service">
+										<div class="dis-box">
+											<label class="t-remark g-t-temark">预售规则</label>
+											<div class="box-flex g-promotion-con">
+												<p><em class="em-promotion">定金</em><span id="formated_deposit">{$presale.formated_deposit}</span>&nbsp;<em class="em-promotion">尾款</em><span id="formated_final_payment">{$presale.formated_final_payment}</span></p>
+												<p><em class="em-promotion">预售人数</em><span class="">{$goods.sales_volume}人</span></p>
+
+											</div><i class="iconfont icon-102 goods-min-icon"></i>
+										</div>
+									</section>
+                  					<section class="padding-all b-color-f m-top1px n-goods-box">
+					                    <!--address-start-->
+					                        <div id="editAddressForm">
+					                            <input type="hidden" id="province_id" name="province_region_id" value="">
+					                            <input type="hidden" id="city_id" name="city_region_id" value="">
+					                            <input type="hidden" id="district_id" name="district_region_id" value="">
+					                            <input type="hidden" id="town_id" name="town_region_id" value="">
+					                            <input type="hidden" id="village_id" name="village_region_id" value="">
+					                            <input type="hidden" id="region_id" name="region_id" value="">
+					                            <input type="hidden" id="address_id" name="address_id" value="">
+					                            <div class="address-box" id="selectAddressBtn" region-data="">
+					                                    <label class="fl t-remark g-t-temark">所在地区</label>
+					                                    <span class="fl text-all-span f-05" id="addressLabelId">{$province_row.region_name}{$city_row.region_name}{$district_row.region_name}{$town_row.region_name}{$village_row.region_name}</span>
+					                                    <div class="f-04"><span class="t-jiantou fr"><i class="iconfont icon-jiantou tf-180"></i></span></div>
+					                            </div>
+					                        </div>
+					                         <!--address-end-->
+					               </section>
+		                          	{if $show_warehouse}
+									<section class="m-top1px padding-all b-color-f goods-attr j-filter-depot">
+										<div class="dis-box">
+											<label class="t-remark g-t-temark">默认仓库</label>
+											<span class="box-flex t-goods1 text-all-span ">{$warehouse_name}</span>
+											 <div class="f-04"><span class="t-jiantou fr"><i class="iconfont icon-jiantou tf-180"></i></span></div>
+										</div>
+									</section>
+									{/if}
+									<section class="m-top1px padding-all b-color-f goods-attr j-goods-attr j-show-div j-property">
+										<div class="dis-box">
+											<label class="t-remark g-t-temark">已选</label>
+											<div class="box-flex t-goods1 ">{$default_spe}</div>
+											 <div class="f-04"><span class="t-jiantou"><i class="iconfont icon-jiantou tf-180"></i></span></div>
+										</div>
+									</section>
+                       				<section class="m-top1px padding-all b-color-f goods-service j-show-div j-service1">
+										<div class="dis-box">
+											<label class="t-remark g-t-temark">服务</label>
+											<div class="box-flex">
+												<div class="dis-box">
+													<p class="box-flex t-goods1">
+														{if $goods.user_id > 0}
+														由{$goods.rz_shopName}发货并提供售后服务。
+														{else}
+														由{$basic_info.shop_name}发货并提供售后服务。
+														{/if}</p>
+													<i class="iconfont icon-102 goods-min-icon"></i>
+
+												</div>
+												<div class="dis-box m-top08 g-r-rule">
+													<p class="box-flex t-remark3">
+														<em class="fl em-promotion"><i class="iconfont icon-daifukuan"></i></em><span class="fl">货到付款</span></p>
+													<p class="box-flex t-remark3">
+														<em class="fl em-promotion"><i class="iconfont icon-7tianwuliyoutuihuo"></i></em><span class="fl">7天退货</span></p>
+													<p class="box-flex t-remark3">
+														<em class="fl em-promotion"><i class="iconfont icon-tixingnaozhong"></i></em><span class="fl">极速达</span></p>
+												</div>
+											</div>
+										</div>
+									</section>
+									<section class="m-top04 goods-evaluation">
+										<a href="{url('goods/index/comment', array('id'=>$goods.goods_id))}">
+											<div class="dis-box padding-all b-color-f  g-evaluation-title">
+												<label class="t-remark g-t-temark">用户评价</label>
+												<div class="box-flex t-goods1">好评率 <em class="t-first">{$comment_all.goodReview}%</em></div>
+												<div class="t-goods1"><em class="t-first">{$comment_all.allmen}</em><span class="t-jiantou">人评论<i class="iconfont icon-jiantou tf-180"></i></span></div>
+											</div>
+										</a>
+										{if $good_comment}
+										<div class="padding-all m-top1px b-color-f g-evaluation-con">
+											<div class="of-hidden evaluation-list">
+												<div class="of-hidden ">
+													<p class="fl">
+														<span class="grade-star g-star-{$good_comment[0]['rank']} fl"></span>
+														<em class="t-remark fl">{$good_comment[0]['username']}</em>
+													</p>
+													<p class="fr t-remark">{$good_comment[0]['add_time']}</p>
+												</div>
+												<p class="clear m-top10 t-goods1">{$good_comment[0]['content']}</p>
+												{if $good_comment[0]['goods']}
+												<p class="clear m-top08 t-remark">{$good_comment[0]['goods'][0]['goods_attr']}</p>
+												{/if}
+												<div class="ect-button-more m-top10 dis-box">
+													<a href="{url('infoimg', array('id'=>$goods.goods_id))}" class="box-flex btn-default-new br-5 min-btn">有图评价</a>
+													<a href="{url('comment', array('id'=>$goods.goods_id))}" class="box-flex btn-default-new br-5 min-btn">全部评价</a>
+												</div>
+											</div>
+										</div>
+										{/if}
+									</section>
+									<section class="m-top04 padding-all goods-shop  b-color-f">
+										{if $goods.user_id}
+										<div class="goods-shop-info">
+											<a href="{$goods.store_url}" class="link-abs"></a>
+											<section class="dis-box">
+												<div class="g-s-i-img"><img src="{$goods.shopinfo.logo_thumb}" /></div>
+												<div class="g-s-i-title box-flex">
+													<h3 class="ellipsis-one">{$goods.rz_shopName}</h3>
+													<p class="t-remark m-top04">已经有 {$collect_number} 人关注</p>
+												</div>
+											</section>
+											<section class="dis-box goods-shop-score m-top12">
+												<p class="box-flex">
+													<label class="fl">商品</label><span class="t-first margin-lr fl">{$merch_cmt['cmt']['commentRank']['zconments']['score']}分</span><em class="em-promotion fl">{$merch_cmt['cmt']['commentRank']['zconments']['goodReview']}</em></p>
+												<p class="box-flex">
+													<label class="fl">服务</label><span class="t-low margin-lr fl">{$merch_cmt['cmt']['commentServer']['zconments']['score']}分</span><em class="em-promotion em-p-low fl">{$merch_cmt['cmt']['commentServer']['zconments']['goodReview']}</em></p>
+												<p class="box-flex">
+													<label class="fl">时效</label><span class="t-center margin-lr fl">{$merch_cmt['cmt']['commentDelivery']['zconments']['score']}分</span><em class="em-promotion em-p-center fl">{$merch_cmt['cmt']['commentDelivery']['zconments']['goodReview']}</em></p>
+											</section>
+										</div>
+										{/if}
+										{if $new_goods}
+										<div class="goods-shop-pic of-hidden">
+											<h4 class="title-hrbg m-top06"><span>爆款新品</span><hr> </h4>
+											<div class="g-s-p-con product-one-list of-hidden scrollbar-none j-g-s-p-con">
+												<div class="swiper-wrapper ">
+													{foreach $new_goods as $k=>$v}
+													<li class="swiper-slide">
+														<div class="product-div">
+															<a href="{$v.url}"><img class="product-list-img" src="{$v.goods_img}" /></a>
+															<div class="product-text m-top06">
+																<a href="{$v.url}"><h4>{$v.name}</h4></a>
+																<p><span class="p-price t-first ">
+					                                                {if $v.promote_price}
+					                                                {$v.promote_price}
+					                                                {else}
+					                                                {$v.shop_price}
+					                                                {/if}
+					                                            </span>
+																</p>
+															</div>
+														</div>
+													</li>
+													{/foreach}
+												</div>
+											</div>
+										</div>
+										{/if}
+										<div class="ect-button-more n-ect-button-more m-top10 dis-box goods-shop-btn">
+											{if isset($basic_info.kf_appkey) && !empty($basic_info.kf_appkey)}
+											<a class="box-flex  btn-default-new br-5 min-btn" href="{url('chat/yunwang/index', array('goods_id'=> $goods.goods_id))}"><i class="iconfont icon-kefu t-first"></i>联系客服</a>
+											{elseif isset($basic_info.meiqia) && !empty($basic_info.meiqia)}
+											<a class="box-flex  btn-default-new br-5 min-btn" href="https://static.meiqia.com/dist/standalone.html?eid={$basic_info.meiqia}"><i class="iconfont icon-kefu t-first"></i>联系客服</a>
+											{else}
+											{if $basic_info.kf_type}
+											<a class="box-flex  btn-default-new br-5 min-btn" href="https://www.taobao.com/webww/ww.php?ver=3&touid={$basic_info.kf_ww}&siteid=cntaobao&status=1&charset=utf-8"><i class="iconfont icon-kefu t-first"></i>联系客服</a>
+											{else}
+											<a class="box-flex  btn-default-new br-5 min-btn" href="https://wpa.qq.com/msgrd?v=3&uin={$basic_info.kf_qq}&site=qq&menu=yes"><i class="iconfont icon-kefu t-first"></i>联系客服</a>
+											{/if}
+											{if $goods.user_id}
+											<a class="box-flex  btn-default-new br-5 min-btn" href="{$goods.store_url}"><i class="iconfont icon-dianpu t-two"></i>进入店铺</a>
+											{/if}
+											{/if}
+										</div>
+									</section>
+                                    <div class="goods_load_more m-top08 b-color-f j-goods-detail-img">
+                                        <i class="iconfont icon-fanhui tf-90"></i><span>上拉查看图文详情</span>
+                                    </div>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-scrollbar"></div>
+            </div>
+        </div>
+        <div class="swiper-slide" id="j-tab-c">
+            <div class="goods-swiper-container-cont">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide goods-swiper-slide">
+                        <div class="goods-info of-hidden ect-tab  j-goods-info j-ect-tab ts-3" style="padding-top:0">
+                            <!-- <div class="goods_load_more">
+                                <i class="iconfont icon-fanhui icon-fanhui-detail tf-90-1"></i><span>下拉回到商品信息</span>
+                            </div> -->
+                            <div class="hd j-tab-title tab-title b-color-f of-hidden" style="position:static">
+                                <ul class="dis-box">
+                                    <li class="box-flex active">商品详情</li>
+                                    <li class="box-flex">规格参数</li>
+                                </ul>
+                            </div>
+                            <div id="j-tab-con" class="goods-detail-cont">
+                                <div class="swiper-wrapper">
+                                    <section class="swiper-slide">
+                                        {if $goods_desc}
+                                        <div class="b-color-f detail-cont">
+                                            {$goods_desc}
+                                        </div>
+                                        {else}
+                                        <div class="no-div-message">
+                                            <i class="iconfont icon-biaoqingleiben"></i>
+                                            <p>亲，此处没有内容～！</p>
+                                        </div>
+                                        {/if}
+                                    </section>
+                                    <section class="swiper-slide goods-info-attr ">
+                                        {if $properties}
+                                        <ul class="t-remark b-color-f">
+                                            {foreach $properties as $key=>$property_group}
+                                            <li class="of-hidden"><span class="fl">{$key}</span></li>
+                                            {foreach $property_group as $property}
+                                            <li class="of-hidden"><span class="fl">{$property.name}</span><span class="fr">{$property.value}</span></li>
+                                            {/foreach} {/foreach}
+                                        </ul>
+                                        {else}
+                                        <div class="no-div-message">
+                                            <i class="iconfont icon-biaoqingleiben"></i>
+                                            <p>亲，此处没有内容～！</p>
+                                        </div>
+                                        {/if}
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-scrollbar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--商品属性弹出层star-->
+<div class="mask-filter-div"></div>
+<div class="show-goods-attr j-filter-show-div ts-3 b-color-1 property-box">
+	<section class="s-g-attr-title b-color-1  product-list-small">
+		<div class="product-div">
+			<img class="product-list-img" src="{$goods.goods_img}">
+				<div class="product-text">
+					<div class="dis-box position-rel">
+						<h4 class="box-flex">{$goods.goods_name}</h4>
+						<i class="iconfont icon-guanbi2 show-div-guanbi"></i>
+					</div>
+					<p><span class="p-price t-first " id="ECS_GOODS_AMOUNT">{$goods.shop_price}</span></p>
+				</div>
+		</div>
+	</section>
+	<section class="s-g-attr-con swiper-scroll b-color-f padding-all m-top1px">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">
+				{foreach $specification as $spec_key=>$spec}
+					{if $spec.values}
+						<h4 class="t-remark">{$spec.name}</h4>
+						<!-- 判断属性是复选还是单选 -->
+						{if $spec.attr_type == 1}
+						<ul class="select-one j-get-one m-top10">
+							{if $spec.is_checked > 0}
+								<!-- pc有属性图片 -->
+								{foreach $spec.values as $key=>$val}
+									<a class="ect-select dis-flex fl" href="javascript:;" {if $val.img_site}onclick="location.href='{$val.img_site}'"{/if}>
+									<label class="ts-1 {if $val.checked == 1}active{/if}" for="spec_value_{$val.id}">{$val.label}</label>
+									<input style="display:none" id="spec_value_{$val.id}" type="radio" name="spec_{$spec_key}" value="{$val.id}" {if $val.checked == 1}checked{/if} onclick="changePrice()" /></a>
+								{/foreach}
+							{else}
+							<!-- pc没属性图片 -->
+							{foreach $spec.values as $key=>$val}
+								<a class="ect-select dis-flex fl" href="javascript:;" {if $val.img_site}onclick="location.href='{$val.img_site}'"{/if}>
+								<label class="ts-1 {if $key == 0}active{/if}" for="spec_value_{$val.id}">{$val.label}</label>
+								<input style="display:none" id="spec_value_{$val.id}" type="radio" name="spec_{$spec_key}" value="{$val.id}" {if $key == 0}checked{/if} onclick="changePrice()" /></a>
+							{/foreach}
+							{/if}
+						</ul>
+						<input type="hidden" name="spec_list" value="{$key}" />
+						{else}
+						<ul class="select-one j-get-one m-top10">
+							{foreach $spec.values as $key=>$val}
+							<li class="ect-select dis-flex fl">
+								<label class="ts-1 {if $key == 0}active{/if}" for="spec_value_{$val.id}">{$val.label}</label>
+								<input type="checkbox" name="spec_{$spec_key}[]" value="{$val.id}" id="spec_value_{$val.id}" onclick="changePrice()" {if $select_key == 0}checked{/if} style="display:none" />
+							</li>
+							{/foreach}
+						</ul>
+						{/if}
+					{/if}
+				{/foreach}
+				<h4 class="t-remark">数量</h4>
+				<!-- 普通商品可修改数量 -->
+				{if $goods.goods_id > 0 && $goods.is_gift == 0 && $goods.parent_id == 0}
+					<div class="div-num dis-box m-top08">
+						<a class="num-less" onClick="changePrice('1')"></a>
+						<input class="box-flex" type="text" value="1" onblur="changePrice('2')" name="number" id="goods_number" />
+						<a class="num-plus" onClick="changePrice('3')"></a>
+					</div>
+				{else}
+					<div class="div-num dis-box m-top08 div-num-disabled">
+						<a class="num-less"></a>
+						<input class="box-flex" type="text" value="{$goods.goods_number}" name="number" />
+						<a class="num-plus"></a>
+					</div>
+				{/if}
+				</div>
+			</div>
+		<div class="swiper-scrollbar"></div>
+	</section>
+	<section class="ect-button-more dis-box">
+		<input type="hidden" value="{$province_row.region_id}" id="province_id" name="province_region_id">
+		<input type="hidden" value="{$city_row.region_id}" id="city_id" name="city_region_id">
+		<input type="hidden" value="{if $district_row.region_id}{$district_row.region_id}{else}0{/if}" id="district_id" name="district_region_id">
+		<input type="hidden" value="{$region_id}" id="warehouse_id" name="warehouse_id">
+		<input type="hidden" value="{$region_id}" id="region_id" name="region_id">
+		<input type="hidden" value="{$goods_id}" id="good_id" name="good_id">
+		<input type="hidden" value="{$user_id}" id="user_id" name="user_id">
+		<input name="goods_spec" value="" type="hidden" />
+		<input type="hidden" value="{$area_id}" id="area_id" name="area_id">
+		<input type="hidden" value="{$presale.act_id}" id="presale_id" name="presale_id">
+		<button type="sumbit" class="btn-submit box-flex add-to-cart {if $presale.status == 0  || $presale.status == 2 }btn-disab{/if}" {if $presale.status == 0  || $presale.status == 2 }disabled="disabled"{/if} >{if $presale.status == 0  || $presale.status == 2 }活动已结束{else}立即预约{/if}</button>
+	</section>
+</div>
+<!--商品属性弹出层end-->
+{if $show_warehouse}
+<!--仓库s-->
+<div class="filter-depot-div ts-5 c-filter-div c-depot-div">
+	<section class="close-filter-div j-close-filter-div">
+		<div class="close-f-btn">
+			<i class="iconfont icon-fanhui"></i>
+			<span>关闭</span>
+		</div>
+	</section>
+	<section class="con-filter-div">
+		<div class="select-two j-get-depot-one">
+			<ul class="padding-all">
+				{foreach $warehouse_list as $warehouse}
+				<li class="ect-select" onclick="warehouse({$warehouse.region_id}, {$goods_id})">
+					<label class="ts-1 {if $region_id == $warehouse.region_id}active{/if}">{$warehouse.region_name}<i class="fr iconfont icon-gou ts-1"></i></label>
+				</li>
+				{/foreach}
+			</ul>
+		</div>
+	</section>
+</div>
+{/if}
+<!--悬浮btn star-->
+	<section class="filter-btn dis-box">
+	{if isset($basic_info.kf_appkey) && !empty($basic_info.kf_appkey)}
+	<a class="filter-btn-kefu  heart" href="{url('chat/yunwang/index', array('goods_id'=> $goods.goods_id))}"><i class="kefu"></i><em>客服</em></a>
+	{elseif isset($basic_info.meiqia) && !empty($basic_info.meiqia)}
+	<a class="filter-btn-kefu  heart" href="https://static.meiqia.com/dist/standalone.html?eid={$basic_info.meiqia}"><i class="kefu"></i><em>客服</em></a>
+	{else}
+	{if $basic_info.kf_type}
+	<a class="filter-btn-kefu  heart" href="https://www.taobao.com/webww/ww.php?ver=3&touid={$basic_info.kf_ww}&siteid=cntaobao&status=1&charset=utf-8"><i class="kefu"></i><em>客服</em></a>
+	{else}
+	<a class="filter-btn-kefu  heart" href="https://wpa.qq.com/msgrd?v=3&uin={$basic_info.kf_qq}&site=qq&menu=yes"><i class="kefu"></i><em>客服</em></a>
+	{/if}
+	{/if}
+	<a class="filter-btn-flow  heart j-heart {if $goods_collect}active{/if}" onclick="collect({$goods.goods_id})" id="ECS_COLLECT">
+		<i class="shoucang ts-2"></i>
+		 <em>收藏</em>
+	</a>
+	{if $goods.user_id}
+	<a class="filter-btn-shop heart" href="{$goods.store_url}">
+        <i class="dianpu ts-2"></i><em>店铺</em></a>
+	{/if}
+	<button type="sumbit" class="btn-submit box-flex add-to-cart {if $presale.status == 0  || $presale.status == 2 }btn-disab{/if}" {if $presale.status == 0  || $presale.status == 2 }disabled="disabled"{/if} >{if $presale.status == 0  || $presale.status == 2 }活动已结束{else}立即预约{/if}</button>
+	<!--<a class="btn-submit box-flex">立即预约</a>-->
+	</section>
+<!--悬浮btn end-->
+</form>
+<!--预售说明star-->
+<div class="show-goods-service j-filter-show-div ts-3 b-color-1 service-box">
+	<section class="goods-show-title of-hidden padding-all b-color-f">
+		<h3 class="fl g-c-title-h3">预售说明</h3>
+		<i class="iconfont icon-guanbi2 show-div-guanbi fr"></i>
+	</section>
+	<section class="goods-show-con goods-big-service swiper-scroll">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide b-color-f presale-text">
+				<p>1.定金付款后，若非{$basic_info.shop_name}或商家责任（根据《售后政策》和客服判断为准），定金恕不退还；</p>
+				<p>2.预售结束时，由系统自动更新确认尾款价格，无论下单顺序先后均可享受相同的预售价格；</p>
+				<p>3.预售结束后，请至“我的订单”内付尾款；</p>
+				<p>4.尾款开始支付时，请在要求的时间{$presale.formated_pay_end_time}内支付尾款，若超时将自动关闭订单，且定金不予退还，赠品不予赠送。请注意预售结束时间，并及时支付尾款，对此我们会有提醒；</p>
+				<p>5.如果提供赠品，赠品赠送依据的排序按照定金付款成功时间来计算，而不是定金下单时间；</p>
+				<p>6.发货时间请以预售商品详情页中的“发货时间”描述为准</p>
+			</div>
+		</div>
+		<style>
+			.presale-text{padding:1rem; box-sizing:border-box; color:#666;}
+			.presale-text p{font-size:1.2rem; margin-bottom:.6rem;}
+		</style>
+	</section>
+</div>
+<!--预售说明end-->
+<!--服务信息star-->
+<div class="show-goods-service j-filter-show-div ts-3 b-color-1 service1-box">
+	<section class="goods-show-title of-hidden padding-all b-color-f">
+		<h3 class="fl g-c-title-h3">服务说明</h3>
+		<i class="iconfont icon-guanbi2 show-div-guanbi fr"></i>
+	</section>
+	<section class="goods-show-con goods-big-service swiper-scroll">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">
+				<ul>
+					<li class="m-top1px b-color-f padding-all of-hidden">
+						<p class="dis-box t-remark3">
+							<em class="em-promotion"><i class="iconfont icon-daifukuan"></i></em>
+							<span class="box-flex">货到付款</span>
+						</p>
+						<p class="g-b-s-con m-top08">支持送货上门后再收款，支持现金、POS机刷卡等方式</p>
+					</li>
+					<li class="m-top1px b-color-f padding-all of-hidden">
+						<p class="dis-box t-remark3">
+							<em class="em-promotion"><i class="iconfont icon-7tianwuliyoutuihuo"></i></em>
+							<span class="box-flex">7天退货</span>
+						</p>
+						<p class="g-b-s-con m-top08">自实际收货日期的次日起7天内，商品完好，可进行无理由退换货</p>
+					</li>
+					<li class="m-top1px b-color-f padding-all of-hidden">
+						<p class="dis-box t-remark3">
+							<em class="em-promotion"><i class="iconfont icon-tixingnaozhong"></i></em>
+							<span class="box-flex">极速达</span>
+						</p>
+						<p class="g-b-s-con m-top08">上午下单，下午送达</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+</div>
+	<!--服务信息end-->
+	<!--地区选择 s-->
+	{include file="address"}
+	<!--地区选择 e-->
+	<!--仓库e-->
+	<!--快捷导航-->
+	{include file="float_nav"}
+	{include file="float_nav_footer"}
+	{include file="image"}
+	<script src="__TPL__/js/jquery.cookie.js"></script>
+	<script type="text/javascript">
+			$(function(){
+		        // 首次加载
+		        changePrice();
+                $("#fnTimeCountDown").fnTimeCountDown();
+		        //相册
+		        initPhotoSwipeFromDOM('.my-gallery-box');
+		    });
+			/**
+			 * 点选可选属性或改变数量时修改商品价格的函数
+			 */
+			function changePrice(type){
+				var max_number = parseInt($(".goods_attr_num").html());// 库存
+				var min_number = 1;
+				var qty = $("#goods_number").val();
+				if(type == 1){
+					if(qty >= min_number){
+						qty--;
+					}
+				}
+				var goods_attr_id = getSelectedAttributes(document.forms['ECS_FORMBUY']);
+	  			$(":input[name='goods_spec']").val(goods_attr_id);
+				if(type == 3){
+					if(qty < max_number){
+						qty++;
+					}else{
+						var message = "您最多可预约" + max_number + "件商品!";
+						d_messages(message);
+						return false;
+					}
+				}
+				if(qty <=0 ){ qty=1; }
+				if(!/^[0-9]*$/.test(qty)){ qty = 1 }
+				var attr = getSelectedAttributes(document.forms['ECS_FORMBUY']);
+				var warehouse = {if $region_id}{$region_id}{else}0{/if};
+				var area = {if $area_id}{$area_id}{else}0{/if};
+				$.get('{url("price")}', {'gid':{$goods_id},'id':{$presale['act_id']},'attr':attr, 'number':qty, 'warehouse_id':warehouse, 'area_id':area}, function(data){
+					changePriceResponse(data);
+				}, 'json');
+			}
+			/**
+			 * 接收返回的信息
+			 */
+			function changePriceResponse(res){
+				if (res.err_msg.length > 0){
+					d_messages(res.err_msg);
+				} else {
+					//属性图片
+					if(res.attr_img) {
+						$(".s-g-attr-title .product-list-img").attr('src',res.attr_img);
+					}
+					//用户购买的数量
+					$("#goods_number").val(res.qty);
+					//更改数量的同时显示
+					var get_text = '';
+					s_get_label = $(".show-goods-attr .s-g-attr-con").find("label.active"); //获取被选中label
+					if(s_get_label.length > 0){
+						s_get_label.each(function() {
+							get_text += $(this).text() + "、";
+						});
+					}
+					var goods_number = $("#goods_number").val();
+					goods_number = parseInt(goods_number) ? parseInt(goods_number) : 1;
+					get_text = get_text + goods_number + "个";
+					$(".j-goods-attr").find(".t-goods1").text(get_text);
+					if ($(".goods_attr_num").length > 0){
+						$(".goods_attr_num").html(res.attr_number);
+					}
+					if(res.err_no == 2){
+						d_messages("该地区暂不支持配送");
+					}
+					else{
+						if(res.attr_number <= 0){
+							//$(".add-to-cart").hide();
+						}
+					}
+					//总价
+					if ($("#ECS_GOODS_AMOUNT").length > 0){
+						$("#ECS_GOODS_AMOUNT").html(res.result);
+					}
+					if($("#ECS_SHOPPRICE").length > 0){
+						$("#ECS_SHOPPRICE").html(res.result);
+					}
+					if($("#ECS_DISCOUNT").length > 0){
+						$("#ECS_DISCOUNT").html(res.discount);
+					}
+					if($("#ECS_MARKETPRICE").length > 0){
+						$("#ECS_MARKETPRICE").html(res.marketPrice_amount);
+					}
+					if($("#formated_deposit").length > 0){
+						$("#formated_deposit").html(res.formated_deposit);
+					}
+					if($("#formated_final_payment").length > 0){
+						$("#formated_final_payment").html(res.formated_final_payment_new);
+					}
+				}
+			}
+			function get_presale(){
+				var qty = $("#goods_number").val();
+				var number = Number($('.goods_attr_num').html());
+				if(qty > number){
+					var message = "您最多可预约" + number + "件商品!";
+					d_messages(message);
+					return false;
+				}
+			};
+			$(function(){
+		        /*点击弹出搜索层*/
+	        $(".j-price-ladder").click(function () {
+	            $(".t-price-ladder").toggleClass("active");
+	        });
+	         //默认选择属性弹窗
+	        $(".j-property").click(function() {
+	            changePrice();
+	            $(".property-box").addClass('show')
+	        });
+	        //服务
+	        $(".j-service").click(function() {
+	            $(".service-box").addClass('show')
+	        });
+	        $(".j-service1").click(function() {
+	            $(".service1-box").addClass('show')
+	        });
+		})
+		window.onload = function(){
+	        header_img()
+	        window.onresize = function(){
+	            header_img()
+	        }
+	        var swiper = new Swiper('.j-g-s-p-con', {
+	            scrollbarHide: true,
+	            slidesPerView: 'auto',
+	            centeredSlides: false,
+	            grabCursor: true
+	        });
+	        //详情上拉等
+			setTimeout(goodsDetail(),100)
+	    }
+
+	</script>
+</body>
+</html>

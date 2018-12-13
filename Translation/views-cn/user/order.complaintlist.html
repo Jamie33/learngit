@@ -1,0 +1,107 @@
+{include file="page_header"}
+<div class="con">
+    <div class="goods-info user-order of-hidden ts-3"style="padding-top:4rem">
+        <nav class="tab-title b-color-f of-hidden" style="position:fixed">
+            <ul class="dis-box">
+                <li class="box-flex {if $status == 0}active{/if}"><a status="0" >可申请订单</a></li>
+                <li class="box-flex {if $status ==1}active{/if}"><a status="1" >已申请订单</a></li>
+            </ul>
+        </nav>
+        <section class="store_info">
+                    <script id="j-product" type="text/html">
+                    <% if order_list%>
+                        <%each order_list as order%>
+                        <section class="flow-checkout-pro  m-top08">
+                            <header class="b-color-f dis-box padding-all">
+                                <span class=" box-flex">
+                                    <%if order.user_name%>
+                                    <%order.user_name%>
+                                    <%else%>
+                                    <%order.shop_name%>
+                                    <%/if%>
+                                </span>
+                                <em class="j-goods-coupon t-first f-04"><%order.order_status%></em>
+                            </header>
+                            <div class="f-c-p-orderid padding-all m-top1px b-color-f">
+                                <a class="product-div-link" href="<%order.order_url%>"></a>
+
+                                <h4 class="t-remark2">
+                                    <label class="t-remark">订单号：</label><%order.order_sn%>
+                                    <!--拼团标识-->
+                                    <%if order.team_id > 0%>
+                                    <em class="em-promotion b-tag">拼团订单</em>
+                                    <%/if%>
+                                    <!--拼团标识 end-->
+                                     <span class="t-jiantou"></span>
+                                </h4>
+                                <p class="t-remark3 m-top04"><%order.order_time%></p>
+                            </div>
+
+                            <div class="padding-all user-orderlist-shop dis-box text-all-select">
+                                <a class="product-div-link" href="<%order.order_url%>"></a>
+                                <ul class="flow-checkout-smallpic box-flex">
+                                    <%each order.order_goods as val %>
+                                    <li><img class="product-list-img" src="<%val.goods_thumb%>" /></li>
+                                    <%/each%>
+                                </ul>
+                                <span class="t-jiantou">
+                                    <span class="f-c-a-count">共 <%order.order_goods_num%>款</span><i class="iconfont icon-jiantou tf-180"></i></span>
+                            </div>
+														<div class="padding-all f-05 user-order-money b-color-f">共<%order.order_goods_num%>款商品 合计：<em class="t-first"><%#order.total_fee%></em></div>
+                            <footer class="padding-all b-color-f m-top1px of-hidden dis-box">
+                                <h4 class="t-remark2 box-flex"></h4>
+                                <p class="ect-button-more ect-button-more-dete n-br-5">
+                                    <a class="btn-default-new br-5 min-btn" href="<%order.url%>">交易纠纷</a>
+                                    <%if order.complaint_state == 4%>
+                                    <a class="btn-default-new br-5 min-btn del-order" data-item="<%order.is_complaint%>" class="sc-btn">删除</a>
+                                    <%/if%>
+                                </p>
+                            </footer>
+                        </section>
+                        <%/each%>
+                        <%else%>
+                        <div class="no-div-message">
+                            <i class="iconfont icon-biaoqingleiben"></i>
+                               <p>亲，还没有订单哦～！</p>
+                            </div>
+                        <%/if%>
+                        </script>
+            </section>
+        </div>
+    </div>
+    <!--快捷导航-->
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+    <script type="text/javascript">
+        //订单列表
+        var infinite = $('.store_info').infinite({url: "{url('user/order/complaint_list')}", template: 'j-product', params: 'status={$status}'});
+
+        $(".tab-title a").click(function () {
+            var status = $(this).attr('status');
+            infinite.onload('status=' + status);
+            $(this).parent().addClass("active").siblings().removeClass("active");
+        })
+       //删除订单
+            $(".goods-info").on('click','.del-order', function(){
+             var order_id = $(this).attr('data-item');
+             var url='{url("user/order/del_compalint")}';
+               layer.open({
+                    content: '是否删除此订单',
+                    btn: ['确定', '取消'],
+                    shadeClose: false,
+                    yes: function() {
+                      $.post(url, {compalint_id:order_id},
+                         function(result){
+                             if(result.y == 1){
+                                window.location.href = "{url('user/order/complaint_list')}";
+                             }
+                         }, 'json');
+                     },
+                   
+                });
+
+        });
+  
+    </script>
+</body>
+</html>

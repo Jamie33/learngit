@@ -1,0 +1,99 @@
+{include file="page_header"}
+    <div class="con b-color-f ">
+    		<header class="dis-box header-menu n-header-menu b-color color-whie new-goods-nav ts-5">
+			
+				<h3 class="box-flex"><nav class="n-goods-shop-list-nav box-flex swiper-container-horizontal ">
+							<ul class="swiper-wrapper  dis-box text-c">
+								<li class="div1 box-flex swiper-slide position-rel swiper-slide-active" category="1">
+                                                                    <a class="product-div-link" href="{url('seckill/index/detail', array('id'=>$goods_id ,'seckill_id'=>$seckill_id ,'tmr'=>$tmr))}"></a>商品</li>
+								<li class="div3 box-flex swiper-slide active position-rel swiper-slide-next" category="3">
+									<a class="product-div-link" href="{url('seckill/index/info', array('id'=>$goods_id ,'seckill_id'=>$seckill_id ,'tmr'=>$tmr))}"></a>详情</li>
+								<li class="div4 box-flex swiper-slide position-rel" category="4">
+									<a class="product-div-link" href="{url('seckill/index/comment', array('id'=>$goods_id ,'seckill_id'=>$seckill_id ,'tmr'=>$tmr))}"></a>评论</li>
+							</ul>
+						</nav>
+				</h3>
+		</header>
+    <div class="goods-info of-hidden ect-tab b-color-f j-goods-info j-ect-tab ts-3"style="padding-top:4.2rem">
+        <div class="hd j-tab-title tab-title b-color-f of-hidden" style="position:static">
+            <ul class="dis-box">
+                <li class="box-flex active">商品详情</li>
+                <li class="box-flex">规格参数</li>
+            </ul>
+        </div>
+         
+        <div id="j-tab-con" class="b-color-f m-top1px tab-con goods-info-box">
+            <div class="swiper-wrapper">
+          
+                <section class="swiper-slide ">
+                    {if $goods_desc}
+                        <div >
+                            {$goods_desc}
+                        </div>
+                    {else}
+                          <div class="no-div-message">
+                            <i class="iconfont icon-biaoqingleiben"></i>
+                                <p>亲，此处没有内容～！</p>
+                            </div>
+                    {/if}     
+                </section>
+                              
+             
+                <section class="swiper-slide goods-info-attr">
+                 {if $properties}
+                        <ul class="t-remark">
+                            {foreach $properties as $key=>$property_group}
+                            <li class="of-hidden"><span class="fl">{$key}</span></li>
+                                {foreach $property_group as $property}
+                                <li class="of-hidden"><span class="fl">{$property.name}</span><span class="fr">{$property.value}</span></li>
+                                {/foreach}
+                            {/foreach}
+                        </ul>
+                  {else}
+                      <div class="no-div-message">
+                        <i class="iconfont icon-biaoqingleiben"></i>
+                            <p>亲，此处没有内容～！</p>
+                        </div>
+                {/if}      
+                </section>
+                </div>
+            </div>
+        </div>
+    </div>
+   </div>
+         <!--快捷导航-->
+    {include file="no_search_nav"}
+        <li>
+            <a href=" {url('seckill/index/index')}">
+                <i class="iconfont icon-tixingnaozhong"></i>
+                <p>限时秒杀</p>
+            </a>  
+        </li>
+    {include file="float_nav_footer"}
+    <script type="text/javascript">
+
+        /*切换*/
+        var tabsSwiper = new Swiper('#j-tab-con', {
+            speed: 100,
+            noSwiping: true,
+            autoHeight: true,
+            onSlideChangeStart: function() {
+                $(".j-tab-title .active").removeClass('active')
+                $(".j-tab-title li").eq(tabsSwiper.activeIndex).addClass('active')
+            }
+        })
+        $(".j-tab-title li").on('touchstart mousedown', function(e) {
+            e.preventDefault()
+            $(".j-tab-title .active").removeClass('active')
+            $(this).addClass('active')
+            tabsSwiper.slideTo($(this).index())
+        })
+        $(".j-tab-title li").click(function(e) {
+            e.preventDefault()
+        })
+
+
+
+    </script>
+</body>
+</html>

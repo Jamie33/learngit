@@ -1,0 +1,223 @@
+{include file="page_header"}
+
+<div class="con b-color-f mb-7" >
+    <form action="{url('realname')}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data"  onsubmit="return false">
+        <section class="j-f-tel margin-lr">
+            <div class="text-all dis-box j-text-all bank_card">
+                <label>真实姓名</label>
+                <div class="box-flex input-text">
+                    <input class="j-input-text inputcard" type="text" name="data[real_name]" placeholder="真实姓名" value="{$real_user.real_name}" />
+                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                </div>
+            </div>
+            <div class="text-all dis-box j-text-all bank_user_name">
+                <label>身份证号</label>
+                <div class="box-flex input-text">
+                    <input class="j-input-text inputcard" type="text" name="data[self_num]" placeholder="身份证号" value="{$real_user.self_num}" />
+                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                </div>
+            </div>
+            <div class="text-all j-text-all bank_user_name p-r">
+                <label>身份证正面</label>
+                {if $step == 'edit'}
+                    <div class="realnameok-img-btn">修改图片</div>
+                {else}
+                    <div class="realnameok-img-btn">上传图片</div>
+                {/if}
+                <div class="realnameok-input">
+                    <input type="file" name="front_of_id_card" id="doc1" onchange="javascript:setImagePreview('doc1','preview1');">
+                </div>
+                {if $real_user.front_of_id_card}
+                    <div id="localImag"> <div class="realnameok-img"><img id="preview1" src="{$real_user.front_of_id_card}"></div></div>
+                {else}
+                    <div id="localImag"> <div class="realnameok-img"><img id="preview1" src="{elixir('img/idimg_one.jpg')}"></div></div>
+                {/if}
+            </div>
+            <div class="text-all  j-text-all bank_user_name p-r">
+                <label>身份证反面</label>
+                {if $step == 'edit'}
+                    <div class="realnameok-img-btn">修改图片</div>
+                {else}
+                    <div class="realnameok-img-btn">上传图片</div>
+                {/if}
+                <div class="realnameok-input">
+                    <input type="file" name="reverse_of_id_card" id="doc2" onchange="javascript:setImagePreview('doc2','preview2');">
+                </div>
+                 {if $real_user.reverse_of_id_card}
+                    <div id="localImag"> <div class="realnameok-img"><img id="preview2" src="{$real_user.reverse_of_id_card}"></div></div>
+                {else}
+                    <div id="localImag"> <div class="realnameok-img"><img id="preview2" src="{elixir('img/idimg_two.jpg')}"></div></div>
+                {/if}
+
+            </div>
+
+
+            <div class="text-all dis-box j-text-all bank_region">
+                <label>银行</label>
+                <div class="box-flex input-text">
+                    <input class="j-input-text inputcard" type="text" name="data[bank_name]" placeholder="如:工商银行上海XXX路支行" value="{$real_user.bank_name}" />
+                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                </div>
+            </div>
+            <div class="text-all dis-box j-text-all bank_name">
+                <label>银行卡号</label>
+                <div class="box-flex input-text">
+                    <input class="j-input-text inputcard" type="text" name="data[bank_card]" placeholder="银行卡号" value="{$real_user.bank_card}" />
+                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                </div>
+            </div>
+            <div class="text-all dis-box j-text-all bank_name">
+                <label>手机号码</label>
+                <div class="box-flex input-text">
+                    <input class="j-input-text inputcard" type="tel" name="mobile_phone" placeholder="手机号码" value="{$real_user.bank_mobile}" />
+                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                </div>
+            </div>
+            <div class="text-all dis-box j-text-all bank_name">
+                <label>短信验证码</label>
+                <div class="box-flex input-text">
+                    <input class="j-input-text inputcard" type="number" name="mobile_code" placeholder="短信验证码" />
+                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                </div>
+                <button type="button" class="box-flex btn-submit min-btn j-submit-phone br-5" id="zphone">获取验证码</button>
+            </div>
+            
+            <div class="ect-button-more dis-box filter-btn">
+                <input type="hidden" name="step" value="{$step}" />
+                <input type="hidden" name="real_id" value="{$real_user.real_id}" />
+                <input type="submit" value="{if $step == 'first'}同意实名认证协议并确定{else}提交{/if}" class="btn-submit box-flex" />
+            </div>
+        </section>
+    </form>
+</div>
+    <!--快捷导航-->
+    {include file="no_search_nav"}
+                <li>
+                    <a href="{url('realnameok')}">
+                         <i class="iconfont icon-qudiandianpumingpianicon"></i>
+                         <p>认证详情</p>
+                    </a>
+                </li>
+    {include file="float_nav_footer"}
+<script type="text/javascript">
+
+$(function(){
+    // 提交表单
+    $('input[type="submit"]').click(function(){
+        // 验证数据
+        var label_name = '';
+        $(".inputcard").each(function(){
+             if($(this).val() == ''){
+                 label_name = $(this).parent().parent().find('label').html();
+                 d_messages('请输入完整的'+ label_name);
+                 return false;
+             }
+         });
+    
+
+        // 异步提交
+        var ajax_data = $(".form-horizontal").serialize();
+        $(".form-horizontal").ajaxSubmit({
+            type: "POST",
+            dataType: "json",
+            url: "{url('realname')}",
+            data: {
+                ajax_data
+            },
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(data, textStatus) {
+                d_messages(data.msg);
+                if(data.status == 0){
+                    window.location.href = "{url('realnameok')}";
+                }
+                return false;
+            },
+        });
+
+    });
+
+    // 获取验证码
+    $('.j-submit-phone').click(function(){
+        var phoneNum = $('input[name=mobile_phone]').val();
+        if(phoneNum == ''){
+            d_messages('请填写手机号码');
+            return false;
+        }
+        $.ajax({
+            url : "{url('realnamesend')}",
+            data :　{mobile:phoneNum},
+            type : 'post',
+            dataType : 'json',
+            success : function(data){
+                if(data.error==0){
+                    RemainTime();
+                }
+                d_messages(data.content, 2);
+            }
+        });
+    });
+
+});
+
+    var iTime = 59;
+    var Account;
+ function RemainTime(){
+      //document.getElementById('zphone').disabled = true;
+      var iSecond,sSecond="",sTime="";
+      if (iTime >= 0){
+        iSecond = parseInt(iTime%60);
+        if (iSecond >= 0){
+          sSecond = iSecond + "秒";
+        }
+        sTime=sSecond;
+        if(iTime==0){
+          clearTimeout(Account);
+          sTime='获取手机验证码';
+          iTime = 59;
+              c=1;
+          //document.getElementById('zphone').disabled = false;
+        }else{
+
+          Account = setTimeout("RemainTime()",1000);
+          iTime=iTime-1;
+              c=0;
+        }
+      }else{
+        sTime='没有倒计时';
+      }
+      //document.getElementById('zphone').value = sTime;
+      $('#zphone').html(sTime);
+    }
+
+//下面用于图片上传预览功能
+function setImagePreview(doc,preview) {
+    var docObj1 = document.getElementById(doc);
+    var imgObjPreview1 = document.getElementById(preview);
+    if (docObj1.files && docObj1.files[0]) {
+        imgObjPreview1.style.display = 'block';
+        imgObjPreview1.src = window.URL.createObjectURL(docObj1.files[0]);
+    } else {
+        docObj1.select();
+        var imgSrc = document.selection.createRange().text;
+        var localImagId = document.getElementById("localImag");
+        localImagId.style.width = "100%";
+        localImagId.style.height = "50%";
+        //图片异常的捕捉，防止用户修改后缀来伪造图片
+        try {
+            localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+            localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+        } catch (e) {
+            alert("您上传的图片格式不正确，请重新选择!");
+            return false;
+        }
+        imgObjPreview1.style.display = 'none';
+        document.selection.empty();
+    }
+    return true;
+}
+
+</script>
+</body>
+</html>

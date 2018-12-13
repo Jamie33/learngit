@@ -1,0 +1,194 @@
+{include file="page_header"}
+	<div class="con" id="checkPage">
+		<section class="b-color-f">
+			<div class="margin-lr">
+				<!--address-start-->
+				<div class="text-all" id="editAddressForm">
+					<input type="hidden" id="province_id" name="province_region_id" value="{$region.province}">
+					<input type="hidden" id="city_id" name="city_region_id" value="{$region.city}">
+					<input type="hidden" id="district_id" name="district_region_id" value="{$region.district}">
+					<input type="hidden" id="town_id" name="town_region_id" value="{$region.street}">
+					<input type="hidden" id="village_id" name="village_region_id" value="">
+					<input type="hidden" id="region_id" name="region_id" value="">
+					<input type="hidden" id="address_id" name="address_id" value="">
+					<div class="address-box" id="selectAddressBtn" region-data="">
+						<label class="fl">所在地区</label>
+						<span class="fl text-all-span" id="addressLabelId">
+						{if $province_row}
+						{$province_row.region_name}{$city_row.region_name}{$district_row.region_name}{$town_row.region_name}{$village_row.region_name}
+						{else}
+						请选择区域
+						{/if}
+						</span>
+						<span class="t-jiantou fr"><i class="iconfont icon-jiantou tf-180"></i></span>
+					</div>
+				</div>
+				<!--address-end-->
+			</div>
+		</section>
+
+		{if $store_list}
+		<div class="flow-consignee-list j-get-consignee-one select-three">
+			<form method="post" name="form">
+			<section class="flow-checkout-adr m-top08">
+		        <div class="weui-cell f-05 text-all">
+		            <div class="weui-cell__hd"><label for="" class="weui-label pl">到店时间：</label></div>
+		            <div class="weui-cell__bd">
+		                <input class="weui-input" type="datetime-local" name="take_time" placeholder="默认为一天后的当前时间" value="{$store_info.take_time}"  id="take_time">
+		            </div>
+		        </div>
+                <div class="text-all dis-box j-text-all">
+                    <label class="pl">手机号码：</label>
+                    <div class="box-flex input-text">
+                        <input class="j-input-text" name="store_mobile" type="tel" placeholder="手机号码将获取取货码订单"  value="{$store_info.store_mobile}" id="store_mobile"/>
+                        <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                    </div>
+                </div>
+                <div class="notice padding-all t-remark3">
+                	<p>* 到店时间,默认为一天后的当前时间</p>
+                	<p>* 手机号码将获取取货码订单</p>
+                </div>
+			</section>
+			{foreach $store_list as $key => $list}
+			<section class="flow-checkout-adr m-top08 j-store-list">
+				<div class="flow-set-adr of-hidden padding-all ">
+					<div class="ect-select fl">
+						<label class="dis-box {if $list.id == $store_id} active{/if}" id="{$list.id}">
+                        	<i class="select-btn active-i"></i>
+                        	<span class="box-flex">选择该门店</span>
+                		</label>
+					</div>
+					<div class="fr">
+						<a href="{url('offline_store/index/map', array('address'=>$list.province.$list.city.$list.district.$list.stores_address))}"><i class="iconfont icon-dingwei2"></i>查看路线</a>
+					</div>
+				</div>
+				<div class="flow-have-adr padding-all">
+					<p class="f-h-adr-title"><label>{$list.stores_name}</label></p>
+					<p class="f-h-adr-con t-remark m-top04">[{$list.province} {$list.city} {$list.district}] {$list.stores_address}</p>
+				</div>
+			</section>
+			{/foreach}
+			<div class="ect-button-more dis-box filter-btn">
+<!-- 			<input type="hidden" value="{$cur_province.region_id}" id="province_id" name="province_region_id">
+				<input type="hidden" value="{$city_row.region_id}" id="city_id" name="city_region_id">
+				<input type="hidden" value="{if $district_row.region_id}{$district_row.region_id}{else}0{/if}" id="district_id" name="district_region_id">
+				<input type="hidden" value="{$region_id}" id="region_id" name="region_id">
+				<input type="hidden" value="{$area_id}" id="area_id" name="area_id">-->
+				<input type="hidden" value="{$goods_id}" id="store_goods_id" name="goods_id">
+				<input type="hidden" value="{$user_id}" id="user_id" name="user_id">
+				<input type="hidden" name="store_id" id="store_id" value="{$store_id}" />
+				<a class="btn-submit box-flex j-store-submit">确定</a>
+			</div>
+			</form>
+		</div>
+		{else}
+		<div class="no-div-message">
+			<i class="iconfont icon-biaoqingleiben"></i>
+			<p>亲，该区域还没有门店列表哦～！</p>
+		</div>
+		{/if}
+	</div>
+	<!--地区选择 s-->
+	{include file="address"}
+     <!--快捷导航-->
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+	<!--地区选择 e-->
+	<script>
+
+	// 选择门店
+	$(".j-store-list .ect-select").click(function () {
+
+		var store_id = $(this).find("label.active").attr('id');
+		console.log(store_id);
+		$('input[name=store_id]').val(store_id);
+	});
+
+	// 提交
+	$('.j-store-submit').click(function() {
+		var goods_id = $('input[name=goods_id]').val();
+		var store_id = $('input[name=store_id]').val();
+
+		var take_time = $('input[name=take_time]').val();
+		var store_mobile = $('input[name=store_mobile]').val();
+
+		// console.log(take_time);
+		var storeInfo = {"store_id": store_id, "take_time": take_time, "store_mobile": store_mobile};
+
+		var spec_arr = '{$goods.spec_arr}';
+		var goods_attr = '{$goods.goods_attr}';
+		var number = '{$goods.number}';
+		var warehouse_id = '{$goods.warehouse_id}';
+		var area_id = '{$goods.area_id}';
+		var goods = {"spec_arr": spec_arr, "number": number, "warehouse_id": warehouse_id, "area_id": area_id};
+
+		// console.log(storeInfo);
+		addToCart_store(goods_id, 0, goods, storeInfo);
+	});
+
+
+
+
+		// var url;
+		// var id;
+		// var temp;
+		// $('.j-store-submit').click(function() {
+		// 	url = "{$request_url}";
+		// 	url = (url.lastIndexOf('#') == -1) ? url : url.substring(0, url.length - 1);
+		// 	url = (url.lastIndexOf('&store_id=') == -1) ? url : url.substring(0, url.indexOf('&store_id='));
+		// 	$('form[name=form]').attr('action', url);
+		// 	id = $('form[name=form] label.active').attr('id');
+		// 	if(id == '' || id == undefined) {
+		// 		window.location.href = url;
+		// 		return false;
+		// 	}
+		// 	id = id.replace('store', '');
+		// 	window.location.href = url + '&store_id=' + id;
+		// });
+
+
+		// region.changedDis = function(district_id, city_id, user_id, d_null) {
+		// 	var province_id = document.getElementById('province_id').value;
+		// 	var goods_id = document.getElementById('good_id').value;
+
+		// 	if(city_id <= 0) {
+		// 		return false;
+		// 	}
+		// 	if(d_null == 1) {
+		// 		d_null = d_null;
+		// 	} else {
+		// 		d_null = '';
+		// 	}
+
+		// 	$("#city_id").val(city_id);
+		// 	//县级
+		// 	$("#district_id").val(district_id);
+
+		// 	console.log(111);
+		// };
+		// $('.filter-city-div').on('click', '.j-get-city-one .ect-select', function() {
+
+		// 	city_span = $(".j-filter-city span.text-all-span");
+		// 	city_txt = $(".j-city-left li.active").text() + " " + $(this).parents(".j-sub-menu").prev(".j-menu-select").find("label").text() + " " + $(this).find("label").text();
+		// 	$(".j-get-city-one").find(".ect-select label").removeClass("active");
+		// 	$(this).find("label").addClass("active");
+		// 	city_span.text(city_txt);
+		// 	if($(".j-filter-city span.text-all-span").hasClass("j-city-scolor")) {
+		// 		$(".j-filter-city span.text-all-span").css("color", "#ec5151");
+		// 	}
+
+		// 	$("body").removeClass("show-city-div");
+		// 	$('.j-store-list').each(function(i, n) {
+		// 		temp = $(n).find('p.f-h-adr-con').text();
+		// 		if(temp.indexOf(city_txt) < 0) {
+		// 			$(n).css('display', 'none');
+		// 			$(n).find('label.active').removeClass('active');
+		// 		} else {
+		// 			$(n).css('display', 'block');
+		// 		}
+		// 	});
+		// });
+	</script>
+
+</body>
+</html>

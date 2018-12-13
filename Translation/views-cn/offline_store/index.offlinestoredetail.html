@@ -1,0 +1,47 @@
+{include file="page_header"}
+
+<div class="con b-color">
+    <section class="user-code  b-color-f">
+        <header class="text-c code-header b-dashed-t">
+            <p class="col-6 f-03">{$offline_store.stores_name}</p>
+            <h4 class="col-3 m-top06 f-2">提货码</h4>
+            <div class="t-code"><img class="img" id="codeimg"></div>
+            <a class="f-05">{$store.pick_code}</a>
+            <p class="col-7 f-03">提货时请出示该提货码</p>
+            <p class="col-7 f-03">提货时间：{$store.take_time}</p>
+        </header>
+        <div class="code-cont  position-rel">
+            <div class="code-round round-left b-color position-abo"></div>
+            <div class="code-round round-right b-color position-abo"></div>
+            <div><h4 class="col-3 f-07">实景图片</h4></div>
+            <img class="img m-top12" src="{$offline_store.stores_img}">
+            <div class="dis-box address-list">
+                <div class="box-flex">
+                    <h4 class="col-3 f-07"><b>{$offline_store.stores_name}</b><label class="f-03 col-9 ml"></label></h4>
+                    <p class="f-05 col-9 m-top04">{$offline_store.province}{$offline_store.city}{$offline_store.district}{$offline_store.stores_address}</p>
+                    <p class="f-05 col-9 m-top04">{$offline_store.stores_tel}</p>
+                    <p class="col-9 f-05 m-top06">门店营业时间：{$offline_store.stores_opening_hours}</p>
+                </div>
+                <div class="flow-done-right">
+                    <i class="iconfont icon-dianhua"></i>
+                    <p class="text-c col-9 f-06" id='j-go-map'>查看地图</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!--引用js-->
+<script>
+    var province = "{$offline_store.province}";
+    var city = "{$offline_store.city}";
+    var district = "{$offline_store.district}";
+    var stores_address = "{$offline_store.stores_address}";
+    document.getElementById('j-go-map').onclick = function(){
+        window.location.href="{url('map', array('address'=>$offline_store.province.$offline_store.city.$offline_store.district.$offline_store.stores_address))}";
+    }
+    $('#codeimg').attr('src', "{url('CreateQrcode', array('value'=>$store.pick_code))}");
+</script>
+
+</body>
+</html>

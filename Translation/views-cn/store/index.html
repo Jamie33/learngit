@@ -1,0 +1,362 @@
+{include file="page_header"}
+<script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+
+<style>
+.all-category {padding: 0.8rem 0rem 0rem 1rem;}
+.all-category i{
+    font-size: 2rem;    
+}
+</style>
+<div class="con">
+
+    <section class="store-nav-list padding-all b-color-f">
+        <div class="product-one-list product-one-list-nav of-hidden scrollbar-none j-g-s-p-con swiper-container-horizontal">
+            <div class="swiper-wrapper store-nav-box  j-catid">
+                <li data-catid="0" class="swiper-slide swiper-slide-active active">
+                    <div class="store-box all-category">
+                        <i class="iconfont icon-caidan"></i>
+                    </div>
+                    <h5 class="text-c col-6 m-top04 f-5">{$lang.all_category}</h5>
+                </li>
+                {foreach $category as $list}
+                    <li data-catid="{$list.cat_id}" class="swiper-slide swiper-slide-active">
+                        <div class="store-box">
+                            <img class="img" src="{$list.touch_icon}">
+                        </div>
+                        <h5 class="text-c col-6 m-top04 f-5">{$list.cat_alias_name}</h5>
+                    </li>
+                {/foreach}
+            </div>
+        </div>
+    </section>
+    <div class="shopping-list j-shopping-list">
+        <div class="shopping-menu">
+            <div class="b-color-f">
+                <nav class="j-g-s-p-con shopping-list-nav m-top1px">
+                    <ul class="dis-box text-center">
+                        <!--<li class="box-flex s-nav-select j-s-nav-select onelist-hidden"><span class="onelist-hidden">类别</span><i class="iconfont icon-xiajiantou"></i></li>-->
+                        <li class="box-flex s-remen-select j-s-remen-select translate store-jt"> <a id="remen"  order="sort" sort="DESC">热门<i class="iconfont icon-xiajiantou"></i></a></li>
+                        <li class="box-flex s-position-select j-s-position-select store-jt"><span class="onelist-hidden">地区<i class="iconfont icon-xiajiantou"></i></span></li>
+                        <li class="box-flex s-distance-select j-s-distance-select translate store-jt"> <a id="paixu"  order="distance" sort="DESC">距离<i class="iconfont icon-xiajiantou"></i></a></li>
+                        <li class="box-flex"><a href="{url('store/map/index')}">附近</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="shopping-abs shopping-option-con">
+                <div class="shopping-city-one swiper-scroll">
+                    <div class="swiper-wrapper ">
+                        <div class="swiper-slide j-province">
+                            <ul>
+                                {foreach $province as $key=>$list}
+                                <li data-province="{$list.region_id}" {if $key===0}class="active"{/if}>{$list.region_name}</li>
+                                {/foreach}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="shopping-city-two">
+                    <div class="swiper-wrapper ">
+                        <div class="swiper-slide">
+                            <ul class="j-city">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           <div class="shopping-abs shopping-nav-con j-shopping-nav-list">
+                <div class="swiper-scroll">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide j-catid store-bottom">
+                            <li><a href="{url('store/index/index')}">返回默认</a></li>
+                            {foreach $category as $list}
+                            <li data-catid="{$list.cat_id}">{$list.cat_alias_name}</li>
+                            {/foreach}
+                        </div>
+                    </div>
+                    <div class="swiper-scrollbar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- 店铺列表start -->
+        <div class="store_info">
+
+            <script id="j-product" type="text/html">
+                <%if totalPage > 0 && list != ''%>
+                <%each list as key%>
+                <section class="m-top08 goods-shop">
+                    <header class="goods-shop-info n-goods-shop-info padding-all" style="background:#">
+                        <a href="<%key.url%>" class="link-abs"></a>
+                        <section class="dis-box">
+                            <div class="g-s-i-img"><img src="<%key.shop_logo%>" /></div>
+                            <div class="g-s-i-title box-flex">
+                                <h3 class="ellipsis-one"><%key.shop_name%></h3>
+
+                                <%if key.self_run == 1%><p class="t-remark m-top04"><span class="self-run-tag">{$lang.self_run}</span></p><%/if%>
+
+                                <p class="f-02 col-9 m-top02">已经有 <span class="num<% key.user_id %>"><%key.gaze_number%></span> 人关注</p>
+                                <%if key.distance >0%>
+                                <p class="f-02 t-first m-top02">距离<%key.distance%>km </p>
+                                <%/if%>
+                            </div>
+                            <div class="g-s-info-add n-g-s-info-add">
+                               <a href="javascript:void(0)" class="gaze<% key.user_id %> <% key.gaze_status %>"  onclick="addgaze(<% key.user_id %>)" ><span id="store-list"><%if key.gaze_status =='active'%>已关注<%else%><i class="iconfont icon-aixin"></i>关注 <%/if%></span></a>
+                            </div>
+                        </section>
+                    </header>
+                    <%if key.goods %>
+                    <section class="goods-shop-pic b-color-f">
+                       <div class="padding-all">
+                        <div class="g-s-p-con product-one-list of-hidden scrollbar-none j-g-s-p-con">
+                            <div class="swiper-wrapper ">
+                                <!-- 商品列表 -->
+                                <%each key.goods as list %>
+                                <li class="swiper-slide">
+                                    <div class="product-div">
+                                        <a class="product-div-link" href="<%list.goods_url%>"></a>
+                                        <img class="product-list-img" src="<%list.goods_thumb%>" />
+                                        <div class="product-text m-top06">
+                                            <!--<h4><%list.goods_name%></h4>-->
+                                            <p class="text-c"><span class="p-price t-first ">
+													<%if list.is_promote && list.gmt_end_time %>
+														<%#list.promote_price %>
+													<%else%>
+														<%#list.shop_price_formated %>
+													<%/if%>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <%/each%>
+                                <!-- 商品列表 end -->
+                            </div>
+                        </div>
+                        </div>
+                    </section>
+                    <%/if%>
+                </section>
+                <%/each%>
+                <% else %>
+                <div class="no-div-message">
+                    <i class="iconfont icon-biaoqingleiben"></i>
+                    <p>亲，此处没有内容～！</p>
+                </div>
+                <%/if%>
+            </script>
+        </div>
+        <!-- 店铺列表end -->
+    </div><div class="mask-filter-div" style="top:10rem"></div>
+</div>
+<div id="allmap"></div>
+<div class="footer-cont"><span><img src='{elixir('img/loading1.gif')}'>正在加载……</span></div>
+     <!--快捷导航-->
+{include file="float_nav"}
+    <li>
+        <a href="{url('user/index/storelist')}">
+             <i class="iconfont icon-star-n"></i>
+              <p>已关注店铺</p>
+        </a>
+    </li>
+{include file="float_nav_footer"}
+<script>
+{literal}
+$(function(){
+    var url = ROOT_URL + 'index.php?m=store';
+    var cat_id = 0,
+        city_id = 0,
+        keywords = '{$keywords}',
+        type = '{$type}',
+        lat = 0,
+        lng = 0,
+        order = 'sort',
+        sort = 'asc';
+
+    // 首次加载
+    var infinite = $('.store_info').infinite({url: url,params:'sort='+sort+'&order='+order+'&cat_id='+cat_id+'&city_id='+city_id+'&keywords='+keywords+'&type='+type,template: 'j-product'});
+
+    var geolocation = new qq.maps.Geolocation("{C('shop.tengxun_key')}", "myapp");
+    var options = {timeout: 8000};
+    geolocation.getLocation(showPosition, showErr, options);
+    function showPosition(position) {
+        //处理
+        lat = position.lat;
+        lng = position.lng;
+
+        infinite.onload('lat='+ lat +'&lng='+lng+'&sort='+sort+'&order='+order+'&cat_id='+cat_id+'&city_id='+city_id+'&keywords='+keywords+'&type='+type);
+    };
+    function showErr() {
+        d_messages('定位失败！');
+    };
+
+    // 点击分类
+    $('.j-catid').on('click', 'li', function(){
+
+        $(".shopping-menu").removeClass("nav-active");
+        $(this).addClass("active").siblings().removeClass("active");
+        $(".mask-filter-div").removeClass("show");
+        cat_id = $(this).attr('data-catid');
+
+        infinite.onload('lat='+ lat +'&lng='+lng+'&sort='+sort+'&order='+order+'&cat_id='+cat_id+'&city_id='+city_id+'&keywords='+keywords+'&type='+type);
+        document.removeEventListener("touchmove", handler, false);
+    });
+
+    var loadingHeight = $(".store_info").outerHeight(true);
+    function loadimgCont(){
+        if ($(document).scrollTop() >= $(window).height() <$(document).height() - $(window).height()) {
+            $(".footer-cont").html("<span><img src='{elixir('img/loading1.gif')}'>正在加载……</span>")
+        }
+        if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+            $(".footer-cont").html("<span>没有更多了</span>")
+        }
+        if(loadingHeight< $(window).height()){
+            $(".footer-cont").css("display","none");
+        }else{
+            $(".footer-cont").css("display","block");
+        }
+    }
+    loadimgCont();
+    $(window).scroll(function() {
+        loadimgCont()
+    });
+
+    var scorll_swiper1 = new Swiper('.shopping-city-two', {
+		scrollbar: false,
+		direction: 'vertical',
+		slidesPerView: 'auto',
+		mousewheelControl: true,
+		freeMode: true
+	});
+    $(".j-s-remen-select").click(function () {
+        if ($(".mask-filter-div").hasClass("show")) {
+            $(".mask-filter-div").removeClass("show");
+        }
+        if (!$(".shopping-menu").hasClass("remen-active")) {
+            $(this).addClass("active").siblings().removeClass("active");
+            $(".shopping-menu").addClass("remen-active");
+            $(".shopping-menu").removeClass("position-active distance-active");
+            $("mask-filter-div").addClass("show");
+        } else {
+            $(".shopping-menu").removeClass("remen-active");
+            $("mask-filter-div").removeClass("show");
+        }
+    });
+    // 点击省份
+    $('.j-province li').click(function(){
+    	$(this).addClass("active").siblings().removeClass("active");
+    	      $.ajax({
+                        type: "POST",
+                        url: "{url('region')}",
+                        dataType: 'JSON',
+                        data: {city: $(this).attr('data-province')},
+                        success: function(data){
+                            $('.j-city').empty();
+                            scorll_swiper1.destroy();
+                            $.each(data.list, function(i, item){//循环遍历
+								$('.j-city').append('<li data-city="'+item.region_id+'">'+item.region_name+'</li>');
+                            })
+                            scorll_swiper1 = new Swiper('.shopping-city-two', {
+								scrollbar: false,
+								direction: 'vertical',
+								slidesPerView: 'auto',
+								mousewheelControl: true,
+								freeMode: true
+							});
+							 scorll_swiper1.update(true);
+                        }
+               });
+    });
+
+    // 点击地区
+    $(document).on("click",".j-city li",function(){
+        $(this).addClass("active").siblings().removeClass("active");
+        city_id = $(this).attr('data-city');
+        infinite.onload('lat='+ lat +'&lng='+lng+'&sort='+sort+'&order='+order+'&cat_id='+cat_id+'&city_id='+city_id+'&keywords='+keywords+'&type='+type);
+     	 $(".shopping-menu").removeClass("position-active");
+        $(".mask-filter-div").removeClass("show");
+    });
+    //　点击排序
+        var  off = true;
+        $("#paixu").on('click', function(e) {
+         var sort = "";
+         var order = $(this).attr("order");
+           if(off){
+               sort = $(this).attr("sort");
+               $(this).attr("sort","ASC");
+               off = false;
+            }else{
+               sort = $(this).attr("sort");
+               $(this).attr("sort","DESC");
+               off = true;
+            }
+           infinite.onload('lat='+ lat +'&lng='+lng+'&sort='+sort+'&order='+order+'&cat_id='+cat_id+'&city_id='+city_id+'&keywords='+keywords+'&type='+type);
+        })
+
+        $("#remen").on('click', function(e) {
+         var sort = "";
+         var order = $(this).attr("order");
+           if(off){
+               sort = $(this).attr("sort");
+               $(this).attr("sort","ASC");
+               off = false;
+            }else{
+               sort = $(this).attr("sort");
+               $(this).attr("sort","DESC");
+               off = true;
+            }
+           infinite.onload('lat='+ lat +'&lng='+lng+'&sort='+sort+'&order='+order+'&cat_id='+cat_id+'&city_id='+city_id+'&keywords='+keywords+'&type='+type);
+        })
+})
+{/literal}
+</script>
+<script>
+
+    function addgaze(shop){
+        if(shop!=''){
+            $.post(ROOT_URL + 'index.php?m=store&a=add_collect', {shopid: shop}, function(data){
+                if(data.error==1){
+                    $(".gaze"+shop).addClass("active");
+                    $(".gaze"+shop).find('span').text("已关注");
+                }
+                if(data.error==2){
+                    $(".gaze"+shop).removeClass("active");
+                    $(".gaze"+shop).find('span').html('<i class="iconfont icon-aixin"></i>' + '关注');
+                }
+                var num = $(".num"+shop).text();
+                if(data.error==1){
+                    num = num*1 + 1;
+                    $(".num"+shop).text(num);
+                }else if(data.error==2){
+                    if(num>0)
+                    {
+                        num = num*1 - 1;
+                        $(".num"+shop).text(num);
+                    }
+                }
+                if(data.error>0){
+                    d_messages(data.msg);
+                }else {
+                    layer.open({
+                        content: '请登录后关注该店铺',
+                        btn: ['立即登录', '取消'],
+                        shadeClose: false,
+                        yes: function () {
+                            window.location.href = ROOT_URL + "index.php?m=user&c=login";
+                        },
+                        no: function () {
+                        }
+                    });
+                }
+            }, 'json');
+        }
+    }
+
+    /*顶部banner滚动*/
+    var swiper = new Swiper('.goods-photo', {
+        paginationClickable: true
+    });
+
+
+</script>
+
+</body>
+</html>

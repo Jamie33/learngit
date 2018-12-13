@@ -1,0 +1,43 @@
+{include file="page_header"}
+		<div class="con">
+
+			<form action="{url('user/index/addcard')}">
+				<section class=" j-f-tel">
+					<div class="b-color-f padding-lr">
+                         {foreach $card_list as $card}
+							<div id="list{$card.id}" class="text-all dis-box j-text-all b-color-f card-div position-rel">
+
+								<div class="card-list">
+                                    <i onclick="card({$card.id})" class="iconfont icon-xiao10"></i>
+									<p>{$card.bank_name}</p>
+									<span>尾号{$card.bank_card}</span>
+								</div>
+								<span class="t-jiantou"></span>
+							</div>
+						{/foreach}	
+					</div>
+					<div class="dis-box padding-all">
+						<input type="hidden" name="u-h-forget" value="u-f-tel" />
+                        <a href="{url('user/account/addcard')}" class="btn-submit box-flex br-5 min-btn">+添加银行卡</a>
+					</div>
+				</section>
+			</form>
+
+		</div>
+	</body>
+<!--快捷导航-->
+    {include file="float_nav"} 
+                <li>
+                    <a href="{url('user/account/index')}">
+                         <i class="iconfont icon-money"></i>
+                         <p>资金管理</p>
+                    </a> 
+                </li>                
+    {include file="float_nav_footer"} 
+    <script>
+        function card(id){
+            $("#list"+id).hide();
+            $.get("{url('user/account/cardlist')}",{id:id},function(){});
+        }
+    </script>
+</html>

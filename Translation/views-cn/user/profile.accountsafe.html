@@ -1,0 +1,95 @@
+{include file="page_header"}
+<div class="con user_profile_safe">
+    <header class="f-03 col-7">
+        建议您启动全部安全设置，以保障账户及资金安全。
+    </header>
+    <section>
+        {if $is_connect_user == 0}
+        <div class="padding-all user_profile_safe_list ">
+            <a href="{url('user/index/edit_password')}">
+                <i class="iconfont icon-zhaohuimima safe-icon col-9"></i>
+                <h4 class="f-05 col-3">修改登录密码</h4>
+                <p class="f-02 col-7 m-top04">互联网账号存在被盗风险，建议您定期更改密码。</p>
+                <i class="iconfont icon-jiantou tf-180"></i>
+             </a>
+         </div>
+         {/if}
+         <div class="padding-all  user_profile_safe_list m-top1px">
+            <a href="{url('user/profile/user_edit_mobile')}">
+                <h4 class="f-05 col-3">
+                {if $info.mobile_phone ==''}
+                <i class="iconfont icon-shoujiyanzheng1 safe-icon col-9"></i>
+                立即手机验证
+                {else}
+                 <i class="iconfont icon-yanzheng safe-icon color-red"></i>
+                <label class="color-red">已验证手机 {$info.mobile_phone}</label>
+                {/if}
+                </h4>
+                <p class="f-02 col-7 m-top04">验证后，可用于快速找回登录密码，接收消息提醒。</p>
+                <i class="iconfont icon-jiantou tf-180"></i>
+             </a>
+         </div>
+         <div class="padding-all  user_profile_safe_list m-top1px">
+            <a href="{url('user/profile/user_edit_email')}">
+                <h4 class="f-05 col-3">
+                {if $info.email == '' || $is_validated == 0}
+                <i class="iconfont icon-youxiangrenzheng safe-icon col-9"></i>
+                立即邮箱验证
+                {else}
+                <i class="iconfont icon-yanzheng safe-icon color-red"></i>
+                <label class="color-red">已验证邮箱 {$info.email}</label>
+                {/if}
+                </h4>
+                <p class="f-02 col-7 m-top04">验证后，可用于快速找回登录密码等。</p>
+                <i class="iconfont icon-jiantou tf-180"></i>
+             </a>
+         </div>
+        <div class="padding-all  user_profile_safe_list m-top1px">
+            <a href="{url('user/profile/user_edit_paypwd')}">
+                <h4 class="f-05 col-3">
+                {if $users_paypwd == 0}
+                <i class="iconfont icon-zhaohuimima safe-icon col-9"></i>
+                启用支付密码
+                {else}
+                <i class="iconfont icon-yanzheng safe-icon color-red"></i>
+                <label class="color-red">已启用支付密码</label>
+                {/if}
+                </h4>
+                <p class="f-02 col-7 m-top06">启用后，购物需验证支付密码，增加安全性。</p>
+                <i class="iconfont icon-jiantou tf-180"></i>
+             </a>
+         </div>
+    </section>
+    <section class="m-top10">
+        <div class="padding-all user_profile_safe_list m-top1px">
+             <a href="{url('user/profile/accountbind')}">
+                <i class="iconfont icon-disanfang01 safe-icon col-9"></i>
+                <h4 class="f-05 col-3">授权管理</h4>
+                <p class="f-02 col-7 m-top04">第三方登录授权信息。</p>
+                <i class="iconfont icon-jiantou tf-180"></i>
+             </a>
+        </div>
+    </section>
+</div>
+<!--快捷导航-->
+{include file="no_search_nav"}
+            <li>
+                <a href="{url('user/profile/index')}">
+                     <i class="iconfont icon-qudiandianpumingpianicon"></i>
+                     <p>个人资料</p>
+                </a>
+            </li>
+{include file="float_nav_footer"}
+<script>
+$(function($) {
+	$(".onclik-safetips").click(function() {
+		$(".my-safetips-box").addClass("current");
+	});
+	$(".my-safetips-close").click(function() {
+		$(".my-safetips-box").removeClass("current");
+	});
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+{include file="page_header"}
+<div class="con">
+	<div class="goods-info user-order of-hidden ect-tab j-ect-tab ts-3" style="padding-top: 4rem;">
+		<nav class=" j-tab-title tab-title b-color-f of-hidden" style="position: fixed;">
+			<ul class="dis-box">
+				<li class="box-flex "><a href="{url('user/refound/index', array('order_id' => $order_id))}">{$lang.return_index}</a></li>
+				<li class="box-flex active"><a href="{url('user/refound/list', array('order_id' => $order_id))}">{$lang.return_progres}</a></li>
+			</ul>
+		</nav>
+		<div id="j-tab-con" class="tab-con">
+			<div class="swiper-wrapper">
+				<!--退换货申请进度 refound-list start-->
+				<section class="swiper-slide refound_info">
+					<script id="j-refound" type="text/html">
+					<%if totalPage > 0 && refound_list != ''%>
+					<%each refound_list as refound%>
+					<section class="flow-checkout-pro m-top08">
+						<div class="padding-all m-top1px b-color-f n-reture-num refound-list">
+							<!-- <h4 class="t-remark2 "><label class="t-remark">{$lang.order_number}：</label><%refound.order_sn%></h4> -->
+							<h4 class="t-remark2 "><label class="t-remark">{$lang.return_sn_user}：</label><%refound.return_sn%></h4>
+							<p class="t-remark3 m-top04">{$lang.apply_time}：<%refound.apply_time%>
+							<span class="color-red"><%if refound.agree_apply == 1%>{$lang.is_agree_apply}<%else if refound.agree_apply == 0%>{$lang.no_agree_apply}<%/if%></span>
+							<span class="color-red"><%refound.reimburse_status%></span></p>
+						</div>
+						<section class="n-return-list-box b-color-f">
+							<ul class="dis-box">
+								<li class="reture-left-img">
+									<div class="img-box"><img class="product-list-img" src="<%refound.goods_thumb%>"></div>
+								</li>
+								<li class="box-flex reture-right-cont">
+									<h4 class="onelist-hidden"><%refound.goods_name%></h4>
+									<div class="dis-box reture-footer">
+										<div class=""><span class="f-03 col-7">{$lang.number_to}×<%refound.return_number%></span></div>
+										<div class="box-flex">
+											<div class="fr">
+											<%if refound.refound_cancel_url%>
+											<a class="btn-default n-return-btn br-5 cancel_return_order" href="javascript:;" data-href="<%refound.refound_cancel_url%>">{$lang.is_cancel}</a>
+											<%/if%>
+											<a class="btn-submit1 n-return-btn br-5" style="border:1px solid #ec5151;" href="<%refound.refound_detail_url%>">{$lang.return_detail_look}</a>
+
+											<%if refound.activation_type == 1%>
+											<a href="javascript:;"  class="btn-submit n-return-btn br-5 activation_return_order" data-id="<%refound.ret_id%>" >{$lang.activation_return}</a>
+											<%/if%>
+
+											<%if refound.return_status == 4%>
+											<a href="javascript:;"  class="btn-submit n-return-btn br-5 delete_return_order" data-item="<%refound.ret_id%>" >{$lang.drop}</a>
+											<%/if%>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</section>
+					</section>
+					<%/each%>
+					<%else%>
+					<div class="no-return-list">
+						<i class="iconfont icon-biaoqingleiben"></i>
+						<p>亲，此处没有内容～！</p>
+					</div>
+					<%/if%>
+					</script>
+				</section>
+				<!--退换货申请进度 refound-list end-->
+			</div>
+		</div>
+	</div>
+</div>
+    <!--快捷导航-->
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+<div class="footer-cont"><span><img src="{elixir('img/loading1.gif')}">正在加载……</span></div>
+<script type="text/javascript">
+$(function ($) {
+	// 退换货进度查询列表
+	var infinite2 = $('.refound_info').infinite({url: "{url('user/refound/list')}", template: 'j-refound', params: 'order_id='+{$order_id}});
+
+    //加载更多
+    var loadingHeight = $(".refound_info").outerHeight(true);
+    function loadimgCont(){
+        if ($(document).scrollTop() >= $(window).height() <$(document).height() - $(window).height()) {
+                $(".footer-cont").html("<span><img src='{elixir('img/loading1.gif')}'>正在加载……</span>")
+        }
+        if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                 $(".footer-cont").html("<span>没有更多了</span>")
+        }
+        if(loadingHeight< $(window).height()){
+             $(".footer-cont").css("display","none");
+        }else{
+             $(".footer-cont").css("display","block");
+        }
+    }
+    loadimgCont();
+    $(window).scroll(function() {
+        loadimgCont();
+    });
+
+	// 激活退换货订单
+	$(".refound_info").on('click','.activation_return_order', function() {
+		var ret_id = $(this).attr('data-id');
+		layer.open({
+            content: '你确认要激活吗？激活后可以再次申请退换货操作',
+            btn: ['确定', '取消'],
+            shadeClose: false,
+            yes: function() {
+            	// 请求
+				$.post("{url('activation_return_order')}", {ret_id:ret_id}, function(data){
+		            d_messages(data.msg);
+		            if (data.error == 0) {
+		                if (data.url) {
+		                    window.location.href = data.url;
+		                } else {
+		                    window.location.reload();
+		                }
+		            } else {
+		                return false;
+		            }
+		        }, 'json');
+            },
+            no: function() { }
+		});
+	});
+
+	// 删除已完成退换货订单
+	$(".refound_info").on('click','.delete_return_order', function() {
+		var ret_id = $(this).attr('data-item');
+		layer.open({
+            content: '你确认要删除该退换货订单吗？',
+            btn: ['确定', '取消'],
+            shadeClose: false,
+            yes: function() {
+            	// 请求
+				$.post("{url('delete_return_order')}", {ret_id:ret_id}, function(data){
+		            d_messages(data.msg);
+		            if (data.error == 0) {
+		                if (data.url) {
+		                    window.location.href = data.url;
+		                } else {
+		                    window.location.reload();
+		                }
+		            } else {
+		                return false;
+		            }
+		        }, 'json');
+            },
+            no: function() { }
+		});
+	});
+
+	// 取消退换货申请
+	$(".refound_info").on('click','.cancel_return_order', function() {
+		var cancel_url = $(this).attr('data-href');
+		layer.open({
+            content: '您确定要取消退换货申请吗？',
+            btn: ['确定', '取消'],
+            shadeClose: false,
+            yes: function() {
+            	// 请求
+				$.get(cancel_url, {}, function(data){
+		            d_messages(data.msg);
+		            if (data.error == 0) {
+		                if (data.url) {
+		                    window.location.href = data.url;
+		                } else {
+		                    window.location.reload();
+		                }
+		            } else {
+		                return false;
+		            }
+		        }, 'json');
+            },
+            no: function() { }
+		});
+	});
+
+});
+</script>
+</body>
+</html>

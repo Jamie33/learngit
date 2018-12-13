@@ -1,0 +1,229 @@
+{include file="page_header"}
+
+<style>
+.coudan-tips {color: #f70;padding: 0.7rem;background:rgba(0,0,0,0.6)}
+.coudan-shows {margin-top: 0.5rem;}
+.flow-accessories{margin-bottom: 4.5rem}
+</style>
+<div class="con" id="pjax-container">
+
+    <div class="flow-accessories blur-div">
+        <section class="product-sequence dis-box">
+            {if $order == 'asc' && $sort == 'goods_id'}
+            <a class="box-flex a-change active" href="{url('cart/coudan/index', array('id'=>$active_id,  'page'=>$page, 'sort'=>'goods_id', 'order'=>'desc'))}#goods_list">综合<i class="iconfont icon-xiajiantou"></i></a>
+            {elseif $order == 'desc' && $sort == 'goods_id'}
+            <a class="box-flex active" href="{url('cart/coudan/index', array('id'=>$active_id, 'page'=>$page, 'sort'=>'goods_id', 'order'=>'asc'))}#goods_list">综合<i class="iconfont icon-xiajiantou"></i></a>
+            {else}
+            <a class="box-flex" href="{url('cart/coudan/index', array('id'=>$active_id, 'page'=>$page, 'sort'=>'goods_id', 'order'=>'desc'))}#goods_list">综合<i class="iconfont icon-xiajiantou"></i></a>
+            {/if}
+            {if $order == 'asc' && $sort == 'shop_price'}
+            <a class="box-flex a-change active" href="{url('cart/coudan/index', array('id'=>$active_id, 'page'=>$page, 'sort'=>'shop_price', 'order'=>'desc'))}#goods_list">价格<i class="iconfont icon-xiajiantou"></i></a>
+            {elseif $order == 'desc' && $sort == 'shop_price'}
+            <a class="box-flex active" href="{url('cart/coudan/index', array('id'=>$active_id, 'page'=>$page, 'sort'=>'shop_price', 'order'=>'asc'))}#goods_list">价格<i class="iconfont icon-xiajiantou"></i></a>
+            {else}
+            <a class="box-flex" href="{url('cart/coudan/index', array('id'=>$active_id, 'page'=>$page, 'sort'=>'shop_price', 'order'=>'desc'))}#goods_list">价格<i class="iconfont icon-xiajiantou"></i></a>
+            {/if}
+            {if $order == 'asc' && $sort == 'sales_volume'}
+            <a class="box-flex a-change active" href="{url('cart/coudan/index', array('id'=>$active_id, 'page'=>$page, 'sort'=>'sales_volume', 'order'=>'desc'))}#goods_list">销量<i class="iconfont icon-xiajiantou"></i></a>
+            {elseif $order == 'desc' && $sort == 'sales_volume'}
+            <a class="box-flex active" href="{url('cart/coudan/index', array('id'=>$active_id, 'page'=>$page, 'sort'=>'sales_volume', 'order'=>'asc'))}#goods_list">销量<i class="iconfont icon-xiajiantou"></i></a>
+            {else}
+            <a class="box-flex" href="{url('cart/coudan/index', array('id'=>$active_id, 'page'=>$page, 'sort'=>'sales_volume', 'order'=>'desc'))}#goods_list">销量<i class="iconfont icon-xiajiantou"></i></a>
+            {/if}
+            <a class="a-sequence j-a-sequence"><i class="iconfont icon-viewlist" data="2"></i></a>
+        </section>
+
+        <section class="product-list j-product-list product-list-small" data="2">
+        <script id="j-product" type="text/html">
+        <%if totalPage > 0%>
+    	<ul>
+            <%each list as goods%>
+    		<li>
+    			<div class="product-div">
+    				<a href="<% goods.url%>"><img class="product-list-img" src="<% goods.goods_thumb%>" /></a>
+    				<div class="product-text">
+                        <a href="<% goods.url%>"><h4><% goods.goods_name%></h4></a>
+    					<p><span class="p-price t-first "><%goods.format_shop_price%></span></p>
+    					<a href="javascript:;" class="icon-flow-cart fr addtoCart_favourable" data-goodsid = "<%goods.goods_id%>"  ><i class="iconfont icon-gouwuche"></i></a>
+    				</div>
+    			</div>
+    	   </li>
+    	   <%/each%>
+    	</ul>
+        <%else%>
+        <div class="no-div-message">
+            <i class="iconfont icon-biaoqingleiben"></i>
+            <p>亲，此处没有内容～！</p>
+        </div>
+        <%/if%>
+        </script>
+        </section>
+     </div>
+
+</div>
+
+<!--悬浮btn star-->
+<footer class="flow-cart-btn">
+    {if $act_type_txt}
+    <div class="flow-shop-header f-05 coudan-tips">
+        {$act_type_txt}
+    </div>
+    {/if}
+    <section class="filter-btn f-cart-filter-btn dis-box n-flow-btn">
+        <div class="box-flex select-three pl coudan-shows">
+            <input type="hidden" name="warehouse_id" value="{$warehouse_id}" id="region_id">
+            <input type="hidden" name="area_id" value="{$area_id}" id="area_id">
+            <input type="hidden" name="area_city" value="{$area_city}" id="area_city">
+            <p class="t-remark"><span class="f-01">已加入购物车的活动商品  共 <em class="cart_fav_num">{$cart_fav_num}</em> 件  </span></p>
+            <p class="dis-box"><em class="dis-block">总价：</em>
+                <span class="t-first box-flex onelist-hidden cart_fav_total">{$cart_fav_total}</span>
+            </p>
+        </div>
+        <div class="g-cart-filter-sb">
+            <a href="{url('cart/index/index')}" class="btn-submit fl"  >{$lang.back_to_cart} </a>
+        </div>
+    </section>
+</footer>
+<!--悬浮btn end-->
+
+<div class="mask-filter-div"></div>
+
+<div class="footer-cont"><span><img src='{elixir('img/loading1.gif')}'>正在加载……</span></div>
+<!--引用js-->
+<script type="text/javascript">
+$(function(){
+
+    // 凑单 活动商品列表
+    var url = "{url('cart/coudan/index', array('id'=> $active_id))}";
+    $('.product-list').infinite({url: url, template:'j-product'});
+
+    // 凑单 加入购物车
+    $(".j-product-list").on('click','.addtoCart_favourable', function() {
+        var goods_id = parseInt($(this).attr('data-goodsid'));
+        var active_id = "{$active_id}";
+
+        if (goods_id > 0 && active_id > 0) {
+            addToCart_favourable(goods_id, active_id);
+        }
+        return false;
+    });
+
+    /*
+     * 凑单 添加活动商品到购物车
+     */
+    function addToCart_favourable(goodsId, active_id) {
+        var goods = new Object();
+        var spec_arr = new Array();
+        var fittings_arr = new Array();
+        var number = 1;
+        var formBuy = document.forms['ECS_FORMBUY'];
+        var quick = 0;
+
+        // 检查是否有商品规格
+        if (formBuy) {
+            str = getSelectedAttributes(formBuy);
+            spec_arr = str.split(',');
+            if (formBuy.elements['number']) {
+                number = formBuy.elements['number'].value;
+            }
+            quick = 1;
+        }
+        //ecmoban模板堂 --zhuo 仓库ID start
+        if(document.getElementById('region_id')){
+            var warehouse_id = document.getElementById('region_id').value;
+            goods.warehouse_id   = warehouse_id;
+        }
+        //地区ID
+        if(document.getElementById('area_id')){
+            var area_id = document.getElementById('area_id').value;
+            goods.area_id = area_id;
+        }
+        if(document.getElementById('area_city')){
+            var area_city = document.getElementById('area_city').value;
+            goods.area_id = area_city;
+        }
+        //ecmoban模板堂 --zhuo 仓库ID end
+
+        goods.active_id = active_id;
+        goods.quick = quick;
+        goods.spec = spec_arr;
+        goods.goods_id = goodsId;
+        goods.number = number;
+        goods.parent = (typeof (parentId) == "undefined") ? 0 : parseInt(parentId);
+        $.post(ROOT_URL + 'index.php?m=cart&c=coudan&a=add_to_cart_coudan', {
+            goods: $.toJSON(goods)
+        }, function(data) {
+            addToCartResponse_favourable(data);
+        }, 'json');
+
+    }
+
+    /*
+     * 凑单 处理添加活动商品到购物车的反馈信息
+     */
+    function addToCartResponse_favourable(result) {
+        document.removeEventListener("touchmove", handler, false);
+        if (result.error > 0) {
+            // 如果需要缺货登记，跳转
+            if (result.error == 2) {
+                layer.open({
+                    content: result.message,
+                    btn: ['确定', '取消'],
+                    shadeClose: false,
+                    yes: function() {
+                        location.href = ROOT_URL + 'index.php?m=user&a=add_booking&id=' + result.goods_id + '&spec=' + result.product_spec;
+                    },
+                    no: function() {
+                    }
+                });
+            }
+            // 没选规格，弹出属性选择框
+            else if (result.error == 6) {
+                location.href = ROOT_URL + 'index.php?m=goods&id='+result.goods_id;
+                //openSpeDiv(result.message, result.goods_id, result.parent);
+            } else {
+                d_messages(result.message, 1);
+            }
+        } else {
+            // 更新购物车数量
+            layer.open({
+                content: "商品已加入购物车，立即去购物车查看?",
+                btn: ['确定', '取消'],
+                shadeClose: false,
+                yes: function() {
+                    location.href = ROOT_URL + 'index.php?m=cart';
+                },
+                no: function() {
+                }
+            });
+            // console.log(result);
+            $(".cart_fav_num").text(result.cart_fav_num);
+            $(".cart_fav_total").text(result.cart_fav_total);
+        }
+    }
+
+    //加载更多
+    var loadingHeight = $(".product-list").outerHeight(true);
+    function loadimgCont()
+    {
+        if ($(document).scrollTop() >= $(window).height() < $(document).height() - $(window).height()) {
+            $(".footer-cont").html("<span><img src='{elixir('img/loading1.gif')}'>正在加载……</span>")
+        }
+        if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+            $(".footer-cont").html("<span>没有更多了</span>")
+        }
+        if (loadingHeight< $(window).height()) {
+            $(".footer-cont").css("display","none");
+        } else {
+            $(".footer-cont").css("display","block");
+        }
+    }
+    loadimgCont();
+    $(window).scroll(function() {
+        loadimgCont();
+    });
+
+});
+</script>
+</body>
+</html>

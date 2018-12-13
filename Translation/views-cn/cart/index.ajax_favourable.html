@@ -1,0 +1,66 @@
+
+    <section class="goods-show-title of-hidden padding-all" style="background: #f6f6f6;">
+        <h3 class="fl g-c-title-h3">可选促销</h3>
+        <i class="iconfont icon-guanbi2 show-div-guanbi fr"></i>
+    </section>
+    <section class="goods-show-con  swiper-scroll b-color-f" style="min-height: 30rem;" id="goods-show-con">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+               <div class="flow-consignee-list j-get-consignee-one select-three">
+    
+                    <section class="flow-checkout-adr">
+                        {foreach $favourable as $key=>$fav}
+                        <div class="flow-set-adr of-hidden padding-all ">
+                            <div class="ect-select " >
+                                <label class="dis-box {if $fav.is_checked}active{/if}" >
+                                    <i class="select-btn active-i"></i>
+                                    <span class="t-first margin-lr">
+                                        <a class="ml10 ftx-05 " data-aid="{$key}" data-gid="{$goods_id}" data-rid="{$rec_id}" href="javascript:void(0);">{$fav.act_name}</a>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        {/foreach}
+                    </section>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="swiper-scrollbar"></div>
+    </section>
+    <script type="text/javascript">  
+        // 切换促销
+        $('.j-get-consignee-one').on('click', ".ect-select label", function(){
+            // 勾选效果
+            $(this).addClass("active").parents(".flow-set-adr").siblings().find("label").removeClass("active");
+
+            // 请求
+            var th = $(this).find('span a');
+            var aid = th.data('aid');
+            var gid = th.data('gid');
+            var rid = th.data('rid');
+
+            $.ajax({
+                type : "GET",
+                url : ROOT_URL + 'index.php?m=cart&a=change_fav',
+                data : "aid=" + aid + "&gid=" + gid + "&rid=" + rid,
+                dataType : 'json',
+                async : false,
+                success : function(res){
+                    $(".flow-have-cart").html(res.content);
+                    $('.promotion-box').removeClass('show');
+                    $(".mask-filter-div").removeClass("show");
+                    $(".n-flow-btn").show();
+                    default_checked();
+                }
+            });        
+        });
+
+        $('.show-goods-attr').on('click', '.show-div-guanbi', function(){
+            document.removeEventListener("touchmove", handler, false);
+            $(".show-goods-attr").removeClass("show");
+            $(".mask-filter-div").removeClass("show");
+            $(".n-flow-btn").show();
+            
+        });
+    </script>

@@ -1,0 +1,41 @@
+{include file="page_header"}
+
+	<div class="con">
+		<div id="bs-example" class="b-l-page-pos">
+				<ul class="nav bs-docs-sidenav" role="tablist" id="link_pos">
+				<li>
+                	<a href="#link_pos">#</a>
+            	</li>
+				{foreach $list as $lis}
+					<li ><a href="#link_{$lis.info}">{$lis.info}</a></li>
+				{/foreach}
+				</ul>
+		</div>
+		<div class="brand-list-page brand-list-page" data-spy="scroll" data-target="#navbar-example" data-offset="0" >
+		{foreach $list as $lis}
+			<a class="b-l-a-id" id="link_{$lis.info}">{$lis.info}</a>
+			<ul>
+			{foreach $lis.list as $li}
+				<li><a href="{$li.url}"><img src="{$li.brand_logo}"><span>{$li.brand_name}</span></a></li>
+			{/foreach}
+			</ul>
+		{/foreach}
+		</div>
+	</div>
+
+	<!--快捷导航-->
+	{include file="float_nav"}
+	<li>
+        <a href="{url('brand/index/index')}">
+             <i class="iconfont icon-pinpai1"></i>
+             <p>品牌街</p>
+        </a>
+     </li>
+    {include file="float_nav_footer"}
+		<script>
+		$(function($){
+			$('body').scrollspy({target: '#bs-example'})
+		});
+		</script>
+</body>
+</html>

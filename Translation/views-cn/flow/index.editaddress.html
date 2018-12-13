@@ -1,0 +1,56 @@
+{include file="page_header"}
+<form action="{url('index/add_address')}" method="post">
+	<input type="hidden" name="address_id" value="{$consignee_list.address_id}">
+	<div class="con b-color-f" id="checkPage">
+		<div class="flow-consignee margin-lr">
+			<div class="text-all dis-box j-text-all">
+				<label>收货人</label>
+				<div class="box-flex input-text">
+					<input name='consignee' value="{$consignee_list.consignee}" class="j-input-text" type="text" placeholder="请输入收货人姓名" />
+					<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+				</div>
+			</div>
+			<div class="text-all dis-box j-text-all">
+				<label>手机号码</label>
+				<div class="box-flex input-text">
+					<input class="j-input-text" name='mobile' type="tel" placeholder="请输入联系电话" value="{$consignee_list.mobile}" />
+					<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+				</div>
+			</div>
+			<!--address-start-->
+			<div class="text-all" id="editAddressForm">
+				<input type="hidden" id="province_id" name="province_region_id" value="">
+				<input type="hidden" id="city_id" name="city_region_id" value="">
+				<input type="hidden" id="district_id" name="district_region_id" value="">
+				<input type="hidden" id="town_id" name="town_region_id" value="">
+				<input type="hidden" id="village_id" name="village_region_id" value="">
+				<input type="hidden" id="region_id" name="region_id" value="">
+				<input type="hidden" id="address_id" name="address_id" value="">
+				<div class="address-box" id="selectAddressBtn" region-data="">
+					<label class="fl">所在地区</label>
+					<span class="fl text-all-span" id="addressLabelId">{$consignee_list.province}{$consignee_list.city}{$consignee_list.district}{$consignee_list.town}{$consignee_list.village}</span>
+					<span class="t-jiantou fr"><i class="iconfont icon-jiantou tf-180"></i></span>
+				</div>
+			</div>
+			<!--address-end-->
+
+			<div class="text-all ">
+				<label>详细信息</label>
+				<div class="box-flex input-text">
+					<input class="j-input-text" name='address' type="text" value="{$consignee_list.address}" placeholder="详细地址" />
+					<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="ect-button-more dis-box filter-btn padding-all">
+		<input type="submit" name="submit" class="btn-submit box-flex " value="保存" />
+	</div>
+	 <!--地区选择 s-->
+          {include file="address"} 
+     <!--地区选择 e-->
+</form>
+</body>
+
+</html>

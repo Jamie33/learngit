@@ -1,0 +1,76 @@
+{include file="page_header"}
+		<div class="con">
+			<div class="goods-info user-order of-hidden ect-tab j-ect-tab ts-3 p-t0">
+				<nav class=" j-tab-title tab-title b-color-f of-hidden">
+					<ul class="dis-box">
+						<li class="box-flex {if $type == 1}active{/if}"><a href="{url('user/crowd/focus',array('type'=>''))}">全部关注</a></li>
+						<li class="box-flex {if $type == 2}active{/if}"><a href="{url('user/crowd/focus',array('type'=>'2'))}">进行中</a></li>
+						<li class="box-flex {if $type == 3}active{/if}"><a href="{url('user/crowd/focus',array('type'=>'3'))}">已成功</a></li>
+						<!-- <li class="box-flex {if $type == 4}active{/if}"><a href="{:url('mycrowd/index/focus',array('type'=>'4'))}">已失败</a></li> -->
+					</ul>
+				</nav>
+				<div id="j-tab-con" class="tab-con">
+					<div class="swiper-wrapper">
+						
+						<section class="swiper-slide">
+							{foreach $zc_focus as $goods}
+							<section class="flow-checkout-pro">								
+								<div class="my-nav-box product-list-small m-top1px b-color-f raise-tuij-box dis-box ">
+									<ul class="box-flex  flow-checkout-pro">
+										<li>
+											<div class="product-div crowd-product-div dis-box">
+												<a class="product-div-link" href="{$goods.url}"></a>
+												<div class="shop-list-width bd"><img class="product-list-img" src="{$goods.title_img}"></div>
+												<div class="product-text box-flex">
+													<h4>{$goods.title}</h4>
+													<p class="col-3 f-05"><em class="color-red">￥{$goods.min_price}</em><em class="col-9 f-02"> 起</em><em class="fr col-9 f-02"><i class="iconfont icon-shijian"></i> 剩余时间：{$goods.shenyu_time}天</em></p>
+													<div class="raise-progressBar raise-user-time dis-box">
+														<p class="wrap box-flex">
+															<span class="bar" style="width:{$goods.baifen_bi}%;"><i class="color"></i></span>
+														</p>
+														<p class="txt">{$goods.baifen_bi}%</p>
+													</div>
+													<p class="col-3 f-03"><em class="col-9">已筹资金:</em><em class="color-red">￥{$goods.join_money}</em><!-- 元 --><em class="fr col-9 f-03">支持人:<em class="color-red">{$goods.zhichi_num}</em>人</em>
+													</p>
+												</div>
+
+											</div>
+										</li>
+									</ul>
+								</div>								
+							</section>
+							{/foreach}
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--快捷导航-->
+    {include file="no_search_nav"} 
+       <li>
+	     <a href="{url('crowd_funding/index/index')}">
+	             <i class="iconfont icon-shequ"></i>
+	              <p>微筹广场</p>
+	       </a> 
+       </li>
+       <li> 
+	         <a href="{url('user/crowd/order')}">
+	             <i class="iconfont icon-dingdan"></i>
+	             <p>微筹订单</p>
+	        </a> 
+        </li>
+        <li>
+	        <a href="{url('user/crowd/index')}">
+	             <i class="iconfont icon-geren"></i>
+	              <p>微筹中心</p>
+	        </a> 
+        </li>
+    {include file="float_nav_footer"}
+    		<script>
+            $(function(){
+                commonShopList();
+            })
+		</script>
+	</body>
+
+</html>

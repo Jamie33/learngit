@@ -1,0 +1,92 @@
+{include file="page_header"}
+<div class="con">
+    <form action="{url('user/account/account')}" method="post">
+		<div class="user-recharge ">
+            <section class="padding-lr b-color-f m-top10">
+    			<div class="text-all dis-box j-text-all">
+    				<label class="t-remark f-04">充值金额 (元)</label>
+    				<div class="box-flex input-text">
+                        <input class="j-input-text" type="number" min="{$buyer_recharge}" step="0.01" placeholder="请输入充值金额" name="amount">
+    			    </div>
+    			</div>
+            </section>
+
+            <section class="margin-lr">
+                <div class="text-all dis-box j-text-all">
+                    <div class="box-flex f-03 col-6">
+                        最低充值金额：<em class="color-red">{if $buyer_recharge > 0}￥{$buyer_recharge}{else}不限{/if}</em>
+                    </div>
+                </div>
+            </section>
+
+            <section class="m-top10 b-color-f padding-all">
+				<div class="f-c-select-msg">
+					<label class="t-remark">备注<span class="t-remark">（50字）</span></label>
+					<div class="text-area1 m-top04">
+                        <textarea name="user_note" maxlength="50" placeholder="（选填）"></textarea>
+						<span>50</span>
+					</div>
+				</div>
+			</section>
+
+			<section class="m-top10 b-color-f padding-lr j-show-div j-show-get-val">
+				<div class="text-all dis-box ">
+					<label class="t-remark">充值方式</label>
+					<div class="box-flex t-goods1 text-right onelist-hidden"><span> </span> <em class="t-first"></em></div>
+					<span class="t-jiantou"><i class="iconfont icon-jiantou tf-180"></i></span>
+				</div>
+				<!--充值方式弹出层-->
+				<div class="show-time-con ts-3 b-color-1 j-filter-show-div">
+					<section class="goods-show-title of-hidden padding-all">
+						<h3 class="fl g-c-title-h3">充值方式</h3>
+						<i class="iconfont icon-guanbi2 show-div-guanbi fr"></i>
+					</section>
+					<section class="s-g-list-con swiper-scroll">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide select-two">
+								<ul class="j-get-one padding-all">
+                                    {foreach $payment as $list}
+									<li class="ect-select">
+										<label class="ts-1" onclick="show({$list.pay_id})"  ><dd><span>{$list.pay_name} </span> {if $list.pay_fee}手续费： <em class="t-first">{$list.pay_fee}</em>{/if}</dd><i class="fr iconfont icon-gou ts-1"></i></label>
+									</li>
+                                    {/foreach}
+								</ul>
+							</div>
+							<div class="swiper-scrollbar"></div>
+						</div>
+					</section>
+				</div>
+			</section>
+
+		</div>
+		<div class="padding-all">
+            <input type="hidden" name="surplus_type" value="0" />
+            <input type="hidden" name="payment_id" value="0" />
+            <input type="hidden" name="pay_code" value="0" />
+            <input type="hidden" name="pay_name" value="0" />
+            <input type="hidden" name="pay_fee" value="0" />
+            <input type="hidden" name="rec_id" value="0" />
+            <button type="submit" class="btn-submit br-5 " name="submit" value="sub">提交申请</button>
+		</div>
+    </form>
+    <!--弹窗layer-->
+    <div class="mask-filter-div"></div>
+</div>
+
+<!--快捷导航-->
+{include file="float_nav"}
+            <li>
+                <a href="{url('user/account/index')}">
+                     <i class="iconfont icon-money"></i>
+                     <p>资金管理</p>
+                </a>
+            </li>
+{include file="float_nav_footer"}
+
+<script type="text/javascript">
+	function show(pid){
+        $("input[name=payment_id]").val(pid);
+    }
+</script>
+</body>
+</html>

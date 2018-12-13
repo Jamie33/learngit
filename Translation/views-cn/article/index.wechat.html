@@ -1,0 +1,49 @@
+{include file="page_header"}
+<div class="con mb-7">
+    <!--微信素材文章内容-->
+    <section class="article-list">
+        <div class="art-tit-box padding-all">
+            <h4 class="com-cont-box art-cont-box f-08 fw-600">{$article.title}</h4>
+            <small><time>{$article.add_time}</time><span style="color:#337ab7">{$article.author}</span></small>
+        </div>
+        {if $article.image}
+        <div class="com-cont-box padding-all"><img class="img" src="{$article.image}" /></div>
+        {/if}
+        <div class="com-cont-box padding-all">{$article.content}</div>
+    </section>
+</div>
+
+<input type="hidden" name="article_id" value="{$article.article_id}"/>
+<input type="hidden" name="cid" value=""/>
+<div class="mask-filter-div"></div>
+
+<script>
+    function dianzan(id) {
+        if ($("#red" + id).hasClass("active")) {
+            $("#red" + id).removeClass("active");
+        } else {
+            $("#red" + id).addClass("active");
+        }
+        var islike = document.getElementById('islike').value;
+        var article_id = document.getElementById('like').value;
+        var isclick = document.getElementById('isclick').value;
+        $("#isclick").val(new Date().getTime());
+        if (isclick < (new Date().getTime() - 1000)) {
+            $.ajax({
+                type: "post",
+                url: "{url('article/index/like')}",
+                data: {article_id: article_id, islike: islike},
+                dataType: "json",
+                success: function (data) {
+                    $("#like_num").html(data.like_num);
+                    $("#islike").val(data.is_like);
+                }
+            });
+        }
+
+    }
+
+</script>
+
+</body>
+</html>

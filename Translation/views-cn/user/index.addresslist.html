@@ -1,0 +1,62 @@
+{include file="page_header"}
+		<div class="con">
+		 {if $consignee_list}
+			<div class="flow-consignee-list j-get-consignee-one select-three">
+                 {foreach $consignee_list as $consignee}
+				<section class="flow-checkout-adr m-top08">
+					<div class="flow-have-adr padding-all">
+						<div class="f-h-adr-title dis-box">
+			                  <div class="box-flex"><label>{$consignee.consignee}</label>
+			                  </div>
+			                  <div class="box-flex"><div class="fr"><span class="f-05">{$consignee.mobile}</span></div></div>
+			             </div>
+			             <p class="f-04  m-top04">{$consignee.address}</p>
+					</div>
+					<div class="flow-set-adr of-hidden padding-all ">
+						<div class="ect-select fl">
+							<label class="dis-box {if $consignee.address_id == $address_id }active{/if}" onclick="adderss_user({$consignee.address_id})">
+								<i class="select-btn active-i"></i>
+								<span class="t-first margin-lr">
+									<a class="ml10 ftx-05 " href="javascript:void(0);">{if $consignee.address_id == $address_id }默认地址{else}设为默认{/if}</a>
+								</span>
+							</label>
+						</div>
+                        <div class="fr">
+	                        <a href="{url('index/addaddress',array('address_id'=>$consignee.address_id))}">
+	                        	<i class="iconfont icon-bianji"></i>编辑
+	                        </a>
+	                        <a href="{url('index/drop',array('address_id'=>$consignee.address_id))}">
+	                        	<i class="iconfont icon-xiao10"></i>删除
+	                        </a>
+                        </div>
+					</div>
+				</section>
+				{/foreach}
+				<div class="ect-button-more dis-box filter-btn">
+					<a href="{url('index/addaddress')}" class="btn-submit box-flex">新增收货人信息</a>
+				</div>
+			</div>
+			{else}
+			<div class="no-div-message">
+				<i class="iconfont icon-biaoqingleiben"></i>
+				<p>亲，还没有收货地址哦～！</p>
+				<a href="{url('index/addaddress')}" class="t-first">点击添加一个收货地址</a>
+			</div>
+			{/if}
+		</div>
+    <!--快捷导航-->
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+    <script type="text/javascript">
+        //设置默认收获地址
+        function adderss_user(address_id){
+            $.get("{url('user/index/ajax_make_address')}",{address_id:address_id},function(data){
+                if(data['address_id']){
+                    d_messages('设置成功');
+                }
+                return false;
+            },'json');
+        }
+    </script>
+	</body>
+</html>

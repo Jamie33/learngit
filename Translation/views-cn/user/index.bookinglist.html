@@ -1,0 +1,39 @@
+{include file="page_header"}
+<div class="con">
+	<section class=" j-f-tel padding-lr b-color-f shortage-list">
+		<script id="j-shortage" type="text/html">
+			<%each list as vo%>
+					<div class="text-all dis-box j-text-all b-color-f card-div item-<%vo.rec_id%>">
+						<div class="box-flex shortage-list-left">
+							<p><a href="<%vo.url%>"><%vo.goods_name%></a></p>
+							<p><%vo.dispose_note%></p>
+							<span><%vo.booking_time%></span>
+						</div>
+						<div class="input-text text-right">
+							<span class="t-remark">数量：<%vo.goods_number%></span>
+						</div>
+						<i class="iconfont icon-xiao10" onclick="del(<%vo.rec_id%>)"></i>
+					</div>
+					<%/each%>
+					</script>
+	</section>
+</div>
+<script type="text/javascript">
+	$('.shortage-list').infinite({
+		url : "{url('user/index/booking_list')}",
+		template : 'j-shortage'
+	});
+
+	function del(rec_id) {
+		var id = rec_id;
+		$.get('{url("del_booking")}', {
+			id : rec_id
+		}, function(data) {
+			if (data.status == 1) {
+				$('.item-' + id).hide();
+			}
+		}, 'json');
+	}
+</script>
+</body>
+</html>

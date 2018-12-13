@@ -1,0 +1,97 @@
+{include file="page_header"}
+
+<div class="con">
+    <div class="goods-info user-order of-hidden ect-tab j-ect-tab ts-3" style="padding-top:0">
+        <nav class="tab-title b-color-f of-hidden">
+            <ul class="dis-box">
+                <li class="box-flex "><a href="{url('coupont/index/index')}" >好券集市</a></li>
+                <li class="box-flex active"><a href="{url('coupont/index/coupons_goods')}" >任务集市</a></li>
+            </ul>
+        </nav>
+
+        <div id="j-tab-con" class="tab-con margin-lr">
+            <div class="swiper-wrapper">
+                <section class="swiper-slide store_info">
+                    <script id="j-product" type="text/html">
+                        <ul>
+                        <%if coupons_list.tab %>
+                        <%each coupons_list.tab as val%>
+                        <li class="dis-box new-coupons-box m-top10">
+                            <div class="box-flex remark-all p-r">
+                                <div class="q-type">
+                                    <div class="b-r-a-price">
+                                        <em>¥</em><strong class="coupons-money"><%val.cou_money%></strong>
+                                        <div class="couons-text text-left color-dark"  style="float:none;padding-top: 2rem;">
+                                            <span><%val.store_name%></span>
+                                        </div>
+                                    </div>
+                                    <div class="b-r-a-con text-left ">
+                                        <!-- <div class="range-item">[<%val.cou_name%>]</div> -->
+                                        <div class="range-item">购物满<%val.cou_man%>元即送<%val.cou_money%>元优惠券</div>
+                                        <div class="range-item col-7"><%val.begintime%> 至 <%val.endtime%></div>
+                                    </div>
+                                </div>
+                                <b class="semi-circle" ></b>
+                            </div>
+                            <a class="b-r-a-btn b-color-f temark-1-text tb-lr-center use_coupouns" href="javascript:;" cou_id="<%val.cou_id%>" >去购物</a>
+                        </li>
+                        <%/each%>
+                        </ul>
+                        <%else%>
+                        <div class="no-div-message">
+                            <i class="iconfont icon-biaoqingleiben"></i>
+                            <p>亲，还没有优惠券哦～！</p>
+                        </div>
+                        <%/if%>
+                     </script>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+         <!--快捷导航-->
+    {include file="float_nav"}
+            <li>
+                <a href="{url('coupont/index/index')}">
+                     <i class="iconfont icon-money"></i>
+                     <p>好券集市</p>
+                </a>
+            </li>
+    {include file="float_nav_footer"}
+    <script type="text/javascript">
+
+        /*切换*/
+        var tabsSwiper = new Swiper('#j-tab-con', {
+            speed: 100,
+            noSwiping: true,
+            autoHeight: true,
+            onSlideChangeStart: function () {
+                $(".j-tab-title .active").removeClass('active')
+                $(".j-tab-title li").eq(tabsSwiper.activeIndex).addClass('active')
+            }
+        })
+        $(".j-tab-title li").on('touchstart mousedown', function (e) {
+            e.preventDefault()
+            $(".j-tab-title .active").removeClass('active')
+            $(this).addClass('active')
+            tabsSwiper.slideTo($(this).index())
+        })
+        $(".j-tab-title li").click(function (e) {
+            e.preventDefault()
+        });
+
+
+        // 加载列表
+        var infinite = $('.store_info').infinite({url: "{url('coupont/index/coupons_goods')}", template: 'j-product'});
+
+        // 去使用、购物
+        $(".store_info").on('click','.use_coupouns', function() {
+            var cou_id = $(this).attr('cou_id');
+            if (cou_id) {
+                window.location.href = "{url('category/index/products', array('id' => 0,'intro' => ''))}" + "&cou_id=" + cou_id;
+            }
+        });
+
+    </script>
+</body>
+</html>

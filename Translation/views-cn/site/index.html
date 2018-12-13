@@ -1,0 +1,486 @@
+{include file="page_header"}
+
+<div class="con mb-7">
+<section class="index-header ts-2">
+    {if $app}
+    <div class="ect-header-banner dis-box" id="ect-banner">
+        <a href="javascript:;"><i class="iconfont icon-guanbi1"></i></a>
+        <div class="box-flex">
+            <img src="{elixir('img/more_icon.png')}" class="fl" />
+            <div class="ect-header-text fl">
+                <h4>享受更加流畅的商城体验</h4>
+                <p>赶快下载多商户APP</p>
+            </div>
+        </div>
+        <a class="btn-submit1" href="http://test.b2b2c.ecjia.com/index.php?m=mobile&c=mobile&a=download">立即下载</a>
+    </div>
+    {/if}
+    <!--search-->
+        <section class="search box banner-search ts-3">
+            <div class="text-all position-rel dis-box j-text-all" style="padding:.66rem 0">
+                {if C('shop.use_lbs')}
+                <a href="{url('location/index/index')}"><div class="dis-box search-logo"><div class="location-left-cont onelist-hidden" id="j-lbs-city">{$current_city.region_name}</div><div class="box-flex"><i class="iconfont icon-moreunfold"></i></div></div></a>
+                {/if}
+               <div class="box-flex input-text n-input-text i-search-input">
+                    <a href="{url('search/index/index')}" class="a-search-input"></a>
+                    <div class="j-input-text nav-soso"><i class="iconfont icon-sousuo"></i>商品/店铺搜索</div>
+                </div>
+                <div class="search-left index-xiaoxi position-rel">
+                    <a ="{url('user/index/mhrefessagelist')}"><i class="iconfont icon-xiaoxi1 isxiaoxi1color"></i><em class="position-abo active"></em></a>
+                </div>
+            </div>
+        </section>
+    </section>
+    <div class="index-banner new-index-banner swiper-container box position-rel banner-first" id="new-index-banner">
+        <div class="swiper-wrapper">
+        {insert_ads(array('id'=>256, 'num'=>6))}
+        </div>
+        <!-- 分页器 -->
+        <div class="swiper-pagination br-half text-c banner-first-pagination"></div>
+        <!--linear-->
+        <div class="linear"></div>
+    </div>
+    <!--menu-->
+    <div class="nav-img">
+        <!--<img class="img" id="nav-bg-img" src="__TPL__/img/ww.jpg">-->
+        <nav class="ptb-1 index-nav" >
+        <ul class="box ul-5 text-c">
+            {foreach $nav as $key=>$list}
+            <li>
+                <a href="{$list.url}">
+                    <img src="{get_data_path($list.pic, 'attached/nav')}">
+                    <p class="m-top02">{$list.name}</p>
+                </a>
+            </li>
+            {/foreach}
+        </ul>
+    </nav>
+    </div>
+    <!--index-new-->
+    <div class="b-color-f mb-1" style="padding-bottom:1.1rem">
+	<section class="dis-box index-new  position-rel">
+		<div class="index-new-left">
+			<div class="new-icon">
+				<img src="{elixir('img/new-icon.png')}">
+			</div>
+		</div>
+		<div class="box-flex">
+			<!-- Swiper -->
+			<div class="swiper-container index-new-list">
+				<div class="swiper-wrapper">
+                    {foreach $article as $vo}
+					<div class="swiper-slide swiper-no-swiping">
+						<a class="product-div-link" href="{$vo['url']}"></a>
+						<div class="index-new-cont">
+							<h4 class="col-3 f-04 onelist-hidden">{$vo['title']}</h4>
+							<p class="col-9 f-02">{$vo['add_time']}</p>
+						</div>
+					</div>
+                    {/foreach}
+				</div>
+			</div>
+		</div>
+		<div class="index-new-right">
+			<!--<span class="t-jiantou t-remark fr"><a href="{url('article/index/index')}">更多<i class="iconfont icon-more f-2"></i></a></span>-->
+              <a href="{url('article/index/index')}"><div class="index-jt-more" style="color:#444;right:0;padding: 0 1.1rem 0 .7rem;font-size: 1.2rem;">更多</div></a>
+		</div>
+        <div class="index-new-bor left-bor"></div>
+        <div class="index-new-bor right-bor"></div>
+	</section>
+    </div>
+    <script type="text/javascript">
+        var gmt_end_time = {if $end_time}{$end_time}{else}0{/if};
+        var day = '<em class="color-whie hour">';
+        var hour = '</em> : <em class="color-whie mini">';
+        var minute = '</em> : <em class="color-whie sec">';
+        var second = '</em>';
+        var end = '';
+        onload = function(){
+            try {onload_leftTime();}
+            catch (e) {}
+        }
+    </script>
+    <!--discount-->
+    <div class="box mb-1 title inx-ms">
+        <div class="box padding-all b-color-f wallet-bt p-r">
+            <h3 class="sale-title position-rel" >
+                <span class="fl inx-ms-time">限时<i class="iconfont">&#xe60b;</i>秒杀</span>
+                <span class="color-dark" id="leftTime"></span>
+            </h3>
+            <a href="{url('category/index/search',array('intro'=>'promotion'))}"><div class="index-jt-more sale-bg">更多<i class="iconfont icon-next-s"></i></div></a>
+        </div>
+      <section class="b-color-f store-box-list" >
+                    <div class="product-one-list of-hidden scrollbar-none j-g-s-p-con swiper-container-horizontal">
+                        <div class="swiper-wrapper">
+                             <!-- {foreach $promotion_goods as $key => $promotion} -->
+                            <li class="swiper-slide swiper-slide-active">
+                                    <a href="{$promotion.url}">
+                                    <div class="index-store-cont">
+                                        <img class="img" src="{$promotion.goods_thumb}">
+                                    </div>
+                                    <p class="index-price text-c">{$promotion.current_price}<br><del>{$promotion.shop_price}</del></p>
+                                    </a>
+                            </li>
+                            <!-- {/foreach} -->
+                            <div class="swiper-slide more-list-box" id="store-box-list">
+                                <a id="store-box-list-a" href="{url('category/index/search',array('intro'=>'promotion'))}">
+                                    <i class="iconfont icon-jiantou1 n-icon-jiantou1 tf-180"></i>
+                                    <p class="text-c">查看更多</p>
+                                </a>
+                            </div>
+                        </div>
+                </div>
+        </section>
+    </div>
+    <!--banner2-->
+    <div class="index-banner swiper-container box mb-1 banner-second">
+        <div class="swiper-wrapper">
+            {insert_ads(array('id'=>257, 'num'=>3))}
+        </div>
+    </div>
+    <!--recom-->
+    <div class="box mb-1 title inx-ms  m-top08">
+        <div class="b-color-f p-r">
+            <img class="img" src="__TPL__/img/guangao.png"> 
+            <a href="{url('category/index/search',array('intro'=>'best'))}"><div class="index-jt-more jinpin-bg">更多<i class="iconfont icon-next-s"></i></div></a>   
+        </div>
+        <section class="product-list-medium">
+            <ul>
+              <!-- {foreach $best_goods as $key => $best} -->
+              <li>
+                <div class="product-div">
+                  <a class="product-div-link" href="{$best.url}"></a>
+                  <img class="product-list-img" src="{$best.goods_thumb}" />
+                  <div class="product-text  index-product-text">
+                      <h4>{$best.goods_name}</h4>
+                      <p><span class="p-price color-red">{$best.current_price}</span></p>
+                    <a href="{$best.link_url}"><div class="index-btn-xs">找相似</div></a>
+                  </div>
+                </div>
+              </li>
+              <!-- {/foreach} -->
+            </ul>
+        </section>
+    </div>
+    <!--hot-->
+    <div class="box mb-1 b-color-f" style="display:none;">
+        <div class="box padding-all  wallet-bt">
+            <h3 class="recom-title">
+                热门大牌
+                <span>最全最时尚的大牌汇集</span>
+                <span class="t-jiantou t-remark fr">更多<i class="iconfont icon-more"></i></span>
+            </h3>
+        </div>
+        <div class="hot-container-div">
+            <i class="iconfont icon-back"></i>
+            <div class="swiper-container hot-container">
+                <ul class="swiper-wrapper">
+                    <!-- {foreach $brand_list as $vo} -->
+                    <li class="swiper-slide ">
+                        <a href="javascript:; ">
+                            <img src="{$vo.brand_logo}" />
+                        </a>
+                    </li>
+                    <!-- {/foreach} -->
+                </ul>
+                <!-- 导航按钮 -->
+            </div>	<i class="iconfont icon-more"></i>
+        </div>
+    </div>
+    <!--banner3-->
+    <div class="index-banner  swiper-container box mb-1 banner-third">
+        <div class="swiper-wrapper">
+        {insert_ads(array('id'=>258, 'num'=>3))}
+        </div>
+    </div>
+    <!--brand-->
+    {if $store}
+    <div class="p-r b-color-f m-top08">
+            <img class="img" src="__TPL__/img/dianpujie.png"> 
+            <a href="{url('store/index/index')}"><div class="index-jt-more dianpu-bg">更多<i class="iconfont icon-next-s"></i></div></a>   
+    </div>
+    <section class="store-new-box b-color-f">
+                <div class="of-hidden scrollbar-none j-g-s-p-con swiper-container-horizontal">
+                    <div class="swiper-wrapper brand-list">
+                     <!--{foreach $store as $key => $val}-->
+
+                        <li class="swiper-slide swiper-slide-active">
+                              <a href="{$val.url}">
+                            <div class="brand-img">
+                                <img src="{$val.street_thumb}" />
+                                <div class="brand-logo">
+                                    <img src="{$val.brand_thumb}"/>
+                                </div>
+                            </div>
+                             <ul class="ul-2 index-store-list">
+                                <!--{foreach $val.goods_list as $k => $v}-->
+                                <li>
+                                    <img src="{$v.goods_thumb}" />
+                                </li>
+                                <!--{/foreach}-->
+                            </ul>   
+                               </a>   
+
+                        </li>
+                         <!--{/foreach}-->
+                          <!--<div class="swiper-slide more-list-box" id="more-list-box">
+                                <a id="more-list-box-a" href="{url('store/index/index')}">
+                                    <p class="text-c">查看更多</p>
+                                    <i class="iconfont icon-jiantou1 n-icon-jiantou1"></i>
+                                </a>
+                          </div>-->
+                    </div>
+            </div>
+    </section>
+    {/if}
+    <!--like-->
+     <div>
+            <img class="img" src="__TPL__/img/cainixihuan.png"> 
+            <a href="{url('store/index/index')}"></a>   
+    </div>
+    <section class="product-list j-product-list product-list-medium" data="1">
+		<script id="j-product" type="text/html">
+		<ul>
+			<%each list as goods%>
+			<li>
+				<div class="product-div">
+					<a class="product-div-link" href="<%goods.url%>"></a>
+					<img class="product-list-img" src="<%goods.goods_thumb%>" />
+					<div class="product-text  index-product-text">
+              <h4><%goods.goods_name%></h4>
+              <p><span class="p-price color-red "><%#goods.current_price%><small></small></span></p>
+              <a href="<%goods.link_url%>"><div class="index-btn-xs">找相似</div></a>
+              <a href="javascript:void(0)" class="icon-flow-cart fr j-goods-attr"><i class="iconfont icon-gouwuche"></i></a>
+          </div>
+				</div>
+			</li>
+			<%/each%>
+		</ul>
+		</script>
+    </section>
+    <div class="n-footer-box" style="display: none;">
+        <ul class="n-footer-minbox">
+            <li>
+                <a href="http://m.ecmoban.com/index.php?m=touch&amp;c=index&amp;a=download">
+                    <div class="n-footer-img-box"><img src="{elixir('img/footer-a.png')}"></div>
+                    <p class="footer-tit1">客户端</p>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <div class="n-footer-img-box"><img src="{elixir('img/footer-c.png')}"></div>
+                    <p class="footer-tit">触屏版</p>
+                </a>
+            </li>
+            <li>
+                <a href="__HOST__/">
+                    <div class="n-footer-img-box"><img src="{elixir('img/footer-b.png')}"></div>
+                    <p class="footer-tit1">电脑版</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <footer class="padding-all text-center t-remark" style="display: none;">
+        {$copyright}
+        &copy; <?php echo date('Y');?> <?php echo C('shop.shop_name');?> 版权所有，并保留所有权利。
+    </footer>
+	<div class="footer-cont"><span><img src='{elixir('img/loading1.gif')}'>正在加载……</span></div>
+    <!--回到顶部-->
+    <nav class="commom-nav dis-box ts-5"  id="commom-nav" style="top:76%">
+        <div class="left-icon">
+            <div class="filter-top filter-top-index" id="scrollUp">
+                <i class="iconfont icon-jiantou"></i>
+                <span>顶部</span>
+            </div>
+        </div>
+    </nav>
+	<footer class="footer-nav dis-box" id="footer-nav">
+		<a href="{url('/')}" class="box-flex nav-list active">
+			<i class="nav-box i-home"></i><span>首页</span>
+		</a>
+		<a href="{url('category/index/index')}" class="box-flex nav-list">
+			<i class="nav-box i-cate"></i><span>分类</span>
+		</a>
+		<a href="{url('search/index/index')}" class="box-flex nav-list">
+			<i class="nav-box i-shop"></i><span>搜索</span>
+		</a>
+		<a href="{url('cart/index/index')}" class="box-flex position-rel nav-list">
+			<i class="nav-box i-flow"></i><span>购物车</span>
+		</a>
+		{if $filter}
+		<a href="{url('drp/user/index')}" class="box-flex nav-list">
+			<i class="nav-box i-user"></i><span>{$custom}中心</span>
+		</a>
+		{elseif $community}
+		<a href="{url('community/index/index')}" class="box-flex nav-list">
+			<i class="nav-box i-user"></i><span>社区</span>
+		</a>
+		{else}
+		<a href="{url('user/index/index')}" class="box-flex nav-list">
+			<i class="nav-box i-user"></i><span>我</span>
+		</a>
+		{/if}
+	</footer>
+	<!--悬浮菜单e-->
+</div>
+<!--浏览记录-->
+<div class="index-history dis-box" id="index-history">
+  <div class="box-flex">
+    <h4 class="f-03"><strong>刚刚您在浏览:</strong></h4>
+    <p class="f-02 col-8 m-top04 onelist-hidden">"衣服"相关产品514</p>
+  </div>
+  <div class="right">
+    <a class="history-title" href="javascript:;">继续浏览</a><label>关闭</label>
+ </div>
+</div>
+<script src="__TPL__/js/jquery.cookie.js"></script>
+<script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+<script type="text/javascript ">
+
+    $(function ($) {
+        //滑动跳转
+         $("#store-box-list").on("touchstart", function(e) {
+            e.preventDefault();
+             startX = e.originalEvent.changedTouches[0].pageX,
+             startY = e.originalEvent.changedTouches[0].pageY;
+        });
+         $("#store-box-list").on("touchmove", function(e) {
+            e.preventDefault();
+            moveEndX = e.originalEvent.changedTouches[0].pageX,
+            moveEndY = e.originalEvent.changedTouches[0].pageY,
+
+            X = moveEndX - startX,
+            Y = moveEndY - startY;
+           if ( Math.abs(X) > Math.abs(Y) && X < 0 ) {            
+                var href = $("#store-box-list-a").attr("href");
+                    window.location.href = href;
+            }
+        });
+        // GPS
+        var geolocation = new qq.maps.Geolocation("{C('shop.tengxun_key')}", "h5");
+        var options = {timeout: 8000};
+
+        geolocation.getLocation(showPosition, showErr, options)
+
+        function showPosition(position) {
+            // var info = JSON.stringify(position, null, 4);
+            // 查询城市信息
+            $.post('{url("location/index/info")}', {city_name: position.city}, function(data){
+                $('#j-lbs-city').html(data.region_name);
+            }, 'json')
+        };
+
+        function showErr() {
+            alert('定位失败，请启用位置服务。');
+        };
+
+        /** 有浏览商品则底部显示提示 */
+        var cookie_histtory = $.cookie('index-history');
+        if(cookie_histtory != undefined && history.length == 1){
+            cookie_histtory = JSON.parse(cookie_histtory);
+            $('.index-history .onelist-hidden').text(cookie_histtory.name);
+            $('.index-history .history-title').attr('href', cookie_histtory.url);
+            $('.index-history').show();
+            //
+            $.cookie('index-history', null, {expires: -1});
+        }else{
+           $('.index-history').hide();
+        }
+        //浏览历史隐藏 
+        var int=setTimeout("clock()",6000);
+        $(".index-history .right label").click(function(){
+            $(".index-history").hide();
+        });
+        //****
+        //获取nav高度，赋值给背景
+        function navList(){
+            var nav = $("#index-nav").outerHeight() + "px" ;
+            $("#nav-img").css("height",nav);
+        }
+        navList()
+        //页面发生变化时触发事件
+        $(window).resize(function(){
+            navList()
+        });
+        var footerHeight = $("#footer-nav").outerHeight() + -2 +"px";
+        $("#index-history").css("bottom",footerHeight);
+
+        /*立即关注*/
+        if ($(".ect-header-banner").hasClass("ect-header-banner")) {
+                $(".new-index-banner").css({"paddingTop": "5rem",})
+        } else {
+                $(".new-index-banner").css({"paddingTop": "0rem",})
+        }
+
+    	var swiper = new Swiper('.index-new-list', {
+					pagination: '.swiper-pagination',
+					paginationClickable: true,
+					direction: 'vertical',
+					loop: true,
+					grabCursor: true,
+					autoplayDisableOnInteraction: false,
+					autoplay: 4000,
+					speed: 700,
+					freeMode: true,
+					noSwiping : true,
+				});
+        var mySwiper = new Swiper('.banner-first', {
+            autoplay: 4000,
+            loop: true,
+            pagination: '.banner-first-pagination'
+        });
+        var mySwiper = new Swiper('.banner-second', {
+            autoplay: 5000,
+            pagination: '.banner-second-pagination'
+        });
+        var mySwiper = new Swiper('.banner-third', {
+            autoplay: 5000,
+            pagination: '.banner-third-pagination'
+        });
+        var mySwiper = new Swiper('.recom-container', {
+            pagination: '.recom-pagination',
+            slidesPerView: 1,
+            paginationClickable: true
+        });
+        var mySwiper = new Swiper('.brand-container', {
+            pagination: '.brand-pagination',
+            slidesPerView: 1,
+            paginationClickable: true
+        });
+        var mySwiper = new Swiper('.hot-container', {
+            slidesPerView: 4,
+            paginationClickable: true,
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev'
+        });
+        //加载更多
+        var loadingHeight = $(".product-list").outerHeight(true);
+        //alert(loadingHeight)
+        function loadimgCont(){
+                if ($(document).scrollTop() >= $(window).height() <$(document).height() - $(window).height()) {
+                        $(".footer-cont").html("<span><img src='{elixir('img/loading1.gif')}'>正在加载……</span>")
+                }
+                if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                         $(".footer-cont").html("<span>没有更多了</span>")
+                }
+                if(loadingHeight< $(window).height()){
+                     $(".footer-cont").css("display","none");
+                }else{
+                     $(".footer-cont").css("display","block");
+                }
+        }
+            loadimgCont();
+        $(window).scroll(function() {     
+            loadimgCont()
+        });
+    });  
+	var url = "{url('async')}";
+	$('.product-list').infinite({url: url, template:'j-product'});
+    function clock(){
+        $(".index-history").hide();
+    }
+</script>
+   
+</body>
+</html>

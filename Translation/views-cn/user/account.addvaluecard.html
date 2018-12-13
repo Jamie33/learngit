@@ -1,0 +1,64 @@
+{include file="page_header"}
+		<div class="con">
+			<form action="{url('user/account/add_value_card')}" method="post" class="validation">
+				<section class="user-center j-f-tel margin-lr">
+			        <div class="b-color-f  user-login-ul">
+			       <div class="text-all dis-box j-text-all login-li">
+			                <div class="input-text box-flex">
+			                    <input class="j-input-text" type="text" name="value_card_sn" placeholder="储值卡卡号"  datatype="*" nullmsg="请输入储值卡卡号" value="">
+			                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+			                </div>
+			            </div>
+			            <div class="text-all dis-box j-text-all login-li m-top10">
+			                <div class="input-text box-flex">
+			                    <input class="j-input-text" type="text" name="password" placeholder="储值卡密码" datatype="*" nullmsg="请输入储值卡密码" value="">
+			                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+			                </div>
+			            </div>
+			            <div class="text-all dis-box j-text-all login-li m-top10">
+			                <div class="box-flex input-text">
+                                             <input class="j-input-text" name="captcha" datatype="*" nullmsg="请输入图片验证码" type="text"
+                                           placeholder="请输入验证码"/>
+                                         <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+			                </div>
+			                    <img src="{url('captcha/index/index')}" onclick="this.src='{url('captcha/index/index')}'"
+                                                  height="36" class="ipt-check-btn j-verify-img"/>
+                                           </div>
+					</div>
+			        <button type="submit" class="btn-submit br-5 min-two-btn">绑定当前账户</button>
+				</section>
+    		</form>
+		</div>
+		<!--引用js-->
+      <!--快捷导航-->
+    {include file="float_nav"} 
+                <li>
+                    <a href="{url('user/account/valuecard')}">
+                         <i class="iconfont icon-yinxingqia"></i>
+                         <p>储值卡</p>
+                    </a> 
+                </li>                
+    {include file="float_nav_footer"} 
+    <script>
+        $(function () {
+            $.Tipmsg.r = null;
+            $(".validation").Validform({
+                tiptype: function (msg) {
+                    d_messages(msg);
+                },
+                tipSweep: true,
+                ajaxPost: true,
+                callback: function (data) {
+                    // {"info":"demo info","status":"y"}
+                    if (data.status === 'y') {
+                        window.location.href = data.url;
+                    } else {
+                        d_messages(data.info);
+                    }
+                }
+            });
+        })
+       </script>
+	</body>
+	
+</html>

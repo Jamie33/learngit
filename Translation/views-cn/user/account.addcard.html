@@ -1,0 +1,78 @@
+{include file="page_header"}
+<body class="b-color-f">
+
+		<div class="con" >
+
+			<form action="{url('add_card')}" method="post" onsubmit="return formcheck()">
+				<section class="user-center j-f-tel margin-lr">
+					<div class="text-all dis-box j-text-all bank_card">
+						<label>卡号</label>
+						<div class="box-flex input-text">
+							<input class="j-input-text inputcard" type="tel" name="bank_card" placeholder="银行卡号" name='band_card'/>
+							<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+						</div>
+					</div>
+					<div class="text-all dis-box j-text-all bank_user_name">
+						<label>持卡人</label>
+						<div class="box-flex input-text">
+							<input class="j-input-text inputcard" type="text" name="bank_user_name" placeholder="持卡人姓名" />
+							<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+						</div>
+					</div>
+                    <div class="text-all dis-box j-text-all bank_region">
+                        <label>开户行</label>
+                        <div class="box-flex input-text">
+                            <input class="j-input-text inputcard" type="text" name="bank_region" placeholder="如:工商银行上海XXX路支行" />
+                            <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                        </div>
+                    </div>
+                    <div class="text-all dis-box j-text-all bank_name">
+                        <label>银行</label>
+                        <div class="box-flex input-text">
+                            <input class="j-input-text inputcard" type="text" name="bank_name" placeholder="如:工商银行" />
+                            <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                        </div>
+                    </div>
+                    <button type="submit" value="sub" class="btn-submit br-5 min-btn">提交</button>
+					
+				</section>
+			</form>
+		</div>
+             <!--快捷导航-->
+    {include file="float_nav"} 
+                <li>
+                    <a href="{url('user/account/index')}">
+                         <i class="iconfont icon-money"></i>
+                         <p>资金管理</p>
+                    </a> 
+                </li>    
+                <li>
+                    <a href="{url('user/account/cardlist')}">
+                         <i class="iconfont icon-yinxingqia"></i>
+                         <p>银行卡</p>
+                    </a> 
+                </li>                  
+    {include file="float_nav_footer"} 
+<script>
+    $(":input").keyup(function (){
+        var name = $(this).attr("name");
+        $("."+name).removeClass("active");
+    });
+    function formcheck(){
+    var check = 0;
+        $(".inputcard").each(function(){
+          if($(this).val()==''){
+              var name = $(this).attr("name");
+              $("."+name).addClass("active");
+              d_messages('请输入完整的信息', 2);
+              check = 1;
+          }
+        })
+     if(check){
+         return false;
+     }
+   }
+</script>
+	</body>
+
+</html>

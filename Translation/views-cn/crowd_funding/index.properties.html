@@ -1,0 +1,64 @@
+{include file="page_header"}
+<div class="con">
+	<header class="dis-box header-menu n-header-menu new-goods-nav ts-5">
+        <h3 class="box-flex">
+        <nav class="n-goods-shop-list-nav box-flex swiper-container-horizontal ">
+            <ul class="swiper-wrapper  dis-box text-c">
+                <li class="div1 box-flex swiper-slide  position-rel swiper-slide-active" category="1">
+                    <a class="product-div-link" href="{url('crowd_funding/index/info',array('id'=> $id))}"></a>商品</li>
+                <li class="div3 box-flex swiper-slide active position-rel swiper-slide-next" category="3">
+                    <a class="product-div-link" href="{url('crowd_funding/index/properties',array('id'=> $id))}"></a>详情</li>
+                <li class="div4 box-flex swiper-slide position-rel" category="4">
+                    <a class="product-div-link" href="{url('crowd_funding/index/comment',array('id'=> $id))}"></a>话题</li>
+            </ul>
+        </nav>
+        </h3>
+    </header>
+			<div class="goods-info of-hidden ect-tab j-goods-info j-ect-tab ts-3" style="padding-top:4.2rem">
+				<div class="hd j-tab-title tab-title b-color-f of-hidden">
+					<ul class="dis-box">
+						<li class="box-flex active">项目主页</li>
+						<li class="box-flex">风险说明</li>
+					</ul>
+				</div>
+				<div id="j-tab-con" class="b-color-f m-top1px tab-con ">
+					<div class="swiper-wrapper">
+						<section class="swiper-slide ">
+								<div class="raise-goods-detali padding-all">
+									{$details}
+								</div>
+						</section>
+						<section class="swiper-slide goods-info-attr">
+								<div class="raise-goods-detali padding-all f-05 col-7">
+									{$row.risk_instruction}
+								</div>
+						</section>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<script>
+			/*切换*/
+			var tabsSwiper = new Swiper('#j-tab-con', {
+				speed: 100,
+				noSwiping: true,
+				autoHeight: true,
+				onSlideChangeStart: function() {
+					$(".j-tab-title .active").removeClass('active')
+					$(".j-tab-title li").eq(tabsSwiper.activeIndex).addClass('active')
+				}
+			})
+			$(".j-tab-title li").on('touchstart mousedown', function(e) {
+				e.preventDefault()
+				$(".j-tab-title .active").removeClass('active')
+				$(this).addClass('active')
+				tabsSwiper.slideTo($(this).index())
+			})
+			$(".j-tab-title li").click(function(e) {
+				e.preventDefault()
+			})
+		</script>
+	</body>
+
+</html>

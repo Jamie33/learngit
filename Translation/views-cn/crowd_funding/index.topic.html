@@ -1,0 +1,32 @@
+{include file="page_header"}
+    <div class="con">
+    <form action="{url('crowd_funding/index/topic')}" method="post" onsubmit="return check()">
+		<section class="b-color-f padding-all">
+			<div class="text-area1">
+				<textarea rows="4" name="content" maxlength="140" placeholder="填写话题内容 (0-140字)"></textarea>
+					<span></span>
+				</div>
+		</section>
+        <input type="hidden" name="goods_id" value="{$goods_id}" />
+        <input type="hidden" name="topic_id" value="{$topic_id}" />
+        <input type="hidden" name="action" value="{$action}" />
+		<div class="ect-button-more n-ect-button-more padding-all dis-box">
+			<a class="btn-default-new box-flex br-5 min-btn" type="button" >取消</a>
+			<button class="btn-submit box-flex br-5 min-btn" type="submit" >提交</button>
+		</div>
+    </form>
+    </div>
+<script>
+    function check(){
+        var content       =$("textarea[name=content]").val();
+        if( content==''){
+            d_messages('话题内容不能为空',2);
+            return false;
+        }
+
+    }
+
+
+</script>
+</body>
+</html>

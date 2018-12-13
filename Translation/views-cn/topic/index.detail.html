@@ -1,0 +1,67 @@
+{include file="page_header"}
+            {if $topic.htmls == ''}
+            <script language="javascript">
+                var topic_width = "100%";
+                var topic_height = "100%";
+
+                var img_url = "{$topic.topic_img}";
+
+                if (img_url.indexOf('.swf') != -1) {
+                    document.write('<div class="topic_banner"><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="' + topic_width + '" height="' + topic_height + '">');
+                    document.write('<param name="movie" value="' + img_url + '"><param name="quality" value="high">');
+                    document.write('<param name="menu" value="false"><param name=wmode value="opaque">');
+                    document.write('<embed src="' + img_url + '" wmode="opaque" menu="false" quality="high" width="' + topic_width + '" height="' + topic_height + '" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent"/>');
+                    document.write('</object></div>');
+                }
+                else {
+                    document.write('<section class="toppic-con"><img src="' + img_url + '"/> </section>');
+                }
+            </script>
+            {else}
+            {$topic.htmls}
+            {/if}
+
+        <div class="toppic-prolist">
+            {foreach $sort_goods_arr as $key => $sort}
+            <section class="product-list j-product-list product-list-medium">
+                <h3 class="g-c-title-h3 padding-all b-color-f">{$key}</h3>
+                <ul class="topic-list">
+                    {foreach $sort as $goods}
+                    <li>
+                        <div class="product-div">
+                            <a class="product-div-link" href="{$goods.url}"></a>
+                            <img class="product-list-img" src="{$goods.goods_thumb}"/>
+                            <div class="product-text index-product-text">
+                                <h4>{$goods.short_style_name}</h4>
+                                </p>
+                                <p><span class="p-price t-first ">
+                                    <!-- {if $goods.promote_price != ""} -->
+                                        {$goods.promote_price}
+                                    <!-- {else}-->
+                                        {$goods.shop_price}
+                                    <!--{/if}-->
+                                </span></p>
+                                <a href="javascript:void(0);" class="icon-flow-cart fr j-goods-attr"><i
+                                        class="iconfont icon-gouwuche"></i></a>
+                            </div>
+                        </div>
+                        <div class="toppic-btn">
+                            <a href="{$goods.url}" class="btn-submit br-5" style="font-size:1.5rem">立即购买</a>
+                        </div>
+                    </li>
+                    {/foreach}
+                </ul>
+            </section>
+            {/foreach}
+        </div>
+     <!--快捷导航-->
+    {include file="float_nav"} 
+                <li>
+                    <a href="{url('topic/index/index')}">
+                         <i class="iconfont icon-remenzhuanti"></i>
+                         <p>专题列表</p>
+                    </a> 
+                </li>              
+    {include file="float_nav_footer"} 
+    </body>
+</html>

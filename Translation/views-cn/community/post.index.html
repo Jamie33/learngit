@@ -1,0 +1,193 @@
+{include file="page_header"}
+<form action="{url('addcom')}" method="post" onsubmit="return check()">
+    <div class="con mb-7">
+        {if $postgoods}
+        <a href="{$postgoods.goods_url}">
+            <section class="dis-box b-color-f padding-all">
+                <div class="write-add-img-box b-color-f">
+                    <div class="write-add-img"><img src="{$postgoods.goods_thumb}"></div>
+                </div>
+                <div class="box-flex gl-com"><p>{$postgoods.goods_name}</p></div>
+                <div class="my-dete-box"><span class="t-jiantou fr"><i class="iconfont icon-jiantou tf-180 jian-top int-jt1-box"></i></span></div>
+            </section>
+        </a>
+        <input type="hidden" name="goods_id" value="{$postgoods.goods_id}"/>
+        {/if}
+
+        <!-- 异步调用相关类型帖子 -->
+        <div class="community-list">
+            <script id="j-product" type="text/html">
+                <%if totalPage > 0%>
+                <%each list as val%>
+                <section class="com-nav m-top06" id="delete_mycom<%val.dis_id%>">
+                    <div class="margin-lr com-min-tit position-rel dis-box">
+                        <a href="<%val.url%>" class="link-abs"> </a>
+                        <%if val.dis_type == 1%>
+                        <em class="em-promotion-1 tm-ns">讨</em>
+                        <%else if val.dis_type == 2%>
+                        <em class="em-promotion-1 tm-ls">问</em>
+                        <%else if val.dis_type == 3%>
+                        <em class="em-promotion-1">圈</em>
+                        <%else if val.dis_type == 4%>
+                        <em class="em-promotion-1 tm-hs-1">晒</em>
+                        <%/if%>
+                        <div class="box-flex onelist-hidden"><span class=""> <strong><%val.dis_text%></strong></span></div>
+                    </div>
+                </section>
+                <div class="dis-box com-header-img-cont n-com-header-img-cont b-color-f">
+                        <div class="box-flex position-rel">
+                            <a href="<%val.url%>" class="link-abs"> </a>
+                            <div class="fl com-left" >
+                                <div class="com-header-img-box">
+                                    <div class="p-r img-commom"><img src="<%val.user_picture%>"></div>
+                                </div>
+                            </div>
+                            <div class="fl com-adm-box n-com-adm-box">
+                                <h4><%val.user_name%></h4>
+                            </div>
+                        </div>
+                        <span><div class="t-time" style="padding:0;margin:0;"><i class="iconfont icon-shijian my-com-size"></i><span><%val.add_time%></span></div></span>
+                    </div>
+                <%/each%>
+                <%else%>
+                <div class="no-div-message">
+                    <i class="iconfont icon-biaoqingleiben"></i>
+                    <p>亲，此处没有发帖内容～！</p>
+                </div>
+                <%/if%>
+            </script>
+        </div>
+       <section class="t-community-cont">
+            {if $postgoods}
+            <a href="{$postgoods.goods_url}">
+                <section class="dis-box b-color-f padding-all">
+                    <div class="write-add-img-box b-color-f">
+                        <div class="write-add-img"><img src="{$postgoods.goods_thumb}"></div>
+                    </div>
+                    <div class="box-flex gl-com"><p>{$postgoods.goods_name}</p></div>
+                    <div class="my-dete-box"><span class="t-jiantou fr"><i class="iconfont icon-jiantou tf-180 jian-top int-jt1-box"></i></span></div>
+                </section>
+            </a>
+            <input type="hidden" name="goods_id" value="{$postgoods.goods_id}"/>
+            {/if}
+            <div class="padding-all select-one-1 m-top06">
+                <ul class="dis-box j-get-one">
+                    <li class="ect-select box-flex list-select promotion my-but-pre">
+                        <label class="ts-1 dis-block active" data-commentid="1">讨论帖</label>
+                    </li>
+                    <li class="ect-select box-flex my-but-pre">
+                        <label class="ts-1 dis-block " data-commentid="2">问答贴</label>
+                    </li>
+                    <li class="ect-select box-flex list-select hasgoods my-but-pre">
+                        <label class="ts-1 dis-block " data-commentid="3">圈子贴</label>
+                    </li>
+<!--                     <li class="ect-select box-flex list-select promotion my-but-pre">
+                        <label class="dis-block " id="openpic">晒单贴</label>
+                    </li> -->
+                </ul>
+                <input type="hidden" name="dis_type" value="1"/>
+            </div>
+            <div id="title" class="m-top02 b-color-f com-input-title">
+                <div class="input-text">
+                        <input type="text" value="{$title}" placeholder="标题" name="title">
+                </div>
+            </div>
+            <div class="b-color-f com-textarea">
+                <div class="f-c-select-msg">
+                    <div class="text-area1 text-area2">
+                        <textarea name="content" class="text-area1" maxlength="300" placeholder="留下点文字吧……">{$content}</textarea>
+                        <span>300</span>
+                    </div>
+                </div>
+            </div>
+            <div class="dis-box padding-all community-box-btn">
+                <div class="box-flex"><label class="j-close-com">取消</label></div>
+                <div class="box-flex"><button type="submit" class="btn-submit" >确定</button></div>
+            </div>
+        </section>
+    </div>
+<!--悬浮btn star-->
+    <footer class="com-nav-footer">
+        <div class="com-list-footer dis-box text-center com-list-1">
+            <a href="{url('community/index/index')}" class="box-flex {if $action == 'index' || $action == 'list'}active{/if}">
+                <p><i class="iconfont icon-medal tm-icon-size"></i></p>
+                <p>社区首页</p>
+            </a>
+             <a href="javascriot:;" class="box-flex j-community-btn p-r">
+                <div class="com-footer-btn">
+                    <span></span>
+                    <em></em>
+                    <label><i class="iconfont icon-jia"></i></label>
+                </div>
+            </a>
+            <a href="{url('community/index/my')}" class="box-flex {if $action == 'my'}active{/if}">
+                <p><i class="iconfont icon-geren tm-icon-size"></i></p>
+                <p>我的帖子</p>
+            </a>
+        </div>
+    </footer>
+
+    <div class="goods-scoll-bg"></div>
+</form>
+<!--悬浮btn end-->
+
+     <!--快捷导航-->
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+<script>
+    $(function(){
+        $(".j-community-btn").click(function(){
+            $(".t-community-cont").addClass("active")
+        })
+        $(".j-close-com").click(function(){
+             $(".t-community-cont").removeClass("active")
+        })
+        var dis_title = $(".ect-select .active").html();
+        $("input[name=title]").val(dis_title);
+
+        // 异步请求
+        var url = "{url('community/post/index')}";
+        var goods_id = $("input[name=goods_id]").val();
+        var infinite = $('.community-list').infinite({url: url + '&type=all&goods_id=' + goods_id, template: 'j-product'});
+
+        $('.ts-1').on('click', function () {
+            var dis_type = $(this).attr("data-commentid");
+            $("input[name=dis_type]").val(dis_type);
+            var dis_title = $(this).html();
+            $("input[name=title]").val(dis_title);
+        });
+
+    });
+
+    header_img();
+    window.onresize = function(){
+        header_img();
+    }
+
+
+    function check() {
+        var dis_type = $(".ect-select .active").attr("data-commentid");
+        if (!dis_type) {
+            d_messages('请选择帖子主题');
+            return false;
+        }
+        var title = $("input[name=title]").val();
+        if (!title) {
+            d_messages('请填写标题');
+            return false;
+        }
+        var content = $("textarea[name=content]").val();
+        if (!content) {
+            d_messages('请填写帖子内容');
+            return false;
+        }
+        var goods_id = $("input[name=goods_id]").val();
+        if (!goods_id) {
+            d_messages('请选择关联商品');
+            return false;
+        }
+    }
+
+</script>
+</body>
+</html>

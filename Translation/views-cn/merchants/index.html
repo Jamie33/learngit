@@ -1,0 +1,182 @@
+{include file="page_header"}
+
+		<div class="con" id="checkPage">
+			<header class="dis-box padding-all open-header-bg">
+				<div class="box-flex">
+					<div class="header-left-box p-r">
+						<div class="header-x p-a o-hs-x active"></div>
+						<div class="header-y p-a o-hs-bg active"><span class="text-c color-whie f-03">1</span></div>
+					</div>
+					<label class="o-hs active">{$lang.business_information}</label>
+				</div>
+				<div class="box-flex">
+					<div class="header-left-box p-r">
+						<div class="header-x p-a o-hs-x "></div>
+						<div class="header-y p-a o-hs-bg "><span class="text-c color-whie f-03">2</span></div>
+					</div>
+					<label class="o-hs ">{$lang.store_information}</label>
+				</div>
+				<div class="box-flex">
+					<div class="header-left-box p-r">
+						<div class="header-x p-a o-hs-x"></div>
+						<div class="header-y p-a o-hs-bg"><span class="text-c color-whie f-03">3</span></div>
+					</div>
+					<label class="o-hs">{$lang.review_or_ok}</label>
+				</div>
+			</header>
+			<div class="open-two-box drp-message-header">
+				<h4 class="f-08">入驻须知:<span class="fr"><i class="iconfont icon-guanbi f-08"></i></span></h4>
+				<p class="f-03 m-top08">
+					1.认真填好个人信息。
+					<br> 2.以下信息都为必填信息。
+					<br> 3.姓名、号码具有真实性。
+					<br>
+				</p>
+			</div>
+			<form action="{url('merchants/index/index')}" method="post" id="formSub" onsubmit="return check()">
+			<div class=" user-open open-box of-hidden b-color-f">
+				<section class="drp-settled-one">
+					<div class="text-all dis-box j-text-all">
+						<label>店主姓名</label>
+						<div class="box-flex input-text">
+							<input class="j-input-text" type="text" name="contactName"  placeholder="店主姓名" value="{$steps.contactname}"/>
+							<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+						</div>
+					</div>
+					<!-- 性别 -->
+					<div class="text-all-sex dis-box j-text-all">
+						<label class="sex-label">{$lang.sex}</label>
+						<div class="box-flex  mechants-sex js-select-sex">
+							<label class="fl dis-box" for="sex_value_1">
+							<i  class=" {if $steps.contactxinbie == '' || $steps.contactxinbie == '男'}active{/if}"></i>{$lang.male}</label>
+                            <input class="hide" id="sex_value_1" type="radio" {if $steps.contactxinbie == '' || $steps.contactxinbie == '男'}checked{/if} name="contactXinbie" value="{$lang.male}"  />
+
+							<label class="fl dis-box" for="sex_value_2"><i {if $steps.contactxinbie == '女'}class="active"{/if}></i>{$lang.female}</label>
+                            <input class="hide" id="sex_value_2" type="radio" {if $steps.contactxinbie == '女'}checked{/if} name="contactXinbie" value="{$lang.female}"  />
+						</div>
+					</div>
+					<div class="text-all dis-box j-text-all">
+						<label>手机号</label>
+						<div class="box-flex input-text">
+							<input class="j-input-text" type="tel" name="contactPhone"  placeholder="手机号" value="{$steps.contactphone}" />
+							<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+						</div>
+					</div>
+					<!--address-start-->
+					<div class="text-all" id="editAddressForm">
+							<input type="hidden" id="province_id" name="province_region_id" value="{$consignee_list.province_id}">
+							<input type="hidden" id="city_id" name="city_region_id" value="{$consignee_list.city_id}">
+							<input type="hidden" id="district_id" name="district_region_id" value="{$consignee_list.district_id}">
+							<input type="hidden" id="town_id" name="town_region_id" value="{$consignee_list.town_region_id}">
+							<input type="hidden" id="village_id" name="village_region_id" value="">
+							<input type="hidden" id="region_id" name="region_id" value="">
+							<input type="hidden" id="address_id" name="address_id" value="{$consignee_list.address_id}">
+							<div class="address-box" id="selectAddressBtn" region-data="">
+								<label class="fl">所在地区</label>
+								<span class="fl text-all-span addressdetail" id="addressLabelId">{$consignee_list.province}{$consignee_list.city}{$consignee_list.district}{$consignee_list.town}{$consignee_list.village}</span>
+								<span class="t-jiantou fr"><i class="iconfont icon-jiantou tf-180"></i></span>
+							</div>
+					</div>
+					 <!--address-end-->
+					<div class="text-all">
+						<div class="box-flex input-text">
+							<input class="j-input-text" name="license_adress" type="text" placeholder="请输入详细地址" value="{$steps.license_adress}">
+							<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+						</div>
+					</div>
+
+					<div class="drp-settled-guide f-03 col-7 dis-box m-top10">
+						<label for="agree">
+							<div class="box-flex input-text">
+								<input type="text" value="0" name="agree" id="agree" class="filter-top" />
+							</div>
+							<i></i>
+						</label>
+						<p class="box-flex">我已阅读《<a href="javascript:;" class="merchants-guide">入驻须知</a>》同意签署在线协议！</p>
+					</div>
+				</section>
+			</div>
+			<footer class="dis-box padding-all">
+				<input type="hidden" name="fid" value="{$steps.fid}" />
+				<button class="btn-submit box-flex br-5">下一步</button>
+			</footer>
+			</form>
+		</div>
+		<!--地区选择 s-->
+		{include file="address"}
+		<!--地区选择 e-->
+		<script>
+			$(function ($) {
+				$(".drp-message-header i").click(function() {
+					$(".drp-message-header").hide();
+				});
+				$(".open-two-box i").click(function() {
+					$(".open-two-box").hide();
+				});
+
+				/*同意协议*/
+				$(".drp-settled-guide input").click(function() {
+					$(".drp-settled-guide label i").toggleClass("active");
+					if ($(".drp-settled-guide label i").hasClass("active")) {
+						$('input[name=agree]').val(1);
+					} else {
+						$('input[name=agree]').val(0);
+					}
+				});
+
+				/*选择性别*/
+				$(".js-select-sex label").click(function() {
+					$(".js-select-sex label i").toggleClass("active");
+				});
+
+				// 入驻指南 弹窗页面层
+				$('.merchants-guide').click(function(){
+					var html = '';
+					$.get("{url('merchants/index/guide')}", '', function(res){
+						html = res.row;
+						html = "<div class='inedx-guode b-color-f padding-all'> "+html+"<p><a href='javascript:;' class='btn-submit box-flex br-5' onclick='set_agree();layer.closeAll(); '>关闭</a></p></div>";
+						layer.open({
+						  type: 1,
+						  content: html,
+						  anim: 'up',
+						  style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s; overflow:auto;'
+						});
+					}, 'json');
+				});
+
+
+			});
+
+			// 勾选为已读
+			function set_agree(){
+				$(".drp-settled-guide label i").addClass("active");
+				$('input[name=agree]').val(1);
+			}
+			// 验证
+			function check(){
+				var contactName  = $("input[name=contactName]").val();
+				var contactPhone = $("input[name=contactPhone]").val();
+				var agree = $('input[name=agree]').val();
+	            var myreg = window.mobilereg;
+	            if( contactName==''){
+			        d_messages('店主姓名不能为空',2);
+				    $("div[name=shop_namediv]").addClass("active");
+					return false;
+	            }   　
+				if( contactPhone == ''){
+		           	d_messages('请输入手机号',2);
+					$("div[name=mobilediv]").addClass("active");
+					return false;
+				}else if(!myreg.test(contactPhone)){
+				    d_messages('请输入有效的手机号',2);
+				    $("div[name=mobilediv]").addClass("active");
+				    return false;
+				}
+				if(agree == 0){
+					d_messages('请阅读《入驻须知》同意签署在线协议',2);
+					return false;
+				}
+			}
+		</script>
+</body>
+</html>

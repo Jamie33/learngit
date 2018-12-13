@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>在线可视化装修</title>
+    <link href="__ROOT__/public/fonts/font_u366719ytlat6gvi.css" rel="stylesheet">
+    <link href="__ROOT__/public/fonts/font_lkv63qpdlo8khuxr.css" rel="stylesheet">
+    <link href="__ROOT__/public/css/backend.css?v=<?=time()?>" rel="stylesheet">
+    <script>
+        window.ROOT_URL = '__ROOT__/';
+        window.PC_URL = '__STATIC__/';
+        window.shopInfo = <?= json_encode(['ru_id' => '0', 'page_id' => '']);?>; // 自营的首页，商家的店铺页，平台的专题页
+    </script>
+</head>
+<body>
+<div id="app"></div>
+<script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+<script type="text/javascript" src="__ROOT__/public/js/manifest.js?v=<?=time()?>"></script>
+<script type="text/javascript" src="__ROOT__/public/js/vendor.js?v=<?=time()?>"></script>
+<script type="text/javascript" src="__ROOT__/public/js/backend.js?v=<?=time()?>"></script>
+<script>
+// 去除火狐默认事件
+document.body.ondrop = function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+}
+</script>
+</body>
+</html>

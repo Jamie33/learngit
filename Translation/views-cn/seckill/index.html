@@ -1,0 +1,230 @@
+{include file="page_header"}
+<div class="con">
+    <div class="seckill-box  ect-tab  j-ect-tab ts-3">
+        <div class="hd tab-title  f-01 wallet-bt j-tab-title-1" style="padding-top:0">
+            <div class="seckill-scll">
+                <nav class="tab-title b-color-f  seckill-box-nav text-c">
+                    <ul class="dis-box">
+                        {foreach $time_list as $time}
+                        <li class="box-flex    {if $time.active==1} active{/if}">
+                            <a status="{$time.id}" tomorrow="{$time.tomorrow}">
+                                <strong class="f-2">
+                                    {$time.title}
+                                    {if $time.tomorrow == 1}
+                                    <!-- <em class="time-tag">明</em> -->
+                                    {/if}
+                                </strong>
+                                {if !$time.is_end && !$time.status}
+                                {if $time.tomorrow == 1}
+                                <p class="f-01">明日开场</p>
+                                {else}
+                                <p class="f-01">即将开始</p>
+                                {/if}
+                                {elseif !$time.is_end && $time.status}
+                                <p class="f-01">抢购中</p>
+                                {else}
+                                <p class="f-01">已结束</p>
+                                {/if}
+                            </a>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </nav>
+            </div>
+            <section class="seckill-heaer-img">
+                <div class="index-banner swiper-container box position-rel banner-first">
+                    <div class="swiper-wrapper">
+                        {if $banner_ads}
+                        {$banner_ads}
+                        {else}
+                        <div class="swiper-slide">
+                            <img src="__TPL__/img/seckill.jpg" class="img">
+                        </div>
+                        {/if}
+                    </div>
+                    <!-- 分页器 -->
+                    <div class="swiper-pagination banner-first-pagination" style="bottom: 0"></div>
+                </div>
+            </section>
+            <!--秒杀倒计时nav-->
+
+            <div id="j-tab-con" class="tab-con index-seckill">
+                <div class="swiper-wrapper">
+                    <section class="swiper-slide store_info">
+                        <script id="j-product" type="text/html">
+                            <%if gb_list !='' && gb_list.list != ''%>
+                                <%if page ==1%>
+                                    <div class="seckill-heaer f-03 dis-box b-color-f wallet-bt">
+                                       <div class="header-left color-red">全场爆款，限时抢购</div>
+                                       <div id="fnTimeCountDown" class="box-flex col-6 text-right" data-end="<%end_time%>">
+                                                   <%if !seckill_status.is_end && !seckill_status.status%>
+                                                   距开始
+                                                   <%else if !seckill_status.is_end && seckill_status.status%>
+                                                   距结束
+                                                   <%else%>
+                                                      已结束
+                                                   <%/if%>
+                                               <span>
+                                                   <%if tomorrow == 1 %><label class="day">00</label><em>天</em><%/if%>
+                                                   <label class="hour">00</label><em>:</em>
+                                                   <label class="mini">00</label><em>:</em>
+                                                   <label class="sec">00</label>
+                                                </span>
+                                           </div>
+                                   </div>
+                                <%/if%>
+                                <ul class="seckill-list  b-color-f j-eminding">
+                                <%each gb_list.list as list%>
+                                    <li class="seckill-cont dis-box padding-all position-rel">
+
+                                        <div class="cont-left position-rel">
+                                            <a  href="<%list.url%>"><img src="<%list.goods_thumb%>" class="img"></a>
+                                            <p class="seckill-teg">已抢完</p>
+                                        </div>
+                                        <div class="box-flex cont-right position-rel">
+                                            <a  href="<%list.url%>">
+                                            <h4 class="f-06 onelist-hidden col-3"><%list.goods_name%></h4>
+                                            <p class="f-03 col-9 m-top02 text-left">限量<%list.sec_num%>件</p>
+                                              <%if !list.is_end && !list.status%>
+                                                <div class="plan-box m-top08 dis-box">
+                                                <!--<p class="right-cont-title font-03 ec-color box"><%list.data_end_time%>准时开抢</p>-->
+                                            </div>
+                                              <%else if !list.is_end && list.status%>
+                                               <div class="plan-box m-top08 dis-box">
+                                                    <p class="left-title">
+                                                        <em><%list.percent%>%</em>
+                                                        <i class="color" style="width:<%list.percent%>%;"></i>
+                                                    </p>
+                                                    <p class="right-title f-03 col-9">已抢<%list.valid_goods%>件</p>
+                                                </div>
+                                              <%else%>
+
+                                             <%/if%>
+                                             </a>
+                                            <div class="dis-box sec-but-list">
+                                                <a class="box-flex" href="<%list.url%>"><p class="color-red f-08"><em>￥</em><%list.sec_price%><del>￥<%list.market_price%></del></p></a>
+                                                <p class="btn-right">
+                                                    <%if !list.is_end && !list.status%>
+                    								<!-- <span class="btn-seckill-d b-s f-05 fr j-show-div <%if list.is_collect==1 %> is-eminding <%/if%>" seckill_id="<%list.id%>">  <%if list.is_collect==1 %> 取消提醒 <%else%>提醒我<%/if%></span> -->
+                                                    <span class="btn-seckill-default b-s f-05 fr" style="background:#1FAF5A"> 即将开始</span
+                    								<%else if !list.is_end && list.status%>
+                    								<a class="box-flex" href="<%list.url%>"><span class="btn-seckill-z b-s f-05 fr">去抢购</span></a>
+                    								<%else%>
+                    								<span class="btn-seckill-s b-s f-05 fr">已结束</span>
+                                                    <%/if%>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                    <%/each%>
+                                </ul>
+                            <%else%>
+                            <div class="no-div-message">
+                                <i class="iconfont icon-biaoqingleiben"></i>
+                                <p>亲，还没有活动哦～！</p>
+                            </div>
+                            <%/if%>
+                         </script>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <!--快捷导航-->
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+    <div class="footer-cont"><span><img src="{elixir('img/loading1.gif')}">正在加载……</span></div>
+<script type="text/javascript">
+$(function(){
+
+    //秒杀轮播
+    var mySwiper = new Swiper('.banner-first', {
+        autoplay: 4000,
+        loop: true,
+        pagination: '.banner-first-pagination'
+    });
+
+    seckillHight = $(".seckill-box-nav").outerHeight(true);
+    $(".seckill-heaer-img").css("margin-top",seckillHight +"px");
+
+    //异步数据
+    var status = $('.seckill-box-nav li.active a').attr('status');
+    var tomorrow = $('.seckill-box-nav li.active a').attr('tomorrow');
+
+    var infinite = $('.store_info').infinite({
+        url: "{url('seckill/Index/index')}",
+        template: 'j-product',
+        params: 'status=' + status + '&tomorrow=' + tomorrow,
+    });
+
+    /*倒计时*/
+    $("#fnTimeCountDown").fnTimeCountDown();
+   
+    $('.seckill-box-nav a').on('click', function(){
+        var status = $(this).attr('status');
+        var tomorrow = $(this).attr('tomorrow');
+        infinite.onload('status=' + status+'&tomorrow='+tomorrow);
+        $(this).parent().addClass("active").siblings().removeClass("active");
+        $("#fnTimeCountDown").fnTimeCountDown();
+    });
+
+    //加载更多
+    var loadingHeight = $(".store_info").outerHeight(true);
+    var topHeight = $(".seckill-box-nav").outerHeight(true);
+    function loadimgCont(){
+        if ($(document).scrollTop() >= $(window).height() < $(document).height() - $(window).height()) {
+            $(".footer-cont").html("<span><img src='{elixir('img/loading1.gif')}'>正在加载……</span>")
+        }
+        if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+            $(".footer-cont").html("<span>没有更多了</span>")
+        }
+        if (loadingHeight + topHeight < $(window).height()) {
+            $(".footer-cont").css("display","none");
+        } else {
+            $(".footer-cont").css("display","block");
+        }
+    }
+    loadimgCont();
+    $(window).scroll(function() {
+        loadimgCont();
+    });
+
+
+    /*提醒*/
+    $(".seckill-box").on('click','.btn-seckill-d', function() {
+        var seckill_id = $(this).attr('seckill_id');
+        var self = $(this)
+        $.get("{url('seckill/index/collect')}", {seckill_id: seckill_id}, function (info) {
+            if (info.error == 0) {
+                $(self[0]).html("取消提醒");
+                $(self[0]).addClass("is-eminding");
+                d_messages('设置提醒成功！');
+            };
+            if (info.error == 1) {
+                $(self[0]).html("提醒我");
+                $(self[0]).removeClass("is-eminding");
+                d_messages('秒杀提醒已取消，您可能会抢不到哦！');
+            }
+            if(info.error == 2){
+                layer.open({
+                    content: '您还没有登录',
+                    btn: ['确定', '取消'],
+                    shadeClose: false,
+                    yes: function() {
+                        window.location.href = "{url('user/index/login')}";
+                    },
+                    no: function() {
+                    }
+                });
+            }
+        },'json');
+    });
+
+});
+</script>
+</body>
+</html>

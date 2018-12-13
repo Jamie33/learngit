@@ -1,0 +1,72 @@
+{include file="page_header"}
+<div class="con mb-7">
+    <div class="my-admin-header-box">
+        <div class="com-bg">
+            <div class="com-header">
+                <div class="margin-lr">
+                    <div class="user-right-maxbox ">
+                        <a href="{url('reply')}">
+                            <div {if $has_new}class="email-box"{/if}></div>
+                            <i class="iconfont icon-youxiang is-youxiang com-bs"></i>
+                        </a>
+                    </div>
+                    </ul>
+                </div>
+                <div class="com-header-img ">
+                    <a href="{url('user/profile/index')}">
+                        <div class="user-com-img-box">
+                        <div class="img-commom p-r"><img src="{$info.user_picture}"></div></div>
+                    </a>
+                    <div class="com-admin m-top08">
+                        <h4>{$info.nick_name}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="com-nav">
+        <div class="user-nav-box  com-list dis-box text-center distypeclass">
+            <div class="oncle-color box-flex">
+                <a distype="1" {if $dis_type == 1} class="active" {/if}><h4>讨论贴</h4><p class="t-remark4">{$type1_num}</p></a>
+            </div>
+            <div class="oncle-color box-flex">
+                <a distype="2"><h4>问答贴</h4><p class="t-remark4">{$type2_num}</p></a>
+            </div>
+            <div class="box-flex oncle-color">
+                <a distype="3"><h4>圈子贴</h4><p class="t-remark4">{$type3_num}</p></a>
+            </div>
+            <div class="oncle-color box-flex">
+                <a distype="4"><h4>晒单贴</h4><p class="t-remark4">{$type4_num}</p></a>
+            </div>
+        </div>
+    </section>
+    {include file="index/tzlist"}
+</div>
+<script>
+    header_img();
+    window.onresize = function(){
+        header_img();
+    }
+    /*店铺信息商品滚动*/
+    var swiper = new Swiper('.j-g-s-p-con', {
+        scrollbarHide: true,
+        slidesPerView: 'auto',
+        centeredSlides: false,
+        grabCursor: true
+    });
+    //异步数据
+    var url = "{url('my')}";
+    var infinite = $('.community-list').infinite({url: url, template: 'j-product'});
+    $('.distypeclass a').on('click', function (e) {
+        var distype = $(this).attr('distype');
+        $(this).siblings().removeClass("active");
+        infinite.onload('dis_type=' + distype);
+
+        header_img();
+        window.onresize = function(){
+            header_img();
+        }
+    });
+</script>
+</body>
+</html>

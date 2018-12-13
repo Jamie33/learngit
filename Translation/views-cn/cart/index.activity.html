@@ -1,0 +1,145 @@
+{include file="page_header"}
+     {if $list}
+        <div class="con" id="pjax-container">
+            <div class="flow-accessories blur-div">
+                <section class="product-list j-product-list product-list-small" data="1">
+                    <ul>
+                        <!-- {foreach $list as $key} -->
+                        <li>
+                            <div class="product-div">
+                                <a href="{$key.url}"><img class="product-list-img" src="{$key.goods_img}" /></a>
+                                <div class="product-text">
+                                    <a href="{$key.url}"><h4>{$key.goods_name}</h4></a>
+                                    <p class="dis-box p-t-remark"><span class="box-flex">库存:{$key.goods_number}</span></p>
+                                    <p><span class="t-first f-05">{$key.price}</span></p>
+                                    <a href="javascript:add_gift({$act_id},{$key.goods_id},{$key.act_price})" class="icon-flow-cart fr "  ><i class="iconfont icon-gouwuche"></i></a>
+                                </div>
+
+                            </div>
+
+                        </li>
+
+                        <!-- {/foreach} -->
+                    </ul>
+
+                </section>
+            </div>
+        </div>
+        <div class="mask-filter-div "></div>
+             {else}
+                <div class="con" id="pjax-container">
+                    <div class="flow-accessories blur-div">
+                    <section class="product-list j-product-list product-list-small" data="1">
+					<ul>
+					<!-- {foreach $fittings_list as $key} -->
+						<li>
+							<div class="product-div">
+								<a href="{$key.url}"><img class="product-list-img" src="{$key.goods_img}" /></a>
+								<div class="product-text">
+                                    <a href="{$key.url}"><h4>{$key.goods_name}</h4></a>
+									<p class="dis-box p-t-remark"><span class="box-flex">库存:{$key.goods_number}</span></p>
+									<p><span class="p-price t-first ">{$key.fittings_price}</span></p>
+									<a href="javascript:addToCart_quick({$key.goods_id},{$key.parent_id})" class="icon-flow-cart fr "  ><i class="iconfont icon-gouwuche"></i></a>
+								</div>
+								
+							</div>
+						
+						</li>
+						
+					<!-- {/foreach} -->	
+					</ul>
+					
+				</section>
+			</div>
+		</div>
+		<div class="mask-filter-div "></div>
+		    <!--商品属性弹出层s-->
+        <div class="show-goods-attr j-filter-show-div ts-3 b-color-1">
+				<section class="s-g-attr-title b-color-1  product-list-small">
+					<div class="product-div">
+						<img class="product-list-img goods-img" src="">
+						<div class="product-text">
+							<div class="dis-box">
+								<h4 class="box-flex goods-name"></h4>
+								<i class="iconfont icon-guanbi2 show-div-guanbi"></i>
+							</div>
+							<p><span class="p-price t-first goods-price"></span></p>
+							<p class="dis-box p-t-remark"><span class="box-flex goods-number">库存:12800</span></p>
+						</div>
+					</div>
+				</section>
+				<section class="s-g-attr-con swiper-scroll b-color-f padding-all m-top1px">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+					<h4 class="t-remark">颜色</h4>
+					<ul class="select-one j-get-one m-top10 goods-color">
+			        </ul>
+					<h4 class="t-remark">尺寸</h4>
+					<ul class="select-one j-get-one m-top10 goods-size">
+					</ul>
+					
+					<h4 class="t-remark">数量</h4>
+					<div class="div-num dis-box m-top08">
+						<a class="num-less"></a>
+						<input class="box-flex" type="number" value="1" />
+						<a class="num-plus"></a>
+					</div>
+					</div>
+					</div>
+					<div class="swiper-scrollbar"></div>
+				</section>
+				<section class="ect-button-more dis-box padding-all">
+				    <input type="hidden" class="goods-id" value="" >
+					<a class="btn-cart box-flex" type="button">加入购物车</a>
+				</section>
+			</div>
+			<!--商品属性弹出层end-->
+        {/if}
+		<!--引用js-->
+		<script>
+			var carturl = "{url('cart/index/index')}";
+            function add_gift(act_id,id,price){
+                $.post(ROOT_URL + 'index.php?m=cart&a=add_gift_to_cart', {act_id: act_id,id:id,price:price}, function(data){
+                    d_messages(data.error, 2);
+					setTimeout("window.location.href = carturl", 400);
+				},'json');
+
+            }
+			function show(html){
+				$(".showinfo").html();
+				$.ajax({
+				    type: "POST",
+				    url: "{url('cart/index/goods_translation')}",
+				    data: {id:html},
+				    async:false,
+				    success: function(data){
+				    	obj = eval ("(" + data + ")");
+				   	    $(".goods-img").attr("src",obj.goods_img);
+					   	$(".goods-name").text(obj.goods_name);
+					   	$(".goods-price").text(obj.shop_price);
+					   	$(".goods-number").text('库存:'+obj.goods_number);
+					   	$(".goods-color").html(obj.color_kinds);
+					   	$(".goods-size").html(obj.size_kinds);
+				    }});
+				$(".mask-filter-div").addClass("show");
+                $(".j-filter-show-div").addClass("show");
+
+			}
+		    
+			/*店铺信息商品滚动*/
+			var swiper = new Swiper('.j-f-n-c-prolist', {
+				scrollbarHide: true,
+				slidesPerView: 'auto',
+				centeredSlides: false,
+				grabCursor: true
+			});
+			var scorll_swiper = new Swiper('.swiper-scroll', {
+		        direction: 'vertical',
+		        slidesPerView: 'auto',
+		        mousewheelControl: true,
+		        freeMode: true
+  		  });
+		</script>
+	</body>
+
+</html>

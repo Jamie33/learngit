@@ -1,0 +1,84 @@
+<section class="flow-checkout-tprice">
+    <header class="b-color-f padding-all">
+        {$lang.goods_all_price}<span class="t-first fr">{$total.goods_price_formated}</span>
+    </header>
+    <ul class="m-top1px b-color-f">
+        <!-- 折扣 -->
+        {if $total.discount > 0}
+        <li class="padding-all of-hidden">
+            <label class="t-remark g-t-temark fl">{$lang.discount}</label>
+            <span class="t-first fr">- {$total.discount_formated}</span>
+        </li>
+        {/if}
+        <!-- 税 -->
+        {if $total.tax > 0}
+        <li class="padding-all of-hidden">
+            <label class="t-remark g-t-temark fl">{$lang.tax}</label>
+            <span class="t-first fr">+ {$total.tax_formated}</span>
+        </li>
+        {/if}
+        <!-- 配送费用 -->
+        {if $total.shipping_fee > 0}
+        <li class="padding-all of-hidden">
+            <label class="t-remark g-t-temark fl">{$lang.shipping_fee}</label>
+            <span class="t-first fr">+ {$total.shipping_fee_formated}</span>
+        </li>
+        {/if}
+        <!-- 保价费用 -->
+        {if $total.shipping_insure > 0}
+        <li class="padding-all of-hidden">
+            <label class="t-remark g-t-temark fl">{$lang.insure_fee}</label>
+            <span class="t-first fr">+ {$total.shipping_insure_formated}</span>
+        </li>
+        {/if}
+        <!-- 支付费用 -->
+        {if $total.pay_fee > 0}
+        <li class="padding-all of-hidden">
+            <label class="t-remark g-t-temark fl">{$lang.pay_fee}</label>
+            <span class="t-first fr">+ {$total.pay_fee_formated}</span>
+        </li>
+        {/if}
+        <!-- 包装费用 -->
+        {if $total.pack_fee > 0}
+        <li class="padding-all of-hidden">
+            <label class="t-remark g-t-temark fl">{$lang.pack_fee}</label>
+            <span class="t-first fr">+ {$total.pack_fee_formated}</span>
+        </li>
+        {/if}
+        <!-- 贺卡费用 -->
+        {if $total.card_fee > 0}
+        <li class="padding-all of-hidden">
+            <label class="t-remark g-t-temark fl">{$lang.card_fee}</label>
+            <span class="t-first fr">+ {$total.card_fee_formated}</span>
+        </li>
+        {/if}
+        <!-- 余额 -->
+        {if $total.surplus > 0}
+        <li class="padding-all of-hidden">
+            <label class="t-remark g-t-temark fl">{$lang.use_surplus}</label>
+            <span class="t-first fr">- {$total.surplus_formated}</span>
+        </li>
+        {/if}
+        <!-- 积分 -->
+        {if $total.integral > 0}
+        <li class="padding-all of-hidden">
+            <label class="t-remark g-t-temark fl">{$lang.use_integral}</label>
+            <span class="t-first fr">- {$total.integral_formated}</span>
+        </li>
+        {/if}
+        <!-- 红包 -->
+        {if $total.bonus > 0  && (isset($bonus_list) || $order.bonus_id > 0)}
+        <li class="padding-all of-hidden">
+            <label class="t-remark g-t-temark fl">{$lang.use_bonus}</label>
+            <span class="t-first fr">- {$total.bonus_formated}</span>
+        </li>
+        {/if}
+          <!-- 优惠券 -->
+        {if $total.coupons > 0 && $order.cou_id > 0}
+        <li class="padding-all of-hidden">
+            <label class="t-remark g-t-temark fl">优惠券</label>
+            <span class="t-first fr">- {$total.coupons_formated}</span>
+        </li>
+        {/if}
+    </ul>
+</section>

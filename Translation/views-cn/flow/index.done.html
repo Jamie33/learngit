@@ -1,0 +1,68 @@
+{include file="page_header"}
+    <div class="con">
+        <div class="flow-done">
+            <div class="flow-done-con">
+                {if $order.pay_code == 'balance' || $order.is_surplus == 1}
+                <i class="iconfont icon-hookring2"></i>
+                <p class="flow-done-title">余额支付成功</p>
+                {else}
+                <i class="iconfont icon-qian"></i>
+                {if $child_order > 1}
+                <p class="flow-done-title">已付款金额</p>
+                {else}
+                <p class="flow-done-title">应付款金额</p>
+                {/if}
+                {if $child_order > 1}
+                <p class="flow-done-price">{$total.amount_formated}</p>
+                {else}
+                <p class="flow-done-price">{$order.order_amount}</p>
+                {/if}
+                {/if}
+            </div>
+            {if $child_order > 1}
+            <div class="flow-done-all">
+                {foreach $child_order_info as $child}
+                <div class="padding-all b-color-f flow-done-id">
+                    <section class="dis-box">
+                        <label class="t-remark g-t-temark">订单号：</label>
+                        <span class="box-flex t-goods1 text-right">{$child.order_sn}</span>
+                    </section>
+                </div>
+                {/foreach}
+            </div>
+            {else}
+            <div class="flow-done-all">
+            <div class="padding-all b-color-f flow-done-id">
+                <section class="dis-box">
+                    <label class="t-remark g-t-temark">订单号：</label>
+                    <span class="box-flex t-goods1 text-right">{$order.order_sn}</span>
+                </section>
+                 </div>
+                {if $store}
+                  <div class="padding-all b-color-f flow-done-id">
+                <section class="dis-box">
+                    <label class="t-remark g-t-temark">门店信息：</label>
+                    <span class="box-flex t-goods1" style="height:inherit">{$store.stores_name}[{$store.province_name} {$store.city_name} {$store.district_name}] {$store.stores_address}</span>
+                </section>
+                {/if}
+            </div>
+            </div>
+            {/if}
+            <div class="padding-all ect-button-more dis-box flow_done_btn">
+                <!-- {if $pay_online && $order.pay_code != 'balance'} -->
+                <!-- 如果是线上支付则显示支付按钮 -->
+                {$pay_online}
+                <!-- {/if} -->
+            </div>
+            {if $order.order_amount==0 || $order.presaletime > 0 || $order.pay_code == 'cod'}
+            <div class="flow-done-other dis-box">
+               <a href="{url('user/order/index')}" class="flow-done-btn btn-default-new min-two-btn br-5">查看订单</a>
+            </div>
+            {/if}
+        </div>
+    </div>
+     <!--快捷导航-->
+    {include file="float_nav"} 
+    {include file="float_nav_footer"} 
+</body>
+</html>

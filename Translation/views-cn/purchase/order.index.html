@@ -1,0 +1,177 @@
+{include file="page_header"}
+<div class="con">
+    <div class="purchase-info user-order of-hidden ts-3">
+        <ul class="store_info user_purchase-ul">
+            <script id="j-product" type="text/html">
+            <% if order_list!=""%>
+                <%each order_list as order%>
+                <li class="flow-checkout-pro">
+                    <header class="b-color-f dis-box padding-all">
+                        <span class=" box-flex">
+                            <%if order.user_name%>
+                            <%order.user_name%>
+                            <%else%>
+                            <%order.shop_name%>
+                            <%/if%>
+                        </span>
+                        <em class="j-goods-coupon t-first f-04">
+                            <%if order.order_status == 1 %>
+                            已完成
+                            <%else%>
+                            未确认
+                            <%/if%>
+                        </em>
+                    </header>
+                    <div class="f-c-p-orderid padding-all m-top1px b-color-f">
+                        <h4 class="t-remark2">
+                            <label class="t-remark">订单号：</label><%order.order_sn%>
+                             <span class="t-jiantou"></span>
+                        </h4>
+                        <p class="t-remark3 m-top04"><%order.order_time%></p>
+                    </div>
+                    <%each order.order_goods as val %>
+                    <div class="product-list-small b-color-f dis-box user_purchase-list">
+                        <ul class="box-flex flow-checkout-bigpic" style="display:block;">
+                            <li>
+                                <div class="product-div" style="background:none">
+                                    <a href="<%val.url%>">
+                                        <img class="product-list-img" src="<%val.goods_thumb%>"></a>
+                                    <div class="product-text">
+                                        <h4 style="padding-right:0"><%val.goods_name%></h4>
+                                        <p>
+                                            <span class="p-price t-first "><%val.goods_price%><small class="fr t-remark">
+                                                x<%val.goods_number%></small></span>
+                                        </p>
+                                        <p class="dis-box p-t-remark"><%val.goods_attr%></p>
+                                        <div class="ka-mo">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <%/each%>
+                    <div class="f-c-p-orderid padding-all b-color-f">
+                        <p class="t-remark2">
+                            <label class="t-remark">联系人：<em class="col-6"><%order.consignee%></em></label>
+                        </p>
+                        <p class="t-remark2 m-top04">
+                            <label class="t-remark">联系方式：<em class="col-6"><%order.mobile%></em></label>
+                        </p>
+                        <p class="t-remark2 m-top04">
+                            <label class="t-remark">收货地址：<em class="col-6"><%order.address%></em></label>
+                        </p>
+                        <p class="t-remark2 m-top04">
+                            <label class="t-remark">是否开发票：<em class="col-6">
+                                <%if order.inv_type == 2%>
+                                    增值税发票
+                                <%else%>
+                                    <%if order.inv_type == 1%>
+                                        普通发票
+                                    <%else%>
+                                        不需要发票
+                                    <%/if%>
+                                <%/if%>
+                                </em></label>
+                        </p>
+
+                        <%if order.inv_type !=0%>
+                        <p class="t-remark2 m-top04">
+                            <label class="t-remark">发票抬头：<em class="col-6"><%order.inv_payee%></em></label>
+                        </p>
+
+                        <p class="t-remark2 m-top04">
+                            <label class="t-remark">纳税人识别码：<em class="col-6"><%order.tax_id%></em></label>
+                        </p>
+                        <%/if%>
+                        <p class="t-remark2 m-top04">
+                            <label class="t-remark">支付方式：<em class="col-6"><%order.pay_name%></em></label>
+                        </p>
+                         <p class="t-remark2 m-top04">
+                            <label class="t-remark">其他备注：<em class="col-6"><%order.postscript%></em></label>
+                        </p>
+
+                    </div>
+					<div class="padding-all f-05 user-order-money b-color-f">共<%order.order_goods_num%>款商品 合计：<em class="t-first"><%#order.order_amount%></em></div>
+                    <footer class="padding-all b-color-f m-top1px of-hidden dis-box">
+                        <h4 class="t-remark2 box-flex"></h4>
+                        <p class="ect-button-more ect-button-more-dete n-br-5">
+                            <%if order.order_status == 1 %>
+                            <button class="btn-default-new br-5 min-btn">已完成</button>
+                            <%else%>
+                            <button class="btn-default-new br-5 min-btn received-order" data-item-received="<%order.order_id%>">设置为完成</button>
+                            <%/if%>
+                            <button class="btn-default-new br-5 min-btn del-order" data-item="<%order.order_id%>">删除</button>
+                        </p>
+                    </footer>
+                </li>
+                <%/each%>
+                <%else%>
+                <div class="no-div-message">
+                    <i class="iconfont icon-biaoqingleiben"></i>
+                    <p>亲，还没有订单哦～！</p>
+                </div>
+                <%/if%>
+            </script>
+        </ul>
+    </div>
+</div>
+    <!--快捷导航-->
+    {include file="float_nav"}
+    <li>
+        <a href="{url('purchase/index/index')}">
+            <i class="iconfont icon-btn_pljj"></i>
+            <p>批发首页</p>
+        </a>
+    </li>
+    {include file="float_nav_footer"}
+    <script type="text/javascript">
+        //订单列表
+        var infinite = $('.store_info').infinite({url: "{url('purchase/order/index')}", template: 'j-product', params: 'status={$status}'});
+        $(".tab-title a").click(function () {
+            var status = $(this).attr('status');
+
+            infinite.onload('status=' + status);
+            $(this).parent().addClass("active").siblings().removeClass("active");
+        })
+        //删除订单
+        $(".purchase-info").on('click','.del-order', function() {
+            var order_id = $(this).attr('data-item');
+            var url='{url("purchase/order/delorder")}';
+            layer.open({
+                content: '是否删除此订单',
+                btn: ['确定', '取消'],
+                shadeClose: false,
+                yes: function() {
+                    $.post(url, {order_id:order_id}, function(result) {
+                         if (result.y == 1) {
+                            window.location.href = "{url('purchase/order/index')}";
+                         }
+                    }, 'json');
+                },
+                no: function() {}
+            });
+        });
+
+        //确认订单
+        $(".purchase-info").on('click','.received-order', function() {
+            var order_id = $(this).attr('data-item-received');
+            var url = '{url("purchase/order/received")}';
+            layer.open({
+                content: '是否确认订单已完成',
+                btn: ['确定', '取消'],
+                shadeClose: false,
+                yes: function() {
+                    $.post(url, {order_id:order_id}, function(result) {
+                         if (result.y == 1) {
+                            window.location.href = "{url('purchase/order/index')}";
+                         }
+                    }, 'json');
+                },
+                no: function() {}
+            });
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,358 @@
+{include file="page_header"}
+		<div class="con">
+			<div class="shopping-info  j-shopping-info">
+			<header>
+				<section class="search category-search b-color-f">
+	                <div class="text-all dis-box j-text-all text-all-back">
+	                    <a class="a-icon-back j-close-search" href="javascript:history.go(-1);"><i class="iconfont icon-back"></i></a>
+	                    <div class="box-flex input-text n-input-text i-search-input">
+	                    <a class="a-search-input j-search-input"></a>
+	                        <div class="j-input-text nav-soso"><i class="iconfont icon-sousuo"></i>商品搜索</div>
+	                    </div>
+	                </div>
+	            </section>
+			</header>
+				<input type="hidden" name="shop_id" value="{$info.shop_id}" >
+				<input type="hidden" name="maxpage" value="{$info.shop_id}" >
+				<input type="hidden" name="page" value="{$page}" >
+				<div class="goods-shop-info shopping-info-title">
+					<section class="dis-box s-i-title-con">
+						<div class="g-s-i-img"><img src="{$info.shop_logo}" /></div>
+						<div class="g-s-i-title box-flex">
+							<h3 class="ellipsis-one box-flex">{$info.shop_name}</h3>
+
+                            {if $info.self_run == 1}<p class="t-remark m-top04"><span class="self-run-tag">{$lang.self_run}</span></p>{/if}
+
+							<p class="t-remark m-top04">已经有 <span class="num{$info.ru_id}">{$info.count_gaze}</span> 人关注</p>
+						</div>
+                        <div class="g-s-info-add">
+							<a class="gaze{$info.ru_id} {$info.gaze_status}"  onclick="addgaze({$info.ru_id})">
+								<span id="store-list">
+									{if $info.gaze_status =='active'}
+										已关注
+									{else}
+										<i class="iconfont icon-aixin"></i>关注
+									{/if}
+								</span>
+							</a>
+						</div>
+					</section>
+					<img class="bg" src="{$info.street_thumb}" />
+					<div class="store-header-bg"></div>
+				</div>
+				<div class="shopping-info-nums b-color-f">
+					<ul class="dis-box text-center">
+						<li class="box-flex">
+							<a href="{url('store/index/pro_list',array('ru_id'=>$info.ru_id))}">
+								<h4>{$info.count_goods}</h4>
+								<p class="t-remark3 m-top02">全部商品</p>
+							</a>
+						</li>
+						<li class="box-flex">
+							<a href="{url('store/index/pro_list',array('ru_id'=>$info.ru_id,'type'=>'is_new'))}">
+								<h4>{$info.count_goods_new}</h4>
+								<p class="t-remark3 m-top02">新品</p>
+							</a>
+						</li>
+						<li class="box-flex">
+							<a href="{url('store/index/pro_list',array('ru_id'=>$info.ru_id,'type'=>'is_promote'))}">
+								<h4>{$info.count_goods_promote}</h4>
+								<p class="t-remark3 m-top02">推荐</p>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<!-- {if $info.count_bonus>0} -->
+				<section class="j-goods-coupon m-top08 padding-all b-color-f goods-coupon j-show-div" ru-id="{$info.ru_id}">
+					<div class="dis-box " >
+						<label class="t-remark g-t-temark">领取优惠券 ({$info.count_bonus})</label>
+						<div class="box-flex g-coupon-con">
+							<ul class="dis-box">
+							   <!-- {foreach $info.bonus_all as $k=>$key} -->
+							   <li class="box-flex"><span class="remark-all temark-3">{if $key.cou_man}满{$key.cou_man}减{$key.cou_money}{else}{$key.cou_money}{/if}</span></li>
+							   <!-- {/foreach} -->
+							</ul>
+						</div>
+					</div>
+				</section>
+				<!-- {/if} -->
+				<!-- {if $info.shop_flash} -->
+				<div class="goods-photo goods-photo-auto m-top08">
+					<div class="swiper-wrapper">
+					    <!-- {foreach $info.shop_flash as $key} -->
+						<li class="swiper-slide tb-lr-center"><img src="{$key}" /></li>
+					    <!-- {/foreach} -->
+					</div>
+					<!-- Add Pagination -->
+					<div class="swiper-pagination"></div>
+				</div>
+				<!-- {/if} -->
+				<div class="shopping-info-hot product-list  product-list-medium m-top06">
+					<h3 class="b-color-f">热门商品</h3>
+					<ul >
+					<!-- {foreach $info.goods_list as $key} -->
+						<li>
+							<div class="product-div">
+								<a class="product-div-link" href="{$key.goods_url}"></a>
+								<img class="product-list-img" src="{$key.goods_thumb}" />
+								<div class="product-text">
+									<h4>{$key.goods_name}</h4>
+									<p class="dis-box p-t-remark"><span class="box-flex">库存:12800</span><span class="box-flex">销量:12800</span></p>
+									<p><span class="p-price t-first ">
+                                     {if $key.is_promote && $key.gmt_end_time}
+                                     {$key.promote_price}
+                                     {else}
+                                     {$key.shop_price_formated}
+                                     {/if}
+                                     <small><del>{$key.market_price}</del></small></span>
+                                    </p>
+									<a href="javascript:void(0)" class="icon-flow-cart fr j-goods-attr"><i class="iconfont icon-gouwuche"></i></a>
+								</div>
+							</div>
+						</li>
+
+				    <!-- {/foreach} -->
+					</ul>
+					<div class="padding-all shopping-list-more"><a href="{url('store/index/pro_list',array('ru_id'=>$info.ru_id))}">查看更多</a></div>
+				</div>
+
+			</div>
+			<div class="b-menu-fixed j-menu-fixed">
+					<ul class="dis-box text-center">
+						<li class="box-flex"><a href="{url('store/index/shop_about', array('ru_id'=>$info.ru_id))}">店铺详情</a></li>
+						<li class="box-flex">
+							<i class="iconfont icon-caidan"></i>热门分类
+                            {if $info.shop_category}
+							<ul class="children-ul">
+								<!-- {foreach $info.shop_category as $key} -->
+									<li class="bigcat" cat-id="{$key.cat_id}"><a href="{url('store/index/pro_list',array('ru_id'=>$info.ru_id,'cat_id'=>$key.cat_id))}" class="onelist-hidden"><span class="">{$key.cat_name}</span></a></li>
+								<!-- {/foreach} -->
+							</ul>
+                            {/if}
+						</li>
+
+						<li class="box-flex">
+                            <!--{if $has_kefu == 1}-->
+                            <a class="filter-btn-kefu filter-btn-a" href="{url('chat/index/index', array('ru_id'=> $info.ru_id))}"><i class="iconfont icon-kefu"></i><em>客服</em></a>
+                            <!--{else}-->
+                            <i class="iconfont icon-kefu"></i>客服
+                            <!--{if $info.shop_wangwang || $info.shop_qq ||$info.kf_appkey}-->
+							<ul class="children-ul">
+                                <!--{if $info.shop_qq}-->
+                                <li><a href="http://wpa.qq.com/msgrd?v=3&amp;uin={$info.shop_qq}&amp;site=qq&amp;menu=yes" target="_blank">QQ</a></li>
+							    <!--{/if}-->
+                                <!--{if $info.shop_wangwang}-->
+                                <li><a href="http://www.taobao.com/webww/ww.php?ver=3&touid=$info.shop_wangwang&siteid=cntaobao&status=1&charset=utf-8" target="_blank">旺旺</a></li>
+                                <!--{/if}-->
+                                  <!-- {if $info.kf_appkey &&$info.is_im ==1 }-->
+                                <li><a class="box-flex btn-default" href="{url('chat/yunwang/index', array('ru_id'=> $info.ru_id))}">IM</a></li>
+                               <!-- {/if}-->
+                                  <!-- {if $info.meiqia }-->
+                                <li><a class="box-flex btn-default" href="https://static.meiqia.com/dist/standalone.html?eid={$info.meiqia}">美恰</a></li>
+                               <!-- {/if}-->
+                            </ul>
+                            <!--{/if}-->
+                            <!--{/if}-->
+						</li>
+					</ul>
+				</div>
+			<div class="search-div j-search-div ts-3">
+				<section class="search">
+					<div class="text-all dis-box j-text-all">
+						<div class="box-flex input-text n-input-text">
+							<input class="j-input-text" type="text"  placeholder="商品搜索" />
+							<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+						</div>
+						<a type="button" class="btn-submit">搜索</a>
+					</div>
+				</section>
+                <!--search -->
+
+                <div class="search-div j-search-div ts-3">
+                    <section class="search">
+
+                            <div class="text-all dis-box j-text-all text-all-back">
+                                <a class="a-icon-back j-close-search" href="javascript:;"><i class="iconfont icon-back"></i></a>
+                                <div class="box-flex input-text">
+                                    <input class="j-input-text" style="padding-left:1rem " type="text" name="infokeyword" placeholder="{if $keywords}{$keywords}{else}商品搜索{/if}" />
+                                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                                </div>
+                                <a type="button" class="btn-submit">搜索</a>
+                            </div>
+
+                    </section>
+                    <section class="search-con">
+                        <div class="swiper-scroll history-search">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <p class="hos-search">
+                                        <label class="fl">最近搜索</label>
+                                        <span class="fr clear_history"><i class="iconfont icon-xiao10"></i></span>
+                                    </p>
+                                    <ul class="hot-search a-text-more a-text-one" id="search-con">
+                                        {foreach $history_keywords as $v}
+                                        <li><a href="{url('store/index/pro_list', array('keyword'=>$v,'ru_id'=>$info.ru_id))}"><span>{$v}</span></a></li>
+                                        {/foreach}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="swiper-scrollbar"></div>
+                        </div>
+                    </section>
+                    <footer class="close-search j-close-search">
+                        点击关闭
+                    </footer>
+                </div>
+
+                <!--search -->
+                <div class="mask-filter-div"></div>
+			<!--领取优惠券star-->
+		<div class="show-goods-coupon j-filter-show-div ts-3 b-color-1">
+			<section class="goods-show-title of-hidden padding-all b-color-f">
+				<h3 class="fl g-c-title-h3">领取店铺优惠券 (<span class="bonus-number">0</span>)</h3>
+				<i class="iconfont icon-guanbi2 show-div-guanbi fr"></i>
+			</section>
+			<!-- 优惠卷 -->
+			<section class="goods-show-con padding-all">
+			<div class="cart-bonus">
+
+			</div>
+			</section>
+			<!-- end/优惠卷  -->
+		</div>
+
+		<div class="div-messages"></div>
+		<input type="hidden" name="type" value="{$type}">
+		<input type="hidden" name="ru_id" value="{$info.ru_id}">
+		<input type="hidden" name="maxpage" value="{$maxpage}">
+		<input type="hidden" name="page" value="">
+	</div>
+	</div><div class="mask-filter-div"></div>
+	 <!--快捷导航-->
+    {include file="float_nav"}
+    			<li>
+                    <a href="{url('store/index/index')}">
+                         <i class="iconfont icon-dianpu"></i>
+                         <p>店铺街</p>
+                    </a>
+                </li>
+    {include file="float_nav_footer"}
+</div>
+		<script>
+		var type  = $("input[name=type]").val();
+		var ru_id = $("input[name=ru_id]").val();
+		var maxpage = $("input[name=maxpage]").val();
+		var page = $("input[name=page]").val();
+		var sort;
+		var url = ROOT_URL + 'index.php?m=store&a=pro_list';
+		var bid;
+		var cat_id;
+        var keyword;
+		 //店铺关注
+	    function addgaze(shop){
+		    if(shop!=''){
+		    	$.post(ROOT_URL + 'index.php?m=store&a=add_collect', {shopid: shop}, function(data){
+                    var num = $(".num"+shop).text();
+			    	if(data.error == 1){
+                      $(".gaze"+shop).addClass("active");
+                      $(".gaze"+shop).find('span').text("已关注");
+                      num = num*1 + 1;
+                      $(".num"+shop).text(num);
+                      d_messages(data.msg);
+					}
+			    	if(data.error == 2){
+                      $(".gaze"+shop).removeClass("active");
+                      $(".gaze"+shop).find('span').html('<i class="iconfont icon-aixin"></i>' + '关注');
+                      num = num*1 - 1;
+                      $(".num"+shop).text(num);
+                      d_messages(data.msg);
+				    }
+                    if(data.error <= 0){
+                        layer.open({
+                            content: '请登录后关注该店铺',
+                            btn: ['立即登录', '取消'],
+                            shadeClose: false,
+                            yes: function () {
+                                window.location.href = ROOT_URL + "index.php?m=user&c=login";
+                            },
+                            no: function () {
+                            }
+                        });
+                    }
+				}, 'json');
+		    }
+        }
+        //弹出优惠券
+        /*-*/
+        $(".j-goods-coupon").click(function() {
+            var ru_id = $(this).attr("ru-id");
+            $.ajax({type: "POST",url: ROOT_URL + "index.php?m=cart&a=cart_bonus",data: {ru_id:ru_id}, dataType:"json", async:false, success:
+                    function(data){
+                        if(data.data!=0){
+                            $(".cart-bonus").html(data.data);
+                            $(".bonus-number").text(data.number);
+                            $(".show-goods-coupon").addClass("show");
+                        }
+                    }});
+        });
+        $(".goods-show-con").click(function() {
+            var id = $(this).attr('cou_id');
+            $.get("{url('coupont/index/getcoupon')}", {cou_id: id}, function (info) {
+                if(info.error == '1'){
+                     layer.open({
+                            content: '还未登录，请登录之后领取',
+                            btn: ['确定', '取消'],
+                            shadeClose: false,
+                            yes: function() {
+                                window.location.href = ROOT_URL + "index.php?m=user&c=login";
+                            },
+                            no: function() {
+                            }
+                        });
+                };
+            },'json');
+        });
+        //清空搜索
+	    $(".clear_history").click(function(){
+            if(history){
+                $.get("{url('category/index/clear_history')}", '', function(data){
+                    if(data.status){
+                        $("#search-con").remove();
+                    }
+                }, 'json');
+            }
+        });
+        //搜索
+        $(".btn-submit").click(function (){
+            keyword = $("input[name=infokeyword]").val();
+            location.href = url+"&ru_id="+ru_id+"&keyword="+keyword;
+        })
+          //分类
+        $(".brand").click(function (){
+           bid = $(this).attr("bid");
+           $.post(url, {type:type,ru_id:ru_id,bid:bid}, function(data){
+         	    $("input[name=showword]").val(keyword);
+		    	var html = template('j-product', data);
+		    	$(".show-filter-div").removeClass("show-filter-div");
+				$('.store_info').html(html);
+			}, 'json');
+        })
+         $(".category").click(function (){
+           cat_id = $(this).attr("cat-id");
+           $.post(url, {type:type,ru_id:ru_id,cat_id:cat_id}, function(data){
+         	    $("input[name=showword]").val(keyword);
+		    	var html = template('j-product', data);
+		    	$(".show-filter-div").removeClass("show-filter-div");
+				$('.store_info').html(html);
+			}, 'json');
+        })
+			/*商品详情相册切换*/
+						var swiper = new Swiper('.goods-photo', {
+							paginationClickable: true,
+							pagination : '.swiper-pagination',
+						});
+
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,306 @@
+{include file="page_header"}
+
+		<div class="con" id="checkPage">
+			<div class="category">
+				<section class="search category-search common-search">
+                    <div class="text-all dis-box j-text-all text-all-back">
+                        <a class="a-icon-back j-close-search" href="javascript:history.go(-1);"><i class="iconfont icon-back"></i></a>
+				  <div class="box-flex input-text n-input-text i-search-input">
+                        <a class="a-search-input" href="{url('search/index/index')}"></a>
+                        <div class="j-input-text nav-soso"><i class="iconfont icon-sousuo"></i>商品/店铺搜索</div>
+                    </div>
+                        {if $cat_id}
+						<a href="javascript:void(0)" class="s-filter j-s-filter">筛选</a>
+                        {/if}
+					</div>
+				</section>
+				<section class="product-sequence dis-box">
+                    {if $order == 'asc' && $sort == 'goods_id'}
+					<a class="box-flex a-change active" href="{url('category/index/products', array('id'=>$category, 'intro'=>$intro, 'display'=>$display, 'brand'=>$brand_id, 'price_min'=>$price_min, 'price_max'=>$price_max, 'filter_attr'=>$filter_attr, 'page'=>$page, 'sort'=>'goods_id', 'order'=>'desc', 'keyword'=>$keyword , 'isself'=>$isself, 'hasgoods'=>$hasgoods, 'promotion'=>$promotion, 'region_id'=> $region_id , 'area_id'=>$area_id, 'ext'=>$ext, 'cou_id' => $cou_id))}#goods_list">综合<i class="iconfont icon-xiajiantou"></i></a>
+                    {elseif $order == 'desc' && $sort == 'goods_id'}
+                    <a class="box-flex active" href="{url('category/index/products', array('id'=>$category, 'intro'=>$intro, 'display'=>$display, 'brand'=>$brand_id, 'price_min'=>$price_min, 'price_max'=>$price_max, 'filter_attr'=>$filter_attr, 'page'=>$page, 'sort'=>'goods_id', 'order'=>'asc', 'keyword'=>$keyword, 'isself'=>$isself, 'hasgoods'=>$hasgoods, 'promotion'=>$promotion, 'region_id'=> $region_id , 'area_id'=>$area_id, 'ext'=>$ext, 'cou_id' => $cou_id))}#goods_list">综合<i class="iconfont icon-xiajiantou"></i></a>
+                    {else}
+                    <a class="box-flex" href="{url('category/index/products', array('id'=>$category, 'intro'=>$intro, 'display'=>$display, 'brand'=>$brand_id, 'price_min'=>$price_min, 'price_max'=>$price_max, 'filter_attr'=>$filter_attr, 'page'=>$page, 'sort'=>'goods_id', 'order'=>'desc', 'keyword'=>$keyword, 'isself'=>$isself, 'hasgoods'=>$hasgoods, 'promotion'=>$promotion, 'region_id'=> $region_id , 'area_id'=>$area_id, 'ext'=>$ext, 'cou_id' => $cou_id))}#goods_list">综合<i class="iconfont icon-xiajiantou"></i></a>
+                    {/if}
+					<a class="box-flex {if $sort == 'last_update'}active{/if}" href="{url('category/index/products', array('id'=>$category, 'intro'=>$intro, 'display'=>$display, 'brand'=>$brand_id, 'price_min'=>$price_min, 'price_max'=>$price_max, 'filter_attr'=>$filter_attr, 'page'=>$page, 'sort'=>'last_update', 'order'=>'desc', 'keyword'=>$keyword, 'isself'=>$isself, 'hasgoods'=>$hasgoods, 'promotion'=>$promotion, 'region_id'=> $region_id , 'area_id'=>$area_id, 'ext'=>$ext, 'cou_id' => $cou_id))}#goods_list">新品</a>
+					<a class="box-flex {if $sort == 'sales_volume'}active{/if}" href="{url('category/index/products', array('id'=>$category, 'intro'=>$intro, 'display'=>$display, 'brand'=>$brand_id, 'price_min'=>$price_min, 'price_max'=>$price_max, 'filter_attr'=>$filter_attr, 'page'=>$page, 'sort'=>'sales_volume', 'order'=>'desc', 'keyword'=>$keyword, 'isself'=>$isself, 'hasgoods'=>$hasgoods, 'promotion'=>$promotion, 'region_id'=> $region_id , 'area_id'=>$area_id, 'ext'=>$ext, 'cou_id' => $cou_id))}#goods_list">销量</a>
+                    {if $order == 'asc' && $sort == 'shop_price'}
+					<a class="box-flex a-change active" href="{url('category/index/products', array('id'=>$category, 'intro'=>$intro, 'display'=>$display, 'brand'=>$brand_id, 'price_min'=>$price_min, 'price_max'=>$price_max, 'filter_attr'=>$filter_attr, 'page'=>$page, 'sort'=>'shop_price', 'order'=>'desc', 'keyword'=>$keyword, 'isself'=>$isself, 'hasgoods'=>$hasgoods, 'promotion'=>$promotion, 'region_id'=> $region_id , 'area_id'=>$area_id, 'ext'=>$ext, 'cou_id' => $cou_id))}#goods_list">价格<i class="iconfont icon-xiajiantou"></i></a>
+                    {elseif $order == 'desc' && $sort == 'shop_price'}
+                    <a class="box-flex active" href="{url('category/index/products', array('id'=>$category, 'intro'=>$intro, 'display'=>$display, 'brand'=>$brand_id, 'price_min'=>$price_min, 'price_max'=>$price_max, 'filter_attr'=>$filter_attr, 'page'=>$page, 'sort'=>'shop_price', 'order'=>'asc', 'keyword'=>$keyword, 'isself'=>$isself, 'hasgoods'=>$hasgoods, 'promotion'=>$promotion, 'region_id'=> $region_id , 'area_id'=>$area_id, 'ext'=>$ext, 'cou_id' => $cou_id))}#goods_list">价格<i class="iconfont icon-xiajiantou"></i></a>
+                    {else}
+                    <a class="box-flex" href="{url('category/index/products', array('id'=>$category, 'intro'=>$intro, 'display'=>$display, 'brand'=>$brand_id, 'price_min'=>$price_min, 'price_max'=>$price_max, 'filter_attr'=>$filter_attr, 'page'=>$page, 'sort'=>'shop_price', 'order'=>'desc', 'keyword'=>$keyword, 'isself'=>$isself, 'hasgoods'=>$hasgoods, 'promotion'=>$promotion, 'region_id'=> $region_id, 'area_id'=>$area_id, 'ext'=>$ext, 'cou_id' => $cou_id))}#goods_list">价格<i class="iconfont icon-xiajiantou"></i></a>
+                    {/if}
+
+                    {if $display == 'text'}
+					<a class="a-sequence j-a-sequence "><i class="iconfont icon-icon-square" data="0"></i></a>
+                    {elseif $display == 'grid'}
+                    <a class="a-sequence j-a-sequence"><i class="iconfont icon-pailie" data="1"></i></a>
+                    {elseif $display == 'list'}
+                    <a class="a-sequence j-a-sequence"><i class="iconfont icon-viewlist" data="2"></i></a>
+                    {/if}
+				</section>
+                <!-- 内容 -->
+                {if $display == 'text'}
+				<section class="product-list j-product-list  product-list-big" data="0">
+                {elseif $display == 'grid'}
+                <section class="product-list j-product-list  product-list-medium" data="1">
+                {elseif $display == 'list'}
+                <section class="product-list j-product-list  product-list-small" data="2">
+                {/if}
+
+                    <script id="j-product" type="text/html">
+                    <%if totalPage > 0%>
+					<ul>
+                        <%each list as goods%>
+                        <li>
+                            <div class="product-div">
+                                <a href="<%goods.url%>"><img class="product-list-img" src="<%goods.goods_thumb%>" /></a>
+                                <div class="product-text index-product-text">
+                                    <a href="<%goods.url%>"><h4><%#goods.goods_name%></h4></a>
+                                    <p>
+                                    <span class="p-price t-first ">
+                                        <%if goods.promote_price%>
+                                        <%#goods.promote_price%>
+                                        <%else%>
+                                        <%#goods.shop_price%>
+                                        <%/if%>
+                                    </span>
+                                    </p>
+                                    <p class="dis-box p-t-remark">
+                                    <%if goods.self_run == 1 || goods.user_id == 0%>
+                                    <span class="self-run-tag">{$lang.self_run}</span> &nbsp;
+                                    <%/if%>
+                                    <span class="box-flex">库存：
+                                    <%if goods.goods_number%>
+                                    <%goods.goods_number%><%goods.measure_unit%>
+                                    <%else%>
+                                      0
+                                    <%/if%>
+                                    </span>
+                                    <span class="box-flex">销量：<%goods.sales_volume%><%goods.measure_unit%></span>
+                                    </p>
+
+                                    <a href="javascript:void(0);" class="icon-flow-cart fr j-goods-attr" onclick="addToCart(<%goods.goods_id%>, 0)"><i class="iconfont icon-gouwuche" ></i></a>
+                                </div>
+                            </div>
+                            </section>
+                        </li>
+                        <%/each%>
+                    </ul>
+                    <%else%>
+                    <div class="no-div-message">
+                        <i class="iconfont icon-biaoqingleiben"></i>
+                        <p>亲，此处没有内容～！</p>
+                    </div>
+                    <%/if%>
+                    </script>
+				</section>
+			</div>
+        </div>
+            <!-- 筛选 -->
+			<div class="j-filter-div filter-div ts-5 c-filter-div" id="j-filter-div">
+				<div class="mask-filter-div"></div>
+                <section class="close-filter-div j-close-filter-div">
+                    <div class="close-f-btn">
+                        <i class="iconfont icon-fanhui"></i>
+                        <span>关闭</span>
+                    </div>
+                </section>
+                <form action="{url('category/index/products', array('id'=>$category, 'display'=>$display, 'sort'=>$sort, 'order'=>$order))}" method="post" id="filter">
+                <section class="con-filter-div ">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+					<div class="radio-switching padding-all j-radio-switching {if $isself}active{/if}" data="{$isself}">
+						<label class="fl">自营产品</label> <span class="fr"><em class="ts-1"></em><hr class="ts-1" /></span>
+					</div>
+                    <div class="filter-city padding-all">
+						<!--address-start-->
+                        <!-- <div id="editAddressForm">
+                            <input type="hidden" id="province_id" name="province_region_id" value="{$province_id}">
+                            <input type="hidden" id="city_id" name="city_region_id" value="{$city_id}">
+                            <input type="hidden" id="district_id" name="district_region_id" value="{$district_id}">
+                            <input type="hidden" id="town_id" name="town_region_id" value="{$town_region_id}">
+                            <input type="hidden" id="village_id" name="village_region_id" value="">
+                            <input type="hidden" id="region_id" name="region_id" value="{$region_id}">
+                            <input type="hidden" id="address_id" name="address_id" value="{$address_id}">
+                            <div class="address-box" id="selectAddressBtn" region-data="">
+                                    <label class="fl t-remark g-t-temark">配送至</label>
+                                    <span class="fl text-all-span f-05" id="addressLabelId">{$province_row.region_name}{$city_row.region_name}{$district_row.region_name}{$town_row.region_name}{$village_row.region_name}</span>
+                                    <span class="t-jiantou fr"><i class="iconfont icon-jiantou tf-180"></i></span>
+                            </div>
+                        </div> -->
+                         <!--address-end-->
+					</div>
+					<div class="padding-all select-one">
+						<ul class="dis-box j-get-more">
+							<!--<li class="ect-select box-flex">
+								<label class="ts-1 active dis-block">货到付款</label>
+							</li>-->
+							<li class="ect-select box-flex list-select hasgoods">
+								<label class="ts-1 dis-block {if $hasgoods}active{/if}">仅看有货</label>
+							</li>
+							<li class="ect-select box-flex list-select promotion">
+								<label class="ts-1 dis-block {if $promotion}active{/if}">促销</label>
+							</li>
+						</ul>
+					</div>
+					<div class="price-range padding-all">
+						<label class="price-range-label" data-min="{$price_range['min']}" data-max="{$price_range['max']}">价格区间</label>
+						<div class="price-slider">
+							<div id="slider-range" class="slider"></div>
+							<div class="slider-info">
+								<span id="slider-range-amount"></span>
+							</div>
+						</div>
+					</div>
+					<div class="select-two">
+						<a class="select-title padding-all j-menu-select">
+                        <label class="fl">品牌</label>
+                        <span class="fr t-jiantou j-t-jiantou" id="j-t-jiantou"><em class="fl">{$brand_name}</em><i class="iconfont icon-jiantou tf-180 ts-2"></i></span>
+                    </a>
+                        <ul class="j-sub-menu padding-all j-get-limit brand" data-istrue="true">
+                            {foreach $brands as $brand}
+                            <li class="ect-select {if $brand['brand_id'] == 0}j-checkbox-all{/if}" data-brand="{$brand['brand_id']}">
+                                <label class="ts-1 {if $brand['selected']}active{/if}">{$brand['brand_name']}<i class="fr iconfont icon-gou ts-1"></i></label>
+                            </li>
+                            {/foreach}
+                        </ul>
+                        {foreach $filter_attr_list as $k=>$v}
+                        <a class="select-title padding-all j-menu-select">
+                            <label class="fl">{$v['filter_attr_name']}</label>
+                            <span class="fr t-jiantou j-t-jiantou"><em class="fl">{$v['select_attr_name']}</em><i class="iconfont icon-jiantou tf-180 ts-2"></i></span>
+                        </a>
+                        <ul class="j-sub-menu padding-all j-get-limit filter_attr" data-filter="true" data-key="{$k}">
+                            {foreach $v['attr_list'] as $attr}
+                            <li class="ect-select {if $attr['attr_id'] == 0}j-checkbox-all{/if}" data-attr="{$attr['attr_id']}" atr="{$attr['filter_attr']}">
+                                <label class="ts-1 {if $attr['selected']}active{/if}">{$attr['attr_value']}<i class="fr iconfont icon-gou ts-1"></i></label>
+                            </li>
+                            {/foreach}
+                        </ul>
+                        {/foreach}
+					</div>
+					<div class="ect-button-more dis-box padding-all">
+                        <input type="hidden" name="isself" value="{$isself}" />
+                        <input type="hidden" name="brand" value="{$brand_id}" />
+                        <input type="hidden" name="price_min" value="{$price_min}" />
+                        <input type="hidden" name="price_max" value="{$price_max}" />
+                        <input type="hidden" name="filter_attr" value="{$filter_attr}"/>
+                        <input type="hidden" name="keyword" value="{$keyword}"/>
+                        <input type="hidden" name="hasgoods" value="{$hasgoods}"/>
+                        <input type="hidden" name="promotion" value="{$promotion}"/>
+                        <input type="hidden" name="region_id" value="{$region_id}" id="region_id"/>
+                        <input type="hidden" name="area_id" value="{$area_id}" id="area_id"/>
+                        <input type="hidden" name="cat_id" value="{$cat_id}" id="cat_id"/>
+                        <input type="hidden" name="cou_id" value="{$cou_id}" id="cou_id"/>
+						<a class="box-flex btn-reset j-filter-reset  min-btn" type="button">清空选项</a>
+						<a class="box-flex btn-submit  min-btn" type="submit" onclick="$('#filter').submit()">确定</a>
+					</div>
+                    </div>
+                </div>
+				</section>
+                </form>
+			</div>
+
+            <!--快捷导航-->
+            {include file="float_nav"}
+            {include file="float_nav_footer"}
+            <div class="footer-cont"><span><img src='{elixir('img/loading1.gif')}'>正在加载……</span></div>
+        <script type="text/javascript" src="__ROOT__/public/js/jquery.cookie.js"></script>
+		<script type="text/javascript">
+            {if $cat_id}
+			var Sliders = function() {
+				// 筛选价格区间 js
+				$("#slider-range").slider({
+					range: true,
+					min: {$price_range['min']},
+					max: {$price_range['max']},
+					step: {$range_step},
+					values: [{$price_min}, {if $price_max}{$price_max}{else}{$price_range['max']}{/if}],
+					slide: function(event, ui) {
+						$("#slider-range-amount").text(ui.values[0] + " ~ " + ui.values[1]);
+                        $("input[name=price_min]").val(ui.values[0]);
+                        $("input[name=price_max]").val(ui.values[1]);
+					}
+				});
+				$("#slider-range-amount").text($("#slider-range").slider("values", 0) + " ~ " + $("#slider-range").slider("values", 1));
+			}();
+            {/if}
+            //异步数据
+            $(function(){
+                // 通过埋点判断是否使用缓存
+                var categoryPageFlag = window.BuryingPoint.search(/category/);
+                if(categoryPageFlag >= 0){
+                    var is_cache = false;
+                }else{
+                    var is_cache = true;
+                }
+                // 缓存ID
+                var cache_prefix = "{md5(serialize(array('id'=>$category, 'display'=>$display, 'brand'=>$brand_id, 'intro'=>$intro, 'price_min'=>$price_min, 'price_max'=>$price_max, 'filter_attr'=>$filter_attr, 'sort'=>$sort, 'order'=>$order, 'keyword'=>$keyword, 'isself'=>$isself, 'hasgoods'=>$hasgoods, 'promotion'=>$promotion, 'region_id'=> $region_id , 'area_id'=>$area_id,'ext'=>$ext, 'cou_id' => $cou_id)))}";
+                // 请求URL
+                var url = "{url('category/index/products', array('id'=>$category, 'display'=>$display, 'brand'=>$brand_id, 'intro'=>$intro, 'price_min'=>$price_min, 'price_max'=>$price_max, 'filter_attr'=>$filter_attr, 'sort'=>$sort, 'order'=>$order, 'keyword'=>$keyword, 'isself'=>$isself, 'hasgoods'=>$hasgoods, 'promotion'=>$promotion , 'region_id'=> $region_id , 'area_id'=>$area_id ,'ext'=>$ext, 'cou_id' => $cou_id))}#goods_list";
+
+                //$('#J_list').more({'address': url, 'trigger':'.get_more', 'amount':'{$size}'});
+
+                // $('.product-sequence').infinite({url: 'category/index/products', template:'j-a-sequence', data_nav: icon_sequence});
+                //商品列表
+                $('.product-list').infinite({url: url, template:'j-product', cache: is_cache, cache_prefix: cache_prefix});
+                //加载更多
+                var loadingHeight = $(".product-list").outerHeight(true);
+                function loadimgCont(){
+                    if ($(document).scrollTop() >= $(window).height() <$(document).height() - $(window).height()) {
+                            $(".footer-cont").html("<span><img src='{elixir('img/loading1.gif')}'>正在加载……</span>")
+                    }
+                    if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                             $(".footer-cont").html("<span>没有更多了</span>")
+                    }
+                    if(loadingHeight< $(window).height()){
+                         $(".footer-cont").css("display","none");
+                    }else{
+                         $(".footer-cont").css("display","block");
+                    }
+                }
+                loadimgCont();
+                $(window).scroll(function() {
+                    loadimgCont();
+                });
+
+                //点击保存模式切换
+                $(".j-a-sequence").click(function () {
+                    var data_value = $(this).find('i').attr('data');
+                    var display_value ;
+                    if(data_value == 2){
+                        display_value = 'list';
+                    }
+                    if(data_value == 1){
+                        display_value = 'grid';
+                    }
+                    if(data_value == 0){
+                        display_value = 'text';
+                    }
+                    //存入cookie
+                    var expireDate = new Date();
+                    expireDate.setTime( expireDate.getTime() + ( 60 * 1000 ) );
+                    $.cookie('display', display_value, {expires: expireDate, path : '/'});
+
+                    var url_value = '';
+                    $(".product-sequence").find('a').each(function() {
+                        url_value = $(this).attr('href');
+                        if (url_value != '' && url_value != undefined) {
+                            var new_url = changeUrlArg(url_value, 'display', display_value);
+                            $(this).attr('href',new_url);
+                        }
+
+                    });
+                    return false;
+                });
+                // 替换URL参数值
+                function changeUrlArg(url, arg, val){
+                    var pattern = arg+'=([^&]*)';
+                    var replaceText = arg+'='+val;
+                    return url.match(pattern) ? url.replace(eval('/('+ arg+'=)([^&]*)/gi'), replaceText) : (url.match('[\?]') ? url+'&'+replaceText : url+'?'+replaceText);
+                }
+            })
+		</script>
+	</body>
+</html>

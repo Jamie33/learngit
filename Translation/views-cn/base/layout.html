@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <title>{$page_title}</title>
+    <meta name="description" content="{$description}"/>
+    <meta name="keywords" content="{$keywords}"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    {:global_assets('css')}
+    <script type="text/javascript">var ROOT_URL = '__ROOT__/';</script>
+    {:global_assets('js')}
+    {if condition="$is_wechat"}
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript">
+        // 分享内容
+        var shareContent = {
+            title: '{$share_data.title}',
+            desc: '{$share_data.desc}',
+            link: '{$share_data.link}',
+            imgUrl: '{$share_data.img}',
+            success: function (res) {
+                // 用户确认分享后执行的回调函数
+                // res {"checkResult":{"onMenuShareTimeline":true},"errMsg":"onMenuShareTimeline:ok"}
+                var msg = res.errMsg;
+                var jsApiname = msg.replace(':ok','');
+                shareCount(jsApiname,'{$share_data.link}');
+            }
+        };
+
+        // 分享统计
+        function shareCount(jsApiname = '', link = ''){
+            $.post('{url("wechat/api/count")}', {jsApiname: jsApiname, link:link}, function (res) {
+                if(res.status == 200){
+                    //
+                }
+            }, 'json');
+        }
+
+        $(function(){
+            var url = window.location.href;
+            var jsConfig = {
+                debug: false,
+                jsApiList: [
+                    'onMenuShareTimeline',
+                    'onMenuShareAppMessage',
+                    'onMenuShareQQ',
+                    'onMenuShareQZone'
+                ]
+            };
+            $.post('{url("wechat/api/jssdk")}', {url: url}, function (res) {
+                if(res.status == 200){
+                    jsConfig.appId = res.data.appId;
+                    jsConfig.timestamp = res.data.timestamp;
+                    jsConfig.nonceStr = res.data.nonceStr;
+                    jsConfig.signature = res.data.signature;
+                    // 配置注入
+                    wx.config(jsConfig);
+                    // 事件注入
+                    wx.ready(function () {
+                        wx.onMenuShareTimeline(shareContent);
+                        wx.onMenuShareAppMessage(shareContent);
+                        wx.onMenuShareQQ(shareContent);
+                        wx.onMenuShareQZone(shareContent);
+                    });
+                }
+            }, 'json');
+        })
+    </script>
+    {/if}
+</head>
+<body>
+<div id="loading"><img src="{:elixir('img/loading.gif')}" /></div>
+{__CONTENT__}
+<p style="display:none;">{:C('shop.stats_code')}</p>
+</body>
+</html>

@@ -1,0 +1,97 @@
+{include file="page_header"}
+		<div class="con mb-7">
+			<div class="index-banner swiper-container box position-rel banner-first">
+				<div class="swiper-wrapper">
+					{insert_ads(array('id'=>1050, 'num'=>6))}
+				</div>
+				<!-- 分页器 -->
+				<div class="swiper-pagination banner-first-pagination"></div>
+				<!--search-->
+			</div>
+			<section class="index-activity m-top10">
+				<div class="dis-box m-top1px">
+					<div class="box-flex activity-list">
+						<!--广告位left-->
+						{insert_ads(array('id'=>1051, 'num'=>1))}
+					</div>
+					<div class="box-flex activity-list">
+						<!--广告位right-->
+						{insert_ads(array('id'=>1052, 'num'=>2))}
+					</div>
+				</div>
+			</section>
+			{foreach $pre_cat_goods as $cat_goods}
+			{if $cat_goods.count_goods != 0}
+			<section class="product-list j-product-list product-list-medium" data="1">
+				<div class="box padding-all title b-color-f">
+		            <h3 class="recom-title">
+		                {$cat_goods.cat_name}
+		                <span class="t-jiantou t-remark fr"><a href="{$cat_goods.cat_url}">更多<i class="iconfont icon-more"></i></a></span>
+		            </h3>
+		       	</div>
+				<ul>
+					{foreach $cat_goods.goods as $goods}
+					<li>
+						<div class="product-div">
+							<a class="product-div-link" href="{$goods.url}"></a>
+							<img class="product-list-img" src="{$goods.thumb}" />
+							<div class="product-text">
+								<h4>{$goods.goods_name}</h4>
+								<p><span class="p-price t-first ">{$goods.shop_price}<small><del>{$goods.market_price}</del></small></span></p>
+								<a href="javascript:void(0)" class="icon-flow-cart fr j-goods-attr"><i class="iconfont icon-gouwuche"></i></a>
+							</div>
+						</div>
+					</li>
+					{/foreach}
+				</ul>
+			</section>
+			{/if}
+		    {/foreach}
+			<div class="b-menu-fixed j-menu-fixed">
+				<ul class="dis-box text-center">
+					<li class="box-flex"><a href="{$pre_list_url}" class="onelist-hidden">抢先订</a></li>
+					<li class="box-flex"><i class="iconfont icon-caidan"></i>热门分类
+						<ul class="children-ul">
+							{foreach $pre_nav_list as $nav}
+							<li><a href="{$nav.url}" class="onelist-hidden">{$nav.cat_name}</a></li>
+							{/foreach}
+						</ul>
+					</li>
+					<li class="box-flex"><a href="{$pre_new_url}" class="onelist-hidden">新品发布</a></li>
+
+				</ul>
+			</div>
+		</div>
+		    <!--快捷导航-->
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+			<script type="text/javascript ">
+				$(function($) {
+					var mySwiper = new Swiper('.banner-first', {
+						pagination: '.banner-first-pagination',
+					});
+					var mySwiper = new Swiper('.banner-second', {
+						pagination: '.banner-second-pagination',
+					});
+					var mySwiper = new Swiper('.banner-third', {
+						pagination: '.banner-third-pagination',
+					});
+					var mySwiper = new Swiper('.recom-container', {
+						pagination: '.recom-pagination',
+						slidesPerView: 1,
+						paginationClickable: true,
+					});
+					var mySwiper = new Swiper('.brand-container', {
+						pagination: '.brand-pagination',
+						slidesPerView: 1,
+						paginationClickable: true,
+					});
+					var mySwiper = new Swiper('.hot-container', {
+						slidesPerView: 4,
+						paginationClickable: true,
+					});
+				});
+			</script>
+	</body>
+
+</html>

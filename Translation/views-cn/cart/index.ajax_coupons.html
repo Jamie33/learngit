@@ -1,0 +1,46 @@
+
+    <section class="goods-show-title of-hidden padding-all b-color-f">
+        <h3 class="fl g-c-title-h3">领取优惠券  ({count($coupons_list)})</h3>
+        <i class="iconfont icon-guanbi2 show-div-guanbi fr"></i>
+    </section>
+    <section class="goods-show-con padding-all swiper-scroll" id="goods-show-con">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide  cart_conpons_list">
+                <ul>
+                    {foreach $coupons_list as $coupons}
+                    <li class="dis-box new-coupons-box {if $coupons.enable_ling == 1}enable-ling{/if} ">
+                        <div class="box-flex remark-all p-r">
+                            <div class="q-type">
+                                <div class="b-r-a-price">
+                                    <em>¥</em><strong class="coupons-money">{$coupons.cou_money}</strong>
+                                    <div class="couons-text text-left color-dark" style="float:none;padding-top: 2rem;">
+                                        <span style="font-size:1.2rem">满{$coupons.cou_man}元可用</span>
+                                    </div>
+                                </div>
+                                <div class="b-r-a-con text-left ">
+                                    <div class="range-item">{$coupons.cou_title}</div>
+                                    <div class="range-item col-7">{$coupons.cou_start_time} 至 {$coupons.cou_end_time}</div>
+                                </div>
+                            </div>
+                            <b class="semi-circle"></b>
+                            {if $coupons.cou_is_receive == 1}
+                            <div class="print-img">
+                                <img src="__TPL__/img/coupons-print.png">
+                            </div>
+                            {/if}
+                        </div>
+                        {if $coupons.cou_is_receive == 1}
+                            <a class="b-r-a-btn b-color-f temark-3-text tb-lr-center" href="javascript:;" >已领取</a>
+                        {elseif $coupons.enable_ling == 1}
+                            <a class="b-r-a-btn b-color-f temark-3-text tb-lr-center " >已抢完</a>
+                        {else}
+                            <a class="b-r-a-btn b-color-f temark-3-text tb-lr-center" href="javascript:;" onclick="receivebonus('{$coupons.cou_id}')">立即<br />领取</a>
+                        {/if}
+                    </li>
+                    {/foreach}
+                </ul>
+                <div class="counpons_all_link text-center f-05 "><a href="{url('coupont/index/index')}" >全部优惠券</a><span class="t-jiantou"><i class="iconfont icon-jiantou tf-180"></i></span></div>
+            </div>
+        </div>
+        <div class="swiper-scrollbar"></div>
+    </section>

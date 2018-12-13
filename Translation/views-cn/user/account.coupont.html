@@ -1,0 +1,124 @@
+{include file="page_header"}
+<style>
+.coupon-nav{margin:.7rem auto 0;overflow:hidden;}
+.coupon-nav span{padding: .4rem 0;font-size:1.3rem;color: #333;background: #ddd;width:6rem;display: block;text-align: center;float:left;border-right:1px solid #ccc;}
+.coupon-nav span:first-child{border-radius: 5px 0 0 5px}
+.coupon-nav span:last-child{border-radius: 0 5px 5px 0;border-right:none;}
+.coupon-nav span.active{background:#ec5151;}
+.coupon-nav span.active a{color:#fff;}
+.coupon-nav-cont{display: inline-block;}
+
+.coupons_is_use a.b-r-a-btn {background:#d2d2d2;}
+.coupons_is_use .b-r-a-price  {color:#8c8c8c}
+</style>
+<div class="con">
+    <div class="flow-coupon user-coupon">
+        <nav class="tab-title b-color-f of-hidden">
+            <ul class="dis-box">
+                <li class="box-flex active"><a >我的优惠券</a></li>
+            </ul>
+        </nav>
+        <div class="coupon-nav">
+            <div class="coupon-nav-cont">
+                <span class=" {if empty($status)}active{/if}"><a status="0" >未使用</a></span>
+                <span class=" {if $status == 1}active{/if}"><a status="1" >已使用</a></span>
+                <span class=" {if $status == 2}active{/if}"><a status="2" >已过期</a></span>
+            </div>
+        </div>
+
+        <div id="j-tab-con" class="tab-con">
+            <div class="swiper-wrapper">
+                <section class="swiper-slide store_info">
+                    <script id="j-product" type="text/html">
+                        <%if coupons_list.tab !=''%>
+                        <ul class="padding-all">
+                            <%each coupons_list.tab as order%>
+                            <li class="dis-box new-coupons-box  <%if order.is_use == 1 || order.is_overdue == 1 %> coupons_is_use <%/if%>  ">
+                                <div class="box-flex remark-all p-r">
+                                    <div class="q-type">
+                                        <div class="b-r-a-price">
+                                            <%if order.cou_type == 5 %>
+                                            <strong class="coupons-money">免邮</strong>
+                                            <%else%>
+                                            <em>¥</em>
+											<strong class="coupons-money">
+												<%if !order.order_sn %>
+													<%if order.uc_money > 0 %>
+													<%order.uc_money%>
+													<%else%>
+													<%order.cou_money%>
+													<%/if%>
+												<%else%>
+													<%order.order_coupons%>
+												<%/if%>	
+											</strong>
+                                            <%/if%>
+                                            <div class="couons-text text-left " style="float:none;" >
+                                                <span class='f-03'><%order.cou_type_name%></span>
+                                            </div>
+                                            <div class="couons-text text-left color-dark" >
+                                                <span class='f-03'>满<%order.cou_man%>元可用</span>
+                                            </div>
+                                        </div>
+                                        <div class="b-r-a-con text-left">
+                                            <div class="range-item"><%order.cou_title%></div>
+                                            <div class="range-item "><%order.store_name%></div>
+                                            <!-- <div class="range-item">满<%order.cou_man%>元可用</div> -->
+                                            <div class="range-item col-7"><%order.begintime%> 至 <%order.endtime%></div>
+                                        </div>
+                                    </div>
+                                    <b class="semi-circle"></b>
+                                </div>
+                                <%if order.is_use == 0 && order.is_overdue == 0 %>
+                                <a class="b-r-a-btn b-color-f temark-1-text tb-lr-center " href="<%order.to_use_url%>" >立即<br />使用</a>
+                                <%else if order.is_use == 1%>
+                                <a class="b-r-a-btn b-color-f temark-1-text tb-lr-center " href="javascript:;"  >已使用</a>
+                                <%else if order.is_overdue == 1%>
+                                <a class="b-r-a-btn b-color-f temark-1-text tb-lr-center " href="javascript:;"  >已过期</a>
+                                <%/if%>
+                            </li>
+                            <%/each%>
+                        </ul>
+                        <%else%>
+                        <div class="no-div-message">
+                            <i class="iconfont icon-biaoqingleiben"></i>
+                            <p>亲，还没有优惠券哦～！</p>
+                        </div>
+                        <%/if%>
+                    </script>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--快捷导航-->
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+    <script type="text/javascript">
+        // 调整子菜单样式
+        var coupon_nav_cont = $(".coupon-nav-cont").outerWidth(true);
+        $(".coupon-nav").css("width",coupon_nav_cont);
+
+        $(".j-tab-title li").on('touchstart mousedown', function(e) {
+            e.preventDefault()
+            $(".j-tab-title .active").removeClass('active')
+            $(this).addClass('active')
+            tabsSwiper.slideTo($(this).index())
+        })
+        $(".j-tab-title li").click(function(e) {
+            e.preventDefault()
+        })
+
+        //列表
+        var infinite = $('.store_info').infinite({url: "{url('user/account/coupont')}",template: 'j-product',params: 'status={$status}'});
+
+        $(".coupon-nav-cont span a").click(function() {
+            var status = $(this).attr('status');
+            infinite.onload('status=' + status);
+            $(this).parent().addClass("active").siblings().removeClass("active");
+            $(".semi-circle").css("height",$(".new-coupons-box").outerHeight())
+        })
+            $(".semi-circle").css("height",$(".new-coupons-box").outerHeight())
+    </script>
+</body>
+</html>

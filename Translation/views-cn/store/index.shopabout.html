@@ -1,0 +1,232 @@
+{include file="page_header"}
+		<div class="con">
+			<div class="shopping-about">
+				<section class="padding-all goods-shop b-color-f">
+					<header class="goods-shop-info">
+						<a href="{url('store/index/shop_info',array('id'=>$info.ru_id))}" class="link-abs"></a>
+						<section class="dis-box">
+							<div class="g-s-i-img"><img src="{$info.shop_logo}" /></div>
+							<div class="g-s-i-title box-flex">
+								<h3 class="ellipsis-one">{$info.shop_name}</h3>
+                                <p class="t-remark m-top04">已经有 <span class="num{$info.ru_id}">{$info.count_gaze}</span> 人关注</p>
+							</div>
+							<div class="g-s-info-add">
+
+								<a class="gaze{$info.ru_id} {$info.gaze_status}"  onclick="addgaze({$info.ru_id})">
+									<span id="store-list">
+									{if $info.gaze_status =='active'}
+										已关注
+									{else}
+										<i class="iconfont icon-aixin"></i>关注
+									{/if}
+								</span>
+								</a>
+							</div>
+						</section>
+						<section class="dis-box goods-shop-score m-top12">
+							<p class="box-flex">
+								<label class="fl">商品</label><span class="t-first margin-lr fl">{$info.commentrank}</span><em class="em-promotion fl">{$info.commentrank_font}</em></p>
+							<p class="box-flex">
+								<label class="fl">服务</label><span class="t-low margin-lr fl">{$info.commentserver}</span><em class="em-promotion em-p-low fl">{$info.commentserver_font}</em></p>
+							<p class="box-flex">
+								<label class="fl">时效</label><span class="t-center margin-lr fl">{$info.commentdelivery}</span><em class="em-promotion em-p-center fl">{$info.commentdelivery_font}</em></p>
+						</section>
+
+					</header>
+				</section>
+			</div>
+			<div class="shopping-info-nums b-color-f m-top1px">
+				<ul class="dis-box text-center">
+
+					<li class="box-flex">
+                    <a href="{url('store/index/pro_list',array('ru_id'=>$info.ru_id))}">
+						<h4>{$info.count_goods}</h4>
+						<p class="t-remark3 m-top02">全部商品</p>
+                    </a>
+					</li>
+
+
+					<li class="box-flex">
+                    <a href="{url('store/index/pro_list',array('ru_id'=>$info.ru_id,'type'=>'store_new'))}">
+						<h4>{$info.count_goods_new}</h4>
+						<p class="t-remark3 m-top02">新品</p>
+                    </a>
+                    </li>
+
+                    <li class="box-flex">
+                    <a href="{url('store/index/pro_list',array('ru_id'=>$info.ru_id,'type'=>'is_promote'))}">
+
+						<h4>{$info.count_goods_promote}</h4>
+						<p class="t-remark3 m-top02">促销</p>
+                    </a>
+                    </li>
+
+				</ul>
+			</div>
+
+
+
+			<div class="m-top08 shopping-about-icon">
+				<section class="padding-all b-color-f m-top1px">
+                    {if $has_kefu ==1 }
+                        <a href="{url('chat/index/index', array('ru_id'=> $info.ru_id))}">
+                        <div class="dis-box">
+						<label class="t-remark p-top g-t-temark">在线客服</label>
+						<span class="box-flex p-top"></span>
+						<div class="f-04"><span class="t-jiantou fr"><i class="iconfont icon-kefu"></i></span></div>
+                        </div>
+                        </a>
+
+                    {elseif $info.kf_appkey &&$info.is_im ==1 }
+                    <a href="{url('chat/yunwang/index', array('ru_id'=> $info.ru_id))}">
+                        <div class="dis-box">
+						<label class="t-remark p-top g-t-temark">在线客服</label>
+						<span class="box-flex p-top"></span>
+						<div class="f-04"><span class="t-jiantou fr"><i class="iconfont icon-kefu"></i></span></div>
+					</div>
+                     </a>
+                    {elseif !empty($info.meiqia) }
+                    <a href="https://static.meiqia.com/dist/standalone.html?eid={$info.meiqia}">
+					<div class="dis-box">
+						<label class="t-remark p-top g-t-temark">在线客服</label>
+						<span class="box-flex p-top"></span>
+						<div class="f-04"><span class="t-jiantou fr"><i class="iconfont icon-kefu"></i></span></div>
+					</div>
+                    </a>
+                    {else}
+                    <a href="https://wpa.qq.com/msgrd?v=3&amp;uin={$info.shop_qq}&amp;site=qq&amp;menu=yes">
+					<div class="dis-box">
+						<label class="t-remark p-top g-t-temark">在线客服</label>
+						<span class="box-flex p-top"></span>
+						<div class="f-04"><span class="t-jiantou fr"><i class="iconfont icon-kefu"></i></span></div>
+					</div>
+                    </a>
+                    {/if}
+
+
+
+				</section>
+                <section class="padding-all b-color-f m-top1px">
+                    <div class="dis-box j-show-div">
+                        <label class="t-remark p-top g-t-temark">店铺二维码</label>
+                        <span class="box-flex"></span>
+                        <span class="t-jiantou fr"><i class="iconfont icon-904anquansaoma"></i></span>
+                        <div class="show-temark-div j-filter-show-div">
+                        	<h4>{$info.shop_name}</h4>
+                        	<div class="img-new-box"><img src="{$info.code}"></div>
+                        	<p>邀请好友扫一扫分享店铺给TA</p>
+                        </div>
+                    </div>
+                </section>
+				<section class="padding-all b-color-f m-top1px">
+                    <a href="tel:{$info.shop_tel}">
+					<div class="dis-box">
+						<label class="t-remark p-top g-t-temark">商家电话</label>
+						<span class="box-flex p-top t-goods1">{$info.shop_tel}</span>
+						<span class="t-jiantou fr"><i class="iconfont icon-a"></i></span>
+					</div>
+                    </a>
+				</section>
+			</div>
+			<div class="m-top08">
+				<section class="padding-all b-color-f m-top1px">
+					<div class="dis-box">
+						<label class="t-remark g-t-temark">店铺简介</label>
+						<span class="box-flex t-goods1">{$info.street_desc}</span>
+					</div>
+				</section>
+				<section class="padding-all b-color-f m-top1px">
+					<div class="dis-box">
+						<label class="t-remark g-t-temark">公司名称</label>
+						<span class="box-flex t-goods1">{$info.shop_desc}</span>
+					</div>
+				</section>
+
+				<section class="padding-all b-color-f m-top1px">
+                    <a class="dis-box" href="http://apis.map.qq.com/uri/v1/geocoder?coord={$info.lat},{$info.long}&referer=ectouch">
+						<label class="t-remark g-t-temark">所在地区</label>
+						<span class="box-flex t-goods1">{$info.shop_address}</span>
+                        {if $info.shop_address }
+                        <div class="f-04"><span class="t-jiantou fr" style="padding-right:0;margin-top:0;"><i class="iconfont icon-dingwei" style="font-size:1.8rem"></i></span></div>
+                        {/if}
+					</a>
+				</section>
+
+                <section class="padding-all b-color-f m-top1px">
+                    <div class="dis-box">
+                        <label class="t-remark g-t-temark">主营品牌</label>
+                        <span class="box-flex t-goods1">{$info.shoprz_brandName}</span>
+                    </div>
+                </section>
+
+                <section class="padding-all b-color-f m-top1px">
+                    <div class="dis-box">
+                        <label class="t-remark g-t-temark">商家等级</label>
+                        <span class="box-flex t-goods1"><img src="{$info.grade_img}" width="20" /> {$info.grade_name}</span>
+                    </div>
+                </section>
+			</div>
+		</div>
+        <div class="mask-filter-div"></div>
+     <!--快捷导航-->
+    {include file="float_nav"}
+                <li>
+                    <a href="{url('store/index/index')}">
+                         <i class="iconfont icon-viewlist"></i>
+                         <p>店铺街</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:history.go(-1);">
+                         <i class="iconfont icon-dianpu"></i>
+                         <p>店铺</p>
+                    </a>
+                </li>
+    {include file="float_nav_footer"}
+		<script>
+
+		 //店铺关注
+         function addgaze(shop){
+             if(shop!=''){
+                 $.post(ROOT_URL + 'index.php?m=store&a=add_collect', {shopid: shop}, function(data){
+                     if(data.error==1){
+                         $(".gaze"+shop).addClass("active");
+                         $(".gaze"+shop).find('span').text("已关注");
+                     }
+                     if(data.error==2){
+                         $(".gaze"+shop).removeClass("active");
+                          $(".gaze"+shop).find('span').html('<i class="iconfont icon-aixin"></i>' + '关注');
+                     }
+                     var num = $(".num"+shop).text();
+                     if(data.error==1){
+                         num = num*1 + 1;
+                         $(".num"+shop).text(num);
+                     }else if(data.error==2){
+                         if(num>0)
+                         {
+                             num = num*1 - 1;
+                             $(".num"+shop).text(num);
+                         }
+                     }
+                     if(data.error>0){
+                         d_messages(data.msg);
+                     }else {
+                         layer.open({
+                             content: '请登录后关注该店铺',
+                             btn: ['立即登录', '取消'],
+                             shadeClose: false,
+                             yes: function () {
+                                 window.location.href = ROOT_URL + "index.php?m=user&c=login";
+                             },
+                             no: function () {
+                             }
+                         });
+                     }
+                 }, 'json');
+             }
+         }
+
+        </script>
+	</body>
+
+</html>

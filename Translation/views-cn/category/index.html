@@ -1,0 +1,167 @@
+{include file="page_header"}
+<div class="con">
+    <div class="category-top blur-div">
+        <header>
+            <section class="search category-search">
+                <div class="text-all dis-box j-text-all text-all-back">
+                    <div class="box-flex input-text n-input-text i-search-input">
+                        <a class="a-search-input" href="{url('search/index/index')}"></a>
+                        <div class="j-input-text nav-soso"><i class="iconfont icon-sousuo"></i>商品/店铺搜索</div>
+                    </div>
+                    {if $cat_id}
+                    <a href="javascript:void(0)" class="s-filter j-s-filter">筛选</a>
+                    {/if}
+                </div>
+            </section>
+        </header>
+        <aside>
+            <div class="menu-left" id="sidebar">
+                <ul>
+                    {foreach $category as $key=>$val}
+                    <li data="{url('category/index/childcategory', array('id'=>$val['id']))}" data-id="{$val.id}">
+                        {sub_str($val['name'], 4,'')}
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+        </aside>
+        <section class="menu-right padding-all" style="margin-bottom:4.6rem">
+            <ul class="child_category"></ul>
+            <script id="category" type="text/html">
+                <%each category as value%>
+                <%if value.cat_id%>
+                <a href="<%value.url%>"><h5><%value.name%></h5></a>
+                <ul>
+                    <%each value.cat_id as cat%>
+                    <li class="w-3"><a href="<%cat.url%>"></a><img src="<%cat.cat_img%>" alt="<%cat.name%>"/><span><%cat.name%></span>
+                    </li>
+                    <%/each%>
+                </ul>
+                <%else%>
+                <li class="w-3"><a href="<%value.url%>"></a><img src="<%value.cat_img%>" alt="<%value.name%>"/><span><%value.name%></span>
+                </li>
+                <%/if%>
+                <%/each%>
+            </script>
+        </section>
+    </div>
+    <footer class="footer-nav dis-box">
+        <a href="{url('/')}" class="box-flex nav-list">
+            <i class="nav-box i-home"></i><span>首页</span>
+        </a>
+        <a href="{url('category/index/index')}" class="box-flex nav-list  active">
+            <i class="nav-box i-cate"></i><span>分类</span>
+        </a>
+        <a href="{url('search/index/index')}" class="box-flex nav-list">
+            <i class="nav-box i-shop"></i><span>搜索</span>
+        </a>
+        <a href="{url('cart/index/index')}" class="box-flex position-rel nav-list">
+            <i class="nav-box i-flow"></i><span>购物车</span>
+        </a>
+        {if $filter}
+        <a href="{url('drp/user/index')}" class="box-flex nav-list">
+            <i class="nav-box i-user"></i><span>{$custom}中心</span>
+        </a>
+        {elseif $community}
+        <a href="{url('community/index/index')}" class="box-flex nav-list">
+            <i class="nav-box i-user"></i><span>社区</span>
+        </a>
+        {else}
+        <a href="{url('user/index/index')}" class="box-flex nav-list">
+            <i class="nav-box i-user"></i><span>我</span>
+        </a>
+        {/if}
+    </footer>
+    <!--悬浮菜单e-->
+</div>
+<script type="text/javascript">
+    $(function () {
+        var cat_id = 0;
+        //取出上次位置的值并保存
+        var sLocalCateO = sessionStorage.getItem("sCateO");
+        if (sLocalCateO != "" && sLocalCateO) {
+            var oCate = JSON.parse(sLocalCateO);
+            ajaxAction($("#sidebar li:first"), oCate.sData, oCate.sDataId);
+            $(".menu-left ul li").each(function () {
+                $(this).removeClass("active")
+                if ($(this).attr("data-id") == oCate.sDataId) {
+                    $(this).addClass("active")
+                }
+            })
+        } else {
+            ajaxAction($("#sidebar li:first"), $("#sidebar li:first").attr("data"), $("#sidebar li:first").attr("data-id"));
+        }
+
+        $("#sidebar li").click(function () {
+            var li = $(this);
+            var url = $(this).attr("data");
+            var id = $(this).attr("data-id");
+            ajaxAction(li, url, id);
+        });
+
+        function ajaxAction(obj, url, id) {
+            if (cat_id != id) {
+                $.ajax({
+                    type: 'get',
+                    url: url,
+                    data: '',
+                    cache: true,
+                    async: false,
+                    dataType: 'json',
+                    beforeSend: function () {
+                        $(".loading").show();
+                    },
+                    success: function (result) {
+                        if (typeof(result.code) == 'undefined') {
+                            $(window).scrollTop(0);
+                            template.config('openTag', '<%');
+                            template.config('closeTag', '%>');
+                            var html = template('category', result);
+                            $(".child_category").html(html);
+                            //$(".child_category ul").html(result);
+                            obj.addClass("active").siblings("li").removeClass("active");
+                        }
+                        else {
+                            d_messages(result.message);
+                        }
+                    },
+                    complete: function () {
+                        $(".loading").hide();
+                    }
+                });
+                cat_id = id;
+            }
+        }
+
+        //返回之前页面的操作位置
+        //将value存储到key字段
+        $(".menu-left").scroll(function () {
+            if ($(".menu-left").scrollTop() != 0) {
+                sessionStorage.setItem("offsetTop", $(".menu-left").scrollTop());//保存滚动位置
+            }
+        });
+        //取出并滚动到上次保存位置
+        var _offset = sessionStorage.getItem("offsetTop");
+        $(".menu-left").scrollTop(_offset);
+
+        //将value存储到key字段
+        $(".menu-left ul li").click(function () {
+            if ($(this).hasClass("active")) {
+                var sDataId = $(this).attr("data-id"),
+                    sData = $(this).attr("data")
+                sO = JSON.stringify({
+                    sDataId: sDataId,
+                    sData: sData
+                })
+                sessionStorage.setItem("sCateO", sO);//保存id,data
+            }
+        });
+        setTimeout(function () {
+            sessionStorage.removeItem("offsetTop");
+            sessionStorage.removeItem("sCateO");
+        }, 10000);
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+{include file="page_header"}
+		<div class="con mb-7">
+
+			<!--头部导航-->
+			<div class="padding-all select-one-1">
+				<ul class="dis-box j-get-one">
+					<li class="ect-select box-flex list-select promotion my-but-pre" postgoodstype="1" >
+						<label class="ts-1 dis-block active" >已购买</label>
+					</li>
+					{if $commentid != 4}
+					<li class="ect-select box-flex my-but-pre" postgoodstype="2">
+						<label class="ts-1 dis-block">购物车</label>
+					</li>
+					<li class="ect-select box-flex list-select hasgoods my-but-pre"   postgoodstype="3">
+						<label class="ts-1 dis-block">已收藏</label>
+					</li>
+					<li class="ect-select box-flex list-select promotion my-but-pre"   postgoodstype="4">
+						<label class="ts-1 dis-block">已浏览</label>
+					</li>
+					{/if}
+				</ul>
+			</div>
+			<!--menu-->
+			<nav class="index-nav-1 com-post-box-1 com-post-box select-com padding-all" id="postgoods">
+				{include file="post.goods"}
+			</nav>
+		</div>
+		<!--悬浮btn star-->
+		<section class="filter-btn">
+			<form action="{url('index')}" method="post" name="theForm" id="theForm" onSubmit="return checkselectedgoodsidForm(this)">
+				<input type="hidden" name="commentid" value="{$commentid}" />
+				<input type="hidden" name="goods_id" value="" />
+				<input type="hidden" name="order_id" value="" />
+				<input type="hidden" name="title" value="{$title}" />
+				<input type="hidden" name="content" value="{$content}" />
+				<button class="btn-submit" type="submit">确定</button>
+			</form>
+		</section>
+		<!--悬浮btn end-->
+		       <!--快捷导航-->
+	{include file="float_nav"}
+     <li>
+        <a href="{url('community/index/index')}">
+            <i class="iconfont icon-medal"></i>
+            <p>社区首页</p>
+        </a>
+     </li>
+      <li>
+         <a href="{url('community/post/index')}">
+            <i class="iconfont icon-paizhao"></i>
+            <p>去发帖</p>
+        </a>
+      </li>
+    {include file="float_nav_footer"}
+	<!--引用js-->
+
+<script>
+$(function(){
+    /*店铺信息商品滚动*/
+	var swiper = new Swiper('.j-g-s-p-con', {
+		scrollbarHide: true,
+		slidesPerView: 'auto',
+		centeredSlides: false,
+		grabCursor: true
+	});
+
+	// 首次加载
+	var postgoodstype = '1';//$('.select-one-1 ul li label active').parents('li').siblings().attr('postgoodstype');
+
+	// (this).addClass("selected").parents(".other-ava ul li").siblings().find("a").removeClass("selected");
+
+	if (postgoodstype > 0){
+		$.post("{url('changeaddpost')}", {postgoodstype: postgoodstype}, function(result){
+			if(result.error != 1 && result.content) {
+				$("#postgoods").html(result.content);
+			}
+		}, 'json');
+	}
+
+	$('.select-one-1 ul li').on('click', function(e) {
+		var postgoodstype = $(this).attr('postgoodstype');
+		$(this).siblings().removeClass("active");
+		$(this).addClass("active");
+		$.post("{url('changeaddpost')}", {postgoodstype: postgoodstype}, function(result){
+			if(result.error != 1) {
+				if(result.content){
+					$("#postgoods").html(result.content);
+				}
+			}
+		}, 'json');
+	});
+
+});
+</script>
+<script>
+	function checkselectedgoodsidForm(frm){
+		var goods_id = $("form#theForm input[name='goods_id']").val();
+		if(!goods_id){
+			var content = '请选着一件商品';
+			d_messages(content);
+			return false;
+		}
+	}
+</script>
+</body>
+</html>

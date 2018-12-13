@@ -1,0 +1,74 @@
+{include file="page_header"}
+		<div class="con">
+			<form action="{url('add_booking')}" method="post" onsubmit="return addBooking();">
+			<div class="user-recharge b-color-f">
+				<section class="m-top1px margin-lr">
+					<div class="text-all dis-box j-text-all">
+						<div class="box-flex input-text f-05">
+							{$info.goods_name}
+						</div>
+					</div>
+				</section>
+				<section class="m-top1px margin-lr">
+					<div class="text-all dis-box j-text-all">
+						<label class="t-remark">订购数量</label>
+						<div class="box-flex input-text">
+							<input class="j-input-text" type="text" name="number" value="{$info.goods_number}">
+						</div>
+					</div>
+				</section>
+				<section class="m-top1px padding-tb margin-lr" style="padding-bottom:0;">
+					<div class="f-c-select-msg">
+						<label class="t-remark">订购描述<span class="t-remark">（50字）</span></label>
+						<div class="text-area1 m-top04">
+							<textarea class="text-area1" maxlength="50" name="desc" placeholder="选填">{$goods_attr}{$info.goods_desc}</textarea>
+							<span>50</span>
+						</div>
+					</div>
+				</section>
+				<section class="m-top1px margin-lr">
+					<div class="text-all dis-box j-text-all">
+						<label class="t-remark">联系人:</label>
+						<div class="box-flex input-text">
+							<input class="j-input-text" type="text" name="linkman" value="{$info.consignee}">
+						</div>
+					</div>
+				</section>
+				<section class="m-top1px margin-lr">
+					<div class="text-all dis-box j-text-all">
+						<label class="t-remark">邮箱地址:</label>
+						<div class="box-flex input-text">
+							<input class="j-input-text" type="text" name="{$info.email}">
+						</div>
+					</div>
+				</section>
+				<section class="m-top1px margin-lr">
+					<div class="text-all dis-box j-text-all">
+						<label class="t-remark">联系电话:</label>
+						<div class="box-flex input-text">
+							<input class="j-input-text" type="text" name="tel" value="{$info.tel}">
+						</div>
+					</div>
+				</section>
+			</div>
+			<div class="dis-box filter-btn">
+				<input name="id" type="hidden" value="{$info.id}" />
+		        <input name="rec_id" type="hidden" value="{$info.rec_id}" />
+				<button type="submit" class="btn-submit box-flex">提交缺货登记</button>
+				<button type="reset" class="btn-reset box-flex btn-clear">重置</button>
+			</div>
+			</form>
+     <!--快捷导航-->
+    {include file="float_nav"} 
+    {include file="float_nav_footer"}
+		</div>
+		<script type="text/javascript">
+			$(function($) {
+				$('.btn-clear').click(function(){
+					$('input,textarea').val("");
+				});
+			});
+		</script>
+	</body>
+
+</html>

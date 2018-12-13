@@ -1,0 +1,332 @@
+{include file="page_header"}
+<style type="text/css" media="all">
+	.section-swiper-box{background:#FCF3CD;position:relative;top: 0;width: 100%;left: 0;right: 0;}
+	.section-swiper-box a{color:#EDA407;}
+	.section-swiper-one{height:3rem;overflow:hidden;white-space:nowrap;margin:0 4rem 0 1.1rem;list-style:none;line-height:3rem;font-size:12px;color:#EDA407;}
+	.section-swiper-two {width:auto;height:auto;font-size:12px;float:left;overflow:hidden;}
+	.section-swiper-box .icon-guanbi2{position:absolute;right:1.1rem; font-size:1.6rem;top:50%;margin-top:-.7rem;color:#EDA407;}
+</style>
+{if $auction}
+<section class="section-swiper-box">
+	<div class="section-swiper-one" id="section-swiper-one" onmouseover="clearInterval(timer)" onmouseout="timer=setInterval(mar,30)">
+		<div class="swiper-scroll" id="swiper-scroll">
+			<div class="section-swiper-two" id="section-swiper-two">
+				<ul>
+					{foreach $auction as $val}
+					<a href="{$val.url}">温馨提示：恭喜拍卖中的商品{$val.goods_name}。</a>
+					{/foreach}
+
+				</ul>
+			</div>
+			<div id="section-swiper-three" class="section-swiper-two"></div>
+		</div>
+	</div>
+	<i class="iconfont icon-guanbi2" ></i>
+</section>
+{/if}
+<div class="con mb-7">
+	<header class="user-header-box position-rel">
+		<div class="padding-all">
+			<a href="{url('profile/index')}">
+				<div class="user-header">
+					{if $info.user_picture !=='' }
+					<div class="heaer-img img-commom"><img src="{$info.user_picture}"></div>
+					{else}
+					<div class="heaer-img img-commom"><img src="{elixir('img/no_image.jpg')}"></div>
+					{/if}
+				</div>
+			</a>
+			<a href="{url('profile/index')}" class="box-flex">
+				<div class="header-admin">
+
+					<h4 class="ellipsis-one f-06">{$info.nick_name}</h4>
+					<p class="color-whie f-02 m-top02">{$rank.user_rank.rank_name}</p>
+				</div>
+			</a>
+			<div class="header-icon">
+				<a class="youxiang" href="{url('index/messagelist')}">
+					{if $cache_info }
+					<div class="tishi-tag"></div>
+					{/if}
+					<label class="f-02">消息</label>
+				</a>
+
+				<a class="shezhi" href="{url('profile/index')}">
+					<i class="iconfont icon-shezhi"></i>
+				</a>
+			</div>
+		</div>
+		</a>
+	</header>
+	<!--order-list-->
+	<section class="b-color-f user-function-list">
+		<a href="{url('order/index',array('status'=>0))}">
+			<div class="dis-box padding-all wallet-bt">
+				<h3 class="box-flex"><i class="iconfont icon-iconfontquanbudingdan color-red"></i>我的订单</h3>
+				<div class="box-flex f-03 text-right onelist-hidden jian-top">全部订单</div>
+				<span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+			</div>
+		</a>
+		<ul class="user-order-list g-s-i-title-2 dis-box text-center ">
+			<a href="{url('user/order/index', array('status'=>1))}" class="box-flex">
+
+				<li>
+					<h4><i class="iconfont icon-daifukuan"></i></h4>
+					<p class="t-remark3">待付款</p>
+					{if $pay_count > 0}
+					<div class="user-list-num">{$pay_count}</div>
+					{/if}
+				</li>
+			</a>
+			{if $team}
+			<a href="{url('team/user/index')}" class="box-flex">
+
+				<li>
+					<h4><i class="iconfont icon-wodetuandui"></i></h4>
+					<p class="t-remark3">待拼团</p>
+					{if $team_num > 0}
+					<div class="user-list-num">{$team_num}</div>
+					{/if}
+				</li>
+			</a>
+			{/if}
+			<a href="{url('user/order/index',array('status'=>2))}" class="box-flex">
+				<li>
+					<h4><i class="iconfont icon-wodetubiaosvg03"></i></h4>
+					<p class="t-remark3">待收货</p>
+					{if $confirmed_count > 0}
+					<div class="user-list-num">{$confirmed_count}</div>
+					{/if}
+				</li>
+			</a>
+			<a href="{url('user/index/comment_list')}" class="box-flex">
+				<li>
+					<h4><i class="iconfont icon-pinglun1" style="font-size:2.3rem;"></i></h4>
+					<p class="t-remark3">待评价</p>
+					{if $not_comment > 0}
+					<div class="user-list-num">{$not_comment}</div>
+					{/if}
+				</li>
+			</a>
+			<a href="{url('user/refound/index')}" class="box-flex">
+				<li>
+					<h4><i class="iconfont icon-tuihuanhuo"></i></h4>
+					<p class="t-remark3">退换货</p>
+					{if $return_count > 0}
+					<div class="user-list-num">{$return_count}</div>
+					{/if}
+				</li>
+			</a>
+		</ul>
+	</section>
+	<!--money-list-->
+	<section class="m-top08 user-function-list b-color-f">
+		<a href="{url('user/account/index')}">
+			<div class="dis-box padding-all wallet-bt">
+				<h3 class="box-flex"><i class="iconfont icon-qianbao  color-fe"></i>我的钱包</h3>
+				<div class="box-flex f-03 text-right onelist-hidden jian-top">资金管理</div>
+				<span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+			</div>
+		</a>
+		<ul class="user-order-list  dis-box text-center">
+			<a href="{url('user/account/index')}" class="box-flex">
+				<li>
+					<h4 class="ellipsis-one">{$info.user_money}</h4>
+					<p class="t-remark3">余额</p>
+				</li>
+			</a>
+			<a href="{url('user/account/bonus')}" class="box-flex">
+
+				<li>
+					<h4 class="ellipsis-one">{$bonus}</h4>
+					<p class="t-remark3">红包</p>
+				</li>
+			</a>
+			<a href="javascript:;" class="box-flex">
+				<li>
+					<h4 class="ellipsis-one">{$info.pay_points}</h4>
+					<p class="t-remark3">积分</p>
+				</li>
+			</a>
+			<a href="{url('user/account/coupont')}" class="box-flex">
+				<li>
+					<h4 class="ellipsis-one">{$coupons_num}</h4>
+					<p class="t-remark3">优惠券</p>
+				</li>
+			</a>
+		</ul>
+	</section>
+	<section class="m-top06" style="display: none">
+		<div class="index-banner swiper-container box mb-1 banner-second">
+				<div class="swiper-wrapper">
+				{insert_ads(array('id'=>267, 'num'=>6))}
+				</div>
+				<!-- 分页器 -->
+				<div class="swiper-pagination br-half text-c banner-second-pagination" style="bottom: 10px;"></div>
+			</div>
+	</section>
+	<!--function-nav-list-->
+	<nav class="b-color-f user-nav-box m-top08">
+		<div class="box ul-4 text-c b-color-f">
+			<a href="{url('user/index/collectionlist')}">
+				<label><i class="iconfont icon-zan-alt color-fe"></i></label>
+				<p class="f-02 col-7">收藏的商品</p>
+			</a>
+			<a href="{url('user/index/storelist')}" class="">
+				<label><i class="iconfont icon-star-n color-f9c"></i></label>
+				<p class="f-02 col-7">关注的店铺</p>
+			</a>
+			{if $share}
+			<a href="{url('user/index/affiliate')}">
+				<label><i class="iconfont icon-fenxiang3 color-e72"></i></label>
+				<p class="f-02 col-7">我的分享</p>
+			</a>
+			{/if}
+			<!--<a href="{url('user/index/service')}">-->
+				<!--<label><i class="iconfont icon-3shouce color-f9c"></i></label>-->
+				<!--<p class="f-02 col-7">服务中心</p>-->
+			<!--</a>-->
+			{if $drp}
+			<a href="{url('drp/index/index')}">
+				<label><i class="iconfont icon-dianpu color-red"></i></label>
+				<p class="f-02 col-7">我的微店</p>
+			</a>
+			{/if}
+			<a href="{url('user/crowd/index')}">
+				<label><i class="iconfont icon-zichou color-ff7"></i></label>
+				<p class="f-02 col-7">我的微筹</p>
+			</a>
+			{if $team}
+			<a href="{url('team/index/index')}">
+				<label><i class="iconfont icon-wodetuandui  color-f9c"></i></label>
+				<p class="f-02 col-7">拼团频道</p>
+			</a>
+			{/if}
+			<a href="{url('merchants/index/index')}">
+				<label><i class="iconfont icon-shangjiaruzhu- color-98"></i></label>
+				<p class="f-02 col-7">商家入驻</p>
+			</a>
+			<a href="{url('user/index/history')}">
+				<label><i class="iconfont icon-zuji color-c78"></i></label>
+				<p class="f-02 col-7">浏览记录</p>
+			</a>
+
+			{if $bargain && $is_wechat == 1}
+			<a href="{url('user/bargain/index')}">
+				<label><i class="iconfont icon-40kanjia color-red"></i></label>
+				<p class="f-02 col-7">我的砍价</p>
+			</a>
+			{/if}
+			{if $purchase && $is_wechat == 1 && $demand == 0}
+			<a href="{url('purchase/index/index')}">
+				<label><i class="iconfont icon-btn_pljj color-fe"></i></label>
+				<p class="f-02 col-7">我的批发</p>
+			</a>
+			<a href="{url('purchase/order/index')}">
+				<label><i class="iconfont icon-btn_pljj color-fe"></i></label>
+				<p class="f-02 col-7">我的采购单</p>
+			</a>
+			{/if}
+			{if $demand == 1}
+			<a href="{url('demand/order/index')}">
+				<label><i class="iconfont icon-btn_pljj color-fe"></i></label>
+				<p class="f-02 col-7">我的采购单</p>
+			</a>
+			<a href="{url('demand/order/return_list')}">
+				<label><i class="iconfont icon-btn_pljj color-fe"></i></label>
+				<p class="f-02 col-7">采购单退换货</p>
+			</a>
+			{/if}
+		</div>
+	</nav>
+
+</div>
+<footer class="footer-nav dis-box">
+	<a href="{url('/')}" class="box-flex nav-list">
+		<i class="nav-box i-home"></i><span>首页</span>
+	</a>
+	<a href="{url('category/index/index')}" class="box-flex nav-list">
+		<i class="nav-box i-cate"></i><span>分类</span>
+	</a>
+	<a href="{url('search/index/index')}" class="box-flex nav-list">
+		<i class="nav-box i-shop"></i><span>搜索</span>
+	</a>
+	<a href="{url('cart/index/index')}" class="box-flex position-rel nav-list">
+		<i class="nav-box i-flow"></i><span>购物车</span>
+	</a>
+	{if $filter}
+	<a href="{url('drp/user/index')}" class="box-flex nav-list active">
+		<i class="nav-box i-user"></i><span>{$custom}中心</span>
+	</a>
+	{elseif $community}
+	<a href="{url('community/index/index')}" class="box-flex nav-list active">
+		<i class="nav-box i-user"></i><span>社区</span>
+	</a>
+	{else}
+	<a href="{url('user/index/index')}" class="box-flex nav-list active">
+		<i class="nav-box i-user"></i><span>我</span>
+	</a>
+	{/if}
+</footer>
+<!--悬浮菜单e-->
+<script>
+	header_img()
+    window.onresize = function(){
+        header_img()
+    }
+    /*店铺信息商品滚动*/
+    var swiper = new Swiper('.j-g-s-p-con', {
+        scrollbarHide: true,
+        slidesPerView: 'auto',
+        centeredSlides: false,
+        grabCursor: true
+    });
+    var mySwiper = new Swiper('.banner-second', {
+        autoplay: 5000,
+        pagination: '.banner-second-pagination'
+    });
+
+    $(function(){
+        //清除搜索记录
+        var history = {if $history}{$history}{else}""{/if};
+        $(".clear_history").click(function(){
+            if(history){
+	            $.get("{url('user/index/clear_history')}", '', function(data){
+	        		if(data.status == 1){
+			            $(".clearHistory").remove();
+	                }
+	            }, 'json');
+            }
+        });
+    })
+</script>
+<script language="javascript" type="text/javascript">
+	var s,s2,s3,s4,timer;
+	function init(){
+		s=getid("section-swiper-one");
+		s2=getid("section-swiper-two");
+		s3=getid("section-swiper-three");
+		s4=getid("swiper-scroll");
+		s4.style.width=(s2.offsetWidth*2+100)+"px";
+		s3.innerHTML=s2.innerHTML;
+		timer=setInterval(mar,30)
+		$(".icon-guanbi2").click(function () {
+				$.get("{url('user/index/set_auction_cookie')}", '', function(data){
+					if(data.status=1){
+						$(".section-swiper-box").hide();
+					}
+				}, 'json');
+		})
+	}
+	function mar(){
+		if(s2.offsetWidth<=s.scrollLeft){
+			s.scrollLeft-=s2.offsetWidth;
+		}else{s.scrollLeft++;}
+	}
+	function getid(id){
+		return document.getElementById(id);
+	}
+	window.onload=init;
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+{include file="page_header"}
+		<div class="con mb-7">
+			<div class="goods-info user-order of-hidden ect-tab j-ect-tab ts-3 p-t0">
+				<nav class=" j-tab-title tab-title b-color-f of-hidden">
+					<ul class="dis-box">
+						<li class="box-flex {if $status == 1}active{/if}">
+							<a href="{url('user/crowd/order',array('status'=>''))}">全部订单</a>
+						</li>
+						<li class="box-flex {if $status == 2}active{/if}">
+							<a href="{url('user/crowd/order',array('status'=>'2'))}">待支付</a>
+						</li>
+						<li class="box-flex {if $status == 3}active{/if}">
+							<a href="{url('user/crowd/order',array('status'=>'3'))}">待发货</a>
+						</li>
+						<li class="box-flex {if $status == 4}active{/if}">
+							<a href="{url('user/crowd/order',array('status'=>'4'))}">待收货</a>
+						</li>
+						<li class="box-flex {if $status == 5}active{/if}">
+							<a href="{url('user/crowd/order',array('status'=>'5'))}">已完结</a>
+						</li>
+					</ul>
+				</nav>
+				<div id="j-tab-con" class="tab-con">
+					<div class="swiper-wrapper">
+						<section class="swiper-slide store_info">
+
+							<script id="j-product" type="text/html">
+								<%if totalPage > 0 %>
+								<%each list as order%>
+								<section class="flow-checkout-pro m-top08">
+									<header class="b-color-f dis-box padding-all">
+										<span class=" box-flex">订单状态</span>
+										<em class="j-goods-coupon t-first"><%order.order_status%></em>
+									</header>
+									<div class="f-c-p-orderid padding-all m-top1px b-color-f">
+
+		                                <h4 class="t-remark2">
+		                                    <label class="t-remark">订单号：</label><%order.order_sn%>
+
+		                                    <em class="em-promotion b-tag"><%order.zc_status%></em>
+
+		                                     <span class="t-jiantou"></span>
+		                                </h4>
+		                                <p class="t-remark3 m-top04"><%order.add_time%></p>
+		                            </div>
+									<div class="product-list-small m-top1px b-color-f raise-tuij-box dis-box">
+										<ul class="box-flex">
+											<li>
+												<div class="product-div dis-box">
+													<a class="product-div-link" href="<%order.order_url%>"></a>
+													<div class="shop-list-width bd"><img class="product-list-img" src="<%order.title_img%>"></div>
+													<div class="product-text box-flex index-product-text" style="height:inherit;">
+														<h4><%order.title%></h4>
+														<h5 class="col-6 f-05 m-top02">支持<em class="color-red"><%#order.price%></em>元<em class="fr col-9 f-03"><em class="color-red"><!-- ×5 --></em></em></h5>
+														<p class="col-7 f-03 m-top04">
+															<%order.content%>
+														</p>
+
+													</div>
+
+												</div>
+											</li>
+										</ul>
+									</div>
+									<footer class="padding-all b-color-f m-top1px of-hidden dis-box">
+										<h4 class="t-remark2 box-flex"><label class="t-remark">合计：</label><span class="t-first"><%#order.total_fee%></span></h4>
+										<%if order.order_del%>
+										<%/if%>
+										<p class="ect-button-more crowd-btn-more">
+											<%if order.order_del%>
+											<a class="delect btn-default-new br-5 min-btn" onclick="delect()" data-item="<%order.order_id%>">删除</a>
+											<%/if%>
+											<%if order.handler%>
+											<%#order.handler%>
+											<%else%>
+											<a class="btn-default-new br-5" href="<%order.order_url%>">查看订单</a>
+											<%/if%>
+										</p>
+									</footer>
+								</section>
+
+								<%/each%>
+								<% else %>
+								<div class="no-div-message">
+									<i class="iconfont icon-biaoqingleiben"></i>
+									<p>亲，此处没有内容～！</p>
+								</div>
+								<% /if %>
+							</script>
+
+						</section>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div class="div-messages"></div>
+		<footer class="footer-nav dis-box">
+			<a href="{url('/')}" class="box-flex nav-list">
+				<i class="nav-box i-home"></i><span>首页</span>
+			</a>
+			<a href="{url('crowd_funding/index/index')}" class="box-flex nav-list">
+				<i class="nav-box i-zhongchou"></i><span>微筹广场</span>
+			</a>
+			<a href="{url('user/crowd/order')}" class="box-flex position-rel nav-list active">
+				<i class="nav-box i-zhongchou-order"></i><span>微筹订单</span>
+			</a>
+
+			<a href="{url('user/crowd/index')}" class="box-flex nav-list">
+				<i class="nav-box i-zhongchou_user"></i><span>微筹中心</span>
+			</a>
+		</footer>
+		<!--悬浮菜单e-->
+		<!--引用js-->
+		<script>
+			//异步数据
+			$(function() {
+				var url = "{url('user/crowd/order', array('status'=>$status, 'page'=>$page))}";
+				$('.store_info').infinite({
+					url: url,
+					template: 'j-product'
+				});
+			})
+
+		function delect(){
+			 var order_id = $(".delect").attr('data-item');
+             var url='{url("user/order/delorder")}';
+               layer.open({
+                    content: '是否删除此订单',
+                    btn: ['确定', '取消'],
+                    shadeClose: false,
+                    yes: function() {
+                      $.post(url, {order_id:order_id},
+                         function(result){
+                             if(result.y == 1){
+                                window.location.href = "{url('user/crowd/order')}";
+                             }
+                         }, 'json');
+                     },
+                    no: function() {
+
+                         }
+                });
+		}
+		$(function($){
+			    commonShopList()
+		})
+		</script>
+	</body>
+
+</html>

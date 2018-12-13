@@ -1,0 +1,11 @@
+<div>对话记录:</div>
+<div class="box-flex">                        
+    <ul class="list-max-height">
+        {foreach $talk_list as $talk}
+        <li class="{if $talk.talk_member_type==3}active{/if}">
+            <h4 class="f-04">{$talk.talk_member_name}:<label>{$talk.talk_time}</label></h4>
+            <p class="f-04 col-3 m-top02">{$talk.talk_content}</p>
+        </li>
+        {/foreach}
+    </ul>
+</div>

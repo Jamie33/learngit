@@ -1,0 +1,175 @@
+{include file="page_header"}
+<div class="con">
+    <div class="user-center user-register of-hidden">
+        <div class="hd j-tab-title">
+            <ul class="dis-box">
+                <li class="box-flex active">{$page_title}</li>
+            </ul>
+        </div>
+        <div id="j-tab-con">
+            <div class="swiper-wrapper">
+                <section class="swiper-slide swiper-no-swiping">
+                    <form action="{url('register')}" method="post" class="validation">
+                    <div class="b-color-f  user-login-ul user-register-ul">
+                        <div class="text-all dis-box j-text-all login-li" name="mobilediv">
+                            <div class="box-flex input-text">
+                                <input class="j-input-text" id="mobile_phone" name="mobile" datatype="m" nullmsg="请输入手机号码" errormsg="手机号码格式不正确" type="tel" placeholder="请输入手机号"/>
+                                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                            </div>
+                        </div>
+                        <div class="text-all dis-box j-text-all login-li  m-top10" name="passworddiv">
+                            <div class="box-flex input-text">
+                                <input class="j-input-text" name="password" type="password" datatype="*6-20" nullmsg="请设置6-20位登录密码" errormsg="密码至少6位数" placeholder="请设置6-20位登录密码"/>
+                                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                            </div>
+                            <i class="iconfont icon-yanjing is-yanjing j-yanjing disabled"></i>
+                        </div>
+                        <div class="text-all dis-box j-text-all login-li m-top10" name="verifydiv">
+                            <div class="box-flex input-text">
+                                <input class="j-input-text" name="verify" datatype="*" nullmsg="请输入图形验证码" type="text" placeholder="请输入图形验证码"/>
+                                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                            </div>
+                            <img src="{url('captcha/index/index')}" onclick="this.src='{url('captcha/index/index')}'" height="36" class="ipt-check-btn j-verify-img"/>
+                        </div>
+                        {if $sms_signin == 1}
+                        <div class="text-all dis-box j-text-all login-li m-top10" name="mobile_codediv">
+                            <div class="box-flex input-text">
+                                <input class="j-input-text" name="mobile_code" datatype="*" nullmsg="请输入短信验证码" type="number" placeholder="请输入短信验证码"/>
+                                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                            </div>
+                            <a type="button" class="ipt-check-btn ipt-check-btn-new" href="#" id="sendsms">获取短信验证码</a>
+                        </div>
+                        {/if}
+                    </div>
+
+                        <input type="hidden" name="enabled_sms" value="{$sms_signin}"/>
+                        <input type="hidden" name="back_act" value="{$back_act}"/>
+                        <button type="submit" class="btn-submit min-two-btn br-5">{$lang.button_submit}</button>
+                        <div class="u-l-register j-register fl">注册即视为同意《<a href="javascript:;" class="a-first">用户注册协议</a>》</div>
+                        <a href="{url('user/login/index',array('back_act' => $back_act))}" class="a-first u-l-register" style="margin-top: 8.2rem">{$lang.want_login}</a>
+
+                    </form>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="div-messages"></div>
+<!--引用js-->
+<script>
+    $(function () {
+        $.Tipmsg.r = null;
+        $(".validation").Validform({
+            tiptype: function (msg) {
+                d_messages(msg);
+            },
+            tipSweep: true,
+            ajaxPost: true,
+            callback: function (data) {
+                // {"info":"demo info","status":"y"}
+                if (data.status === 'y') {
+                    window.location.href = data.url;
+                } else {
+                    $('.j-verify-img').click();
+                    d_messages(data.info);
+                }
+            }
+        });
+    });
+
+    var time = 60;
+    var c = 1;
+    function data() {
+        if (time == 0) {
+            c = 1;
+            $("#sendsms").html("发送验证码");
+            time = 60;
+            return;
+        }
+
+        if (time != 0) {
+            if ($(".ipt-check-btn").attr("class").indexOf("disabled") < 0) {
+                $(".ipt-check-btn").addClass('disabled');
+            }
+            c = 0;
+            $("#sendsms").html("<span>重新获取(" + time + ")</span>");
+            time--;
+        }
+        setTimeout(data, 1000);
+    }
+
+    $("#sendsms").click(function () {
+        var myreg = window.mobilereg;// /^1(3[0-9]|4[0-9]|5[0-35-9]|6[6]|7[01345678]|8[0-9]|9[89])\d{8}$/;
+
+        var mobile = $("input[name=mobile]").val();
+        var verify_code = $("input[name=verify]").val();
+
+        if (verify_code == '') {
+            d_messages('请输入图形验证码');
+            return false;
+        }
+        if (mobile == '') {
+            d_messages('请输入手机号');
+            return false;
+        }
+        if (!myreg.test(mobile)) {
+            d_messages('请输入有效的手机号');
+            return false;
+        }
+        if (c == 0) {
+            d_messages('发送频繁');
+            return;
+        }
+
+        $.post(ROOT_URL + 'index.php?m=sms&a=send', {
+            mobile: mobile,
+            verify_code: verify_code,
+            flag: 'register'
+        }, function (res) {
+            d_messages(res.msg);
+            if (res.code == 2) {
+                data();
+            }
+        }, 'json');
+    })
+
+    /*切换*/
+    var tabsSwiper = new Swiper('#j-tab-con', {
+        speed: 0,
+        noSwiping: true,
+        autoHeight: true
+    });
+    $(".j-tab-title li").on('touchstart mousedown', function (e) {
+        e.preventDefault()
+        $(".j-tab-title .active").removeClass('active')
+        $(this).addClass('active')
+        tabsSwiper.slideTo($(this).index())
+    })
+    $(".j-tab-title li").click(function (e) {
+        e.preventDefault();
+    });
+
+    // 注册协议文章 弹窗页面层
+    $('.j-register a').click(function(){
+        var id = "{$register_article_id}";
+        $.get("{url('user/login/article_detail')}", {id:id}, function(res){
+            if (res) {
+                html = res.data.content;
+                title = res.data.title;
+                html = "<div class='b-color-f padding-all'><p class='text-center f-08 fw-600 mb-1'> "+title+" </p> "+html+"<p><a href='javascript:;' class='btn-submit box-flex br-5' onclick='layer.closeAll(); '>关闭</a></p></div>";
+                layer.open({
+                  type: 1,
+                  content: html,
+                  anim: 'up',
+                  style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s; overflow:auto;'
+                });
+            }
+            return false;
+        }, 'json');
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{include file="page_header"}
+
+	<div class="con store_info">
+        <script id="j-product" type="text/html">
+        <%if totalPage > 0 && list !=''%>
+        <%each list as info%>
+    		<ul class="user_valuecard_detail">
+    			<li class="padding-all b-color-f">
+    				<header class="f-03 col-3">
+                    <!-- <p><em class="col-9">编号：</em>  <%info.rid%></p>-->
+    					<div><em class="col-9">订单号：</em><%if info.order_sn%> <%info.order_sn%><%else%>N/A<%/if%></div>
+    					<div><em class="col-9">使用时间：</em><%info.record_time%></div>
+    				</header>
+    				<div class="m-top04 card_conttent">
+    					<div class="dis-box f-05 col-9">
+    						<div class="box-flex">充值：</div><p class="color-red"><%info.add_val%></p>
+    					</div>
+    					<div class="dis-box f-05 col-9">
+    						<div class="box-flex">使用：</div><p class="color-red"><%info.use_val%></p>
+    					</div>
+    				</div>
+    			</li>
+    		</ul>
+        <%/each%>
+        <%else%>
+            <div class="no-div-message">
+                <i class="iconfont icon-biaoqingleiben"></i>
+                <p>亲，还没有内容哦～！</p>
+            </div>
+        <%/if%>
+        </script>
+
+	</div>
+
+    {if $pay_url}
+    <div class="user-coupon-add  filter-btn">
+        <a href="{$pay_url}" type="button" class="btn-submit">充值</a>
+    </div>
+    {/if}
+
+      <!--快捷导航-->
+    {include file="float_nav"}
+                <li>
+                    <a href="{url('user/account/valuecard')}">
+                         <i class="iconfont icon-yinxingqia"></i>
+                         <p>储值卡</p>
+                    </a>
+                </li>
+    {include file="float_nav_footer"}
+	<script>
+	var vc_id = "{$vid}";
+    var infinite = $('.store_info').infinite({url: "{url('user/account/value_card_info')}",params:'vid='+vc_id, template: 'j-product'});
+
+	</script>
+</body>
+</html>

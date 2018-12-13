@@ -1,0 +1,763 @@
+{include file="page_header"}
+<div class="con">
+    <!--组合配件start-->
+    <div class="b-color-1 goods-suit-cont suit-box show">
+        <header class="b-color-f">
+           <nav class="nav dis-box">
+           {foreach $comboTab as $group_id => $com}
+           <a {if $group_id == 1} class="on" {/if}>{$com}</a>
+           {/foreach}
+           </nav>
+        </header>
+        <section class="suit-cont b-color-f">
+
+            <!--主商品-->
+            <form method="post" name="FORMBUY_GOODS_{$goods_id}" id="FORMBUY_GOODS_{$goods_id}" onsubmit="return false" >
+            <section class="maingoods-select goods-radio-one dis-box" style="padding: 1.1rem">
+                <input type="hidden" name="stock" value="{$goods.group_number}" />
+                <div class="icon"> <label class="active"><i class="j-select-btn active-i "></i></label></div>
+                <div class="img"><img class="product-list-img" src="{$goods.goods_thumb}" /></div>
+                <div class="cont box-flex">
+                    <h4 class="twolist-hidden f-05">{$goods.goods_name}</h4>
+                    <p><span class="p-price t-first f-05 " id="ECS_SHOPPRICE_{$goods.goods_id}">{$goods.shop_price_formated}</span></p>
+                    {if $default_spe}
+                    <div class ="property-box  f-03 j-goods-attr j-property-div">
+                        <span class="col-7">属性：</span>
+                        <span class="t-goods1">{$default_spe} </span>
+                        <i class="iconfont icon-moreunfold f-06 col-9 fr"></i>
+                    </div>
+                    {/if}
+                    <!--商品属性弹出层star-->
+                    <div class="show-goods-attr j-filter-show-div ts-3 b-color-1">
+                        <section class="s-g-attr-title b-color-1  product-list-small">
+                            <div class="product-div">
+                                <img class="product-list-img" src="{$goods.goods_thumb}">
+                                <div class="product-text">
+                                    <div class="dis-box position-rel">
+                                        <h4 class="box-flex">{$goods.goods_name}</h4>
+                                        <i class="iconfont icon-guanbi2 show-div-guanbi"></i>
+                                    </div>
+                                    <p><span class="p-price t-first " id="ECS_SHOPPRICE_attr_{$goods.goods_id}">{if $goods.is_promote && $goods.gmt_end_time}{$goods.promote_price}{else}{$goods.shop_price_formated}{/if}</span></p>
+                                    {if C('shop.show_goodsnumber') && C('shop.use_storage')}
+                                    <p class="dis-box p-t-remark"><span class="box-flex">库存:<font class="goods_attr_num">{$goods.goods_number}</font></span></p>
+                                    {/if}
+                                </div>
+                            </div>
+                        </section>
+                        {if $specification}
+                        <section class="s-g-attr-con swiper-scroll b-color-f padding-all m-top1px">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    {foreach $specification as $spec_key=>$spec}
+                                    {if $spec.values}
+                                    <h4 class="t-remark">{$spec.name}</h4>
+                                    <!-- 判断属性是复选还是单选 -->
+                                    {if $spec.attr_type == 1}
+                                    <ul class="select-one j-get-one m-top10">
+                                        {if $spec.is_checked > 0}
+                                            <!-- pc有属性图片 -->
+                                            {foreach $spec.values as $key=>$val}
+                                            <a class="ect-select dis-flex fl" href="javascript:;" {if $val.img_site}onclick="location.href='{$val.img_site}'" {/if}>
+                                            <input style="display:none" id="spec_value_{$val.id}" type="radio" name="spec_{$spec_key}" value="{$val.id}" {if $val.checked == 1}checked{/if} onclick="fitt_changeAtt('{$goods_id}', 1)" />
+                                            <label class="ts-1 {if $val.checked == 1}active{/if}" for="spec_value_{$val.id}">{$val.label}</label>
+                                            </a>
+                                            {/foreach}
+                                        {else}
+                                            <!-- pc没属性图片 -->
+                                            {if $spec.checked == 1}
+                                                {foreach $spec.values as $key=>$val}
+                                                <a class="ect-select dis-flex fl" href="javascript:;" {if $val.img_site}onclick="location.href='{$val.img_site}'" {/if}>
+                                                <input style="display:none" id="spec_value_{$val.id}" type="radio" name="spec_{$spec_key}" value="{$val.id}" {if $val.checked == 1}checked{/if} onclick="fitt_changeAtt('{$goods_id}', 1)" />
+                                                <label class="ts-1 {if $val.checked == 1}active{/if}" for="spec_value_{$val.id}">{$val.label}</label>
+                                                </a>
+                                                {/foreach}
+                                            {else}
+                                                {foreach $spec.values as $key=>$val}
+                                                <a class="ect-select dis-flex fl" href="javascript:;" {if $val.img_site}onclick="location.href='{$val.img_site}'" {/if}>
+                                                <input style="display:none" id="spec_value_{$val.id}" type="radio" name="spec_{$spec_key}" value="{$val.id}" {if $key == 0}checked{/if} onclick="fitt_changeAtt('{$goods_id}', 1)" />
+                                                <label class="ts-1 {if $key == 0}active{/if}" for="spec_value_{$val.id}">{$val.label}</label>
+                                                </a>
+                                                {/foreach}
+                                            {/if}
+                                        {/if}
+                                    </ul>
+                                    <input type="hidden" name="spec_list" value="{$spec_key}" />
+                                    {else}
+                                    <!-- 复选 -->
+                                    <ul class="select-one goods-select-alone m-top10">
+                                        {foreach $spec.values as $key=>$val}
+                                        <li class="ect-select dis-flex fl">
+                                            <input type="checkbox" name="spec_{$spec_key}[]" value="{$val.id}" id="spec_value_{$val.id}"  {if $key == 0}checked{/if} onclick="fitt_changeAtt('{$goods_id}', 1)" />
+                                            <label class="ts-1 {if $key == 0}active{/if} " for="spec_value_{$val.id}">{$val.label}</label>
+                                        </li>
+                                        {/foreach}
+                                    </ul>
+                                    <input type="hidden" name="spec_list" value="{$spec_key}" />
+                                    {/if}
+                                    {/if}
+                                    {/foreach}
+                                </div>
+                            </div>
+                            <div class="swiper-scrollbar"></div>
+                        </section>
+                        {/if}
+                        <section class="ect-button-more dis-box j-property-value">
+                            <a class="btn-submit box-flex">确定</a>
+                        </section>
+                    </div>
+                    <!--商品属性弹出层end-->
+                </div>
+
+            </section>
+            </form>
+
+            {foreach $comboTab as $group_id => $com}
+
+            <div class="product-list-small box group-box {if $group_id == 1}active{/if} ">
+                <!--推荐配件-->
+
+                <div class="suit-max-height">
+
+                    <!--配件-->
+                    <section class="accessories-select padding-all">
+                        <!--list-->
+                        {foreach $fittings as $k => $item}
+                        {if $item.group_id == $group_id}
+                        <form method="post" name="FORMBUY_GOODS_{$item.goods_id}" id="FORMBUY_GOODS_{$item.goods_id}" onsubmit="return false" >
+                        <div class="goods-radio-one dis-box">
+                            <div class="icon">
+                                <label class="" data-goods="{$item.goods_id}" ><i class="j-select-btn active-i "></i></label>
+                            </div>
+                            <div class="img p-r">
+                                <em class="accessories-tag">配件</em>
+                                <img class="product-list-img" src="{$item.goods_thumb}" />
+                            </div>
+                            <div class="cont box-flex">
+                                <h4 class="twolist-hidden f-05">{$item.goods_name}</h4>
+                                <p><span class="p-price t-first f-05" >{$item.fittings_price}</span></p>
+                                {if $item.default_spe}
+                                <div class ="property-box  f-03 j-goods-attr j-property-div">
+                                    <span class="col-7">属性：</span>
+                                    <span class="t-goods1">{$item.default_spe} </span>
+                                    <i class="iconfont icon-moreunfold f-06 col-9 fr"></i>
+                                </div>
+                                {/if}
+                                 <!--商品属性弹出层star-->
+                                <div class="show-goods-attr j-filter-show-div ts-3 b-color-1">
+                                    <section class="s-g-attr-title b-color-1 product-list-small">
+                                        <div class="product-div">
+                                            <img class="product-list-img" src="{$item.goods_thumb}">
+                                            <div class="product-text">
+                                                <div class="dis-box position-rel">
+                                                    <h4 class="box-flex">{$item.goods_name}</h4>
+                                                    <i class="iconfont icon-guanbi2 show-div-guanbi"></i>
+                                                </div>
+                                                <p><span class="p-price t-first " >{$item.fittings_price}</span></p>
+                                                <p class="dis-box p-t-remark"><span class="box-flex">库存:<font class="goods_attr_num">{$item.goods_number}</font></span></p>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    {if $item.properties.spe}
+                                    <section class="s-g-attr-con swiper-scroll b-color-f padding-all m-top1px">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide">
+
+                                            {foreach $item.properties.spe as $spec_key=>$spec}
+                                            {if $spec.values}
+                                            <h4 class="t-remark">{$spec.name}</h4>
+                                            <!-- 判断属性是复选还是单选 -->
+                                            {if $spec.attr_type == 1}
+                                            <ul class="select-one j-get-one m-top10">
+                                                {if $spec.is_checked > 0}
+                                                    <!-- pc有属性图片 -->
+                                                    {foreach $spec.values as $key=>$val}
+                                                    <a class="ect-select dis-flex fl" href="javascript:;" {if $val.img_site}onclick="location.href='{$val.img_site}'" {/if}>
+                                                    <input style="display:none" id="spec_value_{$val.id}" type="radio" name="spec_{$spec_key}" value="{$val.id}" {if $val.checked == 1}checked{/if} onclick="fitt_changeAtt('{$item.goods_id}', 0)" />
+                                                    <label class="ts-1 {if $val.checked == 1}active{/if} " for="spec_value_{$val.id}">{$val.label}</label>
+                                                    </a>
+                                                    {/foreach}
+                                                {else}
+                                                    <!-- pc没属性图片 -->
+                                                    {if $spec.checked == 1}
+                                                        {foreach $spec.values as $key=>$val}
+                                                        <a class="ect-select dis-flex fl" href="javascript:;" {if $val.img_site}onclick="location.href='{$val.img_site}'" {/if}>
+                                                        <input style="display:none" id="spec_value_{$val.id}" type="radio" name="spec_{$spec_key}" value="{$val.id}" {if $val.checked == 1}checked{/if} onclick="fitt_changeAtt('{$item.goods_id}', 0)"  />
+                                                        <label class="ts-1 {if $val.checked == 1}active{/if}" for="spec_value_{$val.id}">{$val.label}</label>
+                                                        </a>
+                                                        {/foreach}
+                                                    {else}
+                                                        {foreach $spec.values as $key=>$val}
+                                                        <a class="ect-select dis-flex fl" href="javascript:;" {if $val.img_site}onclick="location.href='{$val.img_site}'" {/if}>
+                                                        <input style="display:none" id="spec_value_{$val.id}" type="radio" name="spec_{$spec_key}" value="{$val.id}" {if $key == 0}checked{/if} onclick="fitt_changeAtt('{$item.goods_id}', 0)"  />
+                                                        <label class="ts-1 {if $key == 0}active{/if}" for="spec_value_{$val.id}">{$val.label}</label>
+                                                        </a>
+                                                        {/foreach}
+                                                    {/if}
+                                                {/if}
+                                            </ul>
+                                            <input type="hidden" name="spec_list" value="{$spec_key}" />
+                                            {else}
+                                            <!-- 复选 -->
+                                            <ul class="select-one goods-select-alone m-top10">
+                                                {foreach $spec.values as $key=>$val}
+                                                <li class="ect-select dis-flex fl">
+                                                    <input type="checkbox" name="spec_{$spec_key}[]" value="{$val.id}" id="spec_value_{$val.id}"  {if $key == 0}checked{/if} onclick="fitt_changeAtt('{$item.goods_id}', 0)"  />
+                                                    <label class="ts-1 {if $key == 0}active{/if} " for="spec_value_{$val.id}">{$val.label}</label>
+                                                </li>
+                                                {/foreach}
+                                            </ul>
+                                            <input type="hidden" name="spec_list" value="{$spec_key}" />
+                                            {/if}
+                                            {/if}
+                                            {/foreach}
+
+                                            </div>
+                                        </div>
+                                        <div class="swiper-scrollbar"></div>
+                                    </section>
+                                    {/if}
+                                    <section class="ect-button-more dis-box j-property-value">
+                                        <a class="btn-submit box-flex">确定</a>
+                                    </section>
+                                </div>
+                                <!--商品属性弹出层end-->
+                            </div>
+                        </div>
+                        </form>
+                        {/if}
+                        {/foreach}
+                        <!--list-->
+                    </section>
+                </div>
+                <div class="goods-suit-btn ">
+                    <div class="gns_item text-right f-03 col-9 padding-all o-h">
+                        <div class="dis-box fr" style="line-height:2rem">
+                            {if $goods.group_number}<em class="f-01 color-red">（限购 {$goods.group_number} 套）</em> {/if}
+                            <div>购买：</div>
+                            <div class="div-num dis-box select">
+                                <a class="num-up" data-min-num="1"></a>
+                                <input class="box-flex col-3 text-c f-02" type="number" min="1" step="1" {if $goods.group_number}max="{$goods.group_number}" {/if} name="m_goods_{$group_id}_number" id="m_goods_{$group_id}_number" value="1"  readonly />
+                                <a class="num-next" xiangounum="{$goods.xiangou_num}" data-max-num="{$goods.attr_number}" ></a>
+                            </div>
+                            <div style="padding-left:.6rem">套 </div>
+                        </div>
+                    </div>
+                    <div class="dis-box">
+                        <div class="box-flex b-color-fa" style="padding-right: 1rem;">
+                            <div class="f-05 text-right m-top06" >套餐价：<em id="m_goods_{$group_id}">¥0.00</em></div>
+                            <div class="f-03 text-right m-top02 color-red" >省：<em id="m_goods_save_{$group_id}" >¥0.00</em></div>
+                        </div>
+                        <a class=" btn-submit j-add-cart-combo" group-name="m_goods_{$group_id}" href="javascript:;" style="width:10rem">加入购物车</a>
+                    </div>
+                </div>
+
+            </div>
+
+            {/foreach}
+
+            <input type="hidden" value="{$goods_id}" id="goods_id" name="good_id">
+            <input type="hidden" value="{$region_id}" id="region_id" name="region_id">
+            <input type="hidden" value="{$area_id}" id="area_id" name="area_id">
+            <input type="hidden" value="{$area_city}" id="area_city" name="area_city" >
+
+        </section>
+    </div>
+    <!--组合配件end-->
+    <div class="mask-filter-div"></div>
+</div>
+
+<!--快捷导航-->
+{include file="float_nav"}
+{include file="float_nav_footer"}
+<script>
+    $(function(){
+        var headerWidth = $(".goods-suit-cont .nav").outerWidth();
+        // console.log(headerWidth)
+        $(".goods-suit-cont .nav").css("width",headerWidth);
+        // 动态获取内容高度并且赋值
+        $(".suit-max-height").css("height",$(window).height()-$(".maingoods-select").outerHeight() - $(".goods-suit-cont header").outerHeight()- $(".goods-suit-btn").outerHeight());
+
+        /*tab切换*/
+        $(".goods-suit-cont nav a").on("click",function(){
+            var index = $(this).index();
+            $(this).addClass("on").siblings().removeClass("on");
+            $(".goods-suit-cont .suit-cont .box").eq(index).addClass("active").siblings().removeClass("active");
+        });
+
+        // 首次加载 更新主件商品属性与价格
+        var formName = 'FORMBUY_GOODS_{$goods_id}';
+        if ($("form[name='"+formName+"'] :input[type='radio']").attr('checked') == 'checked') {
+           fitt_changeAtt('{$goods_id}', 1, 'onload');
+        }
+
+        // 主件商品 点击属性弹窗
+        $(".maingoods-select .j-property-div").click(function () {
+            // 判断是否勾选配件商品 至少一件
+            if (!$('.group-box.active .accessories-select').find('.goods-radio-one .icon label').hasClass('active')) {
+                d_messages('{$lang.please_select_group}', 2);
+                return false;
+            }
+
+            $(this).siblings(".j-filter-show-div").addClass("show");
+            $(".mask-filter-div").addClass("show");
+        });
+
+        // 配件商品 点击属性弹窗
+        $(".group-box.active .accessories-select .j-property-div").click(function () {
+            // 判断是否勾选配件商品
+            if (!$(this).parent('.cont').siblings('.icon').find('label').hasClass('active')) {
+                d_messages('{$lang.please_select_group}', 2);
+                return false;
+            }
+
+            // 当前勾选商品id
+            var goods_id = $(this).parent('.cont').siblings('.icon').find('label.active').attr('data-goods');
+            if (parseInt(goods_id)){
+                // 点击属性弹窗 更新配件商品属性
+                var formName = 'FORMBUY_GOODS_' + parseInt(goods_id);
+                if ($("form[name='"+formName+"'] :input[type='radio']").attr('checked') == 'checked') {
+                   fitt_changeAtt(goods_id, 0);
+                }
+            }
+
+            $(this).siblings(".j-filter-show-div").addClass("show");
+            $(".mask-filter-div").addClass("show");
+        });
+
+        //属性选择确定
+        $(".j-property-value").click(function(){
+            $(".j-filter-show-div").removeClass("show");
+            $(".mask-filter-div").removeClass("show");
+        });
+
+
+        /* 配件选择  勾选即加入 cart_combo 取消则删除 */
+        $(".group-box .goods-radio-one .icon").click(function(){
+            var parent_id = $("input[name='good_id']").val();
+            var region_id = $("input[name='region_id']").val();
+            var area_id = $("input[name='area_id']").val();
+            var area_city = $("input[name='area_city']").val();
+
+            var groupName = $('.suit-cont .group-box.active').find('.j-add-cart-combo').attr('group-name');
+            var goods_id = $(this).find('label').attr("data-goods");
+
+            if ($(this).find('label').hasClass('active')) {
+                $(this).find('label').removeClass('active');
+                //删除基本件(组,配件,主件)
+                ec_group_delInCart(groupName, goods_id, parent_id, region_id, area_id, area_city, '');
+            } else {
+                $(this).find('label').addClass('active');
+                //新增配件(组,配件,主件)
+                ec_group_addToCart(groupName, goods_id, parent_id, region_id, area_id, area_city, '');
+            }
+        });
+
+        // 套餐数量 减少
+        $('.group-box .div-num').on('click', '.num-up', function(){
+            let number = parseInt($(this).siblings("input").val());
+            let min_num = parseInt($(this).attr("data-min-num"));
+            if (number > min_num) {
+                number -= 1;
+                $(this).siblings("input").val(number);
+            } else {
+                d_messages("不能小于最小购买数量"+min_num);
+            }
+            return false;
+        });
+        // 套餐数量 增加
+        $('.group-box .div-num').on('click', '.num-next', function(){
+            let number = parseInt($(this).siblings("input").val());
+            let max_num = parseInt($(this).attr("data-max-num"));
+            let xiangounum = parseInt($(this).attr("xiangounum"));
+            //限购商品
+            if (xiangounum && xiangounum > 0 && number >= xiangounum) {
+                $(this).siblings("input").val(xiangounum);
+                d_messages('不能超过限购数量 ' + xiangounum);
+                return false;
+            }
+            // 检查限购套餐数量
+            let group_number = $("input[name='stock']").val();
+            if (group_number && group_number > 0 && number >= group_number) {
+                $(this).siblings("input").val(group_number);
+                d_messages('{$lang.group_max_number} ' + group_number, 2);
+                return false;
+            }
+
+            if (number < max_num) {
+                number += 1;
+                $(this).siblings("input").val(number);
+            } else {
+                d_messages("不能超过最大库存数量 " + max_num);
+            }
+            return false;
+        });
+
+        // 加入套餐到购物车 cart_combo
+        $('.group-box').on('click', '.j-add-cart-combo', function(){
+            var goods_id = '';
+            var groupName = $(this).attr('group-name'); // m_goods_1 套餐组名
+            $('.goods-radio-one label.active').each(function(){
+                if ($(this).hasClass("active") && $(this).attr("data-goods")) {
+                    goods_id += $(this).attr("data-goods") + ',';
+                }
+            });
+
+            if (!goods_id) {
+                d_messages('{$lang.please_select_group}', 2);
+                return false;
+            }
+
+            var region_id = $("input[name='region_id']").val();
+            var area_id = $("input[name='area_id']").val();
+            var area_city = $("input[name='area_city']").val();
+            var goodsId = $("input[name='good_id']").val(); // 主商品id
+
+            addMultiToCart(groupName, goodsId, region_id, area_id, area_city, 1);
+        });
+
+    });
+
+    /**
+     * 点选可选属性修改商品价格的函数
+     * spec_key 当前商品id
+     * type 1 主件 0 配件
+     * fittings_goods 主件商品id
+     */
+    function fitt_changeAtt(spec_key, type, onload) {
+        // 套餐组名
+        var groupName = $('.suit-cont .group-box.active').find('.j-add-cart-combo').attr('group-name');
+
+        var number = $('.suit-cont .group-box.active').find('#'+groupName+'_number').val();
+
+        var warehouse_id = $("input[name='region_id']").val();
+        var area_id = $("input[name='area_id']").val();
+        var area_city = $("input[name='area_city']").val();
+
+        var fittings_goods = '{$goods_id}';
+
+        var attr = fitt_getSelectedAttributes(document.forms['FORMBUY_GOODS_' + spec_key], type); // 获取商品属性id
+        // console.log('attr:'+ attr);
+
+        {if C('add_shop_price') == 0}
+        var goods_attr = getSelectedAttributesGroup('FORMBUY_GOODS_' + spec_key, type); // 获取商品属性组ID
+        {/if}
+
+        // console.log('goods_attr:'+goods_attr);
+
+        var group = new Object();
+
+        group.attr = attr;
+        group.goods_attr = goods_attr;
+        group.number = number;
+        group.warehouse_id = warehouse_id;
+        group.area_id = area_id;
+        group.area_city = area_city;
+        group.group_name = groupName;
+        group.group_id = groupName + '_' + '{$goods_id}'; //group_id m_goods_1_902
+        group.fittings_goods = fittings_goods;
+
+        // console.log(group)
+
+        $.post('{url("fitting_price")}', {'id':spec_key, group: $.toJSON(group), 'type':type, 'onload':onload}, function(data){
+            fitt_changeAttResponse(data);
+        }, 'json');
+    }
+
+    /* 处理添加商品属性到组合购买购物车的反馈信息 */
+    function fitt_changeAttResponse(res) {
+        if (res.err_msg.length > 0){
+            d_messages(res.err_msg);
+            disabled_add_cart_combo();
+            return false;
+        } else {
+            var spec_key = res.goods_id; // 商品id
+            var formName = 'FORMBUY_GOODS_' + spec_key; // form表单name
+            //属性图片
+            if(res.attr_img) {
+                $("form[name='"+formName+"'] .s-g-attr-title .product-list-img").attr('src',res.attr_img);
+                $("form[name='"+formName+"'] .goods-radio-one .product-list-img").attr('src',res.attr_img);
+            }
+            // console.log(formName)
+            //用户可购买的数量
+            if (res.limit_number && res.limit_number > 0 && res.limit_number < res.number) {
+                d_messages('购买数量大于商品限购数量！');
+                disabled_add_cart_combo();
+            }
+            //更改数量的同时显示
+            var get_text = '';
+            s_get_label = $("form[name='"+formName+"'] .show-goods-attr .s-g-attr-con").find("label.active"); //获取被选中label
+            if(s_get_label.length > 0){
+                s_get_label.each(function () {
+                    get_text += $(this).text() + "、";
+                });
+            }
+            get_text = get_text.substr(0, get_text.length - 1);
+            $("form[name='"+formName+"'] .j-goods-attr").find(".t-goods1").text(get_text);
+
+            if (res.err_no == 2) {
+                d_messages("该地区暂不支持配送");
+                // 移除勾选
+                if ($("form[name='"+formName+"'] .icon").find('label').hasClass('active')) {
+                    $("form[name='"+formName+"'] .icon").find('label').find('label').removeClass('active');
+                    //删除基本件(组,配件,主件)
+                    ec_group_delInCart(res.group_name, spec_key, res.parent_id, res.region_id, res.area_id, res.area_city, '');
+                }
+            } else {
+                if (res.attr_number <= 0) {
+                    d_messages("该商品库存不足");
+                    // 移除勾选
+                    if ($("form[name='"+formName+"'] .icon").find('label').hasClass('active')) {
+                        $("form[name='"+formName+"'] .icon").find('label').find('label').removeClass('active');
+                        //删除基本件(组,配件,主件)
+                        ec_group_delInCart(res.group_name, spec_key, res.parent_id, res.region_id, res.area_id, res.area_city, '');
+                    }
+                } else {
+                    {if $goods.review_status < 2}
+                    disabled_add_cart_combo();
+                    {/if}
+                }
+            }
+
+            if ($("form[name='"+formName+"'] .goods_attr_num").length > 0){
+                $("form[name='"+formName+"'] .goods_attr_num").html(res.attr_number);
+            }
+            var total_res;
+            if ($("#ECS_SHOPPRICE_" + spec_key).length > 0) {
+                total_res = res.result;
+                $("#ECS_SHOPPRICE_" + spec_key).html(total_res);
+                $("#ECS_SHOPPRICE_attr_" + spec_key).html(total_res);
+            }
+
+            // 套餐区间价
+            // 首次加载
+            if (res.onload == 'onload' && res.fittings_interval) {
+                //套餐价、参考价、优惠价格异步替换
+                for(var i = 0; i < res.fittings_interval.length; i++){
+                    $("#m_goods_" + res.fittings_interval[i].groupId).html(res.fittings_interval[i].fittings_minMax);
+                    $("#m_goods_save_" + res.fittings_interval[i].groupId).html(res.fittings_interval[i].save_minMaxPrice);
+                    $("#m_goods_reference_" + res.fittings_interval[i].groupId).html(res.fittings_interval[i].market_minMax);
+                }
+            } else {
+                // 切换属性
+                $("#m_goods_" + res.groupId).html(res.fittings_minMax);
+                $("#m_goods_save_" + res.groupId).html(res.save_minMaxPrice);
+                $("#m_goods_reference_" + res.groupId).html(res.market_minMax);
+            }
+        }
+
+    }
+
+    /**
+     * 获得选定的商品属性封装函数
+     * @param formBuy
+     * @param type  1 主件  0 配件
+     */
+    function fitt_getSelectedAttributes(formBuy, type) {
+        var spec_arr = new Array();
+        var j = 0;
+
+        // console.log(formBuy)
+        for (i = 0; i < formBuy.elements.length; i++) {
+            var prefix = formBuy.elements[i].name.substr(0, 5);
+            if (prefix == 'spec_' && (((formBuy.elements[i].type == 'radio' || formBuy.elements[i].type == 'checkbox') && formBuy.elements[i].checked) || formBuy.elements[i].tagName == 'SELECT')) {
+                spec_arr[j] = formBuy.elements[i].value;
+                j++;
+            }
+        }
+
+        spec_arr = spec_arr.join(",");
+        return spec_arr;
+    }
+
+    /**
+     * 获得选定的商品属性组
+     * type 1 主件  0 配件
+     */
+    function getSelectedAttributesGroup(formName, type) {
+        var spec_arr = new Array();
+        var j = 0;
+
+        // console.log(formName)
+        $("form[name='"+formName+"'] :input[name='spec_list']").each(function(index, element) {
+            spec_arr[j] = ($(this).val());
+            j++ ;
+        });
+
+        spec_arr = spec_arr.join(",");
+        return spec_arr;
+    }
+
+    // 勾选搭配商品 添加套餐商品到购物车
+    function ec_group_addToCart(groupName, goodsId, parentId, warehouse_id, area_id, area_city, add_group, fitt_goods){
+        var goods        = new Object();
+        var spec_arr     = new Array();
+        var parent_attr = new Array();
+
+        var goods_attr     = new Array();
+        var parent_goods_attr = new Array();
+
+        var number = $('.suit-cont .group-box.active').find('#'+groupName+'_number').val();
+        number = number ? parseInt(number) : 1;
+
+        spec_arr = fitt_getSelectedAttributes(document.forms['FORMBUY_GOODS_' + goodsId]); // 获取当前（配件）商品属性id
+
+        parent_attr = fitt_getSelectedAttributes(document.forms['FORMBUY_GOODS_' + parentId], 1); // 获取主件商品属性id
+
+        // console.log('spec_arr:'+ spec_arr);
+        // console.log('parent_attr:'+ parent_attr);
+
+        {if C('add_shop_price') == 0}
+        goods_attr = getSelectedAttributesGroup('FORMBUY_GOODS_' + goodsId); // 获取当前（配件）商品属性组ID
+        parent_goods_attr = getSelectedAttributesGroup('FORMBUY_GOODS_' + parentId, 1); // 获取主件商品属性组ID
+        {/if}
+        // parent_goods_attr = parent_goods_attr.split(',');
+        // console.log('goods_attr:'+goods_attr)
+        // console.log('parent_goods_attr:'+parent_goods_attr)
+
+        goods.goods_id = goodsId;
+        goods.number = number;
+
+        goods.spec = spec_arr; // 当前（配件）商品属性
+        goods.parent_attr = parent_attr; // 主件商品属性
+
+        // goods.goods_attr = goods_attr;
+        // goods.parent_goods_attr = parent_goods_attr;
+
+        goods.warehouse_id = warehouse_id;
+        goods.area_id = area_id;
+        goods.area_city = area_city;
+        goods.parent = parentId;
+        goods.group_id = groupName + '_' + parentId; // group_id m_goods_1_902
+        goods.add_group = add_group;
+
+        if (fitt_goods) {
+            goods.fitt_goods  = fitt_goods;
+        }
+
+        $.post(ROOT_URL + 'index.php?m=cart&a=add_to_cart_combo', {goods: $.toJSON(goods)}, function(data) {
+            ec_group_addToCartResponse(data);
+        }, 'json');
+    }
+
+    // 处理勾选搭配商品 添加套餐商品到购物车的反馈信息
+    function ec_group_addToCartResponse(result) {
+        if (result.error > 0) {
+            // 如果需要缺货登记，跳转
+            if (result.error == 2) {
+                layer.open({
+                    content: result.message,
+                    btn: ['确定', '取消'],
+                    shadeClose: false,
+                    yes: function() {
+                        location.href = ROOT_URL + 'index.php?m=user&a=add_booking&id=' + result.goods_id + '&spec=' + result.product_spec;
+                    },
+                    no: function() {
+                    }
+                });
+                disabled_add_cart_combo();
+            } else {
+                d_messages(result.message, 2);
+                disabled_add_cart_combo();
+            }
+        } else {
+            //套餐价、参考价、优惠价格异步替换
+            $("#m_goods_" + result.groupId).html(result.fittings_minMax);
+            $("#m_goods_save_" + result.groupId).html(result.save_minMaxPrice);
+            $("#m_goods_reference_" + result.groupId).html(result.market_minMax);
+        }
+    }
+
+    // 处理取消勾选搭配商品
+    function ec_group_delInCart(groupName, goodsId, parentId, warehouse_id, area_id, area_city) {
+        var goods        = new Object();
+        // var group_item   = goodsId;
+
+        var goods_attr = fitt_getSelectedAttributes(document.forms['FORMBUY_GOODS_' + parentId], 1); // 获取主件商品属性id
+
+        goods.goods_id = goodsId;
+        goods.parent   = (typeof(parentId) == "undefined") ? 0 : parseInt(parentId);
+        goods.group_id = groupName + '_' + parentId; //group_id
+        goods.goods_attr = goods_attr;
+        goods.warehouse_id = warehouse_id;
+        goods.area_id = area_id;
+        goods.area_city = area_city;
+
+        $.post(ROOT_URL + 'index.php?m=cart&a=del_in_cart_combo', {goods: $.toJSON(goods)}, function(data) {
+            ec_group_delInCartResponse(data);
+        }, 'json');
+    }
+
+    // 处理取消勾选搭配商品的反馈信息
+    function ec_group_delInCartResponse(result) {
+        if (result.error > 0) {
+            d_messages(result.message);
+            disabled_add_cart_combo();
+            return false;
+        } else if(result.parent == 0) {
+            // $('.'+group).attr("checked",false);
+        }
+
+        $("#m_goods_" + result.groupId).html(result.fittings_minMax); // 套餐价
+        $("#m_goods_save_" + result.groupId).html(result.save_minMaxPrice); // 节省价
+        $("#m_goods_reference_" + result.groupId).html(result.market_minMax); // 参考价（市场价）
+    }
+
+    /**
+     * 套餐提交到购物车 cart 最终
+     * @param groupName
+     * @param goodsId
+     * @param warehouse_id
+     * @param area_id
+     * @param area_city
+     * @param type
+     */
+    function addMultiToCart(groupName, goodsId, warehouse_id, area_id, area_city, type){
+        var goods     = new Object();
+
+        var number    = $('input[name="'+groupName+'_number"]').val(); // 套餐数量
+
+        // 检查套餐限购数量
+        var group_number = $("input[name='stock']").val();
+        if (group_number && group_number > 0 && number > group_number) {
+            d_messages('{$lang.group_max_number}', 2);
+            setTimeout(function(){
+                window.location.reload();
+            }, 500);
+            return false;
+        }
+
+        goods.group_name = groupName;
+        goods.goods_id = goodsId;
+        goods.warehouse_id = warehouse_id;
+        goods.area_id = area_id;
+        goods.area_city = area_city;
+        goods.number = (number < 1) ? 1: number;
+
+        if (type == 1) {
+            $.post(ROOT_URL + 'index.php?m=cart&a=add_to_cart_group', {goods: $.toJSON(goods)}, function(data) {
+                addMultiToCartResponse(data);
+            }, 'json');
+        }
+    }
+
+    // 套餐提交到购物车 回调
+    function addMultiToCartResponse(result) {
+        if (result.error > 0) {
+            d_messages(result.message);
+            return false;
+        } else {
+            // 去购物车
+            window.location.href = ROOT_URL + 'index.php?m=cart';
+        }
+    }
+
+    /**
+     * 禁用加入购物车
+     */
+    function disabled_add_cart_combo(){
+        $('.suit-cont .group-box.active').find(".btn-submit").removeClass('j-add-cart-combo');
+        $('.suit-cont .group-box.active').find(".btn-submit").css('background','#999');
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+{include file="page_header"}
+		<div class="con mb-7">
+			<div class="raise-user-header drp-user-header" style="padding:0">
+				<div class="admin-bg-box">
+
+						<div class="padding-all dis-box">
+							<a>
+								{if $info.user_picture !=='' }
+								<div class="header-img"><div class="crowd_header_img img-commom"><img src="{$info.user_picture}"></div></div>
+								{else}
+								<div class="header-img"> <div class="crowd_header_img img-commom"><img src="{elixir('img/no_image.jpg')}"></div></div>
+								{/if}
+							</a>
+							<a class="box-flex">
+								<div class="hesder-admin">
+									{if $info.nick_name!=='' }
+									<h4 class="ellipsis-one user-admin-size color-whie f-07">{$info.nick_name}</h4>
+									{else}
+									<h4 class="ellipsis-one user-admin-size color-whie f-07">{$info.username}</h4>
+									{/if}
+									<p class="user-reg-top color-whie f-03">{$rank.user_rank.rank_name}</p>
+								</div>
+							</a>
+
+							</ul>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<section class="m-top10 user-function-list b-color-f">
+				<a href="{url('user/crowd/order')}">
+					<div class="dis-box padding-all my-bottom">
+						<h3 class="box-flex text-all-span my-u-title-size"><i class="iconfont icon-iconfontquanbudingdan color-red"></i>我的订单</h3>
+						<span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+					</div>
+				</a>
+				<a href="{url('user/crowd/crowdbuy')}">
+					<div class="dis-box padding-all my-bottom">
+						<h3 class="box-flex text-all-span my-u-title-size"><i class="iconfont icon-zan color-red"></i>我的支持</h3>
+						<span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+					</div>
+				</a>
+				<a href="{url('user/crowd/focus')}">
+					<div class="dis-box padding-all my-bottom">
+						<h3 class="box-flex text-all-span my-u-title-size"><i class="iconfont icon-02 color-red"></i>我的关注</h3>
+						<span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+					</div>
+				</a>
+
+			</section>
+			<!-- <section class="m-top10 my-nav-box b-color-f">
+
+			<a href="raise_help.html">
+				<div class="dis-box padding-all my-bottom">
+					<h3 class="box-flex text-all-span my-u-title-size"><i class="iconfont icon-tuandui is-user-size color-kf"></i>关于众筹</h3>
+					<span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+				</div>
+			</a>
+			<a href="raise_feedback.html">
+				<div class="dis-box padding-all my-bottom">
+					<h3 class="box-flex text-all-span my-u-title-size"><i class="iconfont icon-tishi is-user-size my-dingdan-color"></i>意见反馈</h3>
+					<span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+				</div>
+			</a>
+		</section> -->
+			<section class="m-top10 user-function-list">
+				<div class="dis-box padding-all b-color-f">
+					<h3 class="box-flex text-all-span my-u-title-size"><i class="iconfont icon-shijian color-red"></i>项目推荐</h3>
+				</div>
+				<!--{if $best_list}-->
+				<div class="product-list-small m-top1px b-color-f raise-tuij-box dis-box ">
+					<ul class="box-flex flow-checkout-bigpic flow-checkout-pro">
+
+						{foreach $best_list as $goods}
+						<li>
+							<div class="product-div dis-box">
+								<a class="product-div-link" href="{$goods.url}"></a>
+								<div class="shop-list-width bd"><img class="product-list-img" src="{$goods.title_img}"></div>
+								<div class="product-text index-product-text box-flex">
+									<h4>{$goods.title}</h4>
+									<p class="col-3 f-05"><em class="color-red">￥{$goods.min_price}</em><em class="col-9 f-02"> 起</em><em class="fr col-9 f-02"><i class="iconfont icon-shijian f-03"></i> 剩余时间：{$goods.shenyu_time}天</em></p>
+									<div class="raise-progressBar raise-user-time dis-box">
+										<p class="wrap box-flex">
+											<span class="bar" style="width:{$goods.baifen_bi}%;"><i class="color"></i></span>
+										</p>
+										<p class="txt">{$goods.baifen_bi}%</p>
+									</div>
+									<p class="col-3 f-03"><em class="col-9">已筹资金:</em><em class="color-red">￥{$goods.join_money}</em><em class="fr col-9 f-03">支持人:<em class="color-red">{$goods.join_num}</em>人</em>
+									</p>
+								</div>
+
+							</div>
+						</li>
+						{/foreach}
+					</ul>
+				</div>
+				<!--{else}-->
+				<div class="no-div-message flow-no-cart">
+					<i class="iconfont icon-biaoqingleiben"></i>
+					<p>亲，此处没有内容～！</p>
+				</div>
+				<!--{/if}-->
+
+			</section>
+		</div>
+		<footer class="footer-nav dis-box">
+			<a href="{url('/')}" class="box-flex nav-list">
+				<i class="nav-box i-home"></i><span>首页</span>
+			</a>
+			<a href="{url('crowd_funding/index/index')}" class="box-flex nav-list">
+				<i class="nav-box i-zhongchou"></i><span>微筹广场</span>
+			</a>
+			<a href="{url('user/crowd/order')}" class="box-flex position-rel nav-list">
+				<i class="nav-box i-zhongchou-order"></i><span>微筹订单</span>
+			</a>
+
+			<a href="{url('user/crowd/index')}" class="box-flex nav-list  active">
+				<i class="nav-box i-zhongchou_user"></i><span>微筹中心</span>
+			</a>
+		</footer>
+		<!--悬浮菜单e-->
+		<script>
+			/*店铺信息商品滚动*/
+			var swiper = new Swiper('.j-g-s-p-con', {
+				scrollbarHide: true,
+				slidesPerView: 'auto',
+				centeredSlides: false,
+				grabCursor: true
+			});
+			$(function($){
+			    commonShopList()
+			    header_img()
+				window.onresize = function(){
+				   header_img()
+				}
+			})
+
+		</script>
+	</body>
+
+</html>

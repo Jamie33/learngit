@@ -1,0 +1,114 @@
+{include file="admin/header"}
+
+<div class="warpper">
+    <div class="title">手机-{$ur_here}</div>
+    <div class="content">
+        <div class="explanation" id="explanation">
+            <div class="ex_tit">
+                <i class="sc_icon"></i><h4>操作提示</h4><span id="explanationZoom" title="收起提示"></span>
+            </div>
+            <ul>
+                <li>请填写在第三方申请的有效的APP_ID， APP_KEY 等配置信息。</li>
+                <li>"*"为必填项。</li>
+                {if $info['type'] == 'wechat'}
+                <li>微信登录，申请地址在 <a href="https://open.weixin.qq.com" target="_blank">微信开放平台</a>，通过认证后需要绑定微信公众号，点击进入<a href="https://mp.weixin.qq.com" target="_blank">微信公众平台</a></li>
+              {/if}
+            </ul>
+        </div>
+        <div class="flexilist">
+            <div class="main-info">
+                <div class="plugin_item mr0 mb8" style="clear:both">
+                    <div class="plugin_icon {$info['type']}-bgcolor" >
+                        <img src="{elixir('img/oauth/sns_'.$info['type'].'.png')}" alt="">
+                    </div>
+                    <div class="plugin_content"><h3 class="title">{$info['name']}</h3><p class="desc">版本:{$info['version']}    作者: {$info['author']}</p></div>
+                </div>
+                <form action="{url('install')}" method="post" class="form-horizontal" role="form">
+                    <div class="switch_info">
+                        {foreach $info['config'] as $key => $vo}
+                        <div class="item">
+                            {if $vo['type'] == 'text'}
+                            <div class="label-t">{$vo['label']}：</div>
+                            <div class="label_value">
+                              <input name="cfg_value[]" type="text" maxlength="50" class="text" value="{$vo['value']}" />   *
+                              <input name="cfg_name[]" type="hidden" value="{$vo['name']}" />
+                              <input name="cfg_type[]" type="hidden" value="{$vo['type']}" />
+                              <input name="cfg_label[]" type="hidden" value="{$vo['label']}" />
+                            </div>
+                            {/if}
+                        </div>
+                        {/foreach}
+                        <div class="item">
+                            <div class="label-t">排序：</div>
+                            <div class="label_value">
+                                <input type="text" name='sort' value='10' class="text" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="label-t">是否显示：</div>
+                            <div class="label_value">
+                                <div class="checkbox_items">
+                                    <div class="checkbox_item">
+                                        <input type="radio" name="status" class="ui-radio event_zhuangtai" id="status_0" value="1" checked>
+                                        <label for="status_0" class="ui-radio-label active">显示</label>
+                                    </div>
+                                    <div class="checkbox_item">
+                                        <input type="radio" name="status" class="ui-radio event_zhuangtai" id="status_1" value="0">
+                                        <label for="status_1" class="ui-radio-label">关闭</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="label-t">申请地址：</div>
+                            <div class="label_value">{$info['website']} <a href="{$info['website']}" class="btn button" target="_blank">立即申请</a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="label-t">&nbsp;</div>
+                            <div class="label_value info_btn">
+                                <input type="hidden" name="type" value="{$info['type']}"/>
+                                <input type="submit" value="安装" class="button"/>
+                                <input type="reset" value="重置" class="button button_reset"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //验证表单
+    $('input[type="submit"]').click(function(){
+        var cfg_value = $('input[name="cfg_value[]"]').val();
+        if(!cfg_value){
+            layer.msg('配置信息不能为空', {icon: 2});
+            return false;
+        }
+    });
+
+    $("#explanationZoom").on("click", function () {
+        var explanation = $(this).parents(".explanation");
+        var width = $(".content").width();
+        if ($(this).hasClass("shopUp")) {
+            $(this).removeClass("shopUp");
+            $(this).attr("title", "收起提示");
+            explanation.find(".ex_tit").css("margin-bottom", 10);
+            explanation.animate({
+                width: width - 0
+            }, 300, function () {
+                $(".explanation").find("ul").show();
+            });
+        } else {
+            $(this).addClass("shopUp");
+            $(this).attr("title", "提示相关设置操作时应注意的要点");
+            explanation.find(".ex_tit").css("margin-bottom", 0);
+            explanation.animate({
+                width: "115"
+            }, 300);
+            explanation.find("ul").hide();
+        }
+    });
+</script>
+{include file="admin/footer"}
