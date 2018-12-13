@@ -1,0 +1,111 @@
+{include file="page_header"}
+<div class="con">
+	<div class="goods-info user-order of-hidden ect-tab j-ect-tab ts-3" style="padding-top: 4rem;">
+		<nav class=" j-tab-title tab-title b-color-f of-hidden" style="position: fixed;">
+			<ul class="dis-box">
+				<li class="box-flex active"><a href="{url('user/refound/index', array('order_id' => $order_id))}">{$lang.return_index}</a></li>
+				<li class="box-flex "><a href="{url('user/refound/list', array('order_id' => $order_id))}">{$lang.return_progres}</a></li>
+			</ul>
+		</nav>
+		<div id="j-tab-con" class="tab-con">
+			<div class="swiper-wrapper">
+				<!-- 售后申请订单 order_list start-->
+				<section class="swiper-slide order_info">
+					<script id="j-order" type="text/html">
+					<%if totalPage > 0 && order_list != ''%>
+					<%each order_list as order%>
+					<section class="flow-checkout-pro m-top08">
+						<div class="padding-all m-top1px b-color-f n-reture-num">
+							<a href="<%order.order_url%>">
+							<h4 class="t-remark2"><label class="t-remark">{$lang.order_number}：</label><%order.order_sn%></h4>
+							<p class="t-remark3 m-top04">{$lang.order_addtime}：<%order.add_time%> <span class="color-red"><%order.status%></span></p>
+							</a>
+						</div>
+
+						<%each order.goods_list as goods%>
+						<div class="flow-checkout-pro">
+							<section class="n-return-list-box b-color-f">
+								<ul class="dis-box">
+									<li  class="reture-left-img">
+										<a href="javascript:;" >
+											<div class="img-box"><img class="product-list-img" src="<%goods.goods_thumb%>"></div>
+										</a>
+									</li>
+									<li class="box-flex reture-right-cont">
+										<a href="javascript:;"><h4 class="onelist-hidden m-top02"><%goods.goods_name%></h4></a>
+										<div class="dis-box reture-footer">
+											<div class=""><em class="f-03 t-first"><%goods.goods_price_format%></em><span class="f-03 col-7">×<%goods.goods_number%></span></div>
+											<%if goods.goods_attr%>
+											<div class="margin-lr05"><span class="f-03 col-7">属性:<%goods.goods_attr%></span></div>
+											<%/if%>
+											<div class="box-flex">
+
+											</div>
+										</div>
+									</li>
+								</ul>
+							</section>
+							<footer class="padding-all b-color-f m-top1px of-hidden dis-box">
+								<h4 class="t-remark2 box-flex"></h4>
+								<p class="ect-button-more ect-button-more-dete n-br-5">
+									<%if goods.is_refound == 1%>
+										<a href="javascript:;" class="btn-default-new br-5 " style="color:#337ab7;">{$lang.have_applied}</a>
+									<%else%>
+										<%if goods.goods_cause == 0 || goods.extension_code == 'virtual_card' %>
+										<a href="javascript:;" class="btn-default-new br-5" style="border:1px solid #cccccc; color: #cccccc">{$lang.applied_to}</a>
+										<%else%>
+										<a href="<%goods.apply_return_url%>" class="btn-default-new br-5"  style="border:1px solid #ec5151;color:#EC5151">{$lang.applied_to}</a>
+										<%/if%>
+									<%/if%>
+								</p>
+							</footer>
+						</div>
+						<%/each%>
+					</section>
+					<%/each%>
+					<%else%>
+					<div class="no-return-list">
+						<i class="iconfont icon-biaoqingleiben"></i>
+						<p>亲，此处没有内容～！</p>
+					</div>
+					<%/if%>
+					</script>
+				</section>
+				<!-- 售后申请订单 order_list end-->
+
+			</div>
+		</div>
+	</div>
+</div>
+    <!--快捷导航-->
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+<div class="footer-cont"><span><img src="{elixir('img/loading1.gif')}">正在加载……</span></div>
+<script type="text/javascript">
+$(function ($) {
+	// 售后申请订单列表
+	var infinite1 = $('.order_info').infinite({url: "{url('user/refound/index')}", template: 'j-order', params: 'order_id='+{$order_id}});
+
+    //加载更多
+    var loadingHeight = $(".order_info").outerHeight(true);
+    function loadimgCont(){
+        if ($(document).scrollTop() >= $(window).height() <$(document).height() - $(window).height()) {
+                $(".footer-cont").html("<span><img src='{elixir('img/loading1.gif')}'>正在加载……</span>")
+        }
+        if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                 $(".footer-cont").html("<span>没有更多了</span>")
+        }
+        if(loadingHeight< $(window).height()){
+             $(".footer-cont").css("display","none");
+        }else{
+             $(".footer-cont").css("display","block");
+        }
+    }
+    loadimgCont();
+    $(window).scroll(function() {
+        loadimgCont();
+    });
+});
+</script>
+</body>
+</html>

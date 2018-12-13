@@ -1,0 +1,110 @@
+{include file="page_header"}
+<div class="con">
+    <div class="goods-info user-order of-hidden ect-tab j-ect-tab ts-3" style="padding-top:0">
+        <div id="j-tab-con" class="tab-con margin-lr">
+            <div class="swiper-wrapper">
+                <section class="swiper-slide store_info">
+                    <script id="j-product" type="text/html">
+                        <%if bonus_list.tab%>
+                        <%each bonus_list.tab as bonus%>
+                        <section class="new-coupons-box bonus-select-box m-top10 ">
+                            <div class="cont dis-box">
+                                <div class="bonus-left">
+                                    <div class="img-box">
+                                    <h4 class="f-2 color-red"><strong class="coupons-money"><%bonus.type_money%></strong></h4>
+                                    </div>
+                                </div>
+                                <div class="box-flex">
+                                    <p class="f-05 col-3 m-top02"><strong><%bonus.type_name%></strong></p>
+                                    <p class="f-01 col-9 m-top02">满<%bonus.min_goods_amount%>元可用</p>
+                                    <p class="f-02 col-9 m-top02"><%bonus.shop_name%></p>
+                                </div>
+                                <div class="coupont-right padding-all">
+                                    <%if bonus.is_receive == 1%>
+                                    <a href="javascript:;" class="to_use" >
+                                        <span class="">去使用</span>
+                                    </a>
+                                    <%else if bonus.is_left == 0%>
+                                    <a href="javascript:;" class="" >
+                                        <span class="is_left">已领完</span>
+                                    </a>
+                                    <%else%>
+                                    <a href="javascript:;" class="get_bonus" bonus_id="<%bonus.type_id%>">
+                                        <span class="">领取</span>
+                                    </a>
+                                    <%/if%>
+                                </div>
+                            </div>
+                            <div class="time b-color-f col-7 f-02">使用期限：<%bonus.begintime%> 至 <%bonus.endtime%></div>
+                        </section>
+                        <%/each%>
+                        <%else%>
+                        <div class="no-div-message">
+                            <i class="iconfont icon-biaoqingleiben"></i>
+                            <p>亲，还没有红包哦～！</p>
+                        </div>
+                        <%/if%>
+                    </script>
+                        <input type="hidden" value="{$sessionid}" id="uid">
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+         <!--快捷导航-->
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+    <script type="text/javascript">
+        /*切换*/
+        var tabsSwiper = new Swiper('#j-tab-con', {
+            speed: 100,
+            noSwiping: true,
+            autoHeight: true,
+            onSlideChangeStart: function () {
+                $(".j-tab-title .active").removeClass('active')
+                $(".j-tab-title li").eq(tabsSwiper.activeIndex).addClass('active')
+            }
+        })
+        $(".j-tab-title li").on('touchstart mousedown', function (e) {
+            e.preventDefault()
+            $(".j-tab-title .active").removeClass('active')
+            $(this).addClass('active')
+            tabsSwiper.slideTo($(this).index())
+        })
+        $(".j-tab-title li").click(function (e) {
+            e.preventDefault()
+        })
+        //列表
+        var infinite = $('.store_info').infinite({url: "{url('bonus/index/index')}", template: 'j-product', params: 'status={$status}'});
+        // 领取
+        $("#j-tab-con").on("click", ".get_bonus", function () {
+            var id = $(this).attr('bonus_id');
+            $.get("{url('bonus/index/getbonus')}", {bonus_id: id}, function (info) {
+                if (info.error == '1') {
+                    layer.open({
+                        content: '还未登录，请登录之后领取',
+                        btn: ['确定', '取消'],
+                        shadeClose: false,
+                        yes: function() {
+                            var back_act = window.location.href;
+                            window.location.href = ROOT_URL + 'index.php?m=user&c=login&back_act='+encodeURIComponent(back_act);
+                        },
+                        no: function() {
+                        }
+                    });
+                }
+                if (info.error == '2') {
+                    d_messages(info.msg);
+                    location.reload();
+                }
+                return false;
+            },'json');
+        });
+
+        // 去使用
+        $("#j-tab-con").on("click", ".to_use", function () {
+            window.location.href = ROOT_URL + 'index.php';
+        });
+    </script>
+</body>
+</html>

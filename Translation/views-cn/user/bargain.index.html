@@ -1,0 +1,71 @@
+{include file="page_header"}
+		<div class="con">
+			<div class="goods-info user-order of-hidden ect-tab j-ect-tab ts-3 p-t0">
+				<nav class=" j-tab-title tab-title b-color-f of-hidden">
+					<ul class="dis-box">
+						<li class="box-flex active"><a href="{url('user/bargain/index')}">参与活动</a></li>
+						<li class="box-flex"><a href="{url('bargain/index/index')}">全部活动</a></li>
+
+					</ul>
+				</nav>
+				<div id="j-tab-con" class="tab-con">
+					<div class="swiper-wrapper">
+						<section class="swiper-slide bargain-goods">
+							<script id="j-product" type="text/html">
+							<%if totalPage > 0 %>
+							<%each list as goods%>
+							<section class="flow-checkout-pro">
+								<div class="my-nav-box product-list-small m-top1px b-color-f raise-tuij-box dis-box ">
+									<ul class="box-flex  flow-checkout-pro">
+										<li>
+											<div class="product-div crowd-product-div dis-box">
+												<a class="product-div-link" href="<%goods.url%>"></a>
+												<div class="shop-list-width bd"><img class="product-list-img" src="<%goods.goods_img%>"></div>
+												<div class="product-text index-product-text box-flex">
+													<h4><%goods.goods_name%></h4>
+													<p class="col-3 f-05 m-top10">
+													<em class=" col-9"><i class="iconfont icon-renshu f-03"></i><%goods.total_num%></em><em class="col-9 f-02">人参与</em>
+													<p class="col-3 f-03 m-top04"><em class="col-9">原价:</em><em class="color-red"><%goods.shop_price%></em>元<em class="fr col-9 f-03">低价:<em class="color-red"><%goods.target_price%></em>人</em>
+													</p>
+												</div>
+
+											</div>
+										</li>
+									</ul>
+								</div>
+							</section>
+							<%/each%>
+							<% else %>
+							<div class="no-div-message">
+								<i class="iconfont icon-biaoqingleiben"></i>
+								<p>亲，此处没有内容～！</p>
+							</div>
+							<% /if %>
+							</script>
+						</section>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+    <!--快捷导航-->
+    {include file="no_search_nav"}
+		<li>
+			<a href="{url('bargain/index/index')}">
+				<i class="iconfont icon-40kanjia"></i>
+					<p>砍价首页</p>
+			</a>
+		</li>
+    {include file="float_nav_footer"}
+	<!--悬浮菜单e-->
+		<script>
+			/*砍价列表获取*/
+		    var url = "{url('user/bargain/index', array('page'=>$page,))}";
+		    $('.bargain-goods').infinite({url: url, template:'j-product'});
+
+		</script>
+	</body>
+
+</html>

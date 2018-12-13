@@ -1,0 +1,58 @@
+    {if $is_wechat}
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript">
+        // 分享内容
+        var shareContent = {
+            title: '{$share_data.title}',
+            desc: '{$share_data.desc}',
+            link: '{$share_data.link}',
+            imgUrl: '{$share_data.img}',
+            success: function (res) {
+                // 用户确认分享后执行的回调函数
+                // res {"checkResult":{"onMenuShareTimeline":true},"errMsg":"onMenuShareTimeline:ok"}
+                var msg = res.errMsg;
+                var jsApiname = msg.replace(':ok','');
+                shareCount(jsApiname,'{$share_data.link}');
+            }
+        };
+
+        // 分享统计
+        function shareCount(jsApiname = '', link = ''){
+            $.post('{url("wechat/api/count")}', {jsApiname: jsApiname, link:link}, function (res) {
+                if(res.status == 200){
+                    //
+                }
+            }, 'json');
+        }
+
+        $(function(){
+            var url = window.location.href;
+            var jsConfig = {
+                debug: false,
+                jsApiList: [
+                    'onMenuShareTimeline',
+                    'onMenuShareAppMessage',
+                    'onMenuShareQQ',
+                    'onMenuShareQZone'
+                ]
+            };
+            $.post('{url("wechat/api/jssdk")}', {url: url}, function (res) {
+                if(res.status == 200){
+                    jsConfig.appId = res.data.appId;
+                    jsConfig.timestamp = res.data.timestamp;
+                    jsConfig.nonceStr = res.data.nonceStr;
+                    jsConfig.signature = res.data.signature;
+                    // 配置注入
+                    wx.config(jsConfig);
+                    // 事件注入
+                    wx.ready(function () {
+                        wx.onMenuShareTimeline(shareContent);
+                        wx.onMenuShareAppMessage(shareContent);
+                        wx.onMenuShareQQ(shareContent);
+                        wx.onMenuShareQZone(shareContent);
+                    });
+                }
+            }, 'json');
+        })
+    </script>
+    {/if}

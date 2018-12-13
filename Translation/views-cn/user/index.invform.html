@@ -1,0 +1,139 @@
+{include file="page_header"}
+
+<div class="con mb-7" id="checkPage">
+    <form action="{url('user/index/inv_form')}" method="post" class="validation">
+        <section class="user-return-list-box padding-all b-color-f m-top08">
+            <div id="tuicause">
+                <h4 class="f-04 col-3">增票资质信息</h4>
+                <ul class="user-register of-hidden">
+                    <li class="text-all dis-box j-text-all">
+                    	<label>单位名称:</label>
+                        <div class="box-flex input-text">
+                            <input class="j-input-text" type="text" name="company_name" placeholder="请输入单位名称" datatype="*" nullmsg="请输入单位名称" value="{$vat_info.company_name}">
+                            <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                        </div>
+                    </li>
+                    <li class="text-all dis-box j-text-all">
+                    	<label>纳税人识别码:</label>
+                        <div class="box-flex input-text">
+                            <input class="j-input-text" type="text" name="tax_id" placeholder="请输入纳税人识别码" datatype="*" nullmsg="请输入纳税人识别码" value="{$vat_info.tax_id}">
+                            <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                        </div>
+                    </li>
+
+                    <li class="text-all dis-box j-text-all">
+                    	<label>注册地址:</label>
+                        <div class="box-flex input-text">
+                            <input class="j-input-text" type="text" name="company_address" placeholder="请输入注册地址" datatype="*" nullmsg="请输入注册地址" value="{$vat_info.company_address}">
+                            <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                        </div>
+                    </li>
+                    <li class="text-all dis-box j-text-all">
+                    	<label>注册电话:</label>
+                        <div class="box-flex input-text">
+                            <input class="j-input-text" type="tel" name="company_telephone" placeholder="请输入注册电话" datatype="*" nullmsg="请输入注册电话" value="{$vat_info.company_telephone}">
+                            <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                        </div>
+                    </li>
+                    <li class="text-all dis-box j-text-all">
+                    	<label>开户银行:</label>
+                        <div class="box-flex input-text">
+                            <input class="j-input-text" type="text" name="bank_of_deposit" placeholder="请输入开户银行" datatype="*" nullmsg="请输入开户银行" value="{$vat_info.bank_of_deposit}">
+                            <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                        </div>
+                    </li>
+                    <li class="text-all dis-box j-text-all">
+                    	<label>银行账户:</label>
+                        <div class="box-flex input-text">
+                            <input class="j-input-text" type="number" name="bank_account" placeholder="请输入银行账户" datatype="*" nullmsg="请输入银行账户" value="{$vat_info.bank_account}">
+                            <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                        </div>
+                    </li>
+        </section>
+        <section class="user-return-list-box padding-all b-color-f m-top08">
+            <div id="tuicause">
+                <h4 class="f-04 col-3">票据收件信息</h4>
+                <ul class="user-register of-hidden">
+                    <li class="text-all dis-box j-text-all">
+                    	<label>姓名:</label>
+                        <div class="box-flex input-text">
+                            <input class="j-input-text" type="text" name="consignee_name" placeholder="请输入姓名" datatype="*" nullmsg="请输入姓名" value="{$vat_info.consignee_name}">
+                            <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                        </div>
+                    </li>
+                    <li class="text-all dis-box j-text-all">
+                    	<label>手机号:</label>
+                        <div class="box-flex input-text">
+                            <input class="j-input-text" type="tel" name="consignee_mobile_phone" placeholder="请输入手机号" datatype="m" nullmsg="请输入收票人手机号" value="{$vat_info.consignee_mobile_phone}">
+                            <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                        </div>
+                    </li>
+                    <!--address-start-->
+                    <div class="text-all" id="editAddressForm">
+                        <input type="hidden" id="province_id" name="province"  datatype="*" nullmsg="请选择地区" value="{$vat_info.province}">
+                        <input type="hidden" id="city_id" name="city" value="{$vat_info.city}">
+                        <input type="hidden" id="district_id" name="district" value="{$vat_info.district}">
+                        <input type="hidden" id="town_id" name="town_region_id" value="">
+                        <input type="hidden" id="village_id" name="village_region_id" value="">
+                        <input type="hidden" id="region_id" name="country" value="1">
+                        <div class="address-box" id="selectAddressBtn" region-data="">
+                            <label class="fl">所在地区:</label>
+                            <span class="fl text-all-span addressdetail" id="addressLabelId">
+                            	{if $vat_info.province_name !=""|| $vat_info.city_name!=""||$vat_info.district_name!=""||$vat_info.town!=""||$vat_info.village!=""}
+                            	{$vat_info.province_name}{$vat_info.city_name}{$vat_info.district_name}{$vat_info.town}{$vat_info.village}
+                            	{else}
+                            	请选择地区
+                            	{/if}
+                            </span>
+                            <span class="t-jiantou fr"><i class="iconfont icon-jiantou tf-180"></i></span>
+                        </div>
+                    </div>
+                    <!--address-end-->
+                    <li class="text-all dis-box j-text-all">
+                    	<label>详细地址:</label>
+                        <div class="box-flex input-text">
+                            <input class="j-input-text" type="text" name="consignee_address" placeholder="请输入详细地址" datatype="*" nullmsg="请输入详细地址" value="{$vat_info.consignee_address}">
+                            <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="j-f-tel  ect-button-more  filter-btn">
+            <input class="j-input-text" type="hidden" name="id" value="{$id}">
+            <button type="submit" class="btn-submit btn-invform dis-box">提交</button>
+        </section>
+
+    </form>
+</div>
+<!--地区选择 s-->
+{include file="address"}
+<!--地区选择 e-->
+
+<!--快捷导航-->
+{include file="float_nav"}
+
+{include file="float_nav_footer"}
+<script>
+    $(function () {
+        $.Tipmsg.r = null;
+        $(".validation").Validform({
+            tiptype: function (msg) {
+                d_messages(msg);
+            },
+            tipSweep: true,
+            ajaxPost: true,
+            callback: function (data) {
+                // {"info":"demo info","status":"y"}
+                if (data.status === 'y') {
+                    window.location.href = data.url;
+                } else {
+                    d_messages(data.info);
+                }
+            }
+        });
+    })
+</script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+{include file="page_header"}
+
+
+<div class="padding-lr user-consult">
+{foreach $message_list as $message}
+    <section class="cons-list dis-box">
+        <div class="box-flex m-top02">
+            <div class="cons-admin text-right">{$info.username}<span>{$message.msg_time}</span></div>
+            <div class="fr m-top04">
+                <div class="cons-cont-1">{$message.msg_title}</div>
+            </div>
+        </div>
+        {if $info.user_picture !='' }
+        <div class="cons-head-img-box cons-head-img-boxr"><img src="{$info.user_picture}"></div>
+        {else}
+        <div class="cons-head-img-box cons-head-img-boxr"><img src="{elixir('img/no_image.jpg')}"></div>
+        {/if}
+    </section>
+    {if $message.re_msg_content!="" }
+    <section class="cons-list dis-box">
+        <div class="cons-head-img-box text-center"><i class="iconfont icon-kefu c-kefu-size "></i></div>
+        <div class="box-flex m-top02">
+            <div class="cons-admin">{$message.re_user_name}<span>{$message.re_msg_time}</span></div>
+            <div class="fl">
+                <div class="cons-cont m-top04">{$message.re_msg_content}</div>
+            </div>
+        </div>
+    </section>
+    {/if}
+{/foreach}
+</div>
+
+<form action="{url('user/index/addmessage')}" method="post">
+            <div class="filter-btn consult-filter-btn">
+			<div class=" dis-box ">
+				<div class="box-flex text-all "><input class="j-input-text" type="text" placeholder="说点什么吧～" name="msg_title"></div>
+                                <input type="submit" value=提交 class="btn-submit"/>
+				</div>
+		</div>
+</form>
+
+<script>
+/*ios第三方输入法兼容问题*/
+var interval = setInterval(function() {
+    document.body.scrollTop = document.body.scrollHeight
+}, 100)
+</script>
+	</body>
+
+</html>

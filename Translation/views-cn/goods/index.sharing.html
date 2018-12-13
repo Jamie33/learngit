@@ -1,0 +1,59 @@
+{include file="page_header"}
+    <div class="con">
+    <!--分享-->
+    <section class="t-goods-sharing-box ">
+        <header>
+            <div class="bg"><img src='{elixir('img/user-speak.png')}'></div>
+            <div class="dis-box cont-section">
+                <div class="left">
+                    <div class="img-box"><img src='{elixir('img/0.jpg')}'></div>
+                </div>
+                <div class="box-flex right">
+                    <h4 class="f-03">我是<em class="f-07"> 测试机器人1</em></h4>
+                    <p class="f-03">我为[大商场官方]代言</p>
+                </div>
+            </div>
+        </header>
+        <div class="cont padding-all">
+            
+            <div class="dis-box shop-cont b-color-f">
+                <div class="left">
+                    <div class="img-box"><img src='{elixir('img/category_top_23.png')}'></div>
+                </div>
+                <div class="box-flex right">
+                    <h4 class="col-3 f-07 twolist-hidden">森马夹克 2016冬装新款男士飞行夹克贴布绣立领休闲外套韩版潮流</h4>
+                </div>
+            </div>
+        </div>
+        <section class="b-color-f goods-sharing-cont">
+            <div class="goods-service">
+                <div class="b-color-f padding-all">
+                       <h3 class="recom-title">分享规则</h3>
+                </div>
+                <div class="f-03  col-7 sharing-cont">
+                    <p>1.凯瑞甘没人看吗坑人吗好看吗痛苦明后天哭了好吗他开门红太快了美好太空棉痛苦没开门卡通漫画看。</p>
+             </div>
+                                        
+        </section>
+        <footer class="padding-all">
+                <div class="sharing-btn">点击右上角分享给朋友</div>
+            </footer>
+    </section>
+
+    <!--end-->
+   </div>
+         <!--快捷导航-->
+    {include file="float_nav"} 
+    {include file="float_nav_footer"}
+    <script type="text/javascript">
+
+$(function(){
+    var sharing_admin = -$(".cont-section").outerWidth()/2;
+       console.log(sharing_admin)
+    $(".cont-section").css("margin-left",sharing_admin)
+
+})
+
+    </script>
+</body>
+</html>

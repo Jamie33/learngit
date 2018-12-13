@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" content="{$description}"/>
+    <meta name="keywords" content="{$keywords}"/>
+    <title>{$page_title}</title>
+    <link href="__ROOT__/public/fonts/font_8obtqlt3yf0z4cxr.css" rel="stylesheet">
+    <link href="__ROOT__/public/fonts/font_lkv63qpdlo8khuxr.css" rel="stylesheet">
+    <link href="__ROOT__/public/css/app.css" rel="stylesheet">
+    <style>
+    /*快捷导航*/
+
+        .commom-nav {
+            position: fixed;
+            right: -82%;
+            top: 66%;
+            width: 82%;
+            z-index: 12;
+            margin-right: 4.5rem;
+        }
+
+        .commom-nav.active {
+            right: -4.5rem;
+        }
+
+        .commom-nav .left-icon .nav-icon {
+            position: relative;
+            width: 4.5rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 0.5rem 0 0 0.5rem;
+            font-size: 1rem;
+            color: #fff;
+            padding: .6rem .2rem .6rem 1.6rem;
+            margin-top: 2.9rem;
+        }
+
+        .commom-nav .left-icon .icon-jiantou1 {
+            position: absolute;
+            left: .4rem;
+            top: 28.6%;
+            color: #fff;
+            font-size: 1.3rem;
+            -moz-transform: rotate(-180deg);
+            -webkit-transform: rotate(-180deg);
+            -ms-transform: rotate(-180deg);
+            -o-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+        }
+
+        .commom-nav .left-icon .icon-jiantou1.active {
+            -moz-transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        .commom-nav .right-cont {
+            background: #fff;
+            border-radius: 0.5rem 0 0 0.5rem;
+            padding: 1rem .6rem;
+        }
+
+        .commom-nav .right-cont .nav-cont {
+            overflow: hidden;
+        }
+
+        .commom-nav .right-cont .nav-cont li {
+            width: 25%;
+            float: left;
+            text-align: center;
+            padding: 0.2rem 0;
+        }
+
+        .commom-nav .right-cont .nav-cont li i {
+            font-size: 2rem;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .commom-nav .right-cont .nav-cont li p {
+            font-size: 1rem;
+            color: #666;
+            margin-top: .1rem;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .common-show {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 100%;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 11;
+            background: rgba(0, 0, 0, 0.4);
+            display: none
+        }
+
+        .common-show.active {
+            display: block;
+            left: 0;
+        }
+
+        .filter-top span {
+            font-size: 1rem;
+            display: block;
+            text-align: center;
+            padding-top: .7rem;
+            color: #fff;
+        }
+
+        .dis-box {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-box;
+            display: box;
+        }
+
+        .ts-5 {
+            -webkit-transition: all .5s;
+            -moz-transition: all .5s;
+            -o-transition: all .5s;
+            transition: all .5s;
+        }
+
+        .box-flex {
+            -webkit-box-flex: 1;
+            -moz-box-flex: 1;
+            -ms-box-flex: 1;
+            box-flex: 1;
+            display: block;
+            width: 100%;
+        }
+        /*优化快捷导航*/
+
+        .filter-top {
+            width: 4.5rem;
+            position: absolute;
+            text-align: center;
+            padding: 1.3rem .4rem .6rem .4rem;
+            display:none;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 0.5rem 0 0 0.5rem;
+        }
+
+        .filter-top-index {
+            margin-top: 1px;
+        }
+
+        .filter-top-index.active {
+            position: absolute;
+            right: 0;
+            top: 102%;
+        }
+
+        .filter-top span {
+            font-size: 1rem;
+            display: block;
+            text-align: center;
+            padding-top: .7rem;
+            color: #fff;
+        }
+
+        .filter-top .icon-jiantou {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: .6rem;
+            font-size: 1.3rem;
+            color: #fff;
+            -moz-transform: rotate(90deg);
+            -webkit-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+    </style>
+      <script>
+        window.ROOT_URL = '__ROOT__/';
+        window.PC_URL = '__STATIC__/';
+        window.shopInfo = <?= json_encode(['ruid' => $_GET['id'], 'page_id' => '','authority' => 1]);?>; // 自营的首页，商家的店铺页，平台的专题页
+    </script>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/javascript" src="__PUBLIC__/vendor/jquery-weui/lib/jquery-2.1.4.js" ></script>
+  <!--快捷导航-->
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+<script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+<script type="text/javascript" src="__ROOT__/public/js/manifest.js?v=<?=time()?>"></script>
+<script type="text/javascript" src="__ROOT__/public/js/vendor.js?v=<?=time()?>"></script>
+<script type="text/javascript" src="__ROOT__/public/js/app.js?v=<?=time()?>"></script>
+
+{include file="jssdk"}
+
+<script>
+     //快捷导航
+    $(".commom-nav .left-icon .nav-icon,.common-show").click(function () {
+        $(".commom-nav").toggleClass("active");
+        $(".common-show").toggleClass("active");
+        $(".icon-jiantou1").toggleClass("active");
+        $(".filter-top-index").toggleClass("active");
+    });
+    window.onload=function(){
+
+		/*页面向上滚动js*/
+		$(".filter-top").click(function() {
+			$("html,body").animate({
+				scrollTop: 0
+			}, 200);
+		});
+
+		$(window).scroll(function() {
+			var prevTop = 0,
+				currTop = 0;
+			currTop = $(window).scrollTop();
+			win_height = $(window).height() * 2;
+			if(currTop >= win_height) {
+				$(".filter-top").stop(true,true).fadeIn(200);
+			} else {
+				$(".filter-top").stop(true,true).fadeOut(200);
+			}
+			//prevTop = currTop; //IE下有BUG，所以用以下方式
+			setTimeout(function() {
+				prevTop = currTop
+			}, 0);
+		});
+
+    /*点击关闭顶部层*/
+    $(".ect-header-banner i.icon-guanbi").click(function () {
+        $(".app-down").hide();
+    });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+{include file="page_header"}
+<div class="con mb-7">
+    {if $link_good}
+    <section>
+<!--         <div class="dis-box padding-all my-bottom b-color-f my-nav-box">
+            <h3 class="box-flex text-all-span my-u-title-size-1">关联商品</h3>
+        </div> -->
+        <a href="{$link_good.url}">
+            <ul class="dis-box b-color-f padding-all">
+                <li class="write-add-img-box b-color-f">
+                    <div class="write-add-img"><img src="{$link_good.goods_thumb}"></div>
+                </li>
+                <li class="box-flex gl-com">
+                    <p>{$link_good.goods_name}</p>
+                </li>
+                <div class="my-dete-box">
+                    <span class="t-jiantou fr"><i class="iconfont icon-jiantou tf-180 jian-top int-jt1-box"></i></span>
+                </div>
+            </ul>
+        </a>
+    </section>
+    {/if}
+    <!--帖子详情-->
+    <section class="com-nav m-top08">
+        <ul class="dis-box com-header-img-cont">
+            <li class="com-left">
+                <div class="com-left-img">
+                    <div class="p-r img-commom"><img src="{$detail.user_picture}"></div>
+                </div>
+            </li>
+            <li class="box-flex">
+                <div class="com-adm-box new-t">
+                    <h4>{$detail.user_name}</h4>
+                </div>
+            </li>
+            <li>
+                <div class="t-time"><i class="iconfont icon-shijian my-com-size"></i><span>{$detail.add_time}</span>
+                </div>
+            </li>
+        </ul>
+        <div class="margin-lr com-min-tit dis-box">
+            {if $detail.dis_type == 1}
+            <em class="em-promotion-1 tm-ns">讨</em>
+            {elseif $detail.dis_type == 2}
+            <em class="em-promotion-1 tm-ls">问</em>
+            {elseif $detail.dis_type == 3}
+            <em class="em-promotion-1">圈</em>
+            {elseif $detail.dis_type == 4}
+            <em class="em-promotion-1 tm-hs-1">晒</em>
+            {/if}
+            <div class="box-flex"><span class=""><strong>{$detail.dis_title}</strong></span></div>
+        </div>
+        {if $dis_type == 4}
+        {foreach $img_list as $list}
+        <div class="com-deta-img" style="width: 100%"><img src="{$list.comment_img}"></div>
+        {/foreach}
+        {/if}
+        <p class="com-cont-box padding-all"> {$detail.dis_text}</p>
+
+        <div class="padding-all  b-color-f  m-top06 fx-deta-box">
+            <ul class="dis-box com-list-1">
+                <li class="box-flex">
+                    <div class="yuan" onclick="dianzan({$dis_type},{$detail.dis_id})">
+                        <a href="javascript:;" id="red" {if $detail.islike} class="active" {else}{/if}>
+                        <i class="iconfont icon-zan icon-yuan1"></i>
+                        <p id="like_num">{$detail.like_num}</p>
+                        <input id="islike" type="hidden" name="islike" value="{$islike}"/>
+                        <input id="isclick" type="hidden" name="isclick" value="0"/>
+                        </a>
+                    </div>
+                </li>
+                <li class="box-flex j-show-div">
+                    <div class="yuan oncle-color new-color">
+                        <i class="iconfont icon-fenxiang"></i>
+                        <p>分享</p>
+                    </div>
+                    <div class="com-icon">
+                        <section class="j-show-div j-show-get-val padding-lr">
+                            <!--分享方式弹出层-->
+                            <div class="show-time-con ts-3 b-color-1 j-filter-show-div">
+                                <section class="goods-show-title of-hidden padding-all b-color-f">
+                                    <h3 class="fl g-c-title-h3">分享到：</h3>
+                                    <i class="iconfont icon-guanbi2 show-div-guanbi fr"></i>
+                                </section>
+                                <section class="s-g-list-con swiper-scroll">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide select-two">
+                                            <ul class="j-get-one padding-all ul-4 pt-1 is-over">
+                                                <div class="bdsharebuttonbox" data-tag="share_1">
+                                                    <!-- <a class="bds_weixin" data-cmd="weixin"></a> -->
+                                                    <a class="bds_sqq" data-cmd="sqq"></a>
+                                                    <a class="bds_qzone" data-cmd="qzone" href="#"></a>
+                                                    <a class="bds_tsina" data-cmd="tsina"></a>
+                                                </div>
+                                                <script>
+                                                    window._bd_share_config = {
+                                                        common: {
+                                                            bdText: '{$detail.dis_text}',
+                                                            bdDesc: '{$detail.dis_text}',
+                                                            bdUrl: window.location.href
+                                                        },
+                                                        share: [{
+                                                            "bdSize": 16
+                                                        }],
+                                                        selectShare: [{
+                                                            "bdselectMiniList": ['qzone', 'tqq', 'kaixin001', 'bdxc', 'tqf']
+                                                        }]
+                                                    }
+                                                    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=' + ~(-new Date() / 36e5)];
+                                                </script>
+                                            </ul>
+                                        </div>
+                                        <div class="swiper-scrollbar"></div>
+                                    </div>
+                                </section>
+                            </div>
+                        </section>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section>
+        {if $reply_count}
+        <div class="dis-box padding-all my-bottom b-color-f my-nav-box m-top06">
+            <h3 class="box-flex text-all-span my-u-title-size-1">评论列表({$reply_count})</h3>
+        </div>
+        {/if}
+        <div class="comment-list">
+            <script id="j-product" type="text/html">
+                <%if totalPage > 0%>
+                <%each commentlist as cf%>
+                <ul class="padding-all b-color-f my-com-max-box">
+                    <li class="com-img-left">
+                        <div class="com-left-img">
+                            <div class="p-r img-commom"><img src="<%cf.user_picture%>"></div>
+                        </div>
+                    </li>
+                    <li class="com-con-right">
+                        <ul class="dis-box">
+                            <li class="box-flex">
+                                <div class="com-adm-box" style="padding-top:.2rem">
+                                    <h4 id="<%cf.dis_id%>" ><%cf.user_name%></h4>
+                                    <p><%cf.add_time%></p>
+                                </div>
+                            </li>
+                            <li class="not">
+                                <div class="com-data-right  com-list-1">
+                                    <span class="oncle-color" onclick="reply_comment(<%cf.dis_id%>)">
+                                        <span class="my-right1"><%if cf.quote_count > 0%><%cf.quote_count%><%else%>0<%/if%><i class="iconfont icon-daipingjia"></i></span>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                        <p class="com-con-m"><%cf.dis_text%></p>
+                        <%each cf.quote as cs%>
+                        <div class="pl-hf-box padding-all">
+                            <p><span><%cs.user_name%> : </span><%cs.dis_text%></p>
+                            <div class="x-jiant"></div>
+                        </div>
+                        <%/each%>
+                    </li>
+                </ul>
+                <%/each%>
+                <%else%>
+                <div class="no-div-message">
+                    <i class="iconfont icon-biaoqingleiben"></i>
+                    <p>亲，此处没有内容～！</p>
+                </div>
+                <%/if%>
+            </script>
+        </div>
+    </section>
+    <div class="goods-scoll-bg"></div>
+</div>
+<section class="filter-btn consult-filter-btn">
+    <div class="dis-box">
+        <div class="com-left-img" style="margin:0.5rem;">
+            <div class="p-r img-commom"><img src="{$user_picture}"></div>
+        </div>
+        <div class="box-flex text-all">
+            <input class="j-input-text" id="J_text" type="text" name='comment' placeholder="回复帖子:" value="">
+        </div>
+        <input type="hidden" name="user_id" value="{$detail.user_id}" />
+        <input type="hidden" name="reply_type" value="" />
+        <input type="hidden" name="quote_id" value="0" />
+        <button type="button" class="btn-submit">发送</button>
+    </div>
+</section>
+<div class="mask-filter-div"></div>
+       <!--快捷导航-->
+        {include file="float_nav"}
+        <li>
+            <a href="{url('community/index/index')}">
+                <i class="iconfont icon-medal"></i>
+                <p>社区首页</p>
+            </a>
+        </li>
+      {include file="float_nav_footer"}
+<!--引用js-->
+<script>
+    $(function () {
+        var url = "{url('commentlist', array('id' => $dis_id,'type' => $dis_type, 'goods_id' => $link_good.goods_id))}";
+        $('.comment-list').infinite({url: url, template: 'j-product'});
+
+        $('.mb-7').click(function () {
+            $(".j-input-text").attr('placeholder', '回复帖子:');
+            // $("input[name='parent_id']").val({$detail.dis_id});
+        });
+
+        // 提交
+        $('.btn-submit').click(function () {
+            var content = $("input[name='comment']").val();
+            if (content == '') {
+                d_messages('请填写回复内容');
+                $(".j-input-text").focus();
+                return false;
+            }
+            var user_id = $("input[name='user_id']").val();
+            var reply_type = $("input[name='reply_type']").val();
+            var quote_id = $("input[name='quote_id']").val();
+
+            $.ajax({
+                type: "post",
+                url: "{url('commnet')}",
+                data: {
+                    parent_id: {$detail.dis_id},
+                    goods_id: {$link_good.goods_id},
+                    user_id: user_id,
+                    type: {$dis_type},
+                    quote_id: quote_id,
+                    dis_text: content,
+                    reply_type: reply_type,
+                },
+                dataType: "json",
+                success: function (data) {
+                    d_messages(data.msg);
+                    if (data.url) {
+                        window.location.href = data.url;
+                    }
+                    return false;
+                }
+            });
+        });
+
+        /*店铺信息商品滚动*/
+        var swiper = new Swiper('.j-g-s-p-con', {
+            scrollbarHide: true,
+            slidesPerView: 'auto',
+            centeredSlides: false,
+            grabCursor: true
+        });
+
+        //ios输入框遮挡问题
+        var interval;
+        //消息框获取焦点
+        $('#J_text').focus(function(){
+            interval = setInterval(function() {
+                document.body.scrollTop = document.body.scrollHeight;
+            }, 600)
+        });
+        //消息框失去焦点
+        $('#J_text').blur(function(){
+            clearInterval(interval);
+        });
+
+    });
+
+    window.onload = function(){
+        header_img();
+    }
+    window.onresize = function(){
+        header_img();
+    }
+
+    // 回复
+    function reply_comment(dis_id) {
+        var parent_id = dis_id;
+        event.stopPropagation();
+        var cname = $("#"+dis_id).html();
+        $(".j-input-text").attr('placeholder', '回复' + cname + ':');
+
+        $("input[name='reply_type']").val('reply_other');
+        $("input[name='quote_id']").val(parent_id);
+
+        $(".j-input-text").focus();
+    }
+
+    function dianzan(dis_type, dis_id) {
+        var isclick = document.getElementById('isclick').value;
+        $("#isclick").val(new Date().getTime());
+        if (isclick < (new Date().getTime() - 1000)) {
+            $.ajax({
+                type: "post",
+                url: "{url('like')}",
+                data: {dis_type: dis_type, dis_id: dis_id},
+                dataType: "json",
+                success: function (data) {
+                    if (data.is_like == 1) {
+                        $("#red").addClass("active");
+                    } else {
+                        $("#red").removeClass("active");
+                    }
+                    $("#like_num").html(data.like_num);
+                    $("#islike").val(data.is_like);
+                }
+            });
+        }
+    }
+
+
+</script>
+</body>
+</html>

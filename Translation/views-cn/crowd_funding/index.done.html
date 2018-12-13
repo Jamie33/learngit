@@ -1,0 +1,39 @@
+{include file="page_header"}
+		<div class="con">
+			<div class="flow-done">
+				<div class="flow-done-con">
+					<i class="iconfont icon-qian"></i>
+					<p class="flow-done-title">付款金额</p>
+					<p class="flow-done-price">{$total.amount_formated}</p>
+				</div>
+				<div class="flow-done-all">
+					<div class="padding-all b-color-f flow-done-id">
+						<section class="dis-box">
+							<label class="t-remark g-t-temark">订单号：</label>
+							<span class="box-flex t-goods1 text-right">{$order.order_sn}</span>
+						</section>						
+					</div>
+						<div class="padding-all b-color-f flow-done-id">		
+						<section class="dis-box">
+							<label class="t-remark g-t-temark">配送方式：</label>
+							<span class="box-flex t-goods1 text-right">{$order.shipping_name}</span>
+						</section>
+					</div>
+				</div>
+			</div>
+			{if $order.pay_code == 'balance'}
+			<div class="padding-all ect-button-more dis-box">
+				<a href="{url('user/crowd/order')}" type="button" class="btn-wechat box-flex br-5 min-two-btn">余额支付已完成</a>
+			</div>
+			{/if}
+			<div class="padding-all ect-button-more dis-box">
+				{$pay_online}
+			</div>
+			<!-- <div class="flow-done-other">
+				<a href="#">其他方式</a>
+			</div> -->
+		</div>
+		</div>
+	</body>
+
+</html>

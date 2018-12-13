@@ -1,0 +1,186 @@
+{include file="page_header"}
+<div class="con">
+    <form action="{url('user/account/account')}" method="post" onsubmit="return check()">
+        <div class="user-recharge ">
+            <section class="j-show-div j-show-get-val padding-lr b-color-f m-top10">
+                <div class="dis-box text-all">
+                    <label class="t-remark " style="font-size:1.4rem" >提现账户</label>
+                    {foreach $bank as $key => $val}
+                    {if $key==0}
+                    <input type="hidden" name="bank_number" value="{$val.bank_card_org}">
+                    <input type="hidden" name="real_name" value="{$val.bank_user_name}">
+                    <input type="hidden" name="user_note" value="{$val.bank_region}">
+                    <input type="hidden" name="mobile" value="{$val.bank_mobile}">
+                    <div class="box-flex m-top06 f-04 text-right onelist-hidden">
+                        <span>{$val.bank_card}({$val.bank_name})</span>
+                    </div>
+                    {/if}
+                    {/foreach}
+                    <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180" style="margin-top:.8rem"></i></span>
+                </div>
+
+                <!--选择银行卡弹出层-->
+                <div class="show-time-con ts-3 b-color-1 j-filter-show-div">
+                    <section class="goods-show-title of-hidden padding-all ">
+                        <h3 class="fl g-c-title-h3">选择银行卡</h3>
+                        <i class="iconfont icon-guanbi2 show-div-guanbi fr"></i>
+                    </section>
+                    <section class="s-g-list-con swiper-scroll">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide select-two">
+                                <ul class="j-get-one padding-all">
+                                    {foreach $bank as $key}
+                                    <li class="ect-select">
+                                        <label class="ts-1" name="{$key.bank_name}" card="{$key.bank_card_org}">
+                                            <dd><span>{$key.bank_card}({$key.bank_name})</span></dd>
+                                            <i class="fr iconfont icon-gou ts-1"></i></label>
+                                    </li>
+                                    {/foreach}
+                                </ul>
+                            </div>
+                            <div class="swiper-scrollbar"></div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+            <section class="m-top10 b-color-f padding-all">
+                <div class="dis-box j-text-all">
+                    <label class="t-remark">提现金额（元）</label>
+                </div>
+                <div class="dis-box j-text-all padding-top m-top10">
+                    <div class="f-07 col-6">￥</div>
+                    <div class="blx-flex f-08"><input class="j-input-text " type="number" min="0" step="0.01" placeholder="请输入提现金额 " name="amount"></div>
+                </div>
+            </section>
+            <section class="margin-lr">
+                <div class="text-all dis-box j-text-all">
+                    <div class="box-flex f-03 col-6">
+                        最低可提现金额：<em class="color-red">{if $buyer_cash > 0}￥{$buyer_cash}{else}不限{/if}</em>
+                    </div>
+                </div>
+                <div class="text-all dis-box j-text-all">
+                    <div class="box-flex f-03 col-6">本次最大提现额度： <em class="color-red">{$surplus_amount}</em><em class="color-red padding-lr">{if $deposit_fee >0}({$deposit_fee}%手续费){/if}</em>
+                    </div>
+                </div>
+            </section>
+            {if C('shop.sms_signin') == 1}
+            <section class="margin-lr">
+                <div class="text-all dis-box j-text-all">
+                    <label class="t-remark">图片验证码</label>
+                    <div class="box-flex input-text">
+                        <input class="j-input-text" style="padding:0 1rem" type="text" name="verify" datatype="*" nullmsg="请输入图片验证码"/>
+                        <!-- <img src="{url('captcha/index/index')}" class="j-verify-img" onclick="this.src='{url('captcha/index/index')}'" height="36" style="position: absolute; right: 0; top: 0; font-size: 1.4rem;"/> -->
+                    </div>
+                    <img src="{url('captcha/index/index')}" onclick="this.src='{url('captcha/index/index')}'" height="36" class="ipt-check-btn j-verify-img"  />
+                </div>
+            </section>
+            <section class="margin-lr">
+                <div class="text-all dis-box j-text-all">
+                    <label class="t-remark">短信验证码</label>
+                    <div class="box-flex input-text">
+                        <input class="j-input-text " style="padding:0 1rem" type="text" name="mobile_code" datatype="*" nullmsg="请输入短信验证码">
+                        <!-- <a style="position: absolute; right: 0; top: 25%; font-size: 1.4rem; z-index: 2; padding:0 1rem" href="javascript:;" id="sendsms">发送验证码</a> -->
+                    </div>
+                    <a type="button" class="ipt-check-btn ipt-check-btn-new f-03" style="margin:0.3rem" href="#" id="sendsms">获取短信验证码</a>
+                </div>
+            </section>
+            {/if}
+        </div>
+
+        <div class="padding-all">
+            <input type="hidden" name="surplus_type" value="1">
+            <button type="submit" class="btn-submit br-5">提交申请</button>
+        </div>
+
+    </form>
+    <!--弹窗layer-->
+    <div class="mask-filter-div"></div>
+</div>
+
+<script type="text/javascript">
+    function check() {
+        $(".ts-1").each(function () {
+            if ($(this).hasClass("active")) {
+                $("input[name=real_name]").val($(this).attr("name"));
+                $("input[name=bank_number]").val($(this).attr("card"));
+                a = 1;
+            }
+        })
+
+        var amount = $("input[name=amount]").val();
+        if (amount == '') {
+            d_messages('请填写提现金额');
+            return false;
+        }
+
+        // 验证码校验
+        {if C('shop.sms_signin') == 1}
+        var verify_code = $("input[name=verify]").val();
+        if (verify_code == '') {
+            d_messages('请输入图片验证码');
+            return false;
+        }
+        var mobile_code = $("input[name=mobile_code]").val();
+        if (mobile_code == '') {
+            d_messages('请输入短信验证码');
+            return false;
+        }
+        {/if}
+
+        if (a != 1) {
+            return false;
+        }
+    }
+
+    var time = 60;
+    var c = 1;
+    function data() {
+        if (time == 0) {
+            c = 1;
+            $("#sendsms").html("发送验证码");
+            time = 60;
+            return;
+        }
+
+        if (time != 0) {
+            if ($(".ipt-check-btn").attr("class").indexOf("disabled") < 0) {
+                $(".ipt-check-btn").addClass('disabled');
+            }
+            c = 0;
+            $("#sendsms").html("<span>重新获取(" + time + ")</span>");
+            time--;
+        }
+        setTimeout(data, 1000);
+    }
+    $("#sendsms").click(function () {
+        var verify_code = $("input[name=verify]").val();
+        var mobile = $("input[name=mobile]").val();
+
+        if (verify_code == '') {
+            d_messages('请输入图片验证码');
+            return false;
+        }
+        if (mobile == '') {
+            d_messages('请输入手机号');
+            return false;
+        }
+        if (c == 0) {
+            d_messages('发送频繁');
+            return;
+        }
+
+        $.post(ROOT_URL + 'index.php?m=sms&a=send', {
+            mobile: mobile,
+            verify_code: verify_code,
+            flag: ''
+        }, function (res) {
+            d_messages(res.msg);
+            if (res.code == 2) {
+                data();
+            }
+            $('.j-verify-img').click();
+        }, 'json');
+    })
+</script>
+</body>
+</html>

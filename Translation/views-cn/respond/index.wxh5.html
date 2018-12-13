@@ -1,0 +1,43 @@
+{include file="page_header"}
+<div class="con">
+    <div class="message">
+    </div>
+</div>
+{if $is_wxh5 == 1}
+<style>
+.layermbtn span:first-child {color:#ff0000; }
+.layermbtn span {color:#44b549; }
+</style>
+<script>
+  $(function() {
+      open_wxpay();
+  });
+
+  function open_wxpay(){
+    var url = "{$order_url}";
+    //询问框
+    layer.open({
+      content: '请确认微信支付是否已完成',
+      btn: ['已完成支付', '支付遇到问题'],
+      yes: function(index){
+        window.location.href = "{$repond_url}";
+        layer.close(index);
+      },
+      no: function (index){
+        redirect(url);
+        layer.close(index);
+      }
+    });
+
+    setTimeout(function () {
+        window.location.href = url.replace('respond_wxh5', 'index');
+    }, 5000);
+  }
+
+  function redirect(url) {
+      window.location.href = url.replace('respond_wxh5', 'index');
+  }
+</script>
+{/if}
+</body>
+</html>

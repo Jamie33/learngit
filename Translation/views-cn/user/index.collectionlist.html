@@ -1,0 +1,81 @@
+{include file="page_header"}
+<style>
+    .store_info .product-list .product-div{position:relative;}
+    .store_info .product-list .product-div .a-accessories-clear{position: absolute;
+    font-size: 1.8rem;
+    color: #888;
+    right: 1.3rem;
+    bottom: 1.3rem;}
+    .store_info .product-list .product-div .a-accessories-clear i{font-size:1.8rem;}
+</style>
+
+<div class="con">
+
+    <section class="store_info">
+    <script id="j-product" type="text/html">
+        <%if totalPage > 0 && goods_list !='' %>
+        <%each goods_list as goods%>  
+		<section class="product-list j-product-list product-list-small">
+			<ul>
+				<li>
+					<div class="product-div">
+						<img class="product-list-img" src="<%goods.goods_thumb%>" />
+						<div class="product-text index-product-text">
+							<a href="<%goods.url%>"><h4><%goods.goods_name%></h4></a>
+							<!-- <p class="dis-box p-t-remark"><span class="box-flex">库存:<%goods.goods_number%></span></p> -->
+							<p><span class="p-price t-first "><%#goods.shop_price%></span></p>
+                            <a href="<%goods.del%>" class="a-accessories-clear"><i class="iconfont icon-xiao10 fr"></i></a>
+						</div>                       
+					</div>                       
+				</li>
+			</ul>
+		</section>
+        <%/each%>
+        <%else%>
+        <div class="no-div-message">
+            <i class="iconfont icon-biaoqingleiben"></i>
+            <p>亲，还没有收藏商品哦～！</p>
+        </div>
+        <%/if%>
+    </script>
+    </section>
+
+</div>
+
+<div class="footer-cont"><span><img src="{elixir('img/loading1.gif')}">正在加载……</span></div>
+<script type="text/javascript">
+$(function ($) {
+	/*店铺信息商品滚动*/
+	var swiper = new Swiper('.j-f-n-c-prolist', {
+		scrollbarHide: true,
+		slidesPerView: 'auto',
+		centeredSlides: false,
+		grabCursor: true
+	});
+	
+    $('.store_info').infinite({url: "{url('user/index/collectionlist')}", template:'j-product'});
+
+    //加载更多
+    var loadingHeight = $(".store_info").outerHeight(true);
+    function loadimgCont(){
+        if ($(document).scrollTop() >= $(window).height() <$(document).height() - $(window).height()) {
+                $(".footer-cont").html("<span><img src='{elixir('img/loading1.gif')}'>正在加载……</span>")
+        }
+        if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                 $(".footer-cont").html("<span>没有更多了</span>")
+        }
+        if(loadingHeight< $(window).height()){
+             $(".footer-cont").css("display","none");
+        }else{
+             $(".footer-cont").css("display","block");
+        }
+    }
+    loadimgCont();
+    $(window).scroll(function() {
+        loadimgCont();
+    });
+
+});
+</script>
+</body>
+</html>

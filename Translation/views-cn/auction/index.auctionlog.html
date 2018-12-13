@@ -1,0 +1,22 @@
+{include file="page_header"}
+<section class="box b-color-f">
+    <div class="box padding-all  wallet-bt">
+        <h3 class="recom-title-1">
+            出价记录					
+            <span class=" t-remark fr">{$auction.bid_user_count}人<i class="iconfont icon-more"></i></span>
+        </h3>
+    </div>
+    {foreach $auction_log as $k=>$v}
+    <div class="padding-1 m-top1px b-color-f g-evaluation-con {if $k > 0}new-auction-bor{/if}">
+        <div class="of-hidden evaluation-list">
+            <div class="of-hidden ">
+                <p class="fl"><span class="act-new-box {if $k > 0}a-col-hs{else}a-col-red{/if}">{if $k > 0}出局{else}领先{/if}</span><span class="aut-admin">{$v.user_name}</span></p>
+                <p class="fr t-remark">{$v.bid_time}</p>
+            </div>
+            <p><span class="p-price t-first ">{$v.formated_bid_price}</span></p>
+        </div>
+    </div>
+    {/foreach}
+</section>
+</body>
+</html>

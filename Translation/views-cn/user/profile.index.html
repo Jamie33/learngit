@@ -1,0 +1,269 @@
+{include file="page_header"}
+
+<section class="b-color-f  my-nav-box">
+	<div class="s-user-top">
+		<div class="user-bg-box-1">
+			<img src="{elixir('img/user-1.png')}">
+		</div>
+		<div class="user-bg2-box-1"><img src="{elixir('img/user-2.png')}"></div>
+		<div class="s-xian-box user_profile_box s-user-top-1 p-r">
+			<div class="dis-box t-goods1 onelist-hidden jian-top" for="logo">
+				<div class="user-img ">
+                    {if $is_wechat == 0}<input id="headimg" type="file" class="user-profile-img" style="opacity: 0" />{/if}
+					<div class="user-head-img-box-1 img-commom">
+                    {if $info.user_picture !=='' }<img src="{$info.user_picture}">{else}<img src="{elixir('img/no_image.jpg')}">{/if}
+                    </div>
+                </div>
+                <div class="box-flex profile-index-top">
+                    <h3 class="text-all-span my-u-title-size">{$info.nick_name}</h3>
+                    <p class="text-all-span f-02"><span>用户名</span> {$user_name}</p>
+                </div>
+			</div>
+            <i class="iconfont icon-jiantou tf-180 jian-top"></i>
+		</div>
+	</div>
+
+	<div class="s-user-top {if !$is_wechat} onclik-nick_name {/if}">
+		<div class="dis-box s-xian-box s-user-top-1">
+			<h3 class="box-flex text-all-span my-u-title-size">昵称</h3>
+			<div id="nick_name" class="box-flex t-goods1 text-right onelist-hidden jian-top">{$info.nick_name}</div>
+            {if !$is_wechat} <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>{/if}
+		</div>
+	</div>
+	<div class="s-user-top onclik-sex">
+		<div class="dis-box s-xian-box s-user-top-1">
+			<h3 class="box-flex text-all-span my-u-title-size">性别</h3>
+			<div id="sex" class="box-flex t-goods1 text-right onelist-hidden jian-top">{$info.sex}</div>
+			<span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+		</div>
+	</div>
+    <div class="s-user-top onclik-birthday">
+        <div class="dis-box s-xian-box s-user-top-1">
+            <h3 class="box-flex text-all-span my-u-title-size">出生日期</h3>
+            <div id="birthday" class="box-flex t-goods1 text-right onelist-hidden jian-top">{$info.birthday}</div>
+            <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+        </div>
+    </div>
+    <a href="{url('index/addresslist')}">
+        <div class="s-user-top">
+            <div class="dis-box s-user-top-1">
+                <h3 class="box-flex text-all-span my-u-title-size">收货地址</h3>
+                <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+            </div>
+        </div>
+    </a>
+</section>
+<section class="b-color-f my-nav-box m-top10">
+	<a href="{url('user/profile/realname')}">
+		<div class="s-user-top">
+			<div class="dis-box s-user-top-1">
+				<h3 class="box-flex text-all-span my-u-title-size">实名认证</h3>
+                <div class="box-flex t-goods1 text-right onelist-hidden jian-top">{if $user_real == 1}已认证{else}未认证{/if}</div>
+				<span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+			</div>
+		</div>
+	</a>
+    <a href="{url('user/profile/accountsafe')}">
+        <div class="s-user-top">
+            <div class="dis-box s-user-top-1">
+                <h3 class="box-flex text-all-span my-u-title-size">账户安全</h3>
+                <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+            </div>
+        </div>
+    </a>
+     <!-- 仅微信显示 -->
+    {if $is_wechat == 1}
+    <a href="{url('user/profile/account_relation')}">
+        <div class="s-user-top">
+            <div class="dis-box s-user-top-1">
+                <h3 class="box-flex text-all-span my-u-title-size">关联账号</h3>
+                <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+            </div>
+        </div>
+    </a>
+   {/if}
+</section>
+<section class="b-color-f my-nav-box m-top10">
+    <a href="{url('user/index/help')}">
+        <div class="s-user-top">
+            <div class="dis-box s-user-top-1">
+                <h3 class="box-flex text-all-span my-u-title-size">使用帮助</h3>
+                <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+            </div>
+        </div>
+    </a>
+</section>
+
+{if !$is_wechat && !$in_ecjia}
+<div class="ect-button-more padding-all">
+    <a class="btn-submit box-flex br-5 bg-hui" type="button" href="{url('user/login/logout')}">退出</a>
+</div>
+{/if}
+
+<!-- 修改昵称 -->
+<div class=" my-nick_name-box">
+    <div class="flow-consignee margin-lr ">
+        <div class="text-all j-text-all dis-box">
+            <label>昵称</label>
+            <div class="box-flex input-text">
+                <input class="j-input-text inputcard" type="text" name="nick_name" placeholder="昵称" value="{$info.nick_name}">
+                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+            </div>
+        </div>
+        <div class="ect-button-more dis-box m-top12  my-nick_name-close">
+            <button  class="btn-submit box-flex br-5 min-two-btn" type="submit" value="submit">确定</button>
+        </div>
+    </div>
+</div>
+<!-- 修改性别 -->
+<div class=" my-sex-box">
+	<div class="flow-consignee margin-lr">
+		<ul class="g-s-i-title-3 dis-box text-center user-sex">
+			<li class="box-flex  sex-default-color">
+				<a href="javascript:;" class="{if $user_sex == 1}active{/if}">
+					<i class="iconfont icon-nan my-sex-size" ></i>
+                	<input type="radio" name="sex" value="1"/><h4 class="ellipsis-one f-03">男</h4>
+				</a>
+			</li>
+			<li class="box-flex sex-default-color" >
+				<a href="javascript:;" class="sex-nv {if $user_sex == 2}active{/if}">
+					<i class="iconfont icon-nv my-sex-size" ></i>
+                  	<input type="radio" name="sex" value="2"/><h4 class="ellipsis-one f-03">女</h4>
+				</a>
+			<li>
+		</ul>
+		<div class="ect-button-more dis-box m-top12 updata-top my-sex-close">
+          <button  class="btn-submit box-flex br-5 min-two-btn" type="submit" value="submit">确定</button>
+		</div>
+	</div>
+</div>
+<!-- 修改出生日期 -->
+<div class=" my-birthday-box">
+    <div class="flow-consignee margin-lr">
+        <div class="weui-cell f-05 text-all col-3">
+            <div class="weui-cell__hd"><span for="" class="weui-label">出生日期：</span></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="date" value="{if $info.birthday}{$info.birthday}{else}1970-01-01{/if}" name="birthday">
+            </div>
+        </div>
+        <div class="ect-button-more dis-box m-top12 my-birthday-close">
+          <button  class="btn-submit box-flex br-5 min-two-btn" type="submit" value="submit">确定</button>
+        </div>
+    </div>
+</div>
+<script>
+$(function($) {
+    // 性别展开修改弹窗
+	$(".onclik-sex").click(function() {
+		$(".my-sex-box").addClass("current");
+	});
+    // 关闭
+	$(".my-sex-close").click(function() {
+		$(".my-sex-box").removeClass("current");
+	});
+    // 点击修改颜色
+    $('.sex-default-color').click(function() {
+        for (var i = 0; i < $('.sex-default-color').size(); i++) {
+            if (this == $('.sex-default-color').get(i)) {
+                $('.sex-default-color').eq(i).children('a').addClass('active');
+            } else {
+                $('.sex-default-color').eq(i).children('a').removeClass('active');
+            }
+        }
+    });
+    // 提交修改
+    $(".user-sex").click(function(){
+        var sex = $(".active input[name='sex']").val();
+
+        $.post("{url('user/profile/editprofile')}",{sex:sex},function(data){
+            $("#sex").text(data.sex);
+        },"json");
+
+    });
+
+
+    // 昵称展开修改弹窗
+    $(".onclik-nick_name").click(function() {
+        $(".my-nick_name-box").addClass("current");
+    });
+    // 关闭 并提交修改
+    $(".my-nick_name-close").click(function() {
+        $(".my-nick_name-box").removeClass("current");
+
+        var nick_name = $("input[name='nick_name']").val();
+        $.post("{url('user/profile/editprofile')}",{nick_name:nick_name},function(data){
+            $("#nick_name").text(data.nick_name);
+        },"json");
+    });
+
+    // 出生日期展开修改弹窗
+    $(".onclik-birthday").click(function() {
+        $(".my-birthday-box").addClass("current");
+    });
+    // 关闭 并提交修改
+    $(".my-birthday-close").click(function() {
+        $(".my-birthday-box").removeClass("current");
+
+        var birthday = $("input[name='birthday']").val();
+        $.post("{url('user/profile/editprofile')}",{birthday:birthday},function(data){
+            $("#birthday").text(data.birthday);
+        },"json");
+    });
+
+});
+
+{if $is_wechat == 0}
+/* 修改头像*/
+$('.user-head-img-box-1 img').click(function(){
+	$('#headimg').click();
+
+});
+$('#headimg').change(function(e){
+	var file = e.target.files[0];
+	var form = new FormData();
+	var max_size = 1024000 * 2;
+	if(file.size > max_size) {
+    layer.open({
+      content: "上传的图片不能超过2MB!",
+      time: 2,
+      end: function (){
+        window.location.reload();
+        return false;
+      }
+    });
+  }
+
+	form.append('img', file);
+
+	var xhr;
+	if(window.ActiveXObject)
+	{
+		xhr = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	else if(window.XMLHttpRequest)
+	{
+		xhr = new XMLHttpRequest();
+	}
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4){
+			if(xhr.status == 200 || xhr.status == 0){
+				var res = xhr.responseText;
+				res = JSON.parse(res);
+				if(res.error == 0){
+					$('.user-head-img-box-1 img').attr('src', res.path);
+				}
+			}
+		}
+	};
+	xhr.open("post", "{url('changeheader')}", true);
+	xhr.send(form);
+
+});
+{/if}
+    header_img()
+    window.onresize = function(){
+        header_img()
+    }
+</script>
+</body>
+</html>

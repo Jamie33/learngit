@@ -1,0 +1,127 @@
+{include file="page_header"}
+<div class="con">
+    <div class="user-center user-register of-hidden">
+        <div class="hd j-tab-title">
+            <ul class="dis-box">
+                <li class="box-flex active">手机号快捷登录</li>
+            </ul>
+        </div>
+        <div id="j-tab-con">
+            <div class="swiper-wrapper">
+                <section class="swiper-slide swiper-no-swiping">
+                    <form action="{url('mobile_quick')}" method="post" class="validation">
+                        <div class="b-color-f  user-login-ul user-register-ul">
+                            <div class="text-all dis-box j-text-all login-li">
+                                <div class="box-flex input-text">
+                                    <input class="j-input-text" name="verify" datatype="*" nullmsg="请输入图片验证码" type="text" placeholder="请输入图片验证码"/>
+                                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                                </div>
+                                <img src="{url('captcha/index/index')}" onclick="this.src='{url('captcha/index/index')}'"
+ height="36" class="ipt-check-btn j-verify-img"/>
+                            </div>
+                            <div class="text-all dis-box j-text-all login-li m-top10" name="mobilediv">
+                                <div class="box-flex input-text">
+                                    <input class="j-input-text" id="mobile_phone" name="mobile" datatype="m"  nullmsg="请输入手机号码" errormsg="手机号码格式不正确" type="tel" placeholder="请输入手机号"/>
+                                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                                </div>
+                                <a type="button" class="ipt-check-btn ipt-check-btn-new" href="#" id="sendsms">获取短信验证码</a>
+                            </div>
+                            <div class="text-all dis-box j-text-all login-li m-top10" name="mobile_codediv">
+                                <div class="box-flex input-text">
+                                    <input class="j-input-text" name="mobile_code" datatype="*" nullmsg="请输入短信验证码" type="number" placeholder="请输入短信验证码"/>
+                                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <input name="enabled_sms" type="hidden" value="1"/>
+                        <input type="hidden" name="back_act" value="{$back_act}"/>
+                        <input type="hidden" id="flag" value="{$flag}">
+                        <button type="submit" class="btn-submit min-two-btn br-5">登录</button>
+                    </form>
+                    <div class="t-remark3 m-top10">若手机号未注册，则默认注册账号，密码为短信验证码。</div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="div-messages"></div>
+<!--引用js-->
+<script>
+    $(function () {
+        $.Tipmsg.r = null;
+        $(".validation").Validform({
+            tiptype: function (msg) {
+                d_messages(msg);
+            },
+            tipSweep: true,
+            ajaxPost: true,
+            callback: function (data) {
+                // {"info":"demo info","status":"y"}
+                if (data.status === 'y') {
+                    window.location.href = data.url;
+                } else {
+                    d_messages(data.info);
+                }
+            }
+        });
+    })
+    var time = 60;
+    var c = 1;
+    function data() {
+        if (time == 0) {
+            c = 1;
+            $("#sendsms").html("发送验证码");
+            time = 60;
+            return;
+        }
+
+        if (time != 0) {
+            if ($(".ipt-check-btn").attr("class").indexOf("disabled") < 0) {
+                $(".ipt-check-btn").addClass('disabled');
+            }
+            c = 0;
+            $("#sendsms").html("<span>重新获取(" + time + ")</span>");
+            time--;
+        }
+        setTimeout(data, 1000);
+    }
+
+    $("#sendsms").click(function () {
+        var myreg = window.mobilereg;
+        var mobile = $("input[name=mobile]").val();
+        var verify_code = $("input[name=verify]").val();
+
+        if (verify_code == '') {
+            d_messages('请输入图片验证码');
+            return false;
+        }
+        if (mobile == '') {
+            d_messages('请输入手机号');
+            return false;
+        }
+        if (!myreg.test(mobile)) {
+            d_messages('请输入有效的手机号');
+            return false;
+        }
+        if (c == 0) {
+            d_messages('发送频繁');
+            return;
+        }
+
+        $.post(ROOT_URL + 'index.php?m=sms&a=send', {
+            mobile: mobile,
+            verify_code: verify_code,
+            flag: ''
+        }, function (res) {
+            d_messages(res.msg);
+            if (res.code == 2) {
+                data();
+            }
+            // 刷新图片验证码
+            $('.j-verify-img').click();
+        }, 'json');
+    })
+
+</script>
+</body>
+</html>

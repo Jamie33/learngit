@@ -1,0 +1,370 @@
+            <!-- 按店铺显示商品  start-->
+            {foreach $goods_list as $goodsRu}
+            <section class="cart-list-box j-cart-get-i-more shop{$goodsRu.ru_id}" num="{$goodsRu.shop_goods_num}">
+                <div class="flow-shop-header padding-all  dis-box b-min b-min-b">
+                    <div class="ect-select box-flex is-shop">
+                        <label class="dis-box label-this-all active">
+                            <i class="j-select-btn active-i" style="margin-right:.6rem" data-type="1"></i>
+                            <a class="box-flex f-05" href="{if $goodsRu.ru_id>0}{url('store/index/shop_info',array('id'=>$goodsRu.ru_id))}{else}javascript:;{/if}">
+                                <i class="iconfont icon-dianpu2 flow-shop-icon {if  $goodsRu.ru_id == 0} active{/if}"></i>
+                                <strong>{$goodsRu.ru_name}{$goodsRu.user_id}</strong>
+                                {if $goodsRu.ru_id == 1}<i class="iconfont icon-more f-08 col-7"></i>{/if}
+                            </a>
+                            {if $goodsRu.coupuns_num > 0}
+                            <div class="color-red f-03  j-goods-coupon" coupon-ruid="{$goodsRu.ru_id}"><strong>领取优惠券</strong></div>
+                            {/if}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="product-list-small" style="padding:0">
+                    <ul>
+                        <li class="b-color-f">
+                            {foreach $goodsRu.new_list as $activity}
+
+                            <!-- {if $activity.act_id > 0} -->
+                            <div class="item-single p-r group-actid-{$activity.act_id}">
+                                <div class="item-full">
+
+                                    <!-- 满赠 -->
+                                    {if $activity.act_type == 0}
+                                    <div class="dis-box f-01 store-name ts-5 " id="act_name_{$activity.act_id}" >
+                                        <em class="em-promotion">{$activity.act_type_txt}</em>
+                                        {if $activity.act_type_ext == 0}
+                                            <!-- {if $activity.available} 满足最低消费-->
+                                            <span class="g-p-c-text box-flex select-gift">
+                                            <a href="{url('activity/index/detail', array('id' => $activity.act_id))}" class="ftx-03" >{$lang.activity_notes_one}{$activity.min_amount}{$lang.yuan}，{$lang.receive_gifts} </a>
+                                            <!-- 领取赠品 -->
+                                            <a href="javascript:void(0);" data-actid="{$activity.act_id}" data-ruid="{$goodsRu.ru_id}" id="select-gift-{$activity.act_id}" class="select-gift-btn j-show-div j-gift-list" ectype="tradeBtn">{$lang.receive_gift}</a>
+                                            </span>
+
+                                            <!-- {else} -->
+                                            <span class="g-p-c-text box-flex select-gift ">
+                                                <a href="{url('activity/index/detail', array('id' => $activity.act_id))}" class="ftx-03">{$lang.activity_notes_three}{$activity.min_amount}{$lang.yuan}，{$lang.receive_gifts} </a>
+                                                <!-- 查看赠品 -->
+                                                <a href="javascript:void(0);" data-actid="{$activity.act_id}" data-ruid="{$goodsRu.ru_id}" id="select-gift-{$activity.act_id}" class="select-gift-btn j-show-div j-gift-list" ectype="tradeBtn">{$lang.see_gift}</a>
+                                            </span>
+                                            <!-- {/if} -->
+
+                                            <!-- 去凑单 再逛逛-->
+                                            <span class="t-jiantou js-coudan"><a href="{url('cart/coudan/index', array('id' => $activity.act_id))}" class="color-00a">{if $activity.available}{$lang.look_around}{else}{$lang.gather_together}{/if}</a><i class="iconfont icon-jiantou tf-180 m-top02"></i></span>
+                                        {else}
+                                            <!-- {if $activity.available} 满足最低消费-->
+                                            <span class="g-p-c-text box-flex select-gift">
+                                                <a href="{url('activity/index/detail', array('id' => $activity.act_id))}" class="ftx-03" >{$lang.activity_notes_one}{$activity.min_amount}{$lang.yuan} ，{$lang.receive_gifts}</a>
+                                                <!-- 领取赠品 -->
+                                                <a href="javascript:void(0);" data-actid="{$activity.act_id}" data-ruid="{$goodsRu.ru_id}" id="select-gift-{$activity.act_id}" class="select-gift-btn  j-show-div j-gift-list" ectype="tradeBtn">{$lang.receive_gift}</a>
+                                            </span>
+
+                                            <!-- {else} -->
+                                            <span class="g-p-c-text box-flex select-gift">
+                                                <a href="{url('activity/index/detail', array('id' => $activity.act_id))}" class="ftx-03" >{$lang.activity_notes_three}{$activity.min_amount}{$lang.yuan}，{$lang.receive_gifts}</a>
+                                                <!-- 查看赠品 -->
+                                                <a href="javascript:void(0);" data-actid="{$activity.act_id}" data-ruid="{$goodsRu.ru_id}" id="select-gift-{$activity.act_id}" class="select-gift-btn  j-show-div j-gift-list" ectype="tradeBtn">{$lang.see_gift}</a>
+                                            </span>
+                                            <!-- {/if} -->
+
+                                            <!-- 去凑单 再逛逛 -->
+                                            <span class="t-jiantou js-coudan"><a href="{url('cart/coudan/index', array('id' => $activity.act_id))}" class="color-00a">{if $activity.available}{$lang.look_around}{else}{$lang.gather_together}{/if}</a><i class="iconfont icon-jiantou tf-180 m-top02"></i></span>
+                                        {/if}
+                                    </div>
+                                    <!-- 满减 -->
+                                    {elseif $activity.act_type == 1}
+                                    <div class="dis-box f-01 store-name ts-5" id="act_name_{$activity.act_id}"  >
+                                        <em class="em-promotion">{$activity.act_type_txt}</em>
+                                        <!-- {if $activity.available} 满足最低消费-->
+                                        <span class="g-p-c-text box-flex">
+                                        {$lang.activity_notes_one}{$activity.min_amount}{$lang.yuan}（<em class="color-red">{$lang.been_reduced}{$activity.act_type_ext_format}{$lang.yuan}</em>）
+                                        </span>
+                                        <!-- {else} -->
+                                        <span class="g-p-c-text box-flex">{$lang.activity_notes_three}{$activity.min_amount}{$lang.activity_notes_two}</span>
+                                        <!-- {/if} -->
+
+                                        <!-- 去凑单 再逛逛 -->
+                                        <span class="t-jiantou js-coudan"><a href="{url('cart/coudan/index', array('id' => $activity.act_id))}" class="color-00a">{if $activity.available}{$lang.look_around}{else}{$lang.gather_together}{/if}</a><i class="iconfont icon-jiantou tf-180 m-top02"></i></span>
+                                    </div>
+                                    <!-- 折扣 -->
+                                    {elseif $activity.act_type == 2}
+                                    <div class="dis-box f-01 store-name ts-5" id="act_name_{$activity.act_id}"  >
+                                        <em class="em-promotion">{$activity.act_type_txt}</em>
+                                        <!-- {if $activity.available} 满足最低消费-->
+                                        <span class="g-p-c-text box-flex ">
+                                        {$lang.activity_notes_one}{$activity.min_amount}{$lang.yuan}（<em class="color-red">{$lang.already_enjoy}{$activity.act_type_ext_format}{$lang.percent_off_discount}</em>）
+                                        </span>
+                                        <!-- {else} -->
+                                        <span class="g-p-c-text box-flex ">
+                                        {$lang.activity_notes_three}{$activity.min_amount}{$lang.zhekouxianzhi}
+                                        </span>
+                                        <!-- {/if} -->
+                                        
+                                        <!-- 去凑单 再逛逛 -->
+                                        <span class="t-jiantou js-coudan"><a href="{url('cart/coudan/index', array('id' => $activity.act_id))}" class="color-00a">{if $activity.available}{$lang.look_around}{else}{$lang.gather_together}{/if}</a><i class="iconfont icon-jiantou tf-180 m-top02"></i></span>
+                                    </div>
+                                    {/if}
+
+                                    <!-- 优惠活动商品 -->
+                                    <span class="hide">{$act_key = 1}</span>
+                                    {foreach $activity.act_goods_list as $goods}
+                                    <div class="item-item p-r">
+                                        {if $goods.store_name}
+                                        <div class="f-05 store-name">
+                                            门店名称：<em class="col-3">{$goods.store_name}</em>
+                                        </div>
+                                        {/if}
+                                        <div class="dis-box drop{$goods.rec_id} com-post-adr {if $goods.parent_id > 0}childBox childBox_{$goods.parent_id}{/if}">
+                                            <input type="hidden" class="total" price="{$goods.amount}" number="{$goods.goods_number}">
+                                            {if $goods.is_invalid == 0}
+                                            <div class="p-r ect-select {if $goods.parent_id > 0}hide{/if}">
+                                                <label class="{if $goods.is_checked==1}active{/if} rec-active" goods-id="{$goods.goods_id}" rec-id="{$goods.rec_id}" {if $goods.store_id}store_id="{$goods.store_id}" {/if} actid="{$activity.act_id}" >
+                                                <i class="j-select-btn active-i " data-type="0"></i>
+                                                </label>
+                                            </div>
+                                            {/if}
+                                            <div class="box-flex {if $goods.parent_id > 0}pl-2{/if}">
+
+                                                <div class="product-div p-r {if $goods.is_invalid == 1}flow-invalid {/if}" style="background:none">
+                                                    <div class="fl">
+                                                        <div class="p-d-img">
+                                                            <a {if $goods.extension_code == 'package_buy'} href="javascript:;" {else} href="{$goods.url}" {/if}>
+                                                            <img class="product-list-img" src="{$goods.goods_thumb}"/>
+                                                            </a>
+                                                            {if $goods.parent_id > 0}
+                                                            <span>配件</span>
+                                                            {/if}
+                                                            {if $goods.is_invalid == 1}<span>（已失效）</span>{/if}
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-text index-product-text">
+                                                        {if $goods.extension_code == 'package_buy'}
+                                                        <a>
+                                                        {else}
+                                                        <a href="{$goods.url}">
+                                                        {/if}
+                                                         <h4 class="twolist-hidden f-05">
+                                                        {$goods.goods_name}
+                                                        </h4>
+                                                        </a>
+                                                        <div class="f-02 col-7 onelist-hidden flow-goods-attr">{$goods.goods_attr}</div>
+                                                        <div class="flow-new-cont m-top04 dis-box">
+                                                                <span class="t-first box-flex j-item-{$goods.rec_id}-price">{$goods.goods_price_formated}</span>
+
+                                                                {if $goods.is_invalid == 1 || $goods.parent_id > 0 || $goods.is_gift > 0 || $goods.extension_code == 'package_buy'}
+                                                                <div class="div-num div-num-gift dis-box ">
+                                                                <em>×</em><input class="box-flex cart-number {if $goods.parent_id > 0}{$goods.group_id}_{$goods.rec_id}{/if}" type="number" value="{$goods.goods_number}" readonly id="{$goods.goods_id}" shop-id="{$goodsRu.ru_id}" cart-id="{$goods.rec_id}" actid="{$activity.act_id}"  />
+                                                                </div>
+                                                                {else}
+                                                                <div class="div-num dis-box select-shop{$goodsRu.ru_id} {if $goods.is_checked == 1}select{/if} ">
+                                                                    <a class="num-up" data-min-num="1"></a>
+                                                                    <input class="box-flex cart-number {if $goods.is_checked == 1}active{/if}" type="number" name="cart_number" value="{$goods.goods_number}" id="{$goods.goods_id}" shop-id="{$goodsRu.ru_id}" cart-id="{$goods.rec_id}" actid="{$activity.act_id}"  />
+                                                                    <a class="num-next" xiangounum="{$goods.xiangounum}" data-max-num="{$goods.attr_number}" ></a>
+                                                                </div>
+                                                                {/if}
+                                                        </div>
+                                                        
+                                                        <div class="cart-cont-box">
+                                                            <span class="f-02 col-7 j-heart" heart-goods="{$goods.goods_id}">收藏</span>
+                                                            <span class="f-02 col-7 j-delete" delete-item="{$goods.rec_id}" elete-goods="{$goods.goods_id}">删除</span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- 可选促销 -->
+                                                    {if $goods.parent_id == 0}
+                                                    <div class="cart-promotion p-r dis-box j-show-div j-promotion" goods-id="{$goods.goods_id}" ru-id="{$goodsRu.ru_id}"  act-id="{$activity.act_id}" rec-id="{$goods.rec_id}">
+                                                        <em class="em-promotion mr-small">{$activity.act_type_txt}</em>
+                                                        <div class="box-flex "><div class="onelist-hidden">{$activity.act_name}</div></div>
+                                                        <div  class="p-r" style="width:1.7rem "><i class="iconfont icon-jiantou tf-90-1 f-04 col-9 p-a" style="right:0"></i></div>
+                                                    </div>
+                                                    {/if}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- 每个优惠活动只有大于一个商品-->                                        
+                                        <div class="none-line {if $act_key > 1 && $goods.parent_id == 0}item-line{/if}"></div>
+                                                                                                                  
+                                    </div>
+                                    <span class="hide">{$act_key = $act_key + 1}</span>
+                                    {/foreach}
+
+                                    <!--  赠品开始 -->
+                                    {foreach $activity.act_cart_gift as $giftgoods}
+                                    <div class="item-item dis-box drop{$giftgoods.rec_id} com-post-adr check_{$giftgoods.rec_id} ">
+                                        <input type="hidden" class="total" price="{$giftgoods.amount}" number="{$giftgoods.goods_number}">
+                                        {if $giftgoods.is_invalid == 0}
+                                            <div class="ect-select hide">
+                                                <label class="{if $giftgoods.is_checked==1}active{/if} rec-active" goods-id="{$giftgoods.goods_id}" rec-id="{$giftgoods.rec_id}" actid="{$activity.act_id}" >
+                                                <i class="j-select-btn active-i " data-type="0"></i>
+                                                </label>
+                                            </div>
+                                        {/if}
+                                        <div class="box-flex gift-goods">
+
+                                            <div class="product-div p-r {if $giftgoods.is_invalid == 1} flow-invalid {/if}" style="background:none">
+                                                <div class="fl">
+                                                    <div class="p-d-img">
+                                                        <a {if $giftgoods.extension_code == 'package_buy'} href="javascript:;" {else} href="{$giftgoods.url}" {/if}>
+                                                        <img class="product-list-img" src="{$giftgoods.goods_thumb}"/>
+                                                        </a>
+                                                        <span>{$lang.largess}</span>
+                                                        {if $giftgoods.is_invalid == 1}<span>（已失效）</span>{/if}
+                                                    </div>
+                                                </div>
+                                                <div class="product-text index-product-text">
+                                                    {if $giftgoods.extension_code == 'package_buy'}
+                                                    <a>
+                                                    {else}
+                                                    <a href="{$giftgoods.url}">
+                                                    {/if}
+                                                     <h4 class="twolist-hidden f-05">
+                                                    {$giftgoods.goods_name}
+                                                    </h4>
+                                                    </a>
+                                                    <div class="f-02 col-7 onelist-hidden flow-goods-attr">{$giftgoods.goods_attr}</div>
+                                                    <div class="flow-new-cont m-top04 dis-box">
+                                                            <span class="t-first  box-flex j-item-{$giftgoods.rec_id}-price">{$giftgoods.goods_price_formated}</span>
+
+                                                            <!--  普通商品可修改数量 -->
+                                                            <!-- {if $giftgoods.goods_id > 0 && $giftgoods.is_gift == 0 && $giftgoods.parent_id == 0 && $giftgoods.extension_code != 'package_buy'} -->
+                                                            <div class="div-num select-shop{$goodsRu.ru_id} dis-box {if $giftgoods.is_checked == 1}select{/if}">
+                                                                <a class="num-up" data-min-num="1"></a>
+                                                                <input class="box-flex cart-number {if $giftgoods.is_checked == 1}active{/if}" type="number" name="cart_number" value="{$giftgoods.goods_number}" id="{$giftgoods.goods_id}" cart-id="{$giftgoods.rec_id}" actid="{$activity.act_id}" />
+                                                                <a class="num-next" xiangounum="{$giftgoods.xiangounum}" data-max-num="{$giftgoods.attr_number}" ></a>
+                                                            </div>
+                                                            <!-- {else} -->
+                                                            <div class="div-num div-num-gift dis-box ">
+                                                            <em>×</em><input class="box-flex cart-number" type="number" value="{$giftgoods.goods_number}"  readonly id="{$giftgoods.group_id}_{$giftgoods.rec_id}" />
+                                                            </div>
+                                                            <!-- {/if} -->
+                                                    </div>
+                                                    <div class="cart-cont-box">
+                                                        <span class="f-02 col-7 j-heart" heart-goods="{$giftgoods.goods_id}">收藏</span>
+                                                        <span class="f-02 col-7 j-delete" delete-item="{$giftgoods.rec_id}" elete-goods="{$giftgoods.goods_id}">删除</span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    {/foreach}
+                                    <!-- 赠品结束-->
+
+                                    <!--  如果活动存在赠品 显示赠品列表 -->
+                                    {if $activity.act_gift_list}
+                                    <div class="gift-box ts-3" ectype="giftBox" id="gift_box_list_{$activity.act_id}_{$goodsRu.ru_id}"  >
+                                        <div class="gift-cont-select" ectype="giftGoods" data-num="{$activity.act_type_ext}">
+                                            <section class="goods-show-title of-hidden padding-all b-color-f">
+                                                <h3 class="fl g-c-title-h3 f-06">{$lang.can_receive_up_to}{$activity.act_type_ext}{$lang.jian_goods}，{if $activity.cart_favourable_gift_num gt 0}{$lang.already_receive}{$activity.cart_favourable_gift_num}{$lang.jian},{/if} {$lang.checked_in} <em id="gift_check_num_{$activity.act_id}_{$goodsRu.ru_id}">0</em> {$lang.jian}</h3>
+
+                                                <!-- <a href="/" class="ftx-03" >{$lang.activity_notes_one}{$activity.min_amount}{$lang.yuan}， {$lang.receive_gifts}{if $activity.cart_favourable_gift_num gt 0}，{$lang.already_receive}{$activity.cart_favourable_gift_num}{$lang.jian}{/if} </a> -->
+                                                <i class="iconfont icon-guanbi2 show-div-guanbi fr"></i>
+                                            </section>
+                                            <section class="s-g-attr-con swiper-scroll b-color-f padding-all m-top1px">
+                                                <div class="swiper-wrapper">
+                                                    <div class="swiper-slide">
+                                                        {foreach $activity.act_gift_list as $gift_list}
+                                                        <div class="item-gift dis-box ">
+
+                                                            <div class="p-checkbox check_{$gift_list.id}_{$activity.act_id}">
+                                                                {if $activity.available}
+                                                                <input type="checkbox" id="{$gift_list.id}_{$goodsRu.ru_id}_{$activity.act_id}" class="ui-checkbox" data-actid="{$activity.act_id}" data-ruid="{$goodsRu.ru_id}" value="{$gift_list.id}" data-name="gift" ectype="giftGoodsCheckbox" >
+                                                                <label for="{$gift_list.id}_{$goodsRu.ru_id}_{$activity.act_id}" class="ui-label"><i class="j-gift-select-btn " ></i></label>
+                                                                {/if}
+                                                            </div>
+
+                                                            <div class="p-img"><a href="{$gift_list.url}" ><img src="{$gift_list.thumb_img}"  /></a></div>
+                                                            <div class="p-msg box-flex">
+                                                                <a href="{$gift_list.url}" title="{$gift_list.name}"><div class="p-name f-05 col-3 ">{$gift_list.name}</div></a>
+                                                                <div class="p-price f-07 color-red"><strong><em>{$gift_list.formated_price}</em></strong></div>
+                                                            </div>
+                                                        </div>
+                                                        {/foreach}
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <section class="ect-button-more dis-box">
+                                                <a class="btn-cart box-flex add-to-cart-gift-reset" href="javascript:;" >取消</a>
+                                                <a class="btn-submit box-flex  js_gift_submit_{$activity.act_id}_{$goodsRu.ru_id}  {if $activity.available} add-to-cart-gift {/if}" href="javascript:;" data-actid="{$activity.act_id}" data-ruid="{$goodsRu.ru_id}" >确定</a>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    {/if}
+                                </div>
+                            </div>
+                            <!-- {else} -->
+
+                            <!-- 普通商品开始 -->
+                            <div class="item-single">
+                            {foreach $activity.act_goods_list as $goods}
+                                <div class="item-item b-min b-min-b">
+                                    {if $goods.store_name}
+                                    <div class="f-05 store-name">
+                                        门店名称：<em class="col-3">{$goods.store_name}</em>
+                                    </div>
+                                    {/if}
+                                    <div class="dis-box drop{$goods.rec_id} com-post-adr {if $goods.parent_id > 0}childBox childBox_{$goods.parent_id}{/if}">
+                                        <input type="hidden" class="total" price="{$goods.amount}" number="{$goods.goods_number}">
+                                        {if $goods.is_invalid == 0}
+                                        <div class="ect-select {if $goods.parent_id > 0}hide{/if} ">
+                                            <label class="{if $goods.is_checked==1}active{/if} rec-active" goods-id="{$goods.goods_id}" rec-id="{$goods.rec_id}" {if $goods.store_id}store_id="{$goods.store_id}" {/if}>
+                                            <i class="j-select-btn active-i " data-type="0"></i>
+                                            </label>
+                                        </div>
+                                        {/if}
+                                        <div class="box-flex {if $goods.parent_id > 0}pl-2{/if}">
+
+                                            <div class="product-div p-r {if $goods.is_invalid == 1}flow-invalid {/if}" style="background:none">
+                                                <div class="fl">
+                                                    <div class="p-d-img">
+                                                        <a {if $goods.extension_code == 'package_buy'} href="javascript:;" {else} href="{$goods.url}" {/if}>
+                                                        <img class="product-list-img" src="{$goods.goods_thumb}"/>
+                                                        </a>
+                                                        {if $goods.parent_id > 0}
+                                                        <span>配件</span>
+                                                        {/if}
+                                                        {if $goods.is_invalid == 1}<span>（已失效）</span>{/if}
+                                                    </div>
+                                                </div>
+                                                <div class="product-text index-product-text">
+                                                    {if $goods.extension_code == 'package_buy'}
+                                                    <a href="javascript:;"><h4 class="twolist-hidden f-05">{$goods.goods_name}<em class="color-red">({$lang.remark_package})</em></h4></a>
+                                                    {else}
+                                                    <a href="{$goods.url}"><h4 class="twolist-hidden f-05">{$goods.goods_name}</h4></a>
+                                                    {/if}
+                                                    <div class="f-02 col-7 onelist-hidden flow-goods-attr">{$goods.goods_attr}</div>
+                                                    <div class="flow-new-cont m-top04 dis-box">
+                                                        <span class="t-first box-flex j-item-{$goods.rec_id}-price">{$goods.goods_price_formated}</span>
+
+                                                        {if $goods.is_invalid == 1 || $goods.parent_id > 0 || $goods.is_gift > 0 || $goods.extension_code == 'package_buy'}
+                                                        <div class="div-num div-num-gift dis-box ">
+                                                        <em>×</em><input class="box-flex cart-number {if $goods.parent_id > 0}{$goods.group_id}_{$goods.rec_id}{/if}" type="number" value="{$goods.goods_number}" readonly id="{$goods.goods_id}" shop-id="{$goodsRu.ru_id}" cart-id="{$goods.rec_id}" actid="0" />
+                                                        </div>
+                                                        {else}
+                                                        <div class="div-num select-shop{$goodsRu.ru_id} dis-box {if $goods.is_checked == 1}select{/if}">
+                                                            <a class="num-up" data-min-num="1"></a>
+                                                            <input class="box-flex cart-number {if $goods.is_checked == 1}active{/if}" type="number" name="cart_number" value="{$goods.goods_number}" id="{$goods.goods_id}"  shop-id="{$goodsRu.ru_id}" cart-id="{$goods.rec_id}" actid="0" />
+                                                            <a class="num-next" xiangounum="{$goods.xiangounum}" data-max-num="{$goods.attr_number}" ></a>
+                                                        </div>
+                                                        {/if}
+                                                    </div>
+                                                    <div class="cart-cont-box">
+                                                        <span class="f-02 col-7 j-heart" heart-goods="{$goods.goods_id}">收藏</span>
+                                                        <span class="f-02 col-7 j-delete" delete-item="{$goods.rec_id}" delete-goods="{$goods.goods_id}">删除</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            {/foreach}
+                            <!-- 普通商品结束-->
+                            </div>
+
+                            <!-- {/if} -->
+                            {/foreach}
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            {/foreach}
+            <!-- 按店铺显示商品  end-->

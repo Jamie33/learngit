@@ -1,0 +1,79 @@
+    <script>
+    $(function(){
+       // 获取节点
+          var block = document.getElementById("ectouch-top");
+          var oW,oH;
+          // 绑定touchstart事件
+          block.addEventListener("touchstart", function(e) {
+           var touches = e.touches[0];
+           //oW = touches.clientX - block.offsetLeft;
+           oH = touches.clientY - block.offsetTop;
+           //阻止页面的滑动默认事件
+           document.addEventListener("touchmove",defaultEvent,false);
+          },false)
+         
+          block.addEventListener("touchmove", function(e) {
+           var touches = e.touches[0];
+           //var oLeft = touches.clientX - oW;
+           var oTop = touches.clientY - oH;
+          //  if(oLeft < 0) {
+          //   oLeft = 0;
+          //  }else if(oLeft > document.documentElement.clientWidth - block.offsetWidth) {
+          //   oLeft = (document.documentElement.clientWidth - block.offsetWidth);
+          //  }
+          // block.style.left = oLeft + "px";
+           block.style.top = oTop + "px";
+          var max_top = block.style.top =oTop;
+          if(max_top < 30){
+             block.style.top = 30 + "px";
+          }
+          if(max_top > 440){
+            block.style.top = 440 + "px";
+          }
+          },false);
+           
+          block.addEventListener("touchend",function() {
+           document.removeEventListener("touchmove",defaultEvent,false);
+          },false);
+          function defaultEvent(e) {
+           e.preventDefault();
+          }
+    })
+</script>
+    <nav class="commom-nav dis-box ts-5" id="ectouch-top">
+        <div class="left-icon">
+            <div class="nav-icon"><i class="iconfont icon-jiantou1"></i>快速导航</div>
+            <div class="filter-top filter-top-index" id="scrollUp">
+                <i class="iconfont icon-jiantou"></i>
+                <span>顶部</span>
+            </div>
+        </div>
+        <div class="right-cont box-flex">
+            <ul class="nav-cont">
+                <li>
+                      <a href="{url('/')}">
+                        <i class="iconfont icon-home"></i>
+                        <p>首页</p>
+                      </a>  
+                </li>
+                <li>
+                     <a href="{url('category/index/index')}">
+                         <i class="iconfont icon-caidan"></i>
+                         <p>分类</p>
+                     </a> 
+                </li>
+                <li>
+                     <a href="{url('cart/index/index')}">
+                         <i class="iconfont icon-gouwuche"></i>
+                         <p>购物车</p>
+                      </a> 
+                </li>
+                <li>
+                    <a href="{url('user/index/index')}">
+                         <i class="iconfont icon-geren"></i>
+                         <p>个人中心</p>
+                    </a> 
+                </li>
+         
+
+

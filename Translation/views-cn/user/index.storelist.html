@@ -1,0 +1,57 @@
+{include file="page_header"}
+
+ <div class="store_info">
+<script id="j-product" type="text/html">
+        <%if store_list !=''%>
+   <%each store_list as store%>
+
+    <div>
+          <section class="m-top04 padding-all goods-shop b-color-f ">
+                    <div class="goods-shop-info">
+                        <a href="<%store.url%>" class="link-abs"></a>
+                        <section class="dis-box">
+                            <div class="g-s-i-img"><img src="<%store.brand_thumb%>" /></div>
+                            
+                            <div class="g-s-i-title box-flex">
+                                <h3 class="ellipsis-one"><%store.store_name%></h3>
+                                <p class="t-remark m-top04">已经有 <%store.collect_number%> 人关注</p>
+                            </div>
+                            <div class="g-s-info-add">
+                                <a href="<%store.del%>" class="gaze23 active">取消关注</a>
+                                </div>
+                        </section>
+                        <!--<section class="dis-box goods-shop-score m-top12">
+                            <p class="box-flex">
+                                <label class="fl">商品</label><span class="t-first margin-lr fl"> <%store.commentrank%>分</span><em class="em-promotion fl"><%store.rankgoodReview%></em></p>
+                            <p class="box-flex">
+                                <label class="fl">服务</label><span class="t-low margin-lr fl"><%store.commentServer%>分</span><em class="em-promotion em-p-low fl"><%store.ServergoodReview%></em></p>
+                            <p class="box-flex">
+                                <label class="fl">时效</label><span class="t-center margin-lr fl"><%store.commentdelivery%>分</span><em class="em-promotion em-p-center fl"><%store.deliverygoodReview%></em></p>
+                        </section>-->
+                    </div>
+          </section>
+        </div>
+    <%/each%>
+     <%else%>
+          <div class="no-div-message">
+				<i class="iconfont icon-biaoqingleiben"></i>
+				<p>亲，还没有收藏店铺哦～！</p>
+	 </div>
+    <%/if%>
+           </script>
+          </div>
+                <script type="text/javascript">
+                      $('.store_info').infinite({url: "{url('user/index/storelist')}", template:'j-product'});
+                </script>
+	<!--快捷导航-->
+{include file="float_nav"}
+    <li>
+        <a href="{url('store/index/index')}">
+             <i class="iconfont icon-dianpu"></i>
+              <p>店铺街</p>
+        </a> 
+    </li>  
+{include file="float_nav_footer"} 
+	</body>
+
+</html>

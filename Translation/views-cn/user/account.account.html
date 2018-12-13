@@ -1,0 +1,42 @@
+{include file="page_header"}
+
+<div class="con">
+<!-- 充值提交申请 -->
+    {if $type}
+        <section class=" j-f-tel padding-lr b-color-f m-top10 mb-1">
+            <div class="text-all dis-box j-text-all b-color-f card-div">
+                <div>
+                    <p>账户充值</p>
+                    <span></span>
+                </div>
+                <div class="box-flex input-text text-right">
+                    <p>{$amount}</p>
+                    <span class="color-red"></span>
+                </div>
+            </div>
+        </section>
+
+        <section class=" j-f-tel padding-lr b-color-f">
+            <div class="text-all dis-box j-text-all b-color-f ">
+                <div>
+                    <p class="t-remark2">支付方式<span class="pl color-red" >{$payment.pay_name} {if $pay_fee}<em class="t-first">手续费：[{$pay_fee}]</em>{/if}</span></p>
+                </div>
+            </div>
+            <div class="text-all dis-box j-text-all b-color-f card-div">
+                <div>
+                    <p>支付方式描述</p>
+                    <span>{$payment.pay_desc}</span>
+                </div>
+            </div>
+        </section>
+        <div class="margin-lr">
+            <div class="ect-button-more dis-box m-top12">
+                <a class="btn-reset box-flex" href="{url('user/account/index')}">取消</a>
+                {$payment.pay_button}
+            </div>
+        </div>
+
+    {/if}
+</div>
+</body>
+</html>

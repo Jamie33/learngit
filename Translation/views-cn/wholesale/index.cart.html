@@ -1,0 +1,110 @@
+{include file="page_header"}
+<div class="con">
+	<section class="flow-checkout-pro j-flow-checkout-pro active">
+				<div class="product-list-small m-top1px b-color-f dis-box">
+				<ul class="box-flex flow-checkout-bigpic">
+					{foreach $cart_goods as $key => $goods}
+					<li>
+						<div class="product-div">							
+							<img class="product-list-img" src="{$goods.goods_thumb}">
+							<div class="product-text">
+								<h5 class="onelist-hidden f-07 col-3">{$goods.goods_name}</h5>
+								<p class="f-03 col-9 m-top02">{$goods.goods_attr}</p>
+								<p class="f-03 col-9">批发价:<span>{$goods.formated_goods_price}</span> <small class="fr">x{$goods.goods_number}件</small></p>
+								<p class="col-9 f-03 m-top12">总价:<sapn class="color-red f-07">{$goods.formated_subtotal}</span> <small class="fr t-remark"><a onclick="dropGoods({$key})"><i class="iconfont icon-xiao10"></i></a></small></p>
+								
+								
+							</div>
+						</div>
+					</li>
+					{/foreach}
+				</ul>
+			</div>
+		{if $cart_goods}
+		<section class="flow-checkout-select b-color-f m-top08">
+			<ul>
+				<li class="f-c-select-msg pay">
+					<label class="t-remark">请输入您的联系方式、付款方式和配送方式等信息</label>
+					<div class="text-area1 m-top04">
+						<textarea name="remark" class="text-area1" maxlength="200" placeholder="买家留言"></textarea>
+						<span>200</span>
+					</div>
+				</li>
+			</ul>
+		</section>
+		{else}
+		<section class="flow-no-cart goods-evaluation">
+			<span class="gwc-bg">
+                <i class="iconfont icon-gouwuche"></i>
+            </span>
+			<p class="t-remark text-center">您还没有批发商品</p>
+			<a href="{url('index')}" type="button" class="btn-default-new br-5 min-btn">返回批发中心</a>
+		</section>
+		{/if}
+	</section>
+
+</div>
+
+<!--悬浮btn star-->
+
+<form id="formid" action="{url('submit_order')}" method="post">
+	<section class="filter-btn f-checkout-filter-btn">
+		<span class="box-flex t-remark fl pay-m">实付款 <em class="t-first">{$total}</em></span>
+		<a class="btn-submit btn-cart fl continue-buy" href="{url('index')}">继续采购</a>
+		<input type="button" class="btn-submit j-submit-account fl continue-buy" value="订购">
+	</section>
+</form>
+    <!--快捷导航-->
+    {include file="float_nav"}             
+    {include file="float_nav_footer"}
+</body>
+<script>
+	$(function() {
+		$('.j-submit-account').click(function() {
+			var remark = $('[name=remark]').val();
+			console.log(remark);
+
+			if(remark == undefined) {
+				d_messages('没有商品');
+				return false;
+			}
+
+			if(remark == '') {
+				d_messages('请填写批发信息');
+				return false;
+			}
+
+			$.ajax({
+				url: "{url('submit_order')}",
+				data: {
+					remark: remark
+				},
+				type: 'post',
+				dataType: 'json',
+				success: function(data) {
+					if(data.error == 0) {
+						window.location.href = "{url('user/order/index')}";
+					}
+				}
+			});
+		});
+	})
+	var url;
+
+	function dropGoods(id) {
+		url = "{url('drop_goods', array('id'=>0))}";
+		url = url.replace(/id\/[0-9]/g, 'id/' + id);
+		$.ajax({
+			url: url,
+			dataType: 'json',
+			success: function(data) {
+				d_messages(data.msg);
+				if(data.error == 0) {
+					setTimeout("window.location.reload(true)", 400);
+				}
+			}
+		});
+	}
+</script>
+
+</html>

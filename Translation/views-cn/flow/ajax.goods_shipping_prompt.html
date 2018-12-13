@@ -1,0 +1,90 @@
+<style>
+.layermbtn {border:1px solid #EBEBEB;font-size:1.5rem}
+.layermbtn span:last-child{background: #EC5151;color: #fff}
+</style>
+<div class="tip-box icon-box">
+    <span class="warn-icon m-icon"></span>
+    <div class="item-fore">
+        <h3><strong>{$lang.flow_no_shipping_prompt}</strong></h3>
+    </div>
+</div>
+
+{foreach $goods_list as $goodsRu}
+    <section class="m-top10">
+        <section class="flow-checkout-pro j-flow-checkout-pro ">
+
+            <div class="product-list-small m-top1px b-color-f dis-box">
+
+                <!-- 优惠活动商品商品列表 -->
+                <ul class="box-flex ">
+                    <!-- 活动商品开始 -->
+                    {foreach $goodsRu.new_list as $activity}
+                    {if $activity.act_id > 0}
+
+                        {foreach $activity.act_goods_list as $goods}
+                        {if $goods.extension_code != 'package_buy'}
+                        <li>
+                            <div class="product-div">
+                                <a class="product-div-link" href="{$goods.url}"></a>
+                                <img class="product-list-img" src="{$goods.goods_thumb}"/>
+                                <div class="product-text">
+                                    <h4>{$goods.goods_name}</h4>
+                                    <p><span class="p-price t-first ">{$goods.formated_goods_price} <small class="fr t-remark">x{$goods.goods_number}</small></span></p>
+                                    <p class="dis-box p-t-remark">{nl2br($goods.goods_attr)}</p>
+                                </div>
+                            </div>
+                        </li>
+                        {/if}
+                        {/foreach}
+                        <!-- 优惠活动商品结束-->
+
+                        <!-- 赠品 -->
+                        {foreach $activity.act_cart_gift as $goods}
+                        {if $goods.extension_code != 'package_buy'}
+                        <li>
+                            <div class="product-div">
+                                <a class="product-div-link" href="{$goods.url}"></a>
+                                <img class="product-list-img" src="{$goods.goods_thumb}"/>
+                                <!-- <span>{$lang.largess}</span> -->
+                                <div class="product-text">
+                                    <h4>{$goods.goods_name}</h4>
+                                    <p><span class="p-price t-first ">{$goods.formated_goods_price} <small class="fr t-remark">x{$goods.goods_number}</small></span></p>
+                                    <p class="dis-box p-t-remark">{nl2br($goods.goods_attr)}</p>
+
+                                </div>
+                            </div>
+                        </li>
+                        {/if}
+                        {/foreach}
+                        <!-- 赠品结束 -->
+
+                    {else}
+                        <!-- 普通商品开始 -->
+                        {foreach $activity.act_goods_list as $goods}
+                        {if $goods.extension_code != 'package_buy'}
+                        <li>
+                            <div class="product-div">
+                                <a class="product-div-link" href="{$goods.url}"></a>
+                                <img class="product-list-img" src="{$goods.goods_thumb}"/>
+                                <div class="product-text">
+                                    <h4>{$goods.goods_name}</h4>
+                                    <p><span class="p-price t-first ">{$goods.formated_goods_price} <small class="fr t-remark">x{$goods.goods_number}</small></span></p>
+                                    <p class="dis-box p-t-remark">{nl2br($goods.goods_attr)}</p>
+
+                                </div>
+                            </div>
+                        </li>
+                        {/if}
+
+                        {/foreach}
+                        <!-- 普通商品结束 -->
+                    {/if}
+                    {/foreach}
+                    <!-- 活动商品结束 -->
+
+                </ul>
+
+            </div>
+        </section>
+    </section>
+{/foreach}

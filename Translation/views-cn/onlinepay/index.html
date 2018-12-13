@@ -1,0 +1,40 @@
+{include file="page_header"}
+<section class="cashier-desk">
+    <header class="f-05 padding-all text-right bg-white">需要支付：<em class="color-red">{$order.order_amount}</em></header>
+    <div class="cashier-cont-list">
+        <ul class=" j-get-consignee-one select-three">
+            <div class="f-05 padding-all  bg-white col-7 m-top08 my-bottom">在线支付方式</div>
+            {foreach $payment_list as $payment}
+            <li class="flow-checkout-adr ">
+                <div class="flow-have-adr f-h-adr-title dis-box ">
+                    <div class="left-icon"><img src="{elixir('img/payment')}/{$payment.pay_code}.png"  style="color:#51C332"/></div>
+                    <div class="box-flex">
+                        <h4 class="f-05">{$payment.pay_name}</h4>
+                    </div>
+                    <div class="of-hidden m-top06">
+                        <div class="ect-select">
+                            <label class="dis-box change {if $payment.pay_id == $order.pay_id }active{/if}" item="{$payment.pay_id}" >
+                                <i class="select-btn active-i "></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {/foreach}
+        </ul>
+    </div>
+</section>
+<div class="ect-button-more dis-box filter-btn payshow">
+{$pay_online}
+</div>
+<script>
+    $(".change").click(function(){
+        var id = $(this).attr('item');
+        var order_id = {$order.order_id};
+        $.get("{url('onlinepay/index/changepayment')}",{pay_id:id,order_id:order_id},function(info){
+            $(".payshow").html(info);
+        });
+    });
+</script>
+</body>
+</html>

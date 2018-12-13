@@ -1,0 +1,45 @@
+{include file="page_header"}
+<div class="con">
+	<div class="user-evaluation">
+		<section class="product-list product-list-small">
+			<ul>
+				<li>
+					<div class="product-div">
+						<a class="product-div-link"
+							href="{url('crowd_funding/index/info',array('id'=>$goods_info['id']))}"></a>
+						<img class="product-list-img" src="{$goods_info.title_img}" />
+						<div class="product-text">
+							<h4>{$goods_info.title}</h4>
+							<h4>{$goods_info.price}</h4>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</section>
+		<form method="post" action="{url('user/crowd/add_comment')}" name="theForm" enctype="multipart/form-data">
+		
+		<section class="m-top1px padding-all b-color-f">
+			<div class="text-area1">
+				<textarea rows="4" maxlength="100" placeholder="填写评论内容 (0-100字)" name="content"></textarea>
+				<span></span>
+			</div>
+		</section>
+        <!-- <section class="m-top1px padding-all b-color-f">
+            <label class="t-remark g-t-temark" style="float:left">晒图</label><input  type="file" name="pic" >
+        </section> -->
+		<input type="hidden" name="comment_id" value="" />
+		<input type="hidden" name="order_id" value="{$order_id}" />
+		<input type="hidden" name="goods_id" value="{$goods_info.id}" />
+		<input type="hidden" name="sign" value="" />
+		<input type="hidden" name="rec_id" value="" />
+		<div class="ect-button-more padding-all">
+            <button class="btn-submit br-5 min-two-btn box-flex" type="submit">提交评论</button>
+        </div>
+		</form>
+		<section class="padding-all">
+			<div id="demo" class="demo"></div>
+		</section>
+	</div>
+</div>
+</body>
+</html>

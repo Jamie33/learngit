@@ -1,0 +1,236 @@
+{include file="page_header"}
+<div class="con">
+    <div class="shopping-list j-shopping-list">
+        <div class="shopping-menu j-shopping-menu">
+            <div class="dis-box b-color-f">
+                <nav style="cursor: grab;" class="shopping-list-nav article-list-nav box-flex">
+                    <ul class="swiper-wrapper">
+                        {foreach $data as $dat}
+                        <li class="div{$dat.id} swiper-slide article-li-select {if $dat.id == $cat_id}active{/if}" category="{$dat.id}">
+                            {$dat.cat_name}
+                        </li>
+                        {/foreach}
+                    </ul>
+                </nav>
+                <div class="shopping-nav-select j-s-nav-select"><i class="iconfont icon-jiantou"></i></div>
+            </div>
+            <div class="shopping-abs shopping-new-con swiper-scroll">
+                <div class="swiper-scroll">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            {foreach $data as $da}
+                            <li class="div{$da.id} {if $da.id == $cat_id}active{/if}" category="{$da.id}">{$da.cat_name}</li>
+                            {/foreach}
+                        </div>
+                    </div>
+                    <div class="swiper-scrollbar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--文章头部
+    <section class="my-admin-header-box">
+        <div class="article-list-box">
+            <a href="user_detail.html">
+                <div class="user-com-img-box"><img src="__TPL__/img/product_05.png"></div>
+            </a>
+            <h4 class="article-title f-07 col-3 text-c m-top08">阳光小狗 | <label class="f-04 col-7">12000人关注</label></h4>
+            <div class="com-nav com-list article-nav dis-box  text-center">
+                    <div class="box-flex oncle-color ">
+                        <a href="javascript:;" class="active">
+                            <h4>全部推荐</h4>
+                            <p class="t-remark4">39</p>
+                        </a>
+                    </div>
+                    <div class="oncle-color box-flex">
+                        <a href="javascript:;">
+                            <h4>资讯</h4>
+                            <p class="t-remark4">0</p>
+                        </a>
+                    </div>
+                    <div class="oncle-color box-flex">
+                        <a href="javascript:;">
+                            <h4>单品</h4>
+                            <p class="t-remark4">154</p>
+                        </a>
+                    </div>
+                    <div class="oncle-color box-flex">
+                        <a href="javascript:;">
+                            <h4>清单</h4>
+                            <p class="t-remark4">2</p>
+                        </a>
+                    </div>
+            </div>
+        </div>
+    </section>-->
+    <div class="article_info">
+        <script id="j-product" type="text/html">
+            <%if totalPage > 0%>
+            <%each list as ain%>
+                    <%if ain.imgNumPattern == 0%>
+                    <div class="article-list article-list-crosswise m-top08  b-color-f"  onclick="viewnum(<%ain.id%>)">
+                         <!--无图模式-->
+                        <a href="<%ain.url%>">
+                        <div class="dis-box">
+                            <div class="article-left box-flex">
+                                <h4 class="f-06 col-3"><%ain.title%></h4>
+                            <footer class="dis-box m-top08">
+                                <div class="article-left-cont"><em>
+                                 <%if ain.author != ""%>
+                                    <%ain.author%>
+                                <%else%>
+                                    匿名用户
+                                <%/if%>
+                                </em></div>
+                                <input id="isclick" type="hidden"  name="isclick" value="0" />
+                                <div class="box-flex article-right-cont f-01 text-right"><em><i class="iconfont icon-shijian"></i><%ain.amity_time%></em><em><i class="iconfont icon-liulan" ></i><%ain.click%></em></div>
+                            </footer>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                    <%else if ain.imgNumPattern ==1%>
+                    <div class="article-list article-list-img m-top08  padding-all b-color-f"  onclick="viewnum(<%ain.id%>)">
+                         <!--单图模式-->
+                        <a href="<%ain.url%>">
+                        <div class="dis-box">
+                            <div class="article-left box-flex">
+                                <h4 class="f-06 col-3"><%ain.title%></h4>
+                            <footer class="dis-box article-img-footer">
+                                <div class="article-left-cont"><em><%ain.author%></em></div>
+                                <div class="box-flex article-right-cont f-01 text-right"><em><i class="iconfont icon-shijian"></i><%ain.amity_time%></em><em ><i class="iconfont icon-liulan"></i><%ain.click%></em></div>
+                            </footer>
+                            </div>
+                            <div class="article-right">
+                                <div class="article-img"><img src="<%ain['album'][0]%>" class="img"></div>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                    <%else%>
+                    <div class="article-list m-top08 article-list-crosswise  b-color-f" onclick="viewnum(<%ain.id%>)">
+                        <!--三图模式-->
+                        <a href="<%ain.url%>">
+                            <div class="dis-box">
+                                <div class="article-left box-flex">
+                                    <h4 class="f-06 col-3"><%ain.title%></h4>
+                                </div>
+                            </div>
+                            <div class="article-img-list dis-box m-top10">
+                            <%each ain['album'] as bin%>
+                                <div class="box-flex img-list"><img src="<%bin%>" class="img"></div>
+                            <%/each%>
+                            </div>
+                            <footer class="dis-box m-top08">
+                                <div class="article-left-cont"><em><%ain.author%></em></div>
+                                <div class="box-flex article-right-cont f-01 text-right"><em><i class="iconfont icon-shijian"></i><%ain.amity_time%></em><em><i class="iconfont icon-liulan"></i><%ain.click%></em></div>
+                            </footer>
+                        </a>
+                    </div>
+                    <%/if%>
+            <%/each%>
+            <% else %>
+            <div class="no-div-message">
+                <i class="iconfont icon-biaoqingleiben"></i>
+                <p>亲，此处没有文章～！</p>
+            </div>
+            <%/if%>
+        </script>
+    </div>
+
+</div>
+<div class="mask-filter-div"></div>
+
+<div class="footer-cont"><span><img src='{elixir('img/loading1.gif')}'>正在加载……</span></div>
+<!--快捷导航-->
+{include file="float_nav"}
+{include file="float_nav_footer"}
+
+<script>
+$(function($){
+    var loadingHeight = $(".article_info").outerHeight(true);
+    function loadimgCont(){
+        if ($(document).scrollTop() >= $(window).height() <$(document).height() - $(window).height()) {
+                $(".footer-cont").html("<span><img src='{elixir('img/loading1.gif')}'>正在加载……</span>")
+        }
+        if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                 $(".footer-cont").html("<span>没有更多了</span>")
+        }
+        if(loadingHeight< $(window).height()){
+             $(".footer-cont").css("display","none");
+        }else{
+             $(".footer-cont").css("display","block");
+        }
+    }
+    loadimgCont();
+    $(window).scroll(function() {
+        loadimgCont();
+    });
+
+    // 首次加载显示第一个分类id
+    var cat_id = $('.shopping-list-nav li.active').attr('category');
+
+    // var url = ROOT_URL + 'index.php?m=article';
+    var url = "{url('article/index/index')}";
+    var infinite = $('.article_info').infinite({
+        url: url,
+        template: 'j-product',
+        params: 'cat_id=' + cat_id
+    });
+
+    $('.shopping-list-nav li').on('click', function (e) {
+        var cat_id = $(this).attr('category');
+        var index = $(".shopping-list-nav li").index(this);
+        $(this).siblings().removeClass("active");
+        $('.shopping-abs .swiper-slide li').removeClass("active");
+        $(".div" + cat_id).addClass("active");
+        swiper_nav.slideTo(index, 1000, false);//切换到第一个slide，速度为1秒
+        // 加载
+        infinite.onload('cat_id=' + cat_id);
+    });
+
+    var swiper_nav = new Swiper('.shopping-list-nav', {
+        scrollbarHide: true,
+        slidesPerView: 'auto',
+        centeredSlides: false,
+        grabCursor: true
+    });
+    //搜索
+    $(".btn-submit").click(function () {
+        keyword = $("input[name=infokeyword]").val();
+        if (keyword || typeof(keyword) == "undefined") {
+            infinite.onload('keyword=' + keyword);
+        } else {
+            d_messages('请输入搜索关键字');
+        }
+    });
+
+    $('.shopping-abs .swiper-slide li').on('click', function (e) {
+        var index = $(".shopping-abs .swiper-slide li").index(this);
+        $('.shopping-list-nav li').eq(index).trigger('click');
+        $(".j-shopping-menu").removeClass("active");
+        $(".mask-filter-div").removeClass("show")
+    });
+
+    $(".article-li-select").click(function () {
+        $(".j-shopping-menu").removeClass("nav-active");
+        $(".mask-filter-div").removeClass("show");
+    });
+
+});
+
+function viewnum(id)
+{
+    $.ajax({
+        type: "post",
+        url: "{url('article/index/view')}",
+        data: {id: id},
+        dataType: "json",
+        success: function (data) {
+            $("#view_num").html(data.view_num);
+        }
+    });
+}
+</script>
+</body>
+</html>

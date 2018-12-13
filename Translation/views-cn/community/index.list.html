@@ -1,0 +1,28 @@
+{include file="page_header"}
+<div class="con mb-7">
+    {include file="index/tzlist"}
+<script>
+$(function(){
+    var url = "{url('list', array('type'=>$type))}";
+    $('.community-list').infinite({url: url, template:'j-product'});
+
+    /*店铺信息商品滚动*/
+    var swiper = new Swiper('.j-g-s-p-con', {
+        scrollbarHide: true,
+        slidesPerView: 'auto',
+        centeredSlides: false,
+        grabCursor: true
+    });
+
+})
+
+    window.onload = function(){
+        header_img()
+    }
+    window.onresize = function(){
+        header_img()
+    }
+
+</script>
+</body>
+</html>

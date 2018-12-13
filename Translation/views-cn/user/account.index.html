@@ -1,0 +1,65 @@
+{include file="page_header"}
+		<section class="purse-header-box text-center purse-f">
+			<p>可用余额</p>
+			<h2>{$surplus_amount}</h2>
+			<h5>冻结余额：{$frozen_money}</h5>
+		 	<img src="{elixir('img/pur-bg.png')}">
+			<div class="user-pur-box">
+				<div class="user-nav-1-box g-s-i-title-2 dis-box text-center">
+					<a href="{url('user/account/deposit')}" class="box-flex">
+						<h4 class="ellipsis-one purse-f"><i class="iconfont icon-money is-money-color"></i>充值</h4>
+					</a>
+					<a href="{url('user/account/accountraply')}" class="box-flex">
+						<h4 class="ellipsis-one purse-f"><i class="iconfont icon-wodetixian is-money-color"></i>提现</h4>
+					</a>
+				</div>
+			</div>
+		</section>
+		<section class="b-color-f my-nav-box m-top10">
+			<div class="user-money-list g-s-i-title-1 dis-box my-dingdan purse-f">
+				<a href="{url('user/account/bonus')}" class="box-flex text-center">
+					<p class="t-remark3">{$lang.your_bonus}</p>
+					<h4 class="ellipsis-one">{$record_count}</h4>
+					<div class="purse-ts-box" style="display:none"></div>
+				</a>
+                {if C('shop.use_value_card')}
+                <a href="{url('user/account/value_card')}" class="box-flex text-center">
+					<p class="t-remark3">{$lang.your_vc_card} </p>
+					<h4 class="ellipsis-one">{$value_card.num}</h4>
+					<div class="purse-ts-box" style="display:none"></div>
+				</a>
+                {/if}
+				<a href="{url('user/account/pay_points')}" class="box-flex text-center">
+					<p class="t-remark3">{C('shop.integral_name')}</p>
+					<h4 class="ellipsis-one">{$pay_points}</h4>
+					<div class="purse-ts-box" style="display:none"></div>
+				</a>
+			</div>
+		</section>
+		<section class="b-color-f my-nav-box m-top10">
+			<a href="{url('user/account/detail')}">
+				<div class="dis-box padding-all my-bottom">
+					<h3 class="box-flex text-all-span my-u-title-size">{$lang.account_detail}</h3>
+					<div class="f-04"><span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span></div>
+				</div>
+			</a>
+			<a href="{url('user/account/log')}">
+				<div class="dis-box padding-all my-bottom">
+					<h3 class="box-flex text-all-span my-u-title-size">{$lang.account_apply_record}</h3>
+					<div class="f-04"><span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span></div>
+				</div>
+			</a>
+            <a href="{url('user/index/inv_info')}">
+				<div class="dis-box padding-all my-bottom">
+					<h3 class="box-flex text-all-span my-u-title-size">{$lang.inv_info}</h3>
+					<div class="f-04"><span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span></div>
+				</div>
+			</a>
+		</section>
+
+    <!--快捷导航-->
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+
+</body>
+</html>

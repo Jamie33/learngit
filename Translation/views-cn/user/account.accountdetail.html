@@ -1,0 +1,87 @@
+{include file="page_header"}
+
+<div class="con">
+	<section class=" j-f-tel padding-lr b-color-f mb-1">
+		<div class="text-all dis-box j-text-all b-color-f card-div">
+			<div>
+				<p>{$log_detail.type}</p>
+				<span>{$log_detail.add_time}</span>
+			</div>
+			<div class="box-flex input-text text-right">
+				<p>{$log_detail.amount}</p>
+				<span class="color-red">{$log_detail.pay_status}</span>
+			</div>
+		</div>
+	</section>
+
+	<section class=" j-f-tel padding-lr b-color-f">
+		<div class="text-all dis-box j-text-all b-color-f card-div">
+			<div>
+				<p>
+                {if $log_detail.type == '提现'}银行卡{else}支付方式{/if}
+
+                {if $log_detail.payment}<span>{$log_detail.payment}&nbsp;手续费：[{$log_detail.deposit_fee}]</span>{/if}
+                </p>
+				<span>{$log_detail.bank_number}</span>
+			</div>
+		</div>
+        {if $log_detail.pay_desc}
+		<div class="text-all dis-box j-text-all b-color-f card-div">
+			<div>
+				<p>支付方式描述</p>
+				<span>{$log_detail.pay_desc}</span>
+			</div>
+		</div>
+        {/if}
+		<div class="text-all dis-box j-text-all b-color-f card-div">
+			<div>
+				<p>会员备注</p>
+				<span>{$log_detail.user_note}</span>
+			</div>
+		</div>
+		<div class="text-all dis-box j-text-all b-color-f card-div">
+			<div>
+				<p>管理员备注</p>
+				<span>{$log_detail.short_admin_note}</span>
+			</div>
+		</div>
+	</section>
+	<div class="margin-lr">
+		<div class="ect-button-more dis-box m-top12">
+            {if $log_detail.pay_status=='未确认'}
+            <a class="btn-submit box-flex cancel" href="javascript:;" data-href="{url('user/account/cancel',array('id' => $log_detail.id))}">取消</a>
+            {/if}
+
+            {$log_detail.handle}
+		</div>
+	</div>
+</div>
+
+<script>
+$(function(){
+    // 取消
+    $('.cancel').click(function(){
+        var url = $(this).attr('data-href');
+
+        layer.open({
+            content: '是否确定要取消此次申请？',
+            btn: ['确定', '取消'],
+            shadeClose: false,
+            yes: function () {
+                $.post(url, {}, function (res) {
+                    d_messages(res.msg, 2);
+                    if (res.error == 0) {
+                        window.location.href = res.url;
+                    }
+                }, 'json');
+            }
+        });
+
+        return false;
+    });
+
+});
+
+</script>
+</body>
+</html>

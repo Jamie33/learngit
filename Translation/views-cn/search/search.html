@@ -1,0 +1,81 @@
+{include file="page_header"}
+<body class="show-search-div">
+<div class="search-div j-search-div ts-3">
+    <section class="search">
+        <form action="{url('category/index/search', array('id'=>$cat_id))}" method="get" id="search-form">
+        <div class="text-all dis-box j-text-all text-all-back">
+            <a class="a-icon-back j-close-search" href="javascript:;"><i class="iconfont icon-back"></i></a>
+            <div class="box-flex input-text">
+                <label class="search-check j-search-check" data="2">
+                    <span>商品</span><i class="iconfont icon-xiajiantou"></i>
+                </label>
+                <input class="j-input-text" type="text" name="keyword" placeholder="{if $keywords}{$keywords}{else}商品/店铺搜索{/if}" />
+                <input type="hidden" name="type_select" value="2" />
+                <input type="hidden" name="isself" value="{$isself}" />
+                <input type="hidden" name="brand" value="{$brand_id}" />
+                <input type="hidden" name="price_min" value="{$price_min}" />
+                <input type="hidden" name="price_max" value="{$price_max}" />
+                <input type="hidden" name="filter_attr" value="{$filter_attr}"/>
+                <i class="iconfont icon-guanbi1 is-null j-is-null"></i>
+            </div>
+            <a type="button" class="btn-submit" onclick="$('#search-form').submit()">搜索</a>
+        </div>
+        </form>
+    </section>
+    <section class="search-con">
+        <div class="swiper-scroll history-search">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <p>
+                        <label class="fl">热门搜索</label>
+                    </p>
+                    <ul class="hot-search a-text-more">
+                        {foreach $hot_keywords as $v}
+                        <li class="w-3"><a href="{url('category/index/search', array('keyword'=>$v))}"><span>{$v}</span></a></li>
+                        {/foreach}
+                    </ul>
+                    <p class="hos-search">
+                        <label class="fl">最近搜索</label>
+                        <span class="fr clear_history"><i class="iconfont icon-xiao10"></i></span>
+                    </p>
+                    {if $history_keywords}
+                    <ul class="hot-search a-text-more a-text-one" id="search-con">
+                        {foreach $history_keywords as $v}
+                        {if $v}
+                        <li><a href="{url('category/index/search', array('keyword'=>$v))}"><span>{$v}</span></a></li>
+                        {/if}
+                        {/foreach}
+                    </ul>
+                    {else}
+                    <div class="no-div-message">
+                        <p>暂无搜索记录</p>
+                    </div>
+                    {/if}
+                </div>
+            </div>
+        <div class="swiper-scrollbar"></div>
+        </div>
+    </section>
+    <footer class="close-search j-close-search">
+        点击关闭
+    </footer>
+</div>
+<script type="text/javascript">
+    $(function(){
+        //清除搜索记录
+        var history = {if $history_keywords}{$history_keywords}{else}""{/if};
+        $(".clear_history").click(function(){
+            if(history && $("ul#search-con").length > 0){
+                $.get("{url('category/index/clear_history')}", '', function(data){
+                    if(data.status){
+                        $("#search-con").remove();
+                        var no = '<div class="no-div-message"><p>暂无搜索记录</p></div>';
+                        $(".hos-search").after(no);
+                    }
+                }, 'json');
+            }
+        });
+    })
+</script>
+</body>
+</html>

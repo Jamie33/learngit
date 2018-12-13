@@ -1,0 +1,44 @@
+    {if $meiqia_id}
+    <script type='text/javascript'>
+        // 点击美洽 打开会话
+        function meiqia_chat() {
+            // 检查登录状态
+            var user_id = "{$user_id}";
+            if (user_id == '' || user_id == '0') {
+                var back_act = window.location.href;
+                window.location.href = ROOT_URL + 'index.php?m=user&c=login&back_act='+encodeURIComponent(back_act);
+            } else {
+                _MEIQIA('showPanel');
+            }
+        }
+    </script>
+    <!-- 这是美洽的嵌入代码 -->
+    <script type='text/javascript'>
+        (function(m, ei, q, i, a, j, s) {
+            m[i] = m[i] || function() {
+                (m[i].a = m[i].a || []).push(arguments)
+            };
+            j = ei.createElement(q),
+                s = ei.getElementsByTagName(q)[0];
+            j.async = true;
+            j.charset = 'UTF-8';
+            j.src = 'https://static.meiqia.com/dist/meiqia.js?_=t';
+            s.parentNode.insertBefore(j, s);
+        })(window, document, 'script', '_MEIQIA');
+        _MEIQIA('entId', '{$meiqia_id}');
+
+        // 设置 clientId
+        _MEIQIA('clientId', '{$user_id}'); // 会员ID
+        // 传递顾客信息
+        _MEIQIA('metadata', {
+            name: '{$userinfo.nick_name}', // 姓名
+            gender: '{$userinfo.sex}', // 性别
+            tel: '{$userinfo.mobile_phone}', // 电话
+            email: '{$userinfo.email}', // 邮箱
+            网站名称: '{$userinfo.shop_name}', // 自定义字段 来源网站名称
+        });
+
+        // 在这里开启无按钮模式（常规情况下，需要紧跟在美洽嵌入代码之后）
+        _MEIQIA('withoutBtn');
+    </script>
+    {/if}

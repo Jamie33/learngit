@@ -1,0 +1,212 @@
+{include file="page_header"}
+<style>
+a.a-sequence {width: 3rem; height:3rem;line-height: 3rem;}
+.brand-logo {padding: 0 1rem;}
+.product-text h4{padding: 1rem}
+</style>
+<div class="con" id="checkPage">
+	<div class="category">
+        <section class="search category-search common-search">
+            <div class="text-all dis-box j-text-all text-all-back">
+                <a class="a-icon-back j-close-search" href="javascript:history.go(-1);"><i class="iconfont icon-back"></i></a>
+
+                <div class="box-flex input-text n-input-text i-search-input">
+                    <form action="{url('brand/index/nav', array('cat_id' => $cat_id))}" method="post" id="serach-brand">
+                    <div class="j-input-text nav-soso" style="padding-left:1.2rem"><i class="iconfont icon-sousuo"></i><input type="text" name="keyword" placeholder="品牌搜索" value="{$keyword}" /></div>
+                    </form>
+                </div>
+                <a type="button" class="btn-submit" style="margin-left:0.5rem" onclick="$('#serach-brand').submit()">搜索</a>
+
+                <!-- <a class="a-sequence j-a-sequence"><i class="iconfont icon-pailie" data="1"></i></a> -->
+                <a href="javascript:void(0)" class="s-filter j-s-filter">筛选</a>
+            </div>
+        </section>
+
+        <!-- 内容 -->
+        <section class="product-list j-product-list  product-list-medium" data="1">
+            <script id="j-product" type="text/html">
+            <%if totalPage > 0%>
+			<ul>
+                <%each list as brand%>
+                <li>
+                    <div class="product-div j-brand-list">
+                        <a href="<%brand.url%>"><img class="product-list-img" src="<%brand.index_img%>" /></a>
+                        <div class="product-text index-product-text text-center">
+                            <div class="brand-logo"><img class="" src="<%brand.brand_logo%>" /></div>
+                            <h4><%brand.brand_name%></h4>
+                        </div>
+                    </div>
+                    </section>
+                </li>
+                <%/each%>
+            </ul>
+            <%else%>
+            <div class="no-div-message">
+                <i class="iconfont icon-biaoqingleiben"></i>
+                <p>亲，此处没有内容～！</p>
+            </div>
+            <%/if%>
+            </script>
+		</section>
+	</div>
+</div>
+
+<!-- 筛选 -->
+<div class="j-filter-div filter-div ts-5 c-filter-div" id="j-filter-div">
+	<div class="mask-filter-div"></div>
+    <section class="close-filter-div j-close-filter-div">
+        <div class="close-f-btn">
+            <i class="iconfont icon-fanhui"></i>
+            <span>关闭</span>
+        </div>
+    </section>
+    <form action="{url('brand/index/nav')}" method="post" id="filter">
+    <section class="con-filter-div j-brand-nav-list">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+				<div class="select-two">
+					<a class="select-title padding-all j-menu-select">
+                    <label class="fl">分类</label>
+                    <span class="fr t-jiantou j-t-jiantou" id="j-t-jiantou"><em class="fl">全部</em><i class="iconfont icon-jiantou tf-180 ts-2"></i></span>
+                    </a>
+                    <ul class="j-sub-menu padding-all j-get-limit-brandnavlist " data-istrue="true">
+                        <li class="ect-select j-checkbox-all" data-brandcat="0">
+                            <label class="ts-1 {if $cat_id == 0}active{/if}">全部<i class="fr iconfont icon-gou ts-1"></i></label>
+                        </li>
+                        {foreach $brand_cat as $bc}
+                        <li class="ect-select " data-brandcat="{$bc['id']}">
+                            <label class="ts-1 {if $bc['id'] == $cat_id}active{/if}">{$bc['name']}<i class="fr iconfont icon-gou ts-1"></i></label>
+                        </li>
+                        {/foreach}
+                    </ul>
+				</div>
+				<div class="ect-button-more dis-box padding-all">
+                    <input type="hidden" name="cat_id" value="{$cat_id}" id="cat_id"/>
+                    <input type="hidden" name="keyword" value="{$keyword}" />
+					<a class="box-flex btn-reset j-filter-reset-brandnavlist  min-btn" type="button">清空选项</a>
+					<a class="box-flex btn-submit  min-btn" type="submit" onclick="$('#filter').submit()">确定</a>
+				</div>
+            </div>
+        </div>
+	</section>
+    </form>
+</div>
+
+<!--快捷导航-->
+{include file="float_nav"}
+{include file="float_nav_footer"}
+<div class="footer-cont"><span><img src='{elixir('img/loading1.gif')}'>正在加载……</span></div>
+<script type="text/javascript">
+    //异步数据
+    $(function(){
+        // 请求URL
+        var url = "{url('brand/index/nav', array('cat_id' => $cat_id, 'keyword'=>$keyword))}";
+        //商品列表
+        $('.product-list').infinite({url: url, template:'j-product'});
+
+
+        //加载更多
+        var loadingHeight = $(".product-list").outerHeight(true);
+        function loadimgCont(){
+            if ($(document).scrollTop() >= $(window).height() <$(document).height() - $(window).height()) {
+                $(".footer-cont").html("<span><img src='{elixir('img/loading1.gif')}'>正在加载……</span>")
+            }
+            if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                $(".footer-cont").html("<span>没有更多了</span>")
+            }
+            if(loadingHeight< $(window).height()){
+                $(".footer-cont").css("display","none");
+            }else{
+                $(".footer-cont").css("display","block");
+            }
+        }
+        loadimgCont();
+        $(window).scroll(function() {
+            brandList();
+            loadimgCont();
+        });
+
+        /**
+         * 固定图片所在DIV大小 防止列表错位
+         */
+        function brandList(){
+            var brand_list =  $(".product-list .j-brand-list").outerWidth(true);
+            $(".product-list .j-brand-list .product-list-img").css("height",brand_list)
+        }
+        brandList();
+        window.onresize = function(){
+            brandList();
+        }
+
+
+        /* 筛选品牌分类  */
+        var brand_cat_name = $(".j-brand-nav-list .j-get-limit-brandnavlist .ect-select").find('label.active').text();
+        $('.j-get-limit-brandnavlist').prev(".select-title").find(".t-jiantou em").text(brand_cat_name);
+
+        $(".j-brand-nav-list .j-get-limit-brandnavlist .ect-select").not(".j-checkbox-all").click(function () {
+            var get_text = $(this).parents(".j-get-limit-brandnavlist");
+            s_t_em_value = get_text.prev(".select-title").find(".t-jiantou em"); //获取需要改变值的em标签
+
+            var s_t_em_text = "", s_get_label_num = 0, brandcat = "";
+            var active_jiantou = get_text.prev(".j-menu-select").find(".j-t-jiantou");
+            active_jiantou.addClass("active");
+            // if (get_text.find(".j-checkbox-all label").hasClass("active")) { //当点击非j-checkbox-all的时候删除其选中状态
+            //     get_text.find(".j-checkbox-all label").removeClass("active");
+            // }
+            $(this).find("label").addClass("active").parents(".ect-select").siblings().find("label").removeClass("active");
+            // $(this).find("label").toggleClass("active");
+
+            s_t_em_text = $(this).find("label").text(); //获取当前选中label的文本值
+            brandcat = parseInt($(this).attr('data-brandcat')); // 品牌分类ID
+
+            console.log(brandcat)
+            s_t_em_value.text(s_t_em_text);
+
+            if (brandcat != "") {
+                $("input[name=cat_id]").val(brandcat);
+            }
+            // 收缩 分类列表
+            $('.j-menu-select').addClass('active');
+            $('.j-sub-menu').hide();
+        });
+
+        // 筛选品牌分类 点击全部
+        $(".j-brand-nav-list .j-checkbox-all").click(function () {
+            checkbox_all = $(this).find("label"); //获取值为“全部”的label
+            s_t_em_value = $(this).parent().prev(".select-title").find(".t-jiantou em"); //获取需要改变值的em标签
+            checkbox_all_text = $(this).find("label").text();
+            if (!checkbox_all.hasClass("active")) {
+                $(this).find("label").addClass("active").parents(".ect-select").siblings().find("label").removeClass("active");
+                s_t_em_value.text(checkbox_all_text); //将calss为j-checkbox-all的label的值赋值给需要改变的em标签
+                $(this).parent(".j-get-limit-brandnavlist").prev(".select-title").find(".t-jiantou").removeClass("active");
+            }
+
+            if ($("input[name=cat_id]").val() > 0) {
+                $("input[name=cat_id]").val(0);
+            }
+            // 收缩 分类列表
+            $('.j-menu-select').addClass('active');
+            $('.j-sub-menu').hide();
+        });
+
+        /*筛选按钮中清空选项*/
+        $(".j-brand-nav-list .j-filter-reset-brandnavlist").click(function () {
+            $(".j-brand-nav-list .con-filter-div label").removeClass("active");
+            $(".j-brand-nav-list .j-checkbox-all label").addClass("active");
+            $(".j-brand-nav-list .j-radio-switching").removeClass("active");
+            $(".j-brand-nav-list .j-menu-select .j-t-jiantou").removeClass("active");
+            $(".j-brand-nav-list .j-menu-select .j-t-jiantou em").text("全部");
+
+            //add by wanglu
+            $(".j-brand-nav-list .j-checkbox-all label").each(function () {
+                $(this).parents("ul").prev().find("span").removeClass("active");
+                $(this).parents("ul").prev().find("span em").text($(this).text());
+            });
+            $("input[name=cat_id]").val(0);
+            $("input[name=keyword]").val('');
+        });
+
+    })
+</script>
+</body>
+</html>

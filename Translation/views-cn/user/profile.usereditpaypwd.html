@@ -1,0 +1,297 @@
+{include file="page_header"}
+
+<div class="con" id="pjax-container">
+    <form action="{url('user/profile/user_edit_paypwd')}" method="post" onsubmit="return check();">
+	<section class="user-center j-f-tel margin-lr">
+        <div class="b-color-f  user-login-ul">
+
+            {if $type == 'email' && $email_is_validated == '1'}
+            <div class="text-all dis-box j-text-all " >
+                <label>已认证邮箱：<span id="email">{$user_info.email}</span></label>
+            </div>
+            <div class="text-all dis-box j-text-all login-li" name="sms_email_codediv">
+                <div class="box-flex input-text">
+                    <input class="j-input-text" type="text" name="sms_email_code" placeholder="请输入邮箱验证码" />
+                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                </div>
+                <a type="button" class="ipt-check-btn ipt-check-btn-new" href="#" id="sendsms_email">获取邮箱验证码</a>
+            </div>
+            {/if}
+
+            {if $type == 'phone' && $mobile_is_validated == '1'}
+            <div class="text-all dis-box j-text-all login-li" name="verifydiv">
+                <div class="box-flex input-text">
+                    <input class="j-input-text" name="verify" datatype="*" nullmsg="请输入图片验证码" type="text" placeholder="请输入图片验证码"/>
+                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                </div>
+                <img src="{url('captcha/index/index')}" onclick="this.src='{url('captcha/index/index')}'" height="36" class="ipt-check-btn j-verify-img"/>
+            </div>
+            <div class="text-all dis-box j-text-all " >
+                <label>已认证手机：<span id="mobie_phone">{$user_info.mobile_phone}</span></label>
+            </div>
+            <div class="text-all dis-box j-text-all login-li" name="sms_codediv">
+                <div class="box-flex input-text">
+                    <input class="j-input-text" type="text" name="sms_code" placeholder="请输入验证码" />
+                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                </div>
+                <a type="button" class="ipt-check-btn ipt-check-btn-new" href="#" id="sendsms">获取短信验证码</a>
+            </div>
+            {/if}
+
+            <!-- 输入原支付密码 -->
+            {if $users_paypwd.paypwd_id == 1}
+            <div class="text-all dis-box j-text-all login-li m-top10">
+                <div class="input-text box-flex" name="old_pay_paypwddiv">
+                    <input class="j-input-text" type="text" name="old_pay_paypwd" placeholder="请输入原支付密码" value="" />
+                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                </div>
+            </div>
+            {/if}
+
+            <div class="text-all dis-box j-text-all login-li m-top10">
+                <div class="input-text box-flex" name="pay_paypwddiv">
+                    <input class="j-input-text" type="text" name="pay_paypwd" placeholder="请输入6-10位支付密码" value="" />
+                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                </div>
+            </div>
+
+            <div class="dis-box select-three m-top10">
+                <div class="ect-select  ">
+                    <input id="user_surplus" type="hidden" name="user_surplus" value="{$users_paypwd.user_surplus}"  />
+                    <label for="user_surplus" class="dis-box label-all {if $users_paypwd.user_surplus} active {/if} " >
+                        <i class="select-btn active-i"></i>
+                        <span class="box-flex">使用余额</span>
+                    </label>
+                </div>
+            </div>
+
+		</div>
+
+        {if $type == 'email' && $mobile_is_validated == '1'}
+        <div class="text-right m-top10 f-04"><a href="{url('user/profile/user_edit_paypwd', array('type' => 'phone'))}" class="f-04" >已认证手机，使用手机发送验证码</a></div>
+        {/if}
+        {if $type == 'phone' && $email_is_validated == '1'}
+        <div class="text-right m-top10 f-04"><a href="{url('user/profile/user_edit_paypwd', array('type' => 'email'))}" class="f-04" >已认证邮箱，使用邮箱发送验证码</a></div>
+        {/if}
+        <input type="hidden" name="sms_signin" value="{$sms_signin}" />
+        <input type="hidden" name="paypwd_id" value="{$users_paypwd.paypwd_id}" />
+        <input type="hidden" name="hash_code" value="{$hash_code}" />
+        <input type="hidden" name="type" value="{$type}" />
+        <button type="submit"  class="btn-submit br-5 min-two-btn">确定</button>
+	</section>
+    </form>
+</div>
+<div class="div-messages"></div>
+
+    <!--快捷导航-->
+    {include file="float_nav"}
+                <li>
+                    <a href="{url('user/profile/accountsafe')}">
+                         <i class="iconfont icon-qudiandianpumingpianicon"></i>
+                         <p>账户安全</p>
+                    </a>
+                </li>
+    {include file="float_nav_footer"}
+    <script type="text/javascript">
+    $(":input").keyup(function(){
+       var box = this.name+"div";
+       var div = $("div[name="+box+"]");
+       var value = div.attr("class").indexOf("active");
+       if ( value > 0 ){
+    	  div.removeClass("active");
+       }
+    });
+
+
+    $(".ect-select").click(function () {
+        var val = $(this).children("input[type=hidden]").val();
+        if (!$(this).children("label").hasClass("active")) {
+            $(this).children("label").addClass("active");
+            $(this).children("input[type=hidden]").val(1);
+        } else {
+            $(this).children("label").removeClass("active");
+            $(this).children("input[type=hidden]").val(0);
+        }
+    });
+
+{if $type == 'phone' && $sms_signin == 1}
+
+    // 验证码倒计时
+	var time = 60;
+	var c = 1;
+	function data(){
+        if(time == 0){
+            c = 1;
+            $("#sendsms").html("发送验证码");
+            time = 60;
+            return;
+        }
+        if(time != 0){
+            if($(".ipt-check-btn").attr("class").indexOf("disabled")<0){
+                $(".ipt-check-btn").addClass('disabled');
+            }
+            c = 0;
+            $("#sendsms").html("<span>重新获取(" + time + ")</span>");
+            time--;
+        }
+        setTimeout(data,1000);
+	}
+
+    // 发送验证码
+	$("#sendsms").click(function(){
+        var myreg = window.mobilereg;// /^1(3[0-9]|4[0-9]|5[0-35-9]|6[6]|7[01345678]|8[0-9]|9[89])\d{8}$/;
+        var mobile = $("#mobie_phone").html();
+        var verify_code = $("input[name=verify]").val();
+
+        if (verify_code == '') {
+            d_messages('请输入图片验证码');
+            return false;
+        }
+        if (mobile == '') {
+            d_messages('请输入手机号');
+            $("#focus-mobile").focus();
+            return false;
+        }
+        if (!myreg.test(mobile)) {
+            d_messages('请输入有效的手机号');
+            $("#focus-mobile").focus();
+            return false;
+        }
+        if (c == 0) {
+            d_messages('发送频繁');
+            return;
+        }
+
+        $.post(ROOT_URL + 'index.php?m=sms&a=send', {
+            mobile: mobile,
+            verify_code: verify_code,
+            flag: ''
+        }, function (res) {
+            d_messages(res.msg);
+            if (res.code == 2) {
+                data();
+            }
+            $('.j-verify-img').click();
+        }, 'json');
+
+    });
+
+    // 提交验证
+    function check(){
+        var sms_code = $("input[name=sms_code]").val();
+        var mobile = $("#mobie_phone").html();
+        var myreg = window.mobilereg; // /^1(3[0-9]|4[0-9]|5[0-35-9]|6[6]|7[01345678]|8[0-9]|9[89])\d{8}$/;
+        if( mobile == ''){
+            d_messages('请输入手机号');
+            return false;
+        }else if(!myreg.test(mobile)){
+            d_messages('请输入有效的手机号');
+            return false;
+        }
+
+        if( sms_code == ''){
+            $("input[name=sms_code]").focus();
+            $("div[name=sms_codediv]").addClass("active");
+            d_messages('请输入验证码！');
+            return false;
+        }
+        var pay_paypwd = $("input[name=pay_paypwd]").val();
+        if( pay_paypwd == ''){
+            $("input[name=pay_paypwd]").focus();
+            $("div[name=pay_paypwddiv]").addClass("active");
+            d_messages('请输入支付密码！');
+            return false;
+        }
+
+        if( pay_paypwd.length < 6 || pay_paypwd.length > 10 ){
+            $("input[name=pay_paypwd]").focus();
+            $("div[name=pay_paypwddiv]").addClass("active");
+            d_messages('请输入6-10位支付密码！');
+            return false;
+        }
+    }
+
+{/if}
+
+
+{if $type == 'email' || $sms_signin == 0}
+
+    // 发送邮箱验证码
+    $("#sendsms_email").click(function(){
+        if(c == 0){
+            d_messages('发送频繁');
+            return;
+        }
+        var email = $("#email").html();
+        if( email == ''){
+            d_messages('请先验证填写邮箱');
+            return false;
+        }
+        data_email();
+        ajax_email();
+     });
+
+    function ajax_email(){
+        var email = $("#email").html();
+        var hash_code = $("input[name=hash_code]").val();
+
+        $.post("{url('user/profile/send_sms')}",{type:'email',email:email,hash_code:hash_code},function(data){
+            d_messages(data.content);
+        },'json');
+    }
+
+    // 验证码倒计时
+    var time = 60;
+    var c = 1;
+    function data_email(){
+        if(time == 0){
+            c = 1;
+            $("#sendsms_email").html("发送验证码");
+            time = 60;
+            return;
+        }
+        if(time != 0){
+            if($(".ipt-check-btn").attr("class").indexOf("disabled")<0){
+                $(".ipt-check-btn").addClass('disabled');
+            }
+            c = 0;
+            $("#sendsms_email").html("重新获取("+time+")");
+            time--;
+        }
+        setTimeout(data_email,1000);
+    }
+
+    // 提交验证
+    function check(){
+        var email = $("#email").html();
+        var sms_email_code = $("input[name=sms_email_code]").val();
+        var pay_paypwd = $("input[name=pay_paypwd]").val();
+        if( email == ''){
+            d_messages('请先验证填写邮箱');
+            return false;
+        }
+        if(sms_email_code == ""){
+            $("input[name=sms_email_code]").focus();
+            d_messages('请输入邮箱验证码',2);
+            return false;
+        }
+        if( pay_paypwd == ''){
+            $("input[name=pay_paypwd]").focus();
+            $("div[name=pay_paypwddiv]").addClass("active");
+            d_messages('请输入支付密码！');
+            return false;
+        }
+        if( pay_paypwd.length < 6 || pay_paypwd.length > 10 ){
+            $("input[name=pay_paypwd]").focus();
+            $("div[name=pay_paypwddiv]").addClass("active");
+            d_messages('请输入6-10位支付密码！');
+            return false;
+        }
+    }
+
+{/if}
+
+    </script>
+
+</body>
+</html>

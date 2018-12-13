@@ -1,0 +1,115 @@
+{include file="page_header"}
+<section class="search new-group-search">
+    <div class="text-all dis-box j-text-all text-all-back">
+        <div class="box-flex input-text">
+            <div class="box-flex">
+                <input class="j-input-text" type="text" name="infokeyword" placeholder="活动名称"/>
+                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+            </div>
+        </div>
+        <a type="button" class="btn-submit">搜索</a>
+    </div>
+</section>
+<section class="goods-evaluation">
+    <div class="con">
+        <div class="user-center-1 user-register-1 of-hidden">
+            <section class="product-sequence dis-box">
+                <a class="box-flex active " sort="act_id" order="DESC">默认<i class="iconfont icon-xiajiantou"></i></a>
+                <a class="box-flex" sort="start_time" order="DESC">最新<i class="iconfont icon-xiajiantou"></i></a>
+                <a class="box-flex" sort="comments_number" order="DESC">评论数<i class="iconfont icon-xiajiantou"></i></a>
+            </section>
+            <div id="j-tab-con" class="article_info">
+                <script id="j-product" type="text/html">
+                    <%if totalPage > 0%>
+                <div class="swiper-wrapper">
+                    <section class="swiper-slide swiper-no-swiping product-list j-product-list product-list-medium" data="1">
+                        <ul>
+                            <%each gb_list as list%>
+                            <li>
+                                <div class="product-div">
+                                    <div class="group-bq-box"><%list.zhekou%><span>折</span></div>
+                                    <a class="product-div-link" href="<%list.url%>"></a>
+                                    <div class="group-img-box">
+                                        <div class="group-over-box"
+                                        <%if list.is_end == 1%> style="display:block" <%else%>
+                                        style="display:none" <%/if%> >
+                                        <div><p class="group-cont-box">已结束</p></div>
+                                    </div>
+                                  <a href="<%list.url%>">  <img class="product-list-img" src="<%list.goods_thumb%>"></a>
+                                </div>
+                                <div class="product-text-group">
+                                    <h4><%list.act_name%></h4>
+                                    <p style="color:#999;font-size:1rem;"><em><%list.cur_amount%></em>件已团</p>
+                                    <p><span class="p-price t-first "><%#list.price%><small>
+                                        <del><%#list.market_price%></del>
+                                    </small></span></p>
+                                    <div class="group-right-box" style="display:block"><span class="group-cont"><%if list.formated_end_date == 1%><%else%>剩余<%/if%></span>
+                                        <span class="group-num-box" onload=""><%if list.formated_end_date == 1%><%else%><%list.formated_end_date%><%/if%></span>
+                                    </div>
+                                    <a href="javascript:void(0)" class="icon-flow-cart fr j-goods-attr"><i class="iconfont icon-gouwuche"></i></a>
+                                </div>
+                            </li>
+                            <%/each%>
+                        </ul>
+                    </section>
+                </div>
+                    <%else%>
+                    <div class="no-div-message">
+                        <i class="iconfont icon-biaoqingleiben"></i>
+                        <p>亲，此处没有内容～！</p>
+                    </div>
+                    <%/if%>
+                </script>
+            </div>
+        </div>
+    </div>
+</section>
+     <!--快捷导航-->
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+<script>
+    var url = ROOT_URL + 'index.php?m=groupbuy';
+    var infinite = $('.article_info').infinite({url: url, template: 'j-product'});
+    //搜
+    $(".btn-submit").click(function (){
+        keyword = $("input[name=infokeyword]").val();
+        if (keyword ||typeof(keyword) == "undefined")
+        {
+            infinite.onload('keyword='+keyword);
+        }else{
+            d_messages('请输入搜索关键字');
+        }
+    })
+    $(".product-sequence a").on('click', function(e) {
+        var sort = $(this).attr('sort');
+        var order = $(this).attr('order');
+        $(this).addClass("active").siblings().removeClass("active");
+        if (order == 'DESC') {
+            $(this).attr("order", "ASC");
+            $(this).removeClass("a-change");
+        } else {
+            $(this).attr("order", "DESC");
+            $(this).addClass("a-change");
+        }
+        infinite.onload('sort=' + sort + '&order=' + order);
+    })
+</script>
+<script>
+    /*切换*/
+    var tabsSwiper = new Swiper('#j-tab-con', {
+        speed: 0,
+        noSwiping: true,
+        autoHeight: true
+    })
+    $(".j-tab-title li").on('touchstart mousedown', function (e) {
+        e.preventDefault()
+        $(".j-tab-title .active").removeClass('active')
+        $(this).addClass('active')
+        tabsSwiper.slideTo($(this).index())
+    })
+    $(".j-tab-title li").click(function (e) {
+        e.preventDefault()
+    })
+</script>
+
+{include file="page_footer"}

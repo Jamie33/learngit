@@ -1,0 +1,56 @@
+{include file="page_header"}
+<body class="b-color-f">
+	<div class="con b-color-f">
+		<div class="user-center user-register of-hidden">
+			<div id="j-tab-con">
+				<div class="swiper-wrapper">
+					<section class="swiper-slide swiper-no-swiping">
+						<form class="login-form" action="{url('oauth/index/mergeusers')}" method="post" class="validform">
+							<div class="text-all dis-box j-text-all" name="usernamediv">
+								<div class="box-flex input-text">
+									<input class="j-input-text" name="username" type="text" datatype="s" nullmsg="请输入新用户名" errormsg="不能输入特殊字符"	placeholder="新用户名/手机号/邮箱" /> <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+								</div>
+							</div>
+							<div class="text-all dis-box j-text-all" name="passworddiv">
+								<div class="box-flex input-text">
+									<input class="j-input-text" name="password" type="password"	datatype="*" nullmsg="请输入新用户名登录密码" placeholder="请输入新用户名登录密码" /> <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+								</div>
+								<i class="iconfont icon-yanjing is-yanjing j-yanjing disabled"></i>
+							</div>
+							<input type="hidden" name="back_url" value="{$back_url}" />
+							<button type="submit" class="btn-submit">确定</button>
+
+							<div class="text-all">注意事项：<br>
+							1.重新绑定已有帐号，会将原帐号数据合并至新帐号。<br>
+							2.将原帐号所有数据删除，原帐号的关系（如推荐）不再有效。<br>
+							3.此项操作不可恢复，请谨慎操作。</div>
+						</form>
+					</section>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="div-messages"></div>
+	<script>
+		$(":input").keyup(function() {
+			var box = this.name + "div";
+			var div = $("div[name=" + box + "]");
+			var value = div.attr("class").indexOf("active")
+			if (value > 0) {
+				div.removeClass("active");
+			}
+		});
+
+		$(".j-tab-title li").on('touchstart mousedown', function(e) {
+			e.preventDefault()
+			$(".j-tab-title .active").removeClass('active')
+			$(this).addClass('active')
+			tabsSwiper.slideTo($(this).index())
+		})
+		$(".j-tab-title li").click(function(e) {
+			e.preventDefault()
+		})
+	</script>
+</body>
+
+</html>

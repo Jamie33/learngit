@@ -1,0 +1,24 @@
+<ul class="box ul-4 text-c ">
+    {foreach $postgoods as $key => $val}
+    <li class="com-post-adr" onclick="select_goods_id({$val.goods_id},{if $val.order_id}{$val.order_id}{else}0{/if})">
+        <div class="ect-select fr">
+            <label class="dis-box" id="goods_id{$val.goods_id}">
+                <i class="select-btn"></i>
+            </label>
+        </div>
+        <div class="my-com-nav1">
+            <img src="{$val.goods_thumb}">
+        </div>
+    </li>
+    {/foreach}
+    <script>
+        function select_goods_id(goods_id,order_id){
+            $('.fr label').removeClass("active");
+            $("#goods_id" + goods_id).addClass("active");
+            $("input[name=goods_id]").val(goods_id);
+            if(order_id != 0){
+                $("input[name=order_id]").val(order_id);
+            }
+        }
+    </script>
+</ul>

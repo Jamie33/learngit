@@ -1,0 +1,158 @@
+{include file="page_header"}
+<div class="con">
+		{foreach $list.top as $top}
+		<div class="brand-cont-box">
+			<div class="bg-img">
+				<img src="{elixir('img/brand_header_bg.jpg')}" />
+			</div>
+			<div class="dis-box cont-box">
+				<div class="box-flex">
+					<img class="img-box" src="{$list1}">
+				</div>
+				<div class="box-flex">
+					<div class="cont">
+						<h4>今日最大牌</h2>
+						<p>每日精选  品牌大促</p>
+					</div>
+					<div class="cont">
+						<h5>日期：<label class="color-red">{$mon}-{$mday}</label></h5>
+						<span>品牌：<label class="col-3">{$top.brand_name}</label></span>
+						<!--<p class="fourlist-hidden">{$top.brand_desc}</p>-->
+					</div>
+				</div>
+			</div>
+		</div>
+		{if $top.goods}
+		<div class="box mb-1 b-color-f">
+			<div class="hot-container-div">
+				<i class="iconfont icon-back"></i>
+				<div class="swiper-container hot-container">
+					<ul class="swiper-wrapper">
+					{foreach $top.goods as $topgoods}
+						<li  class="swiper-slide ">
+							<a href="{$topgoods.url}">
+								<img src="{$topgoods.goods_thumb}" />
+								<p class="index-price text-c">
+									<em>
+ 										{if $topgoods.is_promote==1 && $topgoods.promote_price } {$topgoods.promote_price} {else} {$topgoods.shop_price} {/if}
+									</em>
+									<br>
+									<del>
+										<em>{$topgoods.market_price}</em>
+									</del>
+								</p>
+							</a>
+						</li>
+					{/foreach}
+					</ul>
+					<!-- 导航按钮 -->
+				</div> <i class="iconfont icon-more"></i>
+			</div>
+		</div>
+		{/if}
+		{/foreach}
+
+			<div class="box title inx-ms m-top08">
+				<div class="box padding-all b-color-f">
+					<h3 class="position-rel">
+						<span class="fl inx-ms-time">热门大牌</span>
+					</h3>
+				</div>
+				<!--轮播图-->
+				<div class="padding-all hot-brand_street">
+					<div class="swiper-container h-b-swiper-container">
+						<div class="swiper-wrapper">
+							<!--one-->
+							{foreach $list.center as $centerbrand}
+							<div class="swiper-slide">
+								<section class=" brand-name-list-box ">
+									<div class="brand-cont-header ">
+										<div class="my-brand-header ">
+											<div class="goods-shop-info shopping-info-title ">
+												<section class="dis-box s-i-title-con ">
+													<div class="g-s-i-img "><img src="{$centerbrand.brand_logo}"></div>
+													<div class="g-s-i-title box-flex ">
+														<h3 class="ellipsis-one box-flex ">{$centerbrand.brand_name}</h3>
+														<p class="t-remark m-top04 ">共有 {$centerbrand.count} 件商品</p>
+													</div>
+													<div class="g-s-info-add ">
+														<a href="{$centerbrand.url} ">进入专区</a>
+													</div>
+												</section>
+												<img class="bg " src="{$centerbrand.brand_bg}">
+											</div>
+										</div>
+									</div>
+									<div class="brand-list-box dis-box ">
+										{foreach $centerbrand.goods as $key=>$centerbrandgoods}
+										{if $key == 0}
+										<div class="brand-left-list-box "><a href="{$centerbrandgoods.url}" ><img src="{$centerbrandgoods.goods_thumb}"></a></div>
+										{/if}
+										{/foreach}
+										<div class="brand-right-list-box ">
+											{foreach $centerbrand.goods as $key=>$centerbrandgoods}
+											{if $key != 0 }{if $key < 3 }
+										<div class="brand-right-box-1 "><a href="{$centerbrandgoods.url}" ><img src="{$centerbrandgoods.goods_thumb}"></a></div>
+											{/if}{/if}
+											{/foreach}
+										</div>
+									</div>
+									<div class="box-flex pb-2-1 ">
+										<h3 class="my-u-title-size "></h3> </div>
+								</section>
+							</div>
+							{/foreach}
+						</div>
+						<div class="swiper-pagination"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="box title inx-ms wallet-bt">
+				<div class="box padding-all b-color-f ">
+					<h3 class="position-rel ">
+						<span class="fl inx-ms-time ">推荐大牌</span>
+					</h3>
+				</div>
+			</div>
+
+			<ul class="my-brand-login ">
+			{foreach $brand15 as $brand}
+				<li>
+					<a href="{$brand.url}"><img src="{$brand.brand_logo}"></a>
+				</li>
+			{/foreach}
+				<li class="my-brand-text "><a href="{url('brand/index/nav')}">查看更多</a></li>
+			</ul>
+
+		</div>
+	<!-- Initialize Swiper -->
+	{include file="float_nav"}
+    {include file="float_nav_footer"}
+	<script>
+		$(function($) {
+			function brandHeight(){
+				var brand_cont_height = $(".brand-cont-box .cont-box").outerHeight(true);
+				var brand_box = $(".brand-cont-box").height(brand_cont_height)
+			}
+			brandHeight()
+			window.onresize = function(){
+				brandHeight()
+			}
+			var swiper = new Swiper('.h-b-swiper-container', {
+				pagination: '.swiper-pagination',
+				nextButton: '.swiper-button-next',
+				prevButton: '.swiper-button-prev',
+				slidesPerView: 1,
+				paginationClickable: true,
+				spaceBetween: 30,
+			});
+			var mySwiper = new Swiper('.hot-container', {
+				slidesPerView: 3,
+				 spaceBetween: 20,
+				paginationClickable: true,
+			});
+		});
+	</script>
+</body>
+</html>

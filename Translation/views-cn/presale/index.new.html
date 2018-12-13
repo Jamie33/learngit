@@ -1,0 +1,181 @@
+{include file="page_header"}
+<section class="search">
+    <div class="text-all dis-box j-text-all text-all-back">
+        <div class="box-flex input-text new-group">
+            <div class="box-flex">
+                <input class="j-input-text" type="text" name="infokeyword" placeholder="产品"/>
+                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+            </div>
+        </div>
+        <a href="javascript:;" class="btn-submit-1"><i class="iconfont icon-sousuo my-sousou"></i></a>
+        <a href="#j-filter-div" class="s-filter j-s-filter">筛选</a>
+    </div>
+</section>
+<section class="goods-evaluation">
+    <div class="user-center-1 user-register-1 of-hidden">
+        <div id="j-tab-con">
+            <div class="swiper-wrapper">
+                <section class="swiper-slide swiper-no-swiping product-list j-product-list product-list-medium"
+                         data="1">
+                    <ul class="presale-list">
+                        <script id="j-product" type="text/html">
+                            <%if totalPage > 0%>
+                            <%each list as val%>
+                        <li>
+                            <div class="product-div">
+                                <a class="product-div-link" href="<%val.url%>"></a>
+                                <div class="group-img-box">
+                                    <%if val.status == 3%>
+                                    <div class="group-over-box">
+                                        <div>
+                                            <p class="group-cont-box">已结束</p>
+                                        </div>
+                                    </div>
+                                    <%/if%>
+                                   <a href="<%val.url%>"> <img class="product-list-img" src="<%val.goods_img%>"> </a>
+                                </div>
+                                <div class="product-text-group">
+                                    <h4><%val.goods_name%></h4>
+                                    <p><span class="p-price t-first "><%#val.shop_price%><small>
+                                        <del><%#val.market_price%></del>
+                                    </small></span></p>
+                                    <div class="group-right-box" <%if val.status == 3%> style="display:none" <%/if%> >
+                                        <span class="group-cont"><%if val.status == 1%>距离开始 <%else if val.status == 3%> <%else%>剩余 <%/if%></span>
+                                        <span class="group-num-box"><%val.short_format_date%></span>
+                                    </div>
+                                    <a href="javascript:void(0);" class="icon-flow-cart fr j-goods-attr"><i
+                                            class="iconfont icon-gouwuche"></i></a>
+                             </div>
+                        </li>
+                            <%/each%>
+                            <%else%>
+                            <div class="no-div-message">
+                                <i class="iconfont icon-biaoqingleiben"></i>
+                                <p>亲，此处没有内容～！</p>
+                            </div>
+                            <%/if%>
+                        </script>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="j-filter-div" class="j-filter-div filter-div ts-5 c-filter-div">
+    <div class="mask-filter-div"></div>
+    <section class="close-filter-div j-close-filter-div">
+        <div class="close-f-btn">
+            <i class="iconfont icon-fanhui"></i>
+            <span>关闭</span>
+        </div>
+    </section>
+    <section class="con-filter-div">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="padding-all select-one-1">
+                    <ul class="dis-box j-get-one">
+                        <li class="ect-select box-flex list-select promotion my-but-pre">
+                            <label class="ts-1 dis-block active" status="0">全部</label>
+                        </li>
+                        <li class="ect-select box-flex list-select hasgoods my-but-pre">
+                            <label class="ts-1 dis-block" status="1">即将开始</label>
+                        </li>
+                        <li class="ect-select box-flex list-select hasgoods my-but-pre">
+                            <label class="ts-1 dis-block" status="2">预约中</label>
+                        </li>
+                        <li class="ect-select box-flex list-select promotion my-but-pre">
+                            <label class="ts-1 dis-block" status="3">已结束</label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="select-two">
+                    <ul class="padding-all j-get-limit new-f" data-istrue="true">
+                        <li class="ect-select  j-checkbox-all">
+                            <label class="ts-1" data-catid="0">全部<i
+                                    class="fr iconfont icon-gou ts-1"></i></label>
+                        </li>
+                        {foreach $pre_cat as $val}
+                        <li class="ect-select">
+                            <label class="ts-1 {if $val.selected == 1}active{/if}" data-catid="{$val.cat_id}">{$val.cat_name}<i
+                                    class="fr iconfont icon-gou ts-1"></i></label>
+                        </li>
+                        {/foreach}
+                    </ul>
+
+                </div>
+                <div class="ect-button-more dis-box padding-all">
+                    <a class="box-flex btn-reset j-filter-reset" type="button">清空选项</a>
+                    <a class="box-flex btn-submit" type="submit">确定</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+    <!--快捷导航-->
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+</body>
+<input type="hidden" name="firstcat_id" value="{$cat_id}">
+<script>
+    $(function(){
+        var url = "{url('presale/index/new')}";
+        var infinite = $('.presale-list').infinite({url: url, template: 'j-product'});
+        var cat_id = {$cat_id};
+        var str ="cat_id="+cat_id;
+        infinite.onload(str);
+
+        $(".btn-submit-1").click(function (){
+            var keyword = $("input[name=infokeyword]").val();
+            if (keyword) {
+                $(".dis-block").removeClass('active');
+                $(".ect-select label").removeClass('active');
+                infinite.onload('keyword=' + keyword);
+            } else {
+                d_messages('请输入搜索关键字');
+            }
+        })
+
+        function get_cat_id_arr(){
+            var k = 0;
+            var cat_id_arr = [];
+            $.each($(".ect-select > .active"),function(){
+                cat_id_arr[k] =  $(this).attr("data-catid");
+                k++;
+            });
+            cat_id_arr.shift();
+            $("input[name=firstcat_id]").val(cat_id_arr);
+            return cat_id_arr;
+        }
+
+        $(".product-sequence a").on('click', function(e) {
+            var sort = $(this).attr('sort');
+            var order = $(this).attr('order');
+            var status = $(".dis-block.active").attr('status');
+            var cat_id_arr = get_cat_id_arr();
+            var keyword = $("input[name=infokeyword]").val();
+            if(order == 'DESC'){
+                $(this).attr("order","ASC");
+                $(this).removeClass("a-change");
+            }else{
+                $(this).attr("order","DESC");
+                $(this).addClass("a-change");
+            }
+            var str ="cat_id="+cat_id_arr+"&status="+status+"&sort="+sort+"&order="+order+"&keyword="+keyword;
+            infinite.onload(str);
+        })
+
+        $(".btn-submit").on('click', function(e) {
+
+            if ($("body").hasClass("show-filter-div")) {
+                $("body").removeClass("show-filter-div");
+            }
+            var status = $(".dis-block.active").attr('status');
+            var cat_id_arr = get_cat_id_arr();
+            var str = 'cat_id=' + cat_id_arr + '&status=' + status;
+            var str = 'cat_id=' + cat_id_arr + '&status=' + status;
+            infinite.onload(str);
+        })
+    })
+</script>
+
+</html>

@@ -1,0 +1,53 @@
+{include file="page_header"}
+<div class="con">
+    {foreach $articles as $item}
+    <section class="user_help">
+        <header>{$item['cat_name']}</header>
+        {foreach $item['list'] as $article}
+        <a href="{url('article/index/detail', ['id' => $article['article_id'], 'display' => 'simple'])}">
+            <div class="s-user-top b-color-f">
+                <div class="dis-box s-user-top-1">
+                    <h3 class="box-flex text-all-span my-u-title-size">{$article['title']}</h3>
+                    <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+                </div>
+            </div>
+        </a>
+        {/foreach}
+    </section>
+    {/foreach}
+
+    <section class="user_help">
+        <header>在线客服</header>
+        <a href="{url('user/index/messagelist')}">
+            <div class="s-user-top b-color-f">
+                <div class="dis-box s-user-top-1">
+                    <h3 class="box-flex text-all-span my-u-title-size">咨询客服</h3>
+                    <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+                </div>
+            </div>
+        </a>
+    </section>
+
+    <!--快捷导航-->
+    {include file="no_search_nav"}
+    <li>
+        <a href="{url('user/profile/index')}">
+            <i class="iconfont icon-qudiandianpumingpianicon"></i>
+            <p>个人资料</p>
+        </a>
+    </li>
+    {include file="float_nav_footer"}
+</div>
+
+<script>
+    $(".distribution-new ul li").click(function () {
+        if (!$(this).hasClass("active")) {
+            $(this).addClass("active").siblings().removeClass("active");
+        } else {
+            $(this).removeClass("active");
+        }
+
+    });
+</script>
+</body>
+</html>

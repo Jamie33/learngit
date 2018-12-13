@@ -1,0 +1,103 @@
+{include file="page_header"}
+<div class="con">
+        <section class="store_info">
+                    <script id="j-product" type="text/html">
+                    <% if order_list%>
+                        <%each order_list as order%>
+                            <section class="flow-checkout-pro  m-top08">
+                            <header class="b-color-f dis-box padding-all">
+                                <span class=" box-flex">
+                                    <%if order.user_name%>
+                                    <%order.user_name%>
+                                    <%else%>
+                                    <%order.shop_name%>
+                                    <%/if%>
+                                </span>
+                                <%if order.report_state == 0%>
+                                 <em class="j-goods-coupon t-first f-04">未处理</em>
+                                <%else if order.report_state == 2%>
+                                <em class="j-goods-coupon t-first f-04">用户取消</em>
+                                 <%else%>
+                                <%if order.handle_type == 1%>
+                                <em class="j-goods-coupon t-first f-04">无效举报</em>
+                                <%else if order.handle_type == 2%>
+                                <em class="j-goods-coupon t-first f-04">恶意举报</em>
+                                <%else%>
+                                <em class="j-goods-coupon t-first f-04">有效举报</em>
+                                 <%/if%>
+                                <%/if%>
+                            </header>
+                            <div class="f-c-p-orderid padding-all m-top1px b-color-f">
+                                <a class="product-div-link" href="<%order.goods_url%>"></a>
+
+                                <h4 class="t-remark2">
+                                    <label class="t-remark">举报类型：</label><%order.type_name%>
+                                </h4>
+                                <h4 class="t-remark2">
+                                    <label class="t-remark">举报主题：</label><%order.title_name%>
+                                </h4>
+                                <p class="t-remark3 m-top04"><%order.add_time%></p>
+                            </div>
+
+                            <div class="padding-all user-orderlist-shop dis-box text-all-select">
+                                <a class="product-div-link" href="<%order.order_url%>"></a>
+                                <ul class="flow-checkout-smallpic box-flex">
+                                    <li><img class="product-list-img" src="<%order.goods_image%>" /></li>
+                                </ul>
+                                <span class="t-jiantou">
+                            </div>
+                            <footer class="padding-all b-color-f m-top1px of-hidden dis-box">
+                                <h4 class="t-remark2 box-flex"></h4>
+                                <p class="ect-button-more ect-button-more-dete n-br-5">
+                                    <%if !order.handler%>
+                                    <a class="btn-default-new br-5 min-btn" href="<%order.order_url%>">查看详情</a>
+                                    <%/if%>
+                                    <%if order.report_state == 0%>
+                                      <button class="btn-default-new br-5 min-btn del-order" data-item="<%order.report_id%>" data-state='2'>取消</button>
+                                    <%/if%>
+                                    <%if order.handle_type > 0 || order.report_state == 2%>
+                                     <button class="btn-default-new br-5 min-btn del-order" data-item="<%order.report_id%>" data-state='3'>删除</button>
+                                    <%/if%>
+                                </p>
+                            </footer>
+                        </section>
+                        <%/each%>
+                        <%else%>
+                        <div class="no-div-message">
+                            <i class="iconfont icon-biaoqingleiben"></i>
+                               <p>亲，还没有订单哦～！</p>
+                            </div>
+                        <%/if%>
+                        </script>
+            </section>
+        </div>
+    <!--快捷导航-->
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+    <script type="text/javascript">
+        //订单列表
+        var infinite = $('.store_info').infinite({url: "{url('user/index/report_list')}", template: 'j-product'});
+       //删除订单
+            $(".store_info").on('click','.del-order', function(){
+                var report_id = $(this).attr('data-item');
+                var state = $(this).attr('data-state');
+                $.post("{url('user/index/check_report_state')}", {report_id:report_id, state:state}, function(data){
+                if(data.error == 0){
+                    if(state==3){
+                        layer.open({
+                             content: '是否确定删除',
+                             btn: ['确定', '取消'],
+                             shadeClose: false,
+                             yes: function() {
+                                 window.location.href = "{url('user/index/report_list')}";
+                             },
+                         });
+                    }else{
+                        window.location.href = "{url('user/index/report_list')}";
+                    }
+                }
+            }, 'json');
+        });
+    </script>
+</body>
+</html>

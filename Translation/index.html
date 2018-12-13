@@ -1,0 +1,37 @@
+{include file="page_header"}
+{if $list}
+{foreach $list as $list}
+{foreach $list.activity_list as $key=>$activity}
+<section {if $key > 0} class="m-top06" {/if}>
+    <a href="{$activity.url}">
+        <div class="act-header-box-list">
+            <div class="act-right-box">
+                {$activity.act_type}
+            </div>
+            <img src="{$activity.activity_thumb}">
+        </div>
+        <div class="padding-all b-color-f text-center">
+            <h3 class="my-u-title-size">{$activity.act_name}</h3>
+            {if $activity.status == 0}
+            <p class="act-cont">活动未开始</p>
+            {elseif $activity.status == 1}
+            <p class="act-cont">{$activity.start_time} 至 {$activity.end_time} </p>
+            {elseif $activity.status == 2}
+            <p class="act-cont">活动已结束</p>
+            {/if}
+            <p class="color-red">{$activity.activity_name}</p>
+        </div>
+    </a>
+</section>
+{/foreach}
+{/foreach}
+{else}
+   <div class="no-div-message">
+         <i class="iconfont icon-biaoqingleiben"></i>
+          <p>亲，此处没有内容～！</p>
+         </div>
+ {/if}
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+</body>
+</html>

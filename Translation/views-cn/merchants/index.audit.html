@@ -1,0 +1,80 @@
+{include file="page_header"}
+
+<div class="con mb-7 b-color-f">
+	<!--头部导航-->
+	<header class="dis-box padding-all open-header-bg">
+		<div class="box-flex">
+			<div class="header-left-box p-r">
+				<div class="header-x p-a o-hs-x active"></div>
+				<div class="header-y p-a o-hs-bg active"><span class="text-c color-whie f-03">1</span></div>
+			</div>
+			<label class="o-hs active">{$lang.business_information}</label>
+		</div>
+		<div class="box-flex">
+			<div class="header-left-box p-r">
+				<div class="header-x p-a o-hs-x active"></div>
+				<div class="header-y p-a o-hs-bg active"><span class="text-c color-whie f-03">2</span></div>
+			</div>
+			<label class="o-hs active">{$lang.store_information}</label>
+		</div>
+		<div class="box-flex">
+			<div class="header-left-box p-r">
+				<div class="header-x p-a o-hs-x active"></div>
+				<div class="header-y p-a o-hs-bg active"><span class="text-c color-whie f-03">3</span></div>
+			</div>
+			<label class="o-hs active">{$lang.review_or_ok}</label>
+		</div>
+	</header>
+
+	<section class="padding-all b-color-f">
+
+		<!--审核中-->
+		{if $shop.merchants_audit == 0}
+		<div class="text-c drp-set-three-cont">
+			<h2 class="f-08 col-3 m-top08">正在审核</h2>
+			<p class="col-9 f-05 m-top04">商城期待你的加入</p>
+			<p class="col-9 f-05 m-top04">到pc端补全信息吧</p>
+			<div class="three-loding-img"><img src="{$img}"></div>
+			<footer class="dis-box drp-set-three-btn-box">
+				<a href="{url('/')}" class="drp-set-three-btn box-flex">返回首页</a>
+			</footer>
+		</div>
+		{/if}
+		<!--审核通过-->
+		{if $shop.merchants_audit == 1}
+		<div class="drp-box">
+		<div class="drp-set-three-icon">
+			<i class="iconfont icon-hookring2"></i>
+			<h2 class="f-08 col-3 text-c">审核通过</h2>
+			<p class="col-8 f-05 m-top07 text-c">商城欢迎你的加入</p>
+			<div class="icon-cont">
+				<p class="f-05 col-3"><label class="col-7">管理员：</label>恭喜您，您已经成功通过审核</p>
+			</div>
+		</div>
+		<footer class="dis-box drp-set-three-btn-box">
+				<a href="{url('/')}" class="drp-set-three-btn box-flex">返回首页</a>
+		</footer>
+		</div>
+		{/if}
+		<!--审核未通过-->
+		{if $shop.merchants_audit == 2}
+		<div class="drp-box">
+			<div class="drp-set-three-icon">
+				<i class="iconfont icon-guanbi1 color-red"></i>
+				<h2 class="f-08 col-3 text-c m-top08">审核未通过</h2>
+				<p class="col-8 f-05 m-top07 text-c">商城等候您的加入</p>
+				<div class="icon-cont">
+					<p class="f-05 col-3"><label class="col-7">管理员：</label>{$shop.merchants_message}</p>
+				</div>
+			</div>
+			<footer class="dis-box drp-set-three-btn-box">
+				<a href="{url('/')}" class="drp-set-three-btn box-flex">返回首页</a>
+			</footer>
+		</div>
+		{/if}
+	</section>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+{include file="page_header"}
+
+	<div class="con mb-7">
+		<div class="brand-list-info">
+			<!--<header>-->
+				<!--<section class="search">-->
+					<!--<div class="text-all dis-box j-text-all">-->
+						<!--<div class="box-flex input-text n-input-text">-->
+							<!--<a class="a-search-input j-search-input" href="javascript:void(0)"></a>-->
+							<!--<input type="text" placeholder="品牌商品搜索" />-->
+							<!--<i class="iconfont icon-guanbi1 close-common j-is-null"></i>-->
+						<!--</div>-->
+						<!--<a type="button" class="btn-submit">搜索</a>-->
+					<!--</div>-->
+				<!--</section>-->
+			<!--</header>-->
+			<div class="brand-cont-header brand-list-info-bch">
+				<div class="my-brand-header ">
+					<div class="goods-shop-info shopping-info-title ">
+						<section class="dis-box s-i-title-con ">
+							<div class="g-s-i-img "><img src="{$brand_info.brand_logo} "></div>
+							<div class="g-s-i-title box-flex ">
+								<h3 class="ellipsis-one box-flex ">{$brand_info.brand_name}</h3>
+								<p class="t-remark m-top04 ">共有 {$brand_goods_count} 件商品</p>
+							</div>
+							<!--<div class="g-s-info-add ">
+								<a href="# ">进入专区</a>
+							</div>-->
+						</section>
+                        <img class="bg " src="{$brand_info.brand_bg}">
+
+					</div>
+				</div>
+			</div>
+			<!-- 品牌关联分类 -->
+				<div class="shopping-list j-shopping-list">
+						<div class="shopping-menu j-shopping-menu">
+							<div class="dis-box b-color-f">
+									<nav style="cursor: grab;" class="shopping-list-nav brand-index-nav box-flex">
+									<ul class="swiper-wrapper">
+										{foreach $brand_cat_list as $brand_cat}
+										<li class="div{$brand_cat.cat_id} swiper-slide article-li-select {if $brand_cat.cat_id == $cate}active{/if}" category="{$brand_cat.cat_id}" ><a href="{$brand_cat.url}" >{$brand_cat.cat_name}</a></li>
+										{/foreach}
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</div>
+			<div class="shopping-info-nums b-color-f">
+				<ul class="dis-box text-center">
+					<li class="box-flex">
+						 <a href="{url('brand/index/detail', array('id'=>$brand_id, 'cat' => $cate, 'type'=>''))}">
+							<h4 id="all">{$brand_goods_count}</h4>
+							<p class="t-remark3 m-top02">全部商品</p>
+						 </a>
+					</li>
+					<li class="box-flex">
+						 <a href="{url('brand/index/detail', array('id'=>$brand_id, 'cat' => $cate, 'type'=>'new'))}">
+							<h4 id="new">{$brand_goods_new}</h4>
+							<p class="t-remark3 m-top02">新品</p>
+						 </a>
+					</li>
+					<li class="box-flex">
+						 <a href="{url('brand/index/detail', array('id'=>$brand_id, 'cat' => $cate, 'type'=>'hot'))}">
+							<h4 id="promote">{$brand_goods_hot}</h4>
+							<p class="t-remark3 m-top02">热销</p>
+						 </a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="shopping-info-hot product-list  product-list-medium m-top06">
+				<!--<h3 class="">热门产品</h3>-->
+				<section class="brand-goodlist">
+				<script id="j-product" type="text/html">
+				<%if totalPage > 0%>
+				<ul id="list-all">
+
+				<%each list as goodslis%>
+
+					<li class="<%goodslis.firsttype%>">
+						<div class="product-div">
+							<a class="product-div-link" href="<%goodslis.url%>"></a>
+							<img class="product-list-img" src="<%goodslis.goods_thumb%>" />
+							<div class="product-text">
+								<h4><%goodslis.goods_name%></h4>
+								<p class="dis-box p-t-remark"><span class="box-flex">库存:12800</span><span class="box-flex">销量:<%goodslis.sales_count%></span></p>
+								<p><span class="p-price t-first "><!--{if $goods.promote_price}--><%#goodslis.promote_price%><!--{else}--><%#goodslis.shop_price%><!--{/if}--><small><del><%#goodslis.market_price%></del></small></span></p>
+								<a href="javascript:void(0)" class="icon-flow-cart fr j-goods-attr"><i class="iconfont icon-gouwuche"></i></a>
+							</div>
+						</div>
+					</li>
+				<%/each%>
+
+				</ul>
+				<%else%>
+				<div class="no-div-message">
+					<i class="iconfont icon-biaoqingleiben"></i>
+					<p>亲，此处没有内容～！</p>
+				</div>
+				<%/if%>
+				</script>
+				</section>
+				<!--<div class="padding-all shopping-list-more"><a href="{url('brand/index/nav')}">查看更多</a></div>-->
+			</div>
+		</div>
+		<div class="search-div j-search-div ts-3">
+            <section class="search">
+                <div class="text-all dis-box j-text-all text-all-back">
+                    <a class="a-icon-back j-close-search" href="javascript:;"><i class="iconfont icon-back"></i></a>
+                    <div class="box-flex input-text">
+                        <input class="j-input-text" style="padding-left:1rem " type="text" name="infokeyword" placeholder="{if $keywords}{$keywords}{else}商品搜索{/if}" />
+                        <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                    </div>
+                    <a type="button" class="btn-submit">搜索</a>
+                </div>
+            </section>
+            <section class="search-con">
+                <div class="swiper-scroll history-search">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <p class="hos-search">
+                                <label class="fl">最近搜索</label>
+                                <span class="fr clear_history"><i class="iconfont icon-xiao10"></i></span>
+                            </p>
+                            <ul class="hot-search a-text-more a-text-one" id="search-con">
+                                {foreach $history_keywords as $v}
+                                <li><a href="{url('store/index/pro_list', array('keyword'=>$v,'ru_id'=>$info.ru_id))}"><span>{$v}</span></a></li>
+                                {/foreach}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="swiper-scrollbar"></div>
+                </div>
+            </section>
+            <footer class="close-search j-close-search">点击关闭</footer>
+        </div>
+	</div>
+<!--快捷导航-->
+	{include file="float_nav"}
+	<li>
+        <a href="{url('brand/index/index')}">
+             <i class="iconfont icon-pinpai1"></i>
+             <p>品牌街</p>
+        </a>
+     </li>
+     <li>
+        <a href="{url('brand/index/nav')}">
+             <i class="iconfont icon-pinpai"></i>
+             <p>全部品牌</p>
+        </a>
+     </li>
+    {include file="float_nav_footer"}
+
+	<script>
+		$(function(){
+
+			var url = "{url('brand/index/goods', array('id' => $brand_id, 'cat' => $cate, 'type'=> $type))}";
+			//品牌列表
+			$('.brand-goodlist').infinite({url: url, template:'j-product'});
+
+			// var url = ROOT_URL + 'index.php?m=article';
+
+	var swiper_nav = new Swiper('.shopping-list-nav', {
+		scrollbarHide: true,
+		slidesPerView: 'auto',
+		centeredSlides: false,
+		grabCursor: true
+	});
+	$('.shopping-list-nav li').on('click', function(e) {
+		var category = $(this).attr('category');
+		var index = $(".shopping-list-nav li").index(this);
+		$(this).siblings().removeClass("active");
+		$('.shopping-abs .swiper-slide li').removeClass("active");
+
+		$(".div"+category).addClass("active");
+		swiper_nav.slideTo(index, 1000, false);//切换到第一个slide，速度为1秒
+		infinite.onload('cat_id='+category);
+	})
+
+	$('.shopping-abs .swiper-slide li').on('click', function(e) {
+		var index = $(".shopping-abs .swiper-slide li").index(this);
+		$('.shopping-list-nav li').eq(index).trigger('click');
+		$(".j-shopping-menu").removeClass("active");
+		$(".mask-filter-div").removeClass("show")
+	});
+
+	$(".article-li-select").click(function(){
+		$(".j-shopping-menu").removeClass("nav-active");
+		$(".mask-filter-div").removeClass("show");
+	});
+		});
+
+	</script>
+</body>
+</html>

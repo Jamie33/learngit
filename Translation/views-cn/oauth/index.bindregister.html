@@ -1,0 +1,145 @@
+{include file="page_header"}
+<style>
+.user-center {margin-top: 0;}
+</style>
+<div class="con b-color-f">
+    <div class="user-center user-register of-hidden">
+        <div id="j-tab-con">
+            <div class="swiper-wrapper">
+                {if $oauth_info}
+                <section class="swiper-slide swiper-no-swiping">
+                    <form class="login-form bindform" action="{url('oauth/index/bindregister')}" method="post" >
+                        <div class="s-xian-box user_profile_box s-user-top-1 p-r">
+                            <div class="dis-box t-goods1 onelist-hidden jian-top" for="logo">
+                                <div class="user-img ">
+                                    <div class="user-head-img-box-1 img-commom"><img src="{$oauth_info.headimgurl}"></div>
+                                </div>
+                                <div class="box-flex profile-index-top">
+                                    <h3 class="text-all-span my-u-title-size m-top10">{$oauth_info.nickname}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-all dis-box j-text-all login-li m-top10" name="verifydiv">
+                            <div class="box-flex input-text">
+                                <input class="j-input-text" name="verify" datatype="*" nullmsg="请输入图形验证码" type="text" placeholder="请输入图形验证码"/>
+                                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                            </div>
+                            <img src="{url('captcha/index/index')}" onclick="this.src='{url('captcha/index/index')}'" height="36" class="ipt-check-btn j-verify-img"/>
+                        </div>
+                        <div class="text-all dis-box j-text-all login-li m-top10" name="mobilediv">
+                            <div class="box-flex input-text">
+                                <input class="j-input-text" id="mobile_phone" name="mobile" datatype="m"  nullmsg="请输入手机号" errormsg="手机号格式不正确" type="tel" placeholder="请输入手机号"/>
+                                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                            </div>
+                        </div>
+                        {if $sms_signin == 1}
+                        <div class="text-all dis-box j-text-all login-li m-top10" name="mobile_codediv">
+                            <div class="box-flex input-text">
+                                <input class="j-input-text" name="mobile_code" datatype="*" nullmsg="请输入短信验证码" type="number" placeholder="请输入短信验证码"/>
+                                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                            </div>
+                            <a type="button" class="ipt-check-btn ipt-check-btn-new" href="#" id="sendsms">获取短信验证码</a>
+                        </div>
+                        {/if}
+                        <input type="hidden" name="type" value="{$type}" />
+                        <input type="hidden" name="back_url" value="{$back_url}" />
+                        <button type="submit" class="btn-submit">确定</button>
+                    </form>
+                </section>
+                {/if}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="div-messages"></div>
+<script>
+    $(function () {
+        // 修正头像宽高
+        header_img();
+
+        $(":input").keyup(function() {
+            var box = this.name + "div";
+            var div = $("div[name=" + box + "]");
+            var value = div.attr("class").indexOf("active")
+            if (value > 0) {
+                div.removeClass("active");
+            }
+        });
+
+        $.Tipmsg.r = null;
+        $(".bindform").Validform({
+            tiptype: function (msg) {
+                d_messages(msg);
+            },
+            tipSweep: true,
+            ajaxPost: true,
+            callback: function (data) {
+                // {"info":"demo info","status":"y"}
+                if (data.status === 'y') {
+                    window.location.href = data.url;
+                } else {
+                    d_messages(data.info);
+                }
+            }
+        });
+
+        $("#sendsms").click(function () {
+            var myreg = window.mobilereg;
+            var mobile = $("input[name=mobile]").val();
+            var verify_code = $("input[name=verify]").val();
+
+            if (verify_code == '') {
+                d_messages('请输入图片验证码');
+                return false;
+            }
+            if (mobile == '') {
+                d_messages('请输入手机号');
+                return false;
+            }
+            if (!myreg.test(mobile)) {
+                d_messages('请输入有效的手机号');
+                return false;
+            }
+            if (c == 0) {
+                d_messages('发送频繁');
+                return;
+            }
+
+            $.post(ROOT_URL + 'index.php?m=sms&a=send', {
+                mobile: mobile,
+                verify_code: verify_code,
+                flag: ''
+            }, function (res) {
+                d_messages(res.msg);
+                if (res.code == 2) {
+                    data();
+                }
+                // 刷新图片验证码
+                $('.j-verify-img').click();
+            }, 'json');
+        })
+    });
+
+    var time = 60;
+    var c = 1;
+    function data() {
+        if (time == 0) {
+            c = 1;
+            $("#sendsms").html("获取短信验证码");
+            time = 60;
+            return;
+        }
+
+        if (time != 0) {
+            if ($(".ipt-check-btn").attr("class").indexOf("disabled") < 0) {
+                $(".ipt-check-btn").addClass('disabled');
+            }
+            c = 0;
+            $("#sendsms").html("<span>重新获取(" + time + ")</span>");
+            time--;
+        }
+        setTimeout(data, 1000);
+    }
+</script>
+</body>
+</html>

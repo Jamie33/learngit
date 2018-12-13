@@ -1,0 +1,166 @@
+{include file="page_header"}
+
+<div class="con ">
+    <section class="user-login b-color-f padding-all ">
+        <div class="s-user-top ">
+            <div class="dis-box s-xian-box s-user-top-1">
+                <h3 class="box-flex text-all-span my-u-title-size">当前登录账号</h3>
+            </div>
+        </div>
+        <div class="s-xian-box user_profile_box s-user-top-1 p-r">
+            <div class="dis-box t-goods1 onelist-hidden jian-top" for="logo">
+                <div class="user-img ">
+                    <input id="headimg" type="file" class="user-profile-img" style="opacity: 0" />
+                    <div class="user-head-img-box-1">
+                    {if $now_user_info.user_picture !=='' }<img src="{$now_user_info.user_picture}">{else}<img src="{elixir('img/no_image.jpg')}">{/if}
+                    </div>
+                </div>
+                <div class="box-flex profile-index-top">
+                    <p class="text-all-span f-02"><span>用户名：</span> {$now_user_info.user_name}</p>
+                    <p class="text-all-span f-02"><span>手机：</span> {$now_user_info.mobile_phone}</p>
+                </div>
+            </div>
+        </div>
+        {if $is_relation == 0}
+        <a type="button" class="box-flex btn-submit min-two-btn br-5"  href="{url('user/profile/account_relation')}">去关联账号</a>
+        {/if}
+
+        {if $is_relation == 1}
+        <div class="t-remark3 text-center m-top10">已关联账号：{$relation_user_info.user_name}</div>
+        {/if}
+
+        <div class="user-login-ul user-relation-after m-top10  tips">
+            账号关联可快捷登录商城PC网站和APP账号，并可享受网站会员特权等。商城承诺保障您的账号隐私安全。
+        </div>
+
+        {if $is_relation == 1}
+        <div class="dis-box m-top10 t-remark">
+            解除关联后：将无法使用微信快捷登录商城PC网站及APP。但仍可以使用系统默认分配账号登录。
+        </div>
+        {/if}
+    </section>
+
+    <section class=" b-color-f padding-all m-top10" >
+        {if $is_change_login == 1}
+        <div class="s-user-top ">
+            <div class="dis-box s-xian-box s-user-top-1">
+                <h3 class="box-flex text-all-span my-u-title-size">可切换账号</h3>
+            </div>
+        </div>
+        <div class="user_profile_box s-user-top-1 p-r">
+            <div class="dis-box t-goods1 onelist-hidden jian-top" for="logo">
+                <div class="user-img ">
+                    <input id="headimg" type="file" class="user-profile-img" style="opacity: 0" />
+                    <div class="user-head-img-box-1">
+                    {if $change_user_info.user_picture !=='' }<img src="{$change_user_info.user_picture}">{else}<img src="{elixir('img/no_image.jpg')}">{/if}
+                    </div>
+                </div>
+                <div class="box-flex profile-index-top">
+                    <p class="text-all-span f-02"><span>用户名：</span> {$change_user_info.user_name}</p>
+                    <p class="text-all-span f-02"><span>手机：</span> {$change_user_info.mobile_phone}</p>
+                    <p class="text-all-span f-02"><span>邮箱：</span> {$change_user_info.email}</p>
+                </div>
+            </div>
+        </div>
+        <div class="box-flex" style="margin-left:5.5rem;">
+            {if $is_relation == 1}
+            <input type="hidden" name="relation_user_id" value="{$relation_user_info.user_id}"/>
+            <button class="btn-submit remove-relation-button">解除账号关联</button>
+            {/if}
+
+            <input type="hidden" name="change_user_id" value="{$change_user_info.user_id}"/>
+            <button class="btn-submit change-login-button {if $is_relation == 1} bg-blue {/if}">切换并登录</button>
+        </div>
+        {/if}
+
+    </section>
+</div>
+
+<!--快捷导航-->
+{include file="no_search_nav"}
+            <li>
+                <a href="{url('user/profile/accountsafe')}">
+                     <i class="iconfont icon-qudiandianpumingpianicon"></i>
+                     <p>账户安全</p>
+                </a>
+            </li>
+{include file="float_nav_footer"}
+
+<script>
+    $(":input").keyup(function() {
+        var box = this.name + "div";
+        var div = $("div[name=" + box + "]");
+        var value = div.attr("class").indexOf("active")
+        if (value > 0) {
+            div.removeClass("active");
+        }
+    });
+
+    $(function () {
+
+        // 提交验证
+        $.Tipmsg.r = null;
+        $(".validation").Validform({
+            tiptype: function (msg) {
+                d_messages(msg);
+            },
+            tipSweep: true,
+            ajaxPost: true,
+            callback: function (data) {
+                // {"info":"demo info","status":"y"}
+                if (data.status == 'y') {
+                    window.location.href = data.url;
+                } else {
+                    d_messages(data.info);
+                }
+            }
+        });
+
+
+        // 解除关联
+        $('.remove-relation-button').click(function(){
+
+          //询问框
+          layer.open({
+            content: '您确定要解除关联账号吗？'
+            ,btn: ['确定', '取消']
+            ,yes: function(index){
+                var relation_user_id = $("input[name='relation_user_id']").val();
+                // console.log(relation_user_id);
+                $.post("{url('user/profile/remove_relation')}",{relation_user_id:relation_user_id},function(data){
+                    d_messages(data.msg);
+                    if(data.error == 0 && data.url != ''){
+                        window.location.href = data.url;
+                    }
+                    return false;
+                },"json");
+              layer.close(index);
+            }
+          });
+
+
+        });
+
+
+        // 切换登录
+        $('.change-login-button').click(function(){
+
+            var change_user_id = $("input[name='change_user_id']").val();
+
+            $.post("{url('user/profile/change_login')}",{change_user_id:change_user_id},function(data){
+                d_messages(data.msg);
+                if(data.error == 0 && data.url != ''){
+                    window.location.href = data.url;
+                }
+                return false;
+            },"json");
+
+        });
+
+
+    })
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+{include file="page_header"}
+
+<div class="con mb-2">
+    <header class="user-address-search dis-box j-search-address">
+        <label class="b-color-f"><i class="iconfont icon-sousuo"></i>城市关键词</label>
+    </header>
+    {if empty($_GET['keywords'])}
+    <div class="user-add-title dis-box b-color-f padding-all" id="link_pos">
+        <div class="box-flex">
+            <h4>当前：<span class="j-current_city">{if $current_city.region_name}{$current_city.region_name}{else}未知{/if}</span> <em class="col-9 f-05">GPS定位</em></h4>
+        </div>
+        <div class="position-rel">
+            <a href="javascript:;" class="relocation"><h4><i class="iconfont icon-dingwei1 color-red"></i>重新定位</h4></a>
+        </div>
+    </div>
+    <section class="user-pos-left-maxbox">
+        <div class="user-add-title user-pos-box">
+            <h4>已定位城市</h4>
+            <ul class="location-list-box of-hidden">
+                <li class="switch_city">
+                    <a class="j-current_location_city" href="javascript:void(0);">未知</a>
+                </li>
+            </ul>
+        </div>
+        {if $recent_city}
+        <div class="user-add-title user-pos-box">
+            <h4>最近访问城市</h4>
+            <ul class="of-hidden">
+                {foreach $recent_city as $key => $vo}
+                <li class="switch_city">
+                    <a data-city="{$key}" href="javascript:void(0);">{$vo}</a>
+                </li>
+                {/foreach}
+            </ul>
+        </div>
+        {/if}
+        <div class="user-add-title user-pos-box" id="link_shop">
+            <h4>热门城市</h4>
+            <ul class="of-hidden">
+                {foreach $hot_city as $k => $h}
+                <li class="dis-flex switch_city">
+                    <a data-city="{$h.region_id}" href="javascript:void(0);">{$h.region_name}</a>
+                </li>
+                {/foreach}
+            </ul>
+        </div>
+    </section>
+    {else}
+    <div class="user-pos-search-list">
+        {if $city_list}
+            <span class="b-l-a-id">以下包含 “{$_GET['keywords']}” 的城市</span>
+        {else}
+            <span class="b-l-a-id">没有找到 “{$_GET['keywords']}” 相关的城市</span>
+        {/if}
+    </div>
+    {/if}
+    <div class="user-pos-search-list" data-spy="scroll" data-target="#navbar-example" data-offset="0">
+        {foreach $city_list as $key => $list}
+        <a class="b-l-a-id" id="link_{$key}">{$key}</a>
+        <ul>
+            {foreach $list as $city}
+            <li class="switch_city">
+                <a data-city="{$city.region_id}" href="javascript:void(0);">{$city.region_name}</a>
+            </li>
+            {/foreach}
+        </ul>
+        {/foreach}
+    </div>
+    <div id="bs-example" class="b-l-page-pos-n">
+        <ul class="nav bs-docs-sidenav" role="tablist">
+            <li>
+                <a href="#link_pos">#</a>
+            </li>
+            <li>
+                <a href="#link_shop">热门</a>
+            </li>
+            {foreach $city_list as $key => $list}
+            <li>
+                <a href="#link_{$key}">{$key}</a>
+            </li>
+            {/foreach}
+        </ul>
+    </div>
+    <!--弹出搜索-->
+    <section class=" t-search-footer">
+        <form onsubmit="return doSearch();">
+            <div class="user-address-search dis-box j-text-all">
+                <div class="box-flex">
+                    <div class="user-search-input position-rel">
+                        <i class="iconfont icon-sousuo"></i>
+                        <input class="j-input-text ts-5" name="keywords" type="text" placeholder="城市关键词" id="newinput"
+                               autofocus="autofocus">
+                        <i class="iconfont icon-guanbi1 close-common j-is-null now-top"></i>
+                    </div>
+
+                </div>
+                <div class="user-right-search">
+                    <div class="search-box b-color text-c">
+                        <button>搜索</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+    <div class="ec-fresh-bg ts-3"></div>
+</div>
+<script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+<script>
+    $(function ($) {
+        $('body').scrollspy({
+            target: '#bs-example'
+        })
+
+        var geolocation = new qq.maps.Geolocation("{C('shop.tengxun_key')}", "h5");
+        var options = {timeout: 8000};
+
+        geolocation.getLocation(showPosition, showErr, options)
+
+        function showPosition(position) {
+            // var info = JSON.stringify(position, null, 4);
+            // 查询城市信息
+            $.post('{url("info", array("force" => 1))}', {city_name: position.city}, function(data){
+                $('.j-current_city').html(data.region_name);
+                $('.j-current_location_city').attr('data-city', data.region_id).html(data.region_name);
+            }, 'json')
+        };
+
+        function showErr() {
+          alert('定位失败，请启用位置服务。');
+        };
+
+        // 切换城市
+        $('.switch_city').bind('click', function () {
+            var city_id = $(this).children('a').attr('data-city');
+            var city_name = $(this).children('a').text();
+
+            $.post('{url("index")}', {city_id: city_id, city_name: city_name}, function (data) {
+                $('.j-current_city').html(city_name);
+                d_messages('已切换到' + city_name);
+                setTimeout(function(){
+                    window.location.href = '{url("/")}';
+                }, 1000);
+            });
+        });
+
+        // 重新定位
+        $('.relocation').click(function(){
+
+            $.post("{url('relocation')}", {status: 1}, function(res){
+                geolocation.getLocation(showPosition, showErr, options);
+                setTimeout(function(){
+                    window.location.reload();
+                }, 500);
+            });
+        });
+    });
+
+    function doSearch(){
+        var keyword = $('.j-input-text').val();
+        if(keyword == ''){
+            d_messages('请输入您要查找的城市名称');
+            return false;
+        }
+        window.location.href = "{url('location/index/index')}&keywords=" + keyword;
+        return false;
+    }
+</script>
+</body>
+</html>

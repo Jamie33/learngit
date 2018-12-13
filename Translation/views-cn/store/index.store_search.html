@@ -1,0 +1,37 @@
+<div class="search-div j-search-div ts-3">
+    <section class="search">
+        <form action="{url('category/index/products', array('id'=>$cat_id))}" method="post" id="search-form">
+            <div class="text-all dis-box j-text-all text-all-back">
+                <a class="a-icon-back j-close-search" href="javascript:;"><i class="iconfont icon-back"></i></a>
+                <div class="box-flex input-text">
+                    <input class="j-input-text" style="padding-left: 2px" type="text" name="inputkeyword" placeholder="{if $keywords}{$keywords}{else}商品搜索{/if}" />
+                    <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                </div>
+                <a type="button" class="btn-submit">搜索</a>
+            </div>
+        </form>
+    </section>
+    <section class="search-con">
+        <div class="swiper-scroll history-search">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <p class="hos-search">
+                        <label class="fl">最近搜索</label>
+                        <span class="fr clear_history"><i class="iconfont icon-xiao10"></i></span>
+                    </p>
+                    <ul class="hot-search a-text-more a-text-one" id="search-con">
+                        {foreach $history_keywords as $v}
+                        {if $v}
+                        <li><a href="{url('store/index/pro_list', array('keyword'=>$v,'ru_id'=>$ru_id))}"><span>{$v}</span></a></li>
+                        {/if}
+                        {/foreach}
+                    </ul>
+                </div>
+            </div>
+        <div class="swiper-scrollbar"></div>
+        </div>
+    </section>
+    <footer class="close-search j-close-search">
+        点击关闭
+    </footer>
+</div>

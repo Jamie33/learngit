@@ -1,0 +1,69 @@
+{include file="page_header"}
+<div class="con">
+    <section class=" store_info">
+        <script id="j-product" type="text/html">
+            <%if totalPage > 0 && list !='' %>
+            <section class=" j-f-tel padding-lr b-color-f">
+                <%each list as item%>
+                <div class="text-all dis-box j-text-all b-color-f card-div">
+                    <div class="box-flex">
+                        <%if item.short_change_desc_part1%>
+                        <p><%item.short_change_desc_part1%></p>
+                        <p><%item.short_change_desc_part2%></p>
+                        <%else%>
+                        <p><%item.short_change_desc%></p>
+                        <%/if%>
+                        <span><%item.change_time%></span>
+                    </div>
+                    <div class="input-text text-right"><span class="t-remark"><%item.type%>  <%item.amount%> {C('shop.integral_name')}</span></div>
+                </div>
+                <%/each%>
+            </section>
+            <%else%>
+            <div class="no-div-message">
+                <i class="iconfont icon-biaoqingleiben"></i>
+                <p>亲，此处没有内容～！</p>
+            </div>
+            <%/if%>
+        </script>
+    </section>
+</div>
+
+    <!--快捷导航-->
+    {include file="float_nav"}
+    <li>
+        <a href="{url('user/account/index')}">
+            <i class="iconfont icon-money"></i>
+            <p>资金管理</p>
+        </a>
+    </li>
+    {include file="float_nav_footer"}
+    <div class="footer-cont"><span><img src="{elixir('img/loading1.gif')}">正在加载……</span></div>
+<script>
+$(function(){
+    var infinite = $('.store_info').infinite({url: "{url('user/account/pay_points')}", template: 'j-product'});
+
+    //加载更多
+    var loadingHeight = $(".store_info").outerHeight(true);
+    function loadimgCont(){
+        if ($(document).scrollTop() >= $(window).height() <$(document).height() - $(window).height()) {
+                $(".footer-cont").html("<span><img src='{elixir('img/loading1.gif')}'>正在加载……</span>")
+        }
+        if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                 $(".footer-cont").html("<span>没有更多了</span>")
+        }
+        if(loadingHeight< $(window).height()){
+             $(".footer-cont").css("display","none");
+        }else{
+             $(".footer-cont").css("display","block");
+        }
+    }
+    loadimgCont();
+    $(window).scroll(function() {
+        loadimgCont();
+    });
+});
+
+</script>
+</body>
+</html>

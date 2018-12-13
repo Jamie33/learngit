@@ -1,0 +1,288 @@
+{include file="page_header"}
+<form  name="formReturn" method="post" action="{url('user/order/complaint_submit')}" enctype="multipart/form-data" class="validform" onsubmit="return checkSubmit();">
+    <input name="order_id" value="{$order_id}" type="hidden" />
+    <input name="complaint_id" value="{$complaint_id}" type="hidden" />
+    <div class="con mb-7" id="checkPage">
+        {if $complaint_id}
+        <header class="dis-box padding-all open-header-bg">
+				<div class="box-flex active">
+					<div class="header-left-box p-r">
+						<div class="header-x p-a o-hs-x {if $complaint_info.complaint_state >= 0}active{/if}"></div>
+						<div class="header-y p-a o-hs-bg {if $complaint_info.complaint_state >= 0}active{/if}"><span class="text-c color-whie f-03">1</span></div>
+					</div>
+					<label class="o-hs active">未处理</label>
+				</div>
+				<div class="box-flex">
+					<div class="header-left-box p-r">
+						<div class="header-x p-a o-hs-x {if $complaint_info.complaint_state > 1}active{/if}"></div>
+						<div class="header-y p-a o-hs-bg {if $complaint_info.complaint_state > 1}active{/if}"><span class="text-c color-whie f-03">2</span></div>
+					</div>
+					<label class="o-hs active">待申诉</label>
+				</div>
+                                <div class="box-flex">
+					<div class="header-left-box p-r">
+						<div class="header-x p-a o-hs-x {if $complaint_info.complaint_state > 2}active{/if}"></div>
+						<div class="header-y p-a o-hs-bg {if $complaint_info.complaint_state > 2}active{/if}"><span class="text-c color-whie f-03">3</span></div>
+					</div>
+					<label class="o-hs active">对话中</label>
+				</div>
+				<div class="box-flex">
+					<div class="header-left-box p-r">
+						<div class="header-x p-a o-hs-x {if $complaint_info.complaint_state ==4}active{/if}"></div>
+						<div class="header-y p-a o-hs-bg {if $complaint_info.complaint_state ==4}active{/if}"><span class="text-c color-whie f-03">4</span></div>
+					</div>
+					<label class="o-hs active">完成</label>
+				</div>
+	</header>
+        {/if}
+        
+        <!--商品list -s-->
+        <section class="flow-checkout-pro j-flow-checkout-pro b-bor">
+            <div class="product-list-small b-color-f dis-box">
+                <ul class="box-flex flow-checkout-bigpic" style="display:block;">
+                    {foreach $orders_goods as $goods}
+                    <li>
+                        <div class="product-div">
+                            <img class="product-list-img" src="{$goods.goods_thumb}">
+                            <div class="product-text">
+                                <h4>{$goods.goods_name}</h4>
+                                <p>
+                                    <span class="p-price t-first ">{$goods.goods_price}<small class="fr t-remark">x{$goods.goods_number}</small></span>
+                                </p>
+                                <p class="dis-box p-t-remark"></p>
+                            </div>
+                        </div>
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+        </section>
+        {if !$complaint_id}
+        <!--换货属性-->
+        <section class="user-return-list-box padding-all b-color-f m-top08">
+            <h4 class="f-04 col-7 j-refound-cause">纠纷类型<em>*</em></h4>
+            <div class="user-return-content position-rel">
+                <select class="select" name="title_id" datatype="*" nullmsg="纠纷类型不能为空">
+                  <option value ="0">请选择</option>
+                   {foreach $complaint_title as $title}
+                     <option value ="{$title.title_id}">{$title.title_name}</option>
+                    {/foreach}
+                </select>
+                <i class="iconfont icon-more tf-90 ts-5"></i>
+            </div>
+        </section>
+        <section class="user-return-list-box padding-all b-color-f m-top08">
+            <h4 class="f-04 col-7 j-refound-description">问题描述<em>*</em></h4>
+            <div class="user-return-cont-right position-rel">
+                <textarea rows="3" name="complaint_content" placeholder="请填写问题描述"></textarea>
+            </div>
+        </section>
+        {else}
+        <header class="b-color-f padding-all m-top10 f-06">详细信息</header>
+	        <ul class="user-refound-box b-color-f m-top1px">
+	        	<li class="dis-box">
+	        		<div>纠纷类型:</div>
+	        		<div class="box-flex"><p class="col-3 text-right"> {$complaint_info.title_name}</p></div>
+	        	</li>
+	        	<li class="dis-box">
+	        		<div>投诉时间:</div>
+	        		<div class="box-flex"><p class="text-right">{$complaint_info.add_time}</p></div>
+	        	</li>
+	        	<li class="dis-box">
+	        		<div>问题描述:</div>
+	        		<div class="box-flex"><p class="col-3 text-right">{$complaint_info.complaint_content}</p></div>
+	        	</li>
+                        {if $complaint_info.complaint_handle_time}
+	        	<li class="dis-box">
+	        		<div>初步审核时间:</div>
+	        		<div class="box-flex"><p class="col-3 text-right">{$complaint_info.complaint_handle_time}</p></div>
+	        	</li>
+	        	{/if}
+	         </ul>
+            {if $complaint_info.complaint_state == 2 || $complaint_info.complaint_state == 3 }
+             <ul class="user-refound-box b-color-f m-top04">
+                <li class="dis-box" id="talk">
+                        {include file="talklist"}
+                </li>
+                <div class="user-refound-cont-box">
+                    <div class="user-refound-cont">
+                         <textarea name="talk_content" class="textarea mb10" placeholder="请输入您要发布的内容"></textarea>  
+                    </div>        
+                    <label id='talk_content'class="sc-btn sc-redBg-btn" data-type="0">发布对话</label>
+                </div>
+            </ul>
+            {/if}
+             
+      {/if}
+        <section class="user-return-list-box padding-all b-color-f m-top08">
+            <h4 class="f-04 col-7">图片信息</h4>
+            <div class="form-group add-img-n-maxbox" style="margin-bottom:0">
+                <div class=" ">
+                       <div class="over-n position-rel n-apply-img-box" name="add_img">
+                        {foreach $img as $pic}
+                        <div class='goods-info-img-box'><div class='goods-info-img'><img src='{$pic.pic}' width='100%' data-index='{$pic.img_id}'/></div></div>
+                        <input name='img[]' type='hidden' value='{$pic.pic}'>
+                        {/foreach}
+                    </div>
+                     <div class="n-add-ts-cont">
+                        <input type='hidden' name='textfield' id='textfield' class='txt'/>
+                     </div>
+                </div>
+                 {if !$complaint_id}
+                <li class="user-return-img position-rel text-c m-top10">
+                    <h5 class="m-top08"><i class="iconfont icon-jiahao"></i></h5>
+                    <p class="f-03 col-9">上传凭证</p>
+                    <input type="file" name="file" class="file" id="file" size="28" onchange="document.getElementById('textfield').value=this.value;UpladFile()" />
+                </li>
+                {/if}
+                <!--图片放大-->
+                <div class="weui-gallery" id="gallery">
+                    <span class="weui-gallery__img" id="galleryImg"></span>
+                    {if !$complaint_id}
+                    <div class="weui-gallery__opr">
+                        <a href="javascript:" class="weui-gallery__del galleryDel">
+                            <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+                        </a>
+                    </div>
+                   {/if}
+                </div>
+            </div>
+             <p class="f-03 col-7 m-top06">（注：为了能够更快更好地解决问题，请您上传与卖家沟通的记录图片或者其他证明图片）</p>
+        </section>
+        <div class="padding-all user-bg m-top12">
+            <h4 class="f-04 col-6 mb-1"> 服务说明</h4 >
+            <p class="f-03 col-9">尊敬的用户，为了更好的解决您的问题，请您在问题描述中反馈具体纠纷问题，并上传相关证据图片，避免上传外部链接等内容，以免耽误您的纠纷处理。</p>
+        </div>
+        {if !$complaint_id}
+        <section class="filter-btn dis-box" >
+            <input type="submit" class="btn-submit box-flex click-show-attr add-to-cart" value="确认提交" style="z-index: 99999;">
+        </section>
+        {elseif $complaint_info.complaint_state !=4}
+            <section class="filter-btn dis-box" >
+             <a href="{url('user/order/arbitration',array('complaint_state'=>4,'complaint_id'=>$complaint_id))}" class="btn-submit box-flex click-show-attr add-to-cart" style="z-index: 99999;">问题已经解决</a>
+            </section>
+        {/if}
+    </div>
+</form> 
+    <!--快捷导航--> 
+    {include file="float_nav"}
+    {include file="float_nav_footer"}
+<!--引用js-->
+<script type="text/javascript">
+      var xhr;
+    function createXMLHttpRequest()
+    {
+        if(window.ActiveXObject)
+        {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        else if(window.XMLHttpRequest)
+        {
+            xhr = new XMLHttpRequest();
+        }
+    }
+    function UpladFile()
+    {
+        var fileObj = document.getElementById("file").files[0];
+        if(fileObj == undefined){
+            return false;
+        }
+        var order_id  = $('input[name="order_id"]').val();
+        var FileController = "{url('user/order/img_return')}";
+        var form = new FormData();
+        form.append("myfile", fileObj);
+        form.append("order_id", order_id);
+        createXMLHttpRequest();
+        xhr.onreadystatechange = handleStateChange;
+        xhr.open("post", FileController, true);
+        xhr.send(form);
+    }
+    function handleStateChange()
+    {
+        if(xhr.readyState == 4)
+        {
+            if (xhr.status == 200 || xhr.status == 0)
+            {
+                var result = xhr.responseText;
+                var obj =  JSON.parse(result);
+                
+                if(obj.error == 1){
+                    d_messages(obj.content);
+                    return false;
+                }
+                var i = '';
+                var new_img = '';
+                $('div[name="add_img"]').empty();
+                for (i=0;i<obj.length;i++){
+                    new_img += "<div class='goods-info-img-box'><div class='goods-info-img'><img src='" + obj[i].pic + "' width='100%' data-index='"+obj[i].img_id+"'/></div></div>";
+                    new_img += "<input name='img[]' type='hidden' value='"+obj[i].pic+"'>";
+                }
+                $('div[name="add_img"]').append(new_img);
+            }
+        }
+    }
+    var order_id = $("input[name='order_id']").val();
+
+    $('div[name=add_img]').on( 'click','.clear_pictures',function(){
+        $.post("{url('clear_pictures')}", {order_id:order_id}, function(data){
+            if(data.error == 0){
+                $('div[name=add_img]').empty();
+            }
+        }, 'json');
+    });
+
+    //显示删除图片
+    var $gallery = $("#gallery"),
+        $galleryImg = $("#galleryImg");
+
+    $('div[name=add_img]').on('click','img',function(){
+        $galleryImg.attr("style", this.getAttribute("style"));
+        $galleryImg.attr("data-index", this.getAttribute("data-index"));
+        $galleryImg.css("background-image", "url("+this.getAttribute("src")+")");
+        $gallery.fadeIn(100);
+    });
+
+    $gallery.on("click", function(){
+        $gallery.fadeOut(100);
+    });
+    $('.galleryDel').on('click', function(){
+        var index = $galleryImg.attr("data-index");
+        $.post("{url('clear_pictures')}", {order_id:order_id, id:index}, function(data){
+            if(data.error == 0){
+                $('img[data-index='+index+']').parent().parent('.goods-info-img-box').remove();
+            }
+        }, 'json');
+    });
+    
+    
+        Checktalk();
+    	//检查谈话
+        function Checktalk(){
+            var complaint_id = $("input[name='complaint_id']").val();
+              $.ajax({
+                type: "post",
+                url: "{url('talk_release')}",
+                data: {complaint_id:complaint_id,type:1},
+                dataType: "json",
+                success: function (data) {
+                   $("#talk").html(data.content);
+                }
+            });
+            //发布对话
+            $('#talk_content').click(function(){
+                var talk_content = $("textarea[name='talk_content']").val();
+                    $.ajax({
+                        type: "post",
+                        url: "{url('talk_release')}",
+                        data: {complaint_id:complaint_id,type:0,talk_content:talk_content},
+                        dataType: "json",
+                        success: function (data) {
+                           $("#talk").html(data.content);
+                        }
+                    });
+            }); 
+        }
+        
+</script>
+</body>
+</html>

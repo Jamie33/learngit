@@ -1,0 +1,38 @@
+{include file="page_header"}
+<section class="b-color-f my-nav-box m-top10">
+    <a href="{url('user/index/userhelp')}">
+        <div class="s-user-top">
+            <div class="dis-box s-user-top-1">
+                <h3 class="box-flex text-all-span my-u-title-size">帮助中心</h3>
+
+                <div class="box-flex t-goods1 text-right onelist-hidden jian-top"></div>
+                <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+            </div>
+        </div>
+    </a>
+    <a href="{url('user/order/complaint_list')}">
+        <div class="s-user-top">
+            <div class="dis-box s-user-top-1">
+                <h3 class="box-flex text-all-span my-u-title-size">仲裁</h3>
+                <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+            </div>
+        </div>
+    </a>
+</section>
+{if C('shop.is_illegal')==1}
+<section class="b-color-f my-nav-box m-top10">
+    <a href="{url('user/index/report_list')}">
+        <div class="s-user-top">
+            <div class="dis-box s-user-top-1">
+                <h3 class="box-flex text-all-span my-u-title-size">违规举报</h3>
+                <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+            </div>
+        </div>
+    </a>
+</section>
+{/if}
+<script>
+
+</script>
+</body>
+</html>

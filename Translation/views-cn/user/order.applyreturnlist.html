@@ -1,0 +1,69 @@
+{include file="page_header"}
+<body class="b-color-f">
+		<div class="con">
+            <form name="theForm" method="post" action="{url('user/order/apply_return')}">
+                <input type="hidden" name="return_type" value="">
+                <input name="return_rec_id" value="{$goods.rec_id}" type="hidden" />
+                <input name="return_g_id" value="{$goods.goods_id}" type="hidden" />
+                <input name="return_g_number" value="{$goods.goods_number}" type="hidden" />
+                <input type="hidden" name="rec_id" value="{$goods.rec_id}" />
+			<ul class="user-return-maxbox">
+				<li class="flow-checkout-adr user-return-box padding-all" name="return_type" data-attr="0">
+					<div class="flow-have-adr">
+						<header class="f-h-adr-title">
+							<div class=" dis-box">
+								<div class="user-return-w"><label class="bg-exchange"><i class="iconfont icon-tuihuanhuo my-img-size"></i></label></div>
+								<div class="box-flex"><h4 class="f-08 m-top02">维修</h4></div>
+							</div>
+						</header>
+						<p class="f-h-adr-con t-remark m-top04"> </p>
+					</div>
+					<span class="t-jiantou"><i class="iconfont icon-jiantou tf-180"></i></span>
+				</li>
+
+                {if $return_allowable }
+				<li class="flow-checkout-adr user-return-box padding-all" name="return_type" data-attr="2">
+					<div class="flow-have-adr">
+						<header class="f-h-adr-title">
+							<div class=" dis-box">
+								<div class="user-return-w"><label class="bg-discount"><i class="iconfont icon-tuihuanhuo my-img-size"></i></label></div>
+								<div class="box-flex "><h4 class="f-08 m-top02">退货  </h4></div>
+							</div>
+						</header>
+						<p class="f-h-adr-con t-remark m-top04"> </p>
+					</div>
+					<span class="t-jiantou"><i class="iconfont icon-jiantou tf-180"></i></span>
+				</li>
+                {/if}
+
+
+				<li class="flow-checkout-adr user-return-box padding-all" name="return_type" data-attr="2">
+					<div class="flow-have-adr">
+						<header class="f-h-adr-title">
+							<div class=" dis-box">
+								<div class="user-return-w"><label class="bg-shop"><i class="iconfont icon-tuihuanhuo my-img-size"></i></label></div>
+								<div class="box-flex f-08"><h4 class="f-08 m-top02">换货</h4></div>
+							</div>
+						</header>
+						<p class="f-h-adr-con t-remark m-top04"> </p>
+					</div>
+					<span class="t-jiantou"><i class="iconfont icon-jiantou tf-180"></i></span>
+				</li>
+			</ul>
+            </form>
+		</div>
+
+		<!--引用js-->
+
+        <script>
+            $('li[name="return_type"]').click(function(){
+                var rt = $(this).attr('data-attr');
+                $('input[name="return_type"]').val(rt);
+                $('form[name="theForm"]').submit();
+            })
+
+        </script>
+
+	</body>
+
+</html>

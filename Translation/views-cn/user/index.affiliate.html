@@ -1,0 +1,93 @@
+{include file="page_header"}
+<div class="con">
+	<div class="affiliate-cont-box">
+		<!--分享二维码-->
+	    <header class="p-r">
+		    <div><img src="{$ewm}" class="img"></div>
+			<div class="share-ewm-box">
+				<!-- <img src="{$ewm}"> -->
+				<p class="text-c">长按二维码发送给朋友</p>
+			</div>
+		</header>
+		<!--分成说明-->
+		{if $share.on == 1}
+		{if $goodsid == 0}
+		{if $share.config.separate_by == 0}
+		<!-- 下线人数、分成 -->
+		<section class="affiliate-cont padding-all">
+		  <div class="b-color-f padding-all br-5">
+		  	<h4 class="f-06 m-top04 text-c">{$lang.affiliate_member}</h4>
+			<table class="share-table-box ">
+				<tr class="share-top">
+					<th>{$lang.affiliate_lever}</th>
+					<th>{$lang.affiliate_num}</th>
+					<th>{$lang.level_point}</th>
+					<th>{$lang.level_money}</th>
+				</tr>
+				{foreach $affdb as $key => $list}
+				<tr>
+					<td>{$key}</td>
+					<td>{$list.num}</td>
+					<td>{$list.point}</td>
+					<td>{$list.money}</td>
+				</tr>
+				{/foreach}
+			</table>
+			</div>
+		</section>
+		<!-- 下线人数、分成 -->
+		{/if}
+		<!-- 我的推荐清单 -->
+        <section class="affiliate-cont padding-all affiliate-ajax">
+        <script id="j-product" type="text/html">
+            <%if totalPage > 0%>
+                <div class="b-color-f padding-all br-5">
+                    <h4 class="f-06 m-top04 text-c">分成明细</h4>
+                    <div class="">
+                        <%if logdb != ''%>
+                        <%each logdb as val%>
+                        <table class="rule-table-box ">
+                            <tr class="share-top">
+                                <th colspan="4">{$lang.order_number}：<%val.order_sn%></th>
+                            </tr>
+                            <tr class="rule-title">
+                                <td>{$lang.affiliate_money}</td>
+                                <td>{$lang.affiliate_point}</td>
+                                <td>{$lang.affiliate_mode}</td>
+                                <td>{$lang.affiliate_status}</td>
+                            </tr>
+                            <tr>
+                                <td><%#val.money%></td>
+                                <td><%val.point%></td>
+                                <td><%if val.affiliate_type == 0%>推荐注册分成<%else%>订单分成<%/if%></td>
+                                <td><%if val.is_separate == 1%>已分成<%else%>等待处理<%/if%></td>
+                            </tr>
+                        </table>
+                        <%/each%>
+                        <%else%>
+                        <div class="no-div-message">
+                            <i class="iconfont icon-biaoqingleiben"></i>
+                            <p>亲，此处没有内容～！</p>
+                        </div>
+                        <%/if%>
+                    </div>
+                </div>
+            <%/if%>
+        </script>
+        </section>
+        {/if}
+        {/if}
+	</div>
+</div>
+
+<!--快捷导航-->
+{include file="float_nav"}
+{include file="float_nav_footer"}
+<script>
+$(function () {
+	var url = "{url('affiliate')}";
+	//订单列表
+	$('.affiliate-ajax').infinite({url: url, template: 'j-product'});
+});
+</script>
+{include file="page_footer"}

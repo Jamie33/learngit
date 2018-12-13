@@ -1,0 +1,179 @@
+{include file="page_header"}
+
+	{if $sms_signin == 1}
+	<div class="con" id="pjax-container">
+        <form action="{url('user/profile/user_edit_mobile')}" method="post" onsubmit="return check();">
+        <div id="show">
+			<section class="user-center j-f-tel margin-lr">
+                <div class="b-color-f  user-login-ul">
+                    <div class="text-all dis-box j-text-all login-li">
+                        <div class="box-flex input-text">
+                            <input class="j-input-text" name="verify" datatype="*" nullmsg="请输入图片验证码" type="text" placeholder="请输入图片验证码"/>
+                            <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                        </div>
+                        <img src="{url('captcha/index/index')}" onclick="this.src='{url('captcha/index/index')}'" height="36" class="ipt-check-btn j-verify-img"/>
+                    </div>
+                    <div class="text-all dis-box j-text-all login-li m-top10" name="mobilediv" >
+						<!-- <label>+86</label> -->
+						<div class="box-flex input-text">
+							<input class="j-input-text" name="mobile" id="focus-mobile" maxlength="11"  type="tel" placeholder="请输入验证的手机号" value="{$mobile}" />
+							<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+						</div>
+					</div>
+                    <div class="text-all dis-box j-text-all login-li m-top10" name="sms_codediv">
+                        <div class="box-flex input-text">
+                            <input class="j-input-text" type="text" name="sms_code" placeholder="请输入验证码" />
+                            <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                        </div>
+                        <a type="button" class="ipt-check-btn ipt-check-btn-new" href="#" id="sendsms">获取短信验证码</a>
+                    </div>
+				</div>
+                <input type="hidden" name="sms_signin" value="{$sms_signin}" />
+                <button type="submit"  class="btn-submit br-5 min-two-btn">确定</button>
+			</section>
+		</div>
+        </form>
+	</div>
+	<div class="div-messages"></div>
+	{/if}
+
+	{if $sms_signin == 0}
+	<section class="user-center margin-lr">
+		<form action="{url('user/profile/user_edit_mobile')}" method="post">
+		<div class="b-color-f  user-login-ul">
+			<div class="text-all dis-box j-text-all login-li">
+				<div class="input-text box-flex" name="mobilediv">
+					<input class="j-input-text mobile" id="focus" maxlength="11" name="mobile" placeholder="请输入验证的手机号" value="{$mobile}" />
+					<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+				</div>
+			</div>
+			</div>
+			<button type="submit" class="btn-submit br-5 min-two-btn">确定</button>
+		</form>
+	</section>
+	{/if}
+    <!--快捷导航-->
+    {include file="float_nav"}
+                <li>
+                    <a href="{url('user/profile/accountsafe')}">
+                         <i class="iconfont icon-qudiandianpumingpianicon"></i>
+                         <p>账户安全</p>
+                    </a>
+                </li>
+    {include file="float_nav_footer"}
+    <script type="text/javascript">
+    $(":input").keyup(function(){
+       var box = this.name+"div";
+       var div = $("div[name="+box+"]");
+       var value = div.attr("class").indexOf("active");
+       if ( value > 0 ){
+    	  div.removeClass("active");
+       }
+    });
+
+
+{if $sms_signin == 1}
+
+    // 验证码倒计时
+	var time = 60;
+	var c = 1;
+	function data(){
+        if(time == 0){
+            c = 1;
+            $("#sendsms").html("发送验证码");
+            time = 60;
+            return;
+        }
+        if(time != 0){
+            if($(".ipt-check-btn").attr("class").indexOf("disabled")<0){
+                $(".ipt-check-btn").addClass('disabled');
+            }
+            c = 0;
+            $("#sendsms").html("重新获取("+time+")");
+            time--;
+        }
+        setTimeout(data,1000);
+	}
+
+    // 发送验证码
+	$("#sendsms").click(function(){
+        var myreg = window.mobilereg;
+        var mobile = $("input[name=mobile]").val();
+        var verify_code = $("input[name=verify]").val();
+
+        if (verify_code == '') {
+            d_messages('请输入图片验证码');
+            return false;
+        }
+        if (mobile == '') {
+            d_messages('请输入验证的手机号');
+            $("#focus-mobile").focus();
+            return false;
+        }
+        if (!myreg.test(mobile)) {
+            d_messages('请输入有效的手机号');
+            $("#focus-mobile").focus();
+            return false;
+        }
+        if (c == 0) {
+            d_messages('发送频繁');
+            return;
+        }
+
+        $.post(ROOT_URL + 'index.php?m=sms&a=send', {
+            mobile: mobile,
+            verify_code: verify_code,
+            flag: ''
+        }, function (res) {
+            d_messages(res.msg);
+            if (res.code == 2) {
+                data();
+            }
+            $('.j-verify-img').click();
+        }, 'json');
+
+    });
+
+    // 提交验证
+    function check(){
+        var htmlcode = $("input[name=sms_code]").val();
+        var mobile = $("input[name=mobile]").val();
+        var myreg = window.mobilereg;
+        if( mobile == ''){
+            d_messages('请输入验证的手机号');
+            $("#focus-mobile").focus();
+            $("div[name=mobilediv]").addClass("active");
+            return false;
+        }else if(!myreg.test(mobile)){
+            d_messages('请输入有效的手机号');
+            $("#focus-mobile").focus();
+            $("div[name=mobilediv]").addClass("active");
+            return false;
+        }
+
+        if( htmlcode == ''){
+        	$("input[name=sms_code]").focus();
+        	$("div[name=sms_codediv]").addClass("active");
+		    d_messages('请输入验证码！');
+		    return false;
+        }
+    }
+
+{/if}
+
+    </script>
+
+    {if $sms_signin == 0}
+    <script type="text/javascript">
+    $(".btn-submit").click(function(){
+    	var mobile = $(".mobile");
+    	var myreg = window.mobilereg;
+    	if(!myreg.test(mobile.val())){
+    		d_messages('请输入有效的手机号码！');
+    		return false;
+    	}
+    });
+    </script>
+    {/if}
+</body>
+</html>

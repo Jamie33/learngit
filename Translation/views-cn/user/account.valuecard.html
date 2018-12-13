@@ -1,0 +1,53 @@
+{include file="page_header"}
+
+<style>
+.user-coupon-add .btn-submit { background: #e29266}
+</style>
+<div class="con">
+    <section class="store_info">
+        <script id="j-product" type="text/html">
+            <%if totalPage > 0 && list !=''%>
+                <ul class="padding-all user_valuecard">
+                <%each list as value_card%>
+                    <li>
+                    <div class="valuecard_top padding-all">
+                        <header class="f-08 user_col "><strong>NO.<%value_card.value_card_sn%></strong><label class="user_tag_box active"><%if value_card.status%>已激活 <%else%>已过期<%/if%></label></header>
+                        <h3 class="text-c user_col">
+                          <em class="f-03">金额: </em><%value_card.card_money%>
+                        </h3>
+                        <p class="f-03 text-c col-9 m-top02"><label class="user_col"><a href="<%value_card.detail_url%>" >查看详情<i class="iconfont icon-next-s"></i></a></label></p>
+                    </div>
+                    <div class="user_card_num padding-all">
+                        <p class="f-02 color-whie">过期时间：<%value_card.end_time%> <label class="valuecard_num"><em class="f-03">面值: </em><%value_card.vc_value%></label></p>
+                    </div>
+                    </li>
+                <%/each%>
+                </ul>
+            <%else%>
+                <div class="no-div-message">
+                    <i class="iconfont icon-biaoqingleiben"></i>
+                    <p>亲，还没有储值卡哦～！</p>
+                </div>
+            <%/if%>
+        </script>
+    </section>
+    <div class="user-coupon-add filter-btn">
+        <a href="{url('add_valuecard')}" type="button" class="btn-submit">绑定储值卡</a>
+    </div>
+</div>
+
+    <!--快捷导航-->
+    {include file="float_nav"}
+                <li>
+                    <a href="{url('user/account/index')}">
+                         <i class="iconfont icon-money"></i>
+                         <p>资金管理</p>
+                    </a>
+                </li>
+    {include file="float_nav_footer"}
+	<script>
+    var infinite = $('.store_info').infinite({url: "{url('user/account/value_card')}",template: 'j-product'});
+
+	</script>
+</body>
+</html>

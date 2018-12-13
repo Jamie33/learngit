@@ -1,0 +1,77 @@
+{include file="page_header"}
+<body class="show-search-div">
+<div class="search-div j-search-div ts-3">
+			<section class="search raise-search">
+			<form action="{url('index')}" method="post">
+				<div class="text-all dis-box j-text-all">
+
+					<div class="box-flex input-text">
+						<input class="j-input-text" id="keywordBox" name="keywords" type="text" placeholder="项目搜索" />
+						<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+					</div>
+					<a type="button" onclick="return check('keywordBox')"  class="btn-submit">搜索</a>
+				</div>
+			</form>
+			</section>
+			<section class="search-con">
+				<div class="swiper-scroll history-search">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+
+							<p class="hos-search">
+								<label class="fl">最近搜索</label>
+								<span class="fr" onclick="javascript:clearHistroy();"><i class="iconfont icon-xiao10 j-detail-close"></i></span>
+							</p>
+
+							<ul class="hot-search a-text-more  raise-search-cont a-text-more-btn">
+								{foreach $zcsearch_histroy as $key=>$keyword}
+								<li class="w-3">
+									<a href="{url('index', array('keywords'=>$keyword))}"><span>{$keyword}</span></a>
+								</li>
+								{/foreach}
+
+							</ul>
+						</div>
+					</div>
+					<div class="swiper-scrollbar"></div>
+				</div>
+			</section>
+			<div class="other-login search-footer">
+            <h4 class="title-hrbg"><a href="{url('crowd_funding/index/index')}"><span class="col-6">点击关闭搜索</span></a>
+                <hr>
+            </h4>
+    </div>
+		</div>
+<script type="text/javascript">
+		$(function($) {
+				$(".j-detail-close").click(function(){
+					$(".raise-search-cont").addClass("active");
+				})
+			});
+			/* 搜索验证 */
+			function check(Id) {
+				var strings = document.getElementById(Id).value;
+				if(strings.replace(/(^\s*)|(\s*$)/g, "").length == 0) {
+					alert('请输入搜索内容');
+					return false;
+				}
+				$("form").submit();
+				return true;
+			}
+
+			/* 清空搜索记录 */
+			function clearHistroy(){
+				$.get('{url("clearhistory")}', {
+				}, function(data) {
+					if(data.status ==0){
+						alert('删除失败')
+					}else{
+
+					}
+				}, 'json');
+			}
+
+
+		</script>
+		</body>
+		</html>

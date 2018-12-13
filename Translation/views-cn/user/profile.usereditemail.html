@@ -1,0 +1,212 @@
+{include file="page_header"}
+
+	<div class="con">
+		<section class="user-center j-f-email margin-lr">
+			<form action="{url('user/profile/user_edit_email')}" method="post">
+				<div class="b-color-f  user-login-ul">
+					<div class="text-all dis-box j-text-all login-li">
+						<div class="input-text box-flex" name="emaildiv">
+							<input class="j-input-text" type="text" name="email" placeholder="请输入邮箱" value="{$user_info.email}" />
+							<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+						</div>
+					</div>
+                    {if $type == 'email' || $sms_signin == 0}
+                    <div class="text-all dis-box j-text-all login-li m-top10" name="sms_email_codediv">
+                        <div class="box-flex input-text">
+                            <input class="j-input-text" type="text" name="sms_email_code" placeholder="请输入邮箱验证码" />
+                            <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                        </div>
+                        <a type="button" class="ipt-check-btn ipt-check-btn-new" href="#" id="sendsms_email">获取邮箱验证码</a>
+                    </div>
+                    {/if}
+                    {if $type == 'phone' && $sms_signin == 1}
+                    <div class="text-all dis-box j-text-all " >
+                        <label>已认证手机号：<span id="mobie_phone">{$user_info.mobile_phone}</span></label>
+                    </div>
+                    <div class="text-all dis-box j-text-all login-li" name="sms_codediv">
+                        <div class="box-flex input-text">
+                            <input class="j-input-text" type="text" name="sms_code" placeholder="请输入短信验证码" />
+                            <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+                        </div>
+                        <a type="button" class="ipt-check-btn ipt-check-btn-new" href="#" id="sendsms">获取短信验证码</a>
+                    </div>
+                    {/if}
+				</div>
+                {if $type == 'email' && $sms_signin == 1}
+                <div class="text-right m-top10 f-04"><a href="{url('user/profile/user_edit_email', array('type' => 'phone'))}" class="f-04" >已认证手机，使用手机发送验证码</a></div>
+                {/if}
+
+                {if $change_email == 1}
+                <div class="text-right m-top10 f-04"><a href="{url('user/profile/user_edit_email', array('type' => 'email'))}" class="f-04" >使用邮箱发送验证码</a></div>
+                {/if}
+                <input type="hidden" name="hash_code" value="{$hash_code}" />
+				<button type="submit" class="btn-submit br-5 min-two-btn">确定修改</button>
+			</form>
+		</section>
+	</div>
+
+    <!--快捷导航-->
+    {include file="float_nav"}
+                <li>
+                    <a href="{url('user/profile/accountsafe')}">
+                         <i class="iconfont icon-qudiandianpumingpianicon"></i>
+                         <p>账户安全</p>
+                    </a>
+                </li>
+    {include file="float_nav_footer"}
+    <script>
+
+{if $type == 'phone' && $sms_signin == 1}
+
+    // 验证码倒计时
+    var time = 60;
+    var c = 1;
+    function data_mobile(){
+        if(time == 0){
+            c = 1;
+            $("#sendsms").html("发送验证码");
+            time = 60;
+            return;
+        }
+        if(time != 0){
+            if($(".ipt-check-btn").attr("class").indexOf("disabled")<0){
+                $(".ipt-check-btn").addClass('disabled');
+            }
+            c = 0;
+            $("#sendsms").html("重新获取("+time+")");
+            time--;
+        }
+        setTimeout(data_mobile,1000);
+    }
+
+    // 发送手机验证码
+    $("#sendsms").click(function(){
+          if(c == 0){
+             d_messages('发送频繁');
+             return;
+          }
+          var mobile = $("#mobie_phone").html();
+          var myreg = window.mobilereg;
+          if( mobile == ''){
+            d_messages('请先填写认证手机号');
+            return false;
+          }else if(!myreg.test(mobile)){
+            d_messages('请输入有效的手机号');
+            return false;
+        }
+        data_mobile();
+        ajax_mobile();
+     });
+
+    function ajax_mobile(){
+        var mobile = $("#mobie_phone").html();
+        var hash_code = $("input[name=hash_code]").val();
+
+        $.post("{url('user/profile/send_sms')}",{type:'phone',mobile:mobile,hash_code:hash_code},function(data){
+            d_messages(data.content);
+        },'json');
+    }
+
+    // 提交验证
+    $(".btn-submit").click(function(){
+        var mobile = $("#mobie_phone").html();
+        if(mobile == ""){
+            d_messages('请先填写认证手机号',2);
+            return false;
+        }
+
+        var sms_code = $("input[name=sms_code]").val();
+        if(sms_code == ""){
+            $("input[name=sms_code]").focus();
+            d_messages('请输入短信验证码',2);
+            return false;
+        }
+    });
+
+{/if}
+
+{if $type == 'email' || $sms_signin == 0}
+
+    // 发送邮箱验证码
+    $("#sendsms_email").click(function(){
+          if(c == 0){
+             d_messages('发送频繁');
+             return;
+          }
+          var email = $("input[name=email]").val();
+          var reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+          if( email == ''){
+            d_messages('请输入邮箱');
+            $("input[name=email]").focus();
+            $("div[name=emaildiv]").addClass("active");
+            return false;
+          } else if (!reg.test(email)){
+            d_messages('请输入有效的邮箱');
+            $("input[name=email]").focus();
+            $("div[name=emaildiv]").addClass("active");
+            return false;
+        }
+        data_email();
+        ajax_email();
+     });
+
+    function ajax_email(){
+        var email = $("input[name=email]").val();
+        var hash_code = $("input[name=hash_code]").val();
+
+        $.post("{url('user/profile/send_sms')}",{type:'email',email:email,hash_code:hash_code},function(data){
+            d_messages(data.content);
+        },'json');
+    }
+
+    // 验证码倒计时
+    var time = 60;
+    var c = 1;
+    function data_email(){
+        if(time == 0){
+            c = 1;
+            $("#sendsms_email").html("发送验证码");
+            time = 60;
+            return;
+        }
+        if(time != 0){
+            if($(".ipt-check-btn").attr("class").indexOf("disabled")<0){
+                $(".ipt-check-btn").addClass('disabled');
+            }
+            c = 0;
+            $("#sendsms_email").html("重新获取("+time+")");
+            time--;
+        }
+        setTimeout(data_email,1000);
+    }
+
+    // 提交验证
+    $(".btn-submit").click(function(){
+        var email = $("input[name=email]").val();
+        var reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        if(email == ""){
+            d_messages('请输入用户邮箱',2);
+            $("input[name=email]").focus();
+            $("div[name=emaildiv]").addClass("active");
+            return false;
+        }
+        if(!reg.test(email)){
+            d_messages('请输入有效的邮箱',2);
+            $("input[name=email]").focus();
+            $("div[name=emaildiv]").addClass("active");
+            return false;
+        }
+
+        var sms_email_code = $("input[name=sms_email_code]").val();
+        if(sms_email_code == ""){
+            $("input[name=sms_email_code]").focus();
+            d_messages('请输入邮箱验证码',2);
+            return false;
+        }
+    });
+
+{/if}
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="goods-body">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" content="{$description}"/>
+    <meta name="keywords" content="{$keywords}"/>
+    <title>{$page_title}</title>
+    {global_assets('css')}
+    <script type="text/javascript">var ROOT_URL = '__ROOT__/';</script>
+    {global_assets('js')}
+    {include file="jssdk"}
+</head>
+<body class="goods-body">
+	<p style="text-align:right; display:none;">{C('shop.stats_code')}</p>
+	<div id="loading"><img src="{elixir('img/loading.gif')}" /></div>
+   <div class="swiper-container goods-swiper-container">
+        <div class="swiper-wrapper">
+           <div class="swiper-slide goods_content cur">
+                <div class="goods-swiper-container-cont">
+                    <div class="swiper-wrapper goods_detail">
+                        <div class="swiper-slide goods-swiper-slide">
+                            <div class="con goods" id="checkPage">
+								<form name="ECS_FORMBUY" id="ECS_FORMBUY" method="post" action="javascript:addToCart({$goods.goods_id})">
+									<div class="goods-photo goods-photo-images j-show-goods-img goods-banner" style="margin-top:0">
+									   <span class="goods-num" id="goods-num"><span id="g-active-num"></span>/<span id="g-all-num"></span></span>
+									   <div class="swiper-wrapper my-gallery-box" data-pswp-uid="10">
+									        {foreach $pictures as $v}
+									            <figure class="swiper-slide tb-lr-center">
+									               <div class="img-box">
+								            			<a href="{$v.img_url}" data-size="640x640">
+										                  <img src="{$v.img_url}" alt="{$v.img_url}" />
+										                </a>
+								                    </div>
+									            </figure>
+									        {/foreach}
+									   </div>
+									</div>
+								    <section class="goods-title b-color-f padding-all ">
+                                        <h3>{$goods.goods_name}</h3>
+                                    </section>
+								    <section class="padding-all goods-shop no-shopping-title b-color-f">
+                                        <div class="goods-shop-pic of-hidden">
+                                            <div class="g-s-p-con product-one-list who-product-one-price of-hidden j-g-s-p-con swiper-container-horizontal" style="cursor: -webkit-grab;">
+                                                <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+                                                    <div class="swiper-slide swiper-slide-active" style="width:4rem">
+                                                        <div class="product-div">
+                                                            <div class="product-text m-top06 index-product-text">
+                                                                <div><span class="p-price "><em class="col-9 f-03">批发价</em></span></div>
+                                                                <h5><span class="p-price "><del>原价</del></span></h5>
+                                                                <div><span class="p-price "><em class="col-9 f-03">起批量</em></span></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {if $goods.price_model eq 1}
+                                                    {foreach $goods.volume_price as $k => $price}
+                                                    <li class="swiper-slide swiper-slide-active">
+                                                        <div class="product-div">
+                                                            <div class="product-text m-top06 index-product-text">
+                                                                <div><span class="p-price"><em class=" t-first f-07">{$price.volume_price}</em></span></div>
+                                                                <h5><span class="p-price "><del>{$goods.market_price}</del></span></h5>
+                                                                {if (count($goods.volume_price) - $k) > 1}
+                                                                <div><span class="p-price "><em class="col-9 f-03">{$price.volume_number}-{$price.range_number}{$goods.goods_unit}</em></span></div>
+                                                                {else}
+                                                                <div><span class="p-price "><em class="col-9 f-03">{$price.volume_number}{$goods.goods_unit}</em></span></div>
+                                                                {/if}
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    {/foreach}
+                                                    {else}
+                                                    <li class="swiper-slide swiper-slide-active">
+                                                        <div class="product-div">
+                                                            <div class="product-text m-top06 index-product-text">
+                                                                <div><span class="p-price"><em class=" t-first f-07">{$goods.goods_price}</em></span></div>
+                                                                <h5><span class="p-price "><del>{$goods.market_price}</del></span></h5>
+                                                                <div><span class="p-price "><em class="col-9 f-03">{$goods.moq}{$goods.goods_unit}</em></span></div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    {/if}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                        		    <section class="m-top1px padding-all b-color-f goods-service j-show-div">
+                                        <div class="dis-box">
+                                            {if $goods.goods_extend.is_delivery || $goods.goods_extend.is_free || $goods.goods_extend.is_return}
+                                            <label class="t-remark g-t-temark">实力保障</label>
+                                            <div class="box-flex">
+                                                <div class="dis-box g-r-rule">
+                                                    {if $goods.goods_extend.is_delivery}<p class=" t-remark3">
+                                                        <em class="fl em-promotion">48</em><span class="fl who-service">48小时发货</span></p>{/if}
+                                                    {if $goods.goods_extend.is_free}<p class="box-flex t-remark3">
+                                                        <em class="fl em-promotion">邮</em><span class="fl">包邮</span></p>{/if}
+                                                    {if $goods.goods_extend.is_return}<p class="box-flex t-remark3">
+                                                        <em class="fl em-promotion">退</em><span class="fl">包退</span></p>{/if}
+                                                </div>
+                                            </div>
+                                            {/if}
+                                        </div>
+                                    </section>	
+                                    <ul class="wholesale-color-property m-top08" id="j-calculate-ul">
+                                        <input type="hidden" name="min_num" data-min-num="{$min}" />
+                                        {if $specification}
+                                             {foreach $specification as $spec}
+                                            <h4 class="t-remark title">{$spec.name}</h4>
+                                            {if $spec.values}
+                                             {foreach $main_attr_list as $value}
+
+                                            <li class="dis-box " data-attr-id="{$value.goods_attr_id}">
+                                                <div class="left box-flex">
+                                                    <h4 class="f-04 col-3"><strong>{$value.attr_value}</strong></h4>
+                                                    <div class="dis-box f-03 col-9">
+                                                        <div class="box-flex unit_price">{$goods.goods_price_formatted}</div>
+                                                        <div class="box-flex">{$value.product_number}件可售</div>
+                                                    </div>
+                                                </div>
+                                                <div class="box-flex">
+                                                    <div class="div-num dis-box fr">
+                                                        <a class="num-less" j-min-num="{$goods.moq}"></a>
+                                                        <input class="box-flex" type="number" value="0" style="padding:0">
+                                                        <a class="num-plus" j-max-num="{$value.product_number}"></a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                             {/foreach}
+                                            {/if}
+                                            {/foreach}
+                                        {else}
+                                            <li class="dis-box ">
+                                                <div class="left box-flex">
+                                                    <h4 class="f-04 col-3"><strong>无属性</strong></h4>
+                                                    <div class="dis-box f-03 col-9">
+                                                        <div class="box-flex unit_price">{$goods.goods_price_formatted}</div>
+                                                        <div class="box-flex">库存{$goods.goods_number|default=0}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="box-flex">
+                                                    <div class="div-num dis-box fr">
+                                                        <a class="num-less" j-min-num="{$min}"></a>
+                                                        <input class="box-flex" type="number" value="0" style="padding:0">
+                                                        <a class="num-plus" j-max-num="{$value.product_number}"></a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {/if}
+                                    </ul>						  
+                    			 <div class="goods_load_more m-top08 b-color-f j-goods-detail-img">
+                    					<i class="iconfont icon-fanhui tf-90"></i><span>上拉查看图文详情</span>
+                    			</div>
+						</form>
+                   </div>
+                </div>
+            </div>
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </div>
+   <div class="swiper-slide" id="j-tab-c">
+        <div class="goods-swiper-container-cont">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide goods-swiper-slide">
+                    <div class="goods-info of-hidden ect-tab  j-goods-info j-ect-tab ts-3" style="padding-top:0">
+                        <div class="hd j-tab-title tab-title b-color-f of-hidden" style="position:static">
+                            <ul class="dis-box">
+                                <li class="box-flex active">商品详情</li>
+                                <li class="box-flex">规格参数</li>
+                            </ul>
+                        </div>
+                        <div id="j-tab-con" class="goods-detail-cont">
+                            <div class="swiper-wrapper">
+                                <section class="swiper-slide">
+                                    {if $goods.goods_desc}
+                                        <div class="b-color-f detail-cont">
+                                             {$goods.goods_desc}
+                                        </div>
+                                    {else}
+                                        <div class="no-div-message">
+                                            <i class="iconfont icon-biaoqingleiben"></i>
+                                            <p>亲，此处没有内容～！</p>
+                                        </div>
+                                    {/if}
+                                </section>
+                                <section class="swiper-slide goods-info-attr ">
+                                    {if $properties}
+                                        {foreach $properties as $property_group}
+                                            {foreach $property_group as $property}wq2qwe
+                                            <dd class="column"><span title="{$property.value}">{$property.name}：{$property.value}</span></dd>
+                                            {/foreach}
+                                    {/foreach}
+                                    {else}
+                                    <div class="no-div-message">
+                                        <i class="iconfont icon-biaoqingleiben"></i>
+                                        <p>亲，此处没有内容～！</p>
+                                    </div>
+                                    {/if}
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </div>
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </div>
+</div>
+</div>
+    <!--悬浮btn star-->
+    <section class="filter-btn dis-box j-goods-attr j-show-div j-property j-add-to-cart">
+        <a href="{url('cart')}" class="filter-btn-flow filter-btn-a"><i class="iconfont icon-gouwuche"></i><sup class="b-color cart-number">{$cart_number}</sup><em>进货单</em></a>
+        {if $is_jurisdiction eq 1}
+        <a href="javascript:;" class="btn-cart box-flex j-add-cart">加入进货单</a>
+        <a href="javascript:;" class="btn-submit box-flex j-buy-now">立即订购</a>
+        {else}
+        <a href="javascript:;" class="btn-disab  box-flex">暂无权限</a>
+        {/if}
+
+    </section>
+    <!--悬浮btn end-->
+       
+    {include file="image"}
+     <!--快捷导航-->
+    {include file="no_search_nav"}
+         <li>
+            <a href="{url('purchase/index/index')}">
+                <i class="iconfont icon-btn_pljj"></i>
+                    <p>批发首页</p>
+            </a>
+        </li>
+    {include file="float_nav_footer"}
+<script src="__TPL__/js/jquery.cookie.js"></script>
+<script type="text/javascript">
+    //初始化
+var cart_number =$(".cart-number").html();
+    if(cart_number == 0){
+    $(".cart-number").hide();
+}
+ var is_login = "{$is_login|default=0}", back_url = "{$back_url}";
+
+    /** 属性操作 */
+    $(function(){
+
+        var calculate = {
+            submit_data : {
+                goods_id : "{$goods.goods_id|default=0}",
+                attr_array : [],
+                num_array : []
+            },
+            init : function (){
+              this.dom();
+            },
+            'num-plus' : function (a, b){
+
+                if ( a == null || a == '' || a == undefined || isNaN(a) )
+                        a = 0;
+                return a + b;
+
+            },
+            'num-less' : function (a, b){
+                if ( a == null || a == '' || a == undefined || isNaN(a) )
+                    a = 0;
+
+                let c = a - b;
+                if ( c <= 0 )
+                        c = 0;
+
+                return Math.abs(c);
+            },
+            dom : function () {
+                // 点击 加减号
+                $('#j-calculate-ul').find('a.num-less, a.num-plus').click( function(){
+                    // 减
+                    var num = 0;
+                    let cal = calculate[$(this).attr('class')];
+                    let res = cal(parseInt($(this).siblings('input').val()), 1);
+
+                    // 判断值是否在范围内
+                    let max_num = parseInt($(this).attr('j-max-num'));
+                    if (max_num < res) {
+                        d_messages('采购商品库存不足');
+                        res = max_num;
+                    }
+                    $(this).siblings('input').val(res);  // 赋值
+                    $('#j-calculate-ul').find('input[type=number]').map(function(){
+                        num += parseInt($(this).val())
+                    });
+                    var goods_id = "{$goods.goods_id|default=0}";
+                    $.get("{url('purchase/index/change_price')}", {num:num,goods_id:goods_id}, function (info) {
+                        $('#j-calculate-ul').find('.unit_price').map(function(){
+                            $(this).html(info.unit_price);
+                        });
+                    },'json');
+                });
+                // 点击输入框 输入
+                $('#j-calculate-ul').find('input[type=number]').blur( function (){
+                    var num = 0;
+                    let val = $(this).val() || 0;
+                    // 判断值是否在范围内
+                    let max_num = parseInt($(this).siblings('a.num-plus').attr('j-max-num'));
+
+                    if (max_num < val) {
+                        d_messages('采购商品库存不足');
+                        val = max_num;
+                    }
+                    //
+                    $(this).val(Math.abs(parseInt(val)));
+                    $('#j-calculate-ul').find('input[type=number]').map(function(){
+                        num += parseInt($(this).val())
+                    });
+                    var goods_id = "{$goods.goods_id|default=0}";
+                    $.get("{url('purchase/index/change_price')}", {num:num,goods_id:goods_id}, function (info) {
+                        $('#j-calculate-ul').find('.unit_price').map(function(){
+                            $(this).html(info.unit_price);
+                        });
+                    },'json');
+                });
+            }
+        };
+
+        calculate.init();
+
+        /* 添加商品 */
+        $('.j-add-to-cart a').click(function (){
+            if (!$(this).hasClass('j-add-cart') && !$(this).hasClass('j-buy-now'))
+                return;
+
+            let has_num = false, min_num = $('input[name=min_num]').attr('data-min-num');
+
+            calculate.submit_data.num_array.splice(0, calculate.submit_data.num_array.length);
+            calculate.submit_data.attr_array.splice(0, calculate.submit_data.attr_array.length);
+
+            $('#j-calculate-ul').find('input[type=number]').each(function (i) {
+
+                if ($(this).val() > 0) {
+
+                    has_num = true;
+                    calculate.submit_data.num_array.push( $(this).val() );
+                    calculate.submit_data.attr_array.push( $(this).parents('li').attr('data-attr-id') );
+
+                }
+            });
+            if ( is_login == 0) {
+                 d_messages('请先登录！');
+            layer.open({
+                    content: '你还没有登录，请先登录！',
+                    btn: ['确定', '取消'],
+                    yes: function(index) {
+                        window.location.href = back_url;
+                        layer.close(index);
+                    }
+                });
+                return;
+            }
+            if (!has_num){
+                d_messages('请选择您需要购买的商品');
+                return;
+            }
+            //
+            if ( eval(calculate.submit_data.num_array.join("+")) < min_num ){
+                    d_messages('您订购的商品少于最小起订量');
+                return;
+            }
+
+            let that = $(this);
+
+            $.post("{url('addtocart')}", calculate.submit_data, function(data){
+                if ( data.error == 2 ) {
+                    if (confirm(data.message)) {
+                        window.location.href = data.content;
+                    }
+                }else if (data.error == 1) {
+                    d_messages(data.message);
+                }else if (data.error == 0) {
+                    d_messages('添加成功');
+                    if(data.content>0){
+                        $(".cart-number").show();
+                        $(".cart-number").html(data.content);
+                    }
+                    if ( that.hasClass('j-buy-now') ) {
+                        window.location.href = "{url('cart')}";
+                    }
+                }
+            }, 'json');
+
+        });
+
+    });
+    window.onload = function(){
+        //相册
+        initPhotoSwipeFromDOM('.my-gallery-box');
+        var swiper = new Swiper('.j-g-s-p-con', {
+            scrollbarHide: true,
+            slidesPerView: 'auto',
+            centeredSlides: false,
+            grabCursor: true
+        });
+        //详情上拉等
+        setTimeout(goodsDetail(),100)
+    }
+</script>
+</body>
+</html>

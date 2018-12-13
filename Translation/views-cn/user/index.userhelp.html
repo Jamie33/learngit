@@ -1,0 +1,149 @@
+{include file="page_header"}
+		<div class="con">
+		<section class="user_help">
+			<header><i class="iconfont icon-dianpu"></i>关于商城</header>
+		    <a href="{url('user/index/helpshop')}">
+		        <div class="s-user-top b-color-f">
+		            <div class="dis-box s-user-top-1">
+		                <h3 class="box-flex text-all-span my-u-title-size">商城介绍</h3>
+		                <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+		            </div>
+		        </div>
+		    </a>
+		      <a href="{url('user/index/helpflow')}">
+		        <div class="s-user-top b-color-f">
+		            <div class="dis-box s-user-top-1">
+		                <h3 class="box-flex text-all-span my-u-title-size">购物流程</h3>
+		                <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+		            </div>
+		        </div>
+		    </a>
+		</section>
+
+        {if $is_wechat}
+        <section class="user_help">
+            <header><i class="iconfont icon-wodetuandui"></i>微信通玩法</header>
+            <a href="{url('user/index/helpwechat_introduce')}">
+                <div class="s-user-top b-color-f">
+                    <div class="dis-box s-user-top-1">
+                        <h3 class="box-flex text-all-span my-u-title-size">微信通介绍</h3>
+                        <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+                    </div>
+                </div>
+            </a>
+            <a href="{url('user/index/helpwechat_flowpt')}">
+                <div class="s-user-top b-color-f">
+                    <div class="dis-box s-user-top-1">
+                        <h3 class="box-flex text-all-span my-u-title-size">微信通流程</h3>
+                        <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+                    </div>
+                </div>
+            </a>
+        </section>
+        {/if}
+
+        {if $is_drp}
+        <section class="user_help">
+            <header><i class="iconfont icon-wodetuandui"></i>微分销玩法</header>
+            <a href="{url('user/index/helpdrp_introduce')}">
+                <div class="s-user-top b-color-f">
+                    <div class="dis-box s-user-top-1">
+                        <h3 class="box-flex text-all-span my-u-title-size">微分销介绍</h3>
+                        <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+                    </div>
+                </div>
+            </a>
+            <a href="{url('user/index/helpdrp_flowpt')}">
+                <div class="s-user-top b-color-f">
+                    <div class="dis-box s-user-top-1">
+                        <h3 class="box-flex text-all-span my-u-title-size">微分销流程</h3>
+                        <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+                    </div>
+                </div>
+            </a>
+        </section>
+        {/if}
+
+        {if $is_team}
+		<section class="user_help">
+			<header><i class="iconfont icon-wodetuandui"></i>拼团玩法</header>
+		    <a href="{url('user/index/helppintuan')}">
+		        <div class="s-user-top b-color-f">
+		            <div class="dis-box s-user-top-1">
+		                <h3 class="box-flex text-all-span my-u-title-size">拼团介绍</h3>
+		                <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+		            </div>
+		        </div>
+		    </a>
+		    <a href="{url('user/index/helpflowpt')}">
+		        <div class="s-user-top b-color-f">
+		            <div class="dis-box s-user-top-1">
+		                <h3 class="box-flex text-all-span my-u-title-size">拼团流程</h3>
+		                <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+		            </div>
+		        </div>
+		    </a>
+		</section>
+        {/if}
+
+		<section class="user_help">
+		<header><i class="iconfont icon-iconfontkefu"></i>在线客服</header>
+		    <a href="{url('user/index/messagelist')}">
+		        <div class="s-user-top b-color-f">
+		            <div class="dis-box s-user-top-1">
+		                <h3 class="box-flex text-all-span my-u-title-size">咨询客服</h3>
+		                <span class="t-jiantou"><i class="iconfont icon-jiantou tf-180 jian-top"></i></span>
+		            </div>
+		        </div>
+		    </a>
+		</section>
+		<section class="user_help">
+			<header><i class="iconfont icon-tishi"></i>常见问题</header>
+		    <div class="distribution-new">
+				<ul>
+					<li class="p-r">
+						<h2  class="padding-all">订单已提交成功，什么时候可以送到？<span class="t-jiantou t-remark fr"><i class="iconfont icon-more"></i></span></h2>
+						<div class="help-cont">一般1-7天可以到货，新疆、西藏、内蒙古等偏远地区到货时间为3-15天，海外购订单一般20-30天到货。您可以在订单跟踪页面查看具体物流信息。（如右图）</div>
+					</li>
+					<li class="p-r">
+						<h2  class="padding-all">我们的商品是否可以退换货？<span class="t-jiantou t-remark fr"><i class="iconfont icon-more"></i></span></h2>
+						<div class="help-cont">
+						<strong>我的商品是否可以退换货</strong><br/>
+						我们承诺符合以下情况，自客户收到商品之日起7日内可以退货，15日内可以换货，客户可在线提交返修申请办理退换货事宜。<br/>
+						（1）国家三包所规定的功能性故障。 经由生产厂家指定或特约售后服务中心检测确认，并出具检测报告。<br/>
+						（2）到货物流损或缺件情况。 物流损指在运输过程中造成的损坏、漏液、破碎、性能故障，经售后人员核查情况属实（期间可能需要快递人员证明或要求您提供实物照片等，以便售后人员快速做出判断及时处理），无条件办理退换货事宜。
+						</div>
+					</li>
+					<!--后台添加-->
+					{foreach $new_article as $key => $list}
+					<li class="p-r">
+						<h2  class="padding-all">{$list.order}、{$list.title}<span class="t-jiantou t-remark fr"><i class="iconfont icon-more"></i></span></h2>
+						<div class="help-cont">{$list.content}</div>
+					</li>
+					{/foreach}
+				</ul>
+			</div>
+		</section>
+		<!--快捷导航-->
+	   	{include file="no_search_nav"}
+	       <li>
+                <a href="{url('user/profile/index')}">
+                     <i class="iconfont icon-qudiandianpumingpianicon"></i>
+                     <p>个人资料</p>
+                </a>
+            </li>
+	    {include file="float_nav_footer"}
+		</div>
+		<script>
+			$(".distribution-new ul li").click(function(){
+				if(!$(this).hasClass("active")){
+					$(this).addClass("active").siblings().removeClass("active");
+				}else{
+					$(this).removeClass("active");
+				}
+
+			});
+		</script>
+	</body>
+
+</html>

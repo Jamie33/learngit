@@ -1,0 +1,79 @@
+{include file="page_header"}
+
+<header class="history-header dis-box">
+    <div class="box-flex f-04 col-9">浏览记录 <em class="col-7">{$count}</em>条</div>
+    <div class="his-btn f-03 color-red  clear_history">清空</div>
+</header>
+
+<section class="product-list j-product-list  product-list-small" data="2">
+    <div class="history_info">
+        <script id="j-product" type="text/html">
+            <%if totalPage > 0 && history != ''%>
+			<ul>
+                <%each history as goods%>
+                <li class="wallet-bt">
+                    <div class="product-div">
+                        <a href="<%goods.url%>"><img class="product-list-img" src="<%goods.goods_thumb%>" /></a>
+                        <div class="product-text history-title-box">
+                            <a href="<%goods.url%>"><h4><%goods.goods_name%></h4>
+                            <p>
+                            <span class="p-price t-first ">
+                                <%if goods.promote_price%>
+                                <%#goods.promote_price%>
+                                <%else%>
+                                <%#goods.shop_price%>
+                                <%/if%>
+                                <small><del><%#goods.market_price%></del></small>
+                            </span>
+                            </p>
+                            </a>
+                        </div>
+                    </div>
+                    </section>
+                </li>
+                <%/each%>
+            </ul>
+            <%else%>
+            <div class="no-div-message">
+                <i class="iconfont icon-biaoqingleiben"></i>
+                <p>亲，此处没有内容～！</p>
+            </div>
+            <%/if%>
+        </script>
+    </div>
+</section>
+
+    <!--快捷导航-->
+    {include file="float_nav"}
+
+<script>
+    $(function(){
+
+        $('.history_info').infinite({url: "{url('user/index/history')}", template:'j-product'});
+
+        //清除搜索记录
+        var history = {if $history}{$history}{else}""{/if};
+        var status = 1;
+        var url = "{url('user/index/clearhistory')}";
+        $(".clear_history").click(function(){
+            layer.open({
+                content: '真的要清空浏览记录',
+                btn: ['确定', '取消'],
+                shadeClose: false,
+                yes: function() {
+                  $.post(url, {status:status},
+                     function(result){
+                         if(result.y == 1){
+                            window.location.href = "{url('user/index/history')}";
+                         }
+                     }, 'json');
+                 },
+                no: function() {
+
+                }
+            });
+        });
+    })
+</script>
+</body>
+</html>

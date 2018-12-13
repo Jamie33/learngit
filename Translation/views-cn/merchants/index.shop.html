@@ -1,0 +1,367 @@
+{include file="page_header"}
+
+	<div class="con mb-7">
+		<!--头部导航-->
+		<header class="dis-box padding-all open-header-bg">
+			<div class="box-flex">
+				<div class="header-left-box p-r">
+					<div class="header-x p-a o-hs-x active"></div>
+					<div class="header-y p-a o-hs-bg active"><span class="text-c color-whie f-03">1</span></div>
+				</div>
+				<label class="o-hs active">{$lang.business_information}</label>
+			</div>
+			<div class="box-flex">
+				<div class="header-left-box p-r">
+					<div class="header-x p-a o-hs-x active"></div>
+					<div class="header-y p-a o-hs-bg active"><span class="text-c color-whie f-03">2</span></div>
+				</div>
+				<label class="o-hs active">{$lang.store_information}</label>
+			</div>
+			<div class="box-flex">
+				<div class="header-left-box p-r">
+					<div class="header-x p-a o-hs-x"></div>
+					<div class="header-y p-a o-hs-bg"><span class="text-c color-whie f-03">3</span></div>
+				</div>
+				<label class="o-hs">{$lang.review_or_ok}</label>
+			</div>
+		</header>
+		<form action="{url('merchants/index/shop')}" method="post" id="formSub" class="validation"  >
+			<div class=" user-open open-box of-hidden b-color-f">
+				<section class="drp-settled-one">
+					<!-- 店铺名称 -->
+					<div class="text-all dis-box j-text-all">
+						<label><em class="color-red">*</em>{$lang.shop_name}:</label>
+						<div class="box-flex input-text">
+							<input class="j-input-text" name="rz_shopName"  placeholder="{$lang.msg_shop_name_notnull}" datatype="*" nullmsg="{$lang.msg_shop_name_notnull}" errormsg="请输入店铺名称" />
+							<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+						</div>
+					</div>
+					<!-- 期望登陆名 -->
+					<div class="text-all dis-box j-text-all">
+						<label><em class="color-red">*</em>{$lang.hope_login_name}:</label>
+						<div class="box-flex input-text">
+							<input class="j-input-text" name="hopeLoginName"  placeholder="{$lang.msg_login_shop_name_notnull}"  datatype="*" nullmsg="{$lang.msg_login_shop_name_notnull}" errormsg="请输入期望登陆名"/>
+							<i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+						</div>
+					</div>
+					<!-- 店铺类型 -->
+					<div class="text-all dis-box j-text-all">
+						<label><em class="color-red">*</em>{$lang.shoprz_type}:</label>
+						<div class="box-flex input-text">
+							<div class="drp-settled-select">
+								<select name="shoprz_type" datatype="*" nullmsg="{$lang.msg_shoprz_type_notnull}">
+									<option value="" >{$lang.please}</option>
+									<option value="1">{$lang.shoprz_type_1}</option>
+									<option value="2">{$lang.shoprz_type_2}</option>
+									<option value="3">{$lang.shoprz_type_3}</option>
+								</select>
+								<i class="iconfont icon-jiantou tf-180"></i>
+							</div>
+						</div>
+                    </div>
+                    <!-- 店铺类型 - 旗舰店 子类型 -->
+                    <div class="text-all dis-box j-text-all select-subShoprz-type " style="display:none">
+                        <label> &nbsp;&nbsp;  </label>
+                        <div class="box-flex input-text" style="padding-left:5.5rem;">
+                            <div class="drp-settled-select">
+                                <select name="subShoprz_type">
+                                    <option value="" >{$lang.please}</option>
+                                    <option value="1">{$lang.sub_shoprz_type_1}</option>
+                                    <option value="2">{$lang.sub_shoprz_type_2}</option>
+                                    <option value="3">{$lang.sub_shoprz_type_3}</option>
+                                </select>
+                                <i class="iconfont icon-jiantou tf-180"></i>
+                            </div>
+                        </div>
+					</div>
+					<!-- 经营类目 -->
+					<div class="text-all dis-box j-text-all">
+						<label><em class="color-red">*</em>{$lang.shop_category_main}:</label>
+						<div class="box-flex input-text">
+							<div class="drp-settled-select">
+								<select name="shop_categoryMain" datatype="*" nullmsg="{$lang.msg_shop_category_main_notnull}">
+									<option value="">{$lang.please}</option>
+									{foreach $category as $cat}
+									<option value="{$cat.cat_id}">{$cat.cat_name}</option>
+									{/foreach}
+								</select>
+								<i class="iconfont icon-jiantou tf-180"></i>
+							</div>
+						</div>
+					</div>
+					<!-- 详细类目 -->
+					<div class="text-all dis-box j-text-all">
+						<label><em class="color-red">*</em>{$lang.shop_category_temporary}:</label>
+						<div class="box-flex input-text  j-s-filter">
+							<i class="iconfont icon-jia tf-180 fr ptb-1"></i>
+						</div>
+					</div>
+					<div class="table-responsive">
+						<table class="table table-hover table-bordered table-striped f-05 cate-temporary-list">
+							<tr>
+                    			<th class="text-center">#</td>
+                            	<th class="text-center">一级类目</td>
+                            	<th class="text-center">二级类目</td>
+                            	<th class="text-center">操作</td>
+                            </tr>
+
+                            <!-- <tr class="ct_id_281">
+								<td class="text-center">281</td>
+								<td class="text-center">图书音像</td>
+								<td class="text-center">图书音像</td>
+								<td class="text-center"><a href="javascript:;" data-ctid="281" class="color-red j-delete-childcat">删除</a></td>
+							</tr> -->
+
+						</table>
+					</div>
+				</section>
+			</div>
+			<footer class="dis-box merchants-button">
+				<button class="btn-submit box-flex ">提交</button>
+			</footer>
+		</form>
+	</div>
+
+    <!-- 筛选 -->
+	<div class="j-filter-div filter-div ts-5 c-filter-div" id="j-filter-div">
+		<div class="mask-filter-div"></div>
+        <section class="close-filter-div j-close-filter-div">
+            <div class="close-f-btn">
+                <i class="iconfont icon-fanhui"></i>
+                <span>关闭</span>
+            </div>
+        </section>
+        <!-- <form action="{url('merchants/index/add_child_cate')}" method="post" id="cate"> -->
+        <section class="con-filter-div ">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                	<div class="select-two">
+                		<a class="select-title padding-all ">
+			                <label class="fl">一级类目</label>
+			            </a>
+		            	<div class="drp-settled-select" style="height:3rem;margin:1rem;">
+							<select name="shop_categoryMain">
+								<option value="">{$lang.please}</option>
+								{foreach $category as $cat}
+								<option value="{$cat.cat_id}">{$cat.cat_name}</option>
+								{/foreach}
+							</select>
+							<i class="iconfont icon-jiantou tf-180"></i>
+						</div>
+                	</div>
+
+					<div class="select-merchants-cate">
+		                <a class="select-title padding-all">
+		                    <label class="fl">二级类目</label>
+		                    <span class="fr t-jiantou select-cate-all dis-box"><i ></i>全选/反选</span>
+		                </a>
+		                <ul class="padding-all merchants-cate show" >
+
+		                </ul>
+					</div>
+					<div class="ect-button-more dis-box padding-all">
+                        <input type="hidden" name="childcat_value" value="" />
+						<a class="box-flex btn-reset min-btn" type="button">取消</a>
+						<a class="box-flex btn-submit min-btn j-select-category-temporary" type="submit" >确定</a>
+					</div>
+            	</div>
+        	</div>
+		</section>
+        <!-- </form> -->
+	</div>
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".open-two-box i").click(function() {
+			$(".open-two-box").hide();
+		});
+        // 取消
+        $('.btn-reset').click(function(){
+            if ($("body").hasClass("show-filter-div")) {
+                $("body").removeClass("show-filter-div");
+            }
+        });
+	});
+
+	$(function () {
+        $.Tipmsg.r = null;
+        $(".validation").Validform({
+            tiptype: function (msg) {
+                d_messages(msg);
+            },
+            tipSweep: true,
+            ajaxPost: true,
+            beforeSubmit:function(curform){
+                //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
+                //这里明确return false的话表单将不会提交;
+                // 验证添加详细类目
+                var num = $('.cate-temporary-list tr').length;
+                if (num <= 1) {
+                    d_messages('请添加详细类目', 2);
+                    return false;
+                }
+            },
+            callback: function (data) {
+                // {"info":"demo info","status":"y"}
+                if (data.status === 'y') {
+                    window.location.href = data.url;
+                } else {
+                    d_messages(data.info);
+                }
+            }
+        });
+
+        // 选择店铺类型
+        $('select[name=shoprz_type]').change(function(){
+            var val = $(this).children('option:selected').val(); //selected选中值
+            if (val == 1) {
+                // 旗舰店 选择子类型
+                $('select[name=subShoprz_type]').find("option[value = '"+val+"']").attr("selected","selected");
+                // 增加验证
+                $('select[name=subShoprz_type]').attr('datatype','*').attr('nullmsg','{$lang.msg_sub_shoprz_type_notnull}');
+
+                $('.select-subShoprz-type').show();
+            } else {
+                $('select[name=subShoprz_type]').find("option[value = '"+val+"']").removeAttr("selected");
+                // 移除验证
+                $('select[name=subShoprz_type]').removeAttr('datatype').removeAttr('nullmsg');
+
+                $('.select-subShoprz-type').hide();
+            }
+        });
+
+	    // 选择经营类目
+	    $('select[name=shop_categoryMain]').on('change', function(){
+
+	        var cat_id = $(this).children('option:selected').val(); //selected选中值
+
+            // 恢复 全选初始状态
+            if ($('.select-title .select-cate-all').find("i").hasClass("active")) {
+                $('.select-title .select-cate-all').find("i").removeClass("active");
+            }
+
+            if (cat_id > 0) {
+                $('select[name=shop_categoryMain]').find("option[value = '"+cat_id+"']").attr("selected","selected");
+	        	// 请求下级分类
+			    $.post("{url('merchants/index/get_child_cate')}", {cat_id:cat_id}, function(data){
+			        if(data.status == 0){
+			            var childCate = data.childCate;
+                        // console.log(childCate)
+                        $(".merchants-cate").html('');
+                        var cate_box = '';
+                        // 遍历 子分类
+                        if (childCate.length > 0) {
+                            for (var i = 0; i < childCate.length; i++) {
+                                cate_box += '<li class="ect-select " ><label class="dis-box ts-1" data-catid="'+childCate[i].cat_id+'"><i></i>'+childCate[i].cat_name+'</label></li>';
+                            }
+                        }
+                        $(".merchants-cate").html(cate_box);
+					}
+			    }, 'json');
+	        }
+	        return false;
+	    });
+
+        // 多选 分类
+        $(".merchants-cate").on('click','.ect-select', function() {
+
+            if ($(this).find("label").hasClass("active")) {
+                $(this).find("label").removeClass("active");
+            } else {
+                $(this).find("label").addClass("active");
+            }
+            var cat_id = '';
+            $(this).parents('.merchants-cate').find(".ect-select label").each(function(){
+                if ($(this).hasClass("active")) {
+                    if ($(this).attr("data-catid") != undefined && $(this).attr("data-catid") > 0) {
+                        cat_id += $(this).attr("data-catid") + ',';
+                    }
+                }
+            });
+            if (cat_id) {
+                cat_id = cat_id.substr(0, cat_id.length - 1);
+                $('input[name=childcat_value]').val(cat_id);
+            }
+
+        });
+
+        // 全选 分类
+        $(".select-title").on('click','.select-cate-all', function() {
+
+            if ($(this).find("i").hasClass("active")) {
+                $(this).find("i").removeClass("active");
+            } else {
+                $(this).find("i").addClass("active");
+            }
+
+            if ($('.merchants-cate').find("label").hasClass("active")) {
+                $('.merchants-cate').find("label").removeClass("active");
+            } else {
+                $('.merchants-cate').find("label").addClass("active");
+            }
+
+            var cat_id = '';
+            $('.merchants-cate').find(".ect-select label").each(function(){
+                if ($(this).hasClass("active")) {
+                    if ($(this).attr("data-catid") != undefined && $(this).attr("data-catid") > 0) {
+                        cat_id += $(this).attr("data-catid") + ',';
+                    }
+                }
+            });
+            if (cat_id) {
+                cat_id = cat_id.substr(0, cat_id.length - 1);
+                $('input[name=childcat_value]').val(cat_id);
+            }
+
+        });
+
+        // 添加详细类目 并返回数据
+        $('.j-select-category-temporary').click(function(){
+            var cat_id = $('select[name=shop_categoryMain]').children('option:selected').val(); //selected选中值;
+            var childCateID = $('input[name=childcat_value]').val();
+            if (cat_id && childCateID) {
+                $.post("{url('merchants/index/add_child_cate')}",{cat_id:cat_id, child_cate_id:childCateID}, function(res){
+                    if (res.status == 0) {
+                        var childCateList = res.category_info;
+                        // console.log(childCateList)
+
+                        var html = '<tr><th class="text-center">#</td><th class="text-center">一级类目</td><th class="text-center">二级类目</td><th class="text-center">操作</td></tr>';
+                        $('.cate-temporary-list').html(html);
+                        // 遍历 子分类
+                        if (childCateList.length > 0) {
+                            for (var i = 0; i < childCateList.length; i++) {
+                                var childcate_box = '<tr class="ct_id_'+childCateList[i].ct_id+'"><td class="text-center">'+(i+1)+'</td><td class="text-center">'+childCateList[i].parent_name+'</td><td class="text-center">'+childCateList[i].cat_name+'</td><td class="text-center"><a href="javascript:;" data-ctid="'+childCateList[i].ct_id+'" class="color-red j-delete-childcat">删除</a></td></tr>';
+
+                                $(".cate-temporary-list").append(childcate_box);
+                            }
+                            // 关闭弹窗
+                            if ($("body").hasClass("show-filter-div")) {
+                                $("body").removeClass("show-filter-div");
+                            }
+                        }
+                    }
+                }, 'json');
+            }
+            return false;
+        });
+
+        // 删除详细类目
+        $(".cate-temporary-list").on('click','.j-delete-childcat', function() {
+            var ct_id = $(this).attr('data-ctid');
+            if (ct_id) {
+                $.post("{url('merchants/index/delete_child_cate')}",{ct_id:ct_id}, function(res){
+                    if (res.status == 0) {
+                        $('.ct_id_'+ct_id).remove();
+                    }
+                }, 'json');
+            }
+            return false;
+        });
+
+
+
+    });
+</script>
+</body>
+</html>

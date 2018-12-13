@@ -1,0 +1,169 @@
+{include file="page_header"}
+<div class="con">
+	<div class="goods">
+		<div class="goods-photo j-show-goods-img">
+
+			<span class="goods-num" id="goods-num">
+						<span id="g-active-num"></span>/<span id="g-all-num"></span>
+			</span>
+			<div class="swiper-wrapper">
+				<li class="swiper-slide tb-lr-center"><img src="{$goods.goods_thumb}" /></li>
+			</div>
+			<!-- Add Pagination -->
+			<div class="swiper-pagination"></div>
+		</div>
+
+		<section class="goods-title b-color-f padding-all goods-title-who">
+				<h3>{$goods.goods_name}</h3>
+		</section>
+
+		<section class="wholesale-table padding-all b-color-f m-top08">
+			<form action="{url('add_to_cart')}" class="validation" name="form" method="post">
+				<table width="100%">
+					<tr>
+						{if $hasPrice}
+						<th class="col-3" width="27%">属性</th>
+						{/if}
+						<th class="col-3" width="14%">数量</th>
+						<th class="col-3" width="24%">价格</th>
+						<th class="col-3" width="35%">购买</th>
+					</tr>
+					{foreach $prices as $list}
+					<tr>
+						{if $hasPrice}
+						<td class="col-3">
+							{foreach $list.attr as $k => $v} {$k}:{$v}
+							<br> {/foreach}
+						</td>
+						{/if}
+						<td>
+							<ul class="who-shu-list">
+								{foreach $list.qp_list as $k => $v}
+								<li>{$v.quantity} </li>
+								{/foreach}
+							</ul>
+						</td>
+						<td>
+							<ul class="who-shu-list">
+								{foreach $list.qp_list as $k => $v}
+								<li class="t-first">{$v.price}</li>
+								{/foreach}
+							</ul>
+						</td>
+						<td>
+							<div class="div-num dis-box m-top08" style="width:10rem;margin:0 auto">
+								<a class="num-less" data-min-num="{$list.minNum}"></a>
+								<input class="box-flex" type="text" value="{$list.minNum}" name="number[]" maxlength="6">
+								<a class="num-plus" data-max-num="{$goods.goods_number}"></a>
+							</div>
+						</td>
+					</tr>
+					{/foreach}
+				</table>
+				<input type="hidden" name="id" value="{$id}">
+			</form>
+		</section>
+		<!--详情-->
+		<section class="padding-all b-color-f goods-promotion m-top10">
+			<a href="{url('goods/index/info', array('id'=>$goods.goods_id))}">
+				<div class="dis-box">
+					<label class="t-remark g-t-temark"><em class="t-first">查看商品详情</em></label>
+					<div class="box-flex"></div>
+					<span class="t-jiantou"><i class="iconfont icon-jiantou tf-180"></i></span>
+				</div>
+			</a>
+		</section>
+	</div>
+
+	<!--悬浮btn star-->
+	<section class="filter-btn dis-box">
+		<a class="filter-btn-kefu filter-btn-a" href="https://wpa.qq.com/msgrd?v=3&amp;uin=&amp;site=qq&amp;menu=yes"><i class="iconfont icon-kefu"></i><em>客服</em></a>
+		<a class="btn-cart box-flex add-to-cart btnCart" href="{url('cart')}">采购清单</a>
+		<a class="btn-submit box-flex click-show-attr j-submit-whole">立即采购</a>
+	</section>
+	<!--悬浮btn end-->
+
+	</section>
+</div>
+    <!--快捷导航-->
+    {include file="float_nav"}              
+    {include file="float_nav_footer"}
+<!--悬浮菜单e-->
+<!--引用js-->
+<script>
+	/*商品详情相册切换*/
+	var swiper = new Swiper('.goods-photo', {
+		paginationClickable: true,
+		onInit: function(swiper) {
+			document.getElementById("g-active-num").innerHTML = swiper.activeIndex + 1;
+			document.getElementById("g-all-num").innerHTML = swiper.slides.length;
+		},
+		onSlideChangeStart: function(swiper) {
+			document.getElementById("g-active-num").innerHTML = swiper.activeIndex + 1;
+		}
+	});
+	//换货数量
+	var num;
+	var min_num;
+	var max_num;
+	$(".div-num a").click(function() {
+		if($(this).hasClass("num-less")) {
+			num = parseInt($(this).siblings("input").val());
+			min_num = parseInt($(this).attr("data-min-num"));
+			if(num > min_num) {
+				num -= 1;
+				$(this).siblings("input").val(num);
+			} else {
+				d_messages("不能小于最小数量");
+				$(this).siblings("input").val(min_num);
+			}
+			return false;
+		}
+		if($(this).hasClass("num-plus")) {
+			num = parseInt($(this).siblings("input").val());
+			max_num = parseInt($(this).attr("data-max-num"));
+			if(num < max_num) {
+				num += 1;
+				$(this).siblings("input").val(num);
+			} else {
+				d_messages("不能超过最大数量");
+				$(this).siblings("input").val(max_num);
+			}
+			return false;
+		}
+	});
+	$('input[name=attr_num]').blur(function() {
+		num = parseInt($(this).val());
+		min_num = parseInt($(this).siblings('a.num-less').attr('data-min-num'));
+		max_num = parseInt($(this).siblings('a.num-plus').attr('data-max-num'));
+		if(num < min_num) {
+			d_messages("不能小于最小数量");
+			$(this).val(min_num);
+			return false;
+		} else if(num > max_num) {
+			d_messages("不能超过最大数量");
+			$(this).val(max_num);
+			return false;
+		}
+	});
+
+	$('.j-submit-whole').click(function() {
+		$('form.validation').submit();
+	});
+	$('form.validation').Validform({
+		tipSweep: true,
+		ajaxPost: true,
+		callback: function(data) {
+			d_messages(data.msg);
+			if(data.error == 0) {
+				setTimeout("window.location.href = '{url(cart)}'", 400);
+			}
+		},
+		tiptype: function(msg) {
+			d_messages(msg);
+		}
+	});
+</script>
+</body>
+
+</html>

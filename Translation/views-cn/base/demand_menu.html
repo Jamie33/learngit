@@ -1,0 +1,14 @@
+<footer class="footer-nav dis-box" style="z-index:6">
+    <a href="{:url('demand/index/index')}" class="box-flex nav-list {if 'index' == $action}active{/if}">
+        <i class="nav-box i-home"></i><span>批发首页</span>
+    </a>
+    <a href="{:url('demand/index/list')}" class="box-flex nav-list  {if 'list' == $action}active{/if}">
+        <i class="nav-box i-cate"></i><span>批发列表</span>
+    </a>
+    <a href="{:url('demand/index/cart')}" class="box-flex nav-list {if 'cart' == $action}active{/if}">
+        <i class="nav-box i-flow"></i><span>进货单</span>
+    </a>
+    <a href="{:url('demand/index/show')}" class="box-flex nav-list {if 'show' == $action}active{/if}">
+        <i class="nav-box i-user"></i><span>求购信息</span>
+    </a>
+</footer>

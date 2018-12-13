@@ -1,0 +1,305 @@
+{include file="page_header"}
+
+    <div class="con mb-7">
+        <section class="flow-checkout-pro j-flow-checkout-pro" >
+            <header class="b-color-f padding-all" style="border-bottom:1px solid #f6f6f9">{$lang.goods_list}</header>
+            <div class="product-list-small b-color-f dis-box">
+                <ul class="box-flex flow-checkout-bigpic" style="display:block;">
+                    <li>
+                        <div class="product-div">
+							{if $return_detail['extension_code'] == 'package_buy'}
+                            <a class="product-div-link" href="{url('package/index/index')}"></a>
+							{else}
+							<a class="product-div-link" href="{url('goods/index/index', array('id'=>$return_detail['goods_id']))}"></a>
+							{/if}
+                            <img class="product-list-img" src="{$return_detail.goods_thumb}">
+                            <div class="product-text">
+                                <h4>{$return_detail.goods_name}</h4>
+                                <p>
+                                    <span class="p-price t-first ">{$return_detail.goods_price}<small class="fr t-remark">x{$return_detail.return_number}</small></span>
+                                </p>
+                                <p class="dis-box p-t-remark">
+                                    {$return_detail.attr_val}
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <header class="b-color-f padding-all m-top10 f-06">{$lang.detailed_info}</header>
+        <ul class="user-refound-box b-color-f m-top02">
+        	<li class="dis-box">
+        		<div>{$lang.return_sn_user}:</div>
+        		<div class="box-flex"><p class="t-first text-right">{$return_detail.return_sn}</p></div>
+        	</li>
+        	<li class="dis-box">
+        		<div>{$lang.apply_time}:</div>
+        		<div class="box-flex"><p class="col-3 text-right">{$return_detail.apply_time}</p></div>
+        	</li>
+        	<li class="dis-box">
+        		<div>{$lang.service_type}:</div>
+        		<div class="box-flex">
+                    <p class="col-3 text-right">
+        			{if $return_detail.return_type == 0}
+                        维修
+                        {elseif $return_detail.return_type == 1}
+						退货
+                        {elseif $return_detail.return_type == 2}
+						换货
+                        {elseif $return_detail.return_type == 3}
+                        仅退款
+                    {/if}
+                    </p>
+                </div>
+        	</li>
+        </ul>
+        <header class="b-color-f padding-all m-top04 f-06">{$lang.detail_order_status}</header>
+        <ul class="user-refound-box b-color-f m-top02">
+        	<li class="dis-box">
+        		<div>{$lang.detail_order_status}:</div>
+        		<div class="box-flex"><p class="col-3 text-right">{$return_detail.return_status1} - {$return_detail.refound_status1}</p></div>
+        	</li>
+            <li class="dis-box">
+                <div>{$lang.problem_desc}:</div>
+                <div class="box-flex"><p class="col-3 text-right"> {$return_detail.return_brief}</p></div>
+            </li>
+            {if $return_detail.return_status == '6'}
+            <li class="dis-box">
+                <div>拒绝原因:</div>
+                <div class="box-flex"><p class="col-3 text-right"> {$return_detail.action_note}</p></div>
+            </li>
+            {else}
+        	<li class="dis-box">
+        		<div>{$lang.back_cause}:</div>
+        		<div class="box-flex"><p class="col-3 text-right"> {$return_detail.return_cause}</p></div>
+        	</li>
+            {/if}
+            {if $return_detail.return_type == '1' || $return_detail.return_type == '3'}
+        	<li class="dis-box">
+        		<div>商品退款:</div>
+        		<div class="box-flex"><p class="text-right t-first"> {$return_detail.formated_should_return}</p></div>
+        	</li>
+            {/if}
+        </ul>
+		{if $return_detail.img_list}
+        <ul class="user-refound-box b-color-f m-top04">
+        		<li class="dis-box">
+        		<div>凭证图片:</div>
+        		<div class="box-flex"><p class="col-3 text-right"> </p></div>
+        	</li>
+        	<div class="goods-evaluation-page b-color-f tab-con refound-list-box">
+                <div class="my-gallery" data-pswp-uid="5">
+                    {foreach $return_detail.img_list as $img_url}
+                        <figure>
+                            <div><a href="{$img_url}" data-size="640x640"><img class="img" src="{$img_url}"></a></div>
+                        </figure>
+                    {/foreach}
+                </div>
+                <div class="refound-list-box-bg">
+                    <div class="goods-list-close position-abo"><i class="iconfont icon-guanbi2 text-r"></i></div>
+                </div>
+			</div>
+		</ul>
+		{/if}
+        <ul class="user-refound-box b-color-f m-top04">
+        	<li class="dis-box">
+        		<div>{$lang.contact_name}:</div>
+        		<div class="box-flex"><p class="col-3 text-right"> {$return_detail.addressee}</p></div>
+        	</li>
+        	<li class="dis-box">
+        		<div>{$lang.label_mobile}:</div>
+        		<div class="box-flex"><p class="col-3 text-right">  {$return_detail.phone}</p></div>
+        	</li>
+        	<li class="dis-box">
+        		<div>{$lang.contact_address}:</div>
+        		<div class="box-flex"><p class="col-3 text-right"> {$return_detail.address_detail}</p></div>
+        	</li>
+        </ul>
+		{if $return_detail.agree_apply == 1 && $return_detail.return_type != 3}
+    		{if $return_detail.back_shipp_shipping}
+            <header class="b-color-f padding-all m-top10 express-head" >{$lang.express_info} <span>({$lang.user_sent})</span></header>
+    		<ul class="user-refound-box b-color-f m-top04">
+            	<li class="dis-box">
+            		<div>{$lang.express_company}:</div>
+            		<div class="box-flex"><p class="col-3 text-right"> {$return_detail.back_shipp_shipping}</p></div>
+            	</li>
+            	<li class="dis-box">
+            		<div>{$lang.courier_sz}:</div>
+            		<div class="box-flex"><p class="col-3 text-right">  {$return_detail.back_invoice_no}</p></div>
+            	</li>
+            	 {if $return_detail.back_invoice_no_btn}
+            	<li class="dis-box">
+            		<div class="box-flex"><p class="col-3 text-right n-refound-btn"> {$return_detail.back_invoice_no_btn}</p></div>
+            	</li>
+            	{/if}
+            </ul>
+            {else}
+            <header class="b-color-f padding-all m-top10 express-head" >{$lang.express_info} <span>({$lang.express_info_two})</span></header>
+            <form  method="post" action="{url('user/refound/edit_express')}" class="expressform" onsubmit="return false;">
+            <ul class="user-refound-box b-color-f m-top04 edit-express">
+                <li class="dis-box">
+                    <div class="control-label">{$lang.express_company}:</div>
+                    <div class="box-flex">
+                        <p class="col-3 text-right">
+                            <select name="express[express_name]" class="select form-control select_express" id="express_name" >
+                                <option value="">{$lang.select_express_company}</option>
+                                {foreach $shipping_list as $val}
+                                <option value="{$val.shipping_id}">{$val.shipping_name}</option>
+                                {/foreach}
+                                <option value="999">{$lang.other_express}</option>
+                            </select>
+                            <input type="text" name="express[other_express]" id="other_express" class="m-top04 form-control " />
+                        </p>
+                    </div>
+                </li>
+                <li class="dis-box">
+                    <div class="control-label">{$lang.courier_sz}:</div>
+                    <div class="box-flex"><p class="col-3 text-right"><input type="text" name="express[express_sn]" class="form-control " style="border: 1px solid #ccc;" /></p></div>
+                </li>
+                <li class="dis-box">
+                    <input type="hidden" name="express[order_id]" value="{$return_detail.order_id}" />
+                    <input type="hidden" name="express[ret_id]" value="{$return_detail.ret_id}" />
+                    <input type="submit" class="btn btn-primary" value="{$lang.button_submit}"/>
+                </div>
+            </ul>
+            </form>
+            {/if}
+
+    		{if $return_detail.out_shipp_shipping}
+            <header class="b-color-f padding-all m-top10 express-head" >{$lang.express_info} <span>({$lang.seller_shipping}) </header>
+    		<ul class="user-refound-box b-color-f m-top04">
+    			<li class="dis-box">
+    				<div>{$lang.express_company}:</div>
+    				<div class="box-flex"><p class="col-3 text-right"> {$return_detail.out_shipp_shipping}</p></div>
+    			</li>
+    			<li class="dis-box">
+    				<div>{$lang.courier_sz}:</div>
+    				<div class="box-flex"><p class="col-3 text-right">  {$return_detail.out_invoice_no}</p></div>
+    			</li>
+    			{if $return_detail.out_invoice_no_btn}
+    			<li class="dis-box">
+    				<div class="box-flex"><p class="col-3 text-right n-refound-btn"> {$return_detail.out_invoice_no_btn}</p></div>
+    			</li>
+    			{/if}
+    		</ul>
+    		{/if}
+
+            <div class="padding-all user-bg m-top12">
+                {$lang.return_order_user_desc}
+            </div>
+        {/if}
+
+        {include file="image"}
+    </div>
+
+    <!--悬浮btn star-->
+    {if $return_detail.status == 3}
+    <div class="filter-btn dis-box" style="z-index: 99999;">
+        <div class="btn-submit received-order" >确认收货</div>
+    </div>
+    {elseif $return_detail.status == 4 || $return_detail.refound == 1}
+        <div class="btn-submit" >已完成</div>
+    {elseif $return_detail.status == 6}
+        <div class="filter-btn dis-box" >
+            <div class="btn-submit" >已拒绝</div>
+        </div>
+    {elseif $return_detail.agree_apply == 0}
+        <div class="filter-btn dis-box" >
+            <div class="btn-submit" >待同意</div>
+        </div>
+    {else}
+
+    {/if}
+    <!--悬浮btn end-->
+
+    <!--快捷导航-->
+    {include file="float_nav"}
+                 <li>
+                    <a href="{url('user/refound/index')}">
+                         <i class="iconfont icon-tuihuanhuo"></i>
+                         <p>售后列表</p>
+                    </a>
+                </li>
+    {include file="float_nav_footer"}
+    <script>
+    $(function ($) {
+        // newImg();
+
+        /*店铺信息商品滚动*/
+        var swiper = new Swiper('.j-g-e-p-pic', {
+            scrollbarHide: true,
+            slidesPerView: 'auto',
+            centeredSlides: false,
+            grabCursor: true
+        });
+
+        //确认订单
+        $(".received-order").on('click', function(){
+         var order_id = '{$return_detail.ret_id}';
+         var url = "{url('user/refound/affirmreceived')}";
+           layer.open({
+                content: '你确认已经收到货物了吗？',
+                btn: ['确定', '取消'],
+                shadeClose: false,
+                yes: function() {
+                  $.post(url, {order_id:order_id},
+                     function(result){
+                         if(result.y == 1){
+                            window.location.href = "{url('user/refound/index')}";
+                         }
+                     }, 'json');
+                 },
+                no: function() { }
+            });
+        });
+
+        // 选择其他快递方式
+        $('.select_express').change(function(){
+            var express_id = $(this).children('option:selected').val(); //是selected的值
+            if (express_id == '999'){
+                $('#other_express').show();
+            } else {
+                $('#other_express').hide();
+            }
+        });
+
+        // 用户选择快递信息寄回
+        $('.expressform').submit(function(){
+            var express_id = $('#express_name').val();
+            if(!express_id){
+                d_messages('请选择快递公司');
+                return false;
+            }
+            if (express_id == '999'){
+                var other_express = $('input[name="express[other_express]"]').val();
+                if(!other_express){
+                    d_messages('请填写其他快递公司名称');
+                    return false;
+                }
+            }
+            var express_sn = $('input[name="express[express_sn]"]').val();
+            if(!express_sn){
+                d_messages('请填写快递单号');
+                return false;
+            }
+
+            var ajax_data = $(this).serialize();
+            $.post("{url('edit_express')}", ajax_data, function(data){
+                d_messages(data.msg);
+                if (data.error == 0) {
+                    if (data.url) {
+                        window.location.href = data.url;
+                    } else {
+                        window.location.reload();
+                    }
+                } else {
+                    return false;
+                }
+            }, 'json');
+        });
+
+    });
+    </script>
+</body>
+</html>

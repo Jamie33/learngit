@@ -1,0 +1,96 @@
+{include file="page_header"}
+
+<div class="con b-color-f" >
+    <section class="user-center j-f-tel margin-lr">
+        <div class="text-all dis-box j-text-all bank_card">
+            <label>真实姓名</label>
+            <div class="box-flex input-text">
+                <span class="j-input-text inputcard n-input">{$real_user.real_name}</span>
+                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+            </div>
+        </div>
+        <div class="text-all dis-box j-text-all bank_user_name">
+            <label>身份证号</label>
+            <div class="box-flex input-text">
+                <span class="j-input-text inputcard n-input">{$real_user.self_num}</span>
+                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+            </div>
+        </div>
+        <div class="text-all  j-text-all bank_user_name">
+            <label >身份证正面</label>
+            <div class="input-text">
+                <div class="realnameok-img"><img src="{$real_user.front_of_id_card}"></div>
+
+            </div>
+        </div>
+        <div class="text-all  j-text-all bank_user_name">
+            <label>身份证反面</label>
+            <div class="input-text">
+                <div class="realnameok-img"><img src="{$real_user.reverse_of_id_card}"></div>
+            </div>
+        </div>
+        <div class="text-all dis-box j-text-all bank_region">
+            <label>银行</label>
+            <div class="box-flex input-text">
+                <span class="j-input-text inputcard n-input">{$real_user.bank_name}</span>
+                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+            </div>
+        </div>
+        <div class="text-all dis-box j-text-all bank_name">
+            <label>银行卡号</label>
+            <div class="box-flex input-text">
+                <span class="j-input-text inputcard n-input">{$real_user.bank_card}</span>
+                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+            </div>
+        </div>
+        <div class="text-all dis-box j-text-all bank_name">
+            <label>认证时间</label>
+            <div class="box-flex input-text">
+                <span class="j-input-text inputcard n-input">{$real_user.validate_time}</span>
+                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+            </div>
+        </div>
+        <div class="text-all dis-box j-text-all bank_name">
+            <label>审核状态</label>
+            <div class="box-flex input-text">
+                <span class="j-input-text inputcard n-input color-red">{if $real_user.review_status == 1}审核通过{elseif $real_user.review_status == 2}审核未通过{else}未审核{/if}</span>
+                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+            </div>
+        </div>
+        {if $real_user.review_status == 2}
+        <div class="text-all dis-box j-text-all bank_name">
+            <label>审核未通过描述</label>
+            <div class="box-flex input-text">
+                <span class="j-input-text inputcard n-input color-red">{$real_user.review_content}</span>
+                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+            </div>
+        </div>
+        {/if}
+        <div class="text-all dis-box j-text-all bank_name">
+            <label>绑定手机</label>
+            <div class="box-flex input-text">
+                <span class="j-input-text inputcard n-input">{$real_user.bank_mobile}</span>
+                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+            </div>
+        </div>
+        <div class="text-all dis-box j-text-all bank_name">
+            <label>认证渠道</label>
+            <div class="box-flex input-text">
+                <span class="j-input-text inputcard n-input">{C('shop.shop_name')}实名认证</span>
+                <i class="iconfont icon-guanbi1 close-common j-is-null"></i>
+            </div>
+        </div>
+        <button type="button" value="sub" class="btn-submit br-5 min-btn" style="margin-bottom:1rem"><a href="{url('realname', array('step' => 'edit'))}">修改认证信息</a></button>
+    </section>
+</div>
+    <!--快捷导航-->
+    {include file="float_nav"}
+                <li>
+                    <a href="{url('index')}">
+                         <i class="iconfont icon-qudiandianpumingpianicon"></i>
+                         <p>个人资料</p>
+                    </a>
+                </li>
+    {include file="float_nav_footer"}
+</body>
+</html>

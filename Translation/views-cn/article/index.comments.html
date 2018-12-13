@@ -1,0 +1,180 @@
+{include file="page_header"}
+<div class="con mb-7">
+    <section>
+        <!--评论列表-->
+
+        {if $article.comment}
+        <div class="dis-box padding-all my-bottom b-color-f my-nav-box m-top06">
+            <h3 class="box-flex text-all-span my-u-title-size-1">评论列表</h3>
+        </div>
+        {foreach $article['comment'] as $key => $cf}
+        <ul class="padding-all b-color-f my-com-max-box">
+            <li class="com-img-left">
+                <div class="com-left-box"><div class="p-r img-commom"><img src="{$cf.user.user_picture}"></div></div>
+            </li>
+            <li class="com-con-right">
+                <ul class="dis-box">
+                    <li class="box-flex">
+                        <div class="com-adm-box">
+                            <h4 id="{$cf.comment_id}">{$cf.user_name}</h4>
+                            <p>{$cf.comment_time}</p>
+                        </div>
+                    </li>
+                    <li class="not">
+                        <div class="com-data-right  com-list-1">
+									<span class="oncle-color" onclick="comment2({$cf.comment_id})"><!-- <span
+                                        class="my-right1">{if $cf.count > 0}{$cf.count}{else}0{/if}<i
+                                        class="iconfont icon-daipingjia"></i></span> -->
+                                        <span class="my-right1">{$cf.add_time}</span>
+									</span>
+                        </div>
+                    </li>
+                </ul>
+                <p class="com-con-m">{$cf.content}</p>
+                {foreach $cf.child as $ke => $cs}
+                {if $ke <10}
+                <div class="pl-hf-box padding-all">
+                    <p><span>{$cs.user_name} : </span>{$cs.content}</p>
+                    <div class="x-jiant"></div>
+                </div>
+                {/if}
+                {/foreach}
+                <!--评论回复-->
+<!--                 <ul class="comments-reply-box b-color-f">
+                    <li>
+                        <span>我是回复用户:</span>我是回复用户
+                   </li>
+                </ul> -->
+            </li>
+        </ul>
+        {/foreach}
+        {else}
+            <div class="no-div-message">
+                <i class="iconfont icon-biaoqingleiben"></i>
+                <p>亲，此处没有内容～！</p>
+            </div>
+        {/if}
+    </section>
+</div>
+<section class="filter-btn consult-filter-btn">
+    <div class="dis-box">
+        <div class="box-flex text-all">
+            <input class="j-input-text" type="text" name='comment' placeholder="快来发表下评论吧！~" value="">
+        </div>
+        <button type="button" class="btn-submit">发送</button>
+    </div>
+</section>
+<input type="hidden" name="id" value="{$article.id}"/>
+<input type="hidden" name="cid" value=""/>
+<div class="mask-filter-div"></div>
+<div class="shopping-prompt ts-2">
+    <img src="{elixir('img/fengxiang.png')}"/>
+</div>
+{include file="float_nav"}
+<li>
+    <a href="{url('article/index/index')}">
+        <i class="iconfont icon-wenda"></i>
+        <p>文章频道</p>
+    </a>
+</li>
+{include file="float_nav_footer"}
+<script>
+    //    function init() {
+    //        clip = new ZeroClipboard.Client(); //初始化对象
+    //        ZeroClipboard.setMoviePath("js/clipboard/ZeroClipboard.swf");设置flash
+    //        clip.setHandCursor( true ); //设置手型
+    //        clip.addEventListener('mouseDown', function (client) {  //创建监听
+    //            copylink(); //设置需要复制的代码
+    //        });
+    //        clip.glue( 'd_clip_button'); //将flash覆盖至指定ID的DOM上
+    //    }
+    function copylink() {
+        clip.setText(window.location.href);
+    }
+    $(function ($) {
+        //分享弹框
+        $(".goods-share-img").click(function () {
+            $(".share-bg-box-y").addClass("display-current");
+            $(".share-ts-title-y").addClass("display-current");
+        });
+        $(".share-bg-box-y").click(function () {
+            $(".share-bg-box-y").removeClass("display-current");
+            $(".share-ts-title-y").removeClass("display-current");
+        });
+
+    });
+    $('.mb-7').click(function () {
+        $(".j-input-text").attr('placeholder', '回复文章:');
+        $("input[name='cid']").val('');
+    })
+    function comment2(cid) {
+        c_id = cid;
+        event.stopPropagation();
+        cname = document.getElementById(cid).innerHTML;
+        $(".j-input-text").attr('placeholder', '回复' + cname + ':');
+        $("input[name='cid']").val(c_id);
+    }
+
+    $('.btn-submit').click(function () {
+        $.ajax({
+            type: "post",
+            url: "{url('article/index/comment')}",
+            data: {
+                content: $("input[name='comment']").val(),
+                id: $("input[name='id']").val(),
+                cid: $("input[name='cid']").val()
+            },
+            dataType: "json",
+            success: function (data) {
+                status(data);
+            }
+        });
+        function status(json) {
+            window.location.href = json;
+        }
+
+    });
+
+
+    function dianzan(id) {
+        if ($("#red" + id).hasClass("active")) {
+            //$("#red" + id).removeClass("active");
+        } else {
+            $("#red" + id).addClass("active");
+        }
+        var islike = document.getElementById('islike').value;
+        var id = document.getElementById('like').value;
+        var isclick = document.getElementById('isclick').value;
+        $("#isclick").val(new Date().getTime());
+        if (isclick < (new Date().getTime() - 1000)) {
+            $.ajax({
+                type: "post",
+                url: "{url('article/index/like')}",
+                data: {id: id, islike: islike},
+                dataType: "json",
+                success: function (data) {
+                    $("#like_num").html(data.like_num);
+                    $("#islike").val(data.is_like);
+                }
+            });
+        }
+
+
+    }
+
+    /*店铺信息商品滚动*/
+    var swiper = new Swiper('.j-g-s-p-con', {
+        scrollbarHide: true,
+        slidesPerView: 'auto',
+        centeredSlides: false,
+        grabCursor: true
+    });
+            header_img()
+    window.onresize = function(){
+        header_img()
+    }
+</script>
+
+</body>
+
+</html>

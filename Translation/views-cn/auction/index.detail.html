@@ -1,0 +1,437 @@
+{include file="page_header"}
+		<div class="con">
+            {if $auction.is_winner}
+            <form action="{url('buy')}" name="buy" method="post">
+            {else}
+            <form action="{url('bid')}" name="bid" method="post">
+            {/if}
+			<div class="goods">
+				<div class="goods-photo j-show-goods-img">
+					<div class="group-time-box" id="fnTimeCountDown">
+						<span class="day">00</span>天
+						<span class="hour">00</span>时
+						<span class="mini">00</span>分
+						<span class="sec">00</span>秒
+						<!--<span class="hm">000</span>-->
+					</div>
+					<span class="goods-num" id="goods-num">
+						<span id="g-active-num"></span>/<span id="g-all-num"></span>
+					</span>
+					<div class="swiper-wrapper my-gallery-box" data-pswp-uid="10">
+						  {foreach $pictures as $li}
+						<figure class="swiper-slide tb-lr-center">
+							<div class="img-box">
+							<a href="{$li.img_url}" data-size="640x640">
+								<img src="{$li.img_url}" />
+							</a>
+						</div>
+						</figure>
+						{/foreach}
+					</div>
+					<!-- Add Pagination -->
+					<div class="swiper-pagination"></div>
+				</div>
+
+				<section class="goods-title b-color-f padding-all ">
+						<h3>
+                        {$auction.goods_name}</h3>
+				</section>
+				<section class="goods-price padding-all b-color-f">
+                    <p class="p-price"><span class="t-first">{$auction.formated_current_price}</span></p>
+                    <p class="p-market">一口价 <del>{$auction.formated_end_price}</del></p>
+                    <p class=" dis-box g-p-tthree m-top06">
+                    <p class="p-market">保证金 {$auction.formated_deposit}</p>
+					<p class=" dis-box g-p-tthree m-top06">
+                    <span class="box-flex text-left">加价幅度 {$auction.formated_amplitude}</span>
+                    <span class="box-flex text-right">拍送机构  {$auction_goods.rz_shopName}</span>
+					</p>
+				</section>
+				<section class=" padding-all b-color-f new-auction-bor goods-promotion">
+                    {if $auction.status_no == 0}
+                    <div class="dis-box">
+						<label class="t-remark g-t-temark">
+                            <span class="aut-left-num">未开始</span>
+						</label>
+					</div>
+                    {elseif $auction.status_no == 1}
+                    <div class="dis-box">
+						<label class="t-remark g-t-temark">
+                            <span class="aut-left-num">最低加价:</span> <span class="my-bz">({$auction.formated_amplitude}*N)</span>
+						</label>
+					</div>
+					<div class="div-num dis-box m-top08 ">
+						<a class="num-less" onclick="numLess()"></a>
+                        <input class="box-flex price_times" type="number" value="{$auction.price_times}" name="price_times">
+						<a class="num-plus" onclick="numPlus()"></a>
+					</div>
+                    {else}
+                        {if $auction.is_winner}
+                        <div class="dis-box">
+                            <label class="t-remark g-t-temark">
+                                <span class="aut-left-num">恭喜您，您已{$auction.last_bid.formated_bid_price}拍得本次活动商品。</span>
+                            </label>
+                        </div>
+                        {else}
+                        <div class="dis-box">
+                            <label class="t-remark g-t-temark">
+                                <span class="aut-left-num">已结束</span>
+                            </label>
+                        </div>
+                        {/if}
+                    {/if}
+					
+				</section>
+				<section class="m-top08 goods-evaluation">
+					<div class="padding-1 b-color-f g-evaluation-title ">
+						<div class="box-flex">
+							<h3 class="my-u-title-size">竞拍流程</h3> </div>
+					</div>
+					<div id="myarticle" class="padding-all-3 b-color-f g-evaluation-con">
+						<div class="of-hidden evaluation-list new-auction-cont">
+							<h4>1、获取资格</h4>
+							<p class="aut-cont">用户账号当前积分大于出价所需积分 </p>
+						</div>
+						<div class="of-hidden evaluation-list new-auction-cont">
+							<h4>2、拍的商品</h4>
+							<p class="aut-cont">保证竞拍结束出价最低且唯一，获得竞拍商品 </p>
+						</div>
+						<div class="of-hidden evaluation-list new-auction-cont">
+							<h4>3、确认订单</h4>
+							<p class="aut-cont">填写订单信息，提交订单</p>
+						</div>
+						<div class="goods-more" style="display:none">
+							<div class="of-hidden evaluation-list new-auction-cont">
+								<h4>4、支付订单</h4>
+								<p class="aut-cont">支付已提交的订单 </p>
+							</div>
+							<div class="of-hidden evaluation-list new-auction-cont">
+								<h4>5、竞拍成功</h4>
+								<p class="aut-cont">支付成功后等待收货，竞拍完成 </p>
+							</div>
+						</div>
+					</div>
+
+					<p id="btn" class="act-gengduo b-color-f but-mu"><em onclick="javascript:this.innerHTML=(this.innerHTML=='展开'?'收起':'展开');">展开</em><span class="t-jiantou"><i class="iconfont icon-jiantou tf-180"></i></span></p>
+				</section>
+				<section class="box b-color-f m-top08">
+					<a href="{url('auction_log', array('id'=>$auction['act_id']))}">
+						<div class="box padding-all  wallet-bt">
+							<h3 class="recom-title-1">
+						出价记录					
+                        <span class=" t-remark fr">{$auction.bid_user_count}人<span class="t-jiantou"><i class="iconfont icon-jiantou tf-180"></i></span></span>
+					    </h3>
+						</div>
+					</a>
+                    {foreach $auction_log as $k=>$au}
+					<div class="padding-1 m-top1px b-color-f g-evaluation-con">
+						<div class="of-hidden evaluation-list">
+							<div class="of-hidden ">
+                                {if $k == 0}
+                                <p class="fl"><span class="act-new-box a-col-red">领先</span><span class="aut-admin">{$au.user_name}</span></p>
+                                {else}
+                                <p class="fl"><span class="act-new-box a-col-hs">出局</span><span class="aut-admin">{$au.user_name}</span></p>
+                                {/if}
+                                <p class="fr t-remark">{$au.bid_time}</p>
+							</div>
+                            <p><span class="p-price t-first ">{$au.formated_bid_price}</span></p>
+						</div>
+					</div>
+                    {/foreach}
+                    <a href="{url('auction_log', array('id'=>$auction['act_id']))}">
+						<div class=" padding-all ect-button-more dis-box">
+							<span class="box-flex btn-default br-5 min-btn">查看更多</span>
+						</div>
+					</a>
+				</section>
+				<section class="m-top08  goods-shop  b-color-f no-shopping-title">
+					<div class="box padding-all wallet-bt">
+						<h3 class="recom-title-1">
+						推荐拍品											
+					    </h3>
+					</div>
+					<div class="goods-shop-pic of-hidden padding-all ">
+						<div class="g-s-p-con product-one-list of-hidden scrollbar-none j-g-s-p-con">
+							<div class="swiper-wrapper">
+                                {foreach $hot_goods as $goods}
+								<li class="swiper-slide">
+									<div class="product-div">
+                                        <a class="product-div-link" href="{$goods.url}"></a>
+                                        <img class="product-list-img" src="{$goods.thumb}" />
+										<div class="product-text m-top06">
+                                            <h4>{$goods.short_style_name}</h4>
+                                            <p><span class="p-price t-first ">{$goods.start_price}</p>
+										</div>
+									</div>
+								</li>
+                                {/foreach}
+							</div>
+						</div>
+					</div>
+				</section>
+		<section id="n-goods" class="goods-info of-hidden ect-tab j-goods-info j-ect-tab ts-3 p-t0 m-top08">
+			<div class="hd j-tab-title tab-title b-color-f of-hidden n-fixed-none">
+				<ul class="dis-box">
+					<li class="box-flex f-05 active">拍卖介绍</li>
+					<li class="box-flex f-05">服务保障</li>
+					<li class="box-flex f-05">竞拍攻略</li>
+				</ul>
+			</div>
+			<div id="j-tab-con" class="tab-con swiper-container-horizontal swiper-container-autoheight raise-list-default">
+				<div class="swiper-wrapper">
+					<section class="swiper-slide swiper-slide-active">
+						<!--{if $auction.act_desc}-->
+						<div class="m-top1px">
+							<div class="dis-box raise-header padding-all b-color-f">
+								<div class="raise-admin-left">
+						{$auction.act_desc}
+								</div>
+							</div>
+						</div>
+						<!--{else}-->
+						<div class="no-div-raise flow-no-cart">
+							<i class="iconfont icon-biaoqingleiben"></i>
+							<p>亲，此处没有内容～！</p>
+						</div>
+						<!--{/if}-->
+					</section>
+
+					<section class="swiper-slide goods-info-attr swiper-slide-next">
+						<!--{if $auction.act_promise}-->
+						<div class="m-top1px">
+							<div class="dis-box raise-header padding-all b-color-f">
+								<div class="raise-admin-left">
+								{$auction.act_promise}
+								</div>
+							</div>
+						</div>
+						<!--{else}-->
+						<div class="no-div-raise flow-no-cart">
+							<i class="iconfont icon-biaoqingleiben"></i>
+							<p>亲，此处没有内容～！</p>
+						</div>
+						<!--{/if}-->
+					</section>
+					<section class="swiper-slide goods-info-attr swiper-slide-next">
+						<div class="order-id-list order-id-list-raise">
+							<!--{if $auction.act_ensure}-->
+						<div class="m-top1px">
+							<div class="dis-box raise-header padding-all b-color-f">
+								<div class="raise-admin-left">
+								{$auction.act_ensure}
+								</div>
+							</div>
+						</div>
+							<!--{else}-->
+							<div class="no-div-raise flow-no-cart">
+								<i class="iconfont icon-biaoqingleiben"></i>
+								<p>亲，此处没有内容～！</p>
+							</div>
+							<!--{/if}-->
+						</div>
+					</section>
+				</div>
+			</div>
+		</section>
+			</div>
+
+			<!--悬浮btn star-->
+			<section class="filter-btn dis-box">
+                 {if $basic_info.kf_type == 1}
+                 <a class="filter-btn-kefu heart" href="https://www.taobao.com/webww/ww.php?ver=3&touid={$auction_goods.kf_ww}&siteid=cntaobao&status=1&charset=utf-8"><i class="kefu"></i><em>客服</em></a>
+                 {else}
+                 <a class="filter-btn-kefu heart" href="https://wpa.qq.com/msgrd?v=3&uin={$auction_goods.kf_qq}&site=qq&menu=yes"><i class="kefu"></i><em>客服</em></a>
+                 {/if}
+                  <a class="filter-btn-shop heart" href="{$auction_goods.store_url}">       
+	            		<i class="dianpu ts-2"></i><em>店铺</em></a>
+                  <a class="filter-btn-flow  heart j-heart {if $goods_collect}active{/if}" onclick="collect({$auction.goods_id})" id="ECS_COLLECT">
+                <i class="shoucang ts-2"></i>
+                <em>收藏</em>
+           	  </a>  
+                 {if $auction.status_no == 0}
+				 <a class="btn-submit box-flex btn-disab">未开始</a>
+                 {elseif $auction.status_no == 1}
+                 <input type="hidden" name="id" value="{$auction.act_id}" />
+                 <input type="submit" class="btn-submit box-flex" value="我要出价" />
+                 {else}
+                    {if $auction.is_winner}
+                    <input type="hidden" name="id" value="{$auction.act_id}" />
+                    <input type="submit" class="btn-submit box-flex" value="立即购买" />
+                    {else}
+                    <a class="btn-submit box-flex btn-disab">已结束</a>
+                    {/if}
+                {/if}
+			</section>
+            </form>
+
+			<!--悬浮btn end-->
+               <!--快捷导航-->
+		     {include file="float_nav"} 
+		     <li>
+		        <a href="{url('auction/index/index')}">
+		            <i class="iconfont icon-paimai"></i>
+		            <p>拍卖活动</p>
+		        </a> 
+		    </li>  
+		    {include file="float_nav_footer"}
+		    {include file="image"}
+			<script>
+			//相册
+    		initPhotoSwipeFromDOM('.my-gallery-box');
+			var tabsSwiper = new Swiper('#j-tab-con', {
+						speed: 100,
+						noSwiping: true,
+						autoHeight: true,
+						onSlideChangeStart: function() {
+							$(".j-tab-title .active").removeClass('active')
+							$(".j-tab-title li").eq(tabsSwiper.activeIndex).addClass('active')
+						}
+					})
+					$(".j-tab-title li").on('touchstart mousedown', function(e) {
+						e.preventDefault()
+						$(".j-tab-title .active").removeClass('active')
+						$(this).addClass('active')
+						tabsSwiper.slideTo($(this).index())
+					})
+					$(".j-tab-title li").click(function(e) {
+						e.preventDefault()
+					})
+
+
+				$(".product-sequence a").click(function (){
+					$(this).addClass("active").siblings().removeClass("active");
+				})
+				
+				/*展开全部内容*/
+				$(document).ready(function() {
+					$(".but-mu").click(function() {
+						$(".goods-more").toggle();
+					});
+				});
+                function numLess(){
+                    var times = {$auction.price_times};
+                    var num = parseInt($("input.price_times").val()) - 1;
+                    if(num < times){
+                        d_messages("现在已经是最低拍价");
+                        return false;
+                    }
+                    $("input.price_times").val(num);
+                }
+                function numPlus(){
+                    $("input.price_times").val(parseInt($("input.price_times").val()) + 1);
+                }
+				/*商品详情相册切换*/
+				var swiper = new Swiper('.goods-photo', {
+					paginationClickable: true,
+					onInit: function(swiper) {
+						document.getElementById("g-active-num").innerHTML = swiper.activeIndex + 1;
+						document.getElementById("g-all-num").innerHTML = swiper.slides.length;
+					},
+					onSlideChangeStart: function(swiper) {
+						document.getElementById("g-active-num").innerHTML = swiper.activeIndex + 1;
+					}
+				});
+				/*店铺信息商品滚动*/
+				var swiper = new Swiper('.j-g-s-p-con', {
+					scrollbarHide: true,
+					slidesPerView: 'auto',
+					centeredSlides: false,
+					grabCursor: true
+				});
+				/*倒计时*/
+				$.extend($.fn, {
+					fnTimeCountDown: function(d) {
+						this.each(function() {
+							var $this = $(this);
+							var o = {
+								hm: $this.find(".hm"),
+								sec: $this.find(".sec"),
+								mini: $this.find(".mini"),
+								hour: $this.find(".hour"),
+								day: $this.find(".day"),
+								month: $this.find(".month"),
+								year: $this.find(".year")
+							};
+							var f = {
+								haomiao: function(n) {
+									if (n < 10) return "00" + n.toString();
+									if (n < 100) return "0" + n.toString();
+									return n.toString();
+								},
+								zero: function(n) {
+									var _n = parseInt(n, 10); //解析字符串,返回整数
+									if (_n > 0) {
+										if (_n <= 9) {
+											_n = "0" + _n
+										}
+										return String(_n);
+									} else {
+										return "00";
+									}
+								},
+								dv: function() {
+									//d = d || Date.UTC(2050, 0, 1); //如果未定义时间，则我们设定倒计时日期是2050年1月1日
+									var _d = $this.data("end") || d;
+									var now = new Date(),
+										endDate = new Date(_d.replace(/-/g, "/"));
+									//现在将来秒差值
+									//alert(future.getTimezoneOffset());
+									var dur = (endDate - now.getTime()) / 1000,
+										mss = endDate - now.getTime(),
+										pms = {
+											sec: "00",
+											mini: "00",
+											hour: "00",
+											day: "00",
+										};
+									if (mss > 0) {
+										pms.hm = f.haomiao(mss % 1000);
+										pms.sec = f.zero(dur % 60);
+										pms.mini = Math.floor((dur / 60)) > 0 ? f.zero(Math.floor((dur / 60)) % 60) : "00";
+										pms.hour = Math.floor((dur / 3600)) > 0 ? f.zero(Math.floor((dur / 3600)) % 24) : "00";
+										pms.day = Math.floor((dur / 86400)) > 0 ? f.zero(Math.floor((dur / 86400))) : "00";
+										//月份，以实际平均每月秒数计算
+										//pms.month = Math.floor((dur / 2629744)) > 0 ? f.zero(Math.floor((dur / 2629744)) % 12) : "00";
+										//年份，按按回归年365天5时48分46秒算
+										//pms.year = Math.floor((dur / 31556926)) > 0 ? Math.floor((dur / 31556926)) : "0";
+									} else {
+										pms.year = pms.month = pms.day = pms.hour = pms.mini = pms.sec = "00";
+										pms.hm = "000";
+										//alert('结束了');
+										return;
+									}
+									return pms;
+								},
+								ui: function() {
+									if (o.hm) {
+										o.hm.html(f.dv().hm);
+									}
+									if (o.sec) {
+										o.sec.html(f.dv().sec);
+									}
+									if (o.mini) {
+										o.mini.html(f.dv().mini);
+									}
+									if (o.hour) {
+										o.hour.html(f.dv().hour);
+									}
+									if (o.day) {
+										o.day.html(f.dv().day);
+									}
+									if (o.month) {
+										o.month.html(f.dv().month);
+									}
+									if (o.year) {
+										o.year.html(f.dv().year);
+									}
+									setTimeout(f.ui, 1);
+								}
+							};
+							f.ui();
+						});
+					}
+				});
+                $("#fnTimeCountDown").fnTimeCountDown("{$auction.end_time}");
+			</script>
+
+	</body>
+</html>
