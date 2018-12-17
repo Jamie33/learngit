@@ -1,6 +1,6 @@
-﻿快速导航,Quick navigation
+﻿快速导航,Navigation
 顶部,Top
-首页,Homepage
+首页,Home
 搜索,Search
 分类,Category
 购物车,Cart
@@ -296,7 +296,7 @@
 应付款金额,Amount Due
 订单号,Order number
 门店信息,Offline store information
-查看订单,View order
+查看订单,View orders
 商品优惠,Discount
 税,Tax
 配送费用,Shipping fee
@@ -347,3 +347,26 @@
 批发列表,Wholesale list
 进货单,Purchase list
 求购信息,Purchase information
+请输入手机号码,Enter your phone number
+手机号码格式不正确,Please enter a valid phone number
+请输入图片验证码,Enter the verification code
+获取短信验证码,Get the SMS verification code
+发送短信验证码,Send SMS verification code
+重新获取,Resend
+频繁发送,You have made frequent requests
+手机号快捷登录,Signin in with phone number
+忘记密码,Forgot password
+新用户注册,Sign up
+快捷登陆,Quick login
+请输入用户名,Please enter your username
+消息,Messages
+我的订单,My orders/Orders
+待付款,Pending payment
+待收货,In process
+待评价,Write reviews
+退换货,Return or replace items
+拼团订单,Group purchase orders
+砍价订单,Bargain orders
+延迟收货,Late delivery confirmation
+申请售后,Order issues
+亲，还没有订单哦～！,You have not placed any orders
