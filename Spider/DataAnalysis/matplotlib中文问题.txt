@@ -1,0 +1,20 @@
+平台：windows,python3.5
+
+步骤一：打开设置文件
+import matplotlib
+
+matplotlib.matplotlib_fname()
+
+会显示matplotlibrc文件的地址
+
+步骤二：修改matplotlibrc文件
+将文件中的
+#font.family: sans-serif
+
+去掉注释，修改为
+font.family: Microsoft YaHei
+
+
+步骤三：重启jupyter notebook
+可显示为中文
+
