@@ -181,3 +181,5 @@
 [1220/184805.375:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: 已尝试访问正在退出的过程。 (0xc000010a)
 [0124/120039.977:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
 [0124/120110.064:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0125/120038.592:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0125/120108.677:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
