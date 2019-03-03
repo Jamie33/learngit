@@ -1,0 +1,65 @@
+1. 安装Python For Windows
+   主页:http://www.python.org/download/releases/2.7.5/
+   直接下载地址: http://www.python.org/ftp/python/2.7.5/python-2.7.5.msi
+
+   点击安装程序，默认安装，点下一步到完成。
+   默认安装路径在：C:\Python27
+
+2. 添加系统环境变量
+   在系统环境变量Path中最后追加 ;C:\Python27
+   打开命令行,输入 python, 如果出现如下字符表示环境变量添加成功:
+
+C:\workspace\ruokuai\ruokuai-python>python
+Python 2.7.5 (default, May 15 2013, 22:43:36) [MSC v.1500 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+
+   按Ctrl+D 退出。
+
+3. 安装PIL-1.1.7.win32-py2.7.exe
+   https://ocr-uvg.googlecode.com/files/PIL-1.1.7.win32-py2.7.exe
+   这是一个图片转换的包.
+   默认安装到完成。
+
+4. 安装Python-Requests
+   用于HttpRequest.
+   主页:http://docs.python-requests.org/en/latest/
+   直接下载地址: https://github.com/kennethreitz/requests/zipball/master
+   
+   下载完成后解压zip包，得到kennethreitz-requests-e773443这个文件夹。
+   打开命令行，cd kennethreitz-requests-e773443 目录下。
+   然后执行 python setup.py install
+
+5. 测试：
+   打开命令行，cd到Python脚本目录，比如：
+   cd C:\workspace\ruokuai\ruokuai-python
+   python ruokuai.py
+
+执行上传图片答题:
+Action:upload
+username:你的用户名
+password:你的密码
+typeid:2040
+timeout:90
+softid:1
+softkey:b40ffbee5c1cf4e38028c197eb2fc751
+Image Path:c:\bdlogo.gif
+<?xml version="1.0"?>
+<Root>
+  <Result>kdsl</Result>
+  <Id>f129deff-bff1-4444-91c6-cec08f19ef8b</Id>
+</Root>
+
+Action:info -- 获取用户信息
+Action:register -- 注册用户
+Action:recharge -- 充值
+Action:url -- URL答题
+Action:upload -- 上传答题
+help: 获取所有操作命令
+Action:Exit -- 退出
+
+
+Action:
+   
+
+   
