@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for scrapyseleniumtest project
+# Scrapy settings for shopeeTW project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,16 +9,21 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'scrapyseleniumtest'
+BOT_NAME = 'shopeeTW'
 
-SPIDER_MODULES = ['scrapyseleniumtest.spiders']
-NEWSPIDER_MODULE = 'scrapyseleniumtest.spiders'
+SPIDER_MODULES = ['shopeeTW.spiders']
+NEWSPIDER_MODULE = 'shopeeTW.spiders'
 
 
 
+SELENIUM_TIMEOUT = 60
+
+MONGO_URI = 'localhost'
+
+MONGO_DB = 'shopee_tw'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'scrapyseleniumtest (+http://www.yourdomain.com)'
+#USER_AGENT = 'shopeeTW (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -48,14 +53,14 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
-#    'scrapyseleniumtest.middlewares.ScrapyseleniumtestSpiderMiddleware': 543,
+#PIDER_MIDDLEWARES = {
+#   'shopeeTW.middlewares.ShopeetwSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    'scrapyseleniumtest.middlewares.SeleniumMiddleware': 543,
+    'shopeeTW.middlewares.ShopeeMiddleware': 543,
 }
 
 # Enable or disable extensions
@@ -67,7 +72,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'scrapyseleniumtest.pipelines.MongoPipeline': 300,
+    'shopeeTW.pipelines.ShopeetwPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -91,14 +96,3 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-KEYWORDS = ['iPad']
-
-MAX_PAGE = 1
-
-SELENIUM_TIMEOUT = 60
-
-PHANTOMJS_SERVICE_ARGS = ['--load-images=false', '--disk-cache=true']
-
-MONGO_URI = 'localhost'
-
-MONGO_DB = 'taobao'
