@@ -7,7 +7,8 @@ from shopeeTW.items import ShopeetwItem
 class ShopeeSpider(Spider):
     name = 'shopee'
     allowed_domains = ['shopee.tw']
-    start_urls = ["https://shopee.co.id/Sepatu-Pria-cat.35?page=0&sortBy=sales"]
+    #start_urls = ["https://shopee.co.id/Sepatu-Pria-cat.35?page=0&sortBy=sales"]
+    start_urls = ["https://shopee.tw/女生配件-cat.2580?page=0&sortBy=sales"]
 
     def parse(self, response):
         products = response.xpath('//div[@id="main"]//div[@class="shopee-search-item-result"]//div[contains(@class, "col-xs-2-4")]')
