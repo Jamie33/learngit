@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for shopeeTW project
+# Scrapy settings for tiki project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,19 +9,18 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'shopeeTW'
+BOT_NAME = 'tiki'
 
-SPIDER_MODULES = ['shopeeTW.spiders']
-NEWSPIDER_MODULE = 'shopeeTW.spiders'
-
+SPIDER_MODULES = ['tiki.spiders']
+NEWSPIDER_MODULE = 'tiki.spiders'
 
 SELENIUM_TIMEOUT = 60
 MONGO_URI = 'localhost'
-MONGO_DB = 'lazada_vn'
+MONGO_DB = 'tiki_vn'
 MAX_PAGE = 20
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'shopeeTW (+http://www.yourdomain.com)'
+#USER_AGENT = 'tiki (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -51,14 +50,14 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-#PIDER_MIDDLEWARES = {
-#   'shopeeTW.middlewares.ShopeetwSpiderMiddleware': 543,
+#SPIDER_MIDDLEWARES = {
+#    'tiki.middlewares.TikiSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    'shopeeTW.middlewares.ShopeeMiddleware': 543,
+    'tiki.middlewares.TikiDownloaderMiddleware': 543,
 }
 
 # Enable or disable extensions
@@ -70,7 +69,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'shopeeTW.pipelines.ShopeetwPipeline': 300,
+    'tiki.pipelines.TikiPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -93,4 +92,3 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-
