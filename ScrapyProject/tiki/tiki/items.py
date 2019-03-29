@@ -5,24 +5,14 @@
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/items.html
 
-from scrapy import Item, Field
+from scrapy import Item,Field
 
 
-class ShopeetwItem(Item):
+class TikiItem(Item):
     # define the fields for your item here like:
-
+    # name = scrapy.Field()
     collection = 'cosmetics'
     pro_name = Field()
     price = Field()
     review_num = Field()
     pro_url = Field()
-
-
-    #category = Field()
-    #class_name = Field()
-    #price_range = Field()
-    #price_min = Field()
-    #price_max = Field()
-    #monthly_sales = Field()
-    #pro_url = Field()
-    #pic_url = Field()
