@@ -37,8 +37,6 @@ class TikiDownloaderMiddleware(object):
         self.logger.debug('Chromedriver is Starting')
         try:
             self.browser.get(request.url)
-            item_num = len(self.browser.find_elements_by_css_selector('.product-item'))
-            self.logger.debug(' load {} items...'.format(item_num))
             return HtmlResponse(url=request.url, body=self.browser.page_source, request=request, encoding='utf-8',status=200)
         except TimeoutException:
             return HtmlResponse(url=request.url, status=500, request=request)
