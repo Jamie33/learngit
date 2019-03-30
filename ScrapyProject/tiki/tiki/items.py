@@ -11,8 +11,11 @@ from scrapy import Item,Field
 class TikiItem(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    collection = 'cosmetics'
+    collection = 'cosmetics_rank'
+    rank = Field()
+    page = Field()
     pro_name = Field()
     price = Field()
+    sales = Field()
     review_num = Field()
     pro_url = Field()
