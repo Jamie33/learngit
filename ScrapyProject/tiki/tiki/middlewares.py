@@ -25,9 +25,11 @@ class TikiDownloaderMiddleware(object):
     def __init__(self, timeout=None):
         self.logger = getLogger(__name__)
         self.timeout = timeout
-        self.chrome_options = Options()
-        self.chrome_options.add_argument('--headless')
-        self.browser = webdriver.Chrome(chrome_options=self.chrome_options)
+        # self.chrome_options = Options()
+        # self.chrome_options.add_argument('--headless')
+        # self.browser = webdriver.Chrome(chrome_options=self.chrome_options)
+        # self.wait = WebDriverWait(self.browser, self.timeout)
+        self.browser = webdriver.Chrome()
         self.wait = WebDriverWait(self.browser, self.timeout)
 
     def __del__(self):
@@ -37,6 +39,8 @@ class TikiDownloaderMiddleware(object):
         self.logger.debug('Chromedriver is Starting')
         try:
             self.browser.get(request.url)
+            #print(self.browser.page_source)
+
             return HtmlResponse(url=request.url, body=self.browser.page_source, request=request, encoding='utf-8',status=200)
         except TimeoutException:
             return HtmlResponse(url=request.url, status=500, request=request)
