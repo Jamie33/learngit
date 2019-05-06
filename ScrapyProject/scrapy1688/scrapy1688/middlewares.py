@@ -52,7 +52,7 @@ class Scrapy1688SpiderMiddleware(object):
                     time.sleep(random.uniform(1, 5))
                     item_num = len(self.browser.find_elements_by_css_selector('.cate1688-offer.b2b-ocms-fusion-comp'))
                     self.logger.debug('loading {} items...'.format(item_num))
-                    if item_num == 200:
+                    if item_num >= 20:
                         break
 
                 self.logger.debug('loaded {} items...'.format(item_num))
