@@ -12,6 +12,6 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 # 调用execute()函数执行scarpy的命令 scary crawl 爬虫文件名字
 #execute(['scrapy', 'crawl', 'taobao1688','-o','taobao1688.csv'])
 
-execute(['scrapy', 'crawl', 'taobao1688','-o','taobao1688.json'])
+# execute(['scrapy', 'crawl', 'taobao1688','-o','taobao1688.json'])
 
-# execute(['scrapy', 'crawl', 'taobao1688'])
+execute(['scrapy', 'crawl', 'taobao1688'])

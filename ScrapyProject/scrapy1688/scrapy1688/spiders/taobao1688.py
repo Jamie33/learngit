@@ -55,7 +55,14 @@ class Taobao1688Spider(Spider):
                 item['image_urls'].append(image_url)
         # yield item
         headers = {'Content-Type': 'application/json'}
-        post_url = 'http://test.amazing.com/api/goods/insertgoods?web_from=nindia'
+        post_url = 'http://test.amazing.com/api/goods/insertgoods?web_from=mee_id'
+        '''
+        web_from=参数代表：
+        nindia  之前的印度站
+        tw  台湾站
+        mee  meesho越南站
+        mee_id  meesho印尼站
+        '''
         post_data = {
             "name":item['pro_name'],
             "id":item['pro_id'],
