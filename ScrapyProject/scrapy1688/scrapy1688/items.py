@@ -18,3 +18,4 @@ class Scrapy1688Item(Item):
     main_pic = Field()
     pro_url = Field()
     sold_num = Field()
+    image_urls = Field()

@@ -29,7 +29,6 @@ class MongoPipeline(object):
     def close_spider(self, spider):
         self.client.close()
 
-
 class ImagePipeline(ImagesPipeline):
     def file_path(self, request, response=None, info=None):
         item = request.meta['item']
@@ -45,4 +44,5 @@ class ImagePipeline(ImagesPipeline):
         return item
 
     def get_media_requests(self, item, info):
-        yield Request(item['main_pic'], meta={'item': item})
+        for img_url in item['image_urls']:
+            yield Request(img_url, meta={'item': item})

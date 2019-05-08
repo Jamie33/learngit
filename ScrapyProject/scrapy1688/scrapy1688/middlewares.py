@@ -35,9 +35,7 @@ class Scrapy1688SpiderMiddleware(object):
         self.browser.close()
 
     def process_request(self, request, spider):
-        # if request.url.startswith('http://img.china.alibaba.com'):
-        #     return HtmlResponse(url=request.url, body=self.browser.page_source, request=request,
-        #                         status=200)
+
         if request.url.startswith('https://show.1688.com'):
             self.logger.debug('Chromedriver is Starting')
             try:
@@ -52,7 +50,7 @@ class Scrapy1688SpiderMiddleware(object):
                     time.sleep(random.uniform(1, 5))
                     item_num = len(self.browser.find_elements_by_css_selector('.cate1688-offer.b2b-ocms-fusion-comp'))
                     self.logger.debug('loading {} items...'.format(item_num))
-                    if item_num == 200:
+                    if item_num >= 180:
                         break
 
                 self.logger.debug('loaded {} items...'.format(item_num))
