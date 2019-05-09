@@ -18,6 +18,7 @@ SELENIUM_TIMEOUT = 60
 MONGO_URI = 'localhost'
 MONGO_DB = 'taobao_1688'
 
+
 IMAGES_STORE = './images'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
