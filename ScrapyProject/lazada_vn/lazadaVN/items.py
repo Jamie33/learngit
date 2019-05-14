@@ -8,15 +8,14 @@
 from scrapy import Item, Field
 
 
-class ShopeetwItem(Item):
+class lazadaVNItem(Item):
     # define the fields for your item here like:
 
-    collection = 'lazada_vn_0515'
+    collection = 'cosmetics'
     pro_name = Field()
     price = Field()
     review_num = Field()
     pro_url = Field()
-    category = Field()
 
 
     #category = Field()

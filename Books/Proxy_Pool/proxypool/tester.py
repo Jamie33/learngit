@@ -1,6 +1,10 @@
-import asyncio, aiohttp, time, sys
+import asyncio, aiohttp, time
 from proxypool.setting import *
 from proxypool.db import RedisClient
+try:
+    from aiohttp import ClientError
+except:
+    from aiohttp import ClientProxyConnectionError as ProxyConnectionError
 
 
 class Tester(object):
@@ -13,7 +17,6 @@ class Tester(object):
        :param proxy: 单个代理
        :return: None
        """
-        
         # 定义了连接器并取消ssl安全验证，使用 ssl使其等于False，默认是True的。因为有的网站请求的时候会验证ssl证书,如果是自签名的ssl证书会出错。
         conn = aiohttp.TCPConnector(ssl = False)
         async with aiohttp.ClientSession(connector=conn) as session:
@@ -30,7 +33,7 @@ class Tester(object):
                     else:
                         self.redis.decrease(proxy)
                         print('请求响应码不合法',proxy)
-            except (TimeoutError, ArithmetricError):
+            except (ClientError, aiohttp.client_exceptions.ClientConnectorError, asyncio.TimeoutError, AttributeError):
                 self.redis.decrease(proxy)
                 print('代理请求失败',proxy)
                 
@@ -38,11 +41,14 @@ class Tester(object):
         print('测试开始运行')
         try:
             proxies = self.redis.viewall()
-            loop = asyncio.get_event_loop()
-            for i in range(0,len(proxies),BATCH_TEST_SIZE):
-                test_proxies = proxies[i:i+BATCH_TEST_SIZE] 
-                tasks = [self.test_single_proxy(proxy) for proxy in test_proxies]
-                loop.run_until_complete(asyncio.wait(tasks))
-                time.sleep(5)
+            if proxies:
+                loop = asyncio.get_event_loop()
+                for i in range(0,len(proxies),BATCH_TEST_SIZE):
+                    test_proxies = proxies[i:i+BATCH_TEST_SIZE]
+                    tasks = [self.test_single_proxy(proxy) for proxy in test_proxies]
+                    loop.run_until_complete(asyncio.wait(tasks))
+                    time.sleep(5)
+            else:
+                print('proxies 为空')
         except Exception as e:
             print('测试器发生错误',e.args)

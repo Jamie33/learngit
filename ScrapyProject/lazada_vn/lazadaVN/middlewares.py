@@ -13,7 +13,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from scrapy.http import HtmlResponse
 from logging import getLogger
 from selenium.webdriver.common.keys import Keys
-import time, random
+import time
 from selenium.webdriver.chrome.options import Options
 
 
@@ -26,9 +26,6 @@ class ShopeeMiddleware(object):
         self.logger = getLogger(__name__)
         self.timeout = timeout
         self.chrome_options = Options()
-        # 禁止图片和视频的加载，提高网页爬取速度
-        prefs = {"profile.managed_default_content_settings.images": 2}
-        self.chrome_options.add_experimental_option("prefs", prefs)
         self.chrome_options.add_argument('--headless')
         self.browser = webdriver.Chrome(chrome_options=self.chrome_options)
         self.wait = WebDriverWait(self.browser, self.timeout)
@@ -42,16 +39,6 @@ class ShopeeMiddleware(object):
             self.browser.get(request.url)
             item_num = len(self.browser.find_elements_by_css_selector('.c5TXIP'))
             self.logger.debug(' load {} items...'.format(item_num))
-            while True:
-                if item_num == 40:
-                    break
-                if item_num < 40:
-                    self.browser.find_element_by_xpath("/html/body").send_keys(Keys.PAGE_DOWN)
-                    self.logger.debug('page down...'.format(item_num))
-                    time.sleep(random.uniform(1, 5))
-                    item_num = len(self.browser.find_elements_by_css_selector('.c5TXIP'))
-                    self.logger.debug('loading {} items...'.format(item_num))
-
             #self.logger.debug(self.browser.page_source)
             return HtmlResponse(url=request.url, body=self.browser.page_source, request=request, encoding='utf-8',status=200)
         except TimeoutException:

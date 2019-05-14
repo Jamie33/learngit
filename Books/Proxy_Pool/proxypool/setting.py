@@ -1,5 +1,3 @@
-
-
 # Redis数据库地址
 Redis_host = 'localhost'
 
@@ -10,8 +8,6 @@ Redis_port = 6379
 Redis_password = None
 
 Redis_key = 'proxies'
-
-Redis_db = 1
 
 # 代理分数
 Max_score = 100

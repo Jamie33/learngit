@@ -7,16 +7,17 @@ from random import choice
 
 """
 
+
 class RedisClient(object):
     
-    def __init__(self,host=Redis_host,port=Redis_port,db=Redis_db,password=Redis_password):
+    def __init__(self,host=Redis_host,port=Redis_port,password=Redis_password):
         """
         初始化
         :param host: Redis 地址
         :param port: Redis 端口
         :param password: Redis 密码
         """
-        self.db = redis.StrictRedis(host=host,port=port,db=db,password=password) # 声明了一个StrictRedis 对象
+        self.db = redis.StrictRedis(host=host,port=port,password=password) # 声明了一个StrictRedis 对象
         
     def add(self,proxy,score=Initial_score):
         """
@@ -45,7 +46,7 @@ class RedisClient(object):
             if len(result):
                 return choice(result)
             else:
-                raise 'PoolEmptyError(have not defined yet)'
+                print('PoolEmptyError(have not defined yet)')
     
     def decrease(self,proxy):
         """
@@ -58,10 +59,10 @@ class RedisClient(object):
         """
         score = self.db.zscore(Redis_key,proxy)
         if score and score > Min_score:
-            print('代理{}当前分数{}减1'.format(proxy,score))
+            print('代理 {} 当前分数 {} 减1'.format(proxy,score))
             return self.db.zincrby(Redis_key,score,-1)
         else:
-            print('代理{}当前分数{}移除'.format(proxy,score))
+            print('代理 {} 当前分数 {} 移除'.format(proxy,score))
             return self.db.zrem(Redis_key,proxy)
     
     def exists(self,proxy):
@@ -80,7 +81,7 @@ class RedisClient(object):
         :param proxy: 代理
         :return: 设置结果
         """
-        print('代理{}可用，设置为{}'.format(proxy,Max_score))
+        print('代理 {} 可用，设置为 {}'.format(proxy,Max_score))
         return self.db.zadd(Redis_key,Max_score,proxy)
     
     def count(self):

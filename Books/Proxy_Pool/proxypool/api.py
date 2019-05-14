@@ -5,7 +5,7 @@ __all__= ['app']
 app = Flask(__name__)
 
 def get_conn():
-    if not hasatrr(g,'redis'):
+    if not hasattr(g,'redis'):
         g.redis = RedisClient()
     return g.redis
 
@@ -30,6 +30,17 @@ def get_counts():
     """  
     conn = get_conn()
     return str(conn.count())
+
+
+@app.route('/all')
+def view_all():
+    """
+    Get all proxies
+    :return: 全部代理
+    """
+    conn = get_conn()
+    return str(conn.viewall())
+
 
 if __name__ == '__main__':
     app.run()
