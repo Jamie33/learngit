@@ -9,16 +9,16 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'shopeeTW'
+BOT_NAME = 'lazadaVN'
 
-SPIDER_MODULES = ['shopeeTW.spiders']
-NEWSPIDER_MODULE = 'shopeeTW.spiders'
+SPIDER_MODULES = ['lazadaVN.spiders']
+NEWSPIDER_MODULE = 'lazadaVN.spiders'
 
 
 SELENIUM_TIMEOUT = 60
 MONGO_URI = 'localhost'
-MONGO_DB = 'lazada_vn'
-MAX_PAGE = 10
+MONGO_DB = 'lazada_vn__0514'
+MAX_PAGE = 20
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'shopeeTW (+http://www.yourdomain.com)'
