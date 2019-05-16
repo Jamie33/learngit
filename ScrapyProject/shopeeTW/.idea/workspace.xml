@@ -14,7 +14,7 @@
       <file leaf-file-name="shopee.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shopeeTW/spiders/shopee.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
+            <state relative-caret-position="327">
               <caret line="41" column="22" lean-forward="true" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
               <folding>
                 <element signature="e#24#58#0" expanded="true" />
@@ -92,9 +92,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="2039" />
-    <option name="y" value="168" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="2378" />
+    <option name="y" value="-11" />
     <option name="width" value="1234" />
     <option name="height" value="874" />
   </component>
@@ -504,7 +504,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/shopeeTW/spiders/shopee.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
+        <state relative-caret-position="327">
           <caret line="41" column="22" lean-forward="true" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
           <folding>
             <element signature="e#24#58#0" expanded="true" />
