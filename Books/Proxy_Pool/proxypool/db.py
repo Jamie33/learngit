@@ -60,7 +60,7 @@ class RedisClient(object):
         score = self.db.zscore(Redis_key,proxy)
         if score and score > Min_score:
             print('代理 {} 当前分数 {} 减1'.format(proxy,score))
-            return self.db.zincrby(Redis_key,score,-1)
+            return self.db.zincrby(Redis_key,proxy,-1)
         else:
             print('代理 {} 当前分数 {} 移除'.format(proxy,score))
             return self.db.zrem(Redis_key,proxy)

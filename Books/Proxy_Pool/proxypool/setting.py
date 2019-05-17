@@ -26,7 +26,7 @@ TESTER_CYCLE = 20
 GETTER_CYCLE = 300
 
 # 测试API，建议抓哪个网站测哪个
-TEST_URL = 'http://www.baidu.com'
+TEST_URL = 'https://www.lazada.vn'
 
 # 开关
 TESTER_ENABLED = True

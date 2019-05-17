@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for shopeeTW project
+# Scrapy settings for lazadaVN project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -15,13 +15,15 @@ SPIDER_MODULES = ['lazadaVN.spiders']
 NEWSPIDER_MODULE = 'lazadaVN.spiders'
 
 
-SELENIUM_TIMEOUT = 60
+PROXY_URL = 'http://127.0.0.1:5000/random'
+
 MONGO_URI = 'localhost'
-MONGO_DB = 'lazada_vn__0514'
-MAX_PAGE = 20
+MONGO_DB = 'lazada_vn'
+MAX_PAGE = 10
+
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'shopeeTW (+http://www.yourdomain.com)'
+#USER_AGENT = 'lazadaVN (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -32,7 +34,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 1
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -51,14 +53,14 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-#PIDER_MIDDLEWARES = {
-#   'shopeeTW.middlewares.ShopeetwSpiderMiddleware': 543,
+#SPIDER_MIDDLEWARES = {
+#    'lazadaVN.middlewares.LazadavnSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    'shopeeTW.middlewares.ShopeeMiddleware': 543,
+   'lazadaVN.middlewares.ProxyMiddleware': 555,
 }
 
 # Enable or disable extensions
@@ -70,7 +72,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'shopeeTW.pipelines.ShopeetwPipeline': 300,
+   'lazadaVN.pipelines.LazadavnPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -93,4 +95,3 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-
