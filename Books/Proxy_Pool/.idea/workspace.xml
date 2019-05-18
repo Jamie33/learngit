@@ -32,19 +32,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="setting.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="setting.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/proxypool/setting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="58">
+              <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tester.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="tester.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proxypool/tester.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-87">
+            <state relative-caret-position="-267">
               <caret line="39" column="18" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
             </state>
           </provider>
@@ -89,8 +89,8 @@
       <file leaf-file-name="db.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proxypool/db.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-346">
-              <caret line="83" column="23" lean-forward="true" selection-start-line="83" selection-start-column="21" selection-end-line="83" selection-end-column="23" />
+            <state relative-caret-position="-16">
+              <caret line="43" column="13" lean-forward="true" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -135,14 +135,14 @@
         <option value="$PROJECT_DIR$/proxypool/tester.py" />
         <option value="$PROJECT_DIR$/proxypool/api.py" />
         <option value="$PROJECT_DIR$/run.py" />
-        <option value="$PROJECT_DIR$/proxypool/setting.py" />
         <option value="$PROJECT_DIR$/proxypool/db.py" />
+        <option value="$PROJECT_DIR$/proxypool/setting.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="465" />
-    <option name="y" value="123" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="608" />
+    <option name="y" value="43" />
     <option name="width" value="1234" />
     <option name="height" value="785" />
   </component>
@@ -225,14 +225,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="465" y="123" width="1234" height="785" extended-state="1" />
+    <frame x="608" y="43" width="1234" height="785" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.24916388" />
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="0" weight="0.32978722" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.57392687" />
+      <window_info anchor="bottom" id="Run" order="6" weight="0.52782196" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.32978722" />
       <window_info id="Favorites" order="0" side_tool="true" />
@@ -648,6 +648,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/proxypool/tester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-267">
+          <caret line="39" column="18" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxypool/db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-16">
+          <caret line="43" column="13" lean-forward="true" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/proxypool/scheduler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -658,27 +675,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proxypool/db.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-346">
-          <caret line="83" column="23" lean-forward="true" selection-start-line="83" selection-start-column="21" selection-end-line="83" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proxypool/setting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proxypool/tester.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-87">
-          <caret line="39" column="18" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
+        <state relative-caret-position="58">
+          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
         </state>
       </provider>
     </entry>

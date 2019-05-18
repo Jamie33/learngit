@@ -12,4 +12,4 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 # 调用execute()函数执行scarpy的命令 scary crawl 爬虫文件名字
 #execute(['lazadaVN', 'crawl', 'lazadavn','-o','lazadaVN_page10_0517.csv'])
 
-execute(['lazadaVN', 'crawl', 'lazadavn','-o','lazadaVN_page10_0517test02.csv'])
+execute(['lazadaVN', 'crawl', 'lazadavn','-o','lazadaVN_page10_0518test05.csv'])

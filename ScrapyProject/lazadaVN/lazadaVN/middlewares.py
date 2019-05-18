@@ -7,7 +7,7 @@
 
 from scrapy import signals
 import logging, requests
-
+from scrapy.downloadermiddlewares.retry import RetryMiddleware
 
 class ProxyMiddleware():
     def __init__(self, proxy_url):

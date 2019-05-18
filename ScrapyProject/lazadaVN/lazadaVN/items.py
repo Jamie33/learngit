@@ -9,9 +9,11 @@ from scrapy import Item,Field
 
 
 class LazadavnItem(Item):
-    collection = 'lazada_vn_0517_test02'
+    collection = 'lazada_vn_0518_test05'
     pro_name = Field()
     pro_price = Field()
     pro_review = Field()
     pro_url = Field()
     category = Field()
+    page = Field()
+    page_url = Field()
