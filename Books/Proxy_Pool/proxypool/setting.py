@@ -26,7 +26,7 @@ TESTER_CYCLE = 5
 GETTER_CYCLE = 300
 
 # 测试API，建议抓哪个网站测哪个
-TEST_URL = 'https://www.lazada.vn'
+TEST_URL = 'https://tiki.vn/'
 
 # 开关
 TESTER_ENABLED = True

@@ -10,4 +10,6 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 # os.path.dirname()    用来获取文件的父亲的路径
 
 # 调用execute()函数执行scarpy的命令 scary crawl 爬虫文件名字
-execute(['scrapy', 'crawl', 'tikiVN','-o','sendoVN_cosmetics_page20_rank.csv'])
+#execute(['scrapy', 'crawl', 'tikiVN','-o','sendoVN_cosmetics_page20_rank.csv'])
+
+execute(['scrapy', 'crawl', 'tikiVN','-o','tikiVN_health_page_filterClosetest.csv'])

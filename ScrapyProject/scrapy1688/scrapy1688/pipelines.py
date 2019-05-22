@@ -29,6 +29,7 @@ class MongoPipeline(object):
     def close_spider(self, spider):
         self.client.close()
 
+
 class ImagePipeline(ImagesPipeline):
     def file_path(self, request, response=None, info=None):
         item = request.meta['item']
