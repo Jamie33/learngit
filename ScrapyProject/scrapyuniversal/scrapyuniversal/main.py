@@ -13,3 +13,5 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 #execute(['scrapy', 'crawl', 'tikiVN','-o','sendoVN_cosmetics_page20_rank.csv'])
 
 execute(['scrapy', 'crawl', 'china'])
+
+execute(['python3', 'run.py', 'china'])

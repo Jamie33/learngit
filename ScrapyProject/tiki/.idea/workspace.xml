@@ -102,20 +102,20 @@
     <findStrings>
       <find>download</find>
       <find>downloader</find>
-      <find>&lt;!-- end static block --&gt;</find>
+      <find />
       <find>product-item</find>
-      <find>product-box no-mg</find>
-      <find>Mặt Nạ Trị Mụn Đầu Đen Thu Nhỏ Lỗ Chân Lông Oedo (1Pc)</find>
-      <find>Sữa Rửa Mặt Chứa Amino Acid Oedo</find>
-      <find>Scraped from &lt;200</find>
-      <find>Dao Cạo Râu Lưỡi Thẳng Bằng Thép Không Gỉ Cho Nam Giới</find>
+      <find />
+      <find />
+      <find />
+      <find />
+      <find />
       <find>user</find>
       <find>https://tiki.vn/de-lot-gel-silicon-giam-dau-cham-soc-ban-chan-1-doi-p13792839.html?src=category-page-17166.20908&amp;2hi=0</find>
       <find>https://tiki.vn/den-huong-dan-nha-khoa-den-p14199722.html?src=category-page-17166.20908&amp;2hi=0</find>
       <find>https://tiki.vn/ao-choang-cat-toc-chong-tham-nuoc-p13794495.html?src=category-page-17166.20908&amp;2hi=0</find>
-      <find>Áo Choàng Cắt Tóc Chống Thấm Nước</find>
+      <find />
       <find>filter</find>
-      <find>item number</find>
+      <find />
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -135,9 +135,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="2017" />
-    <option name="y" value="34" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="2055" />
+    <option name="y" value="76" />
     <option name="width" value="1569" />
     <option name="height" value="1002" />
   </component>
@@ -254,7 +254,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2017" y="34" width="1569" height="1002" extended-state="1" />
+    <frame x="1992" y="159" width="1569" height="1002" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.2501633" />
