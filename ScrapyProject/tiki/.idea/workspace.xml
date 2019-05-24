@@ -14,8 +14,8 @@
       <file leaf-file-name="tikiVN.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tiki/spiders/tikiVN.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="24" column="16" lean-forward="true" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+            <state relative-caret-position="77">
+              <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
               <folding>
                 <element signature="e#24#58#0" expanded="true" />
               </folding>
@@ -35,8 +35,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tiki/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+            <state relative-caret-position="324">
+              <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
               <folding>
                 <marker date="1558514260014" expanded="true" signature="1966:2039" ph="..." />
               </folding>
@@ -47,8 +47,8 @@
       <file leaf-file-name="items.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tiki/items.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
+            <state relative-caret-position="336">
+              <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -69,7 +69,7 @@
         <entry file="file://$PROJECT_DIR$/tiki/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="420">
-              <caret line="14" column="31" lean-forward="true" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+              <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
               <folding>
                 <element signature="e#0#56#0" expanded="true" />
               </folding>
@@ -102,20 +102,20 @@
     <findStrings>
       <find>download</find>
       <find>downloader</find>
-      <find />
+      <find>&lt;!-- end static block --&gt;</find>
       <find>product-item</find>
-      <find />
-      <find />
-      <find />
-      <find />
-      <find />
+      <find>product-box no-mg</find>
+      <find>Mặt Nạ Trị Mụn Đầu Đen Thu Nhỏ Lỗ Chân Lông Oedo (1Pc)</find>
+      <find>Sữa Rửa Mặt Chứa Amino Acid Oedo</find>
+      <find>Scraped from &lt;200</find>
+      <find>Dao Cạo Râu Lưỡi Thẳng Bằng Thép Không Gỉ Cho Nam Giới</find>
       <find>user</find>
       <find>https://tiki.vn/de-lot-gel-silicon-giam-dau-cham-soc-ban-chan-1-doi-p13792839.html?src=category-page-17166.20908&amp;2hi=0</find>
       <find>https://tiki.vn/den-huong-dan-nha-khoa-den-p14199722.html?src=category-page-17166.20908&amp;2hi=0</find>
       <find>https://tiki.vn/ao-choang-cat-toc-chong-tham-nuoc-p13794495.html?src=category-page-17166.20908&amp;2hi=0</find>
-      <find />
+      <find>Áo Choàng Cắt Tóc Chống Thấm Nước</find>
       <find>filter</find>
-      <find />
+      <find>item number</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -136,10 +136,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2055" />
-    <option name="y" value="76" />
+    <option name="x" value="2204" />
+    <option name="y" value="57" />
     <option name="width" value="1569" />
-    <option name="height" value="1002" />
+    <option name="height" value="860" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -172,7 +172,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../scrapy1688" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../scrapyuniversal" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -254,13 +254,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1992" y="159" width="1569" height="1002" extended-state="0" />
+    <frame x="2204" y="57" width="1569" height="860" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.2501633" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.14304376" />
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.2033097" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.671875" />
       <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="0" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
@@ -675,33 +675,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tiki/items.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tiki/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
-          <folding>
-            <marker date="1558514260014" expanded="true" signature="1966:2039" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tiki/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="14" column="31" lean-forward="true" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/scrapy/http/request/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -709,10 +682,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tiki/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tiki/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tiki/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+          <folding>
+            <marker date="1558514260014" expanded="true" signature="1966:2039" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tiki/spiders/tikiVN.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="24" column="16" lean-forward="true" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+        <state relative-caret-position="77">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
           <folding>
             <element signature="e#24#58#0" expanded="true" />
           </folding>

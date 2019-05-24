@@ -12,16 +12,16 @@ class TikivnSpider(Spider):
 
     def start_requests(self):
         base_url = 'https://tiki.vn/lam-dep-suc-khoe/c20908?'
-        data = {'src': 'tree','brand_country':'Trung%20Quốc'}
+        data = {'src': 'tree', 'brand_country':'Trung%20Quốc'}
         for page in range(1, self.settings.get('MAX_PAGE')+1):
             data['page'] = page
             params = urlencode(data)
             url = base_url + params
-            yield Request(url, self.parse, meta = {'page':page})
+            yield Request(url, self.parse, meta = {'page': page})
 
     def parse(self, response):
         products = response.xpath('//div[@class="product-box-list"]//div[contains(@class,"product-item")]')
-        print('item number',len(products))
+        print('item number', len(products))
         rank = 1
         for product in products:
             item = TikiItem()
