@@ -11,7 +11,7 @@ from scrapy import Item, Field
 class ShopeetwItem(Item):
     # define the fields for your item here like:
 
-    collection = 'lazada_vn_0515'
+    collection = 'lazada_vn_051701'
     pro_name = Field()
     price = Field()
     review_num = Field()

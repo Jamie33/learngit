@@ -5,17 +5,19 @@
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/items.html
 
-from scrapy import Item,Field
+from scrapy import Item, Field
 
 
 class TikiItem(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    collection = 'cosmetics_rank'
-    rank = Field()
-    page = Field()
+    collection = 'health_0522_test_filter'
     pro_name = Field()
+    pro_id = Field()
     price = Field()
-    sales = Field()
+    main_pic = Field()
     review_num = Field()
     pro_url = Field()
+    image_urls = Field()
+    rank = Field()
+    page = Field()
