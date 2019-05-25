@@ -59,6 +59,7 @@ ROBOTSTXT_OBEY = False
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'shopeeTW.middlewares.ShopeeMiddleware': 543,
+    'shopeeTW.middlewares.ProxypoolMiddleware':542,
 }
 
 # Enable or disable extensions

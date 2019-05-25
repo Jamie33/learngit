@@ -11,11 +11,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="run.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="run.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="120">
+              <caret line="8" column="14" lean-forward="true" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -23,8 +24,9 @@
       <file leaf-file-name="scheduler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proxypool/scheduler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+            <state relative-caret-position="420">
+              <caret line="33" column="16" lean-forward="false" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -32,8 +34,9 @@
       <file leaf-file-name="setting.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proxypool/setting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="120">
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -41,8 +44,9 @@
       <file leaf-file-name="tester.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proxypool/tester.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1110">
-              <caret line="39" column="18" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
+            <state relative-caret-position="555">
+              <caret line="39" column="18" lean-forward="false" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -50,8 +54,8 @@
       <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proxypool/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+            <state relative-caret-position="210">
+              <caret line="15" column="12" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -62,8 +66,8 @@
       <file leaf-file-name="api.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proxypool/api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="345">
+              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -74,8 +78,8 @@
       <file leaf-file-name="crawler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proxypool/crawler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+            <state relative-caret-position="255">
+              <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -83,11 +87,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="db.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="db.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proxypool/db.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="471">
-              <caret line="98" column="11" selection-start-line="98" selection-start-column="11" selection-end-line="98" selection-end-column="11" />
+            <state relative-caret-position="142">
+              <caret line="33" column="21" lean-forward="true" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -95,8 +102,9 @@
       <file leaf-file-name="getter.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proxypool/getter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+            <state relative-caret-position="270">
+              <caret line="20" column="18" lean-forward="false" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -113,6 +121,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>all</find>
+      <find>119.180.153.31:8060</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -131,17 +140,46 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="2025" />
-    <option name="y" value="49" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="46" />
+    <option name="y" value="23" />
     <option name="width" value="1234" />
-    <option name="height" value="874" />
+    <option name="height" value="773" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Proxy_Pool" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Proxy_Pool" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Proxy_Pool" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Proxy_Pool" type="462c0819:PsiDirectoryNode" />
+              <item name="proxypool" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -159,9 +197,26 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="run" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.run">
+    <configuration name="api" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/proxypool" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Proxy_Pool" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/proxypool/api.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="run" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -172,17 +227,26 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Proxy_Pool" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Python.run" />
+      <item index="1" class="java.lang.String" itemvalue="Python.api" />
+    </list>
     <recent_temporary>
-      <list>
-        <item itemvalue="Python.run" />
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Python.run" />
+        <item index="1" class="java.lang.String" itemvalue="Python.api" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -198,50 +262,133 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2025" y="49" width="1234" height="874" extended-state="1" />
-    <editor active="true" />
+    <frame x="46" y="23" width="1234" height="773" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="1" weight="0.24973656" />
-      <window_info anchor="bottom" id="TODO" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Python Console" order="0" weight="0.32978722" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.54735374" />
-      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="1" weight="0.32978722" />
-      <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="4" />
-      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="5" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2497939" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6229008" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxypool/scheduler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="33" column="16" lean-forward="false" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxypool/setting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxypool/tester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="39" column="18" lean-forward="false" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxypool/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="15" column="12" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxypool/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxypool/crawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxypool/getter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="20" column="18" lean-forward="false" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxypool/db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1440">
+          <caret line="98" column="11" lean-forward="false" selection-start-line="98" selection-start-column="11" selection-end-line="98" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proxypool/scheduler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="990">
-          <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+          <caret line="33" column="16" lean-forward="false" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proxypool/setting.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -265,7 +412,7 @@
     <entry file="file://$PROJECT_DIR$/proxypool/api.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
@@ -275,7 +422,7 @@
     <entry file="file://$PROJECT_DIR$/proxypool/crawler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
-          <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+          <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -296,58 +443,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proxypool/scheduler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proxypool/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+        <state relative-caret-position="210">
+          <caret line="15" column="12" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proxypool/api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proxypool/setting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="120">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proxypool/getter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+        <state relative-caret-position="270">
+          <caret line="20" column="18" lean-forward="false" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proxypool/crawler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+        <state relative-caret-position="255">
+          <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -356,15 +481,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/proxypool/tester.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1110">
-          <caret line="39" column="18" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
+        <state relative-caret-position="555">
+          <caret line="39" column="18" lean-forward="false" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxypool/scheduler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="33" column="16" lean-forward="false" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxypool/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proxypool/db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="98" column="11" selection-start-line="98" selection-start-column="11" selection-end-line="98" selection-end-column="11" />
+        <state relative-caret-position="142">
+          <caret line="33" column="21" lean-forward="true" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="14" lean-forward="true" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>

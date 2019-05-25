@@ -37,6 +37,8 @@ class ShopeeSpider(Spider):
             if review_info:
                 review_num = re.search(r'\d+',review_info).group(0)
                 item['review_num'] = int(review_num)
+            else:
+                item['review_num'] = 0
             item['pro_url'] = 'https:'+product.xpath('.//div[@class="c16H9d"]//a/@href').extract_first()
             item['category'] = response.meta['category']
             yield item

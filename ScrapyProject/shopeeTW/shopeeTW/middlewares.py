@@ -13,7 +13,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from scrapy.http import HtmlResponse
 from logging import getLogger
 from selenium.webdriver.common.keys import Keys
-import time, random
+import time, random, requests
 from selenium.webdriver.chrome.options import Options
 
 
@@ -61,3 +61,14 @@ class ShopeeMiddleware(object):
     def from_crawler(cls, crawler):
         return cls(timeout=crawler.settings.get('SELENIUM_TIMEOUT'))
 
+
+class ProxypoolMiddleware(object):
+    # 定义一个请求之前的方法
+    def process_request(self, request, spider):
+        PROXY_POOL_URL = 'http://localhost:5555/random'
+        try:
+            response = requests.get(PROXY_POOL_URL)
+            if response.status_code == 200:
+                return response.text
+        except ConnectionError:
+            return None

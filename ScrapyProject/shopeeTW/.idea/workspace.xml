@@ -14,8 +14,8 @@
       <file leaf-file-name="shopee.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shopeeTW/spiders/shopee.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="41" column="22" lean-forward="true" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+            <state relative-caret-position="244">
+              <caret line="26" column="30" lean-forward="true" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
               <folding>
                 <element signature="e#24#58#0" expanded="true" />
               </folding>
@@ -26,8 +26,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shopeeTW/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="105">
+              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding>
                 <element signature="e#0#56#0" expanded="true" />
               </folding>
@@ -38,8 +38,9 @@
       <file leaf-file-name="items.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shopeeTW/items.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+            <state relative-caret-position="195">
+              <caret line="13" column="32" lean-forward="false" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -47,8 +48,8 @@
       <file leaf-file-name="middlewares.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shopeeTW/middlewares.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="45" column="30" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
+            <state relative-caret-position="276">
+              <caret line="64" column="34" lean-forward="true" selection-start-line="64" selection-start-column="34" selection-end-line="64" selection-end-column="34" />
               <folding>
                 <element signature="e#169#199#0" expanded="true" />
               </folding>
@@ -59,8 +60,9 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shopeeTW/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="-114">
+              <caret line="61" column="50" lean-forward="false" selection-start-line="61" selection-start-column="50" selection-end-line="61" selection-end-column="50" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -68,8 +70,9 @@
       <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shopeeTW/pipelines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-229">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="381">
+              <caret line="26" column="4" lean-forward="true" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -84,25 +87,36 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/shopeeTW/middlewares.py" />
         <option value="$PROJECT_DIR$/shopeeTW/items.py" />
-        <option value="$PROJECT_DIR$/shopeeTW/settings.py" />
         <option value="$PROJECT_DIR$/shopeeTW/main.py" />
         <option value="$PROJECT_DIR$/shopeeTW/spiders/shopee.py" />
+        <option value="$PROJECT_DIR$/shopeeTW/settings.py" />
+        <option value="$PROJECT_DIR$/shopeeTW/middlewares.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2039" />
-    <option name="y" value="168" />
-    <option name="width" value="1234" />
-    <option name="height" value="874" />
+    <option name="x" value="36" />
+    <option name="y" value="23" />
+    <option name="width" value="1280" />
+    <option name="height" value="684" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -125,11 +139,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../scrapy1688" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -146,7 +160,6 @@
   </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="shopeeTW" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -157,17 +170,16 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="shopeeTW" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/shopeeTW/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.main" />
-      </list>
-    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -183,36 +195,94 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1096" extended-state="6" />
+    <frame x="36" y="23" width="1280" height="684" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17966281" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3893617" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2406672" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/shopeeTW/spiders/shopee.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#24#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shopeeTW/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shopeeTW/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="32" lean-forward="false" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shopeeTW/middlewares.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="45" column="30" lean-forward="false" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
+          <folding>
+            <element signature="e#169#199#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shopeeTW/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shopeeTW/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shopeeTW/spiders/shopee.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
             <element signature="e#24#58#0" expanded="true" />
           </folding>
@@ -222,7 +292,7 @@
     <entry file="file://$PROJECT_DIR$/shopeeTW/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
-          <caret line="12" column="3" selection-end-line="12" selection-end-column="75" />
+          <caret line="12" column="3" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="75" />
           <folding>
             <element signature="e#0#56#0" expanded="true" />
           </folding>
@@ -232,14 +302,14 @@
     <entry file="file://$PROJECT_DIR$/shopeeTW/items.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shopeeTW/middlewares.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="750">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
             <element signature="e#169#199#0" expanded="true" />
           </folding>
@@ -249,21 +319,21 @@
     <entry file="file://$PROJECT_DIR$/shopeeTW/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
-          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+          <caret line="13" column="19" lean-forward="false" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shopeeTW/pipelines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
-          <caret line="11" selection-start-line="11" selection-end-line="28" selection-end-column="27" />
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="28" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shopeeTW/spiders/shopee.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
             <element signature="e#24#58#0" expanded="true" />
           </folding>
@@ -273,7 +343,7 @@
     <entry file="file://$PROJECT_DIR$/shopeeTW/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
-          <caret line="12" column="3" selection-end-line="12" selection-end-column="75" />
+          <caret line="12" column="3" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="75" />
           <folding>
             <element signature="e#0#56#0" expanded="true" />
           </folding>
@@ -283,14 +353,14 @@
     <entry file="file://$PROJECT_DIR$/shopeeTW/items.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shopeeTW/middlewares.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="750">
-          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
             <element signature="e#169#199#0" expanded="true" />
           </folding>
@@ -300,14 +370,14 @@
     <entry file="file://$PROJECT_DIR$/shopeeTW/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
-          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+          <caret line="13" column="19" lean-forward="false" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shopeeTW/pipelines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
-          <caret line="11" selection-start-line="11" selection-end-line="28" selection-end-column="27" />
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="28" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -324,7 +394,7 @@
     <entry file="file://$PROJECT_DIR$/shopeeTW/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
-          <caret line="12" column="3" selection-end-line="12" selection-end-column="75" />
+          <caret line="12" column="3" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="75" />
           <folding>
             <element signature="e#0#56#0" expanded="true" />
           </folding>
@@ -334,7 +404,7 @@
     <entry file="file://$PROJECT_DIR$/shopeeTW/middlewares.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="750">
-          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
             <element signature="e#169#199#0" expanded="true" />
           </folding>
@@ -344,28 +414,28 @@
     <entry file="file://$PROJECT_DIR$/shopeeTW/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
-          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+          <caret line="13" column="19" lean-forward="false" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shopeeTW/pipelines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
-          <caret line="11" selection-start-line="11" selection-end-line="28" selection-end-column="27" />
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="28" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shopeeTW/items.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shopeeTW/spiders/shopee.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
-          <caret line="19" column="42" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
+          <caret line="19" column="42" lean-forward="false" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
           <folding>
             <element signature="e#24#58#0" expanded="true" />
           </folding>
@@ -392,14 +462,14 @@
     <entry file="file://$PROJECT_DIR$/shopeeTW/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
-          <caret line="17" selection-start-line="17" selection-end-line="19" selection-end-column="22" />
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="19" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shopeeTW/pipelines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="7" selection-start-line="7" selection-end-line="7" selection-end-column="14" />
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -440,14 +510,14 @@
     <entry file="file://$PROJECT_DIR$/shopeeTW/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
-          <caret line="17" selection-start-line="17" selection-end-line="19" selection-end-column="22" />
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="19" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shopeeTW/pipelines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="7" selection-start-line="7" selection-end-line="7" selection-end-column="14" />
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -461,51 +531,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shopeeTW/middlewares.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="45" column="30" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
-          <folding>
-            <element signature="e#169#199#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shopeeTW/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-229">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shopeeTW/items.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shopeeTW/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="195">
+          <caret line="13" column="32" lean-forward="false" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shopeeTW/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="105">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
             <element signature="e#0#56#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/shopeeTW/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="26" column="4" lean-forward="true" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shopeeTW/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-114">
+          <caret line="61" column="50" lean-forward="false" selection-start-line="61" selection-start-column="50" selection-end-line="61" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shopeeTW/middlewares.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="64" column="34" lean-forward="true" selection-start-line="64" selection-start-column="34" selection-end-line="64" selection-end-column="34" />
+          <folding>
+            <element signature="e#169#199#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/shopeeTW/spiders/shopee.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="41" column="22" lean-forward="true" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+        <state relative-caret-position="244">
+          <caret line="26" column="30" lean-forward="true" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
           <folding>
             <element signature="e#24#58#0" expanded="true" />
           </folding>
