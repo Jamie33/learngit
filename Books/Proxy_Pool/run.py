@@ -1,5 +1,6 @@
 from proxypool.scheduler import Scheduler
 
+
 def main():
     try:
         s = Scheduler()

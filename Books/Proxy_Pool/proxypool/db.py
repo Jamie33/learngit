@@ -29,7 +29,7 @@ class RedisClient(object):
         zadd(name, args, *kwargs) 向key为name的zset中添加元素member，score用于排序。如果该元素存在，则更新其顺序
         """
         if not self.db.zscore(Redis_key,proxy):  
-            return self.db.zadd(Redis_key,score,proxy) 
+            return self.db.zadd(Redis_key,{proxy: score})
             
     def random(self):
         """
