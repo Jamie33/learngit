@@ -10,7 +10,7 @@ from scrapy import Item,Field
 
 
 class TokopediaItem(Item):
-    collection = 'tokopedia_0527_test01'
+    collection = 'tokopedia_0529_test02'
     pro_name = Field()
     pro_price = Field()
     pro_review = Field()
@@ -22,3 +22,4 @@ class TokopediaItem(Item):
     pro_id = Field()
     review_num = Field()
     image_urls = Field()
+    main_pic = Field()

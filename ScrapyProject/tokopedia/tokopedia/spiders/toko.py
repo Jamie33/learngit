@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
-import scrapy,re,json
+import re,json
 from tokopedia.items import TokopediaItem
 from urllib.parse import urlencode
 from scrapy import Request, Spider
 import hashlib
 
+import scrapy.spidermiddlewares.httperror
 
-class TokoSpider(scrapy.Spider):
+
+class TokoSpider(Spider):
     name = 'toko'
-    allowed_domains = ['www.tokopedia.com','test.amazing.com']
-    start_urls = ['https://www.tokopedia.com/p/kecantikan/make-up-tools?fcity=174,175,176,177,178&rt=4,5&official=true']
+    allowed_domains = ['test.amazing.com','www.tokopedia.com']
+    # start_urls = ['https://www.tokopedia.com/p/kecantikan/make-up-tools?fcity=174,175,176,177,178&rt=4,5&official=true']
 
     @staticmethod
     def md5(url):
@@ -20,7 +22,7 @@ class TokoSpider(scrapy.Spider):
     def start_requests(self):
         base_url = 'https://www.tokopedia.com/p/kecantikan/make-up-tools?'
         data = {'fcity': '174,175,176,177,178', 'rt':'4,5','official':'true'}
-        for page in range(1,self.settings.get('MAX_PAGE')+1):
+        for page in range(1, self.settings.get('MAX_PAGE')+1):
             data['page'] = page
             params = urlencode(data)
             url = base_url + params
@@ -55,25 +57,20 @@ class TokoSpider(scrapy.Spider):
             img_link = img.xpath('./img/@src').extract_first()
             image_url = re.sub(r'cache/\d+/','',img_link)
             item['image_urls'].append(image_url)
-        yield item
+        item['main_pic'] = item['image_urls'][0]
+        # yield item
 
         headers = {'Content-Type': 'application/json'}
         post_url = 'http://test.amazing.com/api/goods/insertgoods?web_from=mee_id'
 
-        # web_from=参数代表：
-        # nindia  之前的印度站
-        # tw  台湾站
-        # mee  meesho越南站
-        # mee_id  meesho印尼站
-        #
-        # post_data = {
-        #     "name": item['pro_name'],
-        #     "id": item['pro_id'],
-        #     "price": item['price'],
-        #     "main_pic": item['main_pic'],
-        #     "url": item['pro_url'],
-        #     "sales": 0,
-        #     "review": item['review_num'],
-        #     "images": item['image_urls']
-        # }
-        # return Request(url=post_url, method="POST", body=json.dumps(post_data), headers=headers)
+        post_data = {
+            "name": item['pro_name'],
+            "id": item['pro_id'],
+            "price": item['price'],
+            "url": item['pro_url'],
+            "sales": 0,
+            "review": item['review_num'],
+            "images": item['image_urls'],
+            "main_pic":item['main_pic']
+            }
+        return Request(url=post_url, method="POST", body=json.dumps(post_data), headers=headers)

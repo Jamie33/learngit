@@ -29,8 +29,9 @@ class RedisClient(object):
         zadd(name, args, *kwargs) 向key为name的zset中添加元素member，score用于排序。如果该元素存在，则更新其顺序
         """
         if not self.db.zscore(Redis_key,proxy):  
-            return self.db.zadd(Redis_key,{proxy: score})
-            
+            #return self.db.zadd(Redis_key,{proxy: score})
+            return self.db.zadd(Redis_key,score, proxy)
+
     def random(self):
         """
          随机获取有效代理，首先尝试获取最高分数代理，如果最高分数不存在，则按照排名获取，否者异常

@@ -10,6 +10,7 @@
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 BOT_NAME = 'tokopedia'
+HTTPERROR_ALLOWED_CODES = [404]
 
 SPIDER_MODULES = ['tokopedia.spiders']
 NEWSPIDER_MODULE = 'tokopedia.spiders'
