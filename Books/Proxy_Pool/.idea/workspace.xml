@@ -15,6 +15,10 @@
         <entry file="file://$PROJECT_DIR$/run.py">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+            <state relative-caret-position="210">
+              <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+=======
+<<<<<<< HEAD
             <state relative-caret-position="120">
               <caret line="8" column="14" lean-forward="true" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
               <folding />
@@ -22,6 +26,7 @@
             <state relative-caret-position="90">
               <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
 >>>>>>> 3247decee14c218094bd79667c51c8330b7804af
+>>>>>>> 853d77a75370929e8819b0b0be2bbeb43f46c88f
             </state>
           </provider>
         </entry>
@@ -48,6 +53,10 @@
         <entry file="file://$PROJECT_DIR$/proxypool/setting.py">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+            <state relative-caret-position="183">
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
+=======
+<<<<<<< HEAD
             <state relative-caret-position="120">
               <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
@@ -55,6 +64,7 @@
             <state relative-caret-position="276">
               <caret line="33" column="1" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
 >>>>>>> 3247decee14c218094bd79667c51c8330b7804af
+>>>>>>> 853d77a75370929e8819b0b0be2bbeb43f46c88f
             </state>
           </provider>
         </entry>
@@ -62,9 +72,14 @@
       <file leaf-file-name="tester.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proxypool/tester.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="363">
+              <caret line="31" column="35" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="35" />
+=======
             <state relative-caret-position="555">
               <caret line="39" column="18" lean-forward="false" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
               <folding />
+>>>>>>> 853d77a75370929e8819b0b0be2bbeb43f46c88f
             </state>
           </provider>
         </entry>
@@ -150,7 +165,11 @@
       <find>89.249.251.21:3128</find>
       <find>100</find>
       <find>可用</find>
+<<<<<<< HEAD
+      <find>成功</find>
+=======
 >>>>>>> 3247decee14c218094bd79667c51c8330b7804af
+>>>>>>> 853d77a75370929e8819b0b0be2bbeb43f46c88f
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -169,6 +188,11 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="579" />
+    <option name="y" value="148" />
+=======
   <component name="ProjectFrameBounds">
 <<<<<<< HEAD
     <option name="x" value="46" />
@@ -178,6 +202,7 @@
 =======
     <option name="x" value="366" />
     <option name="y" value="286" />
+>>>>>>> 853d77a75370929e8819b0b0be2bbeb43f46c88f
     <option name="width" value="1234" />
     <option name="height" value="785" />
 >>>>>>> 3247decee14c218094bd79667c51c8330b7804af
@@ -200,7 +225,11 @@
 <<<<<<< HEAD
       <pane id="Scope" />
 =======
+<<<<<<< HEAD
+      <pane id="Scope" />
+=======
 >>>>>>> 3247decee14c218094bd79667c51c8330b7804af
+>>>>>>> 853d77a75370929e8819b0b0be2bbeb43f46c88f
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -218,14 +247,17 @@
         </subPane>
       </pane>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
       <pane id="Scratches" />
 =======
       <pane id="Scope" />
 >>>>>>> 3247decee14c218094bd79667c51c8330b7804af
+>>>>>>> 853d77a75370929e8819b0b0be2bbeb43f46c88f
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../ScrapyProject/shopeeTW" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -306,6 +338,9 @@
   </component>
   <component name="ToolWindowManager">
 <<<<<<< HEAD
+    <frame x="2134" y="118" width="1234" height="785" extended-state="0" />
+=======
+<<<<<<< HEAD
     <frame x="46" y="23" width="1234" height="773" extended-state="0" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2497939" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -327,18 +362,19 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
 =======
     <frame x="366" y="286" width="1234" height="785" extended-state="0" />
+>>>>>>> 853d77a75370929e8819b0b0be2bbeb43f46c88f
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.24916388" />
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.42925277" />
       <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="0" weight="0.32978722" />
+      <window_info anchor="bottom" id="Run" order="6" visible="true" weight="0.43402225" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.32978722" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info id="Favorites" order="0" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -823,6 +859,8 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
     <entry file="file://$PROJECT_DIR$/proxypool/tester.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
@@ -849,6 +887,7 @@
         </state>
       </provider>
     </entry>
+>>>>>>> 853d77a75370929e8819b0b0be2bbeb43f46c88f
     <entry file="file://$PROJECT_DIR$/proxypool/db.py">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
@@ -877,20 +916,37 @@
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+        <state relative-caret-position="210">
+          <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxypool/tester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="31" column="35" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="35" />
+=======
+<<<<<<< HEAD
         <state relative-caret-position="120">
           <caret line="8" column="14" lean-forward="true" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
           <folding />
 =======
         <state relative-caret-position="90">
           <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
+>>>>>>> 853d77a75370929e8819b0b0be2bbeb43f46c88f
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proxypool/setting.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="183">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+=======
         <state relative-caret-position="276">
           <caret line="33" column="1" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
 >>>>>>> 3247decee14c218094bd79667c51c8330b7804af
+>>>>>>> 853d77a75370929e8819b0b0be2bbeb43f46c88f
         </state>
       </provider>
     </entry>
