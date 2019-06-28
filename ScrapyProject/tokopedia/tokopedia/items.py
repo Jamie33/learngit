@@ -8,7 +8,6 @@
 from scrapy import Item,Field
 
 
-
 class TokopediaItem(Item):
     collection = 'tokopedia_0529_test02'
     pro_name = Field()

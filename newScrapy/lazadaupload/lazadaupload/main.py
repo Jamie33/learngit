@@ -10,6 +10,8 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 # os.path.dirname()    用来获取文件的父亲的路径
 
 # 调用execute()函数执行scarpy的命令 scary crawl 爬虫文件名字
-#execute(['lazadaVN', 'crawl', 'lazadavn','-o','lazadaVN_page10_0517.csv'])
+#execute(['scrapy', 'crawl', 'taobao1688','-o','taobao1688.csv'])
 
-execute(['scrapy', 'crawl', 'toko'])
+# execute(['scrapy', 'crawl', 'taobao1688','-o','taobao1688.json'])
+
+execute(['scrapy', 'crawl','lazadaupload'])
