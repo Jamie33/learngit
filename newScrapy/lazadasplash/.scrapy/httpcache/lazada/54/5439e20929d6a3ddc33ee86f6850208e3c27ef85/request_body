@@ -1,0 +1,11 @@
+{
+    "cookies": [],
+    "headers": {
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+    },
+    "lua_source": "\nfunction main(splash, args)\n  assert(splash:go(args.url))\n  assert(splash:wait(args.wait))\n  return splash:html()\nend\n",
+    "url": "https://www.lazada.vn/products/ao-so-mi-nam-vai-lua-chong-nhan-sm1-i207653258-s258188084.html?",
+    "wait": 7
+}

@@ -1,0 +1,11 @@
+{
+    "cookies": [],
+    "headers": {
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+    },
+    "lua_source": "\nfunction main(splash, args)\n  assert(splash:go(args.url))\n  assert(splash:wait(args.wait))\n  return splash:html()\nend\n",
+    "url": "https://www.lazada.vn/products/quan-au-nam-han-quoc-quan-tay-nam-den-dang-om-vai-co-gian-khong-nhan-i246256015-s359826960.html?spm=a2o4n.searchlistcategory.list.59.4c3534bdGagnUo&search=1",
+    "wait": 7
+}
