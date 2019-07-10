@@ -9,35 +9,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="middlewares.py" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/scrapy1688/scrapy1688/middlewares.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="390">
-                    <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
-                    <folding>
-                      <element signature="e#0#30#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="toko.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tokopedia/tokopedia/spiders/toko.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="67" column="33" lean-forward="true" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+            <state relative-caret-position="535">
+              <caret line="75" column="49" lean-forward="true" selection-start-line="75" selection-start-column="49" selection-end-line="75" selection-end-column="49" />
               <folding>
                 <element signature="e#24#38#0" expanded="true" />
               </folding>
@@ -308,7 +286,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="379" y="59" width="1481" height="938" extended-state="0" />
+    <frame x="379" y="59" width="1481" height="938" extended-state="1" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24948025" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -566,8 +544,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tokopedia/tokopedia/spiders/toko.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="67" column="33" lean-forward="true" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+        <state relative-caret-position="535">
+          <caret line="75" column="49" lean-forward="true" selection-start-line="75" selection-start-column="49" selection-end-line="75" selection-end-column="49" />
           <folding>
             <element signature="e#24#38#0" expanded="true" />
           </folding>
