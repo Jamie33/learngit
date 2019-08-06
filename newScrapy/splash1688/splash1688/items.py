@@ -3,12 +3,13 @@
 # Define here the models for your scraped items
 #
 # See documentation in:
-# https://doc.scrapy.org/en/latest/topics/items.html
+# https://docs.scrapy.org/en/latest/topics/items.html
 
-from scrapy import Item, Field
+from scrapy import Item,Field
 
-class Login1688Item(Item):
-    collection = 'products_1688_0801'
+
+class Splash1688Item(Item):
+    collection = 'splash1688product'
     title = Field()
     url = Field()
     image_urls = Field()
@@ -18,4 +19,3 @@ class Login1688Item(Item):
     main_pic = Field()
     pro_des = Field()
     des_images = Field()
-    # category = Field()

@@ -7,7 +7,7 @@ import xlrd
 class Tb1688Spider(Spider):
     name = 'tb1688'
     allowed_domains = ['detail.1688.com','test.amazing.com']
-    #start_urls = ['https://detail.1688.com/offer/41571718696.html?spm=b26110380.sw1688.mof001/.1.574e396c2GXK4G','https://detail.1688.com/offer/596464478184.html?spm=b26110380.sw1688.mof001/.1.574e396c2GXK4G']
+    urls = ['https://detail.1688.com/offer/41571718696.html?spm=b26110380.sw1688.mof001/.1.574e396c2GXK4G','https://detail.1688.com/offer/596464478184.html?spm=b26110380.sw1688.mof001/.1.574e396c2GXK4G']
 
 
     # 用产品链接 md5 加密成唯一的 ID
@@ -18,16 +18,20 @@ class Tb1688Spider(Spider):
         return obj.hexdigest()
 
     def start_requests(self):
-        file_path = self.settings.get('FILE_PATH')
-        data = xlrd.open_workbook(file_path)  # 打开表格
-        sheets = data.nsheets  # 获取表格sheet个数
-        for i in range(sheets):
-            sheet_info = data.sheet_by_index(i)  # 获取每个sheet信息
-            sheet_rows = sheet_info.nrows  # 获取每个sheet行数
-            for n in range(sheet_rows):
-                category = sheet_info.row_values(n)[0]
-                url = sheet_info.row_values(n)[1]  # 获取每个sheet中第二列所有的数据
-                yield Request(url=url, meta={'category':category},callback=self.parse)
+        for url in self.urls:
+            yield Request(url=url,callback=self.parse)
+
+    # def start_requests(self):
+    #     file_path = self.settings.get('FILE_PATH')
+    #     data = xlrd.open_workbook(file_path)  # 打开表格
+    #     sheets = data.nsheets  # 获取表格sheet个数
+    #     for i in range(sheets):
+    #         sheet_info = data.sheet_by_index(i)  # 获取每个sheet信息
+    #         sheet_rows = sheet_info.nrows  # 获取每个sheet行数
+    #         for n in range(sheet_rows):
+    #             category = sheet_info.row_values(n)[0]
+    #             url = sheet_info.row_values(n)[1]  # 获取每个sheet中第二列所有的数据
+    #             yield Request(url=url, meta={'category':category},callback=self.parse)
 
     def parse(self, response):
         item = Login1688Item()
@@ -51,7 +55,7 @@ class Tb1688Spider(Spider):
         item['main_pic'] = item['image_urls'][0]
         desc_images = response.xpath('//div[@id="desc-lazyload-container"]//img')
         item['des_images'] = [img.xpath('./@src').extract_first() for img in desc_images]
-        item['category'] = response.meta['category']
+        # item['category'] = response.meta['category']
         # item['category'] = ''
         item['pro_des'] = []
         yield item

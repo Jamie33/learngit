@@ -25,7 +25,7 @@ class Scrapy1688SpiderMiddleware(object):
         prefs = {"profile.managed_default_content_settings.images": 2}
         self.chrome_options.add_experimental_option("prefs", prefs)
         # 启用headless模式：无浏览器界面，提高速度与稳定性
-        self.chrome_options.add_argument('--headless')
+        #self.chrome_options.add_argument('--headless')
         self.chrome_options.add_argument('--disable-gpu')
         self.browser = webdriver.Chrome(chrome_options=self.chrome_options)
         # self.browser = webdriver.Chrome()

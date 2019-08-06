@@ -22,14 +22,16 @@ class Login1688SpiderMiddleware(object):
         self.logger = getLogger(__name__)
         self.timeout = timeout
         self.chrome_options = Options()
+        # 加载所有Chrome配置
+        self.chrome_options.add_argument(r"--user-data-dir=C:\Users\win7\AppData\Local\Google\Chrome\User Data")
+
         # 禁止图片和视频的加载，提高网页爬取速度
         #prefs = {"profile.managed_default_content_settings.images": 2}
         #self.chrome_options.add_experimental_option("prefs", prefs)
         # self.chrome_options.add_argument('--headless')]
         # self.browser = webdriver.Chrome(chrome_options=self.chrome_options)
         # 允许浏览器重定向，Framebusting requires same-origin or a user gesture
-        self.chrome_options.add_argument("disable-web-security")
-        #self.chrome_options.add_argument(r"--user-data-dir=C:\Users\win7\AppData\Local\Google\Chrome\User Data")  # 设置成用户自己的数据目录
+        #self.chrome_options.add_argument("disable-web-security")
         self.browser = webdriver.Chrome(chrome_options=self.chrome_options)
         self.wait = WebDriverWait(self.browser, self.timeout)
 
