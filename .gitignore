@@ -5,4 +5,3 @@ db.sqlite3
 */.DS_Store
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
-*.xml
