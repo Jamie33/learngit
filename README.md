@@ -14,7 +14,7 @@
 
 - **Desperately in love with Python**
 
-- **python1年工作经验
+- **1年python工作经验**
 
 - **With one year of work experience in python**
 
