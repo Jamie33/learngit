@@ -51,11 +51,11 @@ https://zhuanlan.zhihu.com/p/68038338 （Python3 + Appium + Andriod 东方头条
 
 > 满足日常生活需求写的小脚本 / Python scripts for daily needs
 
-https://zhuanlan.zhihu.com/p/47664186  （深圳图书馆自动预借脚本/  Borrowing books whene they are available from online library system）
+https://zhuanlan.zhihu.com/p/47664186  （深圳图书馆自动预借脚本/  Borrowing books whenever they are available from online library system）
 
 https://zhuanlan.zhihu.com/p/41280394  （论坛每天自动获取积分的脚本/ Getting points from the forum on a daily basis）
 
-https://zhuanlan.zhihu.com/p/41055423  （微信币价查询机器人 / A Wechat bot for check prices of cryptocurrenies）
+https://zhuanlan.zhihu.com/p/41055423  （微信币价查询机器人 / A Wechat bot for checking prices of cryptocurrenies）
 
 ---
 
