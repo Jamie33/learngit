@@ -32,11 +32,11 @@
 
 > 脚本运行效果预览：
 
-![脚本运行效果预览](running.gif)
+![脚本运行效果预览](http://px1dnobar.bkt.clouddn.com/running.gif)
 
 
 > 文档结果预览：
 
 文档预览：pic_ocr_0621.docx 
 
-![文档预览](result.png)
+![文档预览](http://px1dnobar.bkt.clouddn.com/result.png)
