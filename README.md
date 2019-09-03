@@ -30,7 +30,7 @@ https://www.zhihu.com/people/xu-jiu-85-74/posts
 
 > 个人博客 / Blog：
 
-https://jamie33.github.io/  （基于github pages 和 hexo 搭建 / Based on github pages and hexo） 
+[基于github pages 和 hexo 搭建](https://jamie33.github.io/) / Based on github pages and hexo
 
 > 编译文章 / Previous translation work：
 
@@ -39,7 +39,7 @@ https://www.leiphone.com/author/xusan （雷锋网认证作者592篇 / 592 trans
 
 > 爬虫脚本
 
-淘宝台湾地址抓取
+淘宝台湾地址抓取/ To get Taiwan addresses from Taobao
 
 Google 搜索引擎相关邮箱爬取
 
