@@ -5,7 +5,7 @@
 
 > 运营侧需求：抓取 Google 搜索引擎相关邮箱用于EDM
 
-![运营侧需求](![nAWVT1.jpg](https://s2.ax1x.com/2019/09/03/nAWVT1.jpg))
+![运营侧需求](https://s2.ax1x.com/2019/09/03/nAWVT1.jpg)
 
 
 > 进度：(70%) 
@@ -33,5 +33,5 @@
 爬取到 2711 条和 jeans 相关的邮箱, 此数据已去重。
 CSV 文件 包含品类和邮箱两个字段，预览如下：（完整表格烦请参考gmails_jeans.csv）
 
-![文档预览](![nAWmY6.jpg](https://s2.ax1x.com/2019/09/03/nAWmY6.jpg)))
+![文档预览](https://s2.ax1x.com/2019/09/03/nAWmY6.jpg)
 
