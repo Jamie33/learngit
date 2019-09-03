@@ -2,21 +2,13 @@
 
 ## 徐玖 / Jamie
 
-- **四川外国语大学 翻译硕士** 
+- **四川外国语大学 翻译硕士**  Holding a Master of Translation and Interpreting from Sichuan International Studies University
 
-- **Holding a Master of Translation and Interpreting from Sichuan International Studies University**  
+- **英语翻译3年从业经验** Having three years of work experience in English translation
 
-- **英语翻译3年从业经验**
+- **Python 编程爱好者** Desperately in love with Python
 
-- **Having three years of work experience in English translation** 
-
-- **Python 编程爱好者**
-
-- **Desperately in love with Python**
-
-- **1年python工作经验**
-
-- **With one year of work experience in python**
+- **1年python工作经验** With one year of work experience in python
 
 ---
 
