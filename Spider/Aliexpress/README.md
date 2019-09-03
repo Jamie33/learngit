@@ -13,14 +13,14 @@
 > 链接：
 https://www.aliexpress.com/category/100003086/jeans/1.html?site=glo&g=y&SortType=total_tranpro_desc&needQuery=n&tag=
 
-![运营侧需求](![nA4Ewj.jpg](https://s2.ax1x.com/2019/09/03/nA4Ewj.jpg))
+![运营侧需求](https://s2.ax1x.com/2019/09/03/nA4Ewj.jpg)
 
 > 结果：
 
 每页有48个商品，所以20页共爬取到 960 条商品数据。
 爬取数据预览如下：完整表格烦请参考 aliexpress_jean_20page_item_details.csv
 
-![文档预览](![nA4VTs.jpg](https://s2.ax1x.com/2019/09/03/nA4VTs.jpg))
+![文档预览](https://s2.ax1x.com/2019/09/03/nA4VTs.jpg)
 
 
 

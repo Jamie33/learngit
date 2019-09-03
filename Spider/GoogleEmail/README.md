@@ -16,11 +16,11 @@
 
 - google 搜索引擎会省略相关相似的条目，重新搜索以显示省略的结果后，极易出现 google 验证
 
-![google 搜索引擎省略](![nAWeFx.jpg](https://s2.ax1x.com/2019/09/03/nAWeFx.jpg))
+![google 搜索引擎省略](https://s2.ax1x.com/2019/09/03/nAWeFx.jpg)
 
 - 检测到异常请求后，需要 google 验证，暂时无法解决。
 
-![google 验证](![nAWEwR.jpg](https://s2.ax1x.com/2019/09/03/nAWEwR.jpg))
+![google 验证](https://s2.ax1x.com/2019/09/03/nAWEwR.jpg)
 
 目前设置的随机间隔时间是40-60s, google 验证出现过一次
 
