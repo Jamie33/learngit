@@ -28,33 +28,22 @@
 > 爬虫脚本
 
 - [淘宝台湾地址抓取](https://github.com/Jamie33/learngit/tree/master/Spider/TaobaoAddress#%E6%B7%98%E5%AE%9D%E5%8F%B0%E6%B9%BE%E5%9C%B0%E5%9D%80%E6%8A%93%E5%8F%96) / To get Taiwan addresses from Taobao
-
 - [Google 搜索引擎相关邮箱爬取](https://github.com/Jamie33/learngit/tree/master/Spider/GoogleEmail#%E5%8A%A8%E6%80%81%E6%B8%B2%E6%9F%93-selenium%E8%A7%A3%E6%9E%90%E5%BA%93-pyquery%E6%95%B0%E6%8D%AE%E5%BA%93-mongodb) / To collect emails from google search engine
-
 - [速卖通 aliexpress 牛仔裤品类爬虫](https://github.com/Jamie33/learngit/tree/master/Spider/Aliexpress#%E5%8A%A8%E6%80%81%E6%B8%B2%E6%9F%93-selenium%E8%A7%A3%E6%9E%90%E5%BA%93-pyquery%E6%95%B0%E6%8D%AE%E5%BA%93-mongodb) / To acquire items' information of jeans from aliexpress
-
 - [amazon 牛仔裤品类爬虫](https://github.com/Jamie33/learngit/tree/master/Spider/AmazonJeans#amazon%E7%89%9B%E4%BB%94%E8%A3%A4%E5%93%81%E7%B1%BB%E7%88%AC%E8%99%AB) / To obtain data of jeans category from amazon
-
 - [AppAnnie App Top100 排行榜以及其关键词](https://github.com/Jamie33/learngit/tree/master/Spider/AppAnnie#appannie-app-top100%E4%BB%A5%E5%8F%8A%E5%85%B6%E5%85%B3%E9%94%AE%E8%AF%8D) / To get App rank and its keywords in AppAnnie
-
 - [Shopee 、Lazada 、Myntra 三大平台爬虫](https://github.com/Jamie33/learngit/tree/master/Spider/ShopCrawl#shopeelazadamyntra-%E4%B8%89%E5%A4%A7%E5%B9%B3%E5%8F%B0%E7%88%AC%E8%99%AB) / Three spiders on Shopee, Lazada and Myntra
-
 - [shopee 印尼站高价位爆款数据抓取](https://github.com/Jamie33/learngit/tree/master/Spider/ShopeeSales#shopee%E5%8D%B0%E5%B0%BC%E7%AB%99%E9%AB%98%E4%BB%B7%E4%BD%8D%E7%88%86%E6%AC%BE%E6%95%B0%E6%8D%AE%E6%8A%93%E5%8F%96) / To crawl hot sale with high prices in shopee Indonesia
-
 - [shopee 台湾站爆款抓取](https://github.com/Jamie33/learngit/tree/master/Spider/ShopeeSales#shopee-%E5%8F%B0%E6%B9%BE%E7%AB%99%E7%88%86%E6%AC%BE%E6%8A%93%E5%8F%96)/ To get hot-sale items in shopee Taiwan
 
 
 >利用框架 scrapy 爬取数据 / To crawl data using scrapy framework 
 
 - [利用 scrapy 爬取 Lavada 越南站美妆个护产品](https://github.com/Jamie33/learngit/tree/master/ScrapyProject/lazadaVN#lazada%E7%BE%8E%E5%A6%86%E4%B8%AA%E6%8A%A4%E4%BA%A7%E5%93%81%E7%88%AC%E5%8F%96%E9%9C%80%E6%B1%82)/ To crawl product data from Lazada Vietnam using scrapy
-
-- [Lazada 越南站美妆类数据]()
-
-- [Tiki越南站美妆类数据]()
-
-- [Sendo 越南站美妆类数据]()
-
-- [1688商品爬取并上传至后台]()
+- [获取 Lazada 越南站美妆类数据](https://github.com/Jamie33/learngit/tree/master/ScrapyProject/shopeeTW#lazada-%E8%B6%8A%E5%8D%97%E7%AB%99%E7%BE%8E%E5%A6%86%E7%B1%BB%E6%95%B0%E6%8D%AE) / Collecting cosmetics data from Lazada Vietnam
+- [抓取 Tiki越南站美妆类数据](https://github.com/Jamie33/learngit/tree/master/ScrapyProject/tiki#tiki%E8%B6%8A%E5%8D%97%E7%AB%99%E7%BE%8E%E5%A6%86%E7%B1%BB%E6%95%B0%E6%8D%AE) / Acquiring cosmetics data from Tiki Vietnam
+- [爬取 Sendo 越南站美妆类数据](https://github.com/Jamie33/learngit/tree/master/ScrapyProject/tiki#sendo%E8%B6%8A%E5%8D%97%E7%AB%99%E7%BE%8E%E5%A6%86%E7%B1%BB%E6%95%B0%E6%8D%AE) / Crawling cosmetics data from Sendo Vietnam
+- [1688商品爬取并上传至后台](https://github.com/Jamie33/learngit/tree/master/newScrapy/login1688#1688%E5%95%86%E5%93%81%E7%88%AC%E5%8F%96%E5%95%86%E5%93%81%E4%B8%8A%E4%BC%A0%E5%90%8E%E5%8F%B0) / Getting information of items from 1688 and uploading them to the back-end platform
 
 
 >利用 python 进行数据分析和可视化处理 / Data analysis and visualization using python
