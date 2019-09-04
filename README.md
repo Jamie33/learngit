@@ -35,10 +35,19 @@
 
 - [amazon 牛仔裤品类爬虫](https://github.com/Jamie33/learngit/tree/master/Spider/AmazonJeans#amazon%E7%89%9B%E4%BB%94%E8%A3%A4%E5%93%81%E7%B1%BB%E7%88%AC%E8%99%AB) / To obtain data of jeans category from amazon
 
+- [AppAnnie App Top100 排行榜以及其关键词]()
+
+- [Shopee 、Lazada 、Myntra 三大平台爬虫]()
+
+- [shopee 印尼站高价位爆款数据抓取]()
+
+- [shopee 台湾站爆款抓取]()
+
 
 >利用框架 scrapy 爬取数据 / To crawl data using scrapy framework 
 
 - [利用 scrapy 爬取 Lavada 越南站美妆个护产品](https://github.com/Jamie33/learngit/tree/master/ScrapyProject/lazadaVN#lazada%E7%BE%8E%E5%A6%86%E4%B8%AA%E6%8A%A4%E4%BA%A7%E5%93%81%E7%88%AC%E5%8F%96%E9%9C%80%E6%B1%82)/ To crawl product data from Lazada Vietnam using scrapy
+
 
 
 >利用 python 进行数据分析和可视化处理 / Data analysis and visualization using python
