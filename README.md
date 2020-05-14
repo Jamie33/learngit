@@ -31,7 +31,7 @@
 >利用框架 scrapy 爬取数据 / To crawl data using scrapy framework 
 
 - [利用 scrapy 爬取 Lavada 越南站美妆个护产品](https://github.com/Jamie33/learngit/tree/master/ScrapyProject/lazadaVN#lazada%E7%BE%8E%E5%A6%86%E4%B8%AA%E6%8A%A4%E4%BA%A7%E5%93%81%E7%88%AC%E5%8F%96%E9%9C%80%E6%B1%82)/ To crawl product data from Lazada Vietnam using scrapy
-- [获取 Lazada 越南站美妆类数据](https://github.com/Jamie33/learngit/tree/master/ScrapyProject/shopeeTW#lazada-%E8%B6%8A%E5%8D%97%E7%AB%99%E7%BE%8E%E5%A6%86%E7%B1%BB%E6%95%B0%E6%8D%AE) / Collecting cosmetics data from Lazada Vietnam
+- [获取 Lazada 越南站美妆类数据，并上传至后台](https://github.com/Jamie33/learngit/tree/master/ScrapyProject/shopeeTW#lazada-%E8%B6%8A%E5%8D%97%E7%AB%99%E7%BE%8E%E5%A6%86%E7%B1%BB%E6%95%B0%E6%8D%AE) / Collecting cosmetics data from Lazada Vietnam  and uploading them to the back-end platform
 - [抓取 Tiki越南站美妆类数据](https://github.com/Jamie33/learngit/tree/master/ScrapyProject/tiki#tiki%E8%B6%8A%E5%8D%97%E7%AB%99%E7%BE%8E%E5%A6%86%E7%B1%BB%E6%95%B0%E6%8D%AE) / Acquiring cosmetics data from Tiki Vietnam
 - [爬取 Sendo 越南站美妆类数据](https://github.com/Jamie33/learngit/tree/master/ScrapyProject/tiki#sendo%E8%B6%8A%E5%8D%97%E7%AB%99%E7%BE%8E%E5%A6%86%E7%B1%BB%E6%95%B0%E6%8D%AE) / Crawling cosmetics data from Sendo Vietnam
 - [1688商品爬取并上传至后台](https://github.com/Jamie33/learngit/tree/master/newScrapy/login1688#1688%E5%95%86%E5%93%81%E7%88%AC%E5%8F%96%E5%95%86%E5%93%81%E4%B8%8A%E4%BC%A0%E5%90%8E%E5%8F%B0) / Getting information of items from 1688 and uploading them to the back-end platform
