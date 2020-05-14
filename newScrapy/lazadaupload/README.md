@@ -1,4 +1,4 @@
-## Lazada 越南站美妆类数据
+## Lazada 越南站美妆类数据，并上传至后台
 ### scrapy + mongodb + 代理池
 
 ---
