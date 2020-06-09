@@ -4,8 +4,6 @@
 
 - **四川外国语大学 翻译硕士**  Holding a Master of Translation and Interpreting from Sichuan International Studies University
 
-- **英语翻译4年从业经验** Having five years of work experience in English translation
-
 - **用 Python 消除重复性工作** Able to create Python scripts that help me in repetitive tasks
 
 ---
