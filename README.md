@@ -13,6 +13,7 @@
 
 > [个人博客 / Blog](https://jamie33.github.io/) (基于github pages 和 hexo 搭建 / Based on github pages and hexo)
 
+> [Kaggle 泰坦尼克号幸存者预测(排名Top 16%)](https://www.kaggle.com/jamiexujiu/get-started-with-titanic)
 
 > 爬虫脚本
 
