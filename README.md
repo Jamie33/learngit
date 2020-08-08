@@ -8,12 +8,24 @@
 
 ---
 
-
 > [编译文章 / Previous translation work](https://www.leiphone.com/author/xusan )（雷锋网认证作者592篇 / 592 translated articles ）
+
+> [知乎主页](https://www.zhihu.com/people/xu-jiu-85-74/posts) (分析学习过程的心得及笔记 / Share articles about everything I learned) 
 
 > [个人博客 / Blog](https://jamie33.github.io/) (基于github pages 和 hexo 搭建 / Based on github pages and hexo)
 
-> [Kaggle 泰坦尼克号幸存者预测(排名Top 16%)](https://www.kaggle.com/jamiexujiu/get-started-with-titanic)
+> [Kaggle 泰坦尼克号幸存者预测(排名Top 12%)](https://www.kaggle.com/jamiexujiu/get-started-with-titanic)
+
+
+>数据分析和可视化处理【分析工具：Python、Mysql、Pandas、Numpy、Tableau 、Matplotlib、Seaborn、Pyecharts】 / Data analysis and visualization using python
+
+- [巴西电商 Olist Store 数据分析](https://jamie33.github.io/PageDemo/Ecommerce_Demo.html) / Data analysis on a Brazilian ecommerce public dataset of orders made at Olist Store
+
+- [淘宝用户行为数据分析](https://jamie33.github.io/PageDemo/User_Behavior.html) / Data analysis on user Behavior Data from Taobao
+
+- [利用 python 对 shopee TW站 八大品类商品进行数据分析](https://jamie33.github.io/PageDemo/shopee_data_analysis_TW.html)/ Data analysis on eight merchandise categories from shopee Taiwan using python
+- [利用 python 对 shopee 印尼站 四大品类商品进行数据分析](https://jamie33.github.io/PageDemo/shopee_data_analysis.html )/ Data analysis on four merchandise categories from shopee Indonesia using python
+
 
 > 爬虫脚本
 
@@ -35,11 +47,6 @@
 - [爬取 Sendo 越南站美妆类数据](https://github.com/Jamie33/learngit/tree/master/ScrapyProject/tiki#sendo%E8%B6%8A%E5%8D%97%E7%AB%99%E7%BE%8E%E5%A6%86%E7%B1%BB%E6%95%B0%E6%8D%AE) / Crawling cosmetics data from Sendo Vietnam
 - [1688商品爬取并上传至后台](https://github.com/Jamie33/learngit/tree/master/newScrapy/login1688#1688%E5%95%86%E5%93%81%E7%88%AC%E5%8F%96%E5%95%86%E5%93%81%E4%B8%8A%E4%BC%A0%E5%90%8E%E5%8F%B0) / Getting information of items from 1688 and uploading them to the back-end platform
 
-
->利用 python 进行数据分析和可视化处理 / Data analysis and visualization using python
-
-- [利用 python 对 shopee TW站 八大品类商品进行数据分析](https://jamie33.github.io/PageDemo/shopee_data_analysis_TW.html)/ Data analysis on eight merchandise categories from shopee Taiwan using python
-- [利用 python 对 shopee 印尼站 四大品类商品进行数据分析](https://jamie33.github.io/PageDemo/shopee_data_analysis.html )/ Data analysis on four merchandise categories from shopee Indonesia using python
 
 
 > 利用 appium 控制手机的脚本 / Making small amount of money from automating the cellphone using appium
