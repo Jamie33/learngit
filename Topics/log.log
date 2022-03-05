@@ -1,0 +1,5 @@
+2021/11/19 12:01:46 PM - test_logger - INFO: 这是一个普通信息
+2021/11/19 12:01:46 PM - test_logger - DEBUG: 这是一个调试信息
+2021/11/19 12:01:46 PM - test_logger - WARNING: 这是一个警告信息
+2021/11/19 12:01:46 PM - test_logger - ERROR: 这是一个错误信息
+2021/11/19 12:01:46 PM - test_logger - CRITICAL: 这是一个危险信息

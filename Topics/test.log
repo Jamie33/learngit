@@ -1,0 +1,36 @@
+ERROR:root:出现了错误
+INFO:root:打印信息
+WARNING:root:警告信息
+ERROR:root:出现了错误
+INFO:root:打印信息
+WARNING:root:警告信息
+ERROR:出现了错误
+INFO:打印信息
+WARNING:警告信息
+ERROR:出现了错误
+INFO:打印信息
+WARNING:警告信息
+ERROR:出现了错误
+INFO:打印信息
+WARNING:警告信息
+ERROR:出现了错误
+INFO:打印信息
+WARNING:警告信息
+ERROR:出现了错误
+INFO:打印信息
+WARNING:警告信息
+ERROR:出现了错误
+INFO:打印信息
+WARNING:警告信息
+ERROR:出现了错误
+INFO:打印信息
+WARNING:警告信息
+ERROR : 2021-11-19 11:33:48,839 : 出现了错误
+INFO : 2021-11-19 11:33:48,840 : 打印信息
+WARNING : 2021-11-19 11:33:48,840 : 警告信息
+[ERROR - 2021-11-19 11:34:16,116] 出现了错误
+[INFO - 2021-11-19 11:34:16,117] 打印信息
+[WARNING - 2021-11-19 11:34:16,117] 警告信息
+[ERROR - 2021-11-19 11:34:58,464] 出现了错误
+[INFO - 2021-11-19 11:34:58,464] 打印信息
+[WARNING - 2021-11-19 11:34:58,464] 警告信息
