@@ -1,5 +1,5 @@
 pandas==1.0.1
-numpy==1.18.1
+numpy==1.22.0
 Flask==1.1.1
 PyMySQL==0.9.3
 pyecharts==1.7.1
